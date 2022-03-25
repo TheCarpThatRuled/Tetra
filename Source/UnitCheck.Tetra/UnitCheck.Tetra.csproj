@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
+    <RootNamespace>Check</RootNamespace>
     <OutputPath>$(SolutionDir)\Test\$(Configuration)</OutputPath>
   </PropertyGroup>
 
@@ -14,10 +15,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FsCheck" Version="2.16.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.7" />
     <PackageReference Include="MSTest.TestFramework" Version="2.2.7" />
     <PackageReference Include="coverlet.collector" Version="3.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tetra.Testing.FSCheck\Tetra.Testing.FSCheck.csproj" />
+    <ProjectReference Include="..\Tetra.Testing\Tetra.Testing.csproj" />
+    <ProjectReference Include="..\Tetra\Tetra.csproj" />
   </ItemGroup>
 
 </Project>

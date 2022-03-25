@@ -12,21 +12,21 @@
 /// </list>
 /// </summary>
 /// <typeparam name="T">The type of the contained object</typeparam>
-public abstract class Option<T> : IEquatable<Option<T>>,
-                                  IEquatable<T>
+public abstract partial class Option<T> : IEquatable<Option<T>>,
+                                          IEquatable<T>
 {
-   // ------------------------------------------------------------//
+   /* ------------------------------------------------------------ */
    // Factory Functions
-   // ------------------------------------------------------------//
+   /* ------------------------------------------------------------ */
 
    /// <summary>
    /// Creates a none.
    /// </summary>
    /// <returns>A none <c>Option</c>.</returns>
    public static Option<T> None()
-      => null;
+      => new NoneOption();
 
-   // ------------------------------------------------------------//
+   /* ------------------------------------------------------------ */
 
    /// <summary>
    /// Creates a some.
@@ -34,23 +34,30 @@ public abstract class Option<T> : IEquatable<Option<T>>,
    /// <param name="content">The value the <c>Option</c> shall contain.</param>
    /// <returns>A some <c>Option</c> that contains <c>content</c>.</returns>
    public static Option<T> Some(T content)
-      => null;
+      => new SomeOption(content);
 
-   // ------------------------------------------------------------//
+   /* ------------------------------------------------------------ */
+   // Implicit Operator
+   /* ------------------------------------------------------------ */
+
+   public static implicit operator Option<T>(T content)
+      => new SomeOption(content);
+
+   /* ------------------------------------------------------------ */
    // IEquatable<Option<T>> Methods
-   // ------------------------------------------------------------//
+   /* ------------------------------------------------------------ */
 
    public abstract bool Equals(Option<T>? other);
 
-   // ------------------------------------------------------------//
+   /* ------------------------------------------------------------ */
    // IEquatable<T> Methods
-   // ------------------------------------------------------------//
+   /* ------------------------------------------------------------ */
 
    public abstract bool Equals(T? other);
 
-   // ------------------------------------------------------------//
+   /* ------------------------------------------------------------ */
    // Methods
-   // ------------------------------------------------------------//
+   /* ------------------------------------------------------------ */
 
    /// <summary>
    /// Unifies both branches of the <c>Option</c> via mapping functions.
@@ -65,5 +72,5 @@ public abstract class Option<T> : IEquatable<Option<T>>,
    public abstract TNew Reduce<TNew>(Func<TNew> whenNone,
                                      Func<T, TNew> whenSome);
 
-   // ------------------------------------------------------------//
+   /* ------------------------------------------------------------ */
 }
