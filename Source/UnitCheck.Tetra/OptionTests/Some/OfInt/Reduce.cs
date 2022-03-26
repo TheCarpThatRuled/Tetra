@@ -48,35 +48,11 @@ public class Some_OfInt_Reduce
                                    whenSome));
       }
 
-      Arb.Register<ThreeUniqueInts>();
+      Arb.Register<Libraries.ThreeUniqueInt32s>();
 
       Prop.ForAll<(int, int, int)>(Property)
           .QuickCheckThrowOnFailure();
    }
-   /* -------------------------------------------------- */
 
-   // ReSharper disable once ClassNeverInstantiated.Local
-   public sealed class ThreeUniqueInts
-   {
-      /* -------------------------------------------------- */
-
-      // ReSharper disable once UnusedMember.Local
-      public static Arbitrary<(int, int, int)> Type()
-         => Arb
-           .Default
-           .Int32()
-           .Generator
-           .Three()
-           .Where(tuple => tuple.Item1 != tuple.Item2
-                        && tuple.Item1 != tuple.Item3
-                        && tuple.Item2 != tuple.Item3)
-           .Select(tuple => (tuple.Item1,
-                             tuple.Item2,
-                             tuple.Item3))
-           .ToArbitrary();
-
-      /* -------------------------------------------------- */
-   }
-
-   /* ------------------------------------------------------------ */
+   /* ------------------------------------------------------------  */
 }

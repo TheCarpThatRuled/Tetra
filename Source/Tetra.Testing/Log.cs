@@ -10,21 +10,37 @@ public static class Log
 
    public static void ToDebugOutput(string message)
    {
-      #if DEBUG
+   #if DEBUG
       Debug.WriteLine(message);
-      #endif
+   #endif
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public static void ToDebugOutput_AreEqual(object? expected,
+                                             object? actual)
+   {
+      ToDebugOutput($"Expected: {expected}, Actual: {actual}");
+      ToDebugOutput(string.Empty);
    }
 
    /* ------------------------------------------------------------ */
 
    public static void ToDebugOutput_AreEqual(string message,
-                                             object expected,
-                                             object actual)
+                                             object? expected,
+                                             object? actual)
    {
       ToDebugOutput(message);
-      ToDebugOutput($"Expected: {expected}, Actual: {actual}");
-      ToDebugOutput(message);
+      ToDebugOutput_AreEqual(expected,
+                             actual);
    }
+
+   /* ------------------------------------------------------------ */
+
+   public static void ToDebugOutput_AreEqual(DateTime expected,
+                                             DateTime actual)
+      => ToDebugOutput_AreEqual(expected.ToString("O"),
+                                actual.ToString("O"));
 
    /* ------------------------------------------------------------ */
 

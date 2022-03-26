@@ -12,11 +12,37 @@ partial class Option<T>
          => _content = content;
 
       /* ------------------------------------------------------------ */
+      // object Overridden Methods
+      /* ------------------------------------------------------------ */
+
+      public override bool Equals(object? obj)
+         => ReferenceEquals(this,
+                            obj)
+         || obj switch
+            {
+               SomeOption some => Equals(_content,
+                                         some._content),
+               _               => false,
+            };
+
+      /* ------------------------------------------------------------ */
+
+      public override int GetHashCode()
+         => throw new NotImplementedException();
+
+      /* ------------------------------------------------------------ */
       // IEquatable<Option<T>> Methods
       /* ------------------------------------------------------------ */
 
       public override bool Equals(Option<T>? other)
-         => throw new NotImplementedException();
+         => ReferenceEquals(this,
+                            other)
+         || other switch
+            {
+               SomeOption some => Equals(_content,
+                                         some._content),
+               _               => false,
+            };
 
       /* ------------------------------------------------------------ */
       // IEquatable<T> Methods

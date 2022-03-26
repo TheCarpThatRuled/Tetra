@@ -16,6 +16,13 @@ public class Some
    // Option<T> Some(T content)
    /* ------------------------------------------------------------ */
 
+   //GIVEN
+   //Option_of_int
+   //WHEN
+   //Some
+   //THEN
+   //a_some_containing_content_is_returned
+
    [TestMethod]
    public void GIVEN_Option_of_int_WHEN_Some_THEN_a_some_containing_content_is_returned()
    {
@@ -36,6 +43,13 @@ public class Some
    /* ------------------------------------------------------------ */
    // Option<T> Some<T>(T content)
    /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Option
+   //WHEN
+   //Some_of_int
+   //THEN
+   //a_some_containing_content_is_returned
 
    [TestMethod]
    public void GIVEN_Option_WHEN_Some_of_int_THEN_a_some_containing_content_is_returned()

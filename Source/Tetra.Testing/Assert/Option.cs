@@ -4,7 +4,7 @@ using static Tetra.Testing.AssertMessages;
 namespace Tetra.Testing;
 
 // ReSharper disable once InconsistentNaming
-public static class Assert_Extensions
+partial class Assert_Extensions
 {
    /* ------------------------------------------------------------ */
    // Extensions

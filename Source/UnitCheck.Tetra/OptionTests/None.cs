@@ -15,6 +15,13 @@ public class None
    // Option<T> None()
    /* ------------------------------------------------------------ */
 
+   //GIVEN
+   //Option_of_int
+   //WHEN
+   //None
+   //THEN
+   //a_none_is_returned
+
    [TestMethod]
    public void GIVEN_Option_of_int_WHEN_None_THEN_a_none_is_returned()
    {

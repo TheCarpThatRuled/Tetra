@@ -17,7 +17,6 @@ public class None_OfInt_Reduce
    //                   Func<T, TNew> whenSome)
    /* ------------------------------------------------------------ */
 
-
    //GIVEN
    //Some_of_int
    //WHEN
@@ -48,31 +47,10 @@ public class None_OfInt_Reduce
                .And(WasNotInvoked(whenSome));
       }
 
-      Arb.Register<TwoUniqueInts>();
+      Arb.Register<Libraries.TwoUniqueInt32s>();
 
       Prop.ForAll<(int, int)>(Property)
           .QuickCheckThrowOnFailure();
-   }
-   /* -------------------------------------------------- */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   public sealed class TwoUniqueInts
-   {
-      /* -------------------------------------------------- */
-
-      // ReSharper disable once UnusedMember.Local
-      public static Arbitrary<(int, int)> Type()
-         => Arb
-           .Default
-           .Int32()
-           .Generator
-           .Two()
-           .Where(tuple => tuple.Item1 != tuple.Item2)
-           .Select(tuple => (tuple.Item1,
-                             tuple.Item2))
-           .ToArbitrary();
-
-      /* -------------------------------------------------- */
    }
 
    /* ------------------------------------------------------------ */

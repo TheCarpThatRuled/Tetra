@@ -16,6 +16,13 @@ public class ImplicitOperator
    // implicit operator Option<T>(T content)
    /* ------------------------------------------------------------ */
 
+   //GIVEN
+   //an_int
+   //WHEN
+   //Option_of_int_implicit_operator
+   //THEN
+   //a_some_containing_content_is_returned
+
    [TestMethod]
    public void GIVEN_an_int_WHEN_Option_of_int_implicit_operator_THEN_a_some_containing_content_is_returned()
    {
