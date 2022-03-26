@@ -118,7 +118,8 @@ public class Equals
          //Act
          //Assert
          return EqualsIsReflexive(original,
-                                  copy);
+                                  copy,
+                                  value);
       }
 
       Prop.ForAll<int>(Property)
@@ -161,6 +162,45 @@ public class Equals
 
       Prop.ForAll<(Option<int>, Option<int>, Option<int>)>(EqualsIsTransitive<Option<int>>)
           .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Option_of_int AND obj_is_an_int
+   //WHEN
+   //Equals
+   //AND
+   //obj_is_nullable_object
+   //THEN
+   //is_transitive
+
+   [TestMethod]
+   public void GIVEN_Option_of_int_AND_obj_is_an_int_WHEN_Equals_AND_obj_is_nullable_object_THEN_is_transitive()
+   {
+      Arb.Register<Library_OptionOfInt_AND_ObjIsAnInt>();
+
+      Prop.ForAll<(Option<int>, int, int)>(EqualsIsTransitive<Option<int>, int>)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   private sealed class Library_OptionOfInt_AND_ObjIsAnInt
+   {
+      /* ------------------------------------------------------------ */
+      // Methods
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<(Option<int>, int, int)> Type()
+         => Generators
+           .TransitiveOptionAndT(Generators.Int32(),
+                                 Generators.TwoUniqueInt32s())
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */

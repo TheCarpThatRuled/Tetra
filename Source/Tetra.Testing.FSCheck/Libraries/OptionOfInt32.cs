@@ -51,19 +51,9 @@ public static partial class Libraries
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Option<int>,Option<int>,Option<int>)> Type()
+      public static Arbitrary<(Option<int>, Option<int>, Option<int>)> Type()
          => Generators
-           .TwoUniqueOptions(Generators.Int32())
-           .Apply(Gen.Elements<Func<(Option<int> a, Option<int> b), (Option<int>, Option<int>, Option<int>)>>
-                  (
-                     //If a == b && b == c
-                     tuple=> (tuple.a, tuple.a, tuple.a),
-                     //If a == b && b != c
-                     tuple => (tuple.a, tuple.a, tuple.b),
-                     //If a != b && b == c
-                     tuple => (tuple.a, tuple.b, tuple.b)
-                     //If a != b && b != c then the the equality of a to c cannot be predicted via the transitive property
-                  ))
+           .Transitive(Generators.TwoUniqueOptions(Generators.Int32()))
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

@@ -45,4 +45,16 @@ partial class Generators
         .Select(tuple => (tuple.Item1, tuple.Item2));
 
    /* ------------------------------------------------------------ */
+
+   public static Gen<(Option<T>, T, T)> TransitiveOptionAndT<T>(Gen<T> content,
+                                                                Gen<(T, T)> twoUniqueContents)
+      where T : notnull
+      => Gen
+        .Frequency(new Tuple<int, Gen<(Option<T>, T, T)>>(1,
+                                                          content.Select(value => (Tetra.Option<T>.None(), value, value))),
+                   new Tuple<int, Gen<(Option<T>, T, T)>>(4,
+                                                          Transitive(twoUniqueContents,
+                                                                     Tetra.Option.Some)));
+
+   /* ------------------------------------------------------------ */
 }

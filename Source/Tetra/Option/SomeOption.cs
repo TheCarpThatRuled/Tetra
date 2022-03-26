@@ -22,6 +22,8 @@ partial class Option<T>
             {
                SomeOption some => Equals(_content,
                                          some._content),
+               T content => Equals(_content,
+                                   content),
                _               => false,
             };
 

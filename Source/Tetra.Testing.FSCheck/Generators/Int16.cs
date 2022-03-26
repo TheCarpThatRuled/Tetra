@@ -3,7 +3,7 @@ using FsCheck;
 
 namespace Tetra.Testing;
 
-public static partial class Generators
+partial class Generators
 {
    /* ------------------------------------------------------------ */
    // Functions
