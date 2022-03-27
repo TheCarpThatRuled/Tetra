@@ -20,9 +20,13 @@ partial class Option<T>
       /* ------------------------------------------------------------ */
 
       public override int GetHashCode()
-         => throw new NotImplementedException();
-         //=> typeof(T)
-         //  .GetHashCode();
+         => typeof(T)
+           .GetHashCode();
+
+      /* ------------------------------------------------------------ */
+
+      public override string ToString()
+         => $"None of {typeof(T).Name}";
 
       /* ------------------------------------------------------------ */
       // IEquatable<Option<T>> Methods
@@ -42,7 +46,7 @@ partial class Option<T>
       /* ------------------------------------------------------------ */
 
       public override bool Equals(T? other)
-         => throw new NotImplementedException();
+         => false;
 
       /* ------------------------------------------------------------ */
       // Methods

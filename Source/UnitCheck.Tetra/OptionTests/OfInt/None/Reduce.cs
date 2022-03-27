@@ -4,13 +4,13 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.OptionTests;
+namespace Check.OptionTests.OfInt;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class Some_OfInt_Reduce
+public class None_Reduce
 {
    /* ------------------------------------------------------------ */
    // TNew Reduce<TNew>(Func<TNew> whenNone,
@@ -18,41 +18,40 @@ public class Some_OfInt_Reduce
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_int
+   //None_of_int
    //WHEN
    //Reduce AND whenNone_is_a_Func_of_int AND whenSome_is_a_Func_of_int_to_int
    //THEN
-   //whenNone_was_not_invoked AND whenSome_was_invoked_once_with_the_content AND a_some_containing_content_is_returned
+   //whenNone_was_invoked_once AND whenSome_was_not_invoked AND the_return_value_of_whenNone_is_returned
 
    [TestMethod]
    public void
-      GIVEN_Some_of_int_WHEN_Reduce_AND_whenNone_is_a_Func_of_int_AND_whenSome_is_a_Func_of_int_to_int_THEN_whenNone_was_not_invoked_AND_whenSome_was_invoked_once_with_the_content_AND_a_some_containing_content_is_returned()
+      GIVEN_None_of_int_WHEN_Reduce_AND_whenNone_is_a_Func_of_int_AND_whenSome_is_a_Func_of_int_to_int_THEN_whenNone_was_invoked_once_AND_whenSome_was_not_invoked_AND_the_return_value_of_whenNone_is_returned()
    {
-      static Property Property((int value, int whenNone, int whenSome) args)
+      static Property Property((int whenNone, int whenSome) args)
       {
          //Arrange
          var whenNone = FakeFunction<int>.Create(args.whenNone);
          var whenSome = FakeFunction<int, int>.Create(args.whenSome);
 
-         var option = Option.Some(args.value);
+         var option = Option<int>.None();
 
          //Act
          var actual = option.Reduce(whenNone.Func,
                                     whenSome.Func);
 
          //Assert
-         return AreEqual(args.whenSome,
+         return AreEqual(args.whenNone,
                          actual)
-               .And(WasNotInvoked(whenNone))
-               .And(WasInvokedOnce(args.value,
-                                   whenSome));
+               .And(WasInvokedOnce(whenNone))
+               .And(WasNotInvoked(whenSome));
       }
 
-      Arb.Register<Libraries.ThreeUniqueInt32s>();
+      Arb.Register<Libraries.TwoUniqueInt32s>();
 
-      Prop.ForAll<(int, int, int)>(Property)
+      Prop.ForAll<(int, int)>(Property)
           .QuickCheckThrowOnFailure();
    }
 
-   /* ------------------------------------------------------------  */
+   /* ------------------------------------------------------------ */
 }

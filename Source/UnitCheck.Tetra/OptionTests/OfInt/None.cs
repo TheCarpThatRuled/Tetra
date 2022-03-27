@@ -1,9 +1,8 @@
-﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
 
-namespace Check.OptionTests;
+namespace Check.OptionTests.OfInt;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]

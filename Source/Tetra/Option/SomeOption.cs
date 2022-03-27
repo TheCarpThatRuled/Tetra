@@ -20,17 +20,21 @@ partial class Option<T>
                             obj)
          || obj switch
             {
-               SomeOption some => Equals(_content,
-                                         some._content),
-               T content => Equals(_content,
-                                   content),
+               SomeOption some => Equals(some._content),
+               T content => Equals(content),
                _               => false,
             };
 
       /* ------------------------------------------------------------ */
 
       public override int GetHashCode()
-         => throw new NotImplementedException();
+         => _content
+           .GetHashCode();
+
+      /* ------------------------------------------------------------ */
+
+      public override string ToString()
+         => $"Some ({_content})";
 
       /* ------------------------------------------------------------ */
       // IEquatable<Option<T>> Methods
@@ -41,8 +45,7 @@ partial class Option<T>
                             other)
          || other switch
             {
-               SomeOption some => Equals(_content,
-                                         some._content),
+               SomeOption some => Equals(some._content),
                _               => false,
             };
 
@@ -51,7 +54,8 @@ partial class Option<T>
       /* ------------------------------------------------------------ */
 
       public override bool Equals(T? other)
-         => throw new NotImplementedException();
+         => Equals(_content,
+                   other);
 
       /* ------------------------------------------------------------ */
       // Methods

@@ -28,7 +28,8 @@ partial class Properties
         .And(AsProperty(() => ((object)original).Equals(copy))
                .Label("object.Equals is not reflexive: Comparing against an identical instance is not equal"))
         .And(AsProperty(() => ((object)original).Equals(otherType))
-               .Label("object.Equals is not reflexive: Comparing against an identical instance of a different type is not equal"));
+               .Label(
+                   "object.Equals is not pseudo-reflexive: Comparing against an identical instance of a different type is not equal"));
 
    /* ------------------------------------------------------------ */
 
@@ -101,8 +102,24 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
+   // ReSharper disable once InconsistentNaming
    public static Property IEquatableIsTransitive<T>((T a, T b, T c) values)
       where T : notnull, IEquatable<T>
+   {
+      var aEqualB = values.a.Equals(values.b);
+      var bEqualC = values.b.Equals(values.c);
+      var aEqualC = values.a.Equals(values.c);
+
+      return ((aEqualB == bEqualC) == aEqualC)
+        .Label($"object.Equals is not transitive: a == b: {aEqualB}, b == c: {bEqualC}, a == c: {aEqualC}");
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once InconsistentNaming
+   public static Property IEquatableIsTransitive<T0, T1>((T0 a, T1 b, T1 c) values)
+      where T0 : notnull, IEquatable<T1>
+      where T1 : notnull
    {
       var aEqualB = values.a.Equals(values.b);
       var bEqualC = values.b.Equals(values.c);

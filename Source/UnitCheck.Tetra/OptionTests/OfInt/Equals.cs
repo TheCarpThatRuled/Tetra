@@ -4,7 +4,7 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.OptionTests;
+namespace Check.OptionTests.OfInt;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
@@ -19,13 +19,13 @@ public class Equals
    //GIVEN
    //Option_of_int AND obj_is_null_or_a_non_equatable_type
    //WHEN
-   //Equals AND obj_is_nullable_object
+   //Equals AND obj_is_a_nullable_object
    //THEN
    //false_is_returned
 
    [TestMethod]
    public void
-      GIVEN_Option_of_int_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_nullable_object_THEN_false_is_returned()
+      GIVEN_Option_of_int_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
       static Property Property(Option<int> option,
                                object? obj)
@@ -79,12 +79,12 @@ public class Equals
    //GIVEN
    //Option_of_int AND this_is_a_none
    //WHEN
-   //Equals AND obj_is_nullable_object
+   //Equals AND obj_is_a_nullable_object
    //THEN
    //is_reflexive
 
    [TestMethod]
-   public void GIVEN_Option_of_int_AND_this_is_a_none_WHEN_Equals_AND_obj_is_nullable_object_THEN_is_reflexive()
+   public void GIVEN_Option_of_int_AND_this_is_a_none_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
    {
       //Arrange
       var original = Option<int>.None();
@@ -102,12 +102,12 @@ public class Equals
    //GIVEN
    //Option_of_int AND this_is_a_some
    //WHEN
-   //Equals AND obj_is_nullable_object
+   //Equals AND obj_is_a_nullable_object
    //THEN
    //is_reflexive
 
    [TestMethod]
-   public void GIVEN_Option_of_int_AND_this_is_a_some_WHEN_Equals_AND_obj_is_nullable_object_THEN_is_reflexive()
+   public void GIVEN_Option_of_int_AND_this_is_a_some_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
    {
       static Property Property(int value)
       {
@@ -131,12 +131,12 @@ public class Equals
    //GIVEN
    //Option_of_int
    //WHEN
-   //Equals AND obj_is_nullable_object
+   //Equals AND obj_is_a_nullable_object
    //THEN
    //is_symmetric
 
    [TestMethod]
-   public void GIVEN_Option_of_int_WHEN_Equals_AND_obj_is_nullable_object_THEN_is_symmetric()
+   public void GIVEN_Option_of_int_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_symmetric()
    {
       Arb.Register<Libraries.OptionOfInt32>();
 
@@ -151,12 +151,12 @@ public class Equals
    //WHEN
    //Equals
    //AND
-   //obj_is_nullable_object
+   //obj_is_a_nullable_object
    //THEN
    //is_transitive
 
    [TestMethod]
-   public void GIVEN_Option_of_int_WHEN_Equals_AND_obj_is_nullable_object_THEN_is_transitive()
+   public void GIVEN_Option_of_int_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
    {
       Arb.Register<Libraries.TransitiveOptionOfInt32>();
 
@@ -171,12 +171,12 @@ public class Equals
    //WHEN
    //Equals
    //AND
-   //obj_is_nullable_object
+   //obj_is_a_nullable_object
    //THEN
    //is_transitive
 
    [TestMethod]
-   public void GIVEN_Option_of_int_AND_obj_is_an_int_WHEN_Equals_AND_obj_is_nullable_object_THEN_is_transitive()
+   public void GIVEN_Option_of_int_AND_obj_is_an_int_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
    {
       Arb.Register<Library_OptionOfInt_AND_ObjIsAnInt>();
 
@@ -209,7 +209,7 @@ public class Equals
 
    [TestMethod]
    public void
-      GIVEN_Option_of_int_AND_other_is_null_WHEN_Equals_AND_other_is_nullable_Option_of_int_THEN_false_is_returned()
+      GIVEN_Option_of_int_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_Option_of_int_THEN_false_is_returned()
    {
       static Property Property(Option<int> value)
       {
@@ -231,13 +231,13 @@ public class Equals
    //GIVEN
    //Option_of_int AND this_is_a_none
    //WHEN
-   //Equals AND other_is_nullable_Option_of_int
+   //Equals AND other_is_a_nullable_Option_of_int
    //THEN
    //is_reflexive
 
    [TestMethod]
    public void
-      GIVEN_Option_of_int_AND_this_is_a_none_WHEN_Equals_AND_other_is_nullable_Option_of_int_THEN_is_reflexive()
+      GIVEN_Option_of_int_AND_this_is_a_none_WHEN_Equals_AND_other_is_a_nullable_Option_of_int_THEN_is_reflexive()
    {
       //Arrange
       var original = Option<int>.None();
@@ -255,13 +255,13 @@ public class Equals
    //GIVEN
    //Option_of_int AND this_is_a_some
    //WHEN
-   //Equals AND other_is_nullable_Option_of_int
+   //Equals AND other_is_a_nullable_Option_of_int
    //THEN
    //is_reflexive
 
    [TestMethod]
    public void
-      GIVEN_Option_of_int_AND_this_is_a_some_WHEN_Equals_AND_other_is_nullable_Option_of_int_THEN_is_reflexive()
+      GIVEN_Option_of_int_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_nullable_Option_of_int_THEN_is_reflexive()
    {
       static Property Property(int value)
       {
@@ -284,12 +284,12 @@ public class Equals
    //GIVEN
    //Option_of_int
    //WHEN
-   //Equals AND other_is_nullable_Option_of_int
+   //Equals AND other_is_a_nullable_Option_of_int
    //THEN
    //is_symmetric
 
    [TestMethod]
-   public void GIVEN_Option_of_int_WHEN_Equals_AND_other_is_nullable_Option_of_int_THEN_is_symmetric()
+   public void GIVEN_Option_of_int_WHEN_Equals_AND_other_is_a_nullable_Option_of_int_THEN_is_symmetric()
    {
       Arb.Register<Libraries.OptionOfInt32>();
 
@@ -302,12 +302,12 @@ public class Equals
    //GIVEN
    //Option_of_int
    //WHEN
-   //Equals AND other_is_nullable_Option_of_int
+   //Equals AND other_is_a_nullable_Option_of_int
    //THEN
    //is_transitive
 
    [TestMethod]
-   public void GIVEN_Option_of_int_WHEN_Equals_AND_other_is_nullable_Option_of_int_THEN_is_transitive()
+   public void GIVEN_Option_of_int_WHEN_Equals_AND_other_is_a_nullable_Option_of_int_THEN_is_transitive()
    {
       Arb.Register<Libraries.TransitiveOptionOfInt32>();
 
@@ -319,6 +319,49 @@ public class Equals
    // bool Equals(T? other)
    /* ------------------------------------------------------------ */
 
+   //GIVEN
+   //Option_of_int AND this_is_a_some
+   //WHEN
+   //Equals AND other_is_a_nullable_int
+   //THEN
+   //is_pseudo_reflexive
+
+   [TestMethod]
+   public void GIVEN_Option_of_int_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_nullable_int_THEN_is_pseudo_reflexive()
+   {
+      static Property Property(int value)
+      {
+         //Arrange
+         var option = Option.Some(value);
+
+         //Act
+         var actual = option.Equals(value);
+
+         //Assert
+         return IsTrue(actual);
+      }
+
+      Prop.ForAll<int>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Option_of_int AND obj_is_an_int
+   //WHEN
+   //Equals AND other_is_a_nullable_int
+   //THEN
+   //is_transitive
+
+   [TestMethod]
+   public void GIVEN_Option_of_int_WHEN_Equals_AND_other_is_a_nullable_int_THEN_is_transitive()
+   {
+      Arb.Register<Library_OptionOfInt_AND_ObjIsAnInt>();
+
+      Prop.ForAll<(Option<int>, int, int)>(IEquatableIsTransitive<Option<int>, int>)
+          .QuickCheckThrowOnFailure();
+   }
 
    /* ------------------------------------------------------------ */
 }

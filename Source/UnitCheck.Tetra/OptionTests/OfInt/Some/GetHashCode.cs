@@ -4,36 +4,39 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.OptionTests;
+namespace Check.OptionTests.OfInt;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class ImplicitOperator
+public class Some_GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // implicit operator Option<T>(T content)
+   // int GetHashCode()
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //an_int
+   //Some_of_int
    //WHEN
-   //Option_of_int_implicit_operator
+   //GetHashCode
    //THEN
-   //a_some_containing_content_is_returned
+   //the_hash_code_of_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_an_int_WHEN_Option_of_int_implicit_operator_THEN_a_some_containing_content_is_returned()
+   public void GIVEN_Some_of_int_WHEN_GetHashCode_THEN_the_hash_code_of_the_content_is_returned()
    {
       static Property Property(int value)
       {
+         //Arrange
+         var option = Option.Some(value);
+
          //Act
-         Option<int> actual = value;
+         var actual = option.GetHashCode();
 
          //Assert
-         return IsASome(value,
-                        actual);
+         return AreEqual(value.GetHashCode(),
+                         actual);
       }
 
       Prop.ForAll<int>(Property)
