@@ -15,7 +15,7 @@ partial class Properties
                                         _ => false))
         .Label(TheOptionIsSome<T>());
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    public static Property IsANone<T>(Option<T> option,
                                      string name)
@@ -23,14 +23,14 @@ partial class Properties
                                         _ => false))
         .Label(TheOptionIsSome<T>(name));
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    public static Property IsASome<T>(Option<T> option)
       => AsProperty(() => option.Reduce(() => false,
                                         _ => true))
         .Label(TheOptionIsNone<T>());
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    public static Property IsASome<T>(Option<T> option,
                                      string name)
@@ -38,7 +38,7 @@ partial class Properties
                                         _ => true))
         .Label(TheOptionIsNone<T>(name));
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    public static Property IsASome<T>(T expected,
                                      Option<T> option)
@@ -48,7 +48,7 @@ partial class Properties
                                  expected,
                                  some));
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    public static Property IsASome<T>(T expected,
                                      Option<T> option,
@@ -59,5 +59,5 @@ partial class Properties
                                  expected,
                                  some));
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 }

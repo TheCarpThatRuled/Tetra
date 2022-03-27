@@ -72,9 +72,9 @@ partial class Properties
         .Label($"object.Equals is not transitive: a == b: {aEqualB}, b == c: {bEqualC}, a == c: {aEqualC}");
    }
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
    // IEquatable Functions
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    // ReSharper disable once InconsistentNaming
    public static Property IEquatableIsReflexive<T>(T original,

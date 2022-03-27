@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using FsCheck;
+// ReSharper disable InconsistentNaming
 
 namespace Tetra.Testing;
 
@@ -18,7 +19,12 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<(int, int, int)> ThreeUniqueInt32s()
-      => Int32()
+      => ThreeUniqueInt32s(Int32());
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<(int, int, int)> ThreeUniqueInt32s(Gen<int> int32)
+      => int32
         .Three()
         .Where(tuple => tuple.Item1 != tuple.Item2
                      && tuple.Item1 != tuple.Item3
@@ -30,7 +36,12 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<(int, int)> TwoUniqueInt32s()
-      => Int32()
+      => TwoUniqueInt32s(Int32());
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<(int, int)> TwoUniqueInt32s(Gen<int> int32)
+      => int32
         .Two()
         .Where(tuple => tuple.Item1 != tuple.Item2)
         .Select(tuple => (tuple.Item1,

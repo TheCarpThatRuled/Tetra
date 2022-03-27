@@ -2,9 +2,9 @@
 
 public sealed class FakeFunction<T, TReturn>
 {
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
    // Factory Functions
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    /// <summary>
    /// Creates a <c>FakeFunction</c> that will return a value when invoked.
@@ -14,9 +14,9 @@ public sealed class FakeFunction<T, TReturn>
    public static FakeFunction<T, TReturn> Create(TReturn returnValue)
       => new(returnValue);
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
    // Properties
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    /// <summary>
    /// A list of the parameters this <c>FakeFunction</c> has been invoked with
@@ -24,9 +24,9 @@ public sealed class FakeFunction<T, TReturn>
    public IReadOnlyList<T> Invocations()
       => _invocations;
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
    // Methods
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    /// <summary>
    /// The method that should be passed into the argument that should be faked.
@@ -38,7 +38,7 @@ public sealed class FakeFunction<T, TReturn>
       return _returnValue;
    }
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    /// <summary>
    /// Resets the invocation trace.
@@ -47,7 +47,7 @@ public sealed class FakeFunction<T, TReturn>
       => _invocations
         .Clear();
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    /// <summary>
    /// Update the value that should be returned when this <c>FakeFunction</c> is invoked.
@@ -56,20 +56,20 @@ public sealed class FakeFunction<T, TReturn>
    public void UpdateReturnValue(TReturn returnValue)
       => _returnValue = returnValue;
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
    // Private Fields
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    private readonly List<T> _invocations = new();
 
    private TReturn _returnValue;
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
    // Private Constructors
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    private FakeFunction(TReturn returnValue)
       => _returnValue = returnValue;
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 }

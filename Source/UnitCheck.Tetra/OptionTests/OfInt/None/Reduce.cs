@@ -54,4 +54,80 @@ public class None_Reduce
    }
 
    /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //None_of_int
+   //WHEN
+   //Reduce AND whenNone_is_a_Func_of_TestClass AND whenSome_is_a_Func_of_int_to_TestClass
+   //THEN
+   //whenNone_was_invoked_once AND whenSome_was_not_invoked AND the_return_value_of_whenNone_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_None_of_int_WHEN_Reduce_AND_whenNone_is_a_Func_of_TestClass_AND_whenSome_is_a_Func_of_int_to_TestClass_THEN_whenNone_was_invoked_once_AND_whenSome_was_not_invoked_AND_the_return_value_of_whenNone_is_returned()
+   {
+      static Property Property((TestClass whenNone, TestClass whenSome) args)
+      {
+         //Arrange
+         var whenNone = FakeFunction<TestClass>.Create(args.whenNone);
+         var whenSome = FakeFunction<int, TestClass>.Create(args.whenSome);
+
+         var option = Option<int>.None();
+
+         //Act
+         var actual = option.Reduce(whenNone.Func,
+                                    whenSome.Func);
+
+         //Assert
+         return AreEqual(args.whenNone,
+                         actual)
+               .And(WasInvokedOnce(whenNone))
+               .And(WasNotInvoked(whenSome));
+      }
+
+      Arb.Register<Libraries.TwoUniqueTestClasses>();
+
+      Prop.ForAll<(TestClass, TestClass)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //None_of_int
+   //WHEN
+   //Reduce AND whenNone_is_a_Func_of_TestStruct AND whenSome_is_a_Func_of_int_to_TestStruct
+   //THEN
+   //whenNone_was_invoked_once AND whenSome_was_not_invoked AND the_return_value_of_whenNone_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_None_of_int_WHEN_Reduce_AND_whenNone_is_a_Func_of_TestStruct_AND_whenSome_is_a_Func_of_int_to_TestStruct_THEN_whenNone_was_invoked_once_AND_whenSome_was_not_invoked_AND_the_return_value_of_whenNone_is_returned()
+   {
+      static Property Property((TestStruct whenNone, TestStruct whenSome) args)
+      {
+         //Arrange
+         var whenNone = FakeFunction<TestStruct>.Create(args.whenNone);
+         var whenSome = FakeFunction<int, TestStruct>.Create(args.whenSome);
+
+         var option = Option<int>.None();
+
+         //Act
+         var actual = option.Reduce(whenNone.Func,
+                                    whenSome.Func);
+
+         //Assert
+         return AreEqual(args.whenNone,
+                         actual)
+               .And(WasInvokedOnce(whenNone))
+               .And(WasNotInvoked(whenSome));
+      }
+
+      Arb.Register<Libraries.TwoUniqueTestStructs>();
+
+      Prop.ForAll<(TestStruct, TestStruct)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
 }

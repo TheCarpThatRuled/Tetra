@@ -16,13 +16,13 @@ partial class Properties
                               numberOfInvocations,
                               function.Invocations()));
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    public static Property WasInvokedOnce<TReturns>(FakeFunction<TReturns> function)
       => WasInvoked(function,
                     1);
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    public static Property WasNotInvoked<TReturns>(FakeFunction<TReturns> function)
       => WasInvoked(function,

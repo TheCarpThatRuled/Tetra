@@ -33,7 +33,7 @@ partial class Properties
                     + $"\nExpected: {expected}"
                     + $"\nActual: {function.Invocations().First()}"));
 
-   /* -------------------------------------------------- */
+   /* ------------------------------------------------------------ */
 
    public static Property WasNotInvoked<T, TReturn>(FakeFunction<T, TReturn> function)
       => AsProperty(() => function

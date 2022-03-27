@@ -68,6 +68,10 @@ public class Equals
                   Generators.UInt32()
                             .Select(x => (object?)x),
                   Generators.String()
+                            .Select(x => (object?)x),
+                  Generators.Option(Generators.TestClass())
+                            .Select(x => (object?)x),
+                  Generators.Option(Generators.TestStruct())
                             .Select(x => (object?)x))
            .ToArbitrary();
 
