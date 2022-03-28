@@ -60,6 +60,18 @@ public abstract partial class Option<T> : IEquatable<Option<T>>,
    /* ------------------------------------------------------------ */
 
    /// <summary>
+   /// Casts the content of this <c>Option</c> to the new type.
+   /// </summary>
+   /// <typeparam name="TNew">The type the content of this <c>Option</c> shall be cast into.</typeparam>
+   /// <returns>
+   /// If <c>Option</c> is a some and the cast was successful, a some of the new type;
+   /// otherwise a none.
+   /// </returns>
+   public abstract Option<TNew> Cast<TNew>();
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
    /// Identifies if this <c>Option</c> is in the none case.
    /// </summary>
    /// <returns>

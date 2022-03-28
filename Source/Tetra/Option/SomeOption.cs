@@ -61,6 +61,18 @@ partial class Option<T>
       // Methods
       /* ------------------------------------------------------------ */
 
+      public override Option<TNew> Cast<TNew>()
+      {
+         if (_content is TNew content)
+         {
+            return new Option<TNew>.SomeOption(content);
+         }
+
+         return new Option<TNew>.NoneOption();
+      }
+
+      /* ------------------------------------------------------------ */
+
       public override bool IsANone()
          => false;
 
