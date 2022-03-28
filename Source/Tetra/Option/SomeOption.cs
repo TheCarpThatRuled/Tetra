@@ -61,6 +61,16 @@ partial class Option<T>
       // Methods
       /* ------------------------------------------------------------ */
 
+      public override bool IsANone()
+         => false;
+
+      /* ------------------------------------------------------------ */
+
+      public override bool IsASome()
+         => true;
+
+      /* ------------------------------------------------------------ */
+
       public override T Reduce(T _)
          => _content;
 

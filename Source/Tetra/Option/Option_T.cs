@@ -60,6 +60,28 @@ public abstract partial class Option<T> : IEquatable<Option<T>>,
    /* ------------------------------------------------------------ */
 
    /// <summary>
+   /// Identifies if this <c>Option</c> is in the none case.
+   /// </summary>
+   /// <returns>
+   /// <c>true</c> if this <c>Option</c> is a none;
+   /// <c>false</c> if it is a some.
+   /// </returns>
+   public abstract bool IsANone();
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
+   /// Identifies if this <c>Option</c> is in the some case.
+   /// </summary>
+   /// <returns>
+   /// <c>true</c> if this <c>Option</c> is a some;
+   /// <c>false</c> if it is a none.
+   /// </returns>
+   public abstract bool IsASome();
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
    /// Unifies both branches of the <c>Option</c> by providing a value for the none case.
    /// </summary>
    /// <param name="whenNone">A value to use, if the <c>Option</c> is a none.</param>

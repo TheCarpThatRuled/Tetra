@@ -4,44 +4,43 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.OptionTests.OfTestStruct;
+namespace Check.OptionTests.OfTestClass;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class Some_ToString
+public class Some_IsANone
 {
    /* ------------------------------------------------------------ */
-   // string ToString()
+   // bool IsANone()
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_TestStruct
+   //Some_of_TestClass
    //WHEN
-   //ToString
+   //IsANone
    //THEN
-   //Some_brackets_the_content_to_string_is_returned
+   //false_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_TestStruct_WHEN_ToString_THEN_Some_brackets_the_content_to_string_is_returned()
+   public void GIVEN_Some_of_TestClass_WHEN_IsANone_THEN_false_is_returned()
    {
-      static Property Property(TestStruct value)
+      static Property Property(TestClass value)
       {
          //Arrange
          var option = Option.Some(value);
 
          //Act
-         var actual = option.ToString();
+         var actual = option.IsANone();
 
          //Assert
-         return AreEqual($"Some ({value})",
-                         actual);
+         return IsFalse(actual);
       }
 
-      Arb.Register<Libraries.TestStruct>();
+      Arb.Register<Libraries.TestClass>();
 
-      Prop.ForAll<TestStruct>(Property)
+      Prop.ForAll<TestClass>(Property)
           .QuickCheckThrowOnFailure();
    }
 
