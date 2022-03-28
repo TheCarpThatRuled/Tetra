@@ -17,9 +17,9 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND obj_is_null_or_a_non_equatable_type
+   //Option_of_int_AND_obj_is_null_or_a_non_equatable_type
    //WHEN
-   //Equals AND obj_is_a_nullable_object
+   //Equals_AND_obj_is_a_nullable_object
    //THEN
    //false_is_returned
 
@@ -81,9 +81,9 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND this_is_a_none
+   //Option_of_int_AND_this_is_a_none
    //WHEN
-   //Equals AND obj_is_a_nullable_object
+   //Equals_AND_obj_is_a_nullable_object
    //THEN
    //is_reflexive
 
@@ -104,9 +104,9 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND this_is_a_some
+   //Option_of_int_AND_this_is_a_some
    //WHEN
-   //Equals AND obj_is_a_nullable_object
+   //Equals_AND_obj_is_a_nullable_object
    //THEN
    //is_reflexive
 
@@ -135,7 +135,7 @@ public class Equals
    //GIVEN
    //Option_of_int
    //WHEN
-   //Equals AND obj_is_a_nullable_object
+   //Equals_AND_obj_is_a_nullable_object
    //THEN
    //is_symmetric
 
@@ -171,7 +171,7 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND obj_is_an_int
+   //Option_of_int_AND_obj_is_an_int
    //WHEN
    //Equals
    //AND
@@ -212,9 +212,9 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND other_is_null
+   //Option_of_int_AND_other_is_null
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_int
+   //Equals_AND_other_is_a_nullable_Option_of_int
    //THEN
    //false_is_returned
 
@@ -240,9 +240,9 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND this_is_a_none
+   //Option_of_int_AND_this_is_a_none
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_int
+   //Equals_AND_other_is_a_nullable_Option_of_int
    //THEN
    //is_reflexive
 
@@ -264,9 +264,9 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND this_is_a_some
+   //Option_of_int_AND_this_is_a_some
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_int
+   //Equals_AND_other_is_a_nullable_Option_of_int
    //THEN
    //is_reflexive
 
@@ -295,7 +295,7 @@ public class Equals
    //GIVEN
    //Option_of_int
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_int
+   //Equals_AND_other_is_a_nullable_Option_of_int
    //THEN
    //is_symmetric
 
@@ -313,7 +313,7 @@ public class Equals
    //GIVEN
    //Option_of_int
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_int
+   //Equals_AND_other_is_a_nullable_Option_of_int
    //THEN
    //is_transitive
 
@@ -331,14 +331,14 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND this_is_a_some
+   //Option_of_int_AND_this_is_a_some
    //WHEN
-   //Equals AND other_is_a_int
+   //Equals_AND_other_is_an_int
    //THEN
    //is_pseudo_reflexive
 
    [TestMethod]
-   public void GIVEN_Option_of_int_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_int_THEN_is_pseudo_reflexive()
+   public void GIVEN_Option_of_int_AND_this_is_a_some_WHEN_Equals_AND_other_is_an_int_THEN_is_pseudo_reflexive()
    {
       static Property Property(int value)
       {
@@ -359,14 +359,14 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND obj_is_an_int
+   //Option_of_int_AND_obj_is_an_int
    //WHEN
-   //Equals AND other_is_a_int
+   //Equals_AND_other_is_an_int
    //THEN
    //is_transitive
 
    [TestMethod]
-   public void GIVEN_Option_of_int_WHEN_Equals_AND_other_is_a_int_THEN_is_transitive()
+   public void GIVEN_Option_of_int_WHEN_Equals_AND_other_is_an_int_THEN_is_transitive()
    {
       Arb.Register<Library_OptionOfInt_AND_ObjIsAnInt>();
 

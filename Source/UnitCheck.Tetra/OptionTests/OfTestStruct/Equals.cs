@@ -17,9 +17,9 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_TestStruct AND obj_is_null_or_a_non_equatable_type
+   //Option_of_TestStruct_AND_obj_is_null_or_a_non_equatable_type
    //WHEN
-   //Equals AND obj_is_a_nullable_object
+   //Equals_AND_obj_is_a_nullable_object
    //THEN
    //false_is_returned
 
@@ -81,9 +81,9 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_TestStruct AND this_is_a_none
+   //Option_of_TestStruct_AND_this_is_a_none
    //WHEN
-   //Equals AND obj_is_a_nullable_object
+   //Equals_AND_obj_is_a_nullable_object
    //THEN
    //is_reflexive
 
@@ -104,9 +104,9 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_TestStruct AND this_is_a_some
+   //Option_of_TestStruct_AND_this_is_a_some
    //WHEN
-   //Equals AND obj_is_a_nullable_object
+   //Equals_AND_obj_is_a_nullable_object
    //THEN
    //is_reflexive
 
@@ -137,7 +137,7 @@ public class Equals
    //GIVEN
    //Option_of_TestStruct
    //WHEN
-   //Equals AND obj_is_a_nullable_object
+   //Equals_AND_obj_is_a_nullable_object
    //THEN
    //is_symmetric
 
@@ -173,7 +173,7 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_TestStruct AND obj_is_a_TestStruct
+   //Option_of_TestStruct_AND_obj_is_a_TestStruct
    //WHEN
    //Equals
    //AND
@@ -214,9 +214,9 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_TestStruct AND other_is_null
+   //Option_of_TestStruct_AND_other_is_null
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_TestStruct
+   //Equals_AND_other_is_a_nullable_Option_of_TestStruct
    //THEN
    //false_is_returned
 
@@ -242,9 +242,9 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_TestStruct AND this_is_a_none
+   //Option_of_TestStruct_AND_this_is_a_none
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_TestStruct
+   //Equals_AND_other_is_a_nullable_Option_of_TestStruct
    //THEN
    //is_reflexive
 
@@ -266,9 +266,9 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_TestStruct AND this_is_a_some
+   //Option_of_TestStruct_AND_this_is_a_some
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_TestStruct
+   //Equals_AND_other_is_a_nullable_Option_of_TestStruct
    //THEN
    //is_reflexive
 
@@ -299,7 +299,7 @@ public class Equals
    //GIVEN
    //Option_of_TestStruct
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_TestStruct
+   //Equals_AND_other_is_a_nullable_Option_of_TestStruct
    //THEN
    //is_symmetric
 
@@ -317,7 +317,7 @@ public class Equals
    //GIVEN
    //Option_of_TestStruct
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_TestStruct
+   //Equals_AND_other_is_a_nullable_Option_of_TestStruct
    //THEN
    //is_transitive
 
@@ -335,9 +335,9 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_TestStruct AND this_is_a_some
+   //Option_of_TestStruct_AND_this_is_a_some
    //WHEN
-   //Equals AND other_is_a_TestStruct
+   //Equals_AND_other_is_a_TestStruct
    //THEN
    //is_pseudo_reflexive
 
@@ -365,9 +365,9 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_TestStruct AND obj_is_an_int
+   //Option_of_TestStruct_AND_obj_is_an_int
    //WHEN
-   //Equals AND other_is_a_TestStruct
+   //Equals_AND_other_is_a_TestStruct
    //THEN
    //is_transitive
 

@@ -60,6 +60,21 @@ public abstract partial class Option<T> : IEquatable<Option<T>>,
    /* ------------------------------------------------------------ */
 
    /// <summary>
+   /// Unifies both branches of the <c>Option</c> via a mapping function.
+   /// </summary>
+   /// <typeparam name="TNew">The type this <c>Option</c> shall be unified as.</typeparam>
+   /// <param name="whenNone">A value to use, if the <c>Option</c> is a none.</param>
+   /// <param name="whenSome">A mapping function that shall be applied to the content of the <c>Option</c>, if it is a some.</param>
+   /// <returns>
+   /// The content of this <c>Option</c> mapped through <c>whenSome</c> if it is a some;
+   /// otherwise <c>whenNone</c>.
+   /// </returns>
+   public abstract TNew Reduce<TNew>(TNew whenNone,
+                                     Func<T, TNew> whenSome);
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
    /// Unifies both branches of the <c>Option</c> via mapping functions.
    /// </summary>
    /// <typeparam name="TNew">The type this <c>Option</c> shall be unified as.</typeparam>
