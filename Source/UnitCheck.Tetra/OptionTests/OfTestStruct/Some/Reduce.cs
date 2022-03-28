@@ -13,6 +13,77 @@ namespace Check.OptionTests.OfTestStruct;
 public class Some_Reduce
 {
    /* ------------------------------------------------------------ */
+   // T Reduce(T whenNone)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_TestStruct
+   //WHEN
+   //Reduce_AND_whenNone_is_an_TestStruct
+   //THEN
+   //the_content_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Some_of_TestStruct_WHEN_Reduce_AND_whenNone_is_an_TestStruct_THEN_the_content_is_returned()
+   {
+      static Property Property((TestStruct value, TestStruct whenNone) args)
+      {
+         //Arrange
+         var option = Option.Some(args.value);
+
+         //Act
+         var actual = option.Reduce(args.whenNone);
+
+         //Assert
+         return AreEqual(args.value,
+                         actual);
+      }
+
+      Arb.Register<Libraries.TwoUniqueTestStructs>();
+
+      Prop.ForAll<(TestStruct, TestStruct )>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+   // T Reduce(Func<T> whenNone)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_TestStruct
+   //WHEN
+   //Reduce_AND_whenNone_is_a_Func_of_TestStruct
+   //THEN
+   //whenNone_was_not_invoked_AND_the_content_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Some_of_TestStruct_WHEN_Reduce_AND_whenNone_is_a_Func_of_TestStruct_THEN_whenNone_was_not_invoked_AND_the_content_is_returned()
+   {
+      static Property Property((TestStruct value, TestStruct whenNone) args)
+      {
+         //Arrange
+         var whenNone = FakeFunction<TestStruct>.Create(args.whenNone);
+
+         var option = Option.Some(args.value);
+
+         //Act
+         var actual = option.Reduce(whenNone.Func);
+
+         //Assert
+         return AreEqual(args.value,
+                         actual)
+           .And(WasNotInvoked(whenNone));
+      }
+
+      Arb.Register<Libraries.TwoUniqueTestStructs>();
+
+      Prop.ForAll<(TestStruct, TestStruct)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
    // TNew Reduce<TNew>(TNew whenNone,
    //                   Func<T, TNew> whenSome)
    /* ------------------------------------------------------------ */

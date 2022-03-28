@@ -52,6 +52,16 @@ partial class Option<T>
       // Methods
       /* ------------------------------------------------------------ */
 
+      public override T Reduce(T whenNone)
+         => whenNone;
+
+      /* ------------------------------------------------------------ */
+
+      public override T Reduce(Func<T> whenNone)
+         => whenNone();
+
+      /* ------------------------------------------------------------ */
+
       public override TNew Reduce<TNew>(TNew whenNone,
                                         Func<T, TNew> _)
          => whenNone;

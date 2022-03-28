@@ -60,6 +60,30 @@ public abstract partial class Option<T> : IEquatable<Option<T>>,
    /* ------------------------------------------------------------ */
 
    /// <summary>
+   /// Unifies both branches of the <c>Option</c> by providing a value for the none case.
+   /// </summary>
+   /// <param name="whenNone">A value to use, if the <c>Option</c> is a none.</param>
+   /// <returns>
+   /// The content of this <c>Option</c> if it is a some;
+   /// otherwise <c>whenNone</c>.
+   /// </returns>
+   public abstract T Reduce(T whenNone);
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
+   /// Unifies both branches of the <c>Option</c> by providing a function that will create a value for the none case.
+   /// </summary>
+   /// <param name="whenNone">A function that will return the value to use, if the <c>Option</c> is a none.</param>
+   /// <returns>
+   /// The content of this <c>Option</c> if it is a some;
+   /// otherwise the return value of <c>whenNone</c>.
+   /// </returns>
+   public abstract T Reduce(Func<T> whenNone);
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
    /// Unifies both branches of the <c>Option</c> via a mapping function.
    /// </summary>
    /// <typeparam name="TNew">The type this <c>Option</c> shall be unified as.</typeparam>

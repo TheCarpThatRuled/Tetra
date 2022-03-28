@@ -13,7 +13,74 @@ namespace Check.OptionTests.OfInt;
 public class None_Reduce
 {
    /* ------------------------------------------------------------ */
-   // TNew Reduce<TNew>(Func<TNew> whenNone,
+   // T Reduce(T whenNone)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //None_of_int
+   //WHEN
+   //Reduce_AND_whenNone_is_an_int
+   //THEN
+   //whenNone_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_None_of_int_WHEN_Reduce_AND_whenNone_is_an_int_THEN_whenNone_is_returned()
+   {
+      static Property Property(int whenNone)
+      {
+         //Arrange
+         var option = Option<int>.None();
+
+         //Act
+         var actual = option.Reduce(whenNone);
+
+         //Assert
+         return AreEqual(whenNone,
+                         actual);
+      }
+
+      Prop.ForAll<int>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+   // T Reduce(Func<T> whenNone)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //None_of_int
+   //WHEN
+   //Reduce_AND_whenNone_is_a_Func_of_int
+   //THEN
+   //whenNone_was_invoked_once_AND_the_return_value_of_whenNone_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_None_of_int_WHEN_Reduce_AND_whenNone_is_a_Func_of_int_THEN_whenNone_was_invoked_once_AND_the_return_value_of_whenNone_is_returned()
+   {
+      static Property Property(int whenNone)
+      {
+         //Arrange
+         var whenNoneFunc = FakeFunction<int>.Create(whenNone);
+
+         var option = Option<int>.None();
+
+         //Act
+         var actual = option.Reduce(whenNoneFunc.Func);
+
+         //Assert
+         return AreEqual(whenNone,
+                         actual)
+               .And(WasInvokedOnce(whenNoneFunc));
+      }
+
+      Prop.ForAll<int>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+   // TNew Reduce<TNew>(TNew whenNone,
    //                   Func<T, TNew> whenSome)
    /* ------------------------------------------------------------ */
 
@@ -22,7 +89,7 @@ public class None_Reduce
    //WHEN
    //Reduce_AND_whenNone_is_an_int_AND_whenSome_is_a_Func_of_int_to_int
    //THEN
-   //whenSome_was_not_invoked_AND_the_return_value_of_whenNone_is_returned
+   //whenSome_was_not_invoked_AND_whenNone_is_returned
 
    [TestMethod]
    public void

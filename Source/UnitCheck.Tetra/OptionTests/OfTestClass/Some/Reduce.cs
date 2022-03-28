@@ -13,6 +13,77 @@ namespace Check.OptionTests.OfTestClass;
 public class Some_Reduce
 {
    /* ------------------------------------------------------------ */
+   // T Reduce(T whenNone)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_TestClass
+   //WHEN
+   //Reduce_AND_whenNone_is_an_TestClass
+   //THEN
+   //the_content_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Some_of_TestClass_WHEN_Reduce_AND_whenNone_is_an_TestClass_THEN_the_content_is_returned()
+   {
+      static Property Property((TestClass value, TestClass whenNone) args)
+      {
+         //Arrange
+         var option = Option.Some(args.value);
+
+         //Act
+         var actual = option.Reduce(args.whenNone);
+
+         //Assert
+         return AreEqual(args.value,
+                         actual);
+      }
+
+      Arb.Register<Libraries.TwoUniqueTestClasses>();
+
+      Prop.ForAll<(TestClass, TestClass)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+   // T Reduce(Func<T> whenNone)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_TestClass
+   //WHEN
+   //Reduce_AND_whenNone_is_a_Func_of_TestClass
+   //THEN
+   //whenNone_was_not_invoked_AND_the_content_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Some_of_TestClass_WHEN_Reduce_AND_whenNone_is_a_Func_of_TestClass_THEN_whenNone_was_not_invoked_AND_the_content_is_returned()
+   {
+      static Property Property((TestClass value, TestClass whenNone) args)
+      {
+         //Arrange
+         var whenNone = FakeFunction<TestClass>.Create(args.whenNone);
+
+         var option = Option.Some(args.value);
+
+         //Act
+         var actual = option.Reduce(whenNone.Func);
+
+         //Assert
+         return AreEqual(args.value,
+                         actual)
+           .And(WasNotInvoked(whenNone));
+      }
+
+      Arb.Register<Libraries.TwoUniqueTestClasses>();
+
+      Prop.ForAll<(TestClass, TestClass)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
    // TNew Reduce<TNew>(TNew whenNone,
    //                   Func<T, TNew> whenSome)
    /* ------------------------------------------------------------ */

@@ -13,6 +13,77 @@ namespace Check.OptionTests.OfInt;
 public class Some_Reduce
 {
    /* ------------------------------------------------------------ */
+   // T Reduce(T whenNone)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_int
+   //WHEN
+   //Reduce_AND_whenNone_is_an_int
+   //THEN
+   //the_content_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Some_of_int_WHEN_Reduce_AND_whenNone_is_an_int_THEN_the_content_is_returned()
+   {
+      static Property Property((int value, int whenNone) args)
+      {
+         //Arrange
+         var option = Option.Some(args.value);
+
+         //Act
+         var actual = option.Reduce(args.whenNone);
+
+         //Assert
+         return AreEqual(args.value,
+                         actual);
+      }
+
+      Arb.Register<Libraries.TwoUniqueInt32s>();
+
+      Prop.ForAll<(int, int)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+   // T Reduce(Func<T> whenNone)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_int
+   //WHEN
+   //Reduce_AND_whenNone_is_a_Func_of_int
+   //THEN
+   //whenNone_was_not_invoked_AND_the_content_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Some_of_int_WHEN_Reduce_AND_whenNone_is_a_Func_of_int_THEN_whenNone_was_not_invoked_AND_the_content_is_returned()
+   {
+      static Property Property((int value, int whenNone) args)
+      {
+         //Arrange
+         var whenNone = FakeFunction<int>.Create(args.whenNone);
+
+         var option = Option.Some(args.value);
+
+         //Act
+         var actual = option.Reduce(whenNone.Func);
+
+         //Assert
+         return AreEqual(args.value,
+                         actual)
+           .And(WasNotInvoked(whenNone));
+      }
+
+      Arb.Register<Libraries.TwoUniqueInt32s>();
+
+      Prop.ForAll<(int, int)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
    // TNew Reduce<TNew>(TNew whenNone,
    //                   Func<T, TNew> whenSome)
    /* ------------------------------------------------------------ */
