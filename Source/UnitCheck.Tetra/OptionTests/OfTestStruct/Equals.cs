@@ -4,7 +4,7 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.OptionTests.OfInt;
+namespace Check.OptionTests.OfTestStruct;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
@@ -17,7 +17,7 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND obj_is_null_or_a_non_equatable_type
+   //Option_of_TestStruct AND obj_is_null_or_a_non_equatable_type
    //WHEN
    //Equals AND obj_is_a_nullable_object
    //THEN
@@ -25,9 +25,9 @@ public class Equals
 
    [TestMethod]
    public void
-      GIVEN_Option_of_int_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
+      GIVEN_Option_of_TestStruct_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(Option<int> option,
+      static Property Property(Option<TestStruct> option,
                                object? obj)
       {
          //Act
@@ -37,9 +37,9 @@ public class Equals
          return IsFalse(actual);
       }
 
-      Arb.Register<OptionOfInt_AND_ObjIsNullOrANonEquatableType>();
+      Arb.Register<OptionOfTestStruct_AND_ObjIsNullOrANonEquatableType>();
 
-      Prop.ForAll<Option<int>, object?>(Property)
+      Prop.ForAll<Option<TestStruct>, object?>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -47,15 +47,15 @@ public class Equals
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   private sealed class OptionOfInt_AND_ObjIsNullOrANonEquatableType
+   private sealed class OptionOfTestStruct_AND_ObjIsNullOrANonEquatableType
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Option<int>> OptionOfInt()
+      public static Arbitrary<Option<TestStruct>> OptionOfInt()
          => Generators
-           .Option(Generators.Int32())
+           .Option(Generators.TestStruct())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -63,15 +63,15 @@ public class Equals
       public static Arbitrary<object?> Obj()
          => Gen
            .OneOf(Gen.Constant(default(object?)),
-                  Generators.Int16()
+                  Generators.TestClass()
                             .Select(x => (object?)x),
                   Generators.UInt32()
                             .Select(x => (object?)x),
                   Generators.String()
                             .Select(x => (object?)x),
-                  Generators.Option(Generators.TestClass())
+                  Generators.Option(Generators.Int32())
                             .Select(x => (object?)x),
-                  Generators.Option(Generators.TestStruct())
+                  Generators.Option(Generators.TestClass())
                             .Select(x => (object?)x))
            .ToArbitrary();
 
@@ -81,18 +81,18 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND this_is_a_none
+   //Option_of_TestStruct AND this_is_a_none
    //WHEN
    //Equals AND obj_is_a_nullable_object
    //THEN
    //is_reflexive
 
    [TestMethod]
-   public void GIVEN_Option_of_int_AND_this_is_a_none_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
+   public void GIVEN_Option_of_TestStruct_AND_this_is_a_none_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
    {
       //Arrange
-      var original = Option<int>.None();
-      var copy     = Option<int>.None();
+      var original = Option<TestStruct>.None();
+      var copy     = Option<TestStruct>.None();
 
       //Act
       //Assert
@@ -104,16 +104,16 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND this_is_a_some
+   //Option_of_TestStruct AND this_is_a_some
    //WHEN
    //Equals AND obj_is_a_nullable_object
    //THEN
    //is_reflexive
 
    [TestMethod]
-   public void GIVEN_Option_of_int_AND_this_is_a_some_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
+   public void GIVEN_Option_of_TestStruct_AND_this_is_a_some_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
    {
-      static Property Property(int value)
+      static Property Property(TestStruct value)
       {
          //Arrange
          var original = Option.Some(value);
@@ -126,32 +126,34 @@ public class Equals
                                   value);
       }
 
-      Prop.ForAll<int>(Property)
+      Arb.Register<Libraries.TestStruct>();
+
+      Prop.ForAll<TestStruct>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int
+   //Option_of_TestStruct
    //WHEN
    //Equals AND obj_is_a_nullable_object
    //THEN
    //is_symmetric
 
    [TestMethod]
-   public void GIVEN_Option_of_int_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_symmetric()
+   public void GIVEN_Option_of_TestStruct_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_symmetric()
    {
-      Arb.Register<Libraries.OptionOfInt32>();
+      Arb.Register<Libraries.OptionOfTestStruct>();
 
-      Prop.ForAll<Option<int>, Option<int>>(EqualsIsSymmetric<Option<int>>)
+      Prop.ForAll<Option<TestStruct>, Option<TestStruct>>(EqualsIsSymmetric<Option<TestStruct>>)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int
+   //Option_of_TestStruct
    //WHEN
    //Equals
    //AND
@@ -160,18 +162,18 @@ public class Equals
    //is_transitive
 
    [TestMethod]
-   public void GIVEN_Option_of_int_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
+   public void GIVEN_Option_of_TestStruct_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveOptionOfInt32>();
+      Arb.Register<Libraries.TransitiveOptionOfTestStruct>();
 
-      Prop.ForAll<(Option<int>, Option<int>, Option<int>)>(EqualsIsTransitive<Option<int>>)
+      Prop.ForAll<(Option<TestStruct>, Option<TestStruct>, Option<TestStruct>)>(EqualsIsTransitive<Option<TestStruct>>)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND obj_is_an_int
+   //Option_of_TestStruct AND obj_is_a_TestStruct
    //WHEN
    //Equals
    //AND
@@ -180,11 +182,11 @@ public class Equals
    //is_transitive
 
    [TestMethod]
-   public void GIVEN_Option_of_int_AND_obj_is_an_int_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
+   public void GIVEN_Option_of_TestStruct_AND_obj_is_a_TestStruct_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
    {
-      Arb.Register<Library_OptionOfInt_AND_ObjIsAnInt>();
+      Arb.Register<Library_OptionOfTestStruct_AND_ObjIsAnTestStruct>();
 
-      Prop.ForAll<(Option<int>, int, int)>(EqualsIsTransitive<Option<int>, int>)
+      Prop.ForAll<(Option<TestStruct>, TestStruct, TestStruct)>(EqualsIsTransitive<Option<TestStruct>, TestStruct>)
           .QuickCheckThrowOnFailure();
    }
 
@@ -192,16 +194,16 @@ public class Equals
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   private sealed class Library_OptionOfInt_AND_ObjIsAnInt
+   private sealed class Library_OptionOfTestStruct_AND_ObjIsAnTestStruct
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Option<int>, int, int)> Type()
+      public static Arbitrary<(Option<TestStruct>, TestStruct, TestStruct)> Type()
          => Generators
-           .TransitiveOptionAndT(Generators.Int32(),
-                                 Generators.TwoUniqueInt32s())
+           .TransitiveOptionAndT(Generators.TestStruct(),
+                                 Generators.TwoUniqueTestStructs())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -212,17 +214,17 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND other_is_null
+   //Option_of_TestStruct AND other_is_null
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_int
+   //Equals AND other_is_a_nullable_Option_of_TestStruct
    //THEN
    //false_is_returned
 
    [TestMethod]
    public void
-      GIVEN_Option_of_int_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_Option_of_int_THEN_false_is_returned()
+      GIVEN_Option_of_TestStruct_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_Option_of_TestStruct_THEN_false_is_returned()
    {
-      static Property Property(Option<int> value)
+      static Property Property(Option<TestStruct> value)
       {
          //act
          var actual = value.Equals(null);
@@ -231,28 +233,28 @@ public class Equals
          return IsFalse(actual);
       }
 
-      Arb.Register<Libraries.OptionOfInt32>();
+      Arb.Register<Libraries.OptionOfTestStruct>();
 
-      Prop.ForAll<Option<int>>(Property)
+      Prop.ForAll<Option<TestStruct>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND this_is_a_none
+   //Option_of_TestStruct AND this_is_a_none
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_int
+   //Equals AND other_is_a_nullable_Option_of_TestStruct
    //THEN
    //is_reflexive
 
    [TestMethod]
    public void
-      GIVEN_Option_of_int_AND_this_is_a_none_WHEN_Equals_AND_other_is_a_nullable_Option_of_int_THEN_is_reflexive()
+      GIVEN_Option_of_TestStruct_AND_this_is_a_none_WHEN_Equals_AND_other_is_a_nullable_Option_of_TestStruct_THEN_is_reflexive()
    {
       //Arrange
-      var original = Option<int>.None();
-      var copy     = Option<int>.None();
+      var original = Option<TestStruct>.None();
+      var copy     = Option<TestStruct>.None();
 
       //Act
       //Assert
@@ -264,17 +266,17 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND this_is_a_some
+   //Option_of_TestStruct AND this_is_a_some
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_int
+   //Equals AND other_is_a_nullable_Option_of_TestStruct
    //THEN
    //is_reflexive
 
    [TestMethod]
    public void
-      GIVEN_Option_of_int_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_nullable_Option_of_int_THEN_is_reflexive()
+      GIVEN_Option_of_TestStruct_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_nullable_Option_of_TestStruct_THEN_is_reflexive()
    {
-      static Property Property(int value)
+      static Property Property(TestStruct value)
       {
          //Arrange
          var original = Option.Some(value);
@@ -286,43 +288,45 @@ public class Equals
                                       copy);
       }
 
-      Prop.ForAll<int>(Property)
+      Arb.Register<Libraries.TestStruct>();
+
+      Prop.ForAll<TestStruct>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int
+   //Option_of_TestStruct
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_int
+   //Equals AND other_is_a_nullable_Option_of_TestStruct
    //THEN
    //is_symmetric
 
    [TestMethod]
-   public void GIVEN_Option_of_int_WHEN_Equals_AND_other_is_a_nullable_Option_of_int_THEN_is_symmetric()
+   public void GIVEN_Option_of_TestStruct_WHEN_Equals_AND_other_is_a_nullable_Option_of_TestStruct_THEN_is_symmetric()
    {
-      Arb.Register<Libraries.OptionOfInt32>();
+      Arb.Register<Libraries.OptionOfTestStruct>();
 
-      Prop.ForAll<Option<int>, Option<int>>(IEquatableIsSymmetric<Option<int>>)
+      Prop.ForAll<Option<TestStruct>, Option<TestStruct>>(IEquatableIsSymmetric<Option<TestStruct>>)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int
+   //Option_of_TestStruct
    //WHEN
-   //Equals AND other_is_a_nullable_Option_of_int
+   //Equals AND other_is_a_nullable_Option_of_TestStruct
    //THEN
    //is_transitive
 
    [TestMethod]
-   public void GIVEN_Option_of_int_WHEN_Equals_AND_other_is_a_nullable_Option_of_int_THEN_is_transitive()
+   public void GIVEN_Option_of_TestStruct_WHEN_Equals_AND_other_is_a_nullable_Option_of_TestStruct_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveOptionOfInt32>();
+      Arb.Register<Libraries.TransitiveOptionOfTestStruct>();
 
-      Prop.ForAll<(Option<int>, Option<int>, Option<int>)>(IEquatableIsTransitive<Option<int>>)
+      Prop.ForAll<(Option<TestStruct>, Option<TestStruct>, Option<TestStruct>)>(IEquatableIsTransitive<Option<TestStruct>>)
           .QuickCheckThrowOnFailure();
    }
 
@@ -331,16 +335,16 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND this_is_a_some
+   //Option_of_TestStruct AND this_is_a_some
    //WHEN
-   //Equals AND other_is_a_int
+   //Equals AND other_is_a_TestStruct
    //THEN
    //is_pseudo_reflexive
 
    [TestMethod]
-   public void GIVEN_Option_of_int_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_int_THEN_is_pseudo_reflexive()
+   public void GIVEN_Option_of_TestStruct_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_TestStruct_THEN_is_pseudo_reflexive()
    {
-      static Property Property(int value)
+      static Property Property(TestStruct value)
       {
          //Arrange
          var option = Option.Some(value);
@@ -352,25 +356,27 @@ public class Equals
          return IsTrue(actual);
       }
 
-      Prop.ForAll<int>(Property)
+      Arb.Register<Libraries.TestStruct>();
+
+      Prop.ForAll<TestStruct>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int AND obj_is_an_int
+   //Option_of_TestStruct AND obj_is_an_int
    //WHEN
-   //Equals AND other_is_a_int
+   //Equals AND other_is_a_TestStruct
    //THEN
    //is_transitive
 
    [TestMethod]
-   public void GIVEN_Option_of_int_WHEN_Equals_AND_other_is_a_int_THEN_is_transitive()
+   public void GIVEN_Option_of_TestStruct_WHEN_Equals_AND_other_is_a_TestStruct_THEN_is_transitive()
    {
-      Arb.Register<Library_OptionOfInt_AND_ObjIsAnInt>();
+      Arb.Register<Library_OptionOfTestStruct_AND_ObjIsAnTestStruct>();
 
-      Prop.ForAll<(Option<int>, int, int)>(IEquatableIsTransitive<Option<int>, int>)
+      Prop.ForAll<(Option<TestStruct>, TestStruct, TestStruct)>(IEquatableIsTransitive<Option<TestStruct>, TestStruct>)
           .QuickCheckThrowOnFailure();
    }
 
