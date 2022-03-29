@@ -83,6 +83,11 @@ partial class Option<T>
 
       /* ------------------------------------------------------------ */
 
+      public override Option<TNew> Map<TNew>(Func<T, TNew> whenSome)
+         => new Option<TNew>.SomeOption(whenSome(_content));
+
+      /* ------------------------------------------------------------ */
+
       public override T Reduce(T _)
          => _content;
 

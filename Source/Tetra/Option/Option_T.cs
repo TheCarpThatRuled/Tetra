@@ -94,6 +94,19 @@ public abstract partial class Option<T> : IEquatable<Option<T>>,
    /* ------------------------------------------------------------ */
 
    /// <summary>
+   /// Maps the contents of the <c>Option</c> into a new form.
+   /// </summary>
+   /// <typeparam name="TNew">The type this <c>Option</c> shall be transformed into.</typeparam>
+   /// <param name="whenSome">A mapping function that shall be applied to the content of the <c>Option</c>, if it is a some.</param>
+   /// <returns>
+   /// A some containing the content of this <c>Option</c> mapped through <c>whenSome</c> if it is a some;
+   /// otherwise a none.
+   /// </returns>
+   public abstract Option<TNew> Map<TNew>(Func<T, TNew> whenSome);
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
    /// Unifies both branches of the <c>Option</c> by providing a value for the none case.
    /// </summary>
    /// <param name="whenNone">A value to use, if the <c>Option</c> is a none.</param>
