@@ -18,13 +18,13 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<TReturns>(FakeFunction<TReturns> function)
+   public static Property WasInvokedOnce<TReturn>(FakeFunction<TReturn> function)
       => WasInvoked(function,
                     1);
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasNotInvoked<TReturns>(FakeFunction<TReturns> function)
+   public static Property WasNotInvoked<TReturn>(FakeFunction<TReturn> function)
       => WasInvoked(function,
                     0);
 

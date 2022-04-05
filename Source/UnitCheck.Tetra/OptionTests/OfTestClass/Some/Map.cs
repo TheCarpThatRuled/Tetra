@@ -53,7 +53,6 @@ public class Some_Map
 
    /* ------------------------------------------------------------ */
 
-
    //GIVEN
    //Some_of_TestClass
    //WHEN
@@ -154,6 +153,295 @@ public class Some_Map
                         actual)
            .And(WasInvokedOnce(value,
                                whenSomeFunc));
+      }
+
+      Arb.Register<Libraries.TestClass>();
+      Arb.Register<Libraries.TestStruct>();
+
+      Prop.ForAll<TestClass, TestStruct>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+   // Option<TNew> Map<TNew>(Func<T, Option<TNew>> whenSome)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_TestClass_AND_whenSome_returns_a_none
+   //WHEN
+   //Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_int
+   //THEN
+   //whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return
+
+   [TestMethod]
+   public void
+      GIVEN_Some_of_TestClass_AND_whenSome_returns_a_none_WHEN_Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_int_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return()
+   {
+      static Property Property(TestClass value)
+      {
+         //Arrange
+         var whenSome = FakeFunction<TestClass, Option<int>>.Create(Option.None());
+
+         var option = Option.Some(value);
+
+         //Act
+         var actual = option.Map(whenSome.Func);
+
+         //Assert
+         return IsANone(actual)
+           .And(WasInvokedOnce(value,
+                               whenSome));
+      }
+
+      Arb.Register<Libraries.TestClass>();
+
+      Prop.ForAll<TestClass>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_TestClass_AND_whenSome_returns_a_none
+   //WHEN
+   //Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_string
+   //THEN
+   //whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return
+
+   [TestMethod]
+   public void
+      GIVEN_Some_of_TestClass_AND_whenSome_returns_a_none_WHEN_Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_string_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return()
+   {
+      static Property Property(TestClass value)
+      {
+         //Arrange
+         var whenSome = FakeFunction<TestClass, Option<string>>.Create(Option.None());
+
+         var option = Option.Some(value);
+
+         //Act
+         var actual = option.Map(whenSome.Func);
+
+         //Assert
+         return IsANone(actual)
+           .And(WasInvokedOnce(value,
+                               whenSome));
+      }
+
+      Arb.Register<Libraries.TestClass>();
+
+      Prop.ForAll<TestClass>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_TestClass_AND_whenSome_returns_a_none
+   //WHEN
+   //Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_TestClass
+   //THEN
+   //whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return
+
+   [TestMethod]
+   public void
+      GIVEN_Some_of_TestClass_AND_whenSome_returns_a_none_WHEN_Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_TestClass_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return()
+   {
+      static Property Property(TestClass value)
+      {
+         //Arrange
+         var whenSome = FakeFunction<TestClass, Option<TestClass>>.Create(Option.None());
+
+         var option = Option.Some(value);
+
+         //Act
+         var actual = option.Map(whenSome.Func);
+
+         //Assert
+         return IsANone(actual)
+           .And(WasInvokedOnce(value,
+                               whenSome));
+      }
+
+      Arb.Register<Libraries.TestClass>();
+
+      Prop.ForAll<TestClass>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_TestClass_AND_whenSome_returns_a_none
+   //WHEN
+   //Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_TestStruct
+   //THEN
+   //whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return
+
+   [TestMethod]
+   public void
+      GIVEN_Some_of_TestClass_AND_whenSome_returns_a_none_WHEN_Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_TestStruct_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return()
+   {
+      static Property Property(TestClass value)
+      {
+         //Arrange
+         var whenSome = FakeFunction<TestClass, Option<TestStruct>>.Create(Option.None());
+
+         var option = Option.Some(value);
+
+         //Act
+         var actual = option.Map(whenSome.Func);
+
+         //Assert
+         return IsANone(actual)
+           .And(WasInvokedOnce(value,
+                               whenSome));
+      }
+
+      Arb.Register<Libraries.TestClass>();
+
+      Prop.ForAll<TestClass>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_TestClass_AND_whenSome_returns_a_some
+   //WHEN
+   //Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_int
+   //THEN
+   //whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return
+
+   [TestMethod]
+   public void
+      GIVEN_Some_of_TestClass_AND_whenSome_returns_a_some_WHEN_Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_int_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return()
+   {
+      static Property Property(TestClass value, int newValue)
+      {
+         //Arrange
+         var whenSome = FakeFunction<TestClass, Option<int>>.Create(newValue);
+
+         var option = Option.Some(value);
+
+         //Act
+         var actual = option.Map(whenSome.Func);
+
+         //Assert
+         return IsASome(newValue,
+                        actual)
+           .And(WasInvokedOnce(value,
+                               whenSome));
+      }
+
+      Arb.Register<Libraries.TestClass>();
+
+      Prop.ForAll<TestClass, int>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_TestClass_AND_whenSome_returns_a_some
+   //WHEN
+   //Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_string
+   //THEN
+   //whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return
+
+   [TestMethod]
+   public void
+      GIVEN_Some_of_TestClass_AND_whenSome_returns_a_some_WHEN_Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_string_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return()
+   {
+      static Property Property(TestClass value,
+                               string newValue)
+      {
+         //Arrange
+         var whenSome = FakeFunction<TestClass, Option<string>>.Create(newValue);
+
+         var option = Option.Some(value);
+
+         //Act
+         var actual = option.Map(whenSome.Func);
+
+         //Assert
+         return IsASome(newValue,
+                        actual)
+           .And(WasInvokedOnce(value,
+                               whenSome));
+      }
+
+      Arb.Register<Libraries.TestClass>();
+
+      Prop.ForAll<TestClass, string>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_TestClass_AND_whenSome_returns_a_some
+   //WHEN
+   //Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_TestClass
+   //THEN
+   //whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return
+
+   [TestMethod]
+   public void
+      GIVEN_Some_of_TestClass_AND_whenSome_returns_a_some_WHEN_Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_TestClass_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return()
+   {
+      static Property Property((TestClass value, TestClass newValue) args)
+      {
+         //Arrange
+         var whenSome = FakeFunction<TestClass, Option<TestClass>>.Create(args.newValue);
+
+         var option = Option.Some(args.value);
+
+         //Act
+         var actual = option.Map(whenSome.Func);
+
+         //Assert
+         return IsASome(args.newValue,
+                        actual)
+           .And(WasInvokedOnce(args.value,
+                               whenSome));
+      }
+
+      Arb.Register<Libraries.TwoUniqueTestClasses>();
+
+      Prop.ForAll<(TestClass, TestClass)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_TestClass_AND_whenSome_returns_a_some
+   //WHEN
+   //Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_TestStruct
+   //THEN
+   //whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return
+
+   [TestMethod]
+   public void
+      GIVEN_Some_of_TestClass_AND_whenSome_returns_a_some_WHEN_Map_AND_whenSome_is_a_Func_of_TestClass_to_Option_of_TestStruct_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return()
+   {
+      static Property Property(TestClass value,
+                               TestStruct newValue)
+      {
+         //Arrange
+         var whenSome = FakeFunction<TestClass, Option<TestStruct>>.Create(newValue);
+
+         var option = Option.Some(value);
+
+         //Act
+         var actual = option.Map(whenSome.Func);
+
+         //Assert
+         return IsASome(newValue,
+                        actual)
+           .And(WasInvokedOnce(value,
+                               whenSome));
       }
 
       Arb.Register<Libraries.TestClass>();

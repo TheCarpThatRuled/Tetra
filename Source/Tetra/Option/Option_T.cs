@@ -40,6 +40,11 @@ public abstract partial class Option<T> : IEquatable<Option<T>>,
    // Implicit Operator
    /* ------------------------------------------------------------ */
 
+   public static implicit operator Option<T>(None _)
+      => new NoneOption();
+
+   /* ------------------------------------------------------------ */
+
    public static implicit operator Option<T>(T content)
       => new SomeOption(content);
 
@@ -103,6 +108,19 @@ public abstract partial class Option<T> : IEquatable<Option<T>>,
    /// otherwise a none.
    /// </returns>
    public abstract Option<TNew> Map<TNew>(Func<T, TNew> whenSome);
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
+   /// Maps the contents of the <c>Option</c> into a new form.
+   /// </summary>
+   /// <typeparam name="TNew">The type this <c>Option</c> shall be transformed into.</typeparam>
+   /// <param name="whenSome">A mapping function that shall be applied to the content of the <c>Option</c>, if it is a some.</param>
+   /// <returns>
+   /// The content of this <c>Option</c> mapped through <c>whenSome</c> if it is a some;
+   /// otherwise a none.
+   /// </returns>
+   public abstract Option<TNew> Map<TNew>(Func<T, Option<TNew>> whenSome);
 
    /* ------------------------------------------------------------ */
 

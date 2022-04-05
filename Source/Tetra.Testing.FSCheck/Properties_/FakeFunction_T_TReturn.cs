@@ -18,7 +18,7 @@ partial class Properties
         .Label($"The {Name<T, TReturn>()} was not invoked, when we expected it to be. Expected:\n {expected}")
         .And(AsProperty(() => function
                              .Invocations()
-                             .Count()
+                             .Count
                            == 1)
                .Label($"The {Name<T, TReturn>()} was invoked more than once."
                     + "\nExpected:"
@@ -26,12 +26,11 @@ partial class Properties
                     + "\nActual:"
                     + $"\n{function.Invocations().Count}"))
         .And(AsProperty(() => function
-                             .Invocations()
-                             .First()!
+                             .Invocations()[0]!
                              .Equals(expected))
                .Label($"The {Name<T, TReturn>()} was invoked with an unexpected argument"
                     + $"\nExpected: {expected}"
-                    + $"\nActual: {function.Invocations().First()}"));
+                    + $"\nActual: {function.Invocations()[0]}"));
 
    /* ------------------------------------------------------------ */
 

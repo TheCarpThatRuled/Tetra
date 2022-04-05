@@ -72,6 +72,11 @@ partial class Option<T>
 
       /* ------------------------------------------------------------ */
 
+      public override Option<TNew> Map<TNew>(Func<T, Option<TNew>> whenSome)
+         => new Option<TNew>.NoneOption();
+
+      /* ------------------------------------------------------------ */
+
       public override T Reduce(T whenNone)
          => whenNone;
 

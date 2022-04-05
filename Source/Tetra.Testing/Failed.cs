@@ -13,6 +13,22 @@ public static class Failed
 
    /* ------------------------------------------------------------ */
 
+   public static AssertFailedException Assert(string message,
+                                              object? actual)
+      => new(Message(message,
+                     actual));
+
+   /* ------------------------------------------------------------ */
+
+   public static AssertFailedException Assert(string message,
+                                              object? expected,
+                                              object? actual)
+      => new(Message(message,
+                     expected,
+                     actual));
+
+   /* ------------------------------------------------------------ */
+
    public static string ExpectedActual(object? expected,
                                        object? actual)
       => $"Expected: {expected}, Actual: {actual}";

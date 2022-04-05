@@ -10,6 +10,20 @@ public static class Option
    /* ------------------------------------------------------------ */
 
    /// <summary>
+   /// Creates a none.
+   /// </summary>
+   /// <returns>
+   /// The instance of the <c>None</c> passkey.
+   /// It will be implicitly converted into a none <c>Option</c> of the appropriate type.
+   /// </returns>
+   public static None None()
+      => Tetra
+        .None
+        .Instance;
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
    /// Creates a some.
    /// </summary>
    /// <typeparam name="T">The type of the contained object</typeparam>
