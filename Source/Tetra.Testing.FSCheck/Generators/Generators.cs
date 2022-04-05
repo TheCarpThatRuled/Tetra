@@ -9,6 +9,13 @@ public static partial class Generators
    // Functions
    /* ------------------------------------------------------------ */
 
+   public static Gen<T> NonNull<T>(Gen<T> source)
+      where T : class
+      => source
+        .Where(x => x is not null);
+
+   /* ------------------------------------------------------------ */
+
    public static Gen<(T, T, T)> Transitive<T>(Gen<(T, T)> source)
       where T : notnull
       => source

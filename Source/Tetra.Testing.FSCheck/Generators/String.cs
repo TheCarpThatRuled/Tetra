@@ -9,6 +9,11 @@ partial class Generators
    // Functions
    /* ------------------------------------------------------------ */
 
+   public static Gen<string> NonNullString()
+      => NonNull(String());
+
+   /* ------------------------------------------------------------ */
+
    public static Gen<string> String()
       => Arb
         .Default

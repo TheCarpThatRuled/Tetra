@@ -162,7 +162,7 @@ public class Equals
    [TestMethod]
    public void GIVEN_Option_of_int_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveOptionOfInt32>();
+      Arb.Register<Libraries.TransitiveOptionsOfInt32>();
 
       Prop.ForAll<(Option<int>, Option<int>, Option<int>)>(EqualsIsTransitive<Option<int>>)
           .QuickCheckThrowOnFailure();
@@ -320,7 +320,7 @@ public class Equals
    [TestMethod]
    public void GIVEN_Option_of_int_WHEN_Equals_AND_other_is_a_nullable_Option_of_int_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveOptionOfInt32>();
+      Arb.Register<Libraries.TransitiveOptionsOfInt32>();
 
       Prop.ForAll<(Option<int>, Option<int>, Option<int>)>(IEquatableIsTransitive<Option<int>>)
           .QuickCheckThrowOnFailure();

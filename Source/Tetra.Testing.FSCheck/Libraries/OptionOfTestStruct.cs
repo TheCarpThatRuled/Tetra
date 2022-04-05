@@ -45,7 +45,7 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TransitiveOptionOfTestStruct
+   public sealed class TransitiveOptionsOfTestStruct
    {
       /* ------------------------------------------------------------ */
       // Methods

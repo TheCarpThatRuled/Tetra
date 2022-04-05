@@ -164,7 +164,7 @@ public class Equals
    [TestMethod]
    public void GIVEN_Option_of_TestStruct_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveOptionOfTestStruct>();
+      Arb.Register<Libraries.TransitiveOptionsOfTestStruct>();
 
       Prop.ForAll<(Option<TestStruct>, Option<TestStruct>, Option<TestStruct>)>(EqualsIsTransitive<Option<TestStruct>>)
           .QuickCheckThrowOnFailure();
@@ -324,7 +324,7 @@ public class Equals
    [TestMethod]
    public void GIVEN_Option_of_TestStruct_WHEN_Equals_AND_other_is_a_nullable_Option_of_TestStruct_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveOptionOfTestStruct>();
+      Arb.Register<Libraries.TransitiveOptionsOfTestStruct>();
 
       Prop.ForAll<(Option<TestStruct>, Option<TestStruct>, Option<TestStruct>)>(IEquatableIsTransitive<Option<TestStruct>>)
           .QuickCheckThrowOnFailure();

@@ -9,51 +9,31 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class OptionOfInt32
+   public sealed class Message
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Option<int>> Type()
+      public static Arbitrary<Tetra.Message> Type()
          => Generators
-           .Option(Generators.Int32())
+           .Message()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
    }
 
-   /* ------------------------------------------------------------ */
-
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class SomeOptionOfInt32
+   public sealed class TransitiveMessages
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Option<int>> Type()
+      public static Arbitrary<(Tetra.Message, Tetra.Message, Tetra.Message)> Type()
          => Generators
-           .SomeOption(Generators.Int32())
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
-   public sealed class TransitiveOptionsOfInt32
-   {
-      /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<(Option<int>, Option<int>, Option<int>)> Type()
-         => Generators
-           .Transitive(Generators.TwoUniqueOptions(Generators.Int32()))
+           .Transitive(Generators.TwoUniqueMessages())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
