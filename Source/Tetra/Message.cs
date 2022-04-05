@@ -39,22 +39,6 @@ public sealed class Message : IEquatable<Message>
       && _content.Equals(other._content);
 
    /* ------------------------------------------------------------ */
-   // IEquatable<Message> Operators
-   /* ------------------------------------------------------------ */
-
-   public static bool operator ==(Message? left,
-                                  Message? right)
-      => Equals(left,
-                right);
-
-   /* ------------------------------------------------------------ */
-
-   public static bool operator !=(Message? left,
-                                  Message? right)
-      => !Equals(left,
-                 right);
-
-   /* ------------------------------------------------------------ */
    // Properties
    /* ------------------------------------------------------------ */
 
