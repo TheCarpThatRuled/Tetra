@@ -24,6 +24,23 @@ public static partial class Assert_Extensions
    }
 
    /* ------------------------------------------------------------ */
+
+   public static Assert AreEqual(this Assert assert,
+                                 object? expected,
+                                 object? actual,
+                                 string message)
+   {
+      Log.ToDebugOutput_AreEqual(expected,
+                                 actual);
+
+      Assert.AreEqual(expected,
+                      actual,
+                      message);
+
+      return assert;
+   }
+
+   /* ------------------------------------------------------------ */
    // IsBool Extensions
    /* ------------------------------------------------------------ */
 

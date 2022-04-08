@@ -8,7 +8,7 @@ namespace Check.OptionTests.OfInt;
 [TestCategory(GlobalCategories.UnitCheck)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class None
+public class True
 {
    /* ------------------------------------------------------------ */
    // Option<T> None()

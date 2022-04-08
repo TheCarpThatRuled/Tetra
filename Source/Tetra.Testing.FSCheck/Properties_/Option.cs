@@ -11,31 +11,27 @@ partial class Properties
    /* ------------------------------------------------------------ */
 
    public static Property IsANone<T>(Option<T> option)
-      => AsProperty(() => option.Reduce(() => true,
-                                        _ => false))
+      => AsProperty(option.IsANone)
         .Label(TheOptionIsSome<T>());
 
    /* ------------------------------------------------------------ */
 
    public static Property IsANone<T>(Option<T> option,
                                      string name)
-      => AsProperty(() => option.Reduce(() => true,
-                                        _ => false))
+      => AsProperty(option.IsANone)
         .Label(TheOptionIsSome<T>(name));
 
    /* ------------------------------------------------------------ */
 
    public static Property IsASome<T>(Option<T> option)
-      => AsProperty(() => option.Reduce(() => false,
-                                        _ => true))
+      => AsProperty(option.IsASome)
         .Label(TheOptionIsNone<T>());
 
    /* ------------------------------------------------------------ */
 
    public static Property IsASome<T>(Option<T> option,
                                      string name)
-      => AsProperty(() => option.Reduce(() => false,
-                                        _ => true))
+      => AsProperty(option.IsASome)
         .Label(TheOptionIsNone<T>(name));
 
    /* ------------------------------------------------------------ */
