@@ -9,15 +9,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class Message
+   public sealed class Error
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Tetra.Message> Type()
+      public static Arbitrary<Tetra.Error> Type()
          => Generators
-           .Message()
+           .Error()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -27,15 +27,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class ThreeUniqueMessages
+   public sealed class SomeError
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.Message, Tetra.Message, Tetra.Message)> Type()
+      public static Arbitrary<Tetra.Error> Type()
          => Generators
-           .ThreeUniqueMessages()
+           .SomeError()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -45,33 +45,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TransitiveMessages
+   public sealed class TransitiveErrors
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.Message, Tetra.Message, Tetra.Message)> Type()
+      public static Arbitrary<(Tetra.Error, Tetra.Error, Tetra.Error)> Type()
          => Generators
-           .Transitive(Generators.TwoUniqueMessages())
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
-   public sealed class TwoUniqueMessages
-   {
-      /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<(Tetra.Message, Tetra.Message)> Type()
-         => Generators
-           .TwoUniqueMessages()
+           .Transitive(Generators.TwoUniqueErrors())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

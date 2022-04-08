@@ -8,12 +8,37 @@ partial class Error
       // object Overridden Methods
       /* ------------------------------------------------------------ */
 
+      public override bool Equals(object? obj)
+         => ReferenceEquals(this,
+                            obj)
+         || obj switch
+            {
+               NoneError => true,
+               _          => false,
+            };
+
+      /* ------------------------------------------------------------ */
+
+      public override int GetHashCode()
+         => 0;
+
+      /* ------------------------------------------------------------ */
+
+      public override string ToString()
+         => $"None";
+
       /* ------------------------------------------------------------ */
       // IEquatable<Error> Methods
       /* ------------------------------------------------------------ */
 
       public override bool Equals(Error? other)
-         => false;
+         => ReferenceEquals(this,
+                            other)
+         || other switch
+            {
+               NoneError => true,
+               _          => false,
+            };
 
       /* ------------------------------------------------------------ */
       // IEquatable<Message> Methods
@@ -27,7 +52,7 @@ partial class Error
       /* ------------------------------------------------------------ */
 
       public override bool IsANone()
-         => false;
+         => true;
 
       /* ------------------------------------------------------------ */
 
@@ -37,34 +62,34 @@ partial class Error
       /* ------------------------------------------------------------ */
 
       public override Error Map(Func<Message, Message> _)
-         => null;
+         => this;
 
       /* ------------------------------------------------------------ */
 
       public override Error Map(Func<Message, Error> _)
-         => null;
+         => this;
 
       /* ------------------------------------------------------------ */
 
       public override Message Reduce(Message whenNone)
-         => null;
+         => whenNone;
 
       /* ------------------------------------------------------------ */
 
       public override Message Reduce(Func<Message> whenNone)
-         => null;
+         => whenNone();
 
       /* ------------------------------------------------------------ */
 
       public override TNew Reduce<TNew>(TNew whenNone,
                                         Func<Message, TNew> _)
-         => default;
+         => whenNone;
 
       /* ------------------------------------------------------------ */
 
       public override TNew Reduce<TNew>(Func<TNew> whenNone,
                                         Func<Message, TNew> _)
-         => default;
+         => whenNone();
 
       /* ------------------------------------------------------------ */
    }

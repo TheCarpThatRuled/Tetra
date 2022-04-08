@@ -35,14 +35,14 @@ public abstract partial class Error : IEquatable<Error>,
    /// <param name="content">The message the <c>Error</c> shall contain.</param>
    /// <returns>A some <c>Error</c> that contains <c>content</c>.</returns>
    public static Error Some(Message content)
-      => new SomeError();
+      => new SomeError(content);
 
    /* ------------------------------------------------------------ */
    // Implicit Operators
    /* ------------------------------------------------------------ */
 
-   public static implicit operator Error(Message message)
-      => new SomeError();
+   public static implicit operator Error(Message content)
+      => new SomeError(content);
 
    /* ------------------------------------------------------------ */
    // IEquatable<Error> Methods

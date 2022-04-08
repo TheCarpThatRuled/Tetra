@@ -2,34 +2,38 @@
 using Tetra;
 using Tetra.Testing;
 
-namespace Check.OptionTests.OfInt;
+namespace Check.ErrorTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Option)]
+[TestCategory(LocalCategories.Error)]
 // ReSharper disable once InconsistentNaming
-public class None
+public class None_IsANone
 {
    /* ------------------------------------------------------------ */
-   // Option<T> None()
+   // bool IsANone()
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int
-   //WHEN
    //None
+   //WHEN
+   //IsANone
    //THEN
-   //a_none_is_returned
+   //true_is_returned
 
    [TestMethod]
-   public void GIVEN_Option_of_int_WHEN_None_THEN_a_none_is_returned()
+   public void GIVEN_None_WHEN_IsANone_THEN_true_is_returned()
    {
+      //Arrange
+      var error = Error.None();
+
       //Act
-      var actual = Option<int>.None();
+      var actual = error.IsANone();
 
       //Assert
       Assert.That
-            .IsANone(actual);
+            .IsTrue(actual);
    }
+
    /* ------------------------------------------------------------ */
 }

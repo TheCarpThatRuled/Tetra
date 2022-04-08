@@ -35,11 +35,10 @@ partial class Generators
                        .Item1
                        .Reduce(() => tuple
                                     .Item2
-                                    .Reduce(() => false,
-                                            _ => true),
+                                    .IsASome(),
                                i1 => tuple
                                     .Item2
-                                    .Reduce(() => true,
+                                    .Reduce(true,
                                             i2 => !Equals(i1,
                                                           i2))))
         .Select(tuple => (tuple.Item1, tuple.Item2));
