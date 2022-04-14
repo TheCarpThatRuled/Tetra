@@ -28,27 +28,7 @@ partial class Error
          => $"None";
 
       /* ------------------------------------------------------------ */
-      // IEquatable<Error> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(Error? other)
-         => ReferenceEquals(this,
-                            other)
-         || other switch
-            {
-               NoneError => true,
-               _          => false,
-            };
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<Message> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(Message? other)
-         => false;
-
-      /* ------------------------------------------------------------ */
-      // Error Methods
+      // Error OverriddenMethods
       /* ------------------------------------------------------------ */
 
       public override bool IsANone()
@@ -90,6 +70,26 @@ partial class Error
       public override TNew Reduce<TNew>(Func<TNew> whenNone,
                                         Func<Message, TNew> _)
          => whenNone();
+
+      /* ------------------------------------------------------------ */
+      // IEquatable<Error> Methods
+      /* ------------------------------------------------------------ */
+
+      public override bool Equals(Error? other)
+         => ReferenceEquals(this,
+                            other)
+         || other switch
+            {
+               NoneError => true,
+               _         => false,
+            };
+
+      /* ------------------------------------------------------------ */
+      // IEquatable<Message> Methods
+      /* ------------------------------------------------------------ */
+
+      public override bool Equals(Message? other)
+         => false;
 
       /* ------------------------------------------------------------ */
    }

@@ -29,7 +29,8 @@ partial class Option<T>
 
       public override int GetHashCode()
          => _content
-           .GetHashCode();
+          ?.GetHashCode()
+         ?? 0;
 
       /* ------------------------------------------------------------ */
 
@@ -37,28 +38,7 @@ partial class Option<T>
          => $"Some ({_content})";
 
       /* ------------------------------------------------------------ */
-      // IEquatable<Option<T>> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(Option<T>? other)
-         => ReferenceEquals(this,
-                            other)
-         || other switch
-            {
-               SomeOption some => Equals(some._content),
-               _               => false,
-            };
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<T> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(T? other)
-         => Equals(_content,
-                   other);
-
-      /* ------------------------------------------------------------ */
-      // Methods
+      // Option Overridden Methods
       /* ------------------------------------------------------------ */
 
       public override Option<TNew> Cast<TNew>()
@@ -112,6 +92,27 @@ partial class Option<T>
       public override TNew Reduce<TNew>(Func<TNew> _,
                                         Func<T, TNew> whenSome)
          => whenSome(_content);
+
+      /* ------------------------------------------------------------ */
+      // IEquatable<Option<T>> Methods
+      /* ------------------------------------------------------------ */
+
+      public override bool Equals(Option<T>? other)
+         => ReferenceEquals(this,
+                            other)
+         || other switch
+            {
+               SomeOption some => Equals(some._content),
+               _               => false,
+            };
+
+      /* ------------------------------------------------------------ */
+      // IEquatable<T> Methods
+      /* ------------------------------------------------------------ */
+
+      public override bool Equals(T? other)
+         => Equals(_content,
+                   other);
 
       /* ------------------------------------------------------------ */
       // Private Fields

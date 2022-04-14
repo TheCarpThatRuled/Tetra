@@ -37,28 +37,7 @@ partial class Error
          => $"Some ({_content})";
 
       /* ------------------------------------------------------------ */
-      // IEquatable<Error> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(Error? other)
-         => ReferenceEquals(this,
-                            other)
-         || other switch
-            {
-               SomeError some  => Equals(some._content),
-               _               => false,
-            };
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<Message> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(Message? other)
-         => Equals(_content,
-                   other);
-
-      /* ------------------------------------------------------------ */
-      // Error Methods
+      // Error Overridden Methods
       /* ------------------------------------------------------------ */
 
       public override bool IsANone()
@@ -100,6 +79,27 @@ partial class Error
       public override TNew Reduce<TNew>(Func<TNew> _,
                                         Func<Message, TNew> whenSome)
          => whenSome(_content);
+
+      /* ------------------------------------------------------------ */
+      // IEquatable<Error> Methods
+      /* ------------------------------------------------------------ */
+
+      public override bool Equals(Error? other)
+         => ReferenceEquals(this,
+                            other)
+         || other switch
+            {
+               SomeError some => Equals(some._content),
+               _              => false,
+            };
+
+      /* ------------------------------------------------------------ */
+      // IEquatable<Message> Methods
+      /* ------------------------------------------------------------ */
+
+      public override bool Equals(Message? other)
+         => Equals(_content,
+                   other);
 
       /* ------------------------------------------------------------ */
       // Private Fields
