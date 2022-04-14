@@ -28,4 +28,13 @@
     <ProjectReference Include="..\Tetra\Tetra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="LeftTests\" />
+    <Folder Include="FailureTests\" />
+    <Folder Include="EitherTests\" />
+    <Folder Include="ResultTests\" />
+    <Folder Include="SuccessTests\" />
+    <Folder Include="RightTests\" />
+  </ItemGroup>
+
 </Project>

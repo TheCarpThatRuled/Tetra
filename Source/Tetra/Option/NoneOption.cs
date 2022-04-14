@@ -29,27 +29,7 @@ partial class Option<T>
          => $"None of {typeof(T).Name}";
 
       /* ------------------------------------------------------------ */
-      // IEquatable<Option<T>> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(Option<T>? other)
-         => ReferenceEquals(this,
-                            other)
-         || other switch
-            {
-               NoneOption => true,
-               _          => false,
-            };
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<T> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(T? other)
-         => false;
-
-      /* ------------------------------------------------------------ */
-      // Methods
+      // Option Overridden Methods
       /* ------------------------------------------------------------ */
 
       public override Option<TNew> Cast<TNew>()
@@ -96,6 +76,26 @@ partial class Option<T>
       public override TNew Reduce<TNew>(Func<TNew> whenNone,
                                         Func<T, TNew> _)
          => whenNone();
+
+      /* ------------------------------------------------------------ */
+      // IEquatable<Option<T>> Methods
+      /* ------------------------------------------------------------ */
+
+      public override bool Equals(Option<T>? other)
+         => ReferenceEquals(this,
+                            other)
+         || other switch
+            {
+               NoneOption => true,
+               _          => false,
+            };
+
+      /* ------------------------------------------------------------ */
+      // IEquatable<T> Methods
+      /* ------------------------------------------------------------ */
+
+      public override bool Equals(T? other)
+         => false;
 
       /* ------------------------------------------------------------ */
    }

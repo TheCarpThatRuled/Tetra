@@ -1,111 +1,90 @@
 ﻿namespace Tetra;
 
-partial class Error
+partial class Result<T>
 {
-   private sealed class SomeError : Error
+   private sealed class SuccessResult : Result<T>
    {
       /* ------------------------------------------------------------ */
       // Constructors
       /* ------------------------------------------------------------ */
-
-      public SomeError(Message content)
-         => _content = content;
 
       /* ------------------------------------------------------------ */
       // object Overridden Methods
       /* ------------------------------------------------------------ */
 
       public override bool Equals(object? obj)
-         => ReferenceEquals(this,
-                            obj)
-         || obj switch
-            {
-               SomeError some  => Equals(some._content),
-               Message content => Equals(content),
-               _               => false,
-            };
+         => base.Equals(obj);
 
       /* ------------------------------------------------------------ */
 
       public override int GetHashCode()
-         => _content
-           .GetHashCode();
+         => base.GetHashCode();
 
       /* ------------------------------------------------------------ */
 
       public override string ToString()
-         => $"Some ({_content})";
+         => base.ToString();
 
       /* ------------------------------------------------------------ */
-      // Error Overridden Methods
+      // Result<T> Methods
       /* ------------------------------------------------------------ */
 
-      public override bool IsANone()
+      public override Result<TNew> Cast<TNew>(Message whenCastFails)
+         => throw new NotImplementedException();
+
+      /* ------------------------------------------------------------ */
+
+      public override Result<TNew> Cast<TNew>(Func<Message> whenCastFails)
+         => throw new NotImplementedException();
+
+      /* ------------------------------------------------------------ */
+
+      public override bool IsAFailure()
+         => throw new NotImplementedException();
+
+      /* ------------------------------------------------------------ */
+
+      public override bool IsASuccess()
+         => throw new NotImplementedException();
+
+      /* ------------------------------------------------------------ */
+
+      public override Result<TNew> Map<TNew>(Func<Success<T>, TNew> whenSuccess)
+         => throw new NotImplementedException();
+
+      /* ------------------------------------------------------------ */
+
+      public override T Reduce(T whenFailure)
+         => throw new NotImplementedException();
+
+      /* ------------------------------------------------------------ */
+
+      public override T Reduce(Func<Failure, T> whenFailure)
+         => throw new NotImplementedException();
+
+      /* ------------------------------------------------------------ */
+
+      public override TNew Reduce<TNew>(Func<Failure, TNew> whenFailure,
+                                        Func<Success<T>, TNew> whenSuccess)
+         => throw new NotImplementedException();
+
+      /* ------------------------------------------------------------ */
+      // IEquatable<Result<T>> Methods
+      /* ------------------------------------------------------------ */
+
+      public override bool Equals(Result<T>? other)
          => false;
 
       /* ------------------------------------------------------------ */
-
-      public override bool IsASome()
-         => true;
-
+      // IEquatable<T> Methods
       /* ------------------------------------------------------------ */
 
-      public override Error Map(Func<Message, Message> whenSome)
-         => whenSome(_content);
-
-      /* ------------------------------------------------------------ */
-
-      public override Error Map(Func<Message, Error> whenSome)
-         => whenSome(_content);
-
-      /* ------------------------------------------------------------ */
-
-      public override Message Reduce(Message _)
-         => _content;
-
-      /* ------------------------------------------------------------ */
-
-      public override Message Reduce(Func<Message> _)
-         => _content;
-
-      /* ------------------------------------------------------------ */
-
-      public override TNew Reduce<TNew>(TNew _,
-                                        Func<Message, TNew> whenSome)
-         => whenSome(_content);
-
-      /* ------------------------------------------------------------ */
-
-      public override TNew Reduce<TNew>(Func<TNew> _,
-                                        Func<Message, TNew> whenSome)
-         => whenSome(_content);
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<Error> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(Error? other)
-         => ReferenceEquals(this,
-                            other)
-         || other switch
-            {
-               SomeError some => Equals(some._content),
-               _              => false,
-            };
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<Message> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(Message? other)
-         => Equals(_content,
-                   other);
+      public override bool Equals(T? other)
+         => false;
 
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
-
-      private readonly Message _content;
 
       /* ------------------------------------------------------------ */
    }
