@@ -15,6 +15,11 @@ public sealed class Failure
       => _ => func();
 
    /* ------------------------------------------------------------ */
+
+   public static Func<Failure, T> Wrap<T>(Func<Message, T> func)
+      => failure => func(failure._content);
+
+   /* ------------------------------------------------------------ */
    // Implicit Operators
    /* ------------------------------------------------------------ */
 
@@ -32,7 +37,8 @@ public sealed class Failure
    // Internal Constructors
    /* ------------------------------------------------------------ */
 
-   internal Failure(Message content) { }
+   internal Failure(Message content)
+      => _content = content;
 
    /* ------------------------------------------------------------ */
    // Private Fields

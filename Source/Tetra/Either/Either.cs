@@ -7,12 +7,12 @@ public static class Either
    /* ------------------------------------------------------------ */
 
    public static Left<T> Left<T>(T content)
-   => content;
+      => new(content);
 
    /* ------------------------------------------------------------ */
 
    public static Right<T> Right<T>(T content)
-      => content;
+      => new(content);
 
    /* ------------------------------------------------------------ */
 }

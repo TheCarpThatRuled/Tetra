@@ -15,6 +15,11 @@ public sealed class Success<T>
       => _ => func();
 
    /* ------------------------------------------------------------ */
+
+   public static Func<Success<T>, TNew> Wrap<TNew>(Func<T, TNew> func)
+      => success => func(success._content);
+
+   /* ------------------------------------------------------------ */
    // Implicit Operators
    /* ------------------------------------------------------------ */
 
@@ -32,7 +37,8 @@ public sealed class Success<T>
    // Internal Constructors
    /* ------------------------------------------------------------ */
 
-   internal Success(T content) { }
+   internal Success(T content)
+      => _content = content;
 
    /* ------------------------------------------------------------ */
    // Private Fields

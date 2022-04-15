@@ -4,44 +4,44 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.MessageTests;
+namespace Check.RightTests.OfTestStruct;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Message)]
+[TestCategory(LocalCategories.Right)]
 // ReSharper disable once InconsistentNaming
-public class Content
+public class Create
 {
    /* ------------------------------------------------------------ */
-   // string Content()
+   // Right<T> Create(T content)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Message
+   //a_TestStruct
    //WHEN
-   //Content
+   //Right_of_TestStruct_Create
    //THEN
-   //the_content_is_returned
+   //a_Right_containing_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Message_WHEN_Content_THEN_the_content_is_returned()
+   public void GIVEN_a_TestStruct_WHEN_Right_of_TestStruct_Create_THEN_a_Right_containing_the_content_is_returned()
    {
-      static Property Property(string value)
+      static Property Property(TestStruct content)
       {
          //Arrange
-         var message = Message.Create(value);
+         var right = Right<TestStruct>.Create(content);
 
          //Act
-         var actual = message.Content();
+         var actual = right.Content();
 
          //Assert
-         return AreEqual(value,
+         return AreEqual(content,
                          actual);
       }
 
-      Arb.Register<Libraries.NonNullString>();
+      Arb.Register<Libraries.TestStruct>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestStruct>(Property)
           .QuickCheckThrowOnFailure();
    }
 

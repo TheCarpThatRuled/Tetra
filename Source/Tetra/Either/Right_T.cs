@@ -15,6 +15,11 @@ public sealed class Right<T>
       => _ => func();
 
    /* ------------------------------------------------------------ */
+
+   public static Func<Right<T>, TNew> Wrap<TNew>(Func<T, TNew> func)
+      => right => func(right._content);
+
+   /* ------------------------------------------------------------ */
    // Implicit Operators
    /* ------------------------------------------------------------ */
 
@@ -37,7 +42,8 @@ public sealed class Right<T>
    // Internal Constructors
    /* ------------------------------------------------------------ */
 
-   internal Right(T content) { }
+   internal Right(T content)
+      => _content = content;
 
    /* ------------------------------------------------------------ */
    // Private Fields

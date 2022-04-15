@@ -4,44 +4,44 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.MessageTests;
+namespace Check.FailureTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Message)]
+[TestCategory(LocalCategories.Failure)]
 // ReSharper disable once InconsistentNaming
-public class Content
+public class Create
 {
    /* ------------------------------------------------------------ */
-   // string Content()
+   // Failure<T> Create(T content)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Message
+   //a_Message
    //WHEN
-   //Content
+   //Failure_Create
    //THEN
-   //the_content_is_returned
+   //a_Failure_containing_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Message_WHEN_Content_THEN_the_content_is_returned()
+   public void GIVEN_a_Message_WHEN_Failure_Create_THEN_a_Failure_containing_the_content_is_returned()
    {
-      static Property Property(string value)
+      static Property Property(Message content)
       {
          //Arrange
-         var message = Message.Create(value);
+         var failure = Failure.Create(content);
 
          //Act
-         var actual = message.Content();
+         var actual = failure.Content();
 
          //Assert
-         return AreEqual(value,
+         return AreEqual(content,
                          actual);
       }
 
-      Arb.Register<Libraries.NonNullString>();
+      Arb.Register<Libraries.Message>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<Message>(Property)
           .QuickCheckThrowOnFailure();
    }
 

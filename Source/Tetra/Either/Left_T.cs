@@ -15,6 +15,11 @@ public sealed class Left<T>
       => _ => func();
 
    /* ------------------------------------------------------------ */
+
+   public static Func<Left<T>, TNew> Wrap<TNew>(Func<T, TNew> func)
+      => Left => func(Left._content);
+
+   /* ------------------------------------------------------------ */
    // Implicit Operators
    /* ------------------------------------------------------------ */
 
@@ -23,8 +28,8 @@ public sealed class Left<T>
 
    /* ------------------------------------------------------------ */
 
-   public static implicit operator Left<T>(Right<T> right)
-      => new(right.Content());
+   public static implicit operator Left<T>(Right<T> Left)
+      => new(Left.Content());
 
    /* ------------------------------------------------------------ */
    // Methods
@@ -37,7 +42,8 @@ public sealed class Left<T>
    // Internal Constructors
    /* ------------------------------------------------------------ */
 
-   internal Left(T content) { }
+   internal Left(T content)
+      => _content = content;
 
    /* ------------------------------------------------------------ */
    // Private Fields
