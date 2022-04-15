@@ -8,6 +8,9 @@ partial class Result<T>
       // Constructors
       /* ------------------------------------------------------------ */
 
+      public FailureResult(Failure failure)
+         => _failure = failure;
+
       /* ------------------------------------------------------------ */
       // object Overridden Methods
       /* ------------------------------------------------------------ */
@@ -29,12 +32,17 @@ partial class Result<T>
       // Result<T> Methods
       /* ------------------------------------------------------------ */
 
-      public override Result<TNew> Cast<TNew>(Message whenCastFails)
+      public override Result<TNew> Cast<TNew>()
          => throw new NotImplementedException();
 
       /* ------------------------------------------------------------ */
 
-      public override Result<TNew> Cast<TNew>(Func<Message> whenCastFails)
+      public override Result<TNew> Cast<TNew>(Message _)
+         => throw new NotImplementedException();
+
+      /* ------------------------------------------------------------ */
+
+      public override Result<TNew> Cast<TNew>(Func<Success<T>, Message> whenCastFails)
          => throw new NotImplementedException();
 
       /* ------------------------------------------------------------ */
@@ -49,12 +57,12 @@ partial class Result<T>
 
       /* ------------------------------------------------------------ */
 
-      public override Result<TNew> Map<TNew>(Func<Success<T>, TNew> whenSuccess)
+      public override Result<T> Map(Func<Failure, Message> whenFailure)
          => throw new NotImplementedException();
 
       /* ------------------------------------------------------------ */
 
-      public override T Reduce(T whenFailure)
+      public override Result<TNew> Map<TNew>(Func<Success<T>, TNew> _)
          => throw new NotImplementedException();
 
       /* ------------------------------------------------------------ */
@@ -64,8 +72,13 @@ partial class Result<T>
 
       /* ------------------------------------------------------------ */
 
+      public override Message Reduce(Func<Success<T>, Message> _)
+         => throw new NotImplementedException();
+
+      /* ------------------------------------------------------------ */
+
       public override TNew Reduce<TNew>(Func<Failure, TNew>    whenFailure,
-                                        Func<Success<T>, TNew> whenSuccess)
+                                        Func<Success<T>, TNew> _)
          => throw new NotImplementedException();
 
       /* ------------------------------------------------------------ */
@@ -85,6 +98,8 @@ partial class Result<T>
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
+
+      private readonly Failure _failure;
 
       /* ------------------------------------------------------------ */
    }

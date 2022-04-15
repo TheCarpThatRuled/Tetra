@@ -1,7 +1,8 @@
 ﻿namespace Tetra;
 
 /// <summary>
-/// An implementation of the "option" (Aka "maybe") monad. An option may be in one of two states:
+/// An implementation of the "option" (Aka "maybe") monad.
+/// An <c>Option</c> may be in one of two states:
 /// <list type="bullet">
 /// <item>
 /// <description>Some, representing an instance of the contained type;</description>
@@ -77,7 +78,7 @@ public abstract partial class Option<T> : IEquatable<Option<T>>,
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Identifies if this <c>Option</c> is in the none case.
+   /// Identifies if this <c>Option</c> is in the none state.
    /// </summary>
    /// <returns>
    /// <c>true</c> if this <c>Option</c> is a none;
@@ -88,7 +89,7 @@ public abstract partial class Option<T> : IEquatable<Option<T>>,
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Identifies if this <c>Option</c> is in the some case.
+   /// Identifies if this <c>Option</c> is in the some state.
    /// </summary>
    /// <returns>
    /// <c>true</c> if this <c>Option</c> is a some;
@@ -101,7 +102,7 @@ public abstract partial class Option<T> : IEquatable<Option<T>>,
    /// <summary>
    /// Maps the contents of the <c>Option</c> into a new form.
    /// </summary>
-   /// <typeparam name="TNew">The type this <c>Option</c> shall be transformed into.</typeparam>
+   /// <typeparam name="TNew">The type the content of this <c>Option</c> shall be transformed into, if it is a some.</typeparam>
    /// <param name="whenSome">A mapping function that shall be applied to the content of the <c>Option</c>, if it is a some.</param>
    /// <returns>
    /// A some containing the content of this <c>Option</c> mapped through <c>whenSome</c> if it is a some;
@@ -114,7 +115,7 @@ public abstract partial class Option<T> : IEquatable<Option<T>>,
    /// <summary>
    /// Maps the contents of the <c>Option</c> into a new form.
    /// </summary>
-   /// <typeparam name="TNew">The type this <c>Option</c> shall be transformed into.</typeparam>
+   /// <typeparam name="TNew">The type the content of this <c>Option</c> shall be transformed into, if it is a some.</typeparam>
    /// <param name="whenSome">A mapping function that shall be applied to the content of the <c>Option</c>, if it is a some.</param>
    /// <returns>
    /// The content of this <c>Option</c> mapped through <c>whenSome</c> if it is a some;

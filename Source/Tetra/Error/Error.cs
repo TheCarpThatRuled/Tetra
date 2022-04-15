@@ -6,7 +6,7 @@
 /// An <c>Error</c> may be in one of two states:
 /// <list type="bullet">
 /// <item>
-/// <description>Some, representing that an error has occurred and containing a content related to the error;</description>
+/// <description>Some, representing that an error has occurred and containing a message related to the error;</description>
 /// </item>
 /// <item>
 /// <description>None, representing the no error has occurred;</description>
@@ -60,7 +60,7 @@ public abstract partial class Error : IEquatable<Error>,
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Identifies if this <c>Error</c> is in the none case.
+   /// Identifies if this <c>Error</c> is in the none state.
    /// </summary>
    /// <returns>
    /// <c>true</c> if this <c>Error</c> is a none;
@@ -71,7 +71,7 @@ public abstract partial class Error : IEquatable<Error>,
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Identifies if this <c>Error</c> is in the some case.
+   /// Identifies if this <c>Error</c> is in the some state.
    /// </summary>
    /// <returns>
    /// <c>true</c> if this <c>Error</c> is a some;

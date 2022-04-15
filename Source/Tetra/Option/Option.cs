@@ -1,7 +1,7 @@
 ﻿namespace Tetra;
 
 /// <summary>
-/// A container for functions related to <c>Option&gt;T&lt;</c>
+/// A container for functions related to <c>Option&lt;T&gt;</c>
 /// </summary>
 public static class Option
 {
