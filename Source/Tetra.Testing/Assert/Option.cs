@@ -11,11 +11,11 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsANone<T>(this Assert assert,
-                                   Option<T> option)
+                                   Option<T>   option)
    {
       if (option.IsASome())
       {
-         throw Failed.Assert(TheOptionIsNone<T>());
+         throw Failed.Assert(TheOptionIsASome<T>());
       }
 
       return assert;
@@ -24,12 +24,12 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsANone<T>(this Assert assert,
-                                   Option<T> option,
-                                   string name)
+                                   Option<T>   option,
+                                   string      name)
    {
       if (option.IsASome())
       {
-         throw Failed.Assert(TheOptionIsNone<T>(name));
+         throw Failed.Assert(TheOptionIsASome<T>(name));
       }
 
       return assert;
@@ -38,11 +38,11 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsASome<T>(this Assert assert,
-                                   Option<T> option)
+                                   Option<T>   option)
    {
       if (option.IsANone())
       {
-         throw Failed.Assert(TheOptionIsNone<T>());
+         throw Failed.Assert(TheOptionIsANone<T>());
       }
 
       return assert;
@@ -51,12 +51,12 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsASome<T>(this Assert assert,
-                                   Option<T> option,
-                                   string name)
+                                   Option<T>   option,
+                                   string      name)
    {
       if (option.IsANone())
       {
-         throw Failed.Assert(TheOptionIsNone<T>(name));
+         throw Failed.Assert(TheOptionIsANone<T>(name));
       }
 
       return assert;
@@ -65,20 +65,20 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsASome<T>(this Assert assert,
-                                   T expected,
-                                   Option<T> option)
+                                   T           expected,
+                                   Option<T>   option)
    {
       if (option.Reduce(true,
                         actual =>
                         {
                            assert.AreEqual(expected,
                                            actual,
-                                           TheOptionDoesNotContainTheExpectedValue<T>());
+                                           TheOptionIsASomeButDoesNotContainTheExpectedContent<T>());
 
                            return false;
                         }))
       {
-         throw Failed.Assert(TheOptionIsNone<T>());
+         throw Failed.Assert(TheOptionIsANone<T>());
       }
 
       return assert;
@@ -87,21 +87,70 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsASome<T>(this Assert assert,
-                                   T expected,
-                                   Option<T> option,
-                                   string name)
+                                   T           expected,
+                                   Option<T>   option,
+                                   string      name)
    {
       if (option.Reduce(true,
                         actual =>
                         {
                            assert.AreEqual(expected,
                                            actual,
-                                           TheOptionDoesNotContainTheExpectedValue<T>(name));
+                                           TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(name));
 
                            return false;
                         }))
       {
-         throw Failed.Assert(TheOptionIsNone<T>(name));
+         throw Failed.Assert(TheOptionIsANone<T>(name));
+      }
+
+      return assert;
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public static Assert IsASomeAnd<T>(this Assert   assert,
+                                      Func<T, bool> property,
+                                      Option<T>     option)
+   {
+      if (option.Reduce(Function.True,
+                        actual =>
+                        {
+                           if (!property(actual))
+                           {
+                              throw Failed.Assert(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(),
+                                                  actual);
+                           }
+
+                           return false;
+                        }))
+      {
+         throw Failed.Assert(TheOptionIsANone<T>());
+      }
+
+      return assert;
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public static Assert IsASomeAnd<T>(this Assert   assert,
+                                      Func<T, bool> property,
+                                      Option<T>     option,
+                                      string        name)
+   {
+      if (option.Reduce(Function.True,
+                        actual =>
+                        {
+                           if (!property(actual))
+                           {
+                              throw Failed.Assert(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(name),
+                                                  actual);
+                           }
+
+                           return false;
+                        }))
+      {
+         throw Failed.Assert(TheOptionIsANone<T>(name));
       }
 
       return assert;

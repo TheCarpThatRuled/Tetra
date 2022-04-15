@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using FsCheck;
+﻿using FsCheck;
 
 namespace Tetra.Testing;
 
@@ -15,7 +14,7 @@ public static partial class Libraries
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Tetra.Testing.TestClass> Type()
+      public static Arbitrary<Testing.TestClass> Type()
          => Generators
            .TestClass()
            .ToArbitrary();
@@ -33,7 +32,7 @@ public static partial class Libraries
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.Testing.TestClass, Tetra.Testing.TestClass, Tetra.Testing.TestClass)> Type()
+      public static Arbitrary<(Testing.TestClass, Testing.TestClass, Testing.TestClass)> Type()
          => Generators
            .ThreeUniqueTestClasses()
            .ToArbitrary();
@@ -51,7 +50,7 @@ public static partial class Libraries
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.Testing.TestClass, Tetra.Testing.TestClass)> Type()
+      public static Arbitrary<(Testing.TestClass, Testing.TestClass)> Type()
          => Generators
            .TwoUniqueTestClasses()
            .ToArbitrary();

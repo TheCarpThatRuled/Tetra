@@ -8,15 +8,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class Error
+   public sealed class LeftEitherOfInt32AndTestClass
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Tetra.Error> Type()
+      public static Arbitrary<Either<int, Testing.TestClass>> Type()
          => Generators
-           .Error()
+           .LeftEither<int, Testing.TestClass>(Generators.Int32())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -26,15 +26,16 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class SomeError
+   public sealed class EitherOfInt32AndTestClass
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Tetra.Error> Type()
+      public static Arbitrary<Either<int, Testing.TestClass>> Type()
          => Generators
-           .SomeError()
+           .Either(Generators.Int32(),
+                   Generators.TestClass())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -44,15 +45,34 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TransitiveErrors
+   public sealed class RightEitherOfInt32AndTestClass
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.Error, Tetra.Error, Tetra.Error)> Type()
+      public static Arbitrary<Either<int, Testing.TestClass>> Type()
          => Generators
-           .Transitive(Generators.TwoUniqueErrors())
+           .RightEither<int, Testing.TestClass>(Generators.TestClass())
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class TransitiveEithersOfInt32AndTestClass
+   {
+      /* ------------------------------------------------------------ */
+      // Methods
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<(Either<int, Testing.TestClass>, Either<int, Testing.TestClass>, Either<int, Testing.TestClass>)> Type()
+         => Generators
+           .Transitive(Generators.TwoUniqueEithers(Generators.Int32(),
+                                                   Generators.TestClass()))
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

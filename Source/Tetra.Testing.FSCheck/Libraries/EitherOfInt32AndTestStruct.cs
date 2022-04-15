@@ -6,17 +6,17 @@ public static partial class Libraries
 {
    /* ------------------------------------------------------------ */
 
-   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once StructNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class Message
+   public sealed class LeftEitherOfInt32AndTestStruct
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Tetra.Message> Type()
+      public static Arbitrary<Either<int, Testing.TestStruct>> Type()
          => Generators
-           .Message()
+           .LeftEither<int, Testing.TestStruct>(Generators.Int32())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -24,17 +24,18 @@ public static partial class Libraries
 
    /* ------------------------------------------------------------ */
 
-   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once StructNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class ThreeUniqueMessages
+   public sealed class EitherOfInt32AndTestStruct
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.Message, Tetra.Message, Tetra.Message)> Type()
+      public static Arbitrary<Either<int, Testing.TestStruct>> Type()
          => Generators
-           .ThreeUniqueMessages()
+           .Either(Generators.Int32(),
+                   Generators.TestStruct())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -42,17 +43,17 @@ public static partial class Libraries
 
    /* ------------------------------------------------------------ */
 
-   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once StructNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TransitiveMessages
+   public sealed class RightEitherOfInt32AndTestStruct
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.Message, Tetra.Message, Tetra.Message)> Type()
+      public static Arbitrary<Either<int, Testing.TestStruct>> Type()
          => Generators
-           .Transitive(Generators.TwoUniqueMessages())
+           .RightEither<int, Testing.TestStruct>(Generators.TestStruct())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -60,17 +61,18 @@ public static partial class Libraries
 
    /* ------------------------------------------------------------ */
 
-   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once StructNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TwoUniqueMessages
+   public sealed class TransitiveEithersOfInt32AndTestStruct
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.Message, Tetra.Message)> Type()
+      public static Arbitrary<(Either<int, Testing.TestStruct>, Either<int, Testing.TestStruct>, Either<int, Testing.TestStruct>)> Type()
          => Generators
-           .TwoUniqueMessages()
+           .Transitive(Generators.TwoUniqueEithers(Generators.Int32(),
+                                                   Generators.TestStruct()))
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

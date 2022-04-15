@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using FsCheck;
+﻿using FsCheck;
 using static Tetra.Testing.AssertMessages;
 
 namespace Tetra.Testing;
@@ -12,48 +11,69 @@ partial class Properties
 
    public static Property IsANone<T>(Option<T> option)
       => AsProperty(option.IsANone)
-        .Label(TheOptionIsSome<T>());
+        .Label(TheOptionIsASome<T>());
 
    /* ------------------------------------------------------------ */
 
    public static Property IsANone<T>(Option<T> option,
-                                     string name)
+                                     string    name)
       => AsProperty(option.IsANone)
-        .Label(TheOptionIsSome<T>(name));
+        .Label(TheOptionIsASome<T>(name));
 
    /* ------------------------------------------------------------ */
 
    public static Property IsASome<T>(Option<T> option)
       => AsProperty(option.IsASome)
-        .Label(TheOptionIsNone<T>());
+        .Label(TheOptionIsANone<T>());
 
    /* ------------------------------------------------------------ */
 
    public static Property IsASome<T>(Option<T> option,
-                                     string name)
+                                     string    name)
       => AsProperty(option.IsASome)
-        .Label(TheOptionIsNone<T>(name));
+        .Label(TheOptionIsANone<T>(name));
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsASome<T>(T expected,
+   public static Property IsASome<T>(T         expected,
                                      Option<T> option)
       => option
-        .Reduce(() => False(TheOptionIsNone<T>()),
-                some => AreEqual(TheOptionDoesNotContainTheExpectedValue<T>(),
+        .Reduce(() => False(TheOptionIsANone<T>()),
+                some => AreEqual(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(),
                                  expected,
                                  some));
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsASome<T>(T expected,
+   public static Property IsASome<T>(T         expected,
                                      Option<T> option,
-                                     string name)
+                                     string    name)
       => option
-        .Reduce(() => False(TheOptionIsNone<T>(name)),
-                some => AreEqual(TheOptionDoesNotContainTheExpectedValue<T>(name),
+        .Reduce(() => False(TheOptionIsANone<T>(name)),
+                some => AreEqual(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(name),
                                  expected,
                                  some));
+
+   /* ------------------------------------------------------------ */
+
+   public static Property IsASomeAnd<T>(Func<T, bool> property,
+                                        Option<T>     option)
+      => option
+        .Reduce(() => False(TheOptionIsANone<T>()),
+                actual => AsProperty(() => property(actual))
+                  .Label(Failed.Message(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(),
+                                        actual)));
+
+   /* ------------------------------------------------------------ */
+
+   public static Property IsASomeAnd<T>(Func<T, bool> property,
+                                        Option<T>     option,
+                                        string        name)
+      => option
+        .Reduce(() => False(TheOptionIsANone<T>(name)),
+                actual => AsProperty(() => property(actual))
+                  .Label(Failed.Message(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(name),
+                                        actual)));
 
    /* ------------------------------------------------------------ */
 }

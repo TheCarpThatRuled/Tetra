@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using FsCheck;
+﻿using FsCheck;
 // ReSharper disable InconsistentNaming
 
 namespace Tetra.Testing;

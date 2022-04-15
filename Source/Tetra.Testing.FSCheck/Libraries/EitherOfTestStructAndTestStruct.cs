@@ -6,17 +6,17 @@ public static partial class Libraries
 {
    /* ------------------------------------------------------------ */
 
-   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once StructNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class Message
+   public sealed class LeftEitherOfTestStructAndTestStruct
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Tetra.Message> Type()
+      public static Arbitrary<Either<Testing.TestStruct, Testing.TestStruct>> Type()
          => Generators
-           .Message()
+           .LeftEither<Testing.TestStruct, Testing.TestStruct>(Generators.TestStruct())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -24,17 +24,18 @@ public static partial class Libraries
 
    /* ------------------------------------------------------------ */
 
-   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once StructNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class ThreeUniqueMessages
+   public sealed class EitherOfTestStructAndTestStruct
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.Message, Tetra.Message, Tetra.Message)> Type()
+      public static Arbitrary<Either<Testing.TestStruct, Testing.TestStruct>> Type()
          => Generators
-           .ThreeUniqueMessages()
+           .Either(Generators.TestStruct(),
+                   Generators.TestStruct())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -42,17 +43,17 @@ public static partial class Libraries
 
    /* ------------------------------------------------------------ */
 
-   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once StructNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TransitiveMessages
+   public sealed class RightEitherOfTestStructAndTestStruct
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.Message, Tetra.Message, Tetra.Message)> Type()
+      public static Arbitrary<Either<Testing.TestStruct, Testing.TestStruct>> Type()
          => Generators
-           .Transitive(Generators.TwoUniqueMessages())
+           .RightEither<Testing.TestStruct, Testing.TestStruct>(Generators.TestStruct())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -60,17 +61,18 @@ public static partial class Libraries
 
    /* ------------------------------------------------------------ */
 
-   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once StructNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TwoUniqueMessages
+   public sealed class TransitiveEithersOfTestStructAndTestStruct
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.Message, Tetra.Message)> Type()
+      public static Arbitrary<(Either<Testing.TestStruct, Testing.TestStruct>, Either<Testing.TestStruct, Testing.TestStruct>, Either<Testing.TestStruct, Testing.TestStruct>)> Type()
          => Generators
-           .TwoUniqueMessages()
+           .Transitive(Generators.TwoUniqueEithers(Generators.TestStruct(),
+                                                   Generators.TestStruct()))
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

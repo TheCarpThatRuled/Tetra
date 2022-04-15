@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using FsCheck;
+﻿using FsCheck;
 
 namespace Tetra.Testing;
 

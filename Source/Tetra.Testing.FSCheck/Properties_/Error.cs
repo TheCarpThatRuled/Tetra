@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using FsCheck;
+﻿using FsCheck;
 using static Tetra.Testing.AssertMessages;
 
 namespace Tetra.Testing;
@@ -13,51 +12,72 @@ partial class Properties
    public static Property IsANone(Error error)
       => AsProperty(() => error.Reduce(Function.True,
                                        Function.False))
-        .Label(TheErrorIsSome());
+        .Label(TheErrorIsASome());
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsANone(Error error,
+   public static Property IsANone(Error  error,
                                   string name)
       => AsProperty(() => error.Reduce(Function.True,
                                        Function.False))
-        .Label(TheErrorIsSome(name));
+        .Label(TheErrorIsASome(name));
 
    /* ------------------------------------------------------------ */
 
    public static Property IsASome(Error error)
       => AsProperty(() => error.Reduce(Function.False,
                                        Function.True))
-        .Label(TheErrorIsNone());
+        .Label(TheErrorIsANone());
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsASome(Error error,
+   public static Property IsASome(Error  error,
                                   string name)
       => AsProperty(() => error.Reduce(Function.False,
                                        Function.True))
-        .Label(TheErrorIsNone(name));
+        .Label(TheErrorIsANone(name));
 
    /* ------------------------------------------------------------ */
 
    public static Property IsASome(Message expected,
-                                  Error error)
+                                  Error   error)
       => error
-        .Reduce(() => False(TheErrorIsNone()),
-                some => AreEqual(TheErrorDoesNotContainTheExpectedValue(),
+        .Reduce(() => False(TheErrorIsANone()),
+                some => AreEqual(TheErrorIsASomeButDoesNotContainTheExpectedContent(),
                                  expected,
                                  some));
 
    /* ------------------------------------------------------------ */
 
    public static Property IsASome(Message expected,
-                                  Error error,
-                                  string name)
+                                  Error   error,
+                                  string  name)
       => error
-        .Reduce(() => False(TheErrorIsNone(name)),
-                some => AreEqual(TheErrorDoesNotContainTheExpectedValue(name),
+        .Reduce(() => False(TheErrorIsANone(name)),
+                some => AreEqual(TheErrorIsASomeButDoesNotContainTheExpectedContent(name),
                                  expected,
                                  some));
+
+   /* ------------------------------------------------------------ */
+
+   public static Property IsASomeAnd(Func<Message, bool> property,
+                                     Error               error)
+      => error
+        .Reduce(() => False(TheErrorIsANone()),
+                actual => AsProperty(() => property(actual))
+                  .Label(Failed.Message(TheErrorIsASomeButDoesNotContainTheExpectedContent(),
+                                        actual)));
+
+   /* ------------------------------------------------------------ */
+
+   public static Property IsASomeAnd(Func<Message, bool> property,
+                                     Error               error,
+                                     string              name)
+      => error
+        .Reduce(() => False(TheErrorIsANone(name)),
+                actual => AsProperty(() => property(actual))
+                  .Label(Failed.Message(TheErrorIsASomeButDoesNotContainTheExpectedContent(name),
+                                        actual)));
 
    /* ------------------------------------------------------------ */
 }

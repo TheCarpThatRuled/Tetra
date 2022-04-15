@@ -6,33 +6,55 @@
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static string TheErrorDoesNotContainTheExpectedValue()
-         => $"The Error does not contain the expected value";
+      public static string TheErrorIsASomeButDoesNotContainTheExpectedContent()
+         => Error()
+          + IsASomeButDoesNotContainTheExpectedContent;
 
       /* ------------------------------------------------------------ */
 
-      public static string TheErrorDoesNotContainTheExpectedValue(string name)
-         => $@"The Error ""{name}"" does not contain the expected value";
+      public static string TheErrorIsASomeButDoesNotContainTheExpectedContent(string name)
+         => Error(name)
+          + IsASomeButDoesNotContainTheExpectedContent;
 
       /* ------------------------------------------------------------ */
 
-      public static string TheErrorIsNone()
-         => $"The Error is none when we expected it to be some";
+      public static string TheErrorIsANone()
+         => Error()
+          + IsANoneWhenWeExpectedItToBeASome;
 
       /* ------------------------------------------------------------ */
 
-      public static string TheErrorIsNone(string name)
-         => $@"The Error ""{name}"" is none when we expected it to be some";
+      public static string TheErrorIsANone(string name)
+         => Error(name)
+          + IsANoneWhenWeExpectedItToBeASome;
 
       /* ------------------------------------------------------------ */
 
-      public static string TheErrorIsSome()
-         => $"The Error is some when we expected it to be none";
+      public static string TheErrorIsASome()
+         => Error()
+          + IsASomeWhenWeExpectedItToBeANone;
 
       /* ------------------------------------------------------------ */
 
-      public static string TheErrorIsSome(string name)
-         => $@"The Error ""{name}"" is some when we expected it to be none";
+      public static string TheErrorIsASome(string name)
+         => Error(name)
+          + IsASomeWhenWeExpectedItToBeANone;
+
+      /* ------------------------------------------------------------ */
+      // Private Functions
+      /* ------------------------------------------------------------ */
+
+      private static string Error(string? name = null)
+      {
+         var result = $@"The Error ";
+
+         if (name is not null)
+         {
+            result += $@"""{name}"" ";
+         }
+
+         return result;
+      }
 
       /* ------------------------------------------------------------ */
    }
