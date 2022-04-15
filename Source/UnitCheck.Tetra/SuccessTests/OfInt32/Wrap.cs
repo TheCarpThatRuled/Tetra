@@ -24,7 +24,8 @@ public class Wrap
    //func_is_invoked_once_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_int_Wrap_AND_func_is_Func_of_int_WHEN_the_wrapped_func_is_invoked_with_a_Success_of_int_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Success_of_int_Wrap_AND_func_is_Func_of_int_WHEN_the_wrapped_func_is_invoked_with_a_Success_of_int_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
    {
       static Property Property((int content, int newValue) args)
       {
@@ -32,7 +33,7 @@ public class Wrap
          var func = FakeFunction<int>.Create(args.newValue);
 
          var wrappedFunc = Success<int>.Wrap(func.Func);
-         var success        = Success<int>.Create(args.content);
+         var success     = Success<int>.Create(args.content);
 
          //Act
          var actual = wrappedFunc(success);
@@ -49,6 +50,8 @@ public class Wrap
           .QuickCheckThrowOnFailure();
    }
 
+   /* ------------------------------------------------------------ */
+
    //GIVEN
    //Success_of_int_Wrap_AND_func_is_Func_of_TestClass
    //WHEN
@@ -57,15 +60,17 @@ public class Wrap
    //func_is_invoked_once_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_int_Wrap_AND_func_is_Func_of_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Success_of_int_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Success_of_int_Wrap_AND_func_is_Func_of_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Success_of_int_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(int content, TestClass newValue)
+      static Property Property(int       content,
+                               TestClass newValue)
       {
          //Arrange
          var func = FakeFunction<TestClass>.Create(newValue);
 
          var wrappedFunc = Success<int>.Wrap(func.Func);
-         var success        = Success<int>.Create(content);
+         var success     = Success<int>.Create(content);
 
          //Act
          var actual = wrappedFunc(success);
@@ -78,9 +83,11 @@ public class Wrap
 
       Arb.Register<Libraries.TestClass>();
 
-      Prop.ForAll<int, TestClass> (Property)
+      Prop.ForAll<int, TestClass>(Property)
           .QuickCheckThrowOnFailure();
    }
+
+   /* ------------------------------------------------------------ */
 
    //GIVEN
    //Success_of_int_Wrap_AND_func_is_Func_of_TestStruct
@@ -90,15 +97,17 @@ public class Wrap
    //func_is_invoked_once_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_int_Wrap_AND_func_is_Func_of_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Success_of_int_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Success_of_int_Wrap_AND_func_is_Func_of_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Success_of_int_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(int content, TestStruct newValue)
+      static Property Property(int        content,
+                               TestStruct newValue)
       {
          //Arrange
          var func = FakeFunction<TestStruct>.Create(newValue);
 
          var wrappedFunc = Success<int>.Wrap(func.Func);
-         var success        = Success<int>.Create(content);
+         var success     = Success<int>.Create(content);
 
          //Act
          var actual = wrappedFunc(success);
@@ -127,7 +136,8 @@ public class Wrap
    //func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_int_Wrap_AND_func_is_Func_of_int_to_int_WHEN_the_wrapped_func_is_invoked_with_a_Success_of_int_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Success_of_int_Wrap_AND_func_is_Func_of_int_to_int_WHEN_the_wrapped_func_is_invoked_with_a_Success_of_int_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
    {
       static Property Property((int content, int newValue) args)
       {
@@ -135,7 +145,7 @@ public class Wrap
          var func = FakeFunction<int, int>.Create(args.newValue);
 
          var wrappedFunc = Success<int>.Wrap(func.Func);
-         var success = Success<int>.Create(args.content);
+         var success     = Success<int>.Create(args.content);
 
          //Act
          var actual = wrappedFunc(success);
@@ -153,6 +163,8 @@ public class Wrap
           .QuickCheckThrowOnFailure();
    }
 
+   /* ------------------------------------------------------------ */
+
    //GIVEN
    //Success_of_int_Wrap_AND_func_is_Func_of_int_to_TestClass
    //WHEN
@@ -161,15 +173,17 @@ public class Wrap
    //func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_int_Wrap_AND_func_is_Func_of_int_to_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Success_of_int_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Success_of_int_Wrap_AND_func_is_Func_of_int_to_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Success_of_int_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(int content, TestClass newValue)
+      static Property Property(int       content,
+                               TestClass newValue)
       {
          //Arrange
          var func = FakeFunction<int, TestClass>.Create(newValue);
 
          var wrappedFunc = Success<int>.Wrap(func.Func);
-         var success = Success<int>.Create(content);
+         var success     = Success<int>.Create(content);
 
          //Act
          var actual = wrappedFunc(success);
@@ -187,6 +201,8 @@ public class Wrap
           .QuickCheckThrowOnFailure();
    }
 
+   /* ------------------------------------------------------------ */
+
    //GIVEN
    //Success_of_int_Wrap_AND_func_is_Func_of_int_to_TestStruct
    //WHEN
@@ -195,15 +211,17 @@ public class Wrap
    //func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_int_Wrap_AND_func_is_Func_of_int_to_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Success_of_int_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Success_of_int_Wrap_AND_func_is_Func_of_int_to_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Success_of_int_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(int content, TestStruct newValue)
+      static Property Property(int        content,
+                               TestStruct newValue)
       {
          //Arrange
          var func = FakeFunction<int, TestStruct>.Create(newValue);
 
          var wrappedFunc = Success<int>.Wrap(func.Func);
-         var success = Success<int>.Create(content);
+         var success     = Success<int>.Create(content);
 
          //Act
          var actual = wrappedFunc(success);

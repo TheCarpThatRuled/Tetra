@@ -26,13 +26,14 @@ public class Wrap
    [TestMethod]
    public void GIVEN_Failure_Wrap_AND_func_is_Func_of_int_WHEN_the_wrapped_func_is_invoked_with_a_Failure_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(Message content, int newValue)
+      static Property Property(Message content,
+                               int     newValue)
       {
          //Arrange
          var func = FakeFunction<int>.Create(newValue);
 
          var wrappedFunc = Failure.Wrap(func.Func);
-         var failure        = Failure.Create(content);
+         var failure     = Failure.Create(content);
 
          //Act
          var actual = wrappedFunc(failure);
@@ -49,6 +50,8 @@ public class Wrap
           .QuickCheckThrowOnFailure();
    }
 
+   /* ------------------------------------------------------------ */
+
    //GIVEN
    //Failure_Wrap_AND_func_is_Func_of_TestClass
    //WHEN
@@ -59,13 +62,14 @@ public class Wrap
    [TestMethod]
    public void GIVEN_Failure_Wrap_AND_func_is_Func_of_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Failure_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(Message content, TestClass newValue)
+      static Property Property(Message   content,
+                               TestClass newValue)
       {
          //Arrange
          var func = FakeFunction<TestClass>.Create(newValue);
 
          var wrappedFunc = Failure.Wrap(func.Func);
-         var failure        = Failure.Create(content);
+         var failure     = Failure.Create(content);
 
          //Act
          var actual = wrappedFunc(failure);
@@ -79,9 +83,11 @@ public class Wrap
       Arb.Register<Libraries.Message>();
       Arb.Register<Libraries.TestClass>();
 
-      Prop.ForAll<Message, TestClass> (Property)
+      Prop.ForAll<Message, TestClass>(Property)
           .QuickCheckThrowOnFailure();
    }
+
+   /* ------------------------------------------------------------ */
 
    //GIVEN
    //Failure_Wrap_AND_func_is_Func_of_TestStruct
@@ -91,15 +97,17 @@ public class Wrap
    //func_is_invoked_once_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Failure_Wrap_AND_func_is_Func_of_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Failure_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Failure_Wrap_AND_func_is_Func_of_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Failure_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(Message content, TestStruct newValue)
+      static Property Property(Message    content,
+                               TestStruct newValue)
       {
          //Arrange
          var func = FakeFunction<TestStruct>.Create(newValue);
 
          var wrappedFunc = Failure.Wrap(func.Func);
-         var failure        = Failure.Create(content);
+         var failure     = Failure.Create(content);
 
          //Act
          var actual = wrappedFunc(failure);
@@ -129,15 +137,17 @@ public class Wrap
    //func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Failure_Wrap_AND_func_is_Func_of_Message_to_int_WHEN_the_wrapped_func_is_invoked_with_a_Failure_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Failure_Wrap_AND_func_is_Func_of_Message_to_int_WHEN_the_wrapped_func_is_invoked_with_a_Failure_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(Message content, int newValue)
+      static Property Property(Message content,
+                               int     newValue)
       {
          //Arrange
          var func = FakeFunction<Message, int>.Create(newValue);
 
          var wrappedFunc = Failure.Wrap(func.Func);
-         var failure = Failure.Create(content);
+         var failure     = Failure.Create(content);
 
          //Act
          var actual = wrappedFunc(failure);
@@ -155,6 +165,8 @@ public class Wrap
           .QuickCheckThrowOnFailure();
    }
 
+   /* ------------------------------------------------------------ */
+
    //GIVEN
    //Failure_Wrap_AND_func_is_Func_of_Message_to_TestClass
    //WHEN
@@ -163,15 +175,17 @@ public class Wrap
    //func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Failure_Wrap_AND_func_is_Func_of_Message_to_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Failure_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Failure_Wrap_AND_func_is_Func_of_Message_to_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Failure_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(Message content, TestClass newValue)
+      static Property Property(Message   content,
+                               TestClass newValue)
       {
          //Arrange
          var func = FakeFunction<Message, TestClass>.Create(newValue);
 
          var wrappedFunc = Failure.Wrap(func.Func);
-         var failure = Failure.Create(content);
+         var failure     = Failure.Create(content);
 
          //Act
          var actual = wrappedFunc(failure);
@@ -190,6 +204,8 @@ public class Wrap
           .QuickCheckThrowOnFailure();
    }
 
+   /* ------------------------------------------------------------ */
+
    //GIVEN
    //Failure_Wrap_AND_func_is_Func_of_Message_to_TestStruct
    //WHEN
@@ -198,15 +214,17 @@ public class Wrap
    //func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Failure_Wrap_AND_func_is_Func_of_Message_to_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Failure_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Failure_Wrap_AND_func_is_Func_of_Message_to_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Failure_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(Message content, TestStruct newValue)
+      static Property Property(Message    content,
+                               TestStruct newValue)
       {
          //Arrange
          var func = FakeFunction<Message, TestStruct>.Create(newValue);
 
          var wrappedFunc = Failure.Wrap(func.Func);
-         var failure = Failure.Create(content);
+         var failure     = Failure.Create(content);
 
          //Act
          var actual = wrappedFunc(failure);

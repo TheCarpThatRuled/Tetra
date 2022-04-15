@@ -49,6 +49,8 @@ public class Wrap
           .QuickCheckThrowOnFailure();
    }
 
+   /* ------------------------------------------------------------ */
+
    //GIVEN
    //Left_of_int_Wrap_AND_func_is_Func_of_TestClass
    //WHEN
@@ -81,6 +83,8 @@ public class Wrap
       Prop.ForAll<int, TestClass> (Property)
           .QuickCheckThrowOnFailure();
    }
+
+   /* ------------------------------------------------------------ */
 
    //GIVEN
    //Left_of_int_Wrap_AND_func_is_Func_of_TestStruct
@@ -153,6 +157,8 @@ public class Wrap
           .QuickCheckThrowOnFailure();
    }
 
+   /* ------------------------------------------------------------ */
+
    //GIVEN
    //Left_of_int_Wrap_AND_func_is_Func_of_int_to_TestClass
    //WHEN
@@ -186,6 +192,8 @@ public class Wrap
       Prop.ForAll<int, TestClass>(Property)
           .QuickCheckThrowOnFailure();
    }
+
+   /* ------------------------------------------------------------ */
 
    //GIVEN
    //Left_of_int_Wrap_AND_func_is_Func_of_int_to_TestStruct

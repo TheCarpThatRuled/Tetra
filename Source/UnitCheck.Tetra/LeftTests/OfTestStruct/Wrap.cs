@@ -49,6 +49,8 @@ public class Wrap
           .QuickCheckThrowOnFailure();
    }
 
+   /* ------------------------------------------------------------ */
+
    //GIVEN
    //Left_of_TestStruct_Wrap_AND_func_is_Func_of_TestClass
    //WHEN
@@ -82,6 +84,8 @@ public class Wrap
       Prop.ForAll<TestStruct, TestClass> (Property)
           .QuickCheckThrowOnFailure();
    }
+
+   /* ------------------------------------------------------------ */
 
    //GIVEN
    //Left_of_TestStruct_Wrap_AND_func_is_Func_of_TestStruct
@@ -154,6 +158,8 @@ public class Wrap
           .QuickCheckThrowOnFailure();
    }
 
+   /* ------------------------------------------------------------ */
+
    //GIVEN
    //Left_of_TestStruct_Wrap_AND_func_is_Func_of_TestStruct_to_TestClass
    //WHEN
@@ -188,6 +194,8 @@ public class Wrap
       Prop.ForAll<TestStruct, TestClass>(Property)
           .QuickCheckThrowOnFailure();
    }
+
+   /* ------------------------------------------------------------ */
 
    //GIVEN
    //Left_of_TestStruct_Wrap_AND_func_is_Func_of_TestStruct_to_TestStruct
