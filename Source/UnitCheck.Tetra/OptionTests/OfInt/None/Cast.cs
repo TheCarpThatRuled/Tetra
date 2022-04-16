@@ -97,7 +97,7 @@ public class None_Cast
       var option = Option<int>.None();
 
       //Act
-      var actual = option.Cast<TestStruct>();
+      var actual = option.Cast<TestSubClass>();
 
       //Assert
       Assert.That

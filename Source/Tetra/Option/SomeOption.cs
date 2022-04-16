@@ -42,14 +42,9 @@ partial class Option<T>
       /* ------------------------------------------------------------ */
 
       public override Option<TNew> Cast<TNew>()
-      {
-         if (_content is TNew content)
-         {
-            return new Option<TNew>.SomeOption(content);
-         }
-
-         return new Option<TNew>.NoneOption();
-      }
+         => _content is TNew content
+               ? new Option<TNew>.SomeOption(content)
+               : new Option<TNew>.NoneOption();
 
       /* ------------------------------------------------------------ */
 

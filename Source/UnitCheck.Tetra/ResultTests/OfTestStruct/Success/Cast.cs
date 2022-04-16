@@ -1,41 +1,43 @@
-﻿using FsCheck;
+﻿using Check.Data;
+using FsCheck;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
+using Result = Tetra.Result;
 
-namespace Check.OptionTests.OfTestStruct;
+namespace Check.ResultTests.OfTestStruct;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Option)]
+[TestCategory(LocalCategories.Result)]
 // ReSharper disable once InconsistentNaming
-public class Some_Cast
+public class Success_Cast
 {
    /* ------------------------------------------------------------ */
-   // Option<TNew> Cast<TNew>()
+   // Result<TNew> Cast<TNew>()
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_TestStruct
+   //Success_of_TestStruct
    //WHEN
    //Cast_to_int
    //THEN
-   //a_none_is_returned
+   //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_TestStruct_WHEN_Cast_to_int_THEN_a_none_is_returned()
+   public void GIVEN_Success_of_TestStruct_WHEN_Cast_to_int_THEN_a_failure_containing_cast_failed_is_returned()
    {
       static Property Property(TestStruct content)
       {
          //Arrange
-         var option = Option.Some(content);
+         var result = Result.Success(content);
 
          //Act
-         var actual = option.Cast<int>();
+         var actual = result.Cast<int>();
 
          //Assert
-         return IsANone(actual);
+         return IsAFailure(Messages.CastFailed<TestStruct, int>(),
+                           actual);
       }
 
       Arb.Register<Libraries.TestStruct>();
@@ -47,25 +49,26 @@ public class Some_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_TestStruct
+   //Success_of_TestStruct
    //WHEN
    //Cast_to_TestClass
    //THEN
-   //a_none_is_returned
+   //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_TestStruct_WHEN_Cast_to_TestClass_THEN_a_nne_is_returned()
+   public void GIVEN_Success_of_TestStruct_WHEN_Cast_to_TestClass_THEN_a_nne_is_returned()
    {
       static Property Property(TestStruct content)
       {
          //Arrange
-         var option = Option.Some(content);
+         var result = Result.Success(content);
 
          //Act
-         var actual = option.Cast<TestClass>();
+         var actual = result.Cast<TestClass>();
 
          //Assert
-         return IsANone(actual);
+         return IsAFailure(Messages.CastFailed<TestStruct, TestClass>(),
+                           actual);
       }
 
       Arb.Register<Libraries.TestStruct>();
@@ -77,26 +80,26 @@ public class Some_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_TestStruct
+   //Success_of_TestStruct
    //WHEN
    //Cast_to_TestStruct
    //THEN
-   //a_some_containing_the_content_is_returned
+   //a_success_containing_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_TestStruct_WHEN_Cast_to_TestStruct_THEN_a_some_containing_the_content_is_returned()
+   public void GIVEN_Success_of_TestStruct_WHEN_Cast_to_TestStruct_THEN_a_success_containing_the_content_is_returned()
    {
       static Property Property(TestStruct content)
       {
          //Arrange
-         var option = Option.Some(content);
+         var result = Result.Success(content);
 
          //Act
-         var actual = option.Cast<TestStruct>();
+         var actual = result.Cast<TestStruct>();
 
          //Assert
-         return IsASome(content,
-                        actual);
+         return IsASuccess(content,
+                           actual);
       }
 
       Arb.Register<Libraries.TestStruct>();
@@ -108,25 +111,26 @@ public class Some_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_TestStruct
+   //Success_of_TestStruct
    //WHEN
    //Cast_to_TestSubClass
    //THEN
-   //a_none_is_returned
+   //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_TestStruct_WHEN_Cast_to_TestSubClass_THEN_a_none_is_returned()
+   public void GIVEN_Success_of_TestStruct_WHEN_Cast_to_TestSubClass_THEN_a_failure_containing_cast_failed_is_returned()
    {
       static Property Property(TestStruct content)
       {
          //Arrange
-         var option = Option.Some(content);
+         var result = Result.Success(content);
 
          //Act
-         var actual = option.Cast<TestSubClass>();
+         var actual = result.Cast<TestSubClass>();
 
          //Assert
-         return IsANone(actual);
+         return IsAFailure(Messages.CastFailed<TestStruct, TestSubClass>(),
+                           actual);
       }
 
       Arb.Register<Libraries.TestStruct>();

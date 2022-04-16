@@ -1,4 +1,6 @@
-﻿namespace Tetra;
+﻿using static Tetra.TetraMessages;
+
+namespace Tetra;
 
 partial class Result<T>
 {
@@ -46,7 +48,9 @@ partial class Result<T>
       /* ------------------------------------------------------------ */
 
       public override Result<TNew> Cast<TNew>()
-         => throw new NotImplementedException();
+         => _success.Content() is TNew content
+               ? Result<TNew>.Success(content)
+               : Result<TNew>.Failure(CastFailed<T, TNew>());
 
       /* ------------------------------------------------------------ */
 
@@ -61,12 +65,12 @@ partial class Result<T>
       /* ------------------------------------------------------------ */
 
       public override bool IsAFailure()
-         => throw new NotImplementedException();
+         => false;
 
       /* ------------------------------------------------------------ */
 
       public override bool IsASuccess()
-         => throw new NotImplementedException();
+         => true;
 
       /* ------------------------------------------------------------ */
 

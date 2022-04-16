@@ -1,41 +1,43 @@
-﻿using FsCheck;
+﻿using Check.Data;
+using FsCheck;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
+using Result = Tetra.Result;
 
-namespace Check.OptionTests.OfInt;
+namespace Check.ResultTests.OfInt;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Option)]
+[TestCategory(LocalCategories.Result)]
 // ReSharper disable once InconsistentNaming
-public class Some_Cast
+public class Success_Cast
 {
    /* ------------------------------------------------------------ */
-   // Option<TNew> Cast<TNew>()
+   // Result<TNew> Cast<TNew>()
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_int
+   //Success_of_int
    //WHEN
    //Cast_to_uint
    //THEN
-   //a_none_is_returned
+   //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_int_WHEN_Cast_to_uint_THEN_a_none_is_returned()
+   public void GIVEN_Success_of_int_WHEN_Cast_to_uint_THEN_a_failure_containing_cast_failed_is_returned()
    {
       static Property Property(int content)
       {
          //Arrange
-         var option = Option.Some(content);
+         var result = Result.Success(content);
 
          //Act
-         var actual = option.Cast<uint>();
+         var actual = result.Cast<uint>();
 
          //Assert
-         return IsANone(actual);
+         return IsAFailure(Messages.CastFailed<int, uint>(),
+                           actual);
       }
 
       Prop.ForAll<int>(Property)
@@ -45,25 +47,26 @@ public class Some_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_int
+   //Success_of_int
    //WHEN
    //Cast_to_TestClass
    //THEN
-   //a_none_is_returned
+   //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_int_WHEN_Cast_to_TestClass_THEN_a_none_is_returned()
+   public void GIVEN_Success_of_int_WHEN_Cast_to_TestClass_THEN_a_failure_containing_cast_failed_is_returned()
    {
       static Property Property(int content)
       {
          //Arrange
-         var option = Option.Some(content);
+         var result = Result.Success(content);
 
          //Act
-         var actual = option.Cast<TestClass>();
+         var actual = result.Cast<TestClass>();
 
          //Assert
-         return IsANone(actual);
+         return IsAFailure(Messages.CastFailed<int, TestClass>(),
+                           actual);
       }
 
       Prop.ForAll<int>(Property)
@@ -73,25 +76,26 @@ public class Some_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_int
+   //Success_of_int
    //WHEN
    //Cast_to_TestStruct
    //THEN
-   //a_none_is_returned
+   //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_int_WHEN_Cast_to_TestStruct_THEN_a_none_is_returned()
+   public void GIVEN_Success_of_int_WHEN_Cast_to_TestStruct_THEN_a_failure_containing_cast_failed_is_returned()
    {
       static Property Property(int content)
       {
          //Arrange
-         var option = Option.Some(content);
+         var result = Result.Success(content);
 
          //Act
-         var actual = option.Cast<TestStruct>();
+         var actual = result.Cast<TestStruct>();
 
          //Assert
-         return IsANone(actual);
+         return IsAFailure(Messages.CastFailed<int, TestStruct>(),
+                           actual);
       }
 
       Prop.ForAll<int>(Property)
@@ -101,25 +105,26 @@ public class Some_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_int
+   //Success_of_int
    //WHEN
    //Cast_to_TestSubClass
    //THEN
-   //a_none_is_returned
+   //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_int_WHEN_Cast_to_TestSubClass_THEN_a_none_is_returned()
+   public void GIVEN_Success_of_int_WHEN_Cast_to_TestSubClass_THEN_a_failure_containing_cast_failed_is_returned()
    {
       static Property Property(int content)
       {
          //Arrange
-         var option = Option.Some(content);
+         var result = Result.Success(content);
 
          //Act
-         var actual = option.Cast<TestSubClass>();
+         var actual = result.Cast<TestSubClass>();
 
          //Assert
-         return IsANone(actual);
+         return IsAFailure(Messages.CastFailed<int, TestSubClass>(),
+                           actual);
       }
 
       Prop.ForAll<int>(Property)

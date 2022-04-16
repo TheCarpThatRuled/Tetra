@@ -45,7 +45,7 @@ partial class Result<T>
       /* ------------------------------------------------------------ */
 
       public override Result<TNew> Cast<TNew>()
-         => throw new NotImplementedException();
+         => new Result<TNew>.FailureResult(_failure);
 
       /* ------------------------------------------------------------ */
 
@@ -60,12 +60,12 @@ partial class Result<T>
       /* ------------------------------------------------------------ */
 
       public override bool IsAFailure()
-         => throw new NotImplementedException();
+         => true;
 
       /* ------------------------------------------------------------ */
 
       public override bool IsASuccess()
-         => throw new NotImplementedException();
+         => false;
 
       /* ------------------------------------------------------------ */
 

@@ -1,41 +1,44 @@
-﻿using FsCheck;
+﻿using Check.Data;
+using FsCheck;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
+using Result = Tetra.Result;
 
-namespace Check.OptionTests.OfTestClass;
+namespace Check.ResultTests.OfTestClass;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Option)]
+[TestCategory(LocalCategories.Result)]
 // ReSharper disable once InconsistentNaming
-public class Some_Cast
+public class Success_Cast
 {
    /* ------------------------------------------------------------ */
-   // Option<TNew> Cast<TNew>()
+   // Result<TNew> Cast<TNew>()
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_TestClass
+   //Success_of_TestClass
    //WHEN
    //Cast_to_int
    //THEN
-   //a_none_is_returned
+   //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_TestClass_WHEN_Cast_to_int_THEN_a_none_is_returned()
+   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_int_THEN_a_failure_containing_cast_failed_is_returned()
    {
       static Property Property(TestClass content)
       {
          //Arrange
-         var option = Option.Some(content);
+         var result = Result.Success(content);
 
          //Act
-         var actual = option.Cast<int>();
+         var actual = result.Cast<int>();
 
          //Assert
-         return IsANone(actual);
+         return IsAFailure(Messages.CastFailed<TestClass, int>(),
+                           actual);
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -47,26 +50,26 @@ public class Some_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_TestClass_AND_the_content_is_a_TestClass
+   //Success_of_TestClass_AND_the_content_is_a_TestClass
    //WHEN
    //Cast_to_TestClass
    //THEN
-   //a_none_is_returned
+   //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_TestClass_AND_the_content_is_a_TestClass_WHEN_Cast_to_TestClass_THEN_a_none_is_returned()
+   public void GIVEN_Success_of_TestClass_AND_the_content_is_a_TestClass_WHEN_Cast_to_TestClass_THEN_a_failure_containing_cast_failed_is_returned()
    {
       static Property Property(TestClass content)
       {
          //Arrange
-         var option = Option.Some(content);
+         var result = Result.Success(content);
 
          //Act
-         var actual = option.Cast<TestClass>();
+         var actual = result.Cast<TestClass>();
 
          //Assert
-         return IsASome(content,
-                        actual);
+         return IsASuccess(content,
+                           actual);
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -78,26 +81,26 @@ public class Some_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_TestClass_AND_the_content_is_a_TestSubClass
+   //Success_of_TestClass_AND_the_content_is_a_TestSubClass
    //WHEN
    //Cast_to_TestClass
    //THEN
-   //a_some_containing_the_content_is_returned
+   //a_success_containing_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_TestClass_AND_the_content_is_a_TestSubClass_WHEN_Cast_to_TestClass_THEN_a_some_containing_the_content_is_returned()
+   public void GIVEN_Success_of_TestClass_AND_the_content_is_a_TestSubClass_WHEN_Cast_to_TestClass_THEN_a_success_containing_the_content_is_returned()
    {
       static Property Property(TestSubClass content)
       {
          //Arrange
-         var option = Option<TestClass>.Some(content);
+         var result = Result<TestClass>.Success(content);
 
          //Act
-         var actual = option.Cast<TestClass>();
+         var actual = result.Cast<TestClass>();
 
          //Assert
-         return IsASome(content,
-                        actual);
+         return IsASuccess(content,
+                           actual);
       }
 
       Arb.Register<Libraries.TestSubClass>();
@@ -109,25 +112,26 @@ public class Some_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_TestClass
+   //Success_of_TestClass
    //WHEN
    //Cast_to_TestStruct
    //THEN
-   //a_none_is_returned
+   //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_TestClass_WHEN_Cast_to_TestStruct_THEN_a_none_is_returned()
+   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_TestStruct_THEN_a_failure_containing_cast_failed_is_returned()
    {
       static Property Property(TestClass content)
       {
          //Arrange
-         var option = Option.Some(content);
+         var result = Result.Success(content);
 
          //Act
-         var actual = option.Cast<TestStruct>();
+         var actual = result.Cast<TestStruct>();
 
          //Assert
-         return IsANone(actual);
+         return IsAFailure(Messages.CastFailed<TestClass, TestStruct>(),
+                           actual);
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -139,25 +143,26 @@ public class Some_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_TestClass
+   //Success_of_TestClass
    //WHEN
    //Cast_to_TestSubClass
    //THEN
-   //a_none_is_returned
+   //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_TestClass_WHEN_Cast_to_TestSubClass_THEN_a_none_is_returned()
+   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_TestSubClass_THEN_a_failure_containing_cast_failed_is_returned()
    {
       static Property Property(TestClass content)
       {
          //Arrange
-         var option = Option.Some(content);
+         var result = Result.Success(content);
 
          //Act
-         var actual = option.Cast<TestSubClass>();
+         var actual = result.Cast<TestSubClass>();
 
          //Assert
-         return IsANone(actual);
+         return IsAFailure(Messages.CastFailed<TestClass, TestSubClass>(),
+                           actual);
       }
 
       Prop.ForAll<TestClass>(Property)
