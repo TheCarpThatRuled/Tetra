@@ -8,7 +8,7 @@ namespace Check.ErrorTests;
 [TestCategory(GlobalCategories.UnitCheck)]
 [TestCategory(LocalCategories.Error)]
 // ReSharper disable once InconsistentNaming
-public class None
+public class NoneFactory
 {
    /* ------------------------------------------------------------ */
    // Error None()

@@ -146,7 +146,7 @@ public class Equals
    {
       Arb.Register<Libraries.OptionOfTestStruct>();
 
-      Prop.ForAll<Option<TestStruct>, Option<TestStruct>>(EqualsIsSymmetric<Option<TestStruct>>)
+      Prop.ForAll<Option<TestStruct>, Option<TestStruct>>(EqualsIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -186,7 +186,7 @@ public class Equals
    {
       Arb.Register<Library_OptionOfTestStruct_AND_ObjIsAnTestStruct>();
 
-      Prop.ForAll<(Option<TestStruct>, TestStruct, TestStruct)>(EqualsIsTransitive<Option<TestStruct>, TestStruct>)
+      Prop.ForAll<(Option<TestStruct>, TestStruct, TestStruct)>(EqualsIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 
@@ -308,7 +308,7 @@ public class Equals
    {
       Arb.Register<Libraries.OptionOfTestStruct>();
 
-      Prop.ForAll<Option<TestStruct>, Option<TestStruct>>(IEquatableIsSymmetric<Option<TestStruct>>)
+      Prop.ForAll<Option<TestStruct>, Option<TestStruct>>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -376,7 +376,7 @@ public class Equals
    {
       Arb.Register<Library_OptionOfTestStruct_AND_ObjIsAnTestStruct>();
 
-      Prop.ForAll<(Option<TestStruct>, TestStruct, TestStruct)>(IEquatableIsTransitive<Option<TestStruct>, TestStruct>)
+      Prop.ForAll<(Option<TestStruct>, TestStruct, TestStruct)>(IEquatableIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 

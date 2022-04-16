@@ -16,17 +16,30 @@ partial class Result<T>
       /* ------------------------------------------------------------ */
 
       public override bool Equals(object? obj)
-         => base.Equals(obj);
+         => ReferenceEquals(this,
+                            obj)
+         || obj switch
+            {
+               SuccessResult success => Equals(_success.Content(),
+                                               success._success
+                                                      .Content()),
+               T success => Equals(_success.Content(),
+                                   success),
+               _ => false,
+            };
 
       /* ------------------------------------------------------------ */
 
       public override int GetHashCode()
-         => base.GetHashCode();
+         => _success
+           .Content()
+          ?.GetHashCode()
+         ?? 0;
 
       /* ------------------------------------------------------------ */
 
       public override string ToString()
-         => base.ToString();
+         => $"Success ({_success.Content()})";
 
       /* ------------------------------------------------------------ */
       // Result<T> Methods
@@ -79,21 +92,30 @@ partial class Result<T>
 
       public override TNew Reduce<TNew>(Func<Failure, TNew> _,
                                         Func<Success<T>, TNew> whenSuccess)
-         => throw new NotImplementedException();
+         => whenSuccess(_success);
 
       /* ------------------------------------------------------------ */
       // IEquatable<Result<T>> Methods
       /* ------------------------------------------------------------ */
 
       public override bool Equals(Result<T>? other)
-         => false;
+         => ReferenceEquals(this,
+                            other)
+         || other switch
+            {
+               SuccessResult success => Equals(_success.Content(),
+                                               success._success
+                                                      .Content()),
+               _ => false,
+            };
 
       /* ------------------------------------------------------------ */
       // IEquatable<T> Methods
       /* ------------------------------------------------------------ */
 
       public override bool Equals(T? other)
-         => false;
+         => Equals(_success.Content(),
+                   other);
 
       /* ------------------------------------------------------------ */
       // Private Fields

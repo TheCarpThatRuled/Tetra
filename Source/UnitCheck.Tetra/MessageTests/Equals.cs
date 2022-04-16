@@ -114,7 +114,7 @@ public class Equals
    {
       Arb.Register<Libraries.Message>();
 
-      Prop.ForAll<Message, Message>(EqualsIsSymmetric<Message>)
+      Prop.ForAll<Message, Message>(EqualsIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -212,7 +212,7 @@ public class Equals
    {
       Arb.Register<Libraries.Message>();
 
-      Prop.ForAll<Message, Message>(IEquatableIsSymmetric<Message>)
+      Prop.ForAll<Message, Message>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 

@@ -174,7 +174,7 @@ public class Equals
    {
       Arb.Register<Libraries.Error>();
 
-      Prop.ForAll<Error, Error>(EqualsIsSymmetric<Error>)
+      Prop.ForAll<Error, Error>(EqualsIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -214,7 +214,7 @@ public class Equals
    {
       Arb.Register<Library_Error_AND_ObjIsAMessage>();
 
-      Prop.ForAll<(Error, Message, Message)>(EqualsIsTransitive<Error, Message>)
+      Prop.ForAll<(Error, Message, Message)>(EqualsIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 
@@ -336,7 +336,7 @@ public class Equals
    {
       Arb.Register<Libraries.Error>();
 
-      Prop.ForAll<Error, Error>(IEquatableIsSymmetric<Error>)
+      Prop.ForAll<Error, Error>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -404,7 +404,7 @@ public class Equals
    {
       Arb.Register<Library_Error_AND_ObjIsAMessage>();
 
-      Prop.ForAll<(Error, Message, Message)>(IEquatableIsTransitive<Error, Message>)
+      Prop.ForAll<(Error, Message, Message)>(IEquatableIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 

@@ -4,7 +4,7 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.RightTests.OfInt32;
+namespace Check.RightTests.OfInt;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]

@@ -117,7 +117,8 @@ public class Some_Reduce
                                    whenSome));
       }
 
-      Arb.Register<Library_TestClass_AND_TwoUniqueInt32s>();
+      Arb.Register<Libraries.TestClass>();
+      Arb.Register<Libraries.TwoUniqueInt32s>();
 
       Prop.ForAll<TestClass, (int, int)>(Property)
           .QuickCheckThrowOnFailure();
@@ -191,7 +192,8 @@ public class Some_Reduce
                                    whenSome));
       }
 
-      Arb.Register<Library_TestClass_AND_TwoUniqueTestStructs>();
+      Arb.Register<Libraries.TestClass>();
+      Arb.Register<Libraries.TwoUniqueTestStructs>();
 
       Prop.ForAll<TestClass, (TestStruct, TestStruct)>(Property)
           .QuickCheckThrowOnFailure();
@@ -233,7 +235,8 @@ public class Some_Reduce
                                    whenSome));
       }
 
-      Arb.Register<Library_TestClass_AND_TwoUniqueInt32s>();
+      Arb.Register<Libraries.TestClass>();
+      Arb.Register<Libraries.TwoUniqueInt32s>();
 
       Prop.ForAll<TestClass, (int, int)>(Property)
           .QuickCheckThrowOnFailure();
@@ -311,62 +314,11 @@ public class Some_Reduce
                                    whenSome));
       }
 
-      Arb.Register<Library_TestClass_AND_TwoUniqueTestStructs>();
+      Arb.Register<Libraries.TestClass>();
+      Arb.Register<Libraries.TwoUniqueTestStructs>();
 
       Prop.ForAll< TestClass, (TestStruct, TestStruct)>(Property)
           .QuickCheckThrowOnFailure();
-   }
-
-   /* ------------------------------------------------------------ */
-   // Libraries
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
-   private sealed class Library_TestClass_AND_TwoUniqueInt32s
-   {
-      /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<TestClass> TestClass()
-         => Generators
-           .TestClass()
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<(int, int)> TwoUniqueInt32s()
-         => Generators
-           .TwoUniqueInt32s()
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
-   private sealed class Library_TestClass_AND_TwoUniqueTestStructs
-   {
-      /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<TestClass> TestClass()
-         => Generators
-           .TestClass()
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<(TestStruct, TestStruct)> TwoUniqueTestStructs()
-         => Generators
-           .TwoUniqueTestStructs()
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */

@@ -4,44 +4,42 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.LeftTests.OfInt32;
+namespace Check.ResultTests.OfInt;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Left)]
+[TestCategory(LocalCategories.Result)]
 // ReSharper disable once InconsistentNaming
-public class Create
+public class FailureFactory
 {
    /* ------------------------------------------------------------ */
-   // Left<T> Create(T content)
+   // Result<T> Failure()
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //an_int
+   //Result_of_int
    //WHEN
-   //Left_of_int_Create
+   //Failure
    //THEN
-   //a_Left_containing_the_content_is_returned
+   //a_failure_containing_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_an_int_WHEN_Left_of_int_Create_THEN_a_Left_containing_the_content_is_returned()
+   public void GIVEN_Result_of_int_WHEN_Failure_THEN_a_failure_containing_the_content_is_returned()
    {
-      static Property Property(int content)
+      static Property Property(Message content)
       {
-         //Arrange
-         var left = Left<int>.Create(content);
-
          //Act
-         var actual = left.Content();
+         var actual = Result<int>.Failure(content);
 
          //Assert
-         return AreEqual(content,
-                         actual);
+         return IsAFailure(content,
+                           actual);
       }
 
-      Prop.ForAll<int>(Property)
+      Arb.Register<Libraries.Message>();
+
+      Prop.ForAll<Message>(Property)
           .QuickCheckThrowOnFailure();
    }
-
    /* ------------------------------------------------------------ */
 }

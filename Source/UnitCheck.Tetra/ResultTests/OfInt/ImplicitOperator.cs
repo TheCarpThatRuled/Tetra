@@ -4,39 +4,36 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.RightTests.OfInt32;
+namespace Check.ResultTests.OfInt;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Right)]
+[TestCategory(LocalCategories.Result)]
 // ReSharper disable once InconsistentNaming
 public class ImplicitOperator
 {
    /* ------------------------------------------------------------ */
-   // implicit operator Right<T>(T content)
+   // implicit operator Result<T>(T content)
    /* ------------------------------------------------------------ */
 
    //GIVEN
    //an_int
    //WHEN
-   //Right_of_int_implicit_operator
+   //Result_of_int_implicit_operator
    //THEN
-   //a_Right_containing_the_content_is_returned
+   //a_success_containing_content_is_returned
 
    [TestMethod]
-   public void GIVEN_an_int_WHEN_Right_of_int_implicit_operator_THEN_a_Right_containing_the_content_is_returned()
+   public void GIVEN_an_int_WHEN_Result_of_int_implicit_operator_THEN_a_success_containing_content_is_returned()
    {
       static Property Property(int content)
       {
-         //Arrange
-         Right<int> right = content;
-
          //Act
-         var actual = right.Content();
+         Result<int> actual = content;
 
          //Assert
-         return AreEqual(content,
-                         actual);
+         return IsASuccess(content,
+                        actual);
       }
 
       Prop.ForAll<int>(Property)
@@ -44,33 +41,32 @@ public class ImplicitOperator
    }
 
    /* ------------------------------------------------------------ */
-   // implicit operator Right<T>(Left<T> content)
+   // implicit operator Result<T>(Message content)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_Left_of_int
+   //a_Message
    //WHEN
-   //Right_of_int_implicit_operator
+   //Result_of_int_implicit_operator
    //THEN
-   //a_Right_containing_the_content_is_returned
+   //a_failure_containing_content_is_returned
 
    [TestMethod]
-   public void GIVEN_a_Left_of_int_WHEN_Right_of_int_implicit_operator_THEN_a_Right_containing_the_content_is_returned()
+   public void GIVEN_a_Message_WHEN_Result_of_int_implicit_operator_THEN_a_failure_containing_content_is_returned()
    {
-      static Property Property(int content)
+      static Property Property(Message content)
       {
-         //Arrange
-         Right<int> right = Left<int>.Create(content);
-
          //Act
-         var actual = right.Content();
+         Result<int> actual = content;
 
          //Assert
-         return AreEqual(content,
-                         actual);
+         return IsAFailure(content,
+                           actual);
       }
 
-      Prop.ForAll<int>(Property)
+      Arb.Register<Libraries.Message>();
+
+      Prop.ForAll<Message>(Property)
           .QuickCheckThrowOnFailure();
    }
 

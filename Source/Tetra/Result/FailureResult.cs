@@ -16,17 +16,29 @@ partial class Result<T>
       /* ------------------------------------------------------------ */
 
       public override bool Equals(object? obj)
-         => base.Equals(obj);
+         => ReferenceEquals(this,
+                            obj)
+         || obj switch
+            {
+               FailureResult failure => _failure
+                                       .Content()
+                                       .Equals(failure
+                                              ._failure
+                                              .Content()),
+               _ => false,
+            };
 
       /* ------------------------------------------------------------ */
 
       public override int GetHashCode()
-         => base.GetHashCode();
+         => _failure
+           .Content()
+           .GetHashCode();
 
       /* ------------------------------------------------------------ */
 
       public override string ToString()
-         => base.ToString();
+         => $"Failure ({_failure.Content()})";
 
       /* ------------------------------------------------------------ */
       // Result<T> Methods
@@ -79,14 +91,24 @@ partial class Result<T>
 
       public override TNew Reduce<TNew>(Func<Failure, TNew>    whenFailure,
                                         Func<Success<T>, TNew> _)
-         => throw new NotImplementedException();
+         => whenFailure(_failure);
 
       /* ------------------------------------------------------------ */
       // IEquatable<Result<T>> Methods
       /* ------------------------------------------------------------ */
 
       public override bool Equals(Result<T>? other)
-         => false;
+         => ReferenceEquals(this,
+                            other)
+         || other switch
+            {
+               FailureResult failure => _failure
+                                       .Content()
+                                       .Equals(failure
+                                              ._failure
+                                              .Content()),
+               _ => false,
+            };
 
       /* ------------------------------------------------------------ */
       // IEquatable<T> Methods

@@ -4,36 +4,36 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.ErrorTests;
+namespace Check.ResultTests.OfTestClass;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Error)]
+[TestCategory(LocalCategories.Result)]
 // ReSharper disable once InconsistentNaming
-public class Some
+public class FailureFactory
 {
    /* ------------------------------------------------------------ */
-   // Error Some(Message content)
+   // Result<T> Failure()
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Error
+   //Result_of_TestClass
    //WHEN
-   //Some
+   //Failure
    //THEN
-   //a_some_containing_content_is_returned
+   //a_failure_containing_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Error_WHEN_Some_THEN_a_some_containing_content_is_returned()
+   public void GIVEN_Result_of_TestClass_WHEN_Failure_THEN_a_failure_containing_the_content_is_returned()
    {
-      static Property Property(Message value)
+      static Property Property(Message content)
       {
          //Act
-         var actual = Error.Some(value);
+         var actual = Result<TestClass>.Failure(content);
 
          //Assert
-         return IsASome(value,
-                        actual);
+         return IsAFailure(content,
+                           actual);
       }
 
       Arb.Register<Libraries.Message>();
@@ -41,6 +41,5 @@ public class Some
       Prop.ForAll<Message>(Property)
           .QuickCheckThrowOnFailure();
    }
-
    /* ------------------------------------------------------------ */
 }

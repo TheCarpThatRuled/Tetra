@@ -10,7 +10,7 @@ namespace Check.OptionTests.OfTestStruct;
 [TestCategory(GlobalCategories.UnitCheck)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class Some
+public class SomeFactory
 {
    /* ------------------------------------------------------------ */
    // Option<T> Some(T content)

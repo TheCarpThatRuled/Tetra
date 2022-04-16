@@ -3,37 +3,38 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
+using Result = Tetra.Result;
 
-namespace Check.OptionTests.OfInt;
+namespace Check.ResultTests.OfInt;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Option)]
+[TestCategory(LocalCategories.Result)]
 // ReSharper disable once InconsistentNaming
-public class Some
+public class SuccessFactory
 {
    /* ------------------------------------------------------------ */
-   // Option<T> Some(T content)
+   // Result<T> Success(T content)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option_of_int
+   //Result_of_int
    //WHEN
-   //Some
+   //Success
    //THEN
-   //a_some_containing_content_is_returned
+   //a_success_containing_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Option_of_int_WHEN_Some_THEN_a_some_containing_content_is_returned()
+   public void GIVEN_Result_of_int_WHEN_Success_THEN_a_success_containing_content_is_returned()
    {
-      static Property Property(int value)
+      static Property Property(int content)
       {
          //Act
-         var actual = Option<int>.Some(value);
+         var actual = Result<int>.Success(content);
 
          //Assert
-         return IsASome(value,
-                        actual);
+         return IsASuccess(content,
+                           actual);
       }
 
       Prop.ForAll<int>(Property)
@@ -41,27 +42,27 @@ public class Some
    }
 
    /* ------------------------------------------------------------ */
-   // Option<T> Some<T>(T content)
+   // Result<T> Success<T>(T content)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Option
+   //Result
    //WHEN
-   //Some_of_int
+   //Success_of_int
    //THEN
-   //a_some_containing_content_is_returned
+   //a_success_containing_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Option_WHEN_Some_of_int_THEN_a_some_containing_content_is_returned()
+   public void GIVEN_Result_WHEN_Success_of_int_THEN_a_success_containing_content_is_returned()
    {
-      static Property Property(int value)
+      static Property Property(int content)
       {
          //Act
-         var actual = Option.Some(value);
+         var actual = Result.Success(content);
 
          //Assert
-         return IsASome(value,
-                        actual);
+         return IsASuccess(content,
+                           actual);
       }
 
       Prop.ForAll<int>(Property)

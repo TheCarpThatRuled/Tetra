@@ -30,7 +30,7 @@
 
   <ItemGroup>
     <Folder Include="EitherTests\" />
-    <Folder Include="ResultTests\" />
+    <Folder Include="ResultTests\OfTestSubClass\" />
   </ItemGroup>
 
 </Project>

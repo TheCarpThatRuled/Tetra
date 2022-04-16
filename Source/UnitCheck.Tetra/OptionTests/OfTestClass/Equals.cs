@@ -146,7 +146,7 @@ public class Equals
    {
       Arb.Register<Libraries.OptionOfTestClass>();
 
-      Prop.ForAll<Option<TestClass>, Option<TestClass>>(EqualsIsSymmetric<Option<TestClass>>)
+      Prop.ForAll<Option<TestClass>, Option<TestClass>>(EqualsIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -186,7 +186,7 @@ public class Equals
    {
       Arb.Register<Library_OptionOfTestClass_AND_ObjIsATestClass>();
 
-      Prop.ForAll<(Option<TestClass>, TestClass, TestClass)>(EqualsIsTransitive<Option<TestClass>, TestClass>)
+      Prop.ForAll<(Option<TestClass>, TestClass, TestClass)>(EqualsIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 
@@ -308,7 +308,7 @@ public class Equals
    {
       Arb.Register<Libraries.OptionOfTestClass>();
 
-      Prop.ForAll<Option<TestClass>, Option<TestClass>>(IEquatableIsSymmetric<Option<TestClass>>)
+      Prop.ForAll<Option<TestClass>, Option<TestClass>>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -376,7 +376,7 @@ public class Equals
    {
       Arb.Register<Library_OptionOfTestClass_AND_ObjIsATestClass>();
 
-      Prop.ForAll<(Option<TestClass>, TestClass, TestClass)>(IEquatableIsTransitive<Option<TestClass>, TestClass>)
+      Prop.ForAll<(Option<TestClass>, TestClass, TestClass)>(IEquatableIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 

@@ -33,7 +33,7 @@ public static partial class Generators
 
    public static Gen<(T0, T1, T1)> Transitive<T0, T1>(Gen<(T1, T1)> source,
                                                       Func<T1, T0> map)
-      where T0 : notnull, IEquatable<T1>
+      where T0 : IEquatable<T1>
       where T1 : notnull
       => source
         .Apply(Gen.Elements<Func<(T1 a, T1 b), (T0, T1, T1)>>

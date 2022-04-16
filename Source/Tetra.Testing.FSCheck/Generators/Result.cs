@@ -65,10 +65,35 @@ partial class Generators
                                             _ => true),
                                i1 => tuple
                                     .Item2
-                                    .Reduce(i2 => true,
+                                    .Reduce(_ => true,
                                             i2 => !Equals(i1,
                                                           i2))))
         .Select(tuple => (tuple.Item1, tuple.Item2));
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<(Result<T>, T, T)> TransitiveResultAndT<T>(Gen<T>      content,
+                                                                Gen<(T, T)> twoUniqueContents)
+      where T : notnull
+      => TransitiveResultAndT(content,
+                              twoUniqueContents,
+                              Message());
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<(Result<T>, T, T)> TransitiveResultAndT<T>(Gen<T>       successContent,
+                                                                Gen<(T, T)>  twoUniqueSuccessContents,
+                                                                Gen<Message> failureContent)
+      where T : notnull
+      => Gen
+        .Frequency(new Tuple<int, Gen<(Result<T>, T, T)>>(1,
+                                                          FailureResult<T>(failureContent)
+                                                            .Zip(successContent)
+                                                            .Select(tuple => (tuple.Item1, tuple.Item2, tuple.Item2))),
+                   new Tuple<int, Gen<(Result<T>, T, T)>>(4,
+                                                          Transitive(twoUniqueSuccessContents,
+                                                                     Tetra.Result
+                                                                          .Success)));
 
    /* ------------------------------------------------------------ */
 }

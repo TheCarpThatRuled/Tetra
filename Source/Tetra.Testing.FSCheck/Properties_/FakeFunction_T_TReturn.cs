@@ -8,27 +8,53 @@ partial class Properties
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<T, TReturn>(T expected,
+   public static Property WasInvokedOnce<T, TReturn>(T                        expected,
+                                                     FakeFunction<T, TReturn> function)
+      => WasInvokedOnce(actual => Equals(expected,
+                                         actual),
+                        expected?.ToString() ?? string.Empty,
+                        function);
+
+   /* ------------------------------------------------------------ */
+
+   public static Property WasInvokedOnce<TReturn>(Message                        expected,
+                                                  FakeFunction<Failure, TReturn> function)
+      => WasInvokedOnce(actual => Equals(expected,
+                                         actual.Content()),
+                        expected.ToString(),
+                        function);
+
+   /* ------------------------------------------------------------ */
+
+   public static Property WasInvokedOnce<T, TReturn>(T                                 expected,
+                                                     FakeFunction<Success<T>, TReturn> function)
+      => WasInvokedOnce(actual => Equals(expected,
+                                         actual.Content()),
+                        expected?.ToString() ?? string.Empty,
+                        function);
+
+   /* ------------------------------------------------------------ */
+
+   public static Property WasInvokedOnce<T, TReturn>(Func<T, bool>            property,
+                                                     string                   expectedString,
                                                      FakeFunction<T, TReturn> function)
       => AsProperty(() => function
                          .Invocations()
                          .Count
                        != 0)
-        .Label($"The {Name<T, TReturn>()} was not invoked, when we expected it to be. Expected:\n {expected}")
+        .Label($"The {Name<T, TReturn>()} was not invoked, when we expected it to be. Expected:\n {expectedString}")
         .And(AsProperty(() => function
                              .Invocations()
                              .Count
                            == 1)
                .Label($"The {Name<T, TReturn>()} was invoked more than once."
                     + "\nExpected:"
-                    + $"\n{expected}"
+                    + $"\n{expectedString}"
                     + "\nActual:"
                     + $"\n{function.Invocations().Count}"))
-        .And(AsProperty(() => function
-                             .Invocations()[0]!
-                             .Equals(expected))
+        .And(AsProperty(() => property(function.Invocations()[0]!))
                .Label($"The {Name<T, TReturn>()} was invoked with an unexpected argument"
-                    + $"\nExpected: {expected}"
+                    + $"\nExpected: {expectedString}"
                     + $"\nActual: {function.Invocations()[0]}"));
 
    /* ------------------------------------------------------------ */
