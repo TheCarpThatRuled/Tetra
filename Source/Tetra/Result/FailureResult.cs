@@ -54,7 +54,7 @@ partial class Result<T>
 
       /* ------------------------------------------------------------ */
 
-      public override Result<TNew> Cast<TNew>(Func<Success<T>, Message> whenCastFails)
+      public override Result<TNew> Cast<TNew>(Func<Success<T>, Message> _)
          => throw new NotImplementedException();
 
       /* ------------------------------------------------------------ */
