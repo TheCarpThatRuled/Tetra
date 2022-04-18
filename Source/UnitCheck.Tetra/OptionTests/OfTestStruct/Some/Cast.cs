@@ -19,6 +19,36 @@ public class Some_Cast
    //GIVEN
    //Some_of_TestStruct
    //WHEN
+   //Cast_to_DateTime
+   //THEN
+   //a_none_is_returned
+
+   [TestMethod]
+   public void GIVEN_Some_of_TestStruct_WHEN_Cast_to_DateTime_THEN_a_none_is_returned()
+   {
+      static Property Property(TestStruct content)
+      {
+         //Arrange
+         var option = Option.Some(content);
+
+         //Act
+         var actual = option.Cast<DateTime>();
+
+         //Assert
+         return IsANone(actual);
+      }
+
+      Arb.Register<Libraries.TestStruct>();
+
+      Prop.ForAll<TestStruct>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_TestStruct
+   //WHEN
    //Cast_to_int
    //THEN
    //a_none_is_returned

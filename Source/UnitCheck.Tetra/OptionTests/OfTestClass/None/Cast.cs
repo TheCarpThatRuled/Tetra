@@ -40,6 +40,52 @@ public class None_Cast
    //GIVEN
    //None_of_TestClass
    //WHEN
+   //Cast_to_string
+   //THEN
+   //a_none_is_returned
+
+   [TestMethod]
+   public void GIVEN_None_of_TestClass_WHEN_Cast_to_string_THEN_a_none_is_returned()
+   {
+      //Arrange
+      var option = Option<TestClass>.None();
+
+      //Act
+      var actual = option.Cast<string>();
+
+      //Assert
+      Assert.That
+            .IsANone(actual);
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //None_of_TestClass
+   //WHEN
+   //Cast_to_TestClass
+   //THEN
+   //a_none_is_returned
+
+   [TestMethod]
+   public void GIVEN_None_of_TestClass_WHEN_Cast_to_TestClass_THEN_a_none_is_returned()
+   {
+      //Arrange
+      var option = Option<TestClass>.None();
+
+      //Act
+      var actual = option.Cast<TestClass>();
+
+      //Assert
+      Assert.That
+            .IsANone(actual);
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //None_of_TestClass
+   //WHEN
    //Cast_to_TestStruct
    //THEN
    //a_none_is_returned

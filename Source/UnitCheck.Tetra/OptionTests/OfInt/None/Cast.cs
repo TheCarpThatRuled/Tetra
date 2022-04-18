@@ -17,18 +17,18 @@ public class None_Cast
    //GIVEN
    //None_of_int
    //WHEN
-   //Cast_to_uint
+   //Cast_to_int
    //THEN
    //a_none_is_returned
 
    [TestMethod]
-   public void GIVEN_None_of_int_WHEN_Cast_to_uint_THEN_a_none_is_returned()
+   public void GIVEN_None_of_int_WHEN_Cast_to_int_THEN_a_none_is_returned()
    {
       //Arrange
       var option = Option<int>.None();
 
       //Act
-      var actual = option.Cast<uint>();
+      var actual = option.Cast<int>();
 
       //Assert
       Assert.That
@@ -98,6 +98,29 @@ public class None_Cast
 
       //Act
       var actual = option.Cast<TestSubClass>();
+
+      //Assert
+      Assert.That
+            .IsANone(actual);
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //None_of_int
+   //WHEN
+   //Cast_to_uint
+   //THEN
+   //a_none_is_returned
+
+   [TestMethod]
+   public void GIVEN_None_of_int_WHEN_Cast_to_uint_THEN_a_none_is_returned()
+   {
+      //Arrange
+      var option = Option<int>.None();
+
+      //Act
+      var actual = option.Cast<uint>();
 
       //Assert
       Assert.That

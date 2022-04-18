@@ -82,4 +82,27 @@ public class None_Cast
    }
 
    /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //None_of_TestSubClass
+   //WHEN
+   //Cast_to_TestSubClass
+   //THEN
+   //a_none_is_returned
+
+   [TestMethod]
+   public void GIVEN_None_of_TestSubClass_WHEN_Cast_to_TestSubClass_THEN_a_none_is_returned()
+   {
+      //Arrange
+      var option = Option<TestSubClass>.None();
+
+      //Act
+      var actual = option.Cast<TestSubClass>();
+
+      //Assert
+      Assert.That
+            .IsANone(actual);
+   }
+
+   /* ------------------------------------------------------------ */
 }

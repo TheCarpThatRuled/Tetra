@@ -50,6 +50,68 @@ public class Failure_Cast
    //GIVEN
    //Failure_of_TestClass
    //WHEN
+   //Cast_to_string
+   //THEN
+   //a_failure_containing_the_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Failure_of_TestClass_WHEN_Cast_to_string_THEN_a_failure_containing_the_content_is_returned()
+   {
+      static Property Property(Message content)
+      {
+         //Arrange
+         var result = Result<TestClass>.Failure(content);
+
+         //Act
+         var actual = result.Cast<string>();
+
+         //Assert
+         return IsAFailure(content,
+                           actual);
+      }
+
+      Arb.Register<Libraries.Message>();
+
+      Prop.ForAll<Message>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Failure_of_TestClass
+   //WHEN
+   //Cast_to_TestClass
+   //THEN
+   //a_failure_containing_the_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Failure_of_TestClass_WHEN_Cast_to_TestClass_THEN_a_failure_containing_the_content_is_returned()
+   {
+      static Property Property(Message content)
+      {
+         //Arrange
+         var result = Result<TestClass>.Failure(content);
+
+         //Act
+         var actual = result.Cast<TestClass>();
+
+         //Assert
+         return IsAFailure(content,
+                           actual);
+      }
+
+      Arb.Register<Libraries.Message>();
+
+      Prop.ForAll<Message>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Failure_of_TestClass
+   //WHEN
    //Cast_to_TestStruct
    //THEN
    //a_failure_containing_the_content_is_returned
@@ -104,6 +166,335 @@ public class Failure_Cast
       Arb.Register<Libraries.Message>();
 
       Prop.ForAll<Message>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+   // Result<TNew> Cast<TNew>(Message whenCastFails)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Failure_of_TestClass
+   //WHEN
+   //Cast_to_int_AND_whenCastFails_is_a_Message
+   //THEN
+   //a_failure_containing_the_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Failure_of_TestClass_WHEN_Cast_to_int_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_the_content_is_returned()
+   {
+      static Property Property((Message content, Message whenCastFails) args)
+      {
+         //Arrange
+         var result = Result<TestClass>.Failure(args.content);
+
+         //Act
+         var actual = result.Cast<int>(args.whenCastFails);
+
+         //Assert
+         return IsAFailure(args.content,
+                           actual);
+      }
+
+      Arb.Register<Libraries.TwoUniqueMessages>();
+
+      Prop.ForAll<(Message, Message)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Failure_of_TestClass
+   //WHEN
+   //Cast_to_string_AND_whenCastFails_is_a_Message
+   //THEN
+   //a_failure_containing_the_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Failure_of_TestClass_WHEN_Cast_to_string_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_the_content_is_returned()
+   {
+      static Property Property((Message content, Message whenCastFails) args)
+      {
+         //Arrange
+         var result = Result<TestClass>.Failure(args.content);
+
+         //Act
+         var actual = result.Cast<string>(args.whenCastFails);
+
+         //Assert
+         return IsAFailure(args.content,
+                           actual);
+      }
+
+      Arb.Register<Libraries.TwoUniqueMessages>();
+
+      Prop.ForAll<(Message, Message)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Failure_of_TestClass
+   //WHEN
+   //Cast_to_TestClass_AND_whenCastFails_is_a_Message
+   //THEN
+   //a_failure_containing_the_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Failure_of_TestClass_WHEN_Cast_to_TestClass_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_the_content_is_returned()
+   {
+      static Property Property((Message content, Message whenCastFails) args)
+      {
+         //Arrange
+         var result = Result<TestClass>.Failure(args.content);
+
+         //Act
+         var actual = result.Cast<TestClass>(args.whenCastFails);
+
+         //Assert
+         return IsAFailure(args.content,
+                           actual);
+      }
+
+      Arb.Register<Libraries.TwoUniqueMessages>();
+
+      Prop.ForAll<(Message, Message)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Failure_of_TestClass
+   //WHEN
+   //Cast_to_TestStruct_AND_whenCastFails_is_a_Message
+   //THEN
+   //a_failure_containing_the_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Failure_of_TestClass_WHEN_Cast_to_TestStruct_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_the_content_is_returned()
+   {
+      static Property Property((Message content, Message whenCastFails) args)
+      {
+         //Arrange
+         var result = Result<TestClass>.Failure(args.content);
+
+         //Act
+         var actual = result.Cast<TestStruct>(args.whenCastFails);
+
+         //Assert
+         return IsAFailure(args.content,
+                           actual);
+      }
+
+      Arb.Register<Libraries.TwoUniqueMessages>();
+
+      Prop.ForAll<(Message, Message)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Failure_of_TestClass
+   //WHEN
+   //Cast_to_TestSubClass_AND_whenCastFails_is_a_Message
+   //THEN
+   //a_failure_containing_the_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Failure_of_TestClass_WHEN_Cast_to_TestSubClass_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_the_content_is_returned()
+   {
+      static Property Property((Message content, Message whenCastFails) args)
+      {
+         //Arrange
+         var result = Result<TestClass>.Failure(args.content);
+
+         //Act
+         var actual = result.Cast<TestSubClass>(args.whenCastFails);
+
+         //Assert
+         return IsAFailure(args.content,
+                           actual);
+      }
+
+      Arb.Register<Libraries.TwoUniqueMessages>();
+
+      Prop.ForAll<(Message, Message)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+   // Result<TNew> Cast<TNew>(Func<Success<T>, Message> whenCastFails)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Failure_of_TestClass
+   //WHEN
+   //Cast_to_int_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message
+   //THEN
+   //whenCastFails_was_not_invoked_AND_a_failure_containing_the_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Failure_of_int_WHEN_Cast_to_int_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message_THEN_whenCastFails_was_not_invoked_AND_a_failure_containing_the_content_is_returned()
+   {
+      static Property Property((Message content, Message whenCastFails) args)
+      {
+         //Arrange
+         var whenCastFails = FakeFunction<Success<TestClass>, Message>.Create(args.whenCastFails);
+
+         var result = Result<TestClass>.Failure(args.content);
+
+         //Act
+         var actual = result.Cast<int>(whenCastFails.Func);
+
+         //Assert
+         return IsAFailure(args.content,
+                           actual)
+           .And(WasNotInvoked(whenCastFails));
+      }
+
+      Arb.Register<Libraries.TwoUniqueMessages>();
+
+      Prop.ForAll<(Message, Message)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Failure_of_TestClass
+   //WHEN
+   //Cast_to_string_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message
+   //THEN
+   //whenCastFails_was_not_invoked_AND_a_failure_containing_the_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Failure_of_TestClass_WHEN_Cast_to_string_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message_THEN_whenCastFails_was_not_invoked_AND_a_failure_containing_the_content_is_returned()
+   {
+      static Property Property((Message content, Message whenCastFails) args)
+      {
+         //Arrange
+         var whenCastFails = FakeFunction<Success<TestClass>, Message>.Create(args.whenCastFails);
+
+         var result = Result<TestClass>.Failure(args.content);
+
+         //Act
+         var actual = result.Cast<string>(whenCastFails.Func);
+
+         //Assert
+         return IsAFailure(args.content,
+                           actual)
+           .And(WasNotInvoked(whenCastFails));
+      }
+
+      Arb.Register<Libraries.TwoUniqueMessages>();
+
+      Prop.ForAll<(Message, Message)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Failure_of_TestClass
+   //WHEN
+   //Cast_to_TestClass_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message
+   //THEN
+   //whenCastFails_was_not_invoked_AND_a_failure_containing_the_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Failure_of_TestClass_WHEN_Cast_to_TestClass_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message_THEN_whenCastFails_was_not_invoked_AND_a_failure_containing_the_content_is_returned()
+   {
+      static Property Property((Message content, Message whenCastFails) args)
+      {
+         //Arrange
+         var whenCastFails = FakeFunction<Success<TestClass>, Message>.Create(args.whenCastFails);
+
+         var result = Result<TestClass>.Failure(args.content);
+
+         //Act
+         var actual = result.Cast<TestClass>(whenCastFails.Func);
+
+         //Assert
+         return IsAFailure(args.content,
+                           actual)
+           .And(WasNotInvoked(whenCastFails));
+      }
+
+      Arb.Register<Libraries.TwoUniqueMessages>();
+
+      Prop.ForAll<(Message, Message)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Failure_of_TestClass
+   //WHEN
+   //Cast_to_TestStruct_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message
+   //THEN
+   //whenCastFails_was_not_invoked_AND_a_failure_containing_the_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Failure_of_TestClass_WHEN_Cast_to_TestStruct_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message_THEN_whenCastFails_was_not_invoked_AND_a_failure_containing_the_content_is_returned()
+   {
+      static Property Property((Message content, Message whenCastFails) args)
+      {
+         //Arrange
+         var whenCastFails = FakeFunction<Success<TestClass>, Message>.Create(args.whenCastFails);
+
+         var result = Result<TestClass>.Failure(args.content);
+
+         //Act
+         var actual = result.Cast<TestStruct>(whenCastFails.Func);
+
+         //Assert
+         return IsAFailure(args.content,
+                           actual)
+           .And(WasNotInvoked(whenCastFails));
+      }
+
+      Arb.Register<Libraries.TwoUniqueMessages>();
+
+      Prop.ForAll<(Message, Message)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Failure_of_TestClass
+   //WHEN
+   //Cast_to_TestSubClass_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message
+   //THEN
+   //whenCastFails_was_not_invoked_AND_a_failure_containing_the_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Failure_of_TestClass_WHEN_Cast_to_TestSubClass_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message_THEN_whenCastFails_was_not_invoked_AND_a_failure_containing_the_content_is_returned()
+   {
+      static Property Property((Message content, Message whenCastFails) args)
+      {
+         //Arrange
+         var whenCastFails = FakeFunction<Success<TestClass>, Message>.Create(args.whenCastFails);
+
+         var result = Result<TestClass>.Failure(args.content);
+
+         //Act
+         var actual = result.Cast<TestSubClass>(whenCastFails.Func);
+
+         //Assert
+         return IsAFailure(args.content,
+                           actual)
+           .And(WasNotInvoked(whenCastFails));
+      }
+
+      Arb.Register<Libraries.TwoUniqueMessages>();
+
+      Prop.ForAll<(Message, Message)>(Property)
           .QuickCheckThrowOnFailure();
    }
 

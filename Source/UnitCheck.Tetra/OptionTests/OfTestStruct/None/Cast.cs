@@ -17,6 +17,29 @@ public class None_Cast
    //GIVEN
    //None_of_TestStruct
    //WHEN
+   //Cast_to_DateTime
+   //THEN
+   //a_none_is_returned
+
+   [TestMethod]
+   public void GIVEN_None_of_TestStruct_WHEN_Cast_to_DateTime_THEN_a_none_is_returned()
+   {
+      //Arrange
+      var option = Option<TestStruct>.None();
+
+      //Act
+      var actual = option.Cast<DateTime>();
+
+      //Assert
+      Assert.That
+            .IsANone(actual);
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //None_of_TestStruct
+   //WHEN
    //Cast_to_int
    //THEN
    //a_none_is_returned
@@ -52,6 +75,29 @@ public class None_Cast
 
       //Act
       var actual = option.Cast<TestClass>();
+
+      //Assert
+      Assert.That
+            .IsANone(actual);
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //None_of_TestStruct
+   //WHEN
+   //Cast_to_TestStruct
+   //THEN
+   //a_none_is_returned
+
+   [TestMethod]
+   public void GIVEN_None_of_TestStruct_WHEN_Cast_to_TestStruct_THEN_a_none_is_returned()
+   {
+      //Arrange
+      var option = Option<TestStruct>.None();
+
+      //Act
+      var actual = option.Cast<TestStruct>();
 
       //Assert
       Assert.That

@@ -38,24 +38,18 @@ partial class Properties
    public static Property WasInvokedOnce<T, TReturn>(Func<T, bool>            property,
                                                      string                   expectedString,
                                                      FakeFunction<T, TReturn> function)
-      => AsProperty(() => function
-                         .Invocations()
-                         .Count
-                       != 0)
-        .Label($"The {Name<T, TReturn>()} was not invoked, when we expected it to be. Expected:\n {expectedString}")
-        .And(AsProperty(() => function
-                             .Invocations()
-                             .Count
-                           == 1)
-               .Label($"The {Name<T, TReturn>()} was invoked more than once."
-                    + "\nExpected:"
-                    + $"\n{expectedString}"
-                    + "\nActual:"
-                    + $"\n{function.Invocations().Count}"))
-        .And(AsProperty(() => property(function.Invocations()[0]!))
-               .Label($"The {Name<T, TReturn>()} was invoked with an unexpected argument"
-                    + $"\nExpected: {expectedString}"
-                    + $"\nActual: {function.Invocations()[0]}"));
+      => function.Invocations().Count == 0
+            ? False($"The {Name<T, TReturn>()} was not invoked, when we expected it to be. Expected:\n {expectedString}")
+            : function.Invocations().Count != 1
+               ? False($"The {Name<T, TReturn>()} was invoked more than once."
+                     + "\nExpected:"
+                     + $"\n{expectedString}"
+                     + "\nActual:"
+                     + $"\n{function.Invocations().Count}")
+               : AsProperty(() => property(function.Invocations()[0]!))
+                 .Label($"The {Name<T, TReturn>()} was invoked with an unexpected argument"
+                      + $"\nExpected: {expectedString}"
+                      + $"\nActual: {function.Invocations()[0]}");
 
    /* ------------------------------------------------------------ */
 

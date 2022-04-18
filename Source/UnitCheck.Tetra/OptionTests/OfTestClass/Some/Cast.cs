@@ -47,14 +47,44 @@ public class Some_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Some_of_TestClass_AND_the_content_is_a_TestClass
+   //Some_of_TestClass
    //WHEN
-   //Cast_to_TestClass
+   //Cast_to_string
    //THEN
    //a_none_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_TestClass_AND_the_content_is_a_TestClass_WHEN_Cast_to_TestClass_THEN_a_none_is_returned()
+   public void GIVEN_Some_of_string_WHEN_Cast_to_string_THEN_a_none_is_returned()
+   {
+      static Property Property(TestClass content)
+      {
+         //Arrange
+         var option = Option.Some(content);
+
+         //Act
+         var actual = option.Cast<string>();
+
+         //Assert
+         return IsANone(actual);
+      }
+
+      Arb.Register<Libraries.TestClass>();
+
+      Prop.ForAll<TestClass>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_TestClass_AND_the_content_is_a_TestClass
+   //WHEN
+   //Cast_to_TestClass
+   //THEN
+   //a_some_containing_the_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Some_of_TestClass_AND_the_content_is_a_TestClass_WHEN_Cast_to_TestClass_THEN_a_some_containing_the_content_is_returned()
    {
       static Property Property(TestClass content)
       {

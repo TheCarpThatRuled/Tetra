@@ -21,12 +21,12 @@ public class Success_Cast
    //GIVEN
    //Success_of_int
    //WHEN
-   //Cast_to_uint
+   //Cast_to_int
    //THEN
-   //a_failure_containing_cast_failed_is_returned
+   //a_success_containing_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_int_WHEN_Cast_to_uint_THEN_a_failure_containing_cast_failed_is_returned()
+   public void GIVEN_Success_of_int_WHEN_Cast_to_int_THEN_a_success_containing_the_content_is_returned()
    {
       static Property Property(int content)
       {
@@ -34,10 +34,10 @@ public class Success_Cast
          var result = Result.Success(content);
 
          //Act
-         var actual = result.Cast<uint>();
+         var actual = result.Cast<int>();
 
          //Assert
-         return IsAFailure(Messages.CastFailed<int, uint>(),
+         return IsASuccess(content,
                            actual);
       }
 
@@ -133,18 +133,47 @@ public class Success_Cast
    }
 
    /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Success_of_int
+   //WHEN
+   //Cast_to_uint
+   //THEN
+   //a_failure_containing_cast_failed_is_returned
+
+   [TestMethod]
+   public void GIVEN_Success_of_int_WHEN_Cast_to_uint_THEN_a_failure_containing_cast_failed_is_returned()
+   {
+      static Property Property(int content)
+      {
+         //Arrange
+         var result = Result.Success(content);
+
+         //Act
+         var actual = result.Cast<uint>();
+
+         //Assert
+         return IsAFailure(Messages.CastFailed<int, uint>(),
+                           actual);
+      }
+
+      Prop.ForAll<int>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
    // Result<TNew> Cast<TNew>(Message whenCastFails)
    /* ------------------------------------------------------------ */
 
    //GIVEN
    //Success_of_int
    //WHEN
-   //Cast_to_uint_AND_whenCastFails_is_a_Message
+   //Cast_to_int_AND_whenCastFails_is_a_Message
    //THEN
-   //a_failure_containing_whenCastFails_is_returned
+   //a_success_containing_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_int_WHEN_Cast_to_uint_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_whenCastFails_is_returned()
+   public void GIVEN_Success_of_int_WHEN_Cast_to_int_AND_whenCastFails_is_a_Message_THEN_a_success_containing_the_content_is_returned()
    {
       static Property Property(int content, Message whenCastFails)
       {
@@ -152,10 +181,10 @@ public class Success_Cast
          var result = Result.Success(content);
 
          //Act
-         var actual = result.Cast<uint>(whenCastFails);
+         var actual = result.Cast<int>(whenCastFails);
 
          //Assert
-         return IsAFailure(whenCastFails,
+         return IsASuccess(content,
                            actual);
       }
 
@@ -259,18 +288,49 @@ public class Success_Cast
    }
 
    /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Success_of_int
+   //WHEN
+   //Cast_to_uint_AND_whenCastFails_is_a_Message
+   //THEN
+   //a_failure_containing_whenCastFails_is_returned
+
+   [TestMethod]
+   public void GIVEN_Success_of_int_WHEN_Cast_to_uint_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_whenCastFails_is_returned()
+   {
+      static Property Property(int content, Message whenCastFails)
+      {
+         //Arrange
+         var result = Result.Success(content);
+
+         //Act
+         var actual = result.Cast<uint>(whenCastFails);
+
+         //Assert
+         return IsAFailure(whenCastFails,
+                           actual);
+      }
+
+      Arb.Register<Libraries.Message>();
+
+      Prop.ForAll<int, Message>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
    // Result<TNew> Cast<TNew>(Func<Success<T>, Message> whenCastFails)
    /* ------------------------------------------------------------ */
 
    //GIVEN
    //Success_of_int
    //WHEN
-   //Cast_to_uint_AND_whenCastFails_is_a_Func_of_Success_of_int_to_Message
+   //Cast_to_int_AND_whenCastFails_is_a_Func_of_Success_of_int_to_Message
    //THEN
-   //whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned
+   //whenCastFails_was_not_invoked_AND_a_success_containing_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_int_WHEN_Cast_to_uint_AND_whenCastFails_is_a_Func_of_Success_of_int_to_Message_THEN_whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned()
+   public void GIVEN_Success_of_int_WHEN_Cast_to_int_AND_whenCastFails_is_a_Func_of_Success_of_int_to_Message_THEN_whenCastFails_was_not_invoked_AND_a_success_containing_the_content_is_returned()
    {
       static Property Property(int content, Message whenCastFails)
       {
@@ -280,13 +340,12 @@ public class Success_Cast
          var result = Result.Success(content);
 
          //Act
-         var actual = result.Cast<uint>(whenCastFailsFunc.Func);
+         var actual = result.Cast<int>(whenCastFailsFunc.Func);
 
          //Assert
-         return IsAFailure(whenCastFails,
+         return IsASuccess(content,
                            actual)
-           .And(WasInvokedOnce(content,
-                               whenCastFailsFunc));
+           .And(WasNotInvoked(whenCastFailsFunc));
       }
 
       Arb.Register<Libraries.Message>();
@@ -315,7 +374,7 @@ public class Success_Cast
          var result = Result.Success(content);
 
          //Act
-         var actual = result.Cast<TestClass>(whenCastFails);
+         var actual = result.Cast<TestClass>(whenCastFailsFunc.Func);
 
          //Assert
          return IsAFailure(whenCastFails,
@@ -350,7 +409,7 @@ public class Success_Cast
          var result = Result.Success(content);
 
          //Act
-         var actual = result.Cast<TestStruct>(whenCastFails);
+         var actual = result.Cast<TestStruct>(whenCastFailsFunc.Func);
 
          //Assert
          return IsAFailure(whenCastFails,
@@ -385,7 +444,42 @@ public class Success_Cast
          var result = Result.Success(content);
 
          //Act
-         var actual = result.Cast<TestSubClass>(whenCastFails);
+         var actual = result.Cast<TestSubClass>(whenCastFailsFunc.Func);
+
+         //Assert
+         return IsAFailure(whenCastFails,
+                           actual)
+           .And(WasInvokedOnce(content,
+                               whenCastFailsFunc));
+      }
+
+      Arb.Register<Libraries.Message>();
+
+      Prop.ForAll<int, Message>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Success_of_int
+   //WHEN
+   //Cast_to_uint_AND_whenCastFails_is_a_Func_of_Success_of_int_to_Message
+   //THEN
+   //whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned
+
+   [TestMethod]
+   public void GIVEN_Success_of_int_WHEN_Cast_to_uint_AND_whenCastFails_is_a_Func_of_Success_of_int_to_Message_THEN_whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned()
+   {
+      static Property Property(int content, Message whenCastFails)
+      {
+         //Arrange
+         var whenCastFailsFunc = FakeFunction<Success<int>, Message>.Create(whenCastFails);
+
+         var result = Result.Success(content);
+
+         //Act
+         var actual = result.Cast<uint>(whenCastFailsFunc.Func);
 
          //Assert
          return IsAFailure(whenCastFails,

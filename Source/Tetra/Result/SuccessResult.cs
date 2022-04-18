@@ -55,12 +55,16 @@ partial class Result<T>
       /* ------------------------------------------------------------ */
 
       public override Result<TNew> Cast<TNew>(Message whenCastFails)
-         => throw new NotImplementedException();
+         => _success.Content() is TNew content
+               ? Result<TNew>.Success(content)
+               : Result<TNew>.Failure(whenCastFails);
 
       /* ------------------------------------------------------------ */
 
       public override Result<TNew> Cast<TNew>(Func<Success<T>, Message> whenCastFails)
-         => throw new NotImplementedException();
+         => _success.Content() is TNew content
+               ? Result<TNew>.Success(content)
+               : Result<TNew>.Failure(whenCastFails(_success));
 
       /* ------------------------------------------------------------ */
 
