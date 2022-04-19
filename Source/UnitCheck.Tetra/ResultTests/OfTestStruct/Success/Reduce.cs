@@ -41,7 +41,7 @@ public class Success_Reduce
          //Assert
          return AreEqual(args.content,
                          actual)
-               .And(WasNotInvoked(whenFailure));
+           .And(WasNotInvoked(whenFailure));
       }
 
       Arb.Register<Libraries.TwoUniqueTestStructs>();
@@ -51,7 +51,7 @@ public class Success_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // Message Reduce(Func<Success<Message>, TNew> whenSuccess)
+   // Message Reduce(Func<Success<T>, Message> whenSuccess)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -65,7 +65,8 @@ public class Success_Reduce
    public void
       GIVEN_Success_of_TestStruct_WHEN_Reduce_AND_whenSuccess_is_a_Func_of_Success_of_TestStruct_to_Message_THEN_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned()
    {
-      static Property Property(TestStruct content, Message whenSuccess)
+      static Property Property(TestStruct content,
+                               Message    whenSuccess)
       {
          //Arrange
          var whenSuccessFunc = FakeFunction<Success<TestStruct>, Message>.Create(whenSuccess);
@@ -78,8 +79,8 @@ public class Success_Reduce
          //Assert
          return AreEqual(whenSuccess,
                          actual)
-               .And(WasInvokedOnce(content,
-                                   whenSuccessFunc));
+           .And(WasInvokedOnce(content,
+                               whenSuccessFunc));
       }
 
       Arb.Register<Libraries.Message>();
@@ -105,7 +106,8 @@ public class Success_Reduce
    public void
       GIVEN_Success_of_TestStruct_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_int_AND_whenSuccess_is_a_Func_of_Success_of_TestStruct_to_int_THEN_whenFailure_was_not_invoked_AND_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned()
    {
-      static Property Property(TestStruct value, (int whenFailure, int whenSuccess) args)
+      static Property Property(TestStruct                         value,
+                               (int whenFailure, int whenSuccess) args)
       {
          //Arrange
          var whenFailure = FakeFunction<Failure, int>.Create(args.whenFailure);
@@ -145,7 +147,8 @@ public class Success_Reduce
    public void
       GIVEN_Success_of_TestStruct_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestClass_AND_whenSuccess_is_a_Func_of_Success_of_TestStruct_to_TestClass_THEN_whenFailure_was_not_invoked_AND_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned()
    {
-      static Property Property(TestStruct value, (TestClass whenFailure, TestClass whenSuccess) args)
+      static Property Property(TestStruct                                     value,
+                               (TestClass whenFailure, TestClass whenSuccess) args)
       {
          //Arrange
          var whenFailure = FakeFunction<Failure, TestClass>.Create(args.whenFailure);
@@ -185,7 +188,7 @@ public class Success_Reduce
    public void
       GIVEN_Success_of_TestStruct_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestStruct_AND_whenSuccess_is_a_Func_of_Success_of_TestStruct_to_TestStruct_THEN_whenFailure_was_not_invoked_AND_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned()
    {
-      static Property Property((TestStruct value,TestStruct whenFailure, TestStruct whenSuccess) args)
+      static Property Property((TestStruct value, TestStruct whenFailure, TestStruct whenSuccess) args)
       {
          //Arrange
          var whenFailure = FakeFunction<Failure, TestStruct>.Create(args.whenFailure);
@@ -207,7 +210,7 @@ public class Success_Reduce
 
       Arb.Register<Libraries.ThreeUniqueTestStructs>();
 
-      Prop.ForAll< (TestStruct, TestStruct, TestStruct)>(Property)
+      Prop.ForAll<(TestStruct, TestStruct, TestStruct)>(Property)
           .QuickCheckThrowOnFailure();
    }
 

@@ -79,12 +79,12 @@ partial class Result<T>
       /* ------------------------------------------------------------ */
 
       public override Result<T> Map(Func<Failure, Message> _)
-         => throw new NotImplementedException();
+         => this;
 
       /* ------------------------------------------------------------ */
 
       public override Result<TNew> Map<TNew>(Func<Success<T>, TNew> whenSuccess)
-         => throw new NotImplementedException();
+         => whenSuccess(_success);
 
       /* ------------------------------------------------------------ */
 

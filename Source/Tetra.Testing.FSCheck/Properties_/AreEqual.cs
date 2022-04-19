@@ -27,4 +27,25 @@ partial class Properties
                               actual));
 
    /* ------------------------------------------------------------ */
+
+   public static Property AreReferenceEqual(object? expected,
+                                            object? actual)
+      => AsProperty(() => Equals(expected,
+                                 actual))
+        .Label(Failed.Message("Are not reference equal",
+                              expected,
+                              actual));
+
+   /* ------------------------------------------------------------ */
+
+   public static Property AreReferenceEqual(string  message,
+                                            object? expected,
+                                            object? actual)
+      => AsProperty(() => Equals(expected,
+                                 actual))
+        .Label(Failed.Message($"{message}: are not reference equal",
+                              expected,
+                              actual));
+
+   /* ------------------------------------------------------------ */
 }

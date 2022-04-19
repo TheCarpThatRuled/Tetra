@@ -45,17 +45,20 @@ partial class Result<T>
       /* ------------------------------------------------------------ */
 
       public override Result<TNew> Cast<TNew>()
-         => new Result<TNew>.FailureResult(_failure);
+         => new Result<TNew>
+            .FailureResult(_failure);
 
       /* ------------------------------------------------------------ */
 
       public override Result<TNew> Cast<TNew>(Message _)
-         => new Result<TNew>.FailureResult(_failure);
+         => new Result<TNew>
+            .FailureResult(_failure);
 
       /* ------------------------------------------------------------ */
 
       public override Result<TNew> Cast<TNew>(Func<Success<T>, Message> _)
-         => new Result<TNew>.FailureResult(_failure);
+         => new Result<TNew>
+            .FailureResult(_failure);
 
       /* ------------------------------------------------------------ */
 
@@ -70,12 +73,13 @@ partial class Result<T>
       /* ------------------------------------------------------------ */
 
       public override Result<T> Map(Func<Failure, Message> whenFailure)
-         => throw new NotImplementedException();
+         => whenFailure(_failure);
 
       /* ------------------------------------------------------------ */
 
       public override Result<TNew> Map<TNew>(Func<Success<T>, TNew> _)
-         => throw new NotImplementedException();
+         => new Result<TNew>
+            .FailureResult(_failure);
 
       /* ------------------------------------------------------------ */
 
