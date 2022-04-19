@@ -14,6 +14,82 @@ namespace Check.ResultTests.OfTestClass;
 public class Success_Reduce
 {
    /* ------------------------------------------------------------ */
+   // T Reduce(Func<Failure, T> whenFailure)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Success_of_TestClass
+   //WHEN
+   //Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestClass
+   //THEN
+   //whenFailure_was_not_invoked_AND_the_content_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Success_of_TestClass_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestClass_THEN_whenFailure_was_not_invoked_AND_the_content_is_returned()
+   {
+      static Property Property((TestClass content, TestClass whenFailure) args)
+      {
+         //Arrange
+         var whenFailure = FakeFunction<Failure, TestClass>.Create(args.whenFailure);
+
+         var result = Result.Success(args.content);
+
+         //Act
+         var actual = result.Reduce(whenFailure.Func);
+
+         //Assert
+         return AreEqual(args.content,
+                         actual)
+               .And(WasNotInvoked(whenFailure));
+      }
+
+      Arb.Register<Libraries.TwoUniqueTestClasses>();
+
+      Prop.ForAll<(TestClass, TestClass)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+   // Message Reduce(Func<Success<Message>, TNew> whenSuccess)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Success_of_TestClass
+   //WHEN
+   //Reduce_AND_whenSuccess_is_a_Func_of_Success_of_TestClass_to_Message
+   //THEN
+   //whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Success_of_TestClass_WHEN_Reduce_AND_whenSuccess_is_a_Func_of_Success_of_TestClass_to_Message_THEN_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned()
+   {
+      static Property Property(TestClass content, Message whenSuccess)
+      {
+         //Arrange
+         var whenSuccessFunc = FakeFunction<Success<TestClass>, Message>.Create(whenSuccess);
+
+         var result = Result.Success(content);
+
+         //Act
+         var actual = result.Reduce(whenSuccessFunc.Func);
+
+         //Assert
+         return AreEqual(whenSuccess,
+                         actual)
+               .And(WasInvokedOnce(content,
+                                   whenSuccessFunc));
+      }
+
+      Arb.Register<Libraries.Message>();
+      Arb.Register<Libraries.TestClass>();
+
+      Prop.ForAll<TestClass, Message>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
    // TNew Reduce<TNew>(Func<Failure, TNew> whenFailure,
    //                   Func<Success<T>, TNew> whenSuccess)
    /* ------------------------------------------------------------ */

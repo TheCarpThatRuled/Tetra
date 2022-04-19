@@ -89,12 +89,13 @@ partial class Result<T>
       /* ------------------------------------------------------------ */
 
       public override T Reduce(Func<Failure, T> _)
-         => throw new NotImplementedException();
+         => _success
+           .Content();
 
       /* ------------------------------------------------------------ */
 
       public override Message Reduce(Func<Success<T>, Message> whenSuccess)
-         => throw new NotImplementedException();
+         => whenSuccess(_success);
 
       /* ------------------------------------------------------------ */
 
