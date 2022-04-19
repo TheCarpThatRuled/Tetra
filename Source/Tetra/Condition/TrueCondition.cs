@@ -9,17 +9,25 @@ public abstract partial class Condition
       /* ------------------------------------------------------------ */
 
       public override bool Equals(object? obj)
-         => base.Equals(obj);
+         => ReferenceEquals(this,
+                            obj)
+         || obj switch
+            {
+               TrueCondition  => true,
+               bool condition => Equals(condition),
+               _              => false,
+            };
 
       /* ------------------------------------------------------------ */
 
       public override int GetHashCode()
-         => base.GetHashCode();
+         => true
+           .GetHashCode();
 
       /* ------------------------------------------------------------ */
 
       public override string ToString()
-         => base.ToString();
+         => "True";
 
       /* ------------------------------------------------------------ */
       // Condition Overridden Methods
@@ -57,14 +65,14 @@ public abstract partial class Condition
       /* ------------------------------------------------------------ */
 
       public override bool Equals(Condition? other)
-         => false;
+         => other is TrueCondition;
 
       /* ------------------------------------------------------------ */
       // IEquatable<bool> Methods
       /* ------------------------------------------------------------ */
 
       public override bool Equals(bool other)
-         => false;
+         => other;
 
       /* ------------------------------------------------------------ */
    }

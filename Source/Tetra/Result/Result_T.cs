@@ -26,7 +26,7 @@ public abstract partial class Result<T> : IEquatable<Result<T>>,
    /// <param name="content">The value the <c>Result</c> shall contain.</param>
    /// <returns>A failure <c>Result</c> that contains <c>content</c>.</returns>
    public static Result<T> Failure(Message content)
-      => new FailureResult(new Failure(content));
+      => new FailureResult(new(content));
 
    /* ------------------------------------------------------------ */
 
@@ -36,19 +36,19 @@ public abstract partial class Result<T> : IEquatable<Result<T>>,
    /// <param name="content">The value the <c>Result</c> shall contain.</param>
    /// <returns>A success <c>Result</c> that contains <c>content</c>.</returns>
    public static Result<T> Success(T content)
-      => new SuccessResult(new Success<T>(content));
+      => new SuccessResult(new(content));
 
    /* ------------------------------------------------------------ */
    // Implicit Operators
    /* ------------------------------------------------------------ */
 
    public static implicit operator Result<T> (Message content)
-      => new FailureResult(new Failure(content));
+      => new FailureResult(new(content));
 
    /* ------------------------------------------------------------ */
 
    public static implicit operator Result<T> (T content)
-      => new SuccessResult(new Success<T>(content));
+      => new SuccessResult(new(content));
 
    /* ------------------------------------------------------------ */
    // IEquatable<Result<T>> Methods

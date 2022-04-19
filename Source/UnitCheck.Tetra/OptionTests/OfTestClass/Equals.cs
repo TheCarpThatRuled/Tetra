@@ -37,7 +37,8 @@ public class Equals
          return IsFalse(actual);
       }
 
-      Arb.Register<OptionOfTestClass_AND_ObjIsNullOrANonEquatableType>();
+      Arb.Register<Libraries.OptionOfTestClass>();
+      Arb.Register<ObjIsNullOrANonEquatableType>();
 
       Prop.ForAll<Option<TestClass>, object?>(Property)
           .QuickCheckThrowOnFailure();
@@ -47,17 +48,10 @@ public class Equals
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   private sealed class OptionOfTestClass_AND_ObjIsNullOrANonEquatableType
+   private sealed class ObjIsNullOrANonEquatableType
    {
       /* ------------------------------------------------------------ */
       // Methods
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<Option<TestClass>> OptionOfInt()
-         => Generators
-           .Option(Generators.TestClass())
-           .ToArbitrary();
-
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<object?> Obj()

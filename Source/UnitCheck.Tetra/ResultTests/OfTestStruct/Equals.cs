@@ -38,7 +38,8 @@ public class Equals
          return IsFalse(actual);
       }
 
-      Arb.Register<ResultOfTestStruct_AND_ObjIsNullOrANonEquatableType>();
+      Arb.Register<Libraries.ResultOfTestStruct>();
+      Arb.Register<ObjIsNullOrANonEquatableType>();
 
       Prop.ForAll<Result<TestStruct>, object?>(Property)
           .QuickCheckThrowOnFailure();
@@ -48,17 +49,10 @@ public class Equals
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   private sealed class ResultOfTestStruct_AND_ObjIsNullOrANonEquatableType
+   private sealed class ObjIsNullOrANonEquatableType
    {
       /* ------------------------------------------------------------ */
       // Methods
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<Result<TestStruct>> ResultOfTestStruct()
-         => Generators
-           .Result(Generators.TestStruct())
-           .ToArbitrary();
-
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<object?> Obj()

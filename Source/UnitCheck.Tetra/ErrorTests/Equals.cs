@@ -37,7 +37,8 @@ public class Equals
          return IsFalse(actual);
       }
 
-      Arb.Register<Error_AND_ObjIsNullOrANonEquatableType>();
+      Arb.Register<Libraries.Error>();
+      Arb.Register<ObjIsNullOrANonEquatableType>();
 
       Prop.ForAll<Error, object?>(Property)
           .QuickCheckThrowOnFailure();
@@ -47,17 +48,10 @@ public class Equals
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   private sealed class Error_AND_ObjIsNullOrANonEquatableType
+   private sealed class ObjIsNullOrANonEquatableType
    {
       /* ------------------------------------------------------------ */
       // Methods
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<Error> Error()
-         => Generators
-           .Error()
-           .ToArbitrary();
-
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<object?> Obj()

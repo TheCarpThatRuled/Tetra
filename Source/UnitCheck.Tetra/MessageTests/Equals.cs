@@ -37,7 +37,8 @@ public class Equals
          return IsFalse(actual);
       }
 
-      Arb.Register<Message_AND_ObjIsNullOrANonEquatableType>();
+      Arb.Register<ObjIsNullOrANonEquatableType>();
+      Arb.Register<Libraries.Message>();
 
       Prop.ForAll<Message, object?>(Property)
           .QuickCheckThrowOnFailure();
@@ -47,17 +48,10 @@ public class Equals
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   private sealed class Message_AND_ObjIsNullOrANonEquatableType
+   private sealed class ObjIsNullOrANonEquatableType
    {
       /* ------------------------------------------------------------ */
       // Methods
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<Message> Message()
-         => Generators
-           .Message()
-           .ToArbitrary();
-
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<object?> Obj()
@@ -87,14 +81,15 @@ public class Equals
       static Property Property(Message original)
       {
          //Arrange
-         var copy     = Message.Create(original.Content());
+         var copy = Message.Create(original.Content());
 
          //Act
          //Assert
          return EqualsIsReflexive(original,
-                                  copy,
-                                  original);
+                                  copy);
       }
+
+      Arb.Register<Libraries.Message>();
 
       Prop.ForAll<Message>(Property)
           .QuickCheckThrowOnFailure();
