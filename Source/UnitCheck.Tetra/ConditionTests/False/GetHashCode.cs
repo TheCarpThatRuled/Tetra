@@ -15,14 +15,14 @@ public class False_GetHashCode
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Condition
+   //False
    //WHEN
    //GetHashCode
    //THEN
    //the_hash_code_of_false_is_returned
 
    [TestMethod]
-   public void GIVEN_Condition_WHEN_GetHashCode_THEN_the_hash_code_of_false_is_returned()
+   public void GIVEN_False_WHEN_GetHashCode_THEN_the_hash_code_of_false_is_returned()
    {
       //Arrange
       var condition = Condition.False();

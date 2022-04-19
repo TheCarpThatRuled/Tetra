@@ -40,25 +40,25 @@ public abstract partial class Condition
 
       public override T Reduce<T>(T whenFalse,
                                   T whenTrue)
-         => default;
+         => whenTrue;
 
       /* ------------------------------------------------------------ */
 
       public override T Reduce<T>(T whenFalse,
                                   Func<T> whenTrue)
-         => default;
+         => whenTrue();
 
       /* ------------------------------------------------------------ */
 
       public override T Reduce<T>(Func<T> whenFalse,
                                   T whenTrue)
-         => default;
+         => whenTrue;
 
       /* ------------------------------------------------------------ */
 
       public override T Reduce<T>(Func<T> whenFalse,
                                   Func<T> whenTrue)
-         => default;
+         => whenTrue();
 
       /* ------------------------------------------------------------ */
       // IEquatable<Condition> Methods
