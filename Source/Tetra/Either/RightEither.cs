@@ -21,12 +21,15 @@ public abstract partial class Either<TLeft, TRight>
       /* ------------------------------------------------------------ */
 
       public override int GetHashCode()
-         => base.GetHashCode();
+         => _right
+           .Content()
+          ?.GetHashCode()
+         ?? 0;
 
       /* ------------------------------------------------------------ */
 
       public override string ToString()
-         => base.ToString();
+         => $"Right ({_right.Content()})";
 
       /* ------------------------------------------------------------ */
       //  Either<TLeft, TRight> Overridden Methods

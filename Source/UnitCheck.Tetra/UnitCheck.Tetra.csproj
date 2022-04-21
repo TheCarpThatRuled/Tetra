@@ -28,8 +28,4 @@
     <ProjectReference Include="..\Tetra\Tetra.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EitherTests\" />
-  </ItemGroup>
-
 </Project>
