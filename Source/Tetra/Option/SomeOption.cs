@@ -95,11 +95,8 @@ partial class Option<T>
       public override bool Equals(Option<T>? other)
          => ReferenceEquals(this,
                             other)
-         || other switch
-            {
-               SomeOption some => Equals(some._content),
-               _               => false,
-            };
+         || other is SomeOption some
+         && Equals(some._content);
 
       /* ------------------------------------------------------------ */
       // IEquatable<T> Methods

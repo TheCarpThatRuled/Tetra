@@ -110,13 +110,10 @@ partial class Result<T>
       public override bool Equals(Result<T>? other)
          => ReferenceEquals(this,
                             other)
-         || other switch
-            {
-               SuccessResult success => Equals(_success.Content(),
-                                               success._success
-                                                      .Content()),
-               _ => false,
-            };
+         || other is SuccessResult success
+         && Equals(_success.Content(),
+                   success._success
+                          .Content());
 
       /* ------------------------------------------------------------ */
       // IEquatable<T> Methods

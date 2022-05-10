@@ -16,7 +16,11 @@ public abstract partial class Either<TLeft, TRight>
       /* ------------------------------------------------------------ */
 
       public override bool Equals(object? obj)
-         => base.Equals(obj);
+         => ReferenceEquals(this,
+                            obj)
+         || obj is RightEither right
+         && Equals(_right.Content(),
+                   right._right.Content());
 
       /* ------------------------------------------------------------ */
 
@@ -80,7 +84,11 @@ public abstract partial class Either<TLeft, TRight>
       /* ------------------------------------------------------------ */
 
       public override bool Equals(Either<TLeft, TRight>? other)
-         => throw new NotImplementedException();
+         => ReferenceEquals(this,
+                            other)
+         || other is RightEither right
+         && Equals(_right.Content(),
+                   right._right.Content());
 
       /* ------------------------------------------------------------ */
       // Private Fields

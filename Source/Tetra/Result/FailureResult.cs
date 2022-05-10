@@ -18,15 +18,12 @@ partial class Result<T>
       public override bool Equals(object? obj)
          => ReferenceEquals(this,
                             obj)
-         || obj switch
-            {
-               FailureResult failure => _failure
-                                       .Content()
-                                       .Equals(failure
-                                              ._failure
-                                              .Content()),
-               _ => false,
-            };
+         || obj is FailureResult failure
+         && _failure
+           .Content()
+           .Equals(failure
+                  ._failure
+                  .Content());
 
       /* ------------------------------------------------------------ */
 
@@ -105,15 +102,12 @@ partial class Result<T>
       public override bool Equals(Result<T>? other)
          => ReferenceEquals(this,
                             other)
-         || other switch
-            {
-               FailureResult failure => _failure
-                                       .Content()
-                                       .Equals(failure
-                                              ._failure
-                                              .Content()),
-               _ => false,
-            };
+         || other is FailureResult failure
+         && _failure
+           .Content()
+           .Equals(failure
+                  ._failure
+                  .Content());
 
       /* ------------------------------------------------------------ */
       // IEquatable<T> Methods

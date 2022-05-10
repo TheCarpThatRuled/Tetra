@@ -1,4 +1,6 @@
-﻿namespace Tetra;
+﻿using System.Diagnostics;
+
+namespace Tetra;
 
 public abstract partial class Either<TLeft, TRight>
 {
@@ -16,7 +18,11 @@ public abstract partial class Either<TLeft, TRight>
       /* ------------------------------------------------------------ */
 
       public override bool Equals(object? obj)
-         => base.Equals(obj);
+         => ReferenceEquals(this,
+                            obj)
+         || obj is LeftEither left
+         && Equals(_left.Content(),
+                   left._left.Content());
 
       /* ------------------------------------------------------------ */
 
@@ -80,7 +86,11 @@ public abstract partial class Either<TLeft, TRight>
       /* ------------------------------------------------------------ */
 
       public override bool Equals(Either<TLeft, TRight>? other)
-         => throw new NotImplementedException();
+         => ReferenceEquals(this,
+                            other)
+         || other is LeftEither left
+         && Equals(_left.Content(),
+                   left._left.Content());
 
       /* ------------------------------------------------------------ */
       // Private Fields

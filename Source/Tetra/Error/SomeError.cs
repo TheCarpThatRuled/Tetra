@@ -87,11 +87,8 @@ partial class Error
       public override bool Equals(Error? other)
          => ReferenceEquals(this,
                             other)
-         || other switch
-            {
-               SomeError some => Equals(some._content),
-               _              => false,
-            };
+         || other is SomeError some
+         && Equals(some._content);
 
       /* ------------------------------------------------------------ */
       // IEquatable<Message> Methods
