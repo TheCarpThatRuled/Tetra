@@ -5,7 +5,7 @@ namespace Tetra.Testing;
 public static class Log
 {
    /* ------------------------------------------------------------ */
-   // Functions
+   // ToDebugOutput Functions
    /* ------------------------------------------------------------ */
 
    public static void ToDebugOutput(string message)
@@ -50,6 +50,39 @@ public static class Log
       => ToDebugOutput_AreEqual(message,
                                 expected.ToString("O"),
                                 actual.ToString("O"));
+
+   /* ------------------------------------------------------------ */
+   // ToStandardOutput Functions
+   /* ------------------------------------------------------------ */
+
+   public static void And()
+      => TestStep("And");
+
+   /* ------------------------------------------------------------ */
+
+   public static void Given()
+      => TestStep("GIVEN <<<");
+
+   /* ------------------------------------------------------------ */
+
+   public static void TestStep(string message)
+      => ToStandardOutput(">>> " + message);
+
+   /* ------------------------------------------------------------ */
+
+   public static void Then()
+      => TestStep("THEN <<<");
+
+   /* ------------------------------------------------------------ */
+
+   public static void ToStandardOutput(string message)
+      => Console
+        .WriteLine(message);
+
+   /* ------------------------------------------------------------ */
+
+   public static void When()
+      => TestStep("WHEN <<<");
 
    /* ------------------------------------------------------------ */
 }

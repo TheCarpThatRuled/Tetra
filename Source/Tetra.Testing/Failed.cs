@@ -5,7 +5,7 @@ namespace Tetra.Testing;
 public static class Failed
 {
    /* ------------------------------------------------------------ */
-   // Functions
+   // Assert Functions
    /* ------------------------------------------------------------ */
 
    public static AssertFailedException Assert(string message)
@@ -27,6 +27,54 @@ public static class Failed
                      expected,
                      actual));
 
+   /* ------------------------------------------------------------ */
+   // InTest Functions
+   /* ------------------------------------------------------------ */
+
+   public static AssertFailedException InTest(string message)
+      => Assert($"The test failed after the act: {message}");
+
+   /* ------------------------------------------------------------ */
+
+   public static AssertFailedException InTest(string  message,
+                                              object? actual)
+      => Assert($"The test failed after the act: {message}",
+                actual);
+
+   /* ------------------------------------------------------------ */
+
+   public static AssertFailedException InTest(string  message,
+                                              object? expected,
+                                              object? actual)
+      => Assert($"The test failed after the act: {message}",
+                expected,
+                actual);
+
+   /* ------------------------------------------------------------ */
+   // InTestSetup Functions
+   /* ------------------------------------------------------------ */
+
+   public static AssertFailedException InTestSetup(string message)
+      => Assert($"The test failed during test set-up; the act was not performed: {message}");
+
+   /* ------------------------------------------------------------ */
+
+   public static AssertFailedException InTestSetup(string  message,
+                                                   object? actual)
+      => Assert($"The test failed during test set-up; the act was not performed: {message}",
+                actual);
+
+   /* ------------------------------------------------------------ */
+
+   public static AssertFailedException InTestSetup(string  message,
+                                                   object? expected,
+                                                   object? actual)
+      => Assert($"The test failed during test set-up; the act was not performed: {message}",
+                expected,
+                actual);
+
+   /* ------------------------------------------------------------ */
+   // Message Functions
    /* ------------------------------------------------------------ */
 
    public static string ExpectedActual(object? expected,
