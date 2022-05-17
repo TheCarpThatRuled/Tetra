@@ -27,6 +27,24 @@ partial class Properties
    /* ------------------------------------------------------------ */
 
    public static Property WasInvokedOnce<T, TReturn>(T                                 expected,
+                                                     FakeFunction<Left<T>, TReturn> function)
+      => WasInvokedOnce(actual => Equals(expected,
+                                         actual.Content()),
+                        expected?.ToString() ?? string.Empty,
+                        function);
+
+   /* ------------------------------------------------------------ */
+
+   public static Property WasInvokedOnce<T, TReturn>(T                                 expected,
+                                                     FakeFunction<Right<T>, TReturn> function)
+      => WasInvokedOnce(actual => Equals(expected,
+                                         actual.Content()),
+                        expected?.ToString() ?? string.Empty,
+                        function);
+
+   /* ------------------------------------------------------------ */
+
+   public static Property WasInvokedOnce<T, TReturn>(T                                 expected,
                                                      FakeFunction<Success<T>, TReturn> function)
       => WasInvokedOnce(actual => Equals(expected,
                                          actual.Content()),

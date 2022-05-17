@@ -37,7 +37,7 @@ public class Equals
          return IsFalse(actual);
       }
 
-      Arb.Register<Libraries.EitherOfInt32AndInt32>();
+      Arb.Register<Libraries.EitherOfTestClassAndTestStruct>();
       Arb.Register<ObjIsNullOrANonEquatableType>();
 
       Prop.ForAll<Either<TestClass, TestStruct>, object?>(Property)
@@ -97,7 +97,7 @@ public class Equals
                                   copy);
       }
 
-      Arb.Register<Libraries.EitherOfInt32AndInt32>();
+      Arb.Register<Libraries.EitherOfTestClassAndTestStruct>();
 
       Prop.ForAll<Either<TestClass, TestStruct>>(Property)
           .QuickCheckThrowOnFailure();
@@ -115,7 +115,7 @@ public class Equals
    [TestMethod]
    public void GIVEN_Either_of_TestClass_and_TestStruct_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_symmetric()
    {
-      Arb.Register<Libraries.EitherOfInt32AndInt32>();
+      Arb.Register<Libraries.EitherOfTestClassAndTestStruct>();
 
       Prop.ForAll<Either<TestClass, TestStruct>, Either<TestClass, TestStruct>>(EqualsIsSymmetric)
           .QuickCheckThrowOnFailure();
@@ -133,7 +133,7 @@ public class Equals
    [TestMethod]
    public void GIVEN_Either_of_TestClass_and_TestStruct_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveEithersOfInt32AndInt32>();
+      Arb.Register<Libraries.TransitiveEithersOfTestClassAndTestStruct>();
 
       Prop.ForAll<(Either<TestClass, TestStruct>, Either<TestClass, TestStruct>, Either<TestClass, TestStruct>)>(EqualsIsTransitive<Either<TestClass, TestStruct>>)
           .QuickCheckThrowOnFailure();
@@ -163,7 +163,7 @@ public class Equals
          return IsFalse(actual);
       }
 
-      Arb.Register<Libraries.EitherOfInt32AndInt32>();
+      Arb.Register<Libraries.EitherOfTestClassAndTestStruct>();
 
       Prop.ForAll<Either<TestClass, TestStruct>>(Property)
           .QuickCheckThrowOnFailure();
@@ -192,7 +192,7 @@ public class Equals
                                       copy);
       }
 
-      Arb.Register<Libraries.EitherOfInt32AndInt32>();
+      Arb.Register<Libraries.EitherOfTestClassAndTestStruct>();
 
       Prop.ForAll<Either<TestClass, TestStruct>>(Property)
           .QuickCheckThrowOnFailure();
@@ -210,7 +210,7 @@ public class Equals
    [TestMethod]
    public void GIVEN_Either_of_TestClass_and_TestStruct_WHEN_Equals_AND_other_is_a_nullable_Either_of_TestClass_and_TestStruct_THEN_is_symmetric()
    {
-      Arb.Register<Libraries.EitherOfInt32AndInt32>();
+      Arb.Register<Libraries.EitherOfTestClassAndTestStruct>();
 
       Prop.ForAll<Either<TestClass, TestStruct>, Either<TestClass, TestStruct>>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
@@ -228,7 +228,7 @@ public class Equals
    [TestMethod]
    public void GIVEN_Either_of_TestClass_and_TestStruct_WHEN_Equals_AND_other_is_a_nullable_Either_of_TestClass_and_TestStruct_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveEithersOfInt32AndInt32>();
+      Arb.Register<Libraries.TransitiveEithersOfTestClassAndTestStruct>();
 
       Prop.ForAll<(Either<TestClass, TestStruct>, Either<TestClass, TestStruct>, Either<TestClass, TestStruct>)>(IEquatableIsTransitive<Either<TestClass, TestStruct>>)
           .QuickCheckThrowOnFailure();

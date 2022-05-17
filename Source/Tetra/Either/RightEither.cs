@@ -77,7 +77,7 @@ public abstract partial class Either<TLeft, TRight>
 
       public override T Reduce<T>(Func<Left<TLeft>, T> _,
                                   Func<Right<TRight>, T> whenRight)
-         => throw new NotImplementedException();
+         => whenRight(_right);
 
       /* ------------------------------------------------------------ */
       // IEquatable<Either<TLeft, TRight>> Methods

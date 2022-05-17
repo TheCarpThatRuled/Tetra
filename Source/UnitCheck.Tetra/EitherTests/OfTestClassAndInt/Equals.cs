@@ -37,7 +37,7 @@ public class Equals
          return IsFalse(actual);
       }
 
-      Arb.Register<Libraries.EitherOfInt32AndInt32>();
+      Arb.Register<Libraries.EitherOfTestClassAndInt32>();
       Arb.Register<ObjIsNullOrANonEquatableType>();
 
       Prop.ForAll<Either<TestClass, int>, object?>(Property)
@@ -97,7 +97,7 @@ public class Equals
                                   copy);
       }
 
-      Arb.Register<Libraries.EitherOfInt32AndInt32>();
+      Arb.Register<Libraries.EitherOfTestClassAndInt32>();
 
       Prop.ForAll<Either<TestClass, int>>(Property)
           .QuickCheckThrowOnFailure();
@@ -115,7 +115,7 @@ public class Equals
    [TestMethod]
    public void GIVEN_Either_of_TestClass_and_int_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_symmetric()
    {
-      Arb.Register<Libraries.EitherOfInt32AndInt32>();
+      Arb.Register<Libraries.EitherOfTestClassAndInt32>();
 
       Prop.ForAll<Either<TestClass, int>, Either<TestClass, int>>(EqualsIsSymmetric)
           .QuickCheckThrowOnFailure();
@@ -133,7 +133,7 @@ public class Equals
    [TestMethod]
    public void GIVEN_Either_of_TestClass_and_int_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveEithersOfInt32AndInt32>();
+      Arb.Register<Libraries.TransitiveEithersOfTestClassAndInt32>();
 
       Prop.ForAll<(Either<TestClass, int>, Either<TestClass, int>, Either<TestClass, int>)>(EqualsIsTransitive<Either<TestClass, int>>)
           .QuickCheckThrowOnFailure();
@@ -163,7 +163,7 @@ public class Equals
          return IsFalse(actual);
       }
 
-      Arb.Register<Libraries.EitherOfInt32AndInt32>();
+      Arb.Register<Libraries.EitherOfTestClassAndInt32>();
 
       Prop.ForAll<Either<TestClass, int>>(Property)
           .QuickCheckThrowOnFailure();
@@ -192,7 +192,7 @@ public class Equals
                                       copy);
       }
 
-      Arb.Register<Libraries.EitherOfInt32AndInt32>();
+      Arb.Register<Libraries.EitherOfTestClassAndInt32>();
 
       Prop.ForAll<Either<TestClass, int>>(Property)
           .QuickCheckThrowOnFailure();
@@ -210,7 +210,7 @@ public class Equals
    [TestMethod]
    public void GIVEN_Either_of_TestClass_and_int_WHEN_Equals_AND_other_is_a_nullable_Either_of_TestClass_and_int_THEN_is_symmetric()
    {
-      Arb.Register<Libraries.EitherOfInt32AndInt32>();
+      Arb.Register<Libraries.EitherOfTestClassAndInt32>();
 
       Prop.ForAll<Either<TestClass, int>, Either<TestClass, int>>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
@@ -228,7 +228,7 @@ public class Equals
    [TestMethod]
    public void GIVEN_Either_of_TestClass_and_int_WHEN_Equals_AND_other_is_a_nullable_Either_of_TestClass_and_int_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveEithersOfInt32AndInt32>();
+      Arb.Register<Libraries.TransitiveEithersOfTestClassAndInt32>();
 
       Prop.ForAll<(Either<TestClass, int>, Either<TestClass, int>, Either<TestClass, int>)>(IEquatableIsTransitive<Either<TestClass, int>>)
           .QuickCheckThrowOnFailure();
