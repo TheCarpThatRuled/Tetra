@@ -40,12 +40,12 @@ public abstract partial class Either<TLeft, TRight>
       /* ------------------------------------------------------------ */
 
       public override bool IsALeft()
-         => throw new NotImplementedException();
+         => false;
 
       /* ------------------------------------------------------------ */
 
       public override bool IsARight()
-         => throw new NotImplementedException();
+         => true;
 
       /* ------------------------------------------------------------ */
 
