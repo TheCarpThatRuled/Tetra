@@ -13,6 +13,78 @@ namespace Check.EitherTests.OfIntAndInt;
 public class Left_Reduce
 {
    /* ------------------------------------------------------------ */
+   // TLeft Reduce(Func<Right<TRight>,TLeft> whenRight)
+   /* ------------------------------------------------------------ * /
+
+   //GIVEN
+   //Left_of_int
+   //WHEN
+   //Reduce_AND_whenRight_is_a_Func_of_Right_of_int_to_int
+   //THEN
+   //whenRight_was_not_invoked_AND_the_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Left_of_int_WHEN_Reduce_AND_whenRight_is_a_Func_of_Right_of_int_to_int_THEN_whenRight_was_not_invoked_AND_the_content_is_returned()
+   {
+      static Property Property((int content, int whenRight) args)
+      {
+         //Arrange
+         var whenRight = FakeFunction<Right<int>, int>.Create(args.whenRight);
+
+         var result = Either<int, int>.Left(args.content);
+
+         //Act
+         var actual = result.Reduce(whenRight.Func);
+
+         //Assert
+         return AreEqual(args.content,
+                         actual)
+           .And(WasNotInvoked(whenRight));
+      }
+
+      Arb.Register<Libraries.TwoUniqueInt32s>();
+
+      Prop.ForAll<(int, int)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+   /* ------------------------------------------------------------ */
+   // TRight Reduce>(Func<Left<TLeft>,TRight> whenLeft)
+   /* ------------------------------------------------------------ * /
+
+   //GIVEN
+   //Left_of_int
+   //WHEN
+   //Reduce_AND_whenLeft_is_a_Func_of_Left_of_int_to_int
+   //THEN
+   //whenLeft_was_invoked_once_with_the_content_AND_the_return_value_of_whenLeft_is_returned
+
+   [TestMethod]
+   public void GIVEN_Left_of_int_WHEN_Reduce_AND_whenLeft_is_a_Func_of_Left_of_int_to_int_THEN_whenLeft_was_invoked_once_with_the_content_AND_the_return_value_of_whenLeft_is_returned()
+   {
+      static Property Property((int content, int whenLeft) args)
+      {
+         //Arrange
+         var whenLeft = FakeFunction<Left<int>, int>.Create(args.whenLeft);
+
+         var result = Either<int, int>.Left(args.content);
+
+         //Act
+         var actual = result.Reduce(whenLeft.Func);
+
+         //Assert
+         return AreEqual(args.whenLeft,
+                         actual)
+               .And(WasInvokedOnce(args.content,
+                                   whenLeft));
+      }
+
+      Arb.Register<Libraries.TwoUniqueInt32s>();
+
+      Prop.ForAll<(int, int)>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
    // T Reduce<T>(Func<Left<TLeft>,T> whenLeft,
    //             Func<Right<TRight>, T> whenRight)
    /* ------------------------------------------------------------ */

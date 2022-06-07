@@ -26,7 +26,7 @@ public abstract partial class Either<TLeft, TRight> : IEquatable<Either<TLeft, T
    /// <param name="content">The value the <c>Either</c> shall contain.</param>
    /// <returns>A left <c>Either</c> that contains <c>content</c>.</returns>
    public static Either<TLeft, TRight> Left(TLeft content)
-      => new LeftEither(new Left<TLeft>(content));
+      => new LeftEither(new(content));
 
    /* ------------------------------------------------------------ */
 
@@ -36,7 +36,7 @@ public abstract partial class Either<TLeft, TRight> : IEquatable<Either<TLeft, T
    /// <param name="content">The value the <c>Either</c> shall contain.</param>
    /// <returns>A right <c>Either</c> that contains <c>content</c>.</returns>
    public static Either<TLeft, TRight> Right(TRight content)
-      => new RightEither(new Right<TRight>(content));
+      => new RightEither(new(content));
 
    /* ------------------------------------------------------------ */
    // Implicit Operators
@@ -126,6 +126,7 @@ public abstract partial class Either<TLeft, TRight> : IEquatable<Either<TLeft, T
 
    /// <summary>
    /// Unifies both branches of the <c>Either</c> to the left type via a mapping function
+   /// NOTE: for some reason, the type inference system cannot disambiguate between this and the <c>public abstract TRight Reduce(Func<Left<TLeft>, TRight> whenLeft)</c> overload
    /// </summary>
    /// <param name="whenRight">A mapping function that shall be applied to the content of the <c>Either</c>, if it is a right.</param>
    /// <returns>
@@ -138,6 +139,7 @@ public abstract partial class Either<TLeft, TRight> : IEquatable<Either<TLeft, T
 
    /// <summary>
    /// Unifies both branches of the <c>Either</c> to the right type via a mapping function
+   /// NOTE: for some reason, the type inference system cannot disambiguate between this and the <c>public abstract TLeft Reduce(Func<Right<TRight>, TLeft> whenRight)</c> overload
    /// </summary>
    /// <param name="whenLeft">A mapping function that shall be applied to the content of the <c>Either</c>, if it is a left.</param>
    /// <returns>
