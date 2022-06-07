@@ -106,6 +106,30 @@ public abstract partial class Error : IEquatable<Error>,
    /* ------------------------------------------------------------ */
 
    /// <summary>
+   /// Converts this <c>Error</c> into a <c>Result</c>, that is a failure containing the contents if this is a some.
+   /// </summary>
+   /// <param name="whenNone">The value to populate the success with, if it is a none.</param>
+   /// <returns>
+   /// A failure containing the content of this <c>Error</c> if it is a some;
+   /// otherwise a success containing <c>whenNone</c>.
+   /// </returns>
+   public abstract Result<T> MapToResult<T>(T whenNone);
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
+   /// Converts this <c>Error</c> into a <c>Result</c>, that is a failure containing the contents if this is a some.
+   /// </summary>
+   /// <param name="whenNone">A function that creates a value to populate the success with, if it is a none.</param>
+   /// <returns>
+   /// A failure containing the content of this <c>Error</c> if it is a some;
+   /// otherwise a success containing the return value of <c>whenNone</c>.
+   /// </returns>
+   public abstract Result<T> MapToResult<T>(Func<T> whenNone);
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
    /// Unifies both branches of the <c>Error</c> by providing a <c>Message</c> for the none case.
    /// </summary>
    /// <param name="whenNone">The <c>Message</c> to use, if the <c>Error</c> is a none.</param>

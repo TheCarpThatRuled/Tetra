@@ -60,6 +60,16 @@ partial class Error
 
       /* ------------------------------------------------------------ */
 
+      public override Result<T> MapToResult<T>(T _)
+         => _content;
+
+      /* ------------------------------------------------------------ */
+
+      public override Result<T> MapToResult<T>(Func<T> _)
+         => _content;
+
+      /* ------------------------------------------------------------ */
+
       public override Message Reduce(Message _)
          => _content;
 

@@ -51,6 +51,16 @@ partial class Error
 
       /* ------------------------------------------------------------ */
 
+      public override Result<T> MapToResult<T>(T whenNone)
+         => whenNone;
+
+      /* ------------------------------------------------------------ */
+
+      public override Result<T> MapToResult<T>(Func<T> whenNone)
+         => whenNone();
+
+      /* ------------------------------------------------------------ */
+
       public override Message Reduce(Message whenNone)
          => whenNone;
 
