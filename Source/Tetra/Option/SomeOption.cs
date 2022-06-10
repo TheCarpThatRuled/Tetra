@@ -68,6 +68,16 @@ partial class Option<T>
 
       /* ------------------------------------------------------------ */
 
+      public override Result<T> MapToResult(Message _)
+         => _content;
+
+      /* ------------------------------------------------------------ */
+
+      public override Result<T> MapToResult(Func<Message> _)
+         => _content;
+
+      /* ------------------------------------------------------------ */
+
       public override T Reduce(T _)
          => _content;
 

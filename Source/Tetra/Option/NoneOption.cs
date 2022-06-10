@@ -57,6 +57,16 @@ partial class Option<T>
 
       /* ------------------------------------------------------------ */
 
+      public override Result<T> MapToResult(Message whenNone)
+         => whenNone;
+
+      /* ------------------------------------------------------------ */
+
+      public override Result<T> MapToResult(Func<Message> whenNone)
+         => whenNone();
+
+      /* ------------------------------------------------------------ */
+
       public override T Reduce(T whenNone)
          => whenNone;
 

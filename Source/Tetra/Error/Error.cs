@@ -108,6 +108,7 @@ public abstract partial class Error : IEquatable<Error>,
    /// <summary>
    /// Converts this <c>Error</c> into a <c>Result</c>, that is a failure containing the contents if this is a some.
    /// </summary>
+   /// <typeparam name="T">The type of the content of the <c>Result</c> that shall be produced.</typeparam>
    /// <param name="whenNone">The value to populate the success with, if it is a none.</param>
    /// <returns>
    /// A failure containing the content of this <c>Error</c> if it is a some;
@@ -120,6 +121,7 @@ public abstract partial class Error : IEquatable<Error>,
    /// <summary>
    /// Converts this <c>Error</c> into a <c>Result</c>, that is a failure containing the contents if this is a some.
    /// </summary>
+   /// <typeparam name="T">The type of the content of the <c>Result</c> that shall be produced.</typeparam>
    /// <param name="whenNone">A function that creates a value to populate the success with, if it is a none.</param>
    /// <returns>
    /// A failure containing the content of this <c>Error</c> if it is a some;

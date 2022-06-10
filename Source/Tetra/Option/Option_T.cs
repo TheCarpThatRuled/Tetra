@@ -126,6 +126,30 @@ public abstract partial class Option<T> : IEquatable<Option<T>>,
    /* ------------------------------------------------------------ */
 
    /// <summary>
+   /// Converts this <c>Option</c> into a <c>Result</c>, that is a success containing the contents if this is a some.
+   /// </summary>
+   /// <param name="whenNone">The value to populate the failure with, if it is a none.</param>
+   /// <returns>
+   /// A success containing the content of this <c>Option</c> if it is a some;
+   /// otherwise a failure containing the return value of <c>whenNone</c>.
+   /// </returns>
+   public abstract Result<T> MapToResult(Message whenNone);
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
+   /// Converts this <c>Option</c> into a <c>Result</c>, that is a success containing the contents if this is a some.
+   /// </summary>
+   /// <param name="whenNone">A function that creates a value to populate the failure with, if it is a none.</param>
+   /// <returns>
+   /// A success containing the content of this <c>Option</c> if it is a some;
+   /// otherwise a failure containing the return value of <c>whenNone</c>.
+   /// </returns>
+   public abstract Result<T> MapToResult(Func<Message> whenNone);
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
    /// Unifies both branches of the <c>Option</c> by providing a value for the none case.
    /// </summary>
    /// <param name="whenNone">A value to use, if the <c>Option</c> is a none.</param>
