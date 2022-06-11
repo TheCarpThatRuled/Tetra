@@ -8,6 +8,7 @@ internal static class LocalCategories
    // Constants
    /* ------------------------------------------------------------ */
 
+   public const string Char      = nameof(System.Char);
    public const string Condition = nameof(Tetra.Condition);
    public const string Either    = nameof(Tetra.Either);
    public const string Error     = nameof(Tetra.Error);
@@ -19,6 +20,7 @@ internal static class LocalCategories
    public const string Result    = nameof(Tetra.Result);
    public const string Right     = nameof(Right);
    public const string Success   = nameof(Success);
+   public const string Volume    = nameof(Tetra.Volume);
 
    /* ------------------------------------------------------------ */
 }

@@ -8,29 +8,45 @@ public class Volume : IComparable<Volume>,
    /* ------------------------------------------------------------ */
 
    public static Volume Create(char potentialVolume)
-      => new();
+   {
+      if (potentialVolume.IsNotAnAsciiLetter())
+      {
+         throw new ArgumentException($"'{potentialVolume}' is not a valid volume label; a volume label must be an ASCII letter",
+                                     nameof(potentialVolume));
+      }
+
+      return new(potentialVolume);
+   }
 
    /* ------------------------------------------------------------ */
 
    public static Result<Volume> Parse(char potentialVolume)
-      => new Volume();
+      => potentialVolume.IsAnAsciiLetter()
+            ? new Volume(potentialVolume)
+            : Result<Volume>.Failure(Message.Create($"'{potentialVolume}' is not a valid volume label; a volume label must be an ASCII letter"));
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
    /* ------------------------------------------------------------ */
 
+
    public override bool Equals(object? obj)
-      => base.Equals(obj);
+      => ReferenceEquals(this,
+                         obj)
+      || obj is Volume volume
+      && Equals(volume);
 
    /* ------------------------------------------------------------ */
 
    public override int GetHashCode()
-      => base.GetHashCode();
+      => StringComparer
+        .OrdinalIgnoreCase
+        .GetHashCode(_value);
 
    /* ------------------------------------------------------------ */
 
    public override string ToString()
-      => base.ToString();
+      => $"<{_value}>";
 
    /* ------------------------------------------------------------ */
    // IComparable<Volume> Methods
@@ -44,24 +60,30 @@ public class Volume : IComparable<Volume>,
    /* ------------------------------------------------------------ */
 
    public bool Equals(Volume? other)
-      => throw new NotImplementedException();
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Equals(_value,
+                other?._value);
 
    /* ------------------------------------------------------------ */
    // Properties
    /* ------------------------------------------------------------ */
 
    public string Value()
-      => string.Empty;
+      => _value;
+
+   /* ------------------------------------------------------------ */
+   // Protected Constructors
+   /* ------------------------------------------------------------ */
+
+   protected Volume(char volumeLabel)
+      => _value = $"{volumeLabel}:";
 
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private Volume() { }
+   private readonly string _value;
 
    /* ------------------------------------------------------------ */
 }
