@@ -1,5 +1,4 @@
-﻿using Check.Data;
-using FsCheck;
+﻿using FsCheck;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;

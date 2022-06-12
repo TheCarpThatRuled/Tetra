@@ -1,6 +1,6 @@
 ﻿using Tetra;
 
-namespace Check.Data;
+namespace Check;
 
 internal static class Messages
 {

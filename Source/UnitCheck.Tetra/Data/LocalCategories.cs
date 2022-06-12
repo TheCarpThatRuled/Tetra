@@ -1,6 +1,4 @@
-﻿using Tetra;
-
-namespace Check;
+﻿namespace Check;
 
 internal static class LocalCategories
 {

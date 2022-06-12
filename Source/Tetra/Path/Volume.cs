@@ -53,7 +53,10 @@ public class Volume : IComparable<Volume>,
    /* ------------------------------------------------------------ */
 
    public int CompareTo(Volume? other)
-      => throw new NotImplementedException();
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Compare(_value,
+                 other?._value);
 
    /* ------------------------------------------------------------ */
    // IEquatable<Volume> Methods
