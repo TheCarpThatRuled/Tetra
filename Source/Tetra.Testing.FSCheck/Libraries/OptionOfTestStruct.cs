@@ -11,7 +11,7 @@ public static partial class Libraries
    public sealed class OptionOfTestStruct
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Option<Testing.TestStruct>> Type()
@@ -29,7 +29,7 @@ public static partial class Libraries
    public sealed class SomeOptionOfTestStruct
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Option<Testing.TestStruct>> Type()
@@ -47,7 +47,7 @@ public static partial class Libraries
    public sealed class TransitiveOptionsOfTestStruct
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Option<Testing.TestStruct>, Option<Testing.TestStruct>, Option<Testing.TestStruct>)> Type()

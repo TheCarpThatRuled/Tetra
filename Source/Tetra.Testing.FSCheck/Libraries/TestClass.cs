@@ -11,7 +11,7 @@ public static partial class Libraries
    public sealed class TestClass
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Testing.TestClass> Type()
@@ -29,7 +29,7 @@ public static partial class Libraries
    public sealed class ThreeUniqueTestClasses
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Testing.TestClass, Testing.TestClass, Testing.TestClass)> Type()
@@ -47,7 +47,7 @@ public static partial class Libraries
    public sealed class TwoUniqueTestClasses
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Testing.TestClass, Testing.TestClass)> Type()

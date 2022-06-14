@@ -11,7 +11,7 @@ public static partial class Libraries
    public sealed class FailureResultOfInt32
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Result<int>> Type()
@@ -29,7 +29,7 @@ public static partial class Libraries
    public sealed class ResultOfInt32
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Result<int>> Type()
@@ -47,7 +47,7 @@ public static partial class Libraries
    public sealed class SuccessResultOfInt32
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Result<int>> Type()
@@ -65,7 +65,7 @@ public static partial class Libraries
    public sealed class TransitiveResultsOfInt32
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Result<int>, Result<int>, Result<int>)> Type()

@@ -11,7 +11,7 @@ public static partial class Libraries
    public sealed class Message
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Tetra.Message> Type()
@@ -29,7 +29,7 @@ public static partial class Libraries
    public sealed class ThreeUniqueMessages
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Tetra.Message, Tetra.Message, Tetra.Message)> Type()
@@ -47,7 +47,7 @@ public static partial class Libraries
    public sealed class TransitiveMessages
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Tetra.Message, Tetra.Message, Tetra.Message)> Type()
@@ -65,7 +65,7 @@ public static partial class Libraries
    public sealed class TwoUniqueMessages
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Tetra.Message, Tetra.Message)> Type()

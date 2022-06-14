@@ -11,7 +11,7 @@ public static partial class Libraries
    public sealed class FailureResultOfTestStruct
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Result<Testing.TestStruct>> Type()
@@ -29,7 +29,7 @@ public static partial class Libraries
    public sealed class ResultOfTestStruct
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Result<Testing.TestStruct>> Type()
@@ -47,7 +47,7 @@ public static partial class Libraries
    public sealed class SuccessResultOfTestStruct
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Result<Testing.TestStruct>> Type()
@@ -65,7 +65,7 @@ public static partial class Libraries
    public sealed class TransitiveResultsOfTestStruct
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Result<Testing.TestStruct>, Result<Testing.TestStruct>, Result<Testing.TestStruct>)> Type()

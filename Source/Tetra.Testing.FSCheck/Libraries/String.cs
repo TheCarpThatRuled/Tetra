@@ -11,7 +11,7 @@ public static partial class Libraries
    public sealed class NonNullString
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<string> String()

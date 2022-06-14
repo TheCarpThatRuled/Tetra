@@ -62,7 +62,7 @@ public class Parse
          var actual = Volume.Parse(value);
 
          //Assert
-         return IsAFailure(Message.Create($"'{value}' is not a valid volume label; a volume label must be an ASCII letter"),
+         return IsAFailure(Message.Create(Messages.IsNotAValidVolumeLabel(value)),
                            actual);
       }
 

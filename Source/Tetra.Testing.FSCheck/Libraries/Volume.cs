@@ -11,7 +11,7 @@ public static partial class Libraries
    public sealed class Volume
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Tetra.Volume> Type()
@@ -29,7 +29,7 @@ public static partial class Libraries
    public sealed class ThreeUniqueVolumes
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Tetra.Volume, Tetra.Volume, Tetra.Volume)> Type()
@@ -47,7 +47,7 @@ public static partial class Libraries
    public sealed class TransitiveVolumes
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Tetra.Volume, Tetra.Volume, Tetra.Volume)> Type()
@@ -65,7 +65,7 @@ public static partial class Libraries
    public sealed class TwoUniqueVolumes
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Tetra.Volume, Tetra.Volume)> Type()

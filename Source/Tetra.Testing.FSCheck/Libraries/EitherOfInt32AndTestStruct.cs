@@ -11,7 +11,7 @@ public static partial class Libraries
    public sealed class LeftEitherOfInt32AndTestStruct
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Either<int, Testing.TestStruct>> Type()
@@ -29,7 +29,7 @@ public static partial class Libraries
    public sealed class EitherOfInt32AndTestStruct
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Either<int, Testing.TestStruct>> Type()
@@ -48,7 +48,7 @@ public static partial class Libraries
    public sealed class RightEitherOfInt32AndTestStruct
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Either<int, Testing.TestStruct>> Type()
@@ -66,7 +66,7 @@ public static partial class Libraries
    public sealed class TransitiveEithersOfInt32AndTestStruct
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Either<int, Testing.TestStruct>, Either<int, Testing.TestStruct>, Either<int, Testing.TestStruct>)> Type()

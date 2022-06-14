@@ -4,56 +4,56 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeTests;
+namespace Check.FileComponentTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Volume)]
+[TestCategory(LocalCategories.FileComponent)]
 public class Create
 {
    /* ------------------------------------------------------------ */
-   // Volume Create(char potentialVolume)
+   // FileComponent Create(string potentialComponent)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //an_ASCII_letter
+   //a_valid_string
    //WHEN
    //Create
    //THEN
-   //a_volume_with_a_value_of_the_letter_colon_is_returned
+   //a_FileComponent_with_the_string_is_returned
 
    [TestMethod]
-   public void GIVEN_an_ASCII_letter_WHEN_Create_THEN_a_volume_with_a_value_of_the_letter_colon_is_returned()
+   public void GIVEN_an_ASCII_letter_WHEN_Create_THEN_a_FileComponent_with_the_string_is_returned()
    {
-      static Property Property(char value)
+      static Property Property(string value)
       {
          //Act
-         var actual = Volume.Create(value);
+         var actual = FileComponent.Create(value);
 
          //Assert
-         return AreEqual($"{value}:",
+         return AreEqual(value,
                          actual.Value());
       }
 
-      Arb.Register<Libraries.AsciiLetters>();
+      Arb.Register<Libraries.ValidPathComponent>();
 
-      Prop.ForAll<char>(Property)
+      Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_non_ASCII_letter
+   //a_string_containing_an_invalid_character
    //WHEN
    //Create
    //THEN
    //an_argument_exception_is_thrown
 
    [TestMethod]
-   public void GIVEN_a_non_ASCII_letter_WHEN_Create_THEN_an_argument_exception_is_thrown()
+   public void GIVEN_a_string_containing_an_invalid_character_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
-      static Property Property(char value)
+      static Property Property(string value)
       {
          //Arrange
          var exception = Option<Exception>.None();
@@ -61,7 +61,7 @@ public class Create
          //Act
          try
          {
-            Volume.Create(value);
+            FileComponent.Create(value);
          }
          catch (Exception e)
          {
@@ -70,12 +70,12 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             Messages.IsNotAValidVolumeLabel(value) + " (Parameter 'potentialVolume')");
+                                             Messages.IsNotAValidFileComponent(value) + " (Parameter 'potentialComponent')");
       }
 
-      Arb.Register<Libraries.NonAsciiLetters>();
+      Arb.Register<Libraries.InvalidPathComponent>();
 
-      Prop.ForAll<char>(Property)
+      Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
    }
 

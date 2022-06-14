@@ -11,7 +11,7 @@ public static partial class Libraries
    public sealed class AsciiLetters
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<char> Type()
@@ -29,7 +29,7 @@ public static partial class Libraries
    public sealed class NonAsciiLetters
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<char> Type()

@@ -11,7 +11,7 @@ public static partial class Libraries
    public sealed class TestSubClass
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Testing.TestSubClass> Type()

@@ -11,7 +11,7 @@ public static partial class Libraries
    public sealed class TestStruct
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Testing.TestStruct> Type()
@@ -29,7 +29,7 @@ public static partial class Libraries
    public sealed class ThreeUniqueTestStructs
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Testing.TestStruct, Testing.TestStruct, Testing.TestStruct)> Type()
@@ -47,7 +47,7 @@ public static partial class Libraries
    public sealed class TwoUniqueTestStructs
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Testing.TestStruct, Testing.TestStruct)> Type()

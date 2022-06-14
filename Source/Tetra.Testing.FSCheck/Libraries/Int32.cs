@@ -11,7 +11,7 @@ public static partial class Libraries
    public sealed class ThreeUniqueInt32s
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(int, int, int)> Type()
@@ -29,7 +29,7 @@ public static partial class Libraries
    public sealed class TwoUniqueInt32s
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(int, int)> Type()

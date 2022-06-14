@@ -1,4 +1,6 @@
-﻿namespace Tetra;
+﻿using static Tetra.TetraMessages;
+
+namespace Tetra;
 
 public class Volume : IComparable<Volume>,
                       IEquatable<Volume>
@@ -11,7 +13,7 @@ public class Volume : IComparable<Volume>,
    {
       if (potentialVolume.IsNotAnAsciiLetter())
       {
-         throw new ArgumentException($"'{potentialVolume}' is not a valid volume label; a volume label must be an ASCII letter",
+         throw new ArgumentException(IsNotAValidVolumeLabel(potentialVolume),
                                      nameof(potentialVolume));
       }
 
@@ -23,7 +25,7 @@ public class Volume : IComparable<Volume>,
    public static Result<Volume> Parse(char potentialVolume)
       => potentialVolume.IsAnAsciiLetter()
             ? new Volume(potentialVolume)
-            : Result<Volume>.Failure(Message.Create($"'{potentialVolume}' is not a valid volume label; a volume label must be an ASCII letter"));
+            : Result<Volume>.Failure(Message.Create(IsNotAValidVolumeLabel(potentialVolume)));
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods

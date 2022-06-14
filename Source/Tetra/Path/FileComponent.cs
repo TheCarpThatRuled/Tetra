@@ -1,4 +1,6 @@
-﻿namespace Tetra;
+﻿using static Tetra.TetraMessages;
+
+namespace Tetra;
 
 public class FileComponent : IComparable<FileComponent>,
                              IEquatable<FileComponent>
@@ -8,12 +10,23 @@ public class FileComponent : IComparable<FileComponent>,
    /* ------------------------------------------------------------ */
 
    public static FileComponent Create(string potentialComponent)
-      => new();
+   {
+      if (potentialComponent.IsNotAValidPathComponent())
+      {
+         throw new ArgumentException(IsNotAValidFileComponent(potentialComponent),
+                                     nameof(potentialComponent));
+
+      }
+
+      return new(potentialComponent);
+   }
 
    /* ------------------------------------------------------------ */
 
    public static Result<FileComponent> Parse(string potentialComponent)
-      => new FileComponent();
+      => potentialComponent.IsNotAValidPathComponent()
+            ? Result<FileComponent>.Failure(Message.Create(IsNotAValidFileComponent(potentialComponent)))
+            : new FileComponent(potentialComponent);
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -51,17 +64,20 @@ public class FileComponent : IComparable<FileComponent>,
    /* ------------------------------------------------------------ */
 
    public string Value()
-      => string.Empty;
+      => _value;
 
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
+   private readonly string _value;
+
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private FileComponent() { }
+   private FileComponent(string value)
+      => _value = value;
 
    /* ------------------------------------------------------------ */
 }

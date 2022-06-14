@@ -1,4 +1,6 @@
-﻿namespace Tetra;
+﻿using static Tetra.TetraMessages;
+
+namespace Tetra;
 
 public class DirectoryComponent : IComparable<DirectoryComponent>,
                                   IEquatable<DirectoryComponent>
@@ -8,12 +10,23 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
    /* ------------------------------------------------------------ */
 
    public static DirectoryComponent Create(string potentialComponent)
-      => new();
+   {
+      if (potentialComponent.IsNotAValidPathComponent())
+      {
+         throw new ArgumentException(IsNotAValidDirectoryComponent(potentialComponent),
+                                     nameof(potentialComponent));
+
+      }
+
+      return new(potentialComponent);
+   }
 
    /* ------------------------------------------------------------ */
 
    public static Result<DirectoryComponent> Parse(string potentialComponent)
-      => new DirectoryComponent();
+      => potentialComponent.IsNotAValidPathComponent()
+            ? Result<DirectoryComponent>.Failure(Message.Create(IsNotAValidDirectoryComponent(potentialComponent)))
+            : new DirectoryComponent(potentialComponent);
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -51,17 +64,20 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
    /* ------------------------------------------------------------ */
 
    public string Value()
-      => string.Empty;
+      => _value;
 
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
+   private readonly string _value;
+   
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private DirectoryComponent() { }
+   private DirectoryComponent(string value)
+      => _value = value;
 
    /* ------------------------------------------------------------ */
 }

@@ -1,9 +1,8 @@
 ﻿using System.Text;
-using Tetra;
 
-namespace Check;
+namespace Tetra;
 
-internal static class Messages
+public static class TetraMessages
 {
    /* ------------------------------------------------------------ */
    // Functions
@@ -38,12 +37,12 @@ internal static class Messages
    // Static Constructor
    /* ------------------------------------------------------------ */
 
-   static Messages()
+   static TetraMessages()
    {
       var invalidPathComponentCharacters = new StringBuilder();
       var invalidFileNameChars = Path
                                 .GetInvalidFileNameChars()
-                                .Select( x=> x.ToLiteralControlCharacters())
+                                .Select(x => x.ToLiteralControlCharacters())
                                 .ToArray();
 
       invalidPathComponentCharacters.Append($"'{invalidFileNameChars[0]}'");
@@ -55,6 +54,8 @@ internal static class Messages
 
       InvalidPathComponentCharacters = invalidPathComponentCharacters.ToString();
    }
+
+   /* ------------------------------------------------------------ */
 
    /* ------------------------------------------------------------ */
 }

@@ -11,7 +11,7 @@ public static partial class Libraries
    public sealed class Error
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Tetra.Error> Type()
@@ -29,7 +29,7 @@ public static partial class Libraries
    public sealed class SomeError
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<Tetra.Error> Type()
@@ -47,7 +47,7 @@ public static partial class Libraries
    public sealed class TransitiveErrors
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Functions
       /* ------------------------------------------------------------ */
 
       public static Arbitrary<(Tetra.Error, Tetra.Error, Tetra.Error)> Type()

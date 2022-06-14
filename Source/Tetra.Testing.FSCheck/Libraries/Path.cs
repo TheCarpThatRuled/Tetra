@@ -8,15 +8,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class OptionOfInt32
+   public sealed class InvalidPathComponent
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Option<int>> Type()
+      public static Arbitrary<string> String()
          => Generators
-           .Option(Generators.Int32())
+           .InvalidPathComponent()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -26,33 +26,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class SomeOptionOfInt32
+   public sealed class ValidPathComponent
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Option<int>> Type()
+      public static Arbitrary<string> String()
          => Generators
-           .SomeOption(Generators.Int32())
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
-   public sealed class TransitiveOptionsOfInt32
-   {
-      /* ------------------------------------------------------------ */
-      // Functions
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<(Option<int>, Option<int>, Option<int>)> Type()
-         => Generators
-           .Transitive(Generators.TwoUniqueOptions(Generators.Int32()))
+           .ValidPathComponent()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
