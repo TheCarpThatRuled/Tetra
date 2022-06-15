@@ -4,11 +4,11 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.DirectoryComponentTests;
+namespace Check.FileComponentTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.DirectoryComponent)]
+[TestCategory(LocalCategories.FileComponent)]
 // ReSharper disable once InconsistentNaming
 public class Equals
 {
@@ -17,7 +17,7 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //DirectoryComponent_AND_obj_is_null_or_a_non_equatable_type
+   //FileComponent_AND_obj_is_null_or_a_non_equatable_type
    //WHEN
    //Equals_AND_obj_is_a_nullable_object
    //THEN
@@ -25,22 +25,22 @@ public class Equals
 
    [TestMethod]
    public void
-      GIVEN_DirectoryComponent_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
+      GIVEN_FileComponent_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(DirectoryComponent directoryComponent,
+      static Property Property(FileComponent fileComponent,
                                object? obj)
       {
          //Act
-         var actual = directoryComponent.Equals(obj);
+         var actual = fileComponent.Equals(obj);
 
          //Assert
          return IsFalse(actual);
       }
 
       Arb.Register<ObjIsNullOrANonEquatableType>();
-      Arb.Register<Libraries.DirectoryComponent>();
+      Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<DirectoryComponent, object?>(Property)
+      Prop.ForAll<FileComponent, object?>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -69,19 +69,19 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //DirectoryComponent
+   //FileComponent
    //WHEN
    //Equals_AND_obj_is_a_nullable_object
    //THEN
    //is_reflexive
 
    [TestMethod]
-   public void GIVEN_DirectoryComponent_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
+   public void GIVEN_FileComponent_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
    {
-      static Property Property(DirectoryComponent original)
+      static Property Property(FileComponent original)
       {
          //Arrange
-         var copy = DirectoryComponent.Create(original.Value());
+         var copy = FileComponent.Create(original.Value());
 
          //Act
          //Assert
@@ -89,34 +89,34 @@ public class Equals
                                   copy);
       }
 
-      Arb.Register<Libraries.DirectoryComponent>();
+      Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<DirectoryComponent>(Property)
+      Prop.ForAll<FileComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //DirectoryComponent
+   //FileComponent
    //WHEN
    //Equals_AND_obj_is_a_nullable_object
    //THEN
    //is_symmetric
 
    [TestMethod]
-   public void GIVEN_DirectoryComponent_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_symmetric()
+   public void GIVEN_FileComponent_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_symmetric()
    {
-      Arb.Register<Libraries.DirectoryComponent>();
+      Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<DirectoryComponent, DirectoryComponent>(EqualsIsSymmetric)
+      Prop.ForAll<FileComponent, FileComponent>(EqualsIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //DirectoryComponent
+   //FileComponent
    //WHEN
    //Equals
    //AND
@@ -125,30 +125,30 @@ public class Equals
    //is_transitive
 
    [TestMethod]
-   public void GIVEN_DirectoryComponent_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
+   public void GIVEN_FileComponent_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveDirectoryComponents>();
+      Arb.Register<Libraries.TransitiveFileComponents>();
 
-      Prop.ForAll<(DirectoryComponent, DirectoryComponent, DirectoryComponent)>(EqualsIsTransitive<DirectoryComponent>)
+      Prop.ForAll<(FileComponent, FileComponent, FileComponent)>(EqualsIsTransitive<FileComponent>)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // bool Equals(DirectoryComponent? other)
+   // bool Equals(FileComponent? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //DirectoryComponent_AND_other_is_null
+   //FileComponent_AND_other_is_null
    //WHEN
-   //Equals_AND_other_is_a_nullable_DirectoryComponent
+   //Equals_AND_other_is_a_nullable_FileComponent
    //THEN
    //false_is_returned
 
    [TestMethod]
    public void
-      GIVEN_DirectoryComponent_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_DirectoryComponent_THEN_false_is_returned()
+      GIVEN_FileComponent_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_FileComponent_THEN_false_is_returned()
    {
-      static Property Property(DirectoryComponent value)
+      static Property Property(FileComponent value)
       {
          //act
          var actual = value.Equals(null);
@@ -157,29 +157,29 @@ public class Equals
          return IsFalse(actual);
       }
 
-      Arb.Register<Libraries.DirectoryComponent>();
+      Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<DirectoryComponent>(Property)
+      Prop.ForAll<FileComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //DirectoryComponent_AND_this_is_a_some
+   //FileComponent_AND_this_is_a_some
    //WHEN
-   //Equals_AND_other_is_a_nullable_DirectoryComponent
+   //Equals_AND_other_is_a_nullable_FileComponent
    //THEN
    //is_reflexive
 
    [TestMethod]
    public void
-      GIVEN_DirectoryComponent_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_nullable_DirectoryComponent_THEN_is_reflexive()
+      GIVEN_FileComponent_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_nullable_FileComponent_THEN_is_reflexive()
    {
-      static Property Property(DirectoryComponent original)
+      static Property Property(FileComponent original)
       {
          //Arrange
-         var copy     = DirectoryComponent.Create(original.Value());
+         var copy     = FileComponent.Create(original.Value());
 
          //Act
          //Assert
@@ -187,45 +187,45 @@ public class Equals
                                       copy);
       }
 
-      Arb.Register<Libraries.DirectoryComponent>();
+      Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<DirectoryComponent>(Property)
+      Prop.ForAll<FileComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //DirectoryComponent
+   //FileComponent
    //WHEN
-   //Equals_AND_other_is_a_nullable_DirectoryComponent
+   //Equals_AND_other_is_a_nullable_FileComponent
    //THEN
    //is_symmetric
 
    [TestMethod]
-   public void GIVEN_DirectoryComponent_WHEN_Equals_AND_other_is_a_nullable_DirectoryComponent_THEN_is_symmetric()
+   public void GIVEN_FileComponent_WHEN_Equals_AND_other_is_a_nullable_FileComponent_THEN_is_symmetric()
    {
-      Arb.Register<Libraries.DirectoryComponent>();
+      Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<DirectoryComponent, DirectoryComponent>(IEquatableIsSymmetric)
+      Prop.ForAll<FileComponent, FileComponent>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //DirectoryComponent
+   //FileComponent
    //WHEN
-   //Equals_AND_other_is_a_nullable_DirectoryComponent
+   //Equals_AND_other_is_a_nullable_FileComponent
    //THEN
    //is_transitive
 
    [TestMethod]
-   public void GIVEN_DirectoryComponent_WHEN_Equals_AND_other_is_a_nullable_DirectoryComponent_THEN_is_transitive()
+   public void GIVEN_FileComponent_WHEN_Equals_AND_other_is_a_nullable_FileComponent_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveDirectoryComponents>();
+      Arb.Register<Libraries.TransitiveFileComponents>();
 
-      Prop.ForAll<(DirectoryComponent, DirectoryComponent, DirectoryComponent)>(IEquatableIsTransitive<DirectoryComponent>)
+      Prop.ForAll<(FileComponent, FileComponent, FileComponent)>(IEquatableIsTransitive<FileComponent>)
           .QuickCheckThrowOnFailure();
    }
 

@@ -33,31 +33,42 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
    /* ------------------------------------------------------------ */
 
    public override bool Equals(object? obj)
-      => base.Equals(obj);
+      => ReferenceEquals(this,
+                         obj)
+      || obj is DirectoryComponent directoryComponent
+      && Equals(directoryComponent);
 
    /* ------------------------------------------------------------ */
 
    public override int GetHashCode()
-      => base.GetHashCode();
+      => StringComparer
+        .OrdinalIgnoreCase
+        .GetHashCode(_value);
 
    /* ------------------------------------------------------------ */
 
    public override string ToString()
-      => base.ToString();
+      => $"<{_value}>";
 
    /* ------------------------------------------------------------ */
    // IComparable<DirectoryComponent> Methods
    /* ------------------------------------------------------------ */
 
    public int CompareTo(DirectoryComponent? other)
-      => throw new NotImplementedException();
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Compare(_value,
+                 other?._value);
 
    /* ------------------------------------------------------------ */
    // IEquatable<DirectoryComponent> Methods
    /* ------------------------------------------------------------ */
 
    public bool Equals(DirectoryComponent? other)
-      => throw new NotImplementedException();
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Equals(_value,
+                other?._value);
 
    /* ------------------------------------------------------------ */
    // Properties

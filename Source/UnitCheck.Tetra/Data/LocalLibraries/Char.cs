@@ -4,7 +4,7 @@ using Tetra.Testing;
 
 namespace Check;
 
-internal static class LocalLibraries
+internal static partial class LocalLibraries
 {
    /* ------------------------------------------------------------ */
 
