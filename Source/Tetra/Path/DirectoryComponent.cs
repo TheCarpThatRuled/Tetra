@@ -78,17 +78,17 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
       => _value;
 
    /* ------------------------------------------------------------ */
+   // Protected Constructors
+   /* ------------------------------------------------------------ */
+
+   protected DirectoryComponent(string value)
+      => _value = value;
+
+   /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
    private readonly string _value;
-   
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private DirectoryComponent(string value)
-      => _value = value;
 
    /* ------------------------------------------------------------ */
 }

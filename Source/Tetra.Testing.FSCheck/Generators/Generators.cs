@@ -8,6 +8,34 @@ public static partial class Generators
    // Functions
    /* ------------------------------------------------------------ */
 
+   public static Gen<T[]> ArrayOf<T>(Gen<T> source)
+      => Gen
+        .ListOf(source)
+        .Select(x=> x.ToArray());
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<List<T>> ListOf<T>(Gen<T> source)
+      => Gen
+        .ListOf(source)
+        .Select(x => x.ToList());
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<T[]> NonEmptyArrayOf<T>(Gen<T> source)
+      => Gen
+        .NonEmptyListOf(source)
+        .Select(x => x.ToArray());
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<List<T>> NonEmptyListOf<T>(Gen<T> source)
+      => Gen
+        .NonEmptyListOf(source)
+        .Select(x => x.ToList());
+
+   /* ------------------------------------------------------------ */
+
    public static Gen<T> NonNull<T>(Gen<T> source)
       where T : class
       => source

@@ -26,6 +26,24 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
+   public sealed class ListOfFileComponents
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<List<Tetra.FileComponent>> Type()
+         => Generators
+           .ListOf(Generators.FileComponent())
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
    public sealed class ThreeUniqueFileComponents
    {
       /* ------------------------------------------------------------ */
