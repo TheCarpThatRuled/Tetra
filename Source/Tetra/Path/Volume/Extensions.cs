@@ -22,4 +22,20 @@ public static class Volume_Extensions
                 directories);
 
    /* ------------------------------------------------------------ */
+
+   public static VolumeRootedFilePath Append(this Volume   volume,
+                                             FileComponent file)
+      => VolumeRootedFilePath
+        .Create(volume,
+                Array.Empty<DirectoryComponent>(),
+                file);
+
+   /* ------------------------------------------------------------ */
+
+   public static VolumeRootedDirectoryPath ToDirectoryPath(this Volume volume)
+      => VolumeRootedDirectoryPath
+        .Create(volume,
+                Array.Empty<DirectoryComponent>());
+
+   /* ------------------------------------------------------------ */
 }
