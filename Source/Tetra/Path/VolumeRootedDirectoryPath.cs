@@ -5,7 +5,7 @@ namespace Tetra;
 public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
 {
    /* ------------------------------------------------------------ */
-   // Factory Methods
+   // Factory Functions
    /* ------------------------------------------------------------ */
 
    public static VolumeRootedDirectoryPath Create(string potentialPath)
@@ -16,27 +16,44 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
    }
 
    /* ------------------------------------------------------------ */
-   
+
    public static VolumeRootedDirectoryPath Create(Volume                                  volume,
                                                   IReadOnlyCollection<DirectoryComponent> directories)
    {
-      var path = new StringBuilder(volume.Value());
-      path.Append(Path.DirectorySeparatorChar);
+      var path = new StringBuilder();
 
-      foreach (var directory in directories)
-      {
-         path.Append(directory.Value());
-         path.Append(Path.DirectorySeparatorChar);
-      }
+      PathBuilder.Combine(path,
+                          volume,
+                          directories);
 
-      return new(null,
-                 null,
+      return new(volume,
+                 directories,
                  path.ToString());
    }
 
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
+
+   public VolumeRootedDirectoryPath Append(params DirectoryComponent[] directories)
+      => Create(_volume,
+                _directories.Concat(directories)
+                            .ToArray());
+
+   /* ------------------------------------------------------------ */
+
+   public VolumeRootedDirectoryPath Append(IEnumerable<DirectoryComponent> directories)
+      => Create(_volume,
+                _directories.Concat(directories)
+                            .ToArray());
+
+   /* ------------------------------------------------------------ */
+
+   public VolumeRootedFilePath Append(FileComponent file)
+      => VolumeRootedFilePath
+        .Create(_volume,
+                _directories,
+                file);
 
    /* ------------------------------------------------------------ */
    // Protected Constructors
@@ -45,11 +62,18 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
    protected VolumeRootedDirectoryPath(Volume                                  volume,
                                        IReadOnlyCollection<DirectoryComponent> directories,
                                        string                                  value)
-      : base(value) { }
+      : base(value)
+   {
+      _volume      = volume;
+      _directories = directories;
+   }
 
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
+
+   private readonly Volume                                  _volume;
+   private readonly IReadOnlyCollection<DirectoryComponent> _directories;
 
    /* ------------------------------------------------------------ */
 }

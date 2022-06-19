@@ -5,7 +5,7 @@ namespace Tetra;
 public class VolumeRootedFilePath : AbsoluteFilePath
 {
    /* ------------------------------------------------------------ */
-   // Factory Methods
+   // Factory Functions
    /* ------------------------------------------------------------ */
 
    public static VolumeRootedFilePath Create(string potentialPath)
@@ -22,20 +22,16 @@ public class VolumeRootedFilePath : AbsoluteFilePath
                                              IReadOnlyCollection<DirectoryComponent> directories,
                                              FileComponent                           file)
    {
-      var path = new StringBuilder(volume.Value());
-      path.Append(Path.DirectorySeparatorChar);
+      var path = new StringBuilder();
 
-      foreach (var directory in directories)
-      {
-         path.Append(directory.Value());
-         path.Append(Path.DirectorySeparatorChar);
-      }
+      PathBuilder.Combine(path,
+                          volume,
+                          directories,
+                          file);
 
-      path.Append(file.Value());
-
-      return new(null,
-                 null,
-                 null,
+      return new(volume,
+                 directories,
+                 file,
                  path.ToString());
    }
 

@@ -8,6 +8,24 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
+   public sealed class ArrayOfDirectoryComponents
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<Tetra.DirectoryComponent[]> Type()
+         => Generators
+           .ArrayOf(Generators.DirectoryComponent())
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
    public sealed class DirectoryComponent
    {
       /* ------------------------------------------------------------ */
