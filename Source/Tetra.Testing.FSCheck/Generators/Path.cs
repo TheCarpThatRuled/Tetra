@@ -47,4 +47,12 @@ partial class Generators
                             .Contains(character));
 
    /* ------------------------------------------------------------ */
+
+   public static Gen<string> ValidVolumeRootedPath()
+      => AsciiLetter()
+        .Combine(ListOf(ValidPathComponent()),
+                 (volume,
+                  directories) => $"{volume}:{Path.DirectorySeparatorChar}{directories.Aggregate(string.Empty, (total, next) => $"{total}{next}{Path.DirectorySeparatorChar}")}");
+
+   /* ------------------------------------------------------------ */
 }

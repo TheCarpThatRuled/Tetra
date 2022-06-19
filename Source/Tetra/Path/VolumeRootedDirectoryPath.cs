@@ -8,6 +8,15 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
    // Factory Methods
    /* ------------------------------------------------------------ */
 
+   public static VolumeRootedDirectoryPath Create(string potentialPath)
+   {
+      return new(null,
+                 null,
+                 potentialPath);
+   }
+
+   /* ------------------------------------------------------------ */
+   
    public static VolumeRootedDirectoryPath Create(Volume                                  volume,
                                                   IReadOnlyCollection<DirectoryComponent> directories)
    {

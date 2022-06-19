@@ -9,10 +9,10 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<VolumeRootedDirectoryPath> VolumeRootedDirectoryPath()
-      => Volume()
-        .Combine(ListOf(DirectoryComponent()),
-                 Tetra.VolumeRootedDirectoryPath
-                      .Create);
+      => ValidVolumeRootedPath()
+        .Select(Tetra
+               .VolumeRootedDirectoryPath
+               .Create);
 
    /* ------------------------------------------------------------ */
 
@@ -25,6 +25,15 @@ partial class Generators
                                                                  tuple.Item3.Value())
                      && !StringComparer.OrdinalIgnoreCase.Equals(tuple.Item2.Value(),
                                                                  tuple.Item3.Value()));
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<(VolumeRootedDirectoryPath, VolumeRootedDirectoryPath)> TwoIdenticalVolumeRootedDirectoryPaths()
+      => ValidVolumeRootedPath()
+        .Select(path => (Tetra.VolumeRootedDirectoryPath
+                                       .Create(path),
+                                  Tetra.VolumeRootedDirectoryPath
+                                       .Create(path)));
 
    /* ------------------------------------------------------------ */
 

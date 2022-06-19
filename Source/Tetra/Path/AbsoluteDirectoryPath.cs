@@ -8,39 +8,42 @@ public abstract class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>
    /* ------------------------------------------------------------ */
 
    public override bool Equals(object? obj)
-      => default;
-   //=> ReferenceEquals(this,
-   //                   obj)
-   //|| obj is AbsoluteDirectoryPath path
-   //&& Equals(path);
+      => ReferenceEquals(this,
+                         obj)
+      || obj is AbsoluteDirectoryPath path
+      && Equals(path);
 
    /* ------------------------------------------------------------ */
 
    public override int GetHashCode()
-      => default;
-   //    => StringComparer
-   //      .OrdinalIgnoreCase
-   //      .GetHashCode(_value);
+      => StringComparer
+        .OrdinalIgnoreCase
+        .GetHashCode(_value);
 
    /* ------------------------------------------------------------ */
 
    public override string ToString()
-      => string.Empty;
-   //=> $"<{_value}>";
+      => $"<{_value}>";
 
    /* ------------------------------------------------------------ */
    // IComparable<FileComponent> Methods
    /* ------------------------------------------------------------ */
 
    public int CompareTo(AbsoluteDirectoryPath? other)
-      => throw new NotImplementedException();
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Compare(_value,
+                 other?._value);
 
    /* ------------------------------------------------------------ */
    // IEquatable<FileComponent> Methods
    /* ------------------------------------------------------------ */
 
    public bool Equals(AbsoluteDirectoryPath? other)
-      => throw new NotImplementedException();
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Equals(_value,
+                other?._value);
 
    /* ------------------------------------------------------------ */
    // Properties

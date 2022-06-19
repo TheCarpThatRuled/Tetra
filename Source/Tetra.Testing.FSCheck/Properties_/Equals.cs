@@ -116,6 +116,20 @@ partial class Properties
    /* ------------------------------------------------------------ */
 
    // ReSharper disable once InconsistentNaming
+   public static Property IEquatableIsTransitive<TBase,TConcrete>((TConcrete a, TConcrete b, TConcrete c) values)
+      where TConcrete : notnull, TBase, IEquatable<TBase>
+   {
+      var aEqualB = values.a.Equals(values.b);
+      var bEqualC = values.b.Equals(values.c);
+      var aEqualC = values.a.Equals(values.c);
+
+      return ((aEqualB == bEqualC) == aEqualC)
+        .Label($"object.Equals is not transitive: a == b: {aEqualB}, b == c: {bEqualC}, a == c: {aEqualC}");
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once InconsistentNaming
    public static Property IEquatableIsTransitive<T0, T1>((T0 a, T1 b, T1 c) values)
       where T0 : notnull, IEquatable<T1>
       where T1 : notnull

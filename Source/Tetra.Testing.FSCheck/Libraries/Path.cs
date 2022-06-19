@@ -41,4 +41,22 @@ public static partial class Libraries
    }
 
    /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class ValidVolumeRootedPath
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<string> String()
+         => Generators
+           .ValidVolumeRootedPath()
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
 }

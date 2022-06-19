@@ -4,11 +4,11 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeTests;
+namespace Check.DirectoryComponentTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Volume)]
+[TestCategory(LocalCategories.DirectoryComponent)]
 // ReSharper disable once InconsistentNaming
 public class Equals
 {
@@ -17,7 +17,7 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Volume_AND_obj_is_null_or_a_non_equatable_type
+   //DirectoryComponent_AND_obj_is_null_or_a_non_equatable_type
    //WHEN
    //Equals_AND_obj_is_a_nullable_object
    //THEN
@@ -25,22 +25,22 @@ public class Equals
 
    [TestMethod]
    public void
-      GIVEN_Volume_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
+      GIVEN_DirectoryComponent_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(Volume volume,
+      static Property Property(DirectoryComponent directoryComponent,
                                object? obj)
       {
          //Act
-         var actual = volume.Equals(obj);
+         var actual = directoryComponent.Equals(obj);
 
          //Assert
          return IsFalse(actual);
       }
 
       Arb.Register<ObjIsNullOrANonEquatableType>();
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.DirectoryComponent>();
 
-      Prop.ForAll<Volume, object?>(Property)
+      Prop.ForAll<DirectoryComponent, object?>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -69,19 +69,19 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Volume
+   //DirectoryComponent
    //WHEN
    //Equals_AND_obj_is_a_nullable_object
    //THEN
    //is_reflexive
 
    [TestMethod]
-   public void GIVEN_Volume_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
+   public void GIVEN_DirectoryComponent_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
    {
-      static Property Property(Volume original)
+      static Property Property(DirectoryComponent original)
       {
          //Arrange
-         var copy = Volume.Create(original.Value()[0]);
+         var copy = DirectoryComponent.Create(original.Value());
 
          //Act
          //Assert
@@ -89,34 +89,34 @@ public class Equals
                                   copy);
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.DirectoryComponent>();
 
-      Prop.ForAll<Volume>(Property)
+      Prop.ForAll<DirectoryComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Volume
+   //DirectoryComponent
    //WHEN
    //Equals_AND_obj_is_a_nullable_object
    //THEN
    //is_symmetric
 
    [TestMethod]
-   public void GIVEN_Volume_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_symmetric()
+   public void GIVEN_DirectoryComponent_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_symmetric()
    {
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.DirectoryComponent>();
 
-      Prop.ForAll<Volume, Volume>(EqualsIsSymmetric)
+      Prop.ForAll<DirectoryComponent, DirectoryComponent>(EqualsIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Volume
+   //DirectoryComponent
    //WHEN
    //Equals
    //AND
@@ -125,30 +125,30 @@ public class Equals
    //is_transitive
 
    [TestMethod]
-   public void GIVEN_Volume_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
+   public void GIVEN_DirectoryComponent_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveVolumes>();
+      Arb.Register<Libraries.TransitiveDirectoryComponents>();
 
-      Prop.ForAll<(Volume, Volume, Volume)>(EqualsIsTransitive<Volume>)
+      Prop.ForAll<(DirectoryComponent, DirectoryComponent, DirectoryComponent)>(EqualsIsTransitive<DirectoryComponent>)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // bool Equals(Volume? other)
+   // bool Equals(DirectoryComponent? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Volume_AND_other_is_null
+   //DirectoryComponent_AND_other_is_null
    //WHEN
-   //Equals_AND_other_is_a_nullable_Volume
+   //Equals_AND_other_is_a_nullable_DirectoryComponent
    //THEN
    //false_is_returned
 
    [TestMethod]
    public void
-      GIVEN_Volume_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_Volume_THEN_false_is_returned()
+      GIVEN_DirectoryComponent_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_DirectoryComponent_THEN_false_is_returned()
    {
-      static Property Property(Volume value)
+      static Property Property(DirectoryComponent value)
       {
          //act
          var actual = value.Equals(null);
@@ -157,29 +157,29 @@ public class Equals
          return IsFalse(actual);
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.DirectoryComponent>();
 
-      Prop.ForAll<Volume>(Property)
+      Prop.ForAll<DirectoryComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Volume_AND_this_is_a_some
+   //DirectoryComponent_AND_this_is_a_some
    //WHEN
-   //Equals_AND_other_is_a_nullable_Volume
+   //Equals_AND_other_is_a_nullable_DirectoryComponent
    //THEN
    //is_reflexive
 
    [TestMethod]
    public void
-      GIVEN_Volume_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_nullable_Volume_THEN_is_reflexive()
+      GIVEN_DirectoryComponent_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_nullable_DirectoryComponent_THEN_is_reflexive()
    {
-      static Property Property(Volume original)
+      static Property Property(DirectoryComponent original)
       {
          //Arrange
-         var copy     = Volume.Create(original.Value()[0]);
+         var copy     = DirectoryComponent.Create(original.Value());
 
          //Act
          //Assert
@@ -187,45 +187,45 @@ public class Equals
                                       copy);
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.DirectoryComponent>();
 
-      Prop.ForAll<Volume>(Property)
+      Prop.ForAll<DirectoryComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Volume
+   //DirectoryComponent
    //WHEN
-   //Equals_AND_other_is_a_nullable_Volume
+   //Equals_AND_other_is_a_nullable_DirectoryComponent
    //THEN
    //is_symmetric
 
    [TestMethod]
-   public void GIVEN_Volume_WHEN_Equals_AND_other_is_a_nullable_Volume_THEN_is_symmetric()
+   public void GIVEN_DirectoryComponent_WHEN_Equals_AND_other_is_a_nullable_DirectoryComponent_THEN_is_symmetric()
    {
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.DirectoryComponent>();
 
-      Prop.ForAll<Volume, Volume>(IEquatableIsSymmetric)
+      Prop.ForAll<DirectoryComponent, DirectoryComponent>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Volume
+   //DirectoryComponent
    //WHEN
-   //Equals_AND_other_is_a_nullable_Volume
+   //Equals_AND_other_is_a_nullable_DirectoryComponent
    //THEN
    //is_transitive
 
    [TestMethod]
-   public void GIVEN_Volume_WHEN_Equals_AND_other_is_a_nullable_Volume_THEN_is_transitive()
+   public void GIVEN_DirectoryComponent_WHEN_Equals_AND_other_is_a_nullable_DirectoryComponent_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveVolumes>();
+      Arb.Register<Libraries.TransitiveDirectoryComponents>();
 
-      Prop.ForAll<(Volume, Volume, Volume)>(IEquatableIsTransitive<Volume>)
+      Prop.ForAll<(DirectoryComponent, DirectoryComponent, DirectoryComponent)>(IEquatableIsTransitive<DirectoryComponent>)
           .QuickCheckThrowOnFailure();
    }
 
