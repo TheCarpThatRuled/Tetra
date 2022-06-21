@@ -9,7 +9,7 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<VolumeRootedDirectoryPath> VolumeRootedDirectoryPath()
-      => ValidVolumeRootedPath()
+      => ValidPathWithVolumeRootAndTrailingDirectorySeparator()
         .Select(Tetra
                .VolumeRootedDirectoryPath
                .Create);
@@ -29,7 +29,7 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<(VolumeRootedDirectoryPath, VolumeRootedDirectoryPath)> TwoIdenticalVolumeRootedDirectoryPaths()
-      => ValidVolumeRootedPath()
+      => ValidPathWithVolumeRootAndTrailingDirectorySeparator()
         .Select(path => (Tetra.VolumeRootedDirectoryPath
                                        .Create(path),
                                   Tetra.VolumeRootedDirectoryPath

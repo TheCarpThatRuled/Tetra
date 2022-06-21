@@ -44,7 +44,7 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class ValidVolumeRootedPath
+   public sealed class ValidPathWithoutRoot
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -52,7 +52,43 @@ public static partial class Libraries
 
       public static Arbitrary<string> String()
          => Generators
-           .ValidVolumeRootedPath()
+           .ValidPathWithoutRoot()
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class ValidPathWithVolumeRootAndTrailingDirectorySeparator
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<string> String()
+         => Generators
+           .ValidPathWithVolumeRootAndTrailingDirectorySeparator()
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<string> String()
+         => Generators
+           .ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

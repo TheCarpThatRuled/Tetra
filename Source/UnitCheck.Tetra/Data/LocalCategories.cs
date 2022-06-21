@@ -6,6 +6,7 @@ internal static class LocalCategories
    // Constants
    /* ------------------------------------------------------------ */
 
+   public const string Array                     = nameof(System.Array);
    public const string Char                      = nameof(System.Char);
    public const string Condition                 = nameof(Tetra.Condition);
    public const string DirectoryComponent        = nameof(Tetra.DirectoryComponent);
@@ -14,7 +15,9 @@ internal static class LocalCategories
    public const string Failure                   = nameof(Tetra.Failure);
    public const string FileComponent             = nameof(Tetra.FileComponent);
    public const string Function                  = nameof(Tetra.Function);
+   public const string IReadOnlyList             = nameof(IReadOnlyList);
    public const string Left                      = nameof(Left);
+   public const string List                      = nameof(List);
    public const string Message                   = nameof(Tetra.Message);
    public const string Option                    = nameof(Tetra.Option);
    public const string Result                    = nameof(Tetra.Result);

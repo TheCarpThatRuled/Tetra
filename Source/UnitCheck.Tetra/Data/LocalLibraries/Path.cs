@@ -82,7 +82,7 @@ partial class LocalLibraries
 
       public static Arbitrary<(string first, string second)> Type()
          => Generators
-           .ValidVolumeRootedPath()
+           .ValidPathWithVolumeRootAndTrailingDirectorySeparator()
            .Select(path => (path,
                             path.ToLowerInvariant()))
            .ToArbitrary();
@@ -100,7 +100,7 @@ partial class LocalLibraries
 
       public static Arbitrary<(string first, string second)> Type()
          => Generators
-           .ValidVolumeRootedPath()
+           .ValidPathWithVolumeRootAndTrailingDirectorySeparator()
            .TwoValueTuples()
            .Where(tuple => StringComparer
                           .OrdinalIgnoreCase
@@ -124,7 +124,7 @@ partial class LocalLibraries
 
       public static Arbitrary<(string first, string second)> Type()
          => Generators
-           .ValidVolumeRootedPath()
+           .ValidPathWithVolumeRootAndTrailingDirectorySeparator()
            .TwoValueTuples()
            .Where(tuple => StringComparer
                           .OrdinalIgnoreCase

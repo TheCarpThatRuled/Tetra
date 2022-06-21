@@ -48,11 +48,47 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<string> ValidVolumeRootedPath()
+   public static Gen<string> ValidPathWithoutRoot()
+      => Gen
+        .OneOf(ValidPathWithoutRootAndTrailingDirectorySeparator(),
+               ValidPathWithoutRootButWithTrailingDirectorySeparator());
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<string> ValidPathWithoutRootAndTrailingDirectorySeparator()
+      => NonEmptyListOf(ValidPathComponent())
+        .Select(directories => directories.ToDelimitedString(Path.DirectorySeparatorChar.ToString()));
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<string> ValidPathWithoutRootButWithTrailingDirectorySeparator()
+      => NonEmptyListOf(ValidPathComponent())
+        .Select(directories => directories.Aggregate(string.Empty,
+                                                     (total,
+                                                      next) => $"{total}{next}{Path.DirectorySeparatorChar}"));
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<string> ValidPathWithVolumeRoot()
+      => Gen
+        .OneOf(ValidPathWithVolumeRootAndTrailingDirectorySeparator(),
+               ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator());
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<string> ValidPathWithVolumeRootAndTrailingDirectorySeparator()
       => AsciiLetter()
         .Combine(ListOf(ValidPathComponent()),
                  (volume,
                   directories) => $"{volume}:{Path.DirectorySeparatorChar}{directories.Aggregate(string.Empty, (total, next) => $"{total}{next}{Path.DirectorySeparatorChar}")}");
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<string> ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator()
+      => AsciiLetter()
+        .Combine(ValidPathWithoutRootAndTrailingDirectorySeparator(),
+                 (volume,
+                  directories) => $"{volume}:{Path.DirectorySeparatorChar}{directories}");
 
    /* ------------------------------------------------------------ */
 }

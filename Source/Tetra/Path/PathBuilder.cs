@@ -49,6 +49,20 @@ internal static class PathBuilder
 
    /* ------------------------------------------------------------ */
 
+   public static string Combine(Volume                          volume,
+                                IEnumerable<DirectoryComponent> directories)
+   {
+      var path = new StringBuilder();
+
+      Combine(path,
+              volume,
+              directories);
+
+      return path.ToString();
+   }
+
+   /* ------------------------------------------------------------ */
+
    public static void Combine(StringBuilder                   path,
                               Volume                          volume,
                               IEnumerable<DirectoryComponent> directories,
@@ -60,6 +74,22 @@ internal static class PathBuilder
 
       Add(path,
           file);
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public static string Combine(Volume                          volume,
+                                IEnumerable<DirectoryComponent> directories,
+                                FileComponent                   file)
+   {
+      var path = new StringBuilder();
+
+      Combine(path,
+              volume,
+              directories,
+              file);
+
+      return path.ToString();
    }
 
    /* ------------------------------------------------------------ */

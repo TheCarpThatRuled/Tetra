@@ -39,7 +39,7 @@ public class ToString
                          actual);
       }
 
-      Arb.Register<Libraries.ValidVolumeRootedPath>();
+      Arb.Register<Libraries.ValidPathWithVolumeRootAndTrailingDirectorySeparator>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();

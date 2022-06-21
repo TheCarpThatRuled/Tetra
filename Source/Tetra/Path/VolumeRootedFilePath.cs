@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace Tetra;
+﻿namespace Tetra;
 
 public class VolumeRootedFilePath : AbsoluteFilePath
 {
@@ -12,8 +10,8 @@ public class VolumeRootedFilePath : AbsoluteFilePath
    {
       return new(null,
                  null,
-                 null,
-                 potentialPath);
+                 potentialPath,
+                 null);
    }
 
    /* ------------------------------------------------------------ */
@@ -21,37 +19,53 @@ public class VolumeRootedFilePath : AbsoluteFilePath
    public static VolumeRootedFilePath Create(Volume                                  volume,
                                              IReadOnlyCollection<DirectoryComponent> directories,
                                              FileComponent                           file)
+      => new(null,
+             null,
+             PathBuilder.Combine(volume,
+                                 directories,
+                                 file),
+             null);
+
+   /* ------------------------------------------------------------ */
+
+   public static Result<VolumeRootedFilePath> Parse(string potentialPath)
    {
-      var path = new StringBuilder();
-
-      PathBuilder.Combine(path,
-                          volume,
-                          directories,
-                          file);
-
-      return new(volume,
-                 directories,
-                 file,
-                 path.ToString());
+      return new VolumeRootedFilePath(null,
+                                      null,
+                                      potentialPath,
+                                      null);
    }
 
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
+   public VolumeRootedDirectoryPath Parent()
+      => VolumeRootedDirectoryPath
+        .Create("C:\\");
+
    /* ------------------------------------------------------------ */
    // Protected Constructors
    /* ------------------------------------------------------------ */
 
-   protected VolumeRootedFilePath(Volume                                  volume,
-                                  IReadOnlyCollection<DirectoryComponent> directories,
+   protected VolumeRootedFilePath(IReadOnlyCollection<DirectoryComponent> directories,
                                   FileComponent                           file,
-                                  string                                  value)
-      : base(value) { }
+                                  string                                  value,
+                                  Volume                                  volume)
+      : base(value)
+   {
+      _directories = directories;
+      _file        = file;
+      _volume      = volume;
+   }
 
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
+
+   private readonly IReadOnlyCollection<DirectoryComponent> _directories;
+   private readonly FileComponent                           _file;
+   private readonly Volume                                  _volume;
 
    /* ------------------------------------------------------------ */
 }

@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace Tetra;
+﻿namespace Tetra;
 
 public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
 {
@@ -10,25 +8,45 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
 
    public static VolumeRootedDirectoryPath Create(string potentialPath)
    {
-      return new(null,
-                 null,
-                 potentialPath);
+      var components = potentialPath
+                      .Split(Path.DirectorySeparatorChar,
+                             Path.AltDirectorySeparatorChar)
+                      .ToArray();
+
+      var potentialVolume = components[0];
+
+      if (string.IsNullOrEmpty(potentialVolume)
+       || potentialVolume.Length != 2
+       || potentialVolume[0].IsNotAnAsciiLetter()
+       || potentialVolume[1] != ':')
+      {
+         throw new ArgumentException($"A {nameof(VolumeRootedDirectoryPath)} must start with a volume label",
+                                     nameof(potentialPath));
+      }
+
+      return Create(Volume.Create(potentialVolume[0]),
+                    components.Skip(1)
+                              .Where(x=> !string.IsNullOrEmpty(x))
+                              .Select(DirectoryComponent.Create)
+                              .ToArray());
    }
 
    /* ------------------------------------------------------------ */
 
    public static VolumeRootedDirectoryPath Create(Volume                                  volume,
                                                   IReadOnlyCollection<DirectoryComponent> directories)
+      => new(directories,
+             PathBuilder.Combine(volume,
+                                 directories),
+             volume);
+
+   /* ------------------------------------------------------------ */
+
+   public static Result<VolumeRootedDirectoryPath> Parse(string potentialPath)
    {
-      var path = new StringBuilder();
-
-      PathBuilder.Combine(path,
-                          volume,
-                          directories);
-
-      return new(volume,
-                 directories,
-                 path.ToString());
+      return new VolumeRootedDirectoryPath(null,
+                                           potentialPath,
+                                           null);
    }
 
    /* ------------------------------------------------------------ */
@@ -56,24 +74,30 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
                 file);
 
    /* ------------------------------------------------------------ */
+
+   public Option<VolumeRootedDirectoryPath> Parent()
+      => Option
+        .None();
+
+   /* ------------------------------------------------------------ */
    // Protected Constructors
    /* ------------------------------------------------------------ */
 
-   protected VolumeRootedDirectoryPath(Volume                                  volume,
-                                       IReadOnlyCollection<DirectoryComponent> directories,
-                                       string                                  value)
+   protected VolumeRootedDirectoryPath(IReadOnlyCollection<DirectoryComponent> directories,
+                                       string                                  value,
+                                       Volume                                  volume)
       : base(value)
    {
-      _volume      = volume;
       _directories = directories;
+      _volume      = volume;
    }
 
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly Volume                                  _volume;
    private readonly IReadOnlyCollection<DirectoryComponent> _directories;
+   private readonly Volume                                  _volume;
 
    /* ------------------------------------------------------------ */
 }

@@ -13,7 +13,7 @@ public class Create
 {
    /* ------------------------------------------------------------ */
    // VolumeRootedFilePath Create(Volume volume,
-   //                                  IReadOnlyCollection<DirectoryComponent> directories)
+   //                             IReadOnlyCollection<DirectoryComponent> directories)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -31,12 +31,12 @@ public class Create
                                FileComponent file)
       {
          //Arrange
-         var expected = volume.Value()
-                      + Path.DirectorySeparatorChar
-                      + directories.Aggregate(string.Empty,
-                                              (total,
-                                               next) => $"{total}{next.Value()}{Path.DirectorySeparatorChar}")
-                      + file.Value();
+         var expected = directories
+                       .Select(x => x.Value())
+                       .Prepend(volume.Value())
+                       .Append(file.Value())
+                       .ToArray()
+                       .ToDelimitedString(Path.DirectorySeparatorChar);
 
          //Act
          var actual = VolumeRootedFilePath.Create(volume,
