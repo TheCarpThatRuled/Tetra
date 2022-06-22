@@ -33,4 +33,11 @@ partial class Generators
         .Generator;
 
    /* ------------------------------------------------------------ */
+
+   public static Gen<string> TwoOrMoreAsciiLetters()
+      => ArrayOf(AsciiLetter())
+        .Where(chars => chars.Length > 1)
+        .Select(chars => new string(chars));
+
+   /* ------------------------------------------------------------ */
 }

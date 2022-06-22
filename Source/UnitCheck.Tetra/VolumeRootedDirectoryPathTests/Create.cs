@@ -111,6 +111,82 @@ public class Create
    }
 
    /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //a_path_with_an_invalid_volume_root
+   //WHEN
+   //Create
+   //THEN
+   //an_argument_exception_is_thrown
+
+   [TestMethod]
+   public void GIVEN_a_path_with_an_invalid_volume_root_WHEN_Create_THEN_a_failure_is_returned()
+   {
+      static Property Property(string path)
+      {
+         //Arrange
+         var exception = Option<Exception>.None();
+
+         //Act
+         try
+         {
+            VolumeRootedDirectoryPath.Create(path);
+         }
+         catch (Exception e)
+         {
+            exception = e;
+         }
+
+         //Assert
+         return AnArgumentExceptionWasThrown(exception,
+                                             "A VolumeRootedDirectoryPath must start with a volume label" + " (Parameter 'potentialPath')");
+      }
+
+      Arb.Register<Libraries.PathWithInvalidVolumeRoot>();
+
+      Prop.ForAll<string>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //a_path_with_a_volume_root_and_an_invalid_component
+   //WHEN
+   //Create
+   //THEN
+   //an_argument_exception_is_thrown
+
+   [TestMethod]
+   public void GIVEN_a_path_with_a_volume_root_and_an_invalid_component_WHEN_Create_THEN_a_failure_is_returned()
+   {
+      static Property Property(string path)
+      {
+         //Arrange
+         var exception = Option<Exception>.None();
+
+         //Act
+         try
+         {
+            VolumeRootedDirectoryPath.Create(path);
+         }
+         catch (Exception e)
+         {
+            exception = e;
+         }
+
+         //Assert
+         return AnArgumentExceptionWasThrown(exception,
+                                             "A VolumeRootedDirectoryPath may not contain a component with any of the following characters:" + " (Parameter 'potentialPath')");
+      }
+
+      Arb.Register<Libraries.PathWithAVolumeRootAndAnInvalidComponent>();
+
+      Prop.ForAll<string>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
    // VolumeRootedDirectoryPath Create(Volume volume,
    //                                  IReadOnlyCollection<DirectoryComponent> directories)
    /* ------------------------------------------------------------ */

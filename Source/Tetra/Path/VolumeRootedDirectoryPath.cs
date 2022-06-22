@@ -24,11 +24,20 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
                                      nameof(potentialPath));
       }
 
+      var directoryComponents = components
+                               .Skip(1)
+                               .Where(x => !string.IsNullOrEmpty(x))
+                               .ToArray();
+
+      if (directoryComponents.Any(x => x.IsNotAValidPathComponent()))
+      {
+         throw new ArgumentException($"A {nameof(VolumeRootedDirectoryPath)} may not contain a component with any of the following characters:",
+                                     nameof(potentialPath));
+      }
+
       return Create(Volume.Create(potentialVolume[0]),
-                    components.Skip(1)
-                              .Where(x=> !string.IsNullOrEmpty(x))
-                              .Select(DirectoryComponent.Create)
-                              .ToArray());
+                    directoryComponents.Select(DirectoryComponent.Create)
+                                       .ToArray());
    }
 
    /* ------------------------------------------------------------ */
