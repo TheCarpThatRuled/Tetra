@@ -36,9 +36,28 @@
 
       /* ------------------------------------------------------------ */
 
+      public static string TheResultIsAFailure<T>(Message message)
+         => Result<T>()
+          + IsAFailureWhenWeExpectedItToBeASuccess
+          + "\n"
+          + "Actual message: "
+          + message.Content();
+
+      /* ------------------------------------------------------------ */
+
       public static string TheResultIsAFailure<T>(string name)
          => Result<T>(name)
           + IsAFailureWhenWeExpectedItToBeASuccess;
+
+      /* ------------------------------------------------------------ */
+
+      public static string TheResultIsAFailure<T>(string name,
+                                                  Message message)
+         => Result<T>(name)
+          + IsAFailureWhenWeExpectedItToBeASuccess
+          + "\n"
+          + "Actual message: "
+          + message.Content();
 
       /* ------------------------------------------------------------ */
 

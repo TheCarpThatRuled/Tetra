@@ -9,16 +9,29 @@ public static class String_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static bool IsAValidPathComponent(this string component)
-      => !component.IsNotAValidPathComponent();
+   public static bool IsAValidPathComponent(this string value)
+      => !value.IsNotAValidPathComponent();
 
    /* ------------------------------------------------------------ */
 
-   public static bool IsNotAValidPathComponent(this string component)
-      => component
+   public static bool IsAValidVolumeLabel(this string value)
+      => !value.IsNotAValidVolumeLabel();
+
+   /* ------------------------------------------------------------ */
+
+   public static bool IsNotAValidPathComponent(this string value)
+      => value
         .Any(character => Path
                          .GetInvalidFileNameChars()
                          .Contains(character));
+
+   /* ------------------------------------------------------------ */
+
+   public static bool IsNotAValidVolumeLabel(this string value)
+      => string.IsNullOrEmpty(value)
+      || value.Length != 2
+      || value[0].IsNotAnAsciiLetter()
+      || value[1] != ':';
 
    /* ------------------------------------------------------------ */
 

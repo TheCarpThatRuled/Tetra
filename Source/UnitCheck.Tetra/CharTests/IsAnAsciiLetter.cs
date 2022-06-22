@@ -12,7 +12,7 @@ namespace Check.CharTests;
 public class IsAnAsciiLetter
 {
    /* ------------------------------------------------------------ */
-   // bool IsAnAsciiLetter(char character)
+   // bool IsAnAsciiLetter(this char character)
    /* ------------------------------------------------------------ */
 
    //GIVEN

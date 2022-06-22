@@ -80,7 +80,7 @@ partial class Properties
    public static Property IsASuccess<T>(T         expected,
                                         Result<T> result)
       => result
-        .Reduce(_ => False(TheResultIsAFailure<T>()),
+        .Reduce(failure => False(TheResultIsAFailure<T>(failure.Content())),
                 actual => AreEqual(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(),
                                    expected,
                                    actual.Content()));
@@ -91,7 +91,8 @@ partial class Properties
                                         Result<T> result,
                                         string    name)
       => result
-        .Reduce(_ => False(TheResultIsAFailure<T>(name)),
+        .Reduce(failure => False(TheResultIsAFailure<T>(name,
+                                                        failure.Content())),
                 actual => AreEqual(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(name),
                                    expected,
                                    actual.Content()));
@@ -101,7 +102,7 @@ partial class Properties
    public static Property IsASuccessAnd<T>(Func<Success<T>, bool> property,
                                            Result<T>              result)
       => result
-        .Reduce(_ => False(TheResultIsAFailure<T>()),
+        .Reduce(failure => False(TheResultIsAFailure<T>(failure.Content())),
                 actual => AsProperty(() => property(actual))
                   .Label(Failed.Message(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(),
                                         actual)));
@@ -112,7 +113,8 @@ partial class Properties
                                            Result<T>              result,
                                            string                 name)
       => result
-        .Reduce(_ => False(TheResultIsAFailure<T>(name)),
+        .Reduce(failure => False(TheResultIsAFailure<T>(name,
+                                                        failure.Content())),
                 actual => AsProperty(() => property(actual))
                   .Label(Failed.Message(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(name),
                                         actual)));

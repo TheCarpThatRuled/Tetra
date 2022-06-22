@@ -12,7 +12,7 @@ namespace Check.StringTests;
 public class IsNotAValidPathComponent
 {
    /* ------------------------------------------------------------ */
-   // bool IsAnAsciiLetter(char character)
+   // bool IsNotAValidPathComponent(this string value)
    /* ------------------------------------------------------------ */
 
    //GIVEN

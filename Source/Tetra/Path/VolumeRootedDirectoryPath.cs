@@ -7,7 +7,8 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
    /* ------------------------------------------------------------ */
 
    public static VolumeRootedDirectoryPath Create(string potentialPath)
-      => ParseComponents(potentialPath)
+      => ParseComponents(potentialPath,
+                         typeof(VolumeRootedDirectoryPath))
         .Reduce(failure => throw new ArgumentException(failure.Content()
                                                               .Content(),
                                                        nameof(potentialPath)),
@@ -26,7 +27,8 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
    /* ------------------------------------------------------------ */
 
    public static Result<VolumeRootedDirectoryPath> Parse(string potentialPath)
-      => ParseComponents(potentialPath)
+      => ParseComponents(potentialPath,
+                         typeof(VolumeRootedDirectoryPath))
         .Map(success => new VolumeRootedDirectoryPath(success.Content()
                                                              .directories,
                                                       success.Content()
@@ -79,7 +81,8 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static Result<(Volume volume, IReadOnlyCollection<DirectoryComponent> directories)> ParseComponents(string potentialPath)
+   protected static Result<(Volume volume, IReadOnlyCollection<DirectoryComponent> directories)> ParseComponents(string potentialPath,
+                                                                                                                 Type   callerType)
    {
       var components = potentialPath
                       .Split(Path.DirectorySeparatorChar,
@@ -88,13 +91,9 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
 
       var potentialVolume = components[0];
 
-      if (string.IsNullOrEmpty(potentialVolume)
-       || potentialVolume.Length != 2
-       || potentialVolume[0]
-            .IsNotAnAsciiLetter()
-       || potentialVolume[1] != ':')
+      if (potentialVolume.IsNotAValidVolumeLabel())
       {
-         return Message.Create($"A {nameof(VolumeRootedDirectoryPath)} must start with a volume label");
+         return Message.Create($"A {callerType.Name} must start with a volume label");
       }
 
       var directoryComponents = components
@@ -104,7 +103,7 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
 
       if (directoryComponents.Any(x => x.IsNotAValidPathComponent()))
       {
-         return Message.Create($"A {nameof(VolumeRootedDirectoryPath)} may not contain a component with any of the following characters:");
+         return Message.Create($"A {callerType.Name} may not contain a component with any of the following characters:");
       }
 
       return (Volume.Create(potentialVolume[0]),

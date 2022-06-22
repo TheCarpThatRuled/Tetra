@@ -41,6 +41,25 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
+   public static Gen<string> InvalidVolumeLabelInvalidFirstCharacter()
+      => NonAsciiLetter()
+        .Select(x => $"{x}:");
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<string> InvalidVolumeLabelInvalidSecondCharacter()
+      => AsciiLetter()
+        .Combine(Char().Where(x => x != ':'),
+                 (x, y) => $"{x}{y}");
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<string> InvalidVolumeLabelWrongNumberOfCharacters()
+      => NonNullString()
+        .Where(x => x.Length != 2);
+
+   /* ------------------------------------------------------------ */
+
    public static Gen<string> PathWithInvalidVolumeRoot()
       => Gen
         .OneOf(PathWithInvalidVolumeRootAndTrailingDirectorySeparator(),
@@ -183,6 +202,12 @@ partial class Generators
         .Combine(ValidPathWithoutRootAndTrailingDirectorySeparator(),
                  (volume,
                   directories) => $"{volume}:{Path.DirectorySeparatorChar}{directories}");
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<string> ValidVolumeLabel()
+      => AsciiLetter()
+        .Select((volume) => $"{volume}:");
 
    /* ------------------------------------------------------------ */
 }
