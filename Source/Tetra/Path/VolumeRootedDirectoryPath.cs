@@ -7,56 +7,30 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
    /* ------------------------------------------------------------ */
 
    public static VolumeRootedDirectoryPath Create(string potentialPath)
-   {
-      var components = potentialPath
-                      .Split(Path.DirectorySeparatorChar,
-                             Path.AltDirectorySeparatorChar)
-                      .ToArray();
-
-      var potentialVolume = components[0];
-
-      if (string.IsNullOrEmpty(potentialVolume)
-       || potentialVolume.Length != 2
-       || potentialVolume[0].IsNotAnAsciiLetter()
-       || potentialVolume[1] != ':')
-      {
-         throw new ArgumentException($"A {nameof(VolumeRootedDirectoryPath)} must start with a volume label",
-                                     nameof(potentialPath));
-      }
-
-      var directoryComponents = components
-                               .Skip(1)
-                               .Where(x => !string.IsNullOrEmpty(x))
-                               .ToArray();
-
-      if (directoryComponents.Any(x => x.IsNotAValidPathComponent()))
-      {
-         throw new ArgumentException($"A {nameof(VolumeRootedDirectoryPath)} may not contain a component with any of the following characters:",
-                                     nameof(potentialPath));
-      }
-
-      return Create(Volume.Create(potentialVolume[0]),
-                    directoryComponents.Select(DirectoryComponent.Create)
-                                       .ToArray());
-   }
+      => ParseComponents(potentialPath)
+        .Reduce(failure => throw new ArgumentException(failure.Content()
+                                                              .Content(),
+                                                       nameof(potentialPath)),
+                success => new VolumeRootedDirectoryPath(success.Content()
+                                                                .directories,
+                                                         success.Content()
+                                                                .volume));
 
    /* ------------------------------------------------------------ */
 
    public static VolumeRootedDirectoryPath Create(Volume                                  volume,
                                                   IReadOnlyCollection<DirectoryComponent> directories)
       => new(directories,
-             PathBuilder.Combine(volume,
-                                 directories),
              volume);
 
    /* ------------------------------------------------------------ */
 
    public static Result<VolumeRootedDirectoryPath> Parse(string potentialPath)
-   {
-      return new VolumeRootedDirectoryPath(null,
-                                           potentialPath,
-                                           null);
-   }
+      => ParseComponents(potentialPath)
+        .Map(success => new VolumeRootedDirectoryPath(success.Content()
+                                                             .directories,
+                                                      success.Content()
+                                                             .volume));
 
    /* ------------------------------------------------------------ */
    // Methods
@@ -93,12 +67,49 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
    /* ------------------------------------------------------------ */
 
    protected VolumeRootedDirectoryPath(IReadOnlyCollection<DirectoryComponent> directories,
-                                       string                                  value,
                                        Volume                                  volume)
-      : base(value)
+      : base(PathBuilder.Combine(volume,
+                                 directories))
    {
       _directories = directories;
       _volume      = volume;
+   }
+
+   /* ------------------------------------------------------------ */
+   // Protected Methods
+   /* ------------------------------------------------------------ */
+
+   protected static Result<(Volume volume, IReadOnlyCollection<DirectoryComponent> directories)> ParseComponents(string potentialPath)
+   {
+      var components = potentialPath
+                      .Split(Path.DirectorySeparatorChar,
+                             Path.AltDirectorySeparatorChar)
+                      .ToArray();
+
+      var potentialVolume = components[0];
+
+      if (string.IsNullOrEmpty(potentialVolume)
+       || potentialVolume.Length != 2
+       || potentialVolume[0]
+            .IsNotAnAsciiLetter()
+       || potentialVolume[1] != ':')
+      {
+         return Message.Create($"A {nameof(VolumeRootedDirectoryPath)} must start with a volume label");
+      }
+
+      var directoryComponents = components
+                               .Skip(1)
+                               .Where(x => !string.IsNullOrEmpty(x))
+                               .ToArray();
+
+      if (directoryComponents.Any(x => x.IsNotAValidPathComponent()))
+      {
+         return Message.Create($"A {nameof(VolumeRootedDirectoryPath)} may not contain a component with any of the following characters:");
+      }
+
+      return (Volume.Create(potentialVolume[0]),
+              directoryComponents.Select(DirectoryComponent.Create)
+                                 .ToArray());
    }
 
    /* ------------------------------------------------------------ */
