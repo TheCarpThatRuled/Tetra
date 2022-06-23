@@ -12,8 +12,7 @@ namespace Check.VolumeRootedDirectoryPathTests;
 public class Create
 {
    /* ------------------------------------------------------------ */
-   // VolumeRootedDirectoryPath Create(Volume volume,
-   //                                  IReadOnlyCollection<DirectoryComponent> directories)
+   // VolumeRootedDirectoryPath Create(string potentialPath)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -82,7 +81,7 @@ public class Create
    //an_argument_exception_is_thrown
 
    [TestMethod]
-   public void GIVEN_a_valid_path_without_a_volume_WHEN_Create_THEN_a_failure_is_returned()
+   public void GIVEN_a_valid_path_without_a_volume_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
       static Property Property(string path)
       {
@@ -120,7 +119,7 @@ public class Create
    //an_argument_exception_is_thrown
 
    [TestMethod]
-   public void GIVEN_a_path_with_an_invalid_volume_root_WHEN_Create_THEN_a_failure_is_returned()
+   public void GIVEN_a_path_with_an_invalid_volume_root_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
       static Property Property(string path)
       {
@@ -158,7 +157,7 @@ public class Create
    //an_argument_exception_is_thrown
 
    [TestMethod]
-   public void GIVEN_a_path_with_a_volume_root_and_an_invalid_component_WHEN_Create_THEN_a_failure_is_returned()
+   public void GIVEN_a_path_with_a_volume_root_and_an_invalid_component_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
       static Property Property(string path)
       {

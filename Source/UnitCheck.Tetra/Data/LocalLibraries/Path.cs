@@ -74,7 +74,7 @@ partial class LocalLibraries
 
    /* ------------------------------------------------------------ */
 
-   public sealed class ValidVolumeRootedPathEqualToValidVolumeRootedPathCaseInsensitive
+   public sealed class ValidVolumeRootedDirectoryPathEqualToValidVolumeRootedDirectoryPathCaseInsensitive
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -92,7 +92,7 @@ partial class LocalLibraries
 
    /* ------------------------------------------------------------ */
 
-   public sealed class ValidVolumeRootedPathGreaterThanValidVolumeRootedPathCaseInsensitive
+   public sealed class ValidVolumeRootedDirectoryPathGreaterThanValidVolumeRootedDirectoryPathCaseInsensitive
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -116,7 +116,7 @@ partial class LocalLibraries
 
    /* ------------------------------------------------------------ */
 
-   public sealed class ValidVolumeRootedPathLessThanValidVolumeRootedPathCaseInsensitive
+   public sealed class ValidVolumeRootedDirectoryPathLessThanValidVolumeRootedDirectoryPathCaseInsensitive
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -125,6 +125,72 @@ partial class LocalLibraries
       public static Arbitrary<(string first, string second)> Type()
          => Generators
            .ValidPathWithVolumeRootAndTrailingDirectorySeparator()
+           .TwoValueTuples()
+           .Where(tuple => StringComparer
+                          .OrdinalIgnoreCase
+                          .Compare(tuple.first
+                                        .ToString(),
+                                   tuple.second
+                                        .ToString())
+                         < 0)
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public sealed class ValidVolumeRootedFilePathEqualToValidVolumeRootedFilePathCaseInsensitive
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<(string first, string second)> Type()
+         => Generators
+           .ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator()
+           .Select(path => (path,
+                            path.ToLowerInvariant()))
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public sealed class ValidVolumeRootedFilePathGreaterThanValidVolumeRootedFilePathCaseInsensitive
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<(string first, string second)> Type()
+         => Generators
+           .ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator()
+           .TwoValueTuples()
+           .Where(tuple => StringComparer
+                          .OrdinalIgnoreCase
+                          .Compare(tuple.first
+                                        .ToString(),
+                                   tuple.second
+                                        .ToString())
+                         > 0)
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public sealed class ValidVolumeRootedFilePathLessThanValidVolumeRootedFilePathCaseInsensitive
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<(string first, string second)> Type()
+         => Generators
+           .ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator()
            .TwoValueTuples()
            .Where(tuple => StringComparer
                           .OrdinalIgnoreCase

@@ -71,7 +71,7 @@ public class CompareTo
                          actual);
       }
 
-      Arb.Register<LocalLibraries.ValidVolumeRootedPathEqualToValidVolumeRootedPathCaseInsensitive>();
+      Arb.Register<LocalLibraries.ValidVolumeRootedDirectoryPathEqualToValidVolumeRootedDirectoryPathCaseInsensitive>();
 
       Prop.ForAll<(string, string)>(Property)
           .QuickCheckThrowOnFailure();
@@ -105,7 +105,7 @@ public class CompareTo
                          actual);
       }
 
-      Arb.Register<LocalLibraries.ValidVolumeRootedPathLessThanValidVolumeRootedPathCaseInsensitive>();
+      Arb.Register<LocalLibraries.ValidVolumeRootedDirectoryPathLessThanValidVolumeRootedDirectoryPathCaseInsensitive>();
 
       Prop.ForAll<(string, string)>(Property)
           .QuickCheckThrowOnFailure();
@@ -139,7 +139,7 @@ public class CompareTo
                          actual);
       }
 
-      Arb.Register<LocalLibraries.ValidVolumeRootedPathGreaterThanValidVolumeRootedPathCaseInsensitive>();
+      Arb.Register<LocalLibraries.ValidVolumeRootedDirectoryPathGreaterThanValidVolumeRootedDirectoryPathCaseInsensitive>();
 
       Prop.ForAll<(string, string)>(Property)
           .QuickCheckThrowOnFailure();

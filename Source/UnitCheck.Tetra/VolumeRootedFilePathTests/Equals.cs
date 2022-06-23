@@ -27,11 +27,11 @@ public class Equals
    public void
       GIVEN_VolumeRootedFilePath_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(VolumeRootedFilePath VolumeRootedFilePath,
+      static Property Property(VolumeRootedFilePath volumeRootedFilePath,
                                object? obj)
       {
          //Act
-         var actual = VolumeRootedFilePath.Equals(obj);
+         var actual = volumeRootedFilePath.Equals(obj);
 
          //Assert
          return IsFalse(actual);
@@ -127,7 +127,7 @@ public class Equals
    {
       Arb.Register<Libraries.TransitiveVolumeRootedFilePaths>();
 
-      Prop.ForAll<(VolumeRootedFilePath, VolumeRootedFilePath, VolumeRootedFilePath)>(EqualsIsTransitive<VolumeRootedFilePath>)
+      Prop.ForAll<(VolumeRootedFilePath, VolumeRootedFilePath, VolumeRootedFilePath)>(EqualsIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 

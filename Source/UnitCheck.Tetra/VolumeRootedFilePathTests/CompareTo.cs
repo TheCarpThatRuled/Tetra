@@ -26,7 +26,7 @@ public class CompareTo
    [TestMethod]
    public void GIVEN_VolumeRootedFilePath_AND_other_is_null_WHEN_CompareTo_THEN_one_is_returned()
    {
-      static Property Property(string                   path)
+      static Property Property(string path)
       {
          //Arrange
          var volumeRootedFilePath = VolumeRootedFilePath.Create(path);
@@ -39,7 +39,7 @@ public class CompareTo
                          actual);
       }
 
-      Arb.Register<Libraries.ValidPathWithVolumeRootAndTrailingDirectorySeparator>();
+      Arb.Register<Libraries.ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
@@ -71,7 +71,7 @@ public class CompareTo
                          actual);
       }
 
-      Arb.Register<LocalLibraries.ValidVolumeRootedPathEqualToValidVolumeRootedPathCaseInsensitive>();
+      Arb.Register<LocalLibraries.ValidVolumeRootedFilePathEqualToValidVolumeRootedFilePathCaseInsensitive>();
 
       Prop.ForAll<(string, string)>(Property)
           .QuickCheckThrowOnFailure();
@@ -105,7 +105,7 @@ public class CompareTo
                          actual);
       }
 
-      Arb.Register<LocalLibraries.ValidVolumeRootedPathLessThanValidVolumeRootedPathCaseInsensitive>();
+      Arb.Register<LocalLibraries.ValidVolumeRootedFilePathLessThanValidVolumeRootedFilePathCaseInsensitive>();
 
       Prop.ForAll<(string, string)>(Property)
           .QuickCheckThrowOnFailure();
@@ -139,7 +139,7 @@ public class CompareTo
                          actual);
       }
 
-      Arb.Register<LocalLibraries.ValidVolumeRootedPathGreaterThanValidVolumeRootedPathCaseInsensitive>();
+      Arb.Register<LocalLibraries.ValidVolumeRootedFilePathGreaterThanValidVolumeRootedFilePathCaseInsensitive>();
 
       Prop.ForAll<(string, string)>(Property)
           .QuickCheckThrowOnFailure();
