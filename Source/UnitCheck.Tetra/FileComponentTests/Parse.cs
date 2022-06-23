@@ -62,7 +62,8 @@ public class Parse
          var actual = FileComponent.Parse(value);
 
          //Assert
-         return IsAFailure(Message.Create(Messages.IsNotAValidFileComponent(value)),
+         return IsAFailure(Message.Create(Messages.IsNotAValidComponent(value,
+                                                                        "file component")),
                            actual);
       }
 

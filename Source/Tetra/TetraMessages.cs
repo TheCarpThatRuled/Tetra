@@ -14,18 +14,15 @@ public static class TetraMessages
 
    /* ------------------------------------------------------------ */
 
-   public static string IsNotAValidDirectoryComponent(string component)
-      => $"'{component.ToLiteral()}' is not a valid directory component; a directory component may not contain any of the following characters: {InvalidPathComponentCharacters}";
+   public static string IsNotAValidComponent(string component,
+                                             string componentType)
+      => $"'{component.ToLiteral()}' is not a valid {componentType}; a component may not contain any of the following characters: {InvalidPathComponentCharacters}";
 
    /* ------------------------------------------------------------ */
 
-   public static string IsNotAValidFileComponent(string component)
-      => $"'{component.ToLiteral()}' is not a valid file component; a file component may not contain any of the following characters: {InvalidPathComponentCharacters}";
-
-   /* ------------------------------------------------------------ */
-
-   public static string IsNotAValidVolumeLabel(char volume)
-      => $"'{volume.ToLiteral()}' is not a valid volume label; a volume label must be an ASCII letter";
+   public static string IsNotAValidVolumeLabel(char   volume,
+                                               string volumeType)
+      => $"'{volume.ToLiteral()}' is not a valid {volumeType}; a volume label must be an ASCII letter";
 
    /* ------------------------------------------------------------ */
    // Constants

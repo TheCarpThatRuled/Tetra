@@ -10,23 +10,18 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
    /* ------------------------------------------------------------ */
 
    public static DirectoryComponent Create(string potentialComponent)
-   {
-      if (potentialComponent.IsNotAValidPathComponent())
-      {
-         throw new ArgumentException(IsNotAValidDirectoryComponent(potentialComponent),
-                                     nameof(potentialComponent));
-
-      }
-
-      return new(potentialComponent);
-   }
+      => Validate(potentialComponent,
+                  "directory component")
+        .Reduce<DirectoryComponent>(() => new(potentialComponent),
+                                    message => throw new ArgumentException(message.Content(),
+                                                                           nameof(potentialComponent)));
 
    /* ------------------------------------------------------------ */
 
    public static Result<DirectoryComponent> Parse(string potentialComponent)
-      => potentialComponent.IsNotAValidPathComponent()
-            ? Result<DirectoryComponent>.Failure(Message.Create(IsNotAValidDirectoryComponent(potentialComponent)))
-            : new DirectoryComponent(potentialComponent);
+      => Validate(potentialComponent,
+                  "directory component")
+        .MapToResult(new DirectoryComponent(potentialComponent));
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -83,6 +78,17 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
 
    protected DirectoryComponent(string value)
       => _value = value;
+
+   /* ------------------------------------------------------------ */
+   // Protected Methods
+   /* ------------------------------------------------------------ */
+
+   protected static Error Validate(string potentialComponent,
+                                   string componentType)
+      => potentialComponent.IsNotAValidPathComponent()
+            ? Error.Some(Message.Create(IsNotAValidComponent(potentialComponent,
+                                                             componentType)))
+            : Error.None();
 
    /* ------------------------------------------------------------ */
    // Private Fields

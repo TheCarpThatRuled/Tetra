@@ -10,22 +10,18 @@ public class Volume : IComparable<Volume>,
    /* ------------------------------------------------------------ */
 
    public static Volume Create(char potentialVolume)
-   {
-      if (potentialVolume.IsNotAnAsciiLetter())
-      {
-         throw new ArgumentException(IsNotAValidVolumeLabel(potentialVolume),
-                                     nameof(potentialVolume));
-      }
-
-      return new(potentialVolume);
-   }
+      => Validate(potentialVolume,
+                  "volume label")
+        .Reduce<Volume>(() => new(potentialVolume),
+                               message => throw new ArgumentException(message.Content(),
+                                                                      nameof(potentialVolume)));
 
    /* ------------------------------------------------------------ */
 
    public static Result<Volume> Parse(char potentialVolume)
-      => potentialVolume.IsAnAsciiLetter()
-            ? new Volume(potentialVolume)
-            : Result<Volume>.Failure(Message.Create(IsNotAValidVolumeLabel(potentialVolume)));
+      => Validate(potentialVolume,
+                  "volume label")
+        .MapToResult(new Volume(potentialVolume));
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -83,6 +79,17 @@ public class Volume : IComparable<Volume>,
 
    protected Volume(char volumeLabel)
       => _value = $"{volumeLabel}:";
+
+   /* ------------------------------------------------------------ */
+   // Protected Methods
+   /* ------------------------------------------------------------ */
+
+   protected static Error Validate(char   potentialVolume,
+                                   string volumeType)
+      => potentialVolume.IsNotAnAsciiLetter()
+            ? Error.Some(Message.Create(IsNotAValidVolumeLabel(potentialVolume,
+                                                               volumeType)))
+            : Error.None();
 
    /* ------------------------------------------------------------ */
    // Private Fields

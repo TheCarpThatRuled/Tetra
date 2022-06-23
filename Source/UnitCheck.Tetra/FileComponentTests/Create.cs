@@ -70,7 +70,9 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             Messages.IsNotAValidFileComponent(value) + " (Parameter 'potentialComponent')");
+                                             Messages.IsNotAValidComponent(value,
+                                                                           "file component")
+                                           + " (Parameter 'potentialComponent')");
       }
 
       Arb.Register<Libraries.InvalidPathComponent>();

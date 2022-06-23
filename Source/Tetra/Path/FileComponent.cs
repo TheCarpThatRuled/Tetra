@@ -10,23 +10,18 @@ public class FileComponent : IComparable<FileComponent>,
    /* ------------------------------------------------------------ */
 
    public static FileComponent Create(string potentialComponent)
-   {
-      if (potentialComponent.IsNotAValidPathComponent())
-      {
-         throw new ArgumentException(IsNotAValidFileComponent(potentialComponent),
-                                     nameof(potentialComponent));
-
-      }
-
-      return new(potentialComponent);
-   }
+      => Validate(potentialComponent,
+                  "file component")
+        .Reduce<FileComponent>(() => new(potentialComponent),
+                               message => throw new ArgumentException(message.Content(),
+                                                                      nameof(potentialComponent)));
 
    /* ------------------------------------------------------------ */
 
    public static Result<FileComponent> Parse(string potentialComponent)
-      => potentialComponent.IsNotAValidPathComponent()
-            ? Result<FileComponent>.Failure(Message.Create(IsNotAValidFileComponent(potentialComponent)))
-            : new FileComponent(potentialComponent);
+      => Validate(potentialComponent,
+                  "file component")
+        .MapToResult(new FileComponent(potentialComponent));
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -83,6 +78,17 @@ public class FileComponent : IComparable<FileComponent>,
 
    protected FileComponent(string value)
       => _value = value;
+
+   /* ------------------------------------------------------------ */
+   // Protected Methods
+   /* ------------------------------------------------------------ */
+
+   protected static Error Validate(string potentialComponent,
+                                   string componentType)
+      => potentialComponent.IsNotAValidPathComponent()
+            ? Error.Some(Message.Create(IsNotAValidComponent(potentialComponent,
+                                                             componentType)))
+            : Error.None();
 
    /* ------------------------------------------------------------ */
    // Private Fields

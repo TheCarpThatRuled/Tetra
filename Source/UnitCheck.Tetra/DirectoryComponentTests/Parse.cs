@@ -62,7 +62,8 @@ public class Parse
          var actual = DirectoryComponent.Parse(value);
 
          //Assert
-         return IsAFailure(Message.Create(Messages.IsNotAValidDirectoryComponent(value)),
+         return IsAFailure(Message.Create(Messages.IsNotAValidComponent(value,
+                                                                        "directory component")),
                            actual);
       }
 

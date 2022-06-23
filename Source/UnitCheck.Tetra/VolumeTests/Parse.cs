@@ -62,7 +62,8 @@ public class Parse
          var actual = Volume.Parse(value);
 
          //Assert
-         return IsAFailure(Message.Create(Messages.IsNotAValidVolumeLabel(value)),
+         return IsAFailure(Message.Create(Messages.IsNotAValidVolumeLabel(value,
+                                                                          "volume label")),
                            actual);
       }
 

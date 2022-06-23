@@ -70,7 +70,9 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             Messages.IsNotAValidVolumeLabel(value) + " (Parameter 'potentialVolume')");
+                                             Messages.IsNotAValidVolumeLabel(value,
+                                                                             "volume label")
+                                           + " (Parameter 'potentialVolume')");
       }
 
       Arb.Register<Libraries.NonAsciiLetters>();
