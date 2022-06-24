@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
+using static Check.Messages;
 using static Tetra.Testing.Properties;
 
 namespace Check.DirectoryComponentTests;
@@ -62,8 +63,8 @@ public class Parse
          var actual = DirectoryComponent.Parse(value);
 
          //Assert
-         return IsAFailure(Message.Create(Messages.IsNotAValidComponent(value,
-                                                                        "directory component")),
+         return IsAFailure(Message.Create(IsNotAValidComponent(value,
+                                                               HumanReadableName.DirectoryComponent)),
                            actual);
       }
 

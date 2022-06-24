@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
+using static Check.Messages;
 using static Tetra.Testing.Properties;
 
 namespace Check.VolumeRootedDirectoryPathTests;
@@ -100,7 +101,9 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             "A VolumeRootedDirectoryPath must start with a volume label" + " (Parameter 'potentialPath')");
+                                            ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
+                                                                                                                                 HumanReadableName.VolumeRootedDirectoryPath),
+                                                                     "potentialPath"));
       }
 
       Arb.Register<Libraries.ValidPathWithoutRoot>();
@@ -138,7 +141,9 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             "A VolumeRootedDirectoryPath must start with a volume label" + " (Parameter 'potentialPath')");
+                                             ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
+                                                                                                                                  HumanReadableName.VolumeRootedDirectoryPath),
+                                                                      "potentialPath"));
       }
 
       Arb.Register<Libraries.PathWithInvalidVolumeRoot>();
@@ -176,7 +181,9 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             "A VolumeRootedDirectoryPath may not contain a component with any of the following characters:" + " (Parameter 'potentialPath')");
+                                             ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMayNotContainTheCharacters(path,
+                                                                         HumanReadableName.VolumeRootedDirectoryPath),
+                                                                      "potentialPath"));
       }
 
       Arb.Register<Libraries.PathWithAVolumeRootAndAnInvalidComponent>();

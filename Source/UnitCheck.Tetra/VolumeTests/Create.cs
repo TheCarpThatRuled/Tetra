@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
+using static Check.Messages;
 using static Tetra.Testing.Properties;
 
 namespace Check.VolumeTests;
@@ -70,9 +71,9 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             Messages.IsNotAValidVolumeLabel(value,
-                                                                             "volume label")
-                                           + " (Parameter 'potentialVolume')");
+                                             ArgumentExceptionMessage(IsNotAValidVolumeLabel(value,
+                                                                                             HumanReadableName.Volume),
+                                                                      "potentialVolume"));
       }
 
       Arb.Register<Libraries.NonAsciiLetters>();

@@ -25,6 +25,24 @@ public static class TetraMessages
       => $"'{volume.ToLiteral()}' is not a valid {volumeType}; a volume label must be an ASCII letter";
 
    /* ------------------------------------------------------------ */
+
+   public static string IsNotAValidVolumeRootedPathBecauseMayNotContainTheCharacters(string path,
+                                                                                     string pathType)
+      => $"'{path.ToLiteral()}'is not a valid {pathType}; a volume-rooted path may not contain a component that contains any of the following characters: {InvalidPathComponentCharacters}";
+
+   /* ------------------------------------------------------------ */
+
+   public static string IsNotAValidVolumeRootedPathBecauseMayNotEndWithADirectorySeparator(string path,
+                                                                                           string pathType)
+      => $"'{path.ToLiteral()}'is not a valid {pathType}; a volume-rooted path may not end with a directory separator";
+
+   /* ------------------------------------------------------------ */
+
+   public static string IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(string path,
+                                                                                    string pathType)
+      => $"'{path.ToLiteral()}'is not a valid {pathType}; a volume-rooted path must start with a volume label";
+
+   /* ------------------------------------------------------------ */
    // Constants
    /* ------------------------------------------------------------ */
 
@@ -51,8 +69,6 @@ public static class TetraMessages
 
       InvalidPathComponentCharacters = invalidPathComponentCharacters.ToString();
    }
-
-   /* ------------------------------------------------------------ */
 
    /* ------------------------------------------------------------ */
 }

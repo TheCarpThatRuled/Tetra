@@ -1,4 +1,5 @@
 ﻿namespace Tetra;
+using static TetraMessages;
 
 public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
 {
@@ -8,7 +9,7 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
 
    public static VolumeRootedDirectoryPath Create(string potentialPath)
       => ParseComponents(potentialPath,
-                         typeof(VolumeRootedDirectoryPath))
+                         PathType)
         .Reduce(failure => throw new ArgumentException(failure.Content()
                                                               .Content(),
                                                        nameof(potentialPath)),
@@ -28,7 +29,7 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
 
    public static Result<VolumeRootedDirectoryPath> Parse(string potentialPath)
       => ParseComponents(potentialPath,
-                         typeof(VolumeRootedDirectoryPath))
+                         PathType)
         .Map(success => new VolumeRootedDirectoryPath(success.Content()
                                                              .directories,
                                                       success.Content()
@@ -82,8 +83,10 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
    /* ------------------------------------------------------------ */
 
    protected static Result<(Volume volume, IReadOnlyCollection<DirectoryComponent> directories)> ParseComponents(string potentialPath,
-                                                                                                                 Type   callerType)
+                                                                                                                 string pathType)
    {
+      //Todo: Handle the empty string
+
       var components = potentialPath
                       .Split(Path.DirectorySeparatorChar,
                              Path.AltDirectorySeparatorChar)
@@ -93,23 +96,31 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
 
       if (potentialVolume.IsNotAValidVolumeLabel())
       {
-         return Message.Create($"A {callerType.Name} must start with a volume label");
+         return Message.Create(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(potentialPath,
+                                                                                            pathType));
       }
 
       var directoryComponents = components
                                .Skip(1)
-                               .Where(x => !string.IsNullOrEmpty(x))
+                               .Where(x => !string.IsNullOrEmpty(x)) //Todo: Add test for this behaviour
                                .ToArray();
 
       if (directoryComponents.Any(x => x.IsNotAValidPathComponent()))
       {
-         return Message.Create($"A {callerType.Name} may not contain a component with any of the following characters:");
+         return Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotContainTheCharacters(potentialPath,
+                                                                                            pathType));
       }
 
       return (Volume.Create(potentialVolume[0]),
               directoryComponents.Select(DirectoryComponent.Create)
                                  .ToArray());
    }
+
+   /* ------------------------------------------------------------ */
+   // Private Constants
+   /* ------------------------------------------------------------ */
+
+   private const string PathType = "volume-rooted directory path";
 
    /* ------------------------------------------------------------ */
    // Private Fields

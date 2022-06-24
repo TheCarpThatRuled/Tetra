@@ -1,4 +1,5 @@
 ﻿namespace Tetra;
+using static TetraMessages;
 
 public class VolumeRootedFilePath : AbsoluteFilePath
 {
@@ -8,7 +9,7 @@ public class VolumeRootedFilePath : AbsoluteFilePath
 
    public static VolumeRootedFilePath Create(string potentialPath)
       => ParseComponents(potentialPath,
-                         typeof(VolumeRootedFilePath))
+                         PathType)
         .Reduce(failure => throw new ArgumentException(failure.Content()
                                                               .Content(),
                                                        nameof(potentialPath)),
@@ -32,7 +33,7 @@ public class VolumeRootedFilePath : AbsoluteFilePath
 
    public static Result<VolumeRootedFilePath> Parse(string potentialPath)
       => ParseComponents(potentialPath,
-                         typeof(VolumeRootedFilePath))
+                         PathType)
         .Map(success => new VolumeRootedFilePath(success.Content()
                                                         .directories,
                                                  success.Content()
@@ -41,7 +42,13 @@ public class VolumeRootedFilePath : AbsoluteFilePath
                                                         .volume));
 
    /* ------------------------------------------------------------ */
-   // Methods
+   // Properties
+   /* ------------------------------------------------------------ */
+
+   public FileComponent File()
+      => FileComponent
+        .Create("C");
+
    /* ------------------------------------------------------------ */
 
    public VolumeRootedDirectoryPath Parent()
@@ -69,8 +76,10 @@ public class VolumeRootedFilePath : AbsoluteFilePath
    /* ------------------------------------------------------------ */
 
    protected static Result<(Volume volume, IReadOnlyCollection<DirectoryComponent> directories, FileComponent file)> ParseComponents(string potentialPath,
-      Type                                                                                                                                  callerType)
+                                                                                                                                     string pathType)
    {
+      //Todo: Handle the empty string
+
       var components = potentialPath
                       .Split(Path.DirectorySeparatorChar,
                              Path.AltDirectorySeparatorChar)
@@ -80,22 +89,25 @@ public class VolumeRootedFilePath : AbsoluteFilePath
 
       if (potentialVolume.IsNotAValidVolumeLabel())
       {
-         return Message.Create($"A {callerType.Name} must start with a volume label");
+         return Message.Create(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(potentialPath,
+                                                                                           pathType));
       }
 
       var potentialComponents = components
                                .Skip(1)
-                               .Where(x => !string.IsNullOrEmpty(x))
+                               .Where(x => !string.IsNullOrEmpty(x)) //Todo: Add test for this behaviour
                                .ToArray();
 
       if (potentialComponents.Any(x => x.IsNotAValidPathComponent()))
       {
-         return Message.Create($"A {callerType.Name} may not contain a component with any of the following characters:");
+         return Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotContainTheCharacters(potentialPath,
+                                                                                            pathType));
       }
 
       if (string.IsNullOrEmpty(components[^1]))
       {
-         return Message.Create($"A {callerType.Name} may not end with a directory separator");
+         return Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotEndWithADirectorySeparator(potentialPath,
+                                                                                                  pathType));
       }
 
       return (Volume.Create(potentialVolume[0]),
@@ -104,6 +116,12 @@ public class VolumeRootedFilePath : AbsoluteFilePath
                                  .ToArray(),
               FileComponent.Create(components[^1]));
    }
+
+   /* ------------------------------------------------------------ */
+   // Private Constants
+   /* ------------------------------------------------------------ */
+
+   private const string PathType = "volume-rooted file path";
 
    /* ------------------------------------------------------------ */
    // Private Fields

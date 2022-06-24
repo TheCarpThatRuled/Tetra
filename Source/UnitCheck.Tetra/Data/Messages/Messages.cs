@@ -3,10 +3,16 @@ using Tetra;
 
 namespace Check;
 
-internal static class Messages
+internal static partial class Messages
 {
    /* ------------------------------------------------------------ */
    // Functions
+   /* ------------------------------------------------------------ */
+
+   public static string ArgumentExceptionMessage(string message,
+                                                 string parameterName)
+      => $"{message} (Parameter '{parameterName}')";
+
    /* ------------------------------------------------------------ */
 
    public static Message CastFailed<TFrom, TTo>()
@@ -16,7 +22,7 @@ internal static class Messages
    /* ------------------------------------------------------------ */
 
    public static string IsNotAValidComponent(string component,
-                                                 string componentType)
+                                             string componentType)
       => $"'{component.ToLiteral()}' is not a valid {componentType}; a component may not contain any of the following characters: {InvalidPathComponentCharacters}";
 
    /* ------------------------------------------------------------ */
@@ -24,6 +30,24 @@ internal static class Messages
    public static string IsNotAValidVolumeLabel(char   volume,
                                                string volumeType)
       => $"'{volume.ToLiteral()}' is not a valid {volumeType}; a volume label must be an ASCII letter";
+
+   /* ------------------------------------------------------------ */
+
+   public static string IsNotAValidVolumeRootedPathBecauseMayNotContainTheCharacters(string path,
+                                                                                     string pathType)
+      => $"'{path.ToLiteral()}'is not a valid {pathType}; a volume-rooted path may not contain a component that contains any of the following characters: {InvalidPathComponentCharacters}";
+
+   /* ------------------------------------------------------------ */
+
+   public static string IsNotAValidVolumeRootedPathBecauseMayNotEndWithADirectorySeparator(string path,
+                                                                                           string pathType)
+      => $"'{path.ToLiteral()}'is not a valid {pathType}; a volume-rooted path may not end with a directory separator";
+
+   /* ------------------------------------------------------------ */
+
+   public static string IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(string path,
+                                                                                    string pathType)
+      => $"'{path.ToLiteral()}'is not a valid {pathType}; a volume-rooted path must start with a volume label";
 
    /* ------------------------------------------------------------ */
    // Constants
@@ -40,7 +64,7 @@ internal static class Messages
       var invalidPathComponentCharacters = new StringBuilder();
       var invalidFileNameChars = Path
                                 .GetInvalidFileNameChars()
-                                .Select( x=> x.ToLiteralControlCharacters())
+                                .Select(x => x.ToLiteralControlCharacters())
                                 .ToArray();
 
       invalidPathComponentCharacters.Append($"'{invalidFileNameChars[0]}'");

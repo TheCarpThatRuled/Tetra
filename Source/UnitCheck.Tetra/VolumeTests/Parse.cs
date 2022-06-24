@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
+using static Check.Messages;
 using static Tetra.Testing.Properties;
 
 namespace Check.VolumeTests;
@@ -62,8 +63,8 @@ public class Parse
          var actual = Volume.Parse(value);
 
          //Assert
-         return IsAFailure(Message.Create(Messages.IsNotAValidVolumeLabel(value,
-                                                                          "volume label")),
+         return IsAFailure(Message.Create(IsNotAValidVolumeLabel(value,
+                                                                 HumanReadableName.Volume)),
                            actual);
       }
 

@@ -11,7 +11,7 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
 
    public static DirectoryComponent Create(string potentialComponent)
       => Validate(potentialComponent,
-                  "directory component")
+                  ComponentType)
         .Reduce<DirectoryComponent>(() => new(potentialComponent),
                                     message => throw new ArgumentException(message.Content(),
                                                                            nameof(potentialComponent)));
@@ -20,7 +20,7 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
 
    public static Result<DirectoryComponent> Parse(string potentialComponent)
       => Validate(potentialComponent,
-                  "directory component")
+                  ComponentType)
         .MapToResult(new DirectoryComponent(potentialComponent));
 
    /* ------------------------------------------------------------ */
@@ -89,6 +89,12 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
             ? Error.Some(Message.Create(IsNotAValidComponent(potentialComponent,
                                                              componentType)))
             : Error.None();
+
+   /* ------------------------------------------------------------ */
+   // Private Constants
+   /* ------------------------------------------------------------ */
+
+   private const string ComponentType = "directory component";
 
    /* ------------------------------------------------------------ */
    // Private Fields

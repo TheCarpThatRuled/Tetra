@@ -11,7 +11,7 @@ public class FileComponent : IComparable<FileComponent>,
 
    public static FileComponent Create(string potentialComponent)
       => Validate(potentialComponent,
-                  "file component")
+                  ComponentType)
         .Reduce<FileComponent>(() => new(potentialComponent),
                                message => throw new ArgumentException(message.Content(),
                                                                       nameof(potentialComponent)));
@@ -20,7 +20,7 @@ public class FileComponent : IComparable<FileComponent>,
 
    public static Result<FileComponent> Parse(string potentialComponent)
       => Validate(potentialComponent,
-                  "file component")
+                  ComponentType)
         .MapToResult(new FileComponent(potentialComponent));
 
    /* ------------------------------------------------------------ */
@@ -89,6 +89,12 @@ public class FileComponent : IComparable<FileComponent>,
             ? Error.Some(Message.Create(IsNotAValidComponent(potentialComponent,
                                                              componentType)))
             : Error.None();
+
+   /* ------------------------------------------------------------ */
+   // Private Constants
+   /* ------------------------------------------------------------ */
+
+   private const string ComponentType = "file component";
 
    /* ------------------------------------------------------------ */
    // Private Fields

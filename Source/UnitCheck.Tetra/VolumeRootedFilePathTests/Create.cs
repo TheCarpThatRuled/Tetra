@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
+using static Check.Messages;
 using static Tetra.Testing.Properties;
 
 namespace Check.VolumeRootedFilePathTests;
@@ -71,7 +72,9 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             "A VolumeRootedFilePath may not end with a directory separator" + " (Parameter 'potentialPath')");
+                                            ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMayNotEndWithADirectorySeparator(path,
+                                                                                                                                        HumanReadableName.VolumeRootedFilePath),
+                                                                     "potentialPath"));
       }
 
       Arb.Register<Libraries.ValidPathWithVolumeRootAndTrailingDirectorySeparator>();
@@ -109,7 +112,9 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             "A VolumeRootedFilePath must start with a volume label" + " (Parameter 'potentialPath')");
+                                             ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
+                                                                                                                                  HumanReadableName.VolumeRootedFilePath),
+                                                                      "potentialPath"));
       }
 
       Arb.Register<Libraries.ValidPathWithoutRoot>();
@@ -147,7 +152,9 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             "A VolumeRootedFilePath must start with a volume label" + " (Parameter 'potentialPath')");
+                                             ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
+                                                                                                                                  HumanReadableName.VolumeRootedFilePath),
+                                                                      "potentialPath"));
       }
 
       Arb.Register<Libraries.PathWithInvalidVolumeRoot>();
@@ -185,7 +192,9 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             "A VolumeRootedFilePath may not contain a component with any of the following characters:" + " (Parameter 'potentialPath')");
+                                             ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMayNotContainTheCharacters(path,
+                                                                         HumanReadableName.VolumeRootedFilePath),
+                                                                      "potentialPath"));
       }
 
       Arb.Register<Libraries.PathWithAVolumeRootAndAnInvalidComponent>();
@@ -211,7 +220,7 @@ public class Create
    {
       static Property Property(Volume                   volume,
                                List<DirectoryComponent> directories,
-                               FileComponent file)
+                               FileComponent            file)
       {
          //Arrange
          var expected = directories

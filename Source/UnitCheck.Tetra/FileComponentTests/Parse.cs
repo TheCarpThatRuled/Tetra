@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
+using static Check.Messages;
 using static Tetra.Testing.Properties;
 
 namespace Check.FileComponentTests;
@@ -32,9 +33,9 @@ public class Parse
 
          //Assert
          return IsASuccessAnd(actualFileComponent => value
-                                                       == actualFileComponent
-                                                         .Content()
-                                                         .Value(),
+                                                  == actualFileComponent
+                                                    .Content()
+                                                    .Value(),
                               actual);
       }
 
@@ -62,8 +63,8 @@ public class Parse
          var actual = FileComponent.Parse(value);
 
          //Assert
-         return IsAFailure(Message.Create(Messages.IsNotAValidComponent(value,
-                                                                        "file component")),
+         return IsAFailure(Message.Create(IsNotAValidComponent(value,
+                                                               HumanReadableName.FileComponent)),
                            actual);
       }
 

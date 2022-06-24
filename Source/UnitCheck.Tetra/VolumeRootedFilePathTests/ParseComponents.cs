@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
+using static Check.Messages;
 using static Tetra.Testing.Properties;
 
 namespace Check.VolumeRootedFilePathTests;
@@ -12,7 +13,7 @@ namespace Check.VolumeRootedFilePathTests;
 public class ParseComponents
 {
    /* ------------------------------------------------------------ */
-   
+
    private sealed class TestPath : VolumeRootedFilePath
    {
       /* ------------------------------------------------------------ */
@@ -20,9 +21,9 @@ public class ParseComponents
       /* ------------------------------------------------------------ */
 
       public static Result<(Volume volume, IReadOnlyCollection<DirectoryComponent> directories, FileComponent file)> TestParseComponents(string potentialPath,
-                                                                                                                     Type   callerType)
+                                                                                                                                         string pathType)
          => ParseComponents(potentialPath,
-                            callerType);
+                            pathType);
 
       /* ------------------------------------------------------------ */
       // Constructor
@@ -67,7 +68,7 @@ public class ParseComponents
 
          //Act
          var actual = TestPath.TestParseComponents(path,
-                                                   typeof(TestPath));
+                                                   nameof(TestPath));
 
          //Assert
          return IsASuccessAnd(actualComponents => volume.Equals(actualComponents
@@ -108,10 +109,11 @@ public class ParseComponents
          //Arrange
          //Act
          var actual = TestPath.TestParseComponents(path,
-                                                   typeof(TestPath));
+                                                   nameof(TestPath));
 
          //Assert
-         return IsAFailure(Message.Create("A TestPath may not end with a directory separator"),
+         return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotEndWithADirectorySeparator(path,
+                                                                                                             nameof(TestPath))),
                            actual);
       }
 
@@ -138,10 +140,11 @@ public class ParseComponents
          //Arrange
          //Act
          var actual = TestPath.TestParseComponents(path,
-                                                   typeof(TestPath));
+                                                   nameof(TestPath));
 
          //Assert
-         return IsAFailure(Message.Create("A TestPath must start with a volume label"),
+         return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
+                                                                                                      nameof(TestPath))),
                            actual);
       }
 
@@ -166,14 +169,13 @@ public class ParseComponents
       static Property Property(string path)
       {
          //Arrange
-         var exception = Option<Exception>.None();
-
          //Act
          var actual = TestPath.TestParseComponents(path,
-                                                   typeof(TestPath));
+                                                   nameof(TestPath));
 
          //Assert
-         return IsAFailure(Message.Create("A TestPath must start with a volume label"),
+         return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
+                                                                                                      nameof(TestPath))),
                            actual);
       }
 
@@ -198,14 +200,13 @@ public class ParseComponents
       static Property Property(string path)
       {
          //Arrange
-         var exception = Option<Exception>.None();
-
          //Act
          var actual = TestPath.TestParseComponents(path,
-                                                   typeof(TestPath));
+                                                   nameof(TestPath));
 
          //Assert
-         return IsAFailure(Message.Create("A TestPath may not contain a component with any of the following characters:"),
+         return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotContainTheCharacters(path,
+                                                                                                       nameof(TestPath))),
                            actual);
       }
 

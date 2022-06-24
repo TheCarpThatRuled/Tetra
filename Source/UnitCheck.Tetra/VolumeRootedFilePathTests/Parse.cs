@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
+using static Check.Messages;
 using static Tetra.Testing.Properties;
 
 namespace Check.VolumeRootedFilePathTests;
@@ -65,7 +66,8 @@ public class Parse
          var actual = VolumeRootedFilePath.Parse(path);
 
          //Assert
-         return IsAFailure(Message.Create("A VolumeRootedFilePath may not end with a directory separator"),
+         return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotEndWithADirectorySeparator(path,
+                                                                                                             HumanReadableName.VolumeRootedFilePath)),
                            actual);
       }
 
@@ -94,7 +96,8 @@ public class Parse
          var actual = VolumeRootedFilePath.Parse(path);
 
          //Assert
-         return IsAFailure(Message.Create("A VolumeRootedFilePath must start with a volume label"),
+         return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
+                                                                                                      HumanReadableName.VolumeRootedFilePath)),
                            actual);
       }
 
@@ -125,7 +128,8 @@ public class Parse
          var actual = VolumeRootedFilePath.Parse(path);
 
          //Assert
-         return IsAFailure(Message.Create("A VolumeRootedFilePath must start with a volume label"),
+         return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
+                                                                                                      HumanReadableName.VolumeRootedFilePath)),
                            actual);
       }
 
@@ -156,7 +160,8 @@ public class Parse
          var actual = VolumeRootedFilePath.Parse(path);
 
          //Assert
-         return IsAFailure(Message.Create("A VolumeRootedFilePath may not contain a component with any of the following characters:"),
+         return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotContainTheCharacters(path,
+                                                                                                       HumanReadableName.VolumeRootedFilePath)),
                            actual);
       }
 

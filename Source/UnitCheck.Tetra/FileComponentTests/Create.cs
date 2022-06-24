@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
+using static Check.Messages;
 using static Tetra.Testing.Properties;
 
 namespace Check.FileComponentTests;
@@ -70,9 +71,9 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             Messages.IsNotAValidComponent(value,
-                                                                           "file component")
-                                           + " (Parameter 'potentialComponent')");
+                                             ArgumentExceptionMessage(IsNotAValidComponent(value,
+                                                                                           HumanReadableName.FileComponent),
+                                                                      "potentialComponent"));
       }
 
       Arb.Register<Libraries.InvalidPathComponent>();

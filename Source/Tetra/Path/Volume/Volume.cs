@@ -11,22 +11,21 @@ public class Volume : IComparable<Volume>,
 
    public static Volume Create(char potentialVolume)
       => Validate(potentialVolume,
-                  "volume label")
+                  VolumeType)
         .Reduce<Volume>(() => new(potentialVolume),
-                               message => throw new ArgumentException(message.Content(),
-                                                                      nameof(potentialVolume)));
+                        message => throw new ArgumentException(message.Content(),
+                                                               nameof(potentialVolume)));
 
    /* ------------------------------------------------------------ */
 
    public static Result<Volume> Parse(char potentialVolume)
       => Validate(potentialVolume,
-                  "volume label")
+                  VolumeType)
         .MapToResult(new Volume(potentialVolume));
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
    /* ------------------------------------------------------------ */
-
 
    public override bool Equals(object? obj)
       => ReferenceEquals(this,
@@ -91,6 +90,12 @@ public class Volume : IComparable<Volume>,
                                                                volumeType)))
             : Error.None();
 
+   /* ------------------------------------------------------------ */
+   // Private Constants
+   /* ------------------------------------------------------------ */
+
+   private const string VolumeType = "volume label";
+   
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
