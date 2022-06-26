@@ -46,14 +46,14 @@ public class VolumeRootedFilePath : AbsoluteFilePath
    /* ------------------------------------------------------------ */
 
    public FileComponent File()
-      => FileComponent
-        .Create("C");
+      => _file;
 
    /* ------------------------------------------------------------ */
 
    public VolumeRootedDirectoryPath Parent()
       => VolumeRootedDirectoryPath
-        .Create("C:\\");
+        .Create(_volume,
+                _directories);
 
    /* ------------------------------------------------------------ */
    // Protected Constructors

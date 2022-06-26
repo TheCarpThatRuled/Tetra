@@ -62,8 +62,11 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
    /* ------------------------------------------------------------ */
 
    public Option<VolumeRootedDirectoryPath> Parent()
-      => Option
-        .None();
+      => _directories.Any()
+            ? Option.Some(Create(_volume,
+                                 _directories.SkipLast(1)
+                                             .ToArray()))
+            : Option<VolumeRootedDirectoryPath>.None();
 
    /* ------------------------------------------------------------ */
    // Protected Constructors

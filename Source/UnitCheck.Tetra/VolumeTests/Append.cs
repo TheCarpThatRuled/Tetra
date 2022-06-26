@@ -24,17 +24,18 @@ public class Append
    //a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_Volume_and_an_Array_of_DirectoryComponents_WHEN_Create_THEN_a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_Volume_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume               volume,
                                DirectoryComponent[] directories)
       {
          //Arrange
-         var expected = volume.Value()
-                      + Path.DirectorySeparatorChar
-                      + directories.Aggregate(string.Empty,
-                                              (total,
-                                               next) => $"{total}{next.Value()}{Path.DirectorySeparatorChar}");
+         var expected = directories
+                       .Select(x => x.Value())
+                       .Prepend(volume.Value())
+                       .Aggregate(string.Empty,
+                                  (total,
+                                   next) => $"{total}{next}{Path.DirectorySeparatorChar}");
 
          //Act
          var actual = volume.Append(directories);
@@ -64,17 +65,18 @@ public class Append
    //a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_WHEN_Create_THEN_a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume                   volume,
                                List<DirectoryComponent> directories)
       {
          //Arrange
-         var expected = volume.Value()
-                      + Path.DirectorySeparatorChar
-                      + directories.Aggregate(string.Empty,
-                                              (total,
-                                               next) => $"{total}{next.Value()}{Path.DirectorySeparatorChar}");
+         var expected = directories
+                       .Select(x => x.Value())
+                       .Prepend(volume.Value())
+                       .Aggregate(string.Empty,
+                                  (total,
+                                   next) => $"{total}{next}{Path.DirectorySeparatorChar}");
 
          //Act
          var actual = volume.Append(directories);
@@ -104,7 +106,7 @@ public class Append
    //a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_Volume_and_a_FileComponent_WHEN_Create_THEN_a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_Volume_and_a_FileComponent_WHEN_Append_THEN_a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume        volume,
                                FileComponent file)

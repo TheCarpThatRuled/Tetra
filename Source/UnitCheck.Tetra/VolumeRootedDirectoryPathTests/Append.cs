@@ -23,7 +23,7 @@ public class Append
    //a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_VolumeRootedDirectoryPath_and_an_Array_of_DirectoryComponents_WHEN_Create_THEN_a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_VolumeRootedDirectoryPath_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume               volume,
                                DirectoryComponent[] initialDirectories,
@@ -65,7 +65,7 @@ public class Append
    //a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_VolumeRootedDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Create_THEN_a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_VolumeRootedDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume                   volume,
                                List<DirectoryComponent> initialDirectories,
@@ -106,7 +106,7 @@ public class Append
    //a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_VolumeRootedDirectoryPath_and_a_FileComponent_WHEN_Create_THEN_a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_VolumeRootedDirectoryPath_and_a_FileComponent_WHEN_Append_THEN_a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume                   volume,
                                List<DirectoryComponent> initialDirectories,
