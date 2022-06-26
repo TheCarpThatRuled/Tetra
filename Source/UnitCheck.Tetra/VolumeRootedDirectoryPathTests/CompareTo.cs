@@ -26,7 +26,7 @@ public class CompareTo
    [TestMethod]
    public void GIVEN_VolumeRootedDirectoryPath_AND_other_is_null_WHEN_CompareTo_THEN_one_is_returned()
    {
-      static Property Property(string                   path)
+      static Property Property(string path)
       {
          //Arrange
          var volumeRootedDirectoryPath = VolumeRootedDirectoryPath.Create(path);

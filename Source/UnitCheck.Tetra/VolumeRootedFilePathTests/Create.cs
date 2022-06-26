@@ -86,6 +86,39 @@ public class Create
    /* ------------------------------------------------------------ */
 
    //GIVEN
+   //the_empty_string
+   //WHEN
+   //Create
+   //THEN
+   //an_argument_exception_is_thrown
+
+   [TestMethod]
+   public void GIVEN_the_empty_string_WHEN_Create_THEN_an_argument_exception_is_thrown()
+   {
+      //Arrange
+      var exception = Option<Exception>.None();
+
+      //Act
+      try
+      {
+         VolumeRootedFilePath.Create(string.Empty);
+      }
+      catch (Exception e)
+      {
+         exception = e;
+      }
+
+      //Assert
+      Assert.That
+            .AnArgumentExceptionWasThrown(exception,
+                                          ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMayNotBeEmpty(string.Empty,
+                                                                                                                   HumanReadableName.VolumeRootedFilePath),
+                                                                   "potentialPath"));
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
    //a_valid_path_without_a_volume
    //WHEN
    //Create

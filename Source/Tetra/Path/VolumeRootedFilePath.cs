@@ -78,7 +78,11 @@ public class VolumeRootedFilePath : AbsoluteFilePath
    protected static Result<(Volume volume, IReadOnlyCollection<DirectoryComponent> directories, FileComponent file)> ParseComponents(string potentialPath,
                                                                                                                                      string pathType)
    {
-      //Todo: Handle the empty string
+      if (string.IsNullOrEmpty(potentialPath))
+      {
+         return Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotBeEmpty(potentialPath,
+                                                                               pathType));
+      }
 
       var components = potentialPath
                       .Split(Path.DirectorySeparatorChar,

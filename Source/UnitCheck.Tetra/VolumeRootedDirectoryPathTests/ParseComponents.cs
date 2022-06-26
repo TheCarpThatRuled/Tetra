@@ -37,7 +37,8 @@ public class ParseComponents
    }
 
    /* ------------------------------------------------------------ */
-   // protected Result(Volume volume, IReadOnlyCollection<DirectoryComponent> directories) ParseComponents(string potentialPath)
+   // protected Result(Volume volume, IReadOnlyCollection<DirectoryComponent> directories) ParseComponents(string potentialPath,
+   //                                                                                                      string pathType)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -123,6 +124,30 @@ public class ParseComponents
 
       Prop.ForAll<Volume, DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //the_empty_string
+   //WHEN
+   //ParseComponents
+   //THEN
+   //a_failure_is_returned
+
+   [TestMethod]
+   public void GIVEN_the_empty_string_WHEN_ParseComponents_THEN_a_failure_is_returned()
+   {
+      //Arrange
+      //Act
+      var actual = TestPath.TestParseComponents(string.Empty,
+                                                nameof(TestPath));
+
+      //Assert
+      Assert.That
+            .IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotBeEmpty(string.Empty,
+                                                                                       nameof(TestPath))),
+                        actual);
    }
 
    /* ------------------------------------------------------------ */

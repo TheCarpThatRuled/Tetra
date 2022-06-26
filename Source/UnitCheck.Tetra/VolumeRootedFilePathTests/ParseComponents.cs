@@ -40,7 +40,8 @@ public class ParseComponents
    }
 
    /* ------------------------------------------------------------ */
-   // protected Result(Volume volume, IReadOnlyCollection<DirectoryComponent> directories) ParseComponents(string potentialPath)
+   // protected Result(Volume volume, IReadOnlyCollection<DirectoryComponent> directories, FileComponent file) ParseComponents(string potentialPath,
+   //                                                                                                                          string pathType)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -52,7 +53,7 @@ public class ParseComponents
 
    [TestMethod]
    public void
-      GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
+      GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_ParseComponents_THEN_a_success_containing_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume               volume,
                                DirectoryComponent[] directories,
@@ -102,7 +103,7 @@ public class ParseComponents
 
    [TestMethod]
    public void
-      GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
+      GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_ParseComponents_THEN_a_success_containing_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(string path)
       {
@@ -126,6 +127,30 @@ public class ParseComponents
    /* ------------------------------------------------------------ */
 
    //GIVEN
+   //the_empty_string
+   //WHEN
+   //ParseComponents
+   //THEN
+   //a_failure_is_returned
+
+   [TestMethod]
+   public void GIVEN_the_empty_string_WHEN_ParseComponents_THEN_a_failure_is_returned()
+   {
+      //Arrange
+      //Act
+      var actual = TestPath.TestParseComponents(string.Empty,
+                                                nameof(TestPath));
+
+      //Assert
+      Assert.That
+            .IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotBeEmpty(string.Empty,
+                                                                                       nameof(TestPath))),
+                        actual);
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
    //a_valid_path_without_a_volume
    //WHEN
    //ParseComponents
@@ -133,7 +158,7 @@ public class ParseComponents
    //a_failure_is_returned
 
    [TestMethod]
-   public void GIVEN_a_valid_path_without_a_volume_WHEN_Parse_THEN_a_failure_is_returned()
+   public void GIVEN_a_valid_path_without_a_volume_WHEN_ParseComponents_THEN_a_failure_is_returned()
    {
       static Property Property(string path)
       {
@@ -164,7 +189,7 @@ public class ParseComponents
    //a_failure_is_returned
 
    [TestMethod]
-   public void GIVEN_a_path_with_an_invalid_volume_root_WHEN_Parse_THEN_a_failure_is_returned()
+   public void GIVEN_a_path_with_an_invalid_volume_root_WHEN_ParseComponents_THEN_a_failure_is_returned()
    {
       static Property Property(string path)
       {
@@ -195,7 +220,7 @@ public class ParseComponents
    //a_failure_is_returned
 
    [TestMethod]
-   public void GIVEN_a_path_with_a_volume_root_and_an_invalid_component_WHEN_Parse_THEN_a_failure_is_returned()
+   public void GIVEN_a_path_with_a_volume_root_and_an_invalid_component_WHEN_ParseComponents_THEN_a_failure_is_returned()
    {
       static Property Property(string path)
       {

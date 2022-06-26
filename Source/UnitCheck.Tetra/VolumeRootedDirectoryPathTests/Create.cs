@@ -75,6 +75,39 @@ public class Create
    /* ------------------------------------------------------------ */
 
    //GIVEN
+   //the_empty_string
+   //WHEN
+   //Create
+   //THEN
+   //an_argument_exception_is_thrown
+
+   [TestMethod]
+   public void GIVEN_the_empty_string_WHEN_Create_THEN_an_argument_exception_is_thrown()
+   {
+      //Arrange
+      var exception = Option<Exception>.None();
+
+      //Act
+      try
+      {
+         VolumeRootedDirectoryPath.Create(string.Empty);
+      }
+      catch (Exception e)
+      {
+         exception = e;
+      }
+
+      //Assert
+      Assert.That
+            .AnArgumentExceptionWasThrown(exception,
+                                          ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMayNotBeEmpty(string.Empty,
+                                                                                                                   HumanReadableName.VolumeRootedDirectoryPath),
+                                                                   "potentialPath"));
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
    //a_valid_path_without_a_volume
    //WHEN
    //Create
@@ -101,9 +134,9 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                            ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
-                                                                                                                                 HumanReadableName.VolumeRootedDirectoryPath),
-                                                                     "potentialPath"));
+                                             ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
+                                                                         HumanReadableName.VolumeRootedDirectoryPath),
+                                                                      "potentialPath"));
       }
 
       Arb.Register<Libraries.ValidPathWithoutRoot>();
@@ -111,8 +144,7 @@ public class Create
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
    }
-
-   /* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */
 
    //GIVEN
    //a_path_with_an_invalid_volume_root
@@ -142,7 +174,7 @@ public class Create
          //Assert
          return AnArgumentExceptionWasThrown(exception,
                                              ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
-                                                                                                                                  HumanReadableName.VolumeRootedDirectoryPath),
+                                                                         HumanReadableName.VolumeRootedDirectoryPath),
                                                                       "potentialPath"));
       }
 

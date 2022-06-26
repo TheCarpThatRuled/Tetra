@@ -44,7 +44,7 @@ partial class Assert_Extensions
       if (result.Reduce(actual =>
                         {
                            assert.AreEqual(expected,
-                                           actual,
+                                           actual.Content(),
                                            TheResultIsAFailureButDoesNotContainTheExpectedContent<T>());
 
                            return false;
@@ -67,7 +67,7 @@ partial class Assert_Extensions
       if (result.Reduce(actual =>
                         {
                            assert.AreEqual(expected,
-                                           actual,
+                                           actual.Content(),
                                            TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(name));
 
                            return false;
@@ -166,7 +166,7 @@ partial class Assert_Extensions
                         actual =>
                         {
                            assert.AreEqual(expected,
-                                           actual,
+                                           actual.Content(),
                                            TheResultIsASuccessButDoesNotContainTheExpectedContent<T>());
 
                            return false;
@@ -189,7 +189,7 @@ partial class Assert_Extensions
                         actual =>
                         {
                            assert.AreEqual(expected,
-                                           actual,
+                                           actual.Content(),
                                            TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(name));
 
                            return false;

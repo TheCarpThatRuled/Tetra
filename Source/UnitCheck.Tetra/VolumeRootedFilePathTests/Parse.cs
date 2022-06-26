@@ -77,6 +77,27 @@ public class Parse
           .QuickCheckThrowOnFailure();
    }
 
+   //GIVEN
+   //the_empty_string
+   //WHEN
+   //Parse
+   //THEN
+   //a_failure_is_returned
+
+   [TestMethod]
+   public void GIVEN_the_empty_string_WHEN_Parse_THEN_a_failure_is_returned()
+   {
+      //Arrange
+      //Act
+      var actual = VolumeRootedFilePath.Parse(string.Empty);
+
+      //Assert
+      Assert.That
+            .IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotBeEmpty(string.Empty,
+                                                                                       HumanReadableName.VolumeRootedFilePath)),
+                        actual);
+   }
+
    /* ------------------------------------------------------------ */
 
    //GIVEN
