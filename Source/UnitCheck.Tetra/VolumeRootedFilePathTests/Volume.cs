@@ -9,21 +9,21 @@ namespace Check.VolumeRootedFilePathTests;
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
 [TestCategory(LocalCategories.VolumeRootedFilePath)]
-public class File
+public class VolumeProperty
 {
    /* ------------------------------------------------------------ */
-   // FileComponent File()
+   // Volume Volume()
    /* ------------------------------------------------------------ */
 
    //GIVEN
    //a_VolumeRootedFilePath
    //WHEN
-   //File
+   //Volume
    //THEN
-   //a_FileComponent_containing_the_file_is_returned
+   //a_Volume_containing_the_volume_is_returned
 
    [TestMethod]
-   public void GIVEN_a_VolumeRootedFilePath_WHEN_File_THEN_a_FileComponent_containing_the_File_is_returned()
+   public void GIVEN_a_VolumeRootedFilePath_WHEN_Volume_THEN_a_Volume_containing_the_volume_is_returned()
    {
       static Property Property(Volume               volume,
                                DirectoryComponent[] directories,
@@ -35,10 +35,10 @@ public class File
                                                                      file);
 
          //Act
-         var actual = volumeRootedDirectoryPath.File();
+         var actual = volumeRootedDirectoryPath.Volume();
 
          //Assert
-         return AreEqual(file,
+         return AreEqual(volume,
                          actual);
       }
 
@@ -46,7 +46,7 @@ public class File
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
       Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<Volume, DirectoryComponent[], FileComponent>(Property)
+      Prop.ForAll<Tetra.Volume, DirectoryComponent[], FileComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 

@@ -36,6 +36,13 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
                                                              .volume));
 
    /* ------------------------------------------------------------ */
+   // Properties
+   /* ------------------------------------------------------------ */
+
+   public Volume Volume()
+      => _volume;
+
+   /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
@@ -91,7 +98,7 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
       if (string.IsNullOrEmpty(potentialPath))
       {
          return Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotBeEmpty(potentialPath,
-                                                                                 pathType));
+                                                                               pathType));
       }
 
       var components = potentialPath
@@ -104,7 +111,7 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
       if (potentialVolume.IsNotAValidVolumeLabel())
       {
          return Message.Create(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(potentialPath,
-                                                                                            pathType));
+                                                                                           pathType));
       }
 
       var directoryComponents = components
@@ -118,7 +125,8 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
                                                                                             pathType));
       }
 
-      return (Volume.Create(potentialVolume[0]),
+      return (Tetra.Volume
+                   .Create(potentialVolume[0]),
               directoryComponents.Select(DirectoryComponent.Create)
                                  .ToArray());
    }

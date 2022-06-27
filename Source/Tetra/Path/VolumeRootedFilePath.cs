@@ -56,6 +56,11 @@ public class VolumeRootedFilePath : AbsoluteFilePath
                 _directories);
 
    /* ------------------------------------------------------------ */
+
+   public Volume Volume()
+      => _volume;
+
+   /* ------------------------------------------------------------ */
    // Protected Constructors
    /* ------------------------------------------------------------ */
 
@@ -76,7 +81,7 @@ public class VolumeRootedFilePath : AbsoluteFilePath
    /* ------------------------------------------------------------ */
 
    protected static Result<(Volume volume, IReadOnlyCollection<DirectoryComponent> directories, FileComponent file)> ParseComponents(string potentialPath,
-                                                                                                                                     string pathType)
+      string                                                                                                                                pathType)
    {
       if (string.IsNullOrEmpty(potentialPath))
       {
@@ -114,7 +119,8 @@ public class VolumeRootedFilePath : AbsoluteFilePath
                                                                                                   pathType));
       }
 
-      return (Volume.Create(potentialVolume[0]),
+      return (Tetra.Volume
+                   .Create(potentialVolume[0]),
               potentialComponents.SkipLast(1)
                                  .Select(DirectoryComponent.Create)
                                  .ToArray(),
