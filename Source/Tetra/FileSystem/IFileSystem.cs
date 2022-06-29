@@ -12,6 +12,10 @@ public interface IFileSystem
    // Methods
    /* ------------------------------------------------------------ */
 
+   public bool Exists(AbsoluteDirectoryPath path);
+
+   /* ------------------------------------------------------------ */
+
    public Error SetCurrentDirectory(AbsoluteDirectoryPath path);
 
    /* ------------------------------------------------------------ */

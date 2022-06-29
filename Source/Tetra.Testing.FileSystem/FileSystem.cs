@@ -17,6 +17,12 @@ public sealed class FileSystem : IFileSystem
       => _currentDirectory;
 
    /* ------------------------------------------------------------ */
+
+   public bool Exists(AbsoluteDirectoryPath path)
+      => _currentDirectory
+        .Equals(path);
+
+   /* ------------------------------------------------------------ */
    // IFileSystem Methods
    /* ------------------------------------------------------------ */
 
