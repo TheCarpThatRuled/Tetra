@@ -30,12 +30,12 @@ public class VolumeProperty
                                FileComponent        file)
       {
          //Arrange
-         var volumeRootedDirectoryPath = VolumeRootedFilePath.Create(volume,
+         var path = VolumeRootedFilePath.Create(volume,
                                                                      directories,
                                                                      file);
 
          //Act
-         var actual = volumeRootedDirectoryPath.Volume();
+         var actual = path.Volume();
 
          //Assert
          return AreEqual(volume,

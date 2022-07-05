@@ -8,16 +8,16 @@ partial class Generators
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Gen<VolumeRootedDirectoryPath> VolumeRootedDirectoryPath()
+   public static Gen<AbsoluteDirectoryPath> AbsoluteDirectoryPath()
       => ValidPathWithVolumeRootAndTrailingDirectorySeparator()
         .Select(Tetra
-               .VolumeRootedDirectoryPath
+               .AbsoluteDirectoryPath
                .Create);
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(VolumeRootedDirectoryPath, VolumeRootedDirectoryPath, VolumeRootedDirectoryPath)> ThreeUniqueVolumeRootedDirectoryPaths()
-      => VolumeRootedDirectoryPath()
+   public static Gen<(AbsoluteDirectoryPath, AbsoluteDirectoryPath, AbsoluteDirectoryPath)> ThreeUniqueAbsoluteDirectoryPaths()
+      => AbsoluteDirectoryPath()
         .ThreeValueTuples()
         .Where(tuple => !StringComparer.OrdinalIgnoreCase.Equals(tuple.Item1.Value(),
                                                                  tuple.Item2.Value())
@@ -28,17 +28,17 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(VolumeRootedDirectoryPath, VolumeRootedDirectoryPath)> TwoIdenticalVolumeRootedDirectoryPaths()
+   public static Gen<(AbsoluteDirectoryPath, AbsoluteDirectoryPath)> TwoIdenticalAbsoluteDirectoryPaths()
       => ValidPathWithVolumeRootAndTrailingDirectorySeparator()
-        .Select(path => (Tetra.VolumeRootedDirectoryPath
+        .Select(path => (Tetra.AbsoluteDirectoryPath
                                        .Create(path),
-                                  Tetra.VolumeRootedDirectoryPath
+                                  Tetra.AbsoluteDirectoryPath
                                        .Create(path)));
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(VolumeRootedDirectoryPath, VolumeRootedDirectoryPath)> TwoUniqueVolumeRootedDirectoryPaths()
-      => VolumeRootedDirectoryPath()
+   public static Gen<(AbsoluteDirectoryPath, AbsoluteDirectoryPath)> TwoUniqueAbsoluteDirectoryPaths()
+      => AbsoluteDirectoryPath()
         .TwoValueTuples()
         .Where(tuple => !StringComparer.OrdinalIgnoreCase.Equals(tuple.Item1.Value(),
                                                                  tuple.Item2.Value()));

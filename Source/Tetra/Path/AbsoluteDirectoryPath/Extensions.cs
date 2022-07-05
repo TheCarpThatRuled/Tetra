@@ -1,15 +1,15 @@
 ﻿namespace Tetra;
 
 // ReSharper disable once InconsistentNaming
-public static class VolumeRootedDirectoryPath_Extensions
+public static class AbsoluteDirectoryPath_Extensions
 {
    /* ------------------------------------------------------------ */
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static IReadOnlyList<VolumeRootedDirectoryPath> Ancestry(this VolumeRootedDirectoryPath path)
+   public static IReadOnlyList<AbsoluteDirectoryPath> Ancestry(this AbsoluteDirectoryPath path)
    {
-      var  ancestry = new List<VolumeRootedDirectoryPath> {path,};
+      var  ancestry = new List<AbsoluteDirectoryPath> {path,};
 
       bool hadParent;
       do

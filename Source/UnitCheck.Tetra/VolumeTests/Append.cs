@@ -12,7 +12,7 @@ namespace Check.VolumeTests;
 public class Append
 {
    /* ------------------------------------------------------------ */
-   // VolumeRootedDirectoryPath Append(this Volume volume,
+   // AbsoluteDirectoryPath Append(this Volume volume,
    //                                  params DirectoryComponent[] directories)
    /* ------------------------------------------------------------ */
 
@@ -21,10 +21,10 @@ public class Append
    //WHEN
    //Append
    //THEN
-   //a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned
+   //a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_Volume_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_Volume_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume               volume,
                                DirectoryComponent[] directories)
@@ -53,7 +53,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // VolumeRootedDirectoryPath Append(this Volume volume,
+   // AbsoluteDirectoryPath Append(this Volume volume,
    //                                  IReadOnlyCollection<DirectoryComponent> directories)
    /* ------------------------------------------------------------ */
 
@@ -62,10 +62,10 @@ public class Append
    //WHEN
    //Append
    //THEN
-   //a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned
+   //a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume                   volume,
                                List<DirectoryComponent> directories)

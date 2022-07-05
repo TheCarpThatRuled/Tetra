@@ -25,7 +25,7 @@ internal static class LocalCategories
    public const string String                    = nameof(System.String);
    public const string Success                   = nameof(Success);
    public const string Volume                    = nameof(Tetra.Volume);
-   public const string VolumeRootedDirectoryPath = nameof(Tetra.VolumeRootedDirectoryPath);
+   public const string AbsoluteDirectoryPath = nameof(Tetra.AbsoluteDirectoryPath);
    public const string VolumeRootedFilePath      = nameof(Tetra.VolumeRootedFilePath);
 
    /* ------------------------------------------------------------ */

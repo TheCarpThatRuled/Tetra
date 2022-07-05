@@ -4,38 +4,39 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeRootedDirectoryPathTests;
+namespace Check.AbsoluteDirectoryPathTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.VolumeRootedDirectoryPath)]
+[TestCategory(LocalCategories.AbsoluteDirectoryPath)]
 // ReSharper disable once InconsistentNaming
-public class ToString
+public class GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // string ToString()
+   // int GetHashCode()
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //VolumeRootedDirectoryPath
+   //AbsoluteDirectoryPath
    //WHEN
-   //ToString
+   //GetHashCode
    //THEN
-   //the_value_bounded_by_angle_brackets_is_returned
+   //the_ordinal_ignore_case_hash_code_of_the_value_is_returned
 
    [TestMethod]
-   public void GIVEN_VolumeRootedDirectoryPath_WHEN_ToString_THEN_the_value_bounded_by_angle_brackets_is_returned()
+   public void GIVEN_AbsoluteDirectoryPath_WHEN_GetHashCode_THEN_the_ordinal_ignore_case_hash_code_of_the_value_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(string sourcePath)
       {
          //Arrange
-         var volumeRootedDirectoryPath = VolumeRootedDirectoryPath.Create(path);
+         var path = AbsoluteDirectoryPath.Create(sourcePath);
 
          //Act
-         var actual = volumeRootedDirectoryPath.ToString();
+         var actual = path.GetHashCode();
 
          //Assert
-         return AreEqual($"<{path}>",
+         return AreEqual(StringComparer.OrdinalIgnoreCase
+                                       .GetHashCode(sourcePath),
                          actual);
       }
 

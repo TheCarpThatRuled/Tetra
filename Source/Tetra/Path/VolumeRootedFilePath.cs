@@ -50,8 +50,8 @@ public class VolumeRootedFilePath : AbsoluteFilePath
 
    /* ------------------------------------------------------------ */
 
-   public VolumeRootedDirectoryPath Parent()
-      => VolumeRootedDirectoryPath
+   public AbsoluteDirectoryPath Parent()
+      => AbsoluteDirectoryPath
         .Create(_volume,
                 _directories);
 

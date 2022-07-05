@@ -8,15 +8,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class VolumeRootedDirectoryPath
+   public sealed class AbsoluteDirectoryPath
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Tetra.VolumeRootedDirectoryPath> Type()
+      public static Arbitrary<Tetra.AbsoluteDirectoryPath> Type()
          => Generators
-           .VolumeRootedDirectoryPath()
+           .AbsoluteDirectoryPath()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -26,15 +26,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class ThreeUniqueVolumeRootedDirectoryPaths
+   public sealed class ThreeUniqueAbsoluteDirectoryPaths
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.VolumeRootedDirectoryPath, Tetra.VolumeRootedDirectoryPath, Tetra.VolumeRootedDirectoryPath)> Type()
+      public static Arbitrary<(Tetra.AbsoluteDirectoryPath, Tetra.AbsoluteDirectoryPath, Tetra.AbsoluteDirectoryPath)> Type()
          => Generators
-           .ThreeUniqueVolumeRootedDirectoryPaths()
+           .ThreeUniqueAbsoluteDirectoryPaths()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -44,15 +44,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TransitiveVolumeRootedDirectoryPaths
+   public sealed class TransitiveAbsoluteDirectoryPaths
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.VolumeRootedDirectoryPath, Tetra.VolumeRootedDirectoryPath, Tetra.VolumeRootedDirectoryPath)> Type()
+      public static Arbitrary<(Tetra.AbsoluteDirectoryPath, Tetra.AbsoluteDirectoryPath, Tetra.AbsoluteDirectoryPath)> Type()
          => Generators
-           .Transitive(Generators.TwoUniqueVolumeRootedDirectoryPaths())
+           .Transitive(Generators.TwoUniqueAbsoluteDirectoryPaths())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -62,15 +62,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TwoIdenticalVolumeRootedDirectoryPaths
+   public sealed class TwoIdenticalAbsoluteDirectoryPaths
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.VolumeRootedDirectoryPath, Tetra.VolumeRootedDirectoryPath)> Type()
+      public static Arbitrary<(Tetra.AbsoluteDirectoryPath, Tetra.AbsoluteDirectoryPath)> Type()
          => Generators
-           .TwoIdenticalVolumeRootedDirectoryPaths()
+           .TwoIdenticalAbsoluteDirectoryPaths()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -80,15 +80,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TwoUniqueVolumeRootedDirectoryPaths
+   public sealed class TwoUniqueAbsoluteDirectoryPaths
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.VolumeRootedDirectoryPath, Tetra.VolumeRootedDirectoryPath)> Type()
+      public static Arbitrary<(Tetra.AbsoluteDirectoryPath, Tetra.AbsoluteDirectoryPath)> Type()
          => Generators
-           .TwoUniqueVolumeRootedDirectoryPaths()
+           .TwoUniqueAbsoluteDirectoryPaths()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

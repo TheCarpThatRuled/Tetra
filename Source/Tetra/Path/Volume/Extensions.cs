@@ -7,17 +7,17 @@ public static class Volume_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static VolumeRootedDirectoryPath Append(this   Volume               volume,
-                                                  params DirectoryComponent[] directories)
-      => VolumeRootedDirectoryPath
+   public static AbsoluteDirectoryPath Append(this   Volume               volume,
+                                              params DirectoryComponent[] directories)
+      => AbsoluteDirectoryPath
         .Create(volume,
                 directories);
 
    /* ------------------------------------------------------------ */
 
-   public static VolumeRootedDirectoryPath Append(this Volume                             volume,
-                                                  IReadOnlyCollection<DirectoryComponent> directories)
-      => VolumeRootedDirectoryPath
+   public static AbsoluteDirectoryPath Append(this Volume                             volume,
+                                              IReadOnlyCollection<DirectoryComponent> directories)
+      => AbsoluteDirectoryPath
         .Create(volume,
                 directories);
 
@@ -32,8 +32,8 @@ public static class Volume_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static VolumeRootedDirectoryPath ToDirectoryPath(this Volume volume)
-      => VolumeRootedDirectoryPath
+   public static AbsoluteDirectoryPath ToDirectoryPath(this Volume volume)
+      => AbsoluteDirectoryPath
         .Create(volume,
                 Array.Empty<DirectoryComponent>());
 

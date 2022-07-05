@@ -4,42 +4,42 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeRootedDirectoryPathTests;
+namespace Check.AbsoluteDirectoryPathTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.VolumeRootedDirectoryPath)]
+[TestCategory(LocalCategories.AbsoluteDirectoryPath)]
 public class Append
 {
    /* ------------------------------------------------------------ */
-   // VolumeRootedDirectoryPath Append(params DirectoryComponent[] directories)
+   // AbsoluteDirectoryPath Append(params DirectoryComponent[] directories)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_VolumeRootedDirectoryPath_AND_an_Array_of_DirectoryComponents
+   //a_AbsoluteDirectoryPath_AND_an_Array_of_DirectoryComponents
    //WHEN
    //Append
    //THEN
-   //a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned
+   //a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_VolumeRootedDirectoryPath_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_AbsoluteDirectoryPath_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume               volume,
                                DirectoryComponent[] initialDirectories,
                                DirectoryComponent[] directories)
       {
          //Arrange
-         var volumeRootedDirectoryPath = VolumeRootedDirectoryPath.Create(volume,
-                                                                          initialDirectories);
+         var path = AbsoluteDirectoryPath.Create(volume,
+                                                                      initialDirectories);
 
-         var expected = volumeRootedDirectoryPath.Value()
+         var expected = path.Value()
                       + initialDirectories.Aggregate(string.Empty,
                                                      (total,
                                                       next) => $"{total}{next.Value()}{Path.DirectorySeparatorChar}");
 
          //Act
-         var actual = volumeRootedDirectoryPath.Append(initialDirectories);
+         var actual = path.Append(initialDirectories);
 
          //Assert
          return AreEqual(expected,
@@ -54,33 +54,33 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // VolumeRootedDirectoryPath Append(IEnumerable<DirectoryComponent> directories)
+   // AbsoluteDirectoryPath Append(IEnumerable<DirectoryComponent> directories)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_VolumeRootedDirectoryPath_AND_a_sequence_of_DirectoryComponents
+   //a_AbsoluteDirectoryPath_AND_a_sequence_of_DirectoryComponents
    //WHEN
    //Append
    //THEN
-   //a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned
+   //a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_VolumeRootedDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_a_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_AbsoluteDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume                   volume,
                                List<DirectoryComponent> initialDirectories,
                                List<DirectoryComponent> directories)
       {
          //Arrange
-         var volumeRootedDirectoryPath = VolumeRootedDirectoryPath.Create(volume,
-                                                                          initialDirectories);
-         var expected = volumeRootedDirectoryPath.Value()
+         var path = AbsoluteDirectoryPath.Create(volume,
+                                                 initialDirectories);
+         var expected = path.Value()
                       + directories.Aggregate(string.Empty,
                                               (total,
                                                next) => $"{total}{next.Value()}{Path.DirectorySeparatorChar}");
 
          //Act
-         var actual = volumeRootedDirectoryPath.Append(directories);
+         var actual = path.Append(directories);
 
          //Assert
          return AreEqual(expected,
@@ -99,27 +99,27 @@ public class Append
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_VolumeRootedDirectoryPath_AND_a_FileComponent
+   //a_AbsoluteDirectoryPath_AND_a_FileComponent
    //WHEN
    //Append
    //THEN
    //a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_VolumeRootedDirectoryPath_and_a_FileComponent_WHEN_Append_THEN_a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_AbsoluteDirectoryPath_and_a_FileComponent_WHEN_Append_THEN_a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume                   volume,
                                List<DirectoryComponent> initialDirectories,
-                               FileComponent file)
+                               FileComponent            file)
       {
          //Arrange
-         var volumeRootedDirectoryPath = VolumeRootedDirectoryPath.Create(volume,
-                                                                          initialDirectories);
-         var expected = volumeRootedDirectoryPath.Value()
+         var path = AbsoluteDirectoryPath.Create(volume,
+                                                 initialDirectories);
+         var expected = path.Value()
                       + file.Value();
 
          //Act
-         var actual = volumeRootedDirectoryPath.Append(file);
+         var actual = path.Append(file);
 
          //Assert
          return AreEqual(expected,

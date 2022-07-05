@@ -16,7 +16,7 @@ public class WHEN_the_client_checks_if_a_directory_exists
    [TestMethod]
    public void AND_the_directory_is_the_current_directory_THEN_true_is_returned()
    {
-      static Property Property(VolumeRootedDirectoryPath currentDirectory)
+      static Property Property(AbsoluteDirectoryPath currentDirectory)
       {
          //Arrange
          var fileSystem = FileSystem.From(currentDirectory);
@@ -28,9 +28,9 @@ public class WHEN_the_client_checks_if_a_directory_exists
          return IsTrue(actual);
       }
 
-      Arb.Register<Libraries.VolumeRootedDirectoryPath>();
+      Arb.Register<Libraries.AbsoluteDirectoryPath>();
 
-      Prop.ForAll<VolumeRootedDirectoryPath>(Property)
+      Prop.ForAll<AbsoluteDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -39,7 +39,7 @@ public class WHEN_the_client_checks_if_a_directory_exists
    [TestMethod]
    public void AND_the_directory_is_not_the_current_directory_THEN_false_is_returned()
    {
-      static Property Property((VolumeRootedDirectoryPath currentDirectory, VolumeRootedDirectoryPath otherDirectory) args)
+      static Property Property((AbsoluteDirectoryPath currentDirectory, AbsoluteDirectoryPath otherDirectory) args)
       {
          //Arrange
          var fileSystem = FileSystem.From(args.currentDirectory);
@@ -51,9 +51,9 @@ public class WHEN_the_client_checks_if_a_directory_exists
          return IsFalse(actual);
       }
 
-      Arb.Register<Libraries.TwoUniqueVolumeRootedDirectoryPaths>();
+      Arb.Register<Libraries.TwoUniqueAbsoluteDirectoryPaths>();
 
-      Prop.ForAll<(VolumeRootedDirectoryPath, VolumeRootedDirectoryPath)>(Property)
+      Prop.ForAll<(AbsoluteDirectoryPath, AbsoluteDirectoryPath)>(Property)
           .QuickCheckThrowOnFailure();
    }
 

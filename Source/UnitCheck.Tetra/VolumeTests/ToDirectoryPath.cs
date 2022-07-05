@@ -12,7 +12,7 @@ namespace Check.VolumeTests;
 public class ToDirectoryPath
 {
    /* ------------------------------------------------------------ */
-   // VolumeRootedDirectoryPath ToDirectoryPath(this Volume volume)
+   // AbsoluteDirectoryPath ToDirectoryPath(this Volume volume)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -20,10 +20,10 @@ public class ToDirectoryPath
    //WHEN
    //ToDirectoryPath
    //THEN
-   //a_VolumeRootedDirectoryPath_with_the_value_plus_the_directory_separator_is_returned
+   //a_AbsoluteDirectoryPath_with_the_value_plus_the_directory_separator_is_returned
 
    [TestMethod]
-   public void GIVEN_a_Volume_WHEN_Create_THEN_a_VolumeRootedDirectoryPath_with_the_value_plus_the_directory_separator_is_returned()
+   public void GIVEN_a_Volume_WHEN_Create_THEN_a_AbsoluteDirectoryPath_with_the_value_plus_the_directory_separator_is_returned()
    {
       static Property Property(Volume volume)
       {

@@ -12,7 +12,7 @@ namespace Check.VolumeRootedFilePathTests;
 public class Parent
 {
    /* ------------------------------------------------------------ */
-   // VolumeRootedDirectoryPath Parent()
+   // AbsoluteDirectoryPath Parent()
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -20,17 +20,17 @@ public class Parent
    //WHEN
    //Parent
    //THEN
-   //a_VolumeRootedDirectoryPath_containing_the_parent_directory_is_returned
+   //a_AbsoluteDirectoryPath_containing_the_parent_directory_is_returned
 
    [TestMethod]
-   public void GIVEN_a_VolumeRootedFilePath_WHEN_Parent_THEN_a_VolumeRootedDirectoryPath_containing_the_parent_directory_is_returned()
+   public void GIVEN_a_VolumeRootedFilePath_WHEN_Parent_THEN_a_AbsoluteDirectoryPath_containing_the_parent_directory_is_returned()
    {
       static Property Property(Volume               volume,
                                DirectoryComponent[] directories,
                                FileComponent        file)
       {
          //Arrange
-         var volumeRootedDirectoryPath = VolumeRootedFilePath.Create(volume,
+         var path = VolumeRootedFilePath.Create(volume,
                                                                      directories,
                                                                      file);
          var expected = directories
@@ -41,7 +41,7 @@ public class Parent
                                    next) => $"{total}{next}{Path.DirectorySeparatorChar}");
 
          //Act
-         var actual = volumeRootedDirectoryPath.Parent();
+         var actual = path.Parent();
 
          //Assert
          return AreEqual(expected,

@@ -16,7 +16,7 @@ public class WHEN_the_client_creates_the_FileSystem
    [TestMethod]
    public void THEN_the_current_directory_is_the_value_passed_in_on_creation()
    {
-      static Property Property(VolumeRootedDirectoryPath path)
+      static Property Property(AbsoluteDirectoryPath path)
       {
          //Arrange
          //Act
@@ -27,9 +27,9 @@ public class WHEN_the_client_creates_the_FileSystem
                          fileSystem.CurrentDirectory());
       }
 
-      Arb.Register<Libraries.VolumeRootedDirectoryPath>();
+      Arb.Register<Libraries.AbsoluteDirectoryPath>();
 
-      Prop.ForAll<VolumeRootedDirectoryPath>(Property)
+      Prop.ForAll<AbsoluteDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

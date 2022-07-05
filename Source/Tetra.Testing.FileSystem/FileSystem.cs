@@ -22,7 +22,7 @@ public sealed class FileSystem : IFileSystem
 
    public Error Create(AbsoluteDirectoryPath path)
    {
-      var dir = (VolumeRootedDirectoryPath) path;
+      var dir = (AbsoluteDirectoryPath) path;
 
       _directories.AddRange(dir.Ancestry());
 

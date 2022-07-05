@@ -5,15 +5,15 @@ using Tetra.Testing;
 using static Check.Messages;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeRootedDirectoryPathTests;
+namespace Check.AbsoluteDirectoryPathTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.VolumeRootedDirectoryPath)]
+[TestCategory(LocalCategories.AbsoluteDirectoryPath)]
 public class Parse
 {
    /* ------------------------------------------------------------ */
-   // VolumeRootedDirectoryPath Parse(Volume volume,
+   // AbsoluteDirectoryPath Parse(Volume volume,
    //                                  IReadOnlyCollection<DirectoryComponent> directories)
    /* ------------------------------------------------------------ */
 
@@ -22,17 +22,17 @@ public class Parse
    //WHEN
    //Parse
    //THEN
-   //a_success_containing_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned
+   //a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
    public void
-      GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+      GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(string path)
       {
          //Arrange
          //Act
-         var actual = VolumeRootedDirectoryPath.Parse(path);
+         var actual = AbsoluteDirectoryPath.Parse(path);
 
          //Assert
          return IsASuccessAnd(actualPath => path
@@ -54,17 +54,17 @@ public class Parse
    //WHEN
    //Parse
    //THEN
-   //a_success_containing_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned
+   //a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
    public void
-      GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_VolumeRootedDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+      GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(string path)
       {
          //Arrange
          //Act
-         var actual = VolumeRootedDirectoryPath.Parse(path);
+         var actual = AbsoluteDirectoryPath.Parse(path);
 
          //Assert
          return IsASuccessAnd(actualPath => $"{path}{Path.DirectorySeparatorChar}"
@@ -93,12 +93,12 @@ public class Parse
    {
       //Arrange
       //Act
-      var actual = VolumeRootedDirectoryPath.Parse(string.Empty);
+      var actual = AbsoluteDirectoryPath.Parse(string.Empty);
 
       //Assert
       Assert.That
             .IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotBeEmpty(string.Empty,
-                                                                                       HumanReadableName.VolumeRootedDirectoryPath)),
+                                                                                       HumanReadableName.AbsoluteDirectoryPath)),
                         actual);
    }
 
@@ -118,11 +118,11 @@ public class Parse
       {
          //Arrange
          //Act
-         var actual = VolumeRootedDirectoryPath.Parse(path);
+         var actual = AbsoluteDirectoryPath.Parse(path);
 
          //Assert
          return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
-                                                                                                      HumanReadableName.VolumeRootedDirectoryPath)),
+                                                                                                      HumanReadableName.AbsoluteDirectoryPath)),
                            actual);
       }
 
@@ -150,11 +150,11 @@ public class Parse
          var exception = Option<Exception>.None();
 
          //Act
-         var actual = VolumeRootedDirectoryPath.Parse(path);
+         var actual = AbsoluteDirectoryPath.Parse(path);
 
          //Assert
          return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
-                                                                                                      HumanReadableName.VolumeRootedDirectoryPath)),
+                                                                                                      HumanReadableName.AbsoluteDirectoryPath)),
                            actual);
       }
 
@@ -182,11 +182,11 @@ public class Parse
          var exception = Option<Exception>.None();
 
          //Act
-         var actual = VolumeRootedDirectoryPath.Parse(path);
+         var actual = AbsoluteDirectoryPath.Parse(path);
 
          //Assert
          return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotContainTheCharacters(path,
-                                                                                                       HumanReadableName.VolumeRootedDirectoryPath)),
+                                                                                                       HumanReadableName.AbsoluteDirectoryPath)),
                            actual);
       }
 

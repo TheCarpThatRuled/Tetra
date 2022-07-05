@@ -1,40 +1,89 @@
 ﻿namespace Tetra;
 using static TetraMessages;
 
-public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
+public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
+                                     IEquatable<AbsoluteDirectoryPath>
 {
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static VolumeRootedDirectoryPath Create(string potentialPath)
+   public static AbsoluteDirectoryPath Create(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
         .Reduce(failure => throw new ArgumentException(failure.Content()
                                                               .Content(),
                                                        nameof(potentialPath)),
-                success => new VolumeRootedDirectoryPath(success.Content()
-                                                                .directories,
-                                                         success.Content()
-                                                                .volume));
+                success => new AbsoluteDirectoryPath(success.Content()
+                                                            .directories,
+                                                     success.Content()
+                                                            .volume));
 
    /* ------------------------------------------------------------ */
 
-   public static VolumeRootedDirectoryPath Create(Volume                                  volume,
-                                                  IReadOnlyCollection<DirectoryComponent> directories)
+   public static AbsoluteDirectoryPath Create(Volume                                  volume,
+                                              IReadOnlyCollection<DirectoryComponent> directories)
       => new(directories,
              volume);
 
    /* ------------------------------------------------------------ */
 
-   public static Result<VolumeRootedDirectoryPath> Parse(string potentialPath)
+   public static Result<AbsoluteDirectoryPath> Parse(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
-        .Map(success => new VolumeRootedDirectoryPath(success.Content()
-                                                             .directories,
-                                                      success.Content()
-                                                             .volume));
+        .Map(success => new AbsoluteDirectoryPath(success.Content()
+                                                         .directories,
+                                                  success.Content()
+                                                         .volume));
 
+   /* ------------------------------------------------------------ */
+   // object Overridden Methods
+   /* ------------------------------------------------------------ */
+
+   public override bool Equals(object? obj)
+      => ReferenceEquals(this,
+                         obj)
+      || obj is AbsoluteDirectoryPath path
+      && Equals(path);
+
+   /* ------------------------------------------------------------ */
+
+   public override int GetHashCode()
+      => StringComparer
+        .OrdinalIgnoreCase
+        .GetHashCode(_value);
+
+   /* ------------------------------------------------------------ */
+
+   public override string ToString()
+      => $"<{_value}>";
+
+   /* ------------------------------------------------------------ */
+   // IComparable<FileComponent> Methods
+   /* ------------------------------------------------------------ */
+
+   public int CompareTo(AbsoluteDirectoryPath? other)
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Compare(_value,
+                 other?._value);
+
+   /* ------------------------------------------------------------ */
+   // IEquatable<FileComponent> Methods
+   /* ------------------------------------------------------------ */
+
+   public bool Equals(AbsoluteDirectoryPath? other)
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Equals(_value,
+                other?._value);
+
+   /* ------------------------------------------------------------ */
+   // Properties
+   /* ------------------------------------------------------------ */
+
+   public string Value()
+      => _value;
    /* ------------------------------------------------------------ */
    // Properties
    /* ------------------------------------------------------------ */
@@ -46,14 +95,14 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
    // Methods
    /* ------------------------------------------------------------ */
 
-   public VolumeRootedDirectoryPath Append(params DirectoryComponent[] directories)
+   public AbsoluteDirectoryPath Append(params DirectoryComponent[] directories)
       => Create(_volume,
                 _directories.Concat(directories)
                             .ToArray());
 
    /* ------------------------------------------------------------ */
 
-   public VolumeRootedDirectoryPath Append(IEnumerable<DirectoryComponent> directories)
+   public AbsoluteDirectoryPath Append(IEnumerable<DirectoryComponent> directories)
       => Create(_volume,
                 _directories.Concat(directories)
                             .ToArray());
@@ -68,24 +117,25 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
 
    /* ------------------------------------------------------------ */
 
-   public Option<VolumeRootedDirectoryPath> Parent()
+   public Option<AbsoluteDirectoryPath> Parent()
       => _directories.Any()
             ? Option.Some(Create(_volume,
                                  _directories.SkipLast(1)
                                              .ToArray()))
-            : Option<VolumeRootedDirectoryPath>.None();
+            : Option<AbsoluteDirectoryPath>.None();
 
    /* ------------------------------------------------------------ */
    // Protected Constructors
    /* ------------------------------------------------------------ */
 
-   protected VolumeRootedDirectoryPath(IReadOnlyCollection<DirectoryComponent> directories,
-                                       Volume                                  volume)
-      : base(PathBuilder.Combine(volume,
-                                 directories))
+   protected AbsoluteDirectoryPath(IReadOnlyCollection<DirectoryComponent> directories,
+                                   Volume                                  volume)
    {
       _directories = directories;
       _volume      = volume;
+
+      _value = PathBuilder.Combine(volume,
+                                   directories);
    }
 
    /* ------------------------------------------------------------ */
@@ -135,13 +185,14 @@ public class VolumeRootedDirectoryPath : AbsoluteDirectoryPath
    // Private Constants
    /* ------------------------------------------------------------ */
 
-   private const string PathType = "volume-rooted directory path";
+   private const string PathType = "absolute directory path";
 
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
    private readonly IReadOnlyCollection<DirectoryComponent> _directories;
+   private readonly string                                  _value;
    private readonly Volume                                  _volume;
 
    /* ------------------------------------------------------------ */

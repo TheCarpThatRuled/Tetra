@@ -16,7 +16,7 @@ public class WHEN_the_client_sets_the_current_directory
    [TestMethod]
    public void THEN_the_current_directory_is_the_value_passed_to_SetCurrentDirectory_AND_a_none_is_returned()
    {
-      static Property Property((VolumeRootedDirectoryPath initialPath, VolumeRootedDirectoryPath updatedPath) args)
+      static Property Property((AbsoluteDirectoryPath initialPath, AbsoluteDirectoryPath updatedPath) args)
       {
          //Arrange
          var fileSystem = FileSystem.From(args.initialPath);
@@ -30,9 +30,9 @@ public class WHEN_the_client_sets_the_current_directory
            .And(() => IsANone(actual));
       }
 
-      Arb.Register<Libraries.TwoUniqueVolumeRootedDirectoryPaths>();
+      Arb.Register<Libraries.TwoUniqueAbsoluteDirectoryPaths>();
 
-      Prop.ForAll<(VolumeRootedDirectoryPath, VolumeRootedDirectoryPath)>(Property)
+      Prop.ForAll<(AbsoluteDirectoryPath, AbsoluteDirectoryPath)>(Property)
           .QuickCheckThrowOnFailure();
    }
 

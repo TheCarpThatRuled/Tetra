@@ -4,26 +4,26 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeRootedDirectoryPathTests;
+namespace Check.AbsoluteDirectoryPathTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.VolumeRootedDirectoryPath)]
+[TestCategory(LocalCategories.AbsoluteDirectoryPath)]
 public class Ancestry
 {
    /* ------------------------------------------------------------ */
-   // IReadOnlyList<VolumeRootedDirectoryPath> Ancestry(this VolumeRootedDirectoryPath path)
+   // public static IReadOnlyList<AbsoluteDirectoryPath> Ancestry(this AbsoluteDirectoryPath path)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_VolumeRootedDirectoryPath
+   //a_AbsoluteDirectoryPath
    //WHEN
    //Ancestry
    //THEN
-   //a_sequence_of_VolumeRootedDirectoryPaths_representing_each_node_from_the_root_to_the_left_is_returned
+   //a_sequence_of_AbsoluteDirectoryPaths_representing_each_node_from_the_root_to_the_left_is_returned
 
    [TestMethod]
-   public void GIVEN_a_VolumeRootedDirectoryPath_WHEN_Ancestry_THEN_a_sequence_of_VolumeRootedDirectoryPaths_representing_each_node_from_the_root_to_the_left_is_returned()
+   public void GIVEN_a_AbsoluteDirectoryPath_WHEN_Ancestry_THEN_a_sequence_of_AbsoluteDirectoryPaths_representing_each_node_from_the_root_to_the_left_is_returned()
    {
       static Property Property(Volume               volume,
                                DirectoryComponent[] directories)
@@ -33,13 +33,12 @@ public class Ancestry
 
          foreach (var directory in directories)
          {
-            directoryChains.Add(directoryChains[^1]
-                                  .Append(directory));
+            directoryChains.Add(directoryChains[^1].Append(directory));
          }
 
          var expected = directoryChains
-                       .Select(x => VolumeRootedDirectoryPath.Create(volume,
-                                                                     x.ToArray()))
+                       .Select(x => AbsoluteDirectoryPath.Create(volume,
+                                                                 x.ToArray()))
                        .ToArray();
 
          //Act
@@ -56,4 +55,6 @@ public class Ancestry
       Prop.ForAll<Volume, DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
    }
+
+   /* ------------------------------------------------------------ */
 }

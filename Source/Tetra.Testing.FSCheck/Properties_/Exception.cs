@@ -1,4 +1,5 @@
 ﻿using FsCheck;
+using static Tetra.Testing.AssertMessages;
 
 namespace Tetra.Testing;
 
@@ -6,6 +7,32 @@ partial class Properties
 {
    /* ------------------------------------------------------------ */
    // Functions
+   /* ------------------------------------------------------------ */
+
+   public static Property AnArgumentExceptionWasThrown(Action action,
+                                                       string expectedMessage,
+                                                       string expectedParameter)
+   {
+      //Arrange
+      var exception = Option<Exception>.None();
+
+      //Act
+      try
+      {
+         action();
+      }
+      catch (Exception e)
+      {
+         exception = e;
+      }
+
+      //Assert
+      return AnArgumentExceptionWasThrown(exception,
+                                          ArgumentExceptionMessage(expectedMessage,
+                                                                   expectedParameter));
+
+   }
+
    /* ------------------------------------------------------------ */
 
    public static Property AnArgumentExceptionWasThrown(Option<Exception> actual,

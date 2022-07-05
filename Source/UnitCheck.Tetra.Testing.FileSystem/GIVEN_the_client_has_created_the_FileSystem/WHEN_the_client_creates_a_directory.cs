@@ -16,7 +16,7 @@ public class WHEN_the_client_creates_a_directory
    [TestMethod]
    public void THEN_a_none_is_returned_AND_the_directory_and_all_its_parents_exist()
    {
-      static Property Property((VolumeRootedDirectoryPath currentDirectory, VolumeRootedDirectoryPath otherDirectory) args)
+      static Property Property((AbsoluteDirectoryPath currentDirectory, AbsoluteDirectoryPath otherDirectory) args)
       {
          //Arrange
          var fileSystem = FileSystem.From(args.currentDirectory);
@@ -32,9 +32,9 @@ public class WHEN_the_client_creates_a_directory
                           .All(fileSystem.Exists)));
       }
 
-      Arb.Register<Libraries.TwoUniqueVolumeRootedDirectoryPaths>();
+      Arb.Register<Libraries.TwoUniqueAbsoluteDirectoryPaths>();
 
-      Prop.ForAll<(VolumeRootedDirectoryPath, VolumeRootedDirectoryPath )>(Property)
+      Prop.ForAll<(AbsoluteDirectoryPath, AbsoluteDirectoryPath )>(Property)
           .QuickCheckThrowOnFailure();
    }
 

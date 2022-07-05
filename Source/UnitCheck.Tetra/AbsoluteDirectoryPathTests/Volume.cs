@@ -4,11 +4,11 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeRootedDirectoryPathTests;
+namespace Check.AbsoluteDirectoryPathTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.VolumeRootedDirectoryPath)]
+[TestCategory(LocalCategories.AbsoluteDirectoryPath)]
 public class VolumeProperty
 {
    /* ------------------------------------------------------------ */
@@ -16,24 +16,24 @@ public class VolumeProperty
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_VolumeRootedDirectoryPath
+   //a_AbsoluteDirectoryPath
    //WHEN
    //Volume
    //THEN
    //a_Volume_containing_the_volume_is_returned
 
    [TestMethod]
-   public void GIVEN_a_VolumeRootedDirectoryPath_WHEN_Volume_THEN_a_Volume_containing_the_volume_is_returned()
+   public void GIVEN_a_AbsoluteDirectoryPath_WHEN_Volume_THEN_a_Volume_containing_the_volume_is_returned()
    {
       static Property Property(Volume               volume,
                                DirectoryComponent[] directories)
       {
          //Arrange
-         var volumeRootedDirectoryPath = VolumeRootedDirectoryPath.Create(volume,
-                                                                     directories);
+         var path = AbsoluteDirectoryPath.Create(volume,
+                                                 directories);
 
          //Act
-         var actual = volumeRootedDirectoryPath.Volume();
+         var actual = path.Volume();
 
          //Assert
          return AreEqual(volume,
