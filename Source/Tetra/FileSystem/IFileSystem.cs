@@ -12,6 +12,10 @@ public interface IFileSystem
    // Methods
    /* ------------------------------------------------------------ */
 
+   public Error Create(AbsoluteDirectoryPath path);
+
+   /* ------------------------------------------------------------ */
+
    public bool Exists(AbsoluteDirectoryPath path);
 
    /* ------------------------------------------------------------ */

@@ -20,7 +20,7 @@ public class WHEN_the_client_creates_the_FileSystem
       {
          //Arrange
          //Act
-         var fileSystem = FileSystem.Create(path);
+         var fileSystem = FileSystem.From(path);
 
          //Assert
          return AreEqual(path,

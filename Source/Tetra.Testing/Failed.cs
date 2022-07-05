@@ -83,6 +83,12 @@ public static class Failed
 
    /* ------------------------------------------------------------ */
 
+   public static string ExpectedActual<T>(IReadOnlyCollection<T>? expected,
+                                          IReadOnlyCollection<T>? actual)
+      => $"Expected:\n{FormatSequence(expected)}\nActual: {FormatSequence(actual)}";
+
+   /* ------------------------------------------------------------ */
+
    public static string Message(string message,
                                 object? actual)
       => $"{message}; Actual: {actual}";
@@ -93,6 +99,16 @@ public static class Failed
                                 object? expected,
                                 object? actual)
       => $"{message}; {ExpectedActual(expected, actual)}";
+
+   /* ------------------------------------------------------------ */
+   // Private Functions
+   /* ------------------------------------------------------------ */
+
+   private static string FormatSequence<T>(IEnumerable<T>? expected)
+      => expected?.Aggregate(string.Empty,
+                             (total,
+                              next) => $"{total}{next}\n")
+      ?? "null";
 
    /* ------------------------------------------------------------ */
 }

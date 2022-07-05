@@ -19,7 +19,7 @@ public class WHEN_the_client_sets_the_current_directory
       static Property Property((VolumeRootedDirectoryPath initialPath, VolumeRootedDirectoryPath updatedPath) args, Message message)
       {
          //Arrange
-         var fileSystem = FileSystem.Create(args.initialPath);
+         var fileSystem = FileSystem.From(args.initialPath);
          fileSystem.SettingTheCurrentDirectoryShallFail(message);
 
          //Act

@@ -19,7 +19,7 @@ public class WHEN_the_client_checks_if_a_directory_exists
       static Property Property(VolumeRootedDirectoryPath currentDirectory)
       {
          //Arrange
-         var fileSystem = FileSystem.Create(currentDirectory);
+         var fileSystem = FileSystem.From(currentDirectory);
 
          //Act
          var actual = fileSystem.Exists(currentDirectory);
@@ -42,7 +42,7 @@ public class WHEN_the_client_checks_if_a_directory_exists
       static Property Property((VolumeRootedDirectoryPath currentDirectory, VolumeRootedDirectoryPath otherDirectory) args)
       {
          //Arrange
-         var fileSystem = FileSystem.Create(args.currentDirectory);
+         var fileSystem = FileSystem.From(args.currentDirectory);
 
          //Act
          var actual = fileSystem.Exists(args.otherDirectory);

@@ -6,7 +6,7 @@ public sealed class FileSystem : IFileSystem
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static FileSystem Create(AbsoluteDirectoryPath currentDirectory)
+   public static FileSystem From(AbsoluteDirectoryPath currentDirectory)
       => new(currentDirectory);
 
    /* ------------------------------------------------------------ */
@@ -17,13 +17,24 @@ public sealed class FileSystem : IFileSystem
       => _currentDirectory;
 
    /* ------------------------------------------------------------ */
+   // IFileSystem Methods
+   /* ------------------------------------------------------------ */
 
-   public bool Exists(AbsoluteDirectoryPath path)
-      => _currentDirectory
-        .Equals(path);
+   public Error Create(AbsoluteDirectoryPath path)
+   {
+      var dir = (VolumeRootedDirectoryPath) path;
+
+      _directories.AddRange(dir.Ancestry());
+
+      return Error.None();
+   }
 
    /* ------------------------------------------------------------ */
-   // IFileSystem Methods
+
+   public bool Exists(AbsoluteDirectoryPath path)
+      => _directories
+        .Contains(path);
+
    /* ------------------------------------------------------------ */
 
    public Error SetCurrentDirectory(AbsoluteDirectoryPath path)
@@ -45,6 +56,8 @@ public sealed class FileSystem : IFileSystem
    // Private Fields
    /* ------------------------------------------------------------ */
 
+   private readonly List<AbsoluteDirectoryPath> _directories = new List<AbsoluteDirectoryPath>();
+
    //Mutable
    private Func<AbsoluteDirectoryPath, Error> _setCurrentDirectory;
    private AbsoluteDirectoryPath              _currentDirectory;
@@ -58,6 +71,8 @@ public sealed class FileSystem : IFileSystem
       _setCurrentDirectory = SuccessfullySetCurrentDirectory;
 
       _currentDirectory = currentDirectory;
+
+      _directories.Add(currentDirectory);
    }
 
    /* ------------------------------------------------------------ */
