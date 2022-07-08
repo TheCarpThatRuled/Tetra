@@ -4,15 +4,15 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeTests;
+namespace Check.VolumeComponentTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Volume)]
+[TestCategory(LocalCategories.VolumeComponent)]
 public class Append
 {
    /* ------------------------------------------------------------ */
-   // AbsoluteDirectoryPath Append(this Volume volume,
+   // AbsoluteDirectoryPath Append(this VolumeComponent volume,
    //                                  params DirectoryComponent[] directories)
    /* ------------------------------------------------------------ */
 
@@ -26,7 +26,7 @@ public class Append
    [TestMethod]
    public void GIVEN_a_Volume_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(Volume               volume,
+      static Property Property(VolumeComponent      volume,
                                DirectoryComponent[] directories)
       {
          //Arrange
@@ -45,15 +45,15 @@ public class Append
                          actual.Value());
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
 
-      Prop.ForAll<Volume, DirectoryComponent[]>(Property)
+      Prop.ForAll<VolumeComponent, DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // AbsoluteDirectoryPath Append(this Volume volume,
+   // AbsoluteDirectoryPath Append(this VolumeComponent volume,
    //                                  IReadOnlyCollection<DirectoryComponent> directories)
    /* ------------------------------------------------------------ */
 
@@ -67,7 +67,7 @@ public class Append
    [TestMethod]
    public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(Volume                   volume,
+      static Property Property(VolumeComponent          volume,
                                List<DirectoryComponent> directories)
       {
          //Arrange
@@ -86,15 +86,15 @@ public class Append
                          actual.Value());
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.ListOfDirectoryComponents>();
 
-      Prop.ForAll<Volume, List<DirectoryComponent>>(Property)
+      Prop.ForAll<VolumeComponent, List<DirectoryComponent>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // AbsoluteFilePath Append(this Volume volume,
+   // AbsoluteFilePath Append(this VolumeComponent volume,
    //                             FileComponent file)
    /* ------------------------------------------------------------ */
 
@@ -108,8 +108,8 @@ public class Append
    [TestMethod]
    public void GIVEN_a_Volume_and_a_FileComponent_WHEN_Append_THEN_a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(Volume        volume,
-                               FileComponent file)
+      static Property Property(VolumeComponent volume,
+                               FileComponent   file)
       {
          //Arrange
          var expected = volume.Value()
@@ -124,10 +124,10 @@ public class Append
                          actual.Value());
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<Volume, FileComponent>(Property)
+      Prop.ForAll<VolumeComponent, FileComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 

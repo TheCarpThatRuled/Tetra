@@ -25,7 +25,7 @@ public class Parent
    [TestMethod]
    public void GIVEN_a_AbsoluteDirectoryPath_containing_just_a_volume_WHEN_Parent_THEN_a_none_is_returned()
    {
-      static Property Property(Volume volume)
+      static Property Property(VolumeComponent volume)
       {
          //Arrange
          var path = AbsoluteDirectoryPath.Create(volume,
@@ -38,9 +38,9 @@ public class Parent
          return IsANone(actual);
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
 
-      Prop.ForAll<Volume>(Property)
+      Prop.ForAll<VolumeComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -57,7 +57,7 @@ public class Parent
    public void
       GIVEN_a_AbsoluteDirectoryPath_containing_a_volume_and_at_least_one_directory_WHEN_Parent_THEN_a_some_containing_a_AbsoluteDirectoryPath_containing_the_parent_directory_is_returned()
    {
-      static Property Property(Volume               volume,
+      static Property Property(VolumeComponent      volume,
                                DirectoryComponent[] directories)
       {
          //Arrange
@@ -79,10 +79,10 @@ public class Parent
                            actual);
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.NonEmptyArrayOfDirectoryComponents>();
 
-      Prop.ForAll<Volume, DirectoryComponent[]>(Property)
+      Prop.ForAll<VolumeComponent, DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
    }
 

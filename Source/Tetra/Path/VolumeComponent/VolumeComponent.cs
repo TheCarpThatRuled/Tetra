@@ -2,26 +2,26 @@
 
 namespace Tetra;
 
-public class Volume : IComparable<Volume>,
-                      IEquatable<Volume>
+public class VolumeComponent : IComparable<VolumeComponent>,
+                      IEquatable<VolumeComponent>
 {
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static Volume Create(char potentialVolume)
+   public static VolumeComponent Create(char potentialVolume)
       => Validate(potentialVolume,
                   VolumeType)
-        .Reduce<Volume>(() => new(potentialVolume),
+        .Reduce<VolumeComponent>(() => new(potentialVolume),
                         message => throw new ArgumentException(message.Content(),
                                                                nameof(potentialVolume)));
 
    /* ------------------------------------------------------------ */
 
-   public static Result<Volume> Parse(char potentialVolume)
+   public static Result<VolumeComponent> Parse(char potentialVolume)
       => Validate(potentialVolume,
                   VolumeType)
-        .MapToResult(new Volume(potentialVolume));
+        .MapToResult(new VolumeComponent(potentialVolume));
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -30,7 +30,7 @@ public class Volume : IComparable<Volume>,
    public override bool Equals(object? obj)
       => ReferenceEquals(this,
                          obj)
-      || obj is Volume volume
+      || obj is VolumeComponent volume
       && Equals(volume);
 
    /* ------------------------------------------------------------ */
@@ -46,20 +46,20 @@ public class Volume : IComparable<Volume>,
       => $"<{_value}>";
 
    /* ------------------------------------------------------------ */
-   // IComparable<Volume> Methods
+   // IComparable<VolumeComponent> Methods
    /* ------------------------------------------------------------ */
 
-   public int CompareTo(Volume? other)
+   public int CompareTo(VolumeComponent? other)
       => StringComparer
         .OrdinalIgnoreCase
         .Compare(_value,
                  other?._value);
 
    /* ------------------------------------------------------------ */
-   // IEquatable<Volume> Methods
+   // IEquatable<VolumeComponent> Methods
    /* ------------------------------------------------------------ */
 
-   public bool Equals(Volume? other)
+   public bool Equals(VolumeComponent? other)
       => StringComparer
         .OrdinalIgnoreCase
         .Equals(_value,
@@ -76,7 +76,7 @@ public class Volume : IComparable<Volume>,
    // Protected Constructors
    /* ------------------------------------------------------------ */
 
-   protected Volume(char volumeLabel)
+   protected VolumeComponent(char volumeLabel)
       => _value = $"{volumeLabel}:";
 
    /* ------------------------------------------------------------ */

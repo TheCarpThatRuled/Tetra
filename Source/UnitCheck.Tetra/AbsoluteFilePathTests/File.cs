@@ -25,7 +25,7 @@ public class File
    [TestMethod]
    public void GIVEN_a_AbsoluteFilePath_WHEN_File_THEN_a_FileComponent_containing_the_File_is_returned()
    {
-      static Property Property(Volume               volume,
+      static Property Property(VolumeComponent      volume,
                                DirectoryComponent[] directories,
                                FileComponent        file)
       {
@@ -42,11 +42,11 @@ public class File
                          actual);
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
       Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<Volume, DirectoryComponent[], FileComponent>(Property)
+      Prop.ForAll<VolumeComponent, DirectoryComponent[], FileComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 

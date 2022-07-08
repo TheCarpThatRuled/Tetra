@@ -21,8 +21,8 @@ public class ParseComponents
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Result<(Volume volume, IReadOnlyCollection<DirectoryComponent> directories)> TestParseComponents(string potentialPath,
-                                                                                                                     string pathType)
+      public static Result<(VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories)> TestParseComponents(string potentialPath,
+         string                                                                                                                      pathType)
          => ParseComponents(potentialPath,
                             pathType);
 
@@ -31,14 +31,14 @@ public class ParseComponents
       /* ------------------------------------------------------------ */
 
       private TestPath(IReadOnlyCollection<DirectoryComponent> directories,
-                       Volume                                  volume) : base(directories,
+                       VolumeComponent                         volume) : base(directories,
                                                                               volume) { }
 
       /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */
-   // protected Result(Volume volume, IReadOnlyCollection<DirectoryComponent> directories) ParseComponents(string potentialPath,
+   // protected Result(VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories) ParseComponents(string potentialPath,
    //                                                                                                      string pathType)
    /* ------------------------------------------------------------ */
 
@@ -53,7 +53,7 @@ public class ParseComponents
    public void
       GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(Volume               volume,
+      static Property Property(VolumeComponent      volume,
                                DirectoryComponent[] directories)
       {
          //Arrange
@@ -76,10 +76,10 @@ public class ParseComponents
                               actual);
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
 
-      Prop.ForAll<Volume, DirectoryComponent[]>(Property)
+      Prop.ForAll<VolumeComponent, DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -96,7 +96,7 @@ public class ParseComponents
    public void
       GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(Volume               volume,
+      static Property Property(VolumeComponent      volume,
                                DirectoryComponent[] directories)
       {
          //Arrange
@@ -120,10 +120,10 @@ public class ParseComponents
       }
 
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
 
-      Prop.ForAll<Volume, DirectoryComponent[]>(Property)
+      Prop.ForAll<VolumeComponent, DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
    }
 

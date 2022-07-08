@@ -25,7 +25,7 @@ public class Append
    [TestMethod]
    public void GIVEN_a_AbsoluteDirectoryPath_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(Volume               volume,
+      static Property Property(VolumeComponent      volume,
                                DirectoryComponent[] initialDirectories,
                                DirectoryComponent[] directories)
       {
@@ -46,10 +46,10 @@ public class Append
                          actual.Value());
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
 
-      Prop.ForAll<Volume, DirectoryComponent[], DirectoryComponent[]>(Property)
+      Prop.ForAll<VolumeComponent, DirectoryComponent[], DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -67,7 +67,7 @@ public class Append
    [TestMethod]
    public void GIVEN_a_AbsoluteDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(Volume                   volume,
+      static Property Property(VolumeComponent          volume,
                                List<DirectoryComponent> initialDirectories,
                                List<DirectoryComponent> directories)
       {
@@ -87,10 +87,10 @@ public class Append
                          actual.Value());
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.ListOfDirectoryComponents>();
 
-      Prop.ForAll<Volume, List<DirectoryComponent>, List<DirectoryComponent>>(Property)
+      Prop.ForAll<VolumeComponent, List<DirectoryComponent>, List<DirectoryComponent>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -108,7 +108,7 @@ public class Append
    [TestMethod]
    public void GIVEN_a_AbsoluteDirectoryPath_and_a_FileComponent_WHEN_Append_THEN_a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(Volume                   volume,
+      static Property Property(VolumeComponent          volume,
                                List<DirectoryComponent> initialDirectories,
                                FileComponent            file)
       {
@@ -126,11 +126,11 @@ public class Append
                          actual.Value());
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.ListOfDirectoryComponents>();
       Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<Volume, List<DirectoryComponent>, FileComponent>(Property)
+      Prop.ForAll<VolumeComponent, List<DirectoryComponent>, FileComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 

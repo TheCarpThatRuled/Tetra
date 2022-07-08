@@ -72,9 +72,9 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                            ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMayNotEndWithADirectorySeparator(path,
-                                                                                                                                        HumanReadableName.AbsoluteFilePath),
-                                                                     "potentialPath"));
+                                             ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMayNotEndWithADirectorySeparator(path,
+                                                                         HumanReadableName.AbsoluteFilePath),
+                                                                      "potentialPath"));
       }
 
       Arb.Register<Libraries.ValidPathWithVolumeRootAndTrailingDirectorySeparator>();
@@ -146,7 +146,7 @@ public class Create
          //Assert
          return AnArgumentExceptionWasThrown(exception,
                                              ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
-                                                                                                                                  HumanReadableName.AbsoluteFilePath),
+                                                                         HumanReadableName.AbsoluteFilePath),
                                                                       "potentialPath"));
       }
 
@@ -186,7 +186,7 @@ public class Create
          //Assert
          return AnArgumentExceptionWasThrown(exception,
                                              ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
-                                                                                                                                  HumanReadableName.AbsoluteFilePath),
+                                                                         HumanReadableName.AbsoluteFilePath),
                                                                       "potentialPath"));
       }
 
@@ -237,7 +237,7 @@ public class Create
    }
 
    /* ------------------------------------------------------------ */
-   // AbsoluteFilePath Create(Volume volume,
+   // AbsoluteFilePath Create(VolumeComponent volume,
    //                             IReadOnlyCollection<DirectoryComponent> directories)
    /* ------------------------------------------------------------ */
 
@@ -251,7 +251,7 @@ public class Create
    [TestMethod]
    public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_WHEN_Create_THEN_a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(Volume                   volume,
+      static Property Property(VolumeComponent          volume,
                                List<DirectoryComponent> directories,
                                FileComponent            file)
       {
@@ -265,19 +265,19 @@ public class Create
 
          //Act
          var actual = AbsoluteFilePath.Create(volume,
-                                                  directories,
-                                                  file);
+                                              directories,
+                                              file);
 
          //Assert
          return AreEqual(expected,
                          actual.Value());
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.ListOfDirectoryComponents>();
       Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<Volume, List<DirectoryComponent>, FileComponent>(Property)
+      Prop.ForAll<VolumeComponent, List<DirectoryComponent>, FileComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 

@@ -8,32 +8,32 @@ partial class Generators
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Gen<Volume> Volume()
+   public static Gen<VolumeComponent> VolumeComponent()
       => AsciiLetter()
         .Select(Tetra
-               .Volume
+               .VolumeComponent
                .Create);
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(Volume, Volume, Volume)> ThreeUniqueVolumes()
+   public static Gen<(VolumeComponent, VolumeComponent, VolumeComponent)> ThreeUniqueVolumeComponents()
       => AsciiLetter()
         .Three()
         .Where(tuple => tuple.Item1 != tuple.Item2
                      && tuple.Item1 != tuple.Item3
                      && tuple.Item2 != tuple.Item3)
-        .Select(tuple => (Tetra.Volume.Create(tuple.Item1),
-                          Tetra.Volume.Create(tuple.Item2),
-                          Tetra.Volume.Create(tuple.Item3)));
+        .Select(tuple => (Tetra.VolumeComponent.Create(tuple.Item1),
+                          Tetra.VolumeComponent.Create(tuple.Item2),
+                          Tetra.VolumeComponent.Create(tuple.Item3)));
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(Volume, Volume)> TwoUniqueVolumes()
+   public static Gen<(VolumeComponent, VolumeComponent)> TwoUniqueVolumeComponents()
       => AsciiLetter()
         .Two()
         .Where(tuple => tuple.Item1 != tuple.Item2)
-        .Select(tuple => (Tetra.Volume.Create(tuple.Item1),
-                          Tetra.Volume.Create(tuple.Item2)));
+        .Select(tuple => (Tetra.VolumeComponent.Create(tuple.Item1),
+                          Tetra.VolumeComponent.Create(tuple.Item2)));
 
    /* ------------------------------------------------------------ */
 }

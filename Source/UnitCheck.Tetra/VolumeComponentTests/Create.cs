@@ -5,15 +5,15 @@ using Tetra.Testing;
 using static Check.Messages;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeTests;
+namespace Check.VolumeComponentTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Volume)]
+[TestCategory(LocalCategories.VolumeComponent)]
 public class Create
 {
    /* ------------------------------------------------------------ */
-   // Volume Create(char potentialVolume)
+   // VolumeComponent Create(char potentialVolume)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -29,7 +29,7 @@ public class Create
       static Property Property(char value)
       {
          //Act
-         var actual = Volume.Create(value);
+         var actual = VolumeComponent.Create(value);
 
          //Assert
          return AreEqual($"{value}:",
@@ -62,7 +62,7 @@ public class Create
          //Act
          try
          {
-            Volume.Create(value);
+            VolumeComponent.Create(value);
          }
          catch (Exception e)
          {

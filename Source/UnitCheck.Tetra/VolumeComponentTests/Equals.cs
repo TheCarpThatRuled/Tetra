@@ -4,11 +4,11 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeTests;
+namespace Check.VolumeComponentTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Volume)]
+[TestCategory(LocalCategories.VolumeComponent)]
 // ReSharper disable once InconsistentNaming
 public class Equals
 {
@@ -27,8 +27,8 @@ public class Equals
    public void
       GIVEN_Volume_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(Volume volume,
-                               object? obj)
+      static Property Property(VolumeComponent volume,
+                               object?         obj)
       {
          //Act
          var actual = volume.Equals(obj);
@@ -38,9 +38,9 @@ public class Equals
       }
 
       Arb.Register<ObjIsNullOrANonEquatableType>();
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
 
-      Prop.ForAll<Volume, object?>(Property)
+      Prop.ForAll<VolumeComponent, object?>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -58,9 +58,9 @@ public class Equals
          => Gen
            .OneOf(Gen.Constant(default(object?)),
                   Generators.Int32()
-                            .Select(x => (object?)x),
+                            .Select(x => (object?) x),
                   Generators.String()
-                            .Select(x => (object?)x))
+                            .Select(x => (object?) x))
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -69,7 +69,7 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Volume
+   //VolumeComponent
    //WHEN
    //Equals_AND_obj_is_a_nullable_object
    //THEN
@@ -78,10 +78,10 @@ public class Equals
    [TestMethod]
    public void GIVEN_Volume_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
    {
-      static Property Property(Volume original)
+      static Property Property(VolumeComponent original)
       {
          //Arrange
-         var copy = Volume.Create(original.Value()[0]);
+         var copy = VolumeComponent.Create(original.Value()[0]);
 
          //Act
          //Assert
@@ -89,16 +89,16 @@ public class Equals
                                   copy);
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
 
-      Prop.ForAll<Volume>(Property)
+      Prop.ForAll<VolumeComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Volume
+   //VolumeComponent
    //WHEN
    //Equals_AND_obj_is_a_nullable_object
    //THEN
@@ -107,16 +107,16 @@ public class Equals
    [TestMethod]
    public void GIVEN_Volume_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_symmetric()
    {
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
 
-      Prop.ForAll<Volume, Volume>(EqualsIsSymmetric)
+      Prop.ForAll<VolumeComponent, VolumeComponent>(EqualsIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Volume
+   //VolumeComponent
    //WHEN
    //Equals
    //AND
@@ -127,14 +127,14 @@ public class Equals
    [TestMethod]
    public void GIVEN_Volume_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveVolumes>();
+      Arb.Register<Libraries.TransitiveVolumeComponents>();
 
-      Prop.ForAll<(Volume, Volume, Volume)>(EqualsIsTransitive<Volume>)
+      Prop.ForAll<(VolumeComponent, VolumeComponent, VolumeComponent)>(EqualsIsTransitive<VolumeComponent>)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // bool Equals(Volume? other)
+   // bool Equals(VolumeComponent? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -148,7 +148,7 @@ public class Equals
    public void
       GIVEN_Volume_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_Volume_THEN_false_is_returned()
    {
-      static Property Property(Volume value)
+      static Property Property(VolumeComponent value)
       {
          //act
          var actual = value.Equals(null);
@@ -157,9 +157,9 @@ public class Equals
          return IsFalse(actual);
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
 
-      Prop.ForAll<Volume>(Property)
+      Prop.ForAll<VolumeComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -176,10 +176,10 @@ public class Equals
    public void
       GIVEN_Volume_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_nullable_Volume_THEN_is_reflexive()
    {
-      static Property Property(Volume original)
+      static Property Property(VolumeComponent original)
       {
          //Arrange
-         var copy     = Volume.Create(original.Value()[0]);
+         var copy = VolumeComponent.Create(original.Value()[0]);
 
          //Act
          //Assert
@@ -187,16 +187,16 @@ public class Equals
                                       copy);
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
 
-      Prop.ForAll<Volume>(Property)
+      Prop.ForAll<VolumeComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Volume
+   //VolumeComponent
    //WHEN
    //Equals_AND_other_is_a_nullable_Volume
    //THEN
@@ -205,16 +205,16 @@ public class Equals
    [TestMethod]
    public void GIVEN_Volume_WHEN_Equals_AND_other_is_a_nullable_Volume_THEN_is_symmetric()
    {
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
 
-      Prop.ForAll<Volume, Volume>(IEquatableIsSymmetric)
+      Prop.ForAll<VolumeComponent, VolumeComponent>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Volume
+   //VolumeComponent
    //WHEN
    //Equals_AND_other_is_a_nullable_Volume
    //THEN
@@ -223,9 +223,9 @@ public class Equals
    [TestMethod]
    public void GIVEN_Volume_WHEN_Equals_AND_other_is_a_nullable_Volume_THEN_is_transitive()
    {
-      Arb.Register<Libraries.TransitiveVolumes>();
+      Arb.Register<Libraries.TransitiveVolumeComponents>();
 
-      Prop.ForAll<(Volume, Volume, Volume)>(IEquatableIsTransitive<Volume>)
+      Prop.ForAll<(VolumeComponent, VolumeComponent, VolumeComponent)>(IEquatableIsTransitive<VolumeComponent>)
           .QuickCheckThrowOnFailure();
    }
 

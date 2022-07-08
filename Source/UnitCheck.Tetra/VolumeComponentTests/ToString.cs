@@ -4,11 +4,11 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeTests;
+namespace Check.VolumeComponentTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Volume)]
+[TestCategory(LocalCategories.VolumeComponent)]
 // ReSharper disable once InconsistentNaming
 public class ToString
 {
@@ -17,7 +17,7 @@ public class ToString
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Volume
+   //VolumeComponent
    //WHEN
    //ToString
    //THEN
@@ -29,7 +29,7 @@ public class ToString
       static Property Property(char asciiLetter)
       {
          //Arrange
-         var volume = Volume.Create(asciiLetter);
+         var volume = VolumeComponent.Create(asciiLetter);
 
          //Act
          var actual = volume.ToString();

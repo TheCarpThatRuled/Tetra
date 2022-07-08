@@ -23,7 +23,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteDirectoryPath Create(Volume                                  volume,
+   public static AbsoluteDirectoryPath Create(VolumeComponent                                  volume,
                                               IReadOnlyCollection<DirectoryComponent> directories)
       => new(directories,
              volume);
@@ -90,7 +90,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
    // Properties
    /* ------------------------------------------------------------ */
 
-   public Volume Volume()
+   public VolumeComponent Volume()
       => _volume;
 
    /* ------------------------------------------------------------ */
@@ -131,7 +131,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
    /* ------------------------------------------------------------ */
 
    protected AbsoluteDirectoryPath(IReadOnlyCollection<DirectoryComponent> directories,
-                                   Volume                                  volume)
+                                   VolumeComponent                                  volume)
    {
       _directories = directories;
       _volume      = volume;
@@ -144,7 +144,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static Result<(Volume volume, IReadOnlyCollection<DirectoryComponent> directories)> ParseComponents(string potentialPath,
+   protected static Result<(VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories)> ParseComponents(string potentialPath,
                                                                                                                  string pathType)
    {
       if (string.IsNullOrEmpty(potentialPath))
@@ -177,7 +177,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
                                                                                             pathType));
       }
 
-      return (Tetra.Volume
+      return (Tetra.VolumeComponent
                    .Create(potentialVolume[0]),
               directoryComponents.Select(DirectoryComponent.Create)
                                  .ToArray());
@@ -195,7 +195,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
 
    private readonly IReadOnlyCollection<DirectoryComponent> _directories;
    private readonly string                                  _value;
-   private readonly Volume                                  _volume;
+   private readonly VolumeComponent                                  _volume;
 
    /* ------------------------------------------------------------ */
 }

@@ -16,7 +16,7 @@ internal static class PathBuilder
    /* ------------------------------------------------------------ */
 
    public static void Add(StringBuilder path,
-                          Volume        volume)
+                          VolumeComponent        volume)
    {
       path.Append(volume.Value());
       path.Append(Path.DirectorySeparatorChar);
@@ -37,7 +37,7 @@ internal static class PathBuilder
    /* ------------------------------------------------------------ */
 
    public static void Combine(StringBuilder                   path,
-                              Volume                          volume,
+                              VolumeComponent                          volume,
                               IEnumerable<DirectoryComponent> directories)
    {
       Add(path,
@@ -49,7 +49,7 @@ internal static class PathBuilder
 
    /* ------------------------------------------------------------ */
 
-   public static string Combine(Volume                          volume,
+   public static string Combine(VolumeComponent                          volume,
                                 IEnumerable<DirectoryComponent> directories)
    {
       var path = new StringBuilder();
@@ -64,7 +64,7 @@ internal static class PathBuilder
    /* ------------------------------------------------------------ */
 
    public static void Combine(StringBuilder                   path,
-                              Volume                          volume,
+                              VolumeComponent                          volume,
                               IEnumerable<DirectoryComponent> directories,
                               FileComponent                   file)
    {
@@ -78,7 +78,7 @@ internal static class PathBuilder
 
    /* ------------------------------------------------------------ */
 
-   public static string Combine(Volume                          volume,
+   public static string Combine(VolumeComponent                          volume,
                                 IEnumerable<DirectoryComponent> directories,
                                 FileComponent                   file)
    {

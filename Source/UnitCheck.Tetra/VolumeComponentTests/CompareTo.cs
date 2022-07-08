@@ -4,16 +4,16 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeTests;
+namespace Check.VolumeComponentTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Volume)]
+[TestCategory(LocalCategories.VolumeComponent)]
 // ReSharper disable once InconsistentNaming
 public class CompareTo
 {
    /* ------------------------------------------------------------ */
-   // int CompareTo(Volume? other)
+   // int CompareTo(VolumeComponent? other)
    /* ------------------------------------------------------------ */
 
 
@@ -30,7 +30,7 @@ public class CompareTo
       static Property Property(char asciiLetter)
       {
          //Arrange
-         var volume = Volume.Create(asciiLetter);
+         var volume = VolumeComponent.Create(asciiLetter);
 
          //Act
          var actual = volume.CompareTo(null);
@@ -61,8 +61,8 @@ public class CompareTo
       static Property Property((char first, char second) args)
       {
          //Arrange
-         var firstVolume  = Volume.Create(args.first);
-         var secondVolume = Volume.Create(args.second);
+         var firstVolume  = VolumeComponent.Create(args.first);
+         var secondVolume = VolumeComponent.Create(args.second);
 
          //Act
          var actual = firstVolume.CompareTo(secondVolume);
@@ -93,8 +93,8 @@ public class CompareTo
       static Property Property((char first, char second) args)
       {
          //Arrange
-         var firstVolume  = Volume.Create(args.first);
-         var secondVolume = Volume.Create(args.second);
+         var firstVolume  = VolumeComponent.Create(args.first);
+         var secondVolume = VolumeComponent.Create(args.second);
 
          //Act
          var actual = firstVolume.CompareTo(secondVolume);
@@ -125,8 +125,8 @@ public class CompareTo
       static Property Property((char first, char second) args)
       {
          //Arrange
-         var firstVolume  = Volume.Create(args.first);
-         var secondVolume = Volume.Create(args.second);
+         var firstVolume  = VolumeComponent.Create(args.first);
+         var secondVolume = VolumeComponent.Create(args.second);
 
          //Act
          var actual = firstVolume.CompareTo(secondVolume);

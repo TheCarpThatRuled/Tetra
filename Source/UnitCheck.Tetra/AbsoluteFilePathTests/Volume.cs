@@ -12,7 +12,7 @@ namespace Check.AbsoluteFilePathTests;
 public class VolumeProperty
 {
    /* ------------------------------------------------------------ */
-   // Volume Volume()
+   // VolumeComponent Volume()
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -20,19 +20,19 @@ public class VolumeProperty
    //WHEN
    //Volume
    //THEN
-   //a_Volume_containing_the_volume_is_returned
+   //a_VolumeComponent_containing_the_volume_is_returned
 
    [TestMethod]
-   public void GIVEN_a_AbsoluteFilePath_WHEN_Volume_THEN_a_Volume_containing_the_volume_is_returned()
+   public void GIVEN_a_AbsoluteFilePath_WHEN_Volume_THEN_a_VolumeComponent_containing_the_volume_is_returned()
    {
-      static Property Property(Volume               volume,
+      static Property Property(VolumeComponent      volume,
                                DirectoryComponent[] directories,
                                FileComponent        file)
       {
          //Arrange
          var path = AbsoluteFilePath.Create(volume,
-                                                                     directories,
-                                                                     file);
+                                            directories,
+                                            file);
 
          //Act
          var actual = path.Volume();
@@ -42,11 +42,11 @@ public class VolumeProperty
                          actual);
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
       Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<Tetra.Volume, DirectoryComponent[], FileComponent>(Property)
+      Prop.ForAll<VolumeComponent, DirectoryComponent[], FileComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 

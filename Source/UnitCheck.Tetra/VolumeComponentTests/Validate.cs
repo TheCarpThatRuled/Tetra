@@ -4,16 +4,16 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeTests;
+namespace Check.VolumeComponentTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Volume)]
+[TestCategory(LocalCategories.VolumeComponent)]
 public class Validate
 {
    /* ------------------------------------------------------------ */
 
-   private sealed class TestVolume : Volume
+   private sealed class TestVolumeComponent : VolumeComponent
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -28,14 +28,14 @@ public class Validate
       // Constructor
       /* ------------------------------------------------------------ */
 
-      private TestVolume()
+      private TestVolumeComponent()
          : base('\0') { }
 
       /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */
-   // Volume Validate(char potentialVolume)
+   // VolumeComponent Validate(char potentialVolume)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -51,8 +51,8 @@ public class Validate
       static Property Property(char value)
       {
          //Act
-         var actual = TestVolume.TestValidate(value,
-                                              nameof(TestVolume));
+         var actual = TestVolumeComponent.TestValidate(value,
+                                                       nameof(TestVolumeComponent));
 
          //Assert
          return IsANone(actual);
@@ -80,12 +80,12 @@ public class Validate
       {
          //Arrange
          //Act
-         var actual = TestVolume.TestValidate(value,
-                                              nameof(TestVolume));
+         var actual = TestVolumeComponent.TestValidate(value,
+                                                       nameof(TestVolumeComponent));
 
          //Assert
          return IsASome(Message.Create(Messages.IsNotAValidVolumeLabel(value,
-                                                                       nameof(TestVolume))),
+                                                                       nameof(TestVolumeComponent))),
                         actual);
       }
 

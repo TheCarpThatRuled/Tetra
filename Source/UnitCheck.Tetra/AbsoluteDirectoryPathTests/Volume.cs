@@ -12,7 +12,7 @@ namespace Check.AbsoluteDirectoryPathTests;
 public class VolumeProperty
 {
    /* ------------------------------------------------------------ */
-   // Volume Volume()
+   // VolumeComponent Volume()
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -20,12 +20,12 @@ public class VolumeProperty
    //WHEN
    //Volume
    //THEN
-   //a_Volume_containing_the_volume_is_returned
+   //a_VolumeComponent_containing_the_volume_is_returned
 
    [TestMethod]
-   public void GIVEN_a_AbsoluteDirectoryPath_WHEN_Volume_THEN_a_Volume_containing_the_volume_is_returned()
+   public void GIVEN_a_AbsoluteDirectoryPath_WHEN_Volume_THEN_a_VolumeComponent_containing_the_volume_is_returned()
    {
-      static Property Property(Volume               volume,
+      static Property Property(VolumeComponent      volume,
                                DirectoryComponent[] directories)
       {
          //Arrange
@@ -40,10 +40,10 @@ public class VolumeProperty
                          actual);
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
 
-      Prop.ForAll<Volume, DirectoryComponent[]>(Property)
+      Prop.ForAll<VolumeComponent, DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
    }
 

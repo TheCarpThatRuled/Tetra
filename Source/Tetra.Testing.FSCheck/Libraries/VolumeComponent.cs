@@ -8,15 +8,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class Volume
+   public sealed class VolumeComponent
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Tetra.Volume> Type()
+      public static Arbitrary<Tetra.VolumeComponent> Type()
          => Generators
-           .Volume()
+           .VolumeComponent()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -26,15 +26,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class ThreeUniqueVolumes
+   public sealed class ThreeUniqueVolumeComponents
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.Volume, Tetra.Volume, Tetra.Volume)> Type()
+      public static Arbitrary<(Tetra.VolumeComponent, Tetra.VolumeComponent, Tetra.VolumeComponent)> Type()
          => Generators
-           .ThreeUniqueVolumes()
+           .ThreeUniqueVolumeComponents()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -44,15 +44,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TransitiveVolumes
+   public sealed class TransitiveVolumeComponents
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.Volume, Tetra.Volume, Tetra.Volume)> Type()
+      public static Arbitrary<(Tetra.VolumeComponent, Tetra.VolumeComponent, Tetra.VolumeComponent)> Type()
          => Generators
-           .Transitive(Generators.TwoUniqueVolumes())
+           .Transitive(Generators.TwoUniqueVolumeComponents())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -62,15 +62,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TwoUniqueVolumes
+   public sealed class TwoUniqueVolumeComponents
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.Volume, Tetra.Volume)> Type()
+      public static Arbitrary<(Tetra.VolumeComponent, Tetra.VolumeComponent)> Type()
          => Generators
-           .TwoUniqueVolumes()
+           .TwoUniqueVolumeComponents()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

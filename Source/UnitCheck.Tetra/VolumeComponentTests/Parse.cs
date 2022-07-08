@@ -5,15 +5,15 @@ using Tetra.Testing;
 using static Check.Messages;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeTests;
+namespace Check.VolumeComponentTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Volume)]
+[TestCategory(LocalCategories.VolumeComponent)]
 public class Parse
 {
    /* ------------------------------------------------------------ */
-   // Result<Volume> Parse(char potentialVolume)
+   // Result<VolumeComponent> Parse(char potentialVolume)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -29,7 +29,7 @@ public class Parse
       static Property Property(char value)
       {
          //Act
-         var actual = Volume.Parse(value);
+         var actual = VolumeComponent.Parse(value);
 
          //Assert
          return IsASuccessAnd(actualVolume => $"{value}:"
@@ -60,7 +60,7 @@ public class Parse
       static Property Property(char value)
       {
          //Act
-         var actual = Volume.Parse(value);
+         var actual = VolumeComponent.Parse(value);
 
          //Assert
          return IsAFailure(Message.Create(IsNotAValidVolumeLabel(value,

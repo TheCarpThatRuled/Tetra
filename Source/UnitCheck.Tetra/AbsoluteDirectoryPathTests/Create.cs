@@ -177,7 +177,7 @@ public class Create
    }
 
    /* ------------------------------------------------------------ */
-   // AbsoluteDirectoryPath Create(Volume volume,
+   // AbsoluteDirectoryPath Create(VolumeComponent volume,
    //                              IReadOnlyCollection<DirectoryComponent> directories)
    /* ------------------------------------------------------------ */
 
@@ -191,7 +191,7 @@ public class Create
    [TestMethod]
    public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_WHEN_Create_THEN_a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(Volume                   volume,
+      static Property Property(VolumeComponent          volume,
                                List<DirectoryComponent> directories)
       {
          //Arrange
@@ -210,10 +210,10 @@ public class Create
                          actual.Value());
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.ListOfDirectoryComponents>();
 
-      Prop.ForAll<Volume, List<DirectoryComponent>>(Property)
+      Prop.ForAll<VolumeComponent, List<DirectoryComponent>>(Property)
           .QuickCheckThrowOnFailure();
    }
 

@@ -25,7 +25,7 @@ public class Parent
    [TestMethod]
    public void GIVEN_a_AbsoluteFilePath_WHEN_Parent_THEN_a_AbsoluteDirectoryPath_containing_the_parent_directory_is_returned()
    {
-      static Property Property(Volume               volume,
+      static Property Property(VolumeComponent      volume,
                                DirectoryComponent[] directories,
                                FileComponent        file)
       {
@@ -48,11 +48,11 @@ public class Parent
                          actual.Value());
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
       Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<Volume, DirectoryComponent[], FileComponent>(Property)
+      Prop.ForAll<VolumeComponent, DirectoryComponent[], FileComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 

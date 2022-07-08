@@ -4,15 +4,15 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeTests;
+namespace Check.VolumeComponentTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.Volume)]
+[TestCategory(LocalCategories.VolumeComponent)]
 public class ToDirectoryPath
 {
    /* ------------------------------------------------------------ */
-   // AbsoluteDirectoryPath ToDirectoryPath(this Volume volume)
+   // AbsoluteDirectoryPath ToDirectoryPath(this VolumeComponent volume)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -25,7 +25,7 @@ public class ToDirectoryPath
    [TestMethod]
    public void GIVEN_a_Volume_WHEN_Create_THEN_a_AbsoluteDirectoryPath_with_the_value_plus_the_directory_separator_is_returned()
    {
-      static Property Property(Volume volume)
+      static Property Property(VolumeComponent volume)
       {
          //Arrange
          var expected = volume.Value()
@@ -39,9 +39,9 @@ public class ToDirectoryPath
                          actual.Value());
       }
 
-      Arb.Register<Libraries.Volume>();
+      Arb.Register<Libraries.VolumeComponent>();
 
-      Prop.ForAll<Volume>(Property)
+      Prop.ForAll<VolumeComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 
