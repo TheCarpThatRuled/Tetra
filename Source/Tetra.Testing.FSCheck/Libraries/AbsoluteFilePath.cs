@@ -8,15 +8,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class VolumeRootedFilePath
+   public sealed class AbsoluteFilePath
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Tetra.VolumeRootedFilePath> Type()
+      public static Arbitrary<Tetra.AbsoluteFilePath> Type()
          => Generators
-           .VolumeRootedFilePath()
+           .AbsoluteFilePath()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -26,15 +26,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class ThreeUniqueVolumeRootedFilePaths
+   public sealed class ThreeUniqueAbsoluteFilePaths
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.VolumeRootedFilePath, Tetra.VolumeRootedFilePath, Tetra.VolumeRootedFilePath)> Type()
+      public static Arbitrary<(Tetra.AbsoluteFilePath, Tetra.AbsoluteFilePath, Tetra.AbsoluteFilePath)> Type()
          => Generators
-           .ThreeUniqueVolumeRootedFilePaths()
+           .ThreeUniqueAbsoluteFilePaths()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -44,15 +44,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TransitiveVolumeRootedFilePaths
+   public sealed class TransitiveAbsoluteFilePaths
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.VolumeRootedFilePath, Tetra.VolumeRootedFilePath, Tetra.VolumeRootedFilePath)> Type()
+      public static Arbitrary<(Tetra.AbsoluteFilePath, Tetra.AbsoluteFilePath, Tetra.AbsoluteFilePath)> Type()
          => Generators
-           .Transitive(Generators.TwoUniqueVolumeRootedFilePaths())
+           .Transitive(Generators.TwoUniqueAbsoluteFilePaths())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -62,15 +62,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TwoIdenticalVolumeRootedFilePaths
+   public sealed class TwoIdenticalAbsoluteFilePaths
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.VolumeRootedFilePath, Tetra.VolumeRootedFilePath)> Type()
+      public static Arbitrary<(Tetra.AbsoluteFilePath, Tetra.AbsoluteFilePath)> Type()
          => Generators
-           .TwoIdenticalVolumeRootedFilePaths()
+           .TwoIdenticalAbsoluteFilePaths()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -80,15 +80,15 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class TwoUniqueVolumeRootedFilePaths
+   public sealed class TwoUniqueAbsoluteFilePaths
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Tetra.VolumeRootedFilePath, Tetra.VolumeRootedFilePath)> Type()
+      public static Arbitrary<(Tetra.AbsoluteFilePath, Tetra.AbsoluteFilePath)> Type()
          => Generators
-           .TwoUniqueVolumeRootedFilePaths()
+           .TwoUniqueAbsoluteFilePaths()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

@@ -5,15 +5,15 @@ using Tetra.Testing;
 using static Check.Messages;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeRootedFilePathTests;
+namespace Check.AbsoluteFilePathTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.VolumeRootedFilePath)]
+[TestCategory(LocalCategories.AbsoluteFilePath)]
 public class Parse
 {
    /* ------------------------------------------------------------ */
-   // VolumeRootedFilePath Parse(string potentialPath)
+   // AbsoluteFilePath Parse(string potentialPath)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -21,17 +21,17 @@ public class Parse
    //WHEN
    //Parse
    //THEN
-   //a_success_containing_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned
+   //a_success_containing_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
    public void
-      GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
+      GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(string path)
       {
          //Arrange
          //Act
-         var actual = VolumeRootedFilePath.Parse(path);
+         var actual = AbsoluteFilePath.Parse(path);
 
          //Assert
          return IsASuccessAnd(actualPath => path
@@ -63,11 +63,11 @@ public class Parse
       {
          //Arrange
          //Act
-         var actual = VolumeRootedFilePath.Parse(path);
+         var actual = AbsoluteFilePath.Parse(path);
 
          //Assert
          return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotEndWithADirectorySeparator(path,
-                                                                                                             HumanReadableName.VolumeRootedFilePath)),
+                                                                                                             HumanReadableName.AbsoluteFilePath)),
                            actual);
       }
 
@@ -89,12 +89,12 @@ public class Parse
    {
       //Arrange
       //Act
-      var actual = VolumeRootedFilePath.Parse(string.Empty);
+      var actual = AbsoluteFilePath.Parse(string.Empty);
 
       //Assert
       Assert.That
             .IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotBeEmpty(string.Empty,
-                                                                                       HumanReadableName.VolumeRootedFilePath)),
+                                                                                       HumanReadableName.AbsoluteFilePath)),
                         actual);
    }
 
@@ -114,11 +114,11 @@ public class Parse
       {
          //Arrange
          //Act
-         var actual = VolumeRootedFilePath.Parse(path);
+         var actual = AbsoluteFilePath.Parse(path);
 
          //Assert
          return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
-                                                                                                      HumanReadableName.VolumeRootedFilePath)),
+                                                                                                      HumanReadableName.AbsoluteFilePath)),
                            actual);
       }
 
@@ -146,11 +146,11 @@ public class Parse
          var exception = Option<Exception>.None();
 
          //Act
-         var actual = VolumeRootedFilePath.Parse(path);
+         var actual = AbsoluteFilePath.Parse(path);
 
          //Assert
          return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
-                                                                                                      HumanReadableName.VolumeRootedFilePath)),
+                                                                                                      HumanReadableName.AbsoluteFilePath)),
                            actual);
       }
 
@@ -178,11 +178,11 @@ public class Parse
          var exception = Option<Exception>.None();
 
          //Act
-         var actual = VolumeRootedFilePath.Parse(path);
+         var actual = AbsoluteFilePath.Parse(path);
 
          //Assert
          return IsAFailure(Message.Create(IsNotAValidVolumeRootedPathBecauseMayNotContainTheCharacters(path,
-                                                                                                       HumanReadableName.VolumeRootedFilePath)),
+                                                                                                       HumanReadableName.AbsoluteFilePath)),
                            actual);
       }
 

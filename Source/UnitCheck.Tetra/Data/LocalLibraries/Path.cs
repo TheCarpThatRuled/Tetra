@@ -140,7 +140,7 @@ partial class LocalLibraries
 
    /* ------------------------------------------------------------ */
 
-   public sealed class ValidVolumeRootedFilePathEqualToValidVolumeRootedFilePathCaseInsensitive
+   public sealed class ValidAbsoluteFilePathEqualToValidAbsoluteFilePathCaseInsensitive
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -158,7 +158,7 @@ partial class LocalLibraries
 
    /* ------------------------------------------------------------ */
 
-   public sealed class ValidVolumeRootedFilePathGreaterThanValidVolumeRootedFilePathCaseInsensitive
+   public sealed class ValidAbsoluteFilePathGreaterThanValidAbsoluteFilePathCaseInsensitive
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -182,7 +182,7 @@ partial class LocalLibraries
 
    /* ------------------------------------------------------------ */
 
-   public sealed class ValidVolumeRootedFilePathLessThanValidVolumeRootedFilePathCaseInsensitive
+   public sealed class ValidAbsoluteFilePathLessThanValidAbsoluteFilePathCaseInsensitive
    {
       /* ------------------------------------------------------------ */
       // Functions

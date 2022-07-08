@@ -1,5 +1,7 @@
-﻿namespace Tetra;
-using static TetraMessages;
+﻿using static Tetra.TetraMessages;
+
+
+namespace Tetra;
 
 public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
                                      IEquatable<AbsoluteDirectoryPath>
@@ -109,8 +111,8 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
 
    /* ------------------------------------------------------------ */
 
-   public VolumeRootedFilePath Append(FileComponent file)
-      => VolumeRootedFilePath
+   public AbsoluteFilePath Append(FileComponent file)
+      => AbsoluteFilePath
         .Create(_volume,
                 _directories,
                 file);

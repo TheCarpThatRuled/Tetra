@@ -4,39 +4,38 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeRootedFilePathTests;
+namespace Check.AbsoluteFilePathTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.VolumeRootedFilePath)]
+[TestCategory(LocalCategories.AbsoluteFilePath)]
 // ReSharper disable once InconsistentNaming
-public class GetHashCode
+public class ToString
 {
    /* ------------------------------------------------------------ */
-   // int GetHashCode()
+   // string ToString()
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //VolumeRootedFilePath
+   //AbsoluteFilePath
    //WHEN
-   //GetHashCode
+   //ToString
    //THEN
-   //the_ordinal_ignore_case_hash_code_of_the_value_is_returned
+   //the_value_bounded_by_angle_brackets_is_returned
 
    [TestMethod]
-   public void GIVEN_VolumeRootedFilePath_WHEN_GetHashCode_THEN_the_ordinal_ignore_case_hash_code_of_the_value_is_returned()
+   public void GIVEN_AbsoluteFilePath_WHEN_ToString_THEN_the_value_bounded_by_angle_brackets_is_returned()
    {
       static Property Property(string path)
       {
          //Arrange
-         var volumeRootedFilePath = VolumeRootedFilePath.Create(path);
+         var absoluteFilePath = AbsoluteFilePath.Create(path);
 
          //Act
-         var actual = volumeRootedFilePath.GetHashCode();
+         var actual = absoluteFilePath.ToString();
 
          //Assert
-         return AreEqual(StringComparer.OrdinalIgnoreCase
-                                       .GetHashCode(path),
+         return AreEqual($"<{path}>",
                          actual);
       }
 

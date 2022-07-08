@@ -23,9 +23,9 @@ public static class Volume_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static VolumeRootedFilePath Append(this Volume   volume,
-                                             FileComponent file)
-      => VolumeRootedFilePath
+   public static AbsoluteFilePath Append(this Volume   volume,
+                                         FileComponent file)
+      => AbsoluteFilePath
         .Create(volume,
                 Array.Empty<DirectoryComponent>(),
                 file);

@@ -5,23 +5,23 @@ using Tetra.Testing;
 using static Check.Messages;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeRootedFilePathTests;
+namespace Check.AbsoluteFilePathTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.VolumeRootedFilePath)]
+[TestCategory(LocalCategories.AbsoluteFilePath)]
 public class ParseComponents
 {
    /* ------------------------------------------------------------ */
 
-   private sealed class TestPath : VolumeRootedFilePath
+   private sealed class TestPath : AbsoluteFilePath
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
       public static Result<(Volume volume, IReadOnlyCollection<DirectoryComponent> directories, FileComponent file)> TestParseComponents(string potentialPath,
-                                                                                                                                         string pathType)
+         string                                                                                                                                 pathType)
          => ParseComponents(potentialPath,
                             pathType);
 
@@ -49,11 +49,11 @@ public class ParseComponents
    //WHEN
    //ParseComponents
    //THEN
-   //a_success_containing_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned
+   //a_success_containing_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
    public void
-      GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_ParseComponents_THEN_a_success_containing_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
+      GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_ParseComponents_THEN_a_success_containing_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume               volume,
                                DirectoryComponent[] directories,
@@ -103,7 +103,7 @@ public class ParseComponents
 
    [TestMethod]
    public void
-      GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_ParseComponents_THEN_a_success_containing_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
+      GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_ParseComponents_THEN_a_success_containing_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(string path)
       {

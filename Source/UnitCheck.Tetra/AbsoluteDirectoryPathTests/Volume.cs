@@ -43,7 +43,7 @@ public class VolumeProperty
       Arb.Register<Libraries.Volume>();
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
 
-      Prop.ForAll<Tetra.Volume, DirectoryComponent[]>(Property)
+      Prop.ForAll<Volume, DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
    }
 

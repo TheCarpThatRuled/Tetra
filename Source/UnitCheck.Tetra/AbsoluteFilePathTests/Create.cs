@@ -5,15 +5,15 @@ using Tetra.Testing;
 using static Check.Messages;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeRootedFilePathTests;
+namespace Check.AbsoluteFilePathTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.VolumeRootedFilePath)]
+[TestCategory(LocalCategories.AbsoluteFilePath)]
 public class Create
 {
    /* ------------------------------------------------------------ */
-   // VolumeRootedFilePath Create(string potentialPath)
+   // AbsoluteFilePath Create(string potentialPath)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -21,16 +21,16 @@ public class Create
    //WHEN
    //Create
    //THEN
-   //a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned
+   //a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Create_THEN_a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Create_THEN_a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(string path)
       {
          //Arrange
          //Act
-         var actual = VolumeRootedFilePath.Create(path);
+         var actual = AbsoluteFilePath.Create(path);
 
          //Assert
          return AreEqual(path,
@@ -63,7 +63,7 @@ public class Create
          //Act
          try
          {
-            VolumeRootedFilePath.Create(path);
+            AbsoluteFilePath.Create(path);
          }
          catch (Exception e)
          {
@@ -73,7 +73,7 @@ public class Create
          //Assert
          return AnArgumentExceptionWasThrown(exception,
                                             ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMayNotEndWithADirectorySeparator(path,
-                                                                                                                                        HumanReadableName.VolumeRootedFilePath),
+                                                                                                                                        HumanReadableName.AbsoluteFilePath),
                                                                      "potentialPath"));
       }
 
@@ -101,7 +101,7 @@ public class Create
       //Act
       try
       {
-         VolumeRootedFilePath.Create(string.Empty);
+         AbsoluteFilePath.Create(string.Empty);
       }
       catch (Exception e)
       {
@@ -112,7 +112,7 @@ public class Create
       Assert.That
             .AnArgumentExceptionWasThrown(exception,
                                           ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMayNotBeEmpty(string.Empty,
-                                                                                                                   HumanReadableName.VolumeRootedFilePath),
+                                                                                                                   HumanReadableName.AbsoluteFilePath),
                                                                    "potentialPath"));
    }
 
@@ -136,7 +136,7 @@ public class Create
          //Act
          try
          {
-            VolumeRootedFilePath.Create(path);
+            AbsoluteFilePath.Create(path);
          }
          catch (Exception e)
          {
@@ -146,7 +146,7 @@ public class Create
          //Assert
          return AnArgumentExceptionWasThrown(exception,
                                              ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
-                                                                                                                                  HumanReadableName.VolumeRootedFilePath),
+                                                                                                                                  HumanReadableName.AbsoluteFilePath),
                                                                       "potentialPath"));
       }
 
@@ -176,7 +176,7 @@ public class Create
          //Act
          try
          {
-            VolumeRootedFilePath.Create(path);
+            AbsoluteFilePath.Create(path);
          }
          catch (Exception e)
          {
@@ -186,7 +186,7 @@ public class Create
          //Assert
          return AnArgumentExceptionWasThrown(exception,
                                              ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
-                                                                                                                                  HumanReadableName.VolumeRootedFilePath),
+                                                                                                                                  HumanReadableName.AbsoluteFilePath),
                                                                       "potentialPath"));
       }
 
@@ -216,7 +216,7 @@ public class Create
          //Act
          try
          {
-            VolumeRootedFilePath.Create(path);
+            AbsoluteFilePath.Create(path);
          }
          catch (Exception e)
          {
@@ -226,7 +226,7 @@ public class Create
          //Assert
          return AnArgumentExceptionWasThrown(exception,
                                              ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMayNotContainTheCharacters(path,
-                                                                         HumanReadableName.VolumeRootedFilePath),
+                                                                         HumanReadableName.AbsoluteFilePath),
                                                                       "potentialPath"));
       }
 
@@ -237,7 +237,7 @@ public class Create
    }
 
    /* ------------------------------------------------------------ */
-   // VolumeRootedFilePath Create(Volume volume,
+   // AbsoluteFilePath Create(Volume volume,
    //                             IReadOnlyCollection<DirectoryComponent> directories)
    /* ------------------------------------------------------------ */
 
@@ -246,10 +246,10 @@ public class Create
    //WHEN
    //Create
    //THEN
-   //a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned
+   //a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_WHEN_Create_THEN_a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_WHEN_Create_THEN_a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume                   volume,
                                List<DirectoryComponent> directories,
@@ -264,7 +264,7 @@ public class Create
                        .ToDelimitedString(Path.DirectorySeparatorChar);
 
          //Act
-         var actual = VolumeRootedFilePath.Create(volume,
+         var actual = AbsoluteFilePath.Create(volume,
                                                   directories,
                                                   file);
 

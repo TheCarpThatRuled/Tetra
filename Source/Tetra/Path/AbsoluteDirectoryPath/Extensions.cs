@@ -9,7 +9,7 @@ public static class AbsoluteDirectoryPath_Extensions
 
    public static IReadOnlyList<AbsoluteDirectoryPath> Ancestry(this AbsoluteDirectoryPath path)
    {
-      var  ancestry = new List<AbsoluteDirectoryPath> {path,};
+      var ancestry = new List<AbsoluteDirectoryPath> {path,};
 
       bool hadParent;
       do

@@ -94,7 +94,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // VolumeRootedFilePath Append(this Volume volume,
+   // AbsoluteFilePath Append(this Volume volume,
    //                             FileComponent file)
    /* ------------------------------------------------------------ */
 
@@ -103,10 +103,10 @@ public class Append
    //WHEN
    //Append
    //THEN
-   //a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned
+   //a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_Volume_and_a_FileComponent_WHEN_Append_THEN_a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_Volume_and_a_FileComponent_WHEN_Append_THEN_a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume        volume,
                                FileComponent file)

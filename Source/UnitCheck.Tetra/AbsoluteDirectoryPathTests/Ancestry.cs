@@ -33,7 +33,8 @@ public class Ancestry
 
          foreach (var directory in directories)
          {
-            directoryChains.Add(directoryChains[^1].Append(directory));
+            directoryChains.Add(directoryChains[^1]
+                                  .Append(directory));
          }
 
          var expected = directoryChains
@@ -42,7 +43,8 @@ public class Ancestry
                        .ToArray();
 
          //Act
-         var actual = expected[^1].Ancestry();
+         var actual = expected[^1]
+           .Ancestry();
 
          //Assert
          return AreSequenceEqual(expected,

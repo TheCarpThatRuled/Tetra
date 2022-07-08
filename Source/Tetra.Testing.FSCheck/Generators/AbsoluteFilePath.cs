@@ -8,16 +8,16 @@ partial class Generators
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Gen<VolumeRootedFilePath> VolumeRootedFilePath()
+   public static Gen<AbsoluteFilePath> AbsoluteFilePath()
       => ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator()
         .Select(Tetra
-               .VolumeRootedFilePath
+               .AbsoluteFilePath
                .Create);
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(VolumeRootedFilePath, VolumeRootedFilePath, VolumeRootedFilePath)> ThreeUniqueVolumeRootedFilePaths()
-      => VolumeRootedFilePath()
+   public static Gen<(AbsoluteFilePath, AbsoluteFilePath, AbsoluteFilePath)> ThreeUniqueAbsoluteFilePaths()
+      => AbsoluteFilePath()
         .ThreeValueTuples()
         .Where(tuple => !StringComparer.OrdinalIgnoreCase.Equals(tuple.Item1.Value(),
                                                                  tuple.Item2.Value())
@@ -28,17 +28,17 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(VolumeRootedFilePath, VolumeRootedFilePath)> TwoIdenticalVolumeRootedFilePaths()
+   public static Gen<(AbsoluteFilePath, AbsoluteFilePath)> TwoIdenticalAbsoluteFilePaths()
       => ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator()
-        .Select(path => (Tetra.VolumeRootedFilePath
+        .Select(path => (Tetra.AbsoluteFilePath
                                        .Create(path),
-                                  Tetra.VolumeRootedFilePath
+                                  Tetra.AbsoluteFilePath
                                        .Create(path)));
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(VolumeRootedFilePath, VolumeRootedFilePath)> TwoUniqueVolumeRootedFilePaths()
-      => VolumeRootedFilePath()
+   public static Gen<(AbsoluteFilePath, AbsoluteFilePath)> TwoUniqueAbsoluteFilePaths()
+      => AbsoluteFilePath()
         .TwoValueTuples()
         .Where(tuple => !StringComparer.OrdinalIgnoreCase.Equals(tuple.Item1.Value(),
                                                                  tuple.Item2.Value()));

@@ -89,7 +89,7 @@ public class Equals
 
       Arb.Register<Libraries.TwoIdenticalAbsoluteDirectoryPaths>();
 
-      Prop.ForAll<(AbsoluteDirectoryPath, AbsoluteDirectoryPath )>(Property)
+      Prop.ForAll<(AbsoluteDirectoryPath, AbsoluteDirectoryPath)>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -180,7 +180,7 @@ public class Equals
          //Act
          //Assert
          return IEquatableIsReflexive(args.original,
-                                                             args.copy);
+                                      args.copy);
       }
 
       Arb.Register<Libraries.TwoIdenticalAbsoluteDirectoryPaths>();

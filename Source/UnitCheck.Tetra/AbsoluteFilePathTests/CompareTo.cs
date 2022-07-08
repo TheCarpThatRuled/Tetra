@@ -4,35 +4,35 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.VolumeRootedFilePathTests;
+namespace Check.AbsoluteFilePathTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.VolumeRootedFilePath)]
+[TestCategory(LocalCategories.AbsoluteFilePath)]
 // ReSharper disable once InconsistentNaming
 public class CompareTo
 {
    /* ------------------------------------------------------------ */
-   // int CompareTo(VolumeRootedFilePath? other)
+   // int CompareTo(AbsoluteFilePath? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //VolumeRootedFilePath_AND_other_is_null
+   //AbsoluteFilePath_AND_other_is_null
    //WHEN
    //CompareTo
    //THEN
    //one_is_returned
 
    [TestMethod]
-   public void GIVEN_VolumeRootedFilePath_AND_other_is_null_WHEN_CompareTo_THEN_one_is_returned()
+   public void GIVEN_AbsoluteFilePath_AND_other_is_null_WHEN_CompareTo_THEN_one_is_returned()
    {
       static Property Property(string path)
       {
          //Arrange
-         var volumeRootedFilePath = VolumeRootedFilePath.Create(path);
+         var absoluteFilePath = AbsoluteFilePath.Create(path);
 
          //Act
-         var actual = volumeRootedFilePath.CompareTo(null);
+         var actual = absoluteFilePath.CompareTo(null);
 
          //Assert
          return AreEqual(1,
@@ -48,30 +48,30 @@ public class CompareTo
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //VolumeRootedFilePath_AND_other_contains_a_value_that_is_equal_ignoring_case
+   //AbsoluteFilePath_AND_other_contains_a_value_that_is_equal_ignoring_case
    //WHEN
    //CompareTo
    //THEN
    //zero_is_returned
 
    [TestMethod]
-   public void GIVEN_VolumeRootedFilePath_AND_other_contains_a_value_that_is_equal_ignoring_case_WHEN_CompareTo_THEN_zero_is_returned()
+   public void GIVEN_AbsoluteFilePath_AND_other_contains_a_value_that_is_equal_ignoring_case_WHEN_CompareTo_THEN_zero_is_returned()
    {
       static Property Property((string first, string second) args)
       {
          //Arrange
-         var firstVolumeRootedFilePath  = VolumeRootedFilePath.Create(args.first);
-         var secondVolumeRootedFilePath = VolumeRootedFilePath.Create(args.second);
+         var firstAbsoluteFilePath  = AbsoluteFilePath.Create(args.first);
+         var secondAbsoluteFilePath = AbsoluteFilePath.Create(args.second);
 
          //Act
-         var actual = firstVolumeRootedFilePath.CompareTo(secondVolumeRootedFilePath);
+         var actual = firstAbsoluteFilePath.CompareTo(secondAbsoluteFilePath);
 
          //Assert
          return AreEqual(0,
                          actual);
       }
 
-      Arb.Register<LocalLibraries.ValidVolumeRootedFilePathEqualToValidVolumeRootedFilePathCaseInsensitive>();
+      Arb.Register<LocalLibraries.ValidAbsoluteFilePathEqualToValidAbsoluteFilePathCaseInsensitive>();
 
       Prop.ForAll<(string, string)>(Property)
           .QuickCheckThrowOnFailure();
@@ -80,23 +80,24 @@ public class CompareTo
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //VolumeRootedFilePath_AND_other_contains_a_value_that_is_greater_than_ignoring_case
+   //AbsoluteFilePath_AND_other_contains_a_value_that_is_greater_than_ignoring_case
    //WHEN
    //CompareTo
    //THEN
    //the_difference_between_the_values_ignoring_case_is_returned
 
    [TestMethod]
-   public void GIVEN_VolumeRootedFilePath_AND_other_contains_a_value_that_is_greater_than_ignoring_case_WHEN_CompareTo_THEN_the_difference_between_the_values_ignoring_case_is_returned()
+   public void
+      GIVEN_AbsoluteFilePath_AND_other_contains_a_value_that_is_greater_than_ignoring_case_WHEN_CompareTo_THEN_the_difference_between_the_values_ignoring_case_is_returned()
    {
       static Property Property((string first, string second) args)
       {
          //Arrange
-         var firstVolumeRootedFilePath  = VolumeRootedFilePath.Create(args.first);
-         var secondVolumeRootedFilePath = VolumeRootedFilePath.Create(args.second);
+         var firstAbsoluteFilePath  = AbsoluteFilePath.Create(args.first);
+         var secondAbsoluteFilePath = AbsoluteFilePath.Create(args.second);
 
          //Act
-         var actual = firstVolumeRootedFilePath.CompareTo(secondVolumeRootedFilePath);
+         var actual = firstAbsoluteFilePath.CompareTo(secondAbsoluteFilePath);
 
          //Assert
          return AreEqual(StringComparer.OrdinalIgnoreCase
@@ -105,7 +106,7 @@ public class CompareTo
                          actual);
       }
 
-      Arb.Register<LocalLibraries.ValidVolumeRootedFilePathLessThanValidVolumeRootedFilePathCaseInsensitive>();
+      Arb.Register<LocalLibraries.ValidAbsoluteFilePathLessThanValidAbsoluteFilePathCaseInsensitive>();
 
       Prop.ForAll<(string, string)>(Property)
           .QuickCheckThrowOnFailure();
@@ -114,23 +115,23 @@ public class CompareTo
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //VolumeRootedFilePath_AND_other_contains_a_value_that_is_less_than_ignoring_case
+   //AbsoluteFilePath_AND_other_contains_a_value_that_is_less_than_ignoring_case
    //WHEN
    //CompareTo
    //THEN
    //the_difference_between_the_values_ignoring_case_is_returned
 
    [TestMethod]
-   public void GIVEN_VolumeRootedFilePath_AND_other_contains_a_value_that_is_less_than_ignoring_case_WHEN_CompareTo_THEN_the_difference_between_the_values_ignoring_case_is_returned()
+   public void GIVEN_AbsoluteFilePath_AND_other_contains_a_value_that_is_less_than_ignoring_case_WHEN_CompareTo_THEN_the_difference_between_the_values_ignoring_case_is_returned()
    {
       static Property Property((string first, string second) args)
       {
          //Arrange
-         var firstVolumeRootedFilePath  = VolumeRootedFilePath.Create(args.first);
-         var secondVolumeRootedFilePath = VolumeRootedFilePath.Create(args.second);
+         var firstAbsoluteFilePath  = AbsoluteFilePath.Create(args.first);
+         var secondAbsoluteFilePath = AbsoluteFilePath.Create(args.second);
 
          //Act
-         var actual = firstVolumeRootedFilePath.CompareTo(secondVolumeRootedFilePath);
+         var actual = firstAbsoluteFilePath.CompareTo(secondAbsoluteFilePath);
 
          //Assert
          return AreEqual(StringComparer.OrdinalIgnoreCase
@@ -139,7 +140,7 @@ public class CompareTo
                          actual);
       }
 
-      Arb.Register<LocalLibraries.ValidVolumeRootedFilePathGreaterThanValidVolumeRootedFilePathCaseInsensitive>();
+      Arb.Register<LocalLibraries.ValidAbsoluteFilePathGreaterThanValidAbsoluteFilePathCaseInsensitive>();
 
       Prop.ForAll<(string, string)>(Property)
           .QuickCheckThrowOnFailure();

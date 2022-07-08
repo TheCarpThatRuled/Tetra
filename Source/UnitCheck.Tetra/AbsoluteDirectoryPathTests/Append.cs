@@ -31,7 +31,7 @@ public class Append
       {
          //Arrange
          var path = AbsoluteDirectoryPath.Create(volume,
-                                                                      initialDirectories);
+                                                 initialDirectories);
 
          var expected = path.Value()
                       + initialDirectories.Aggregate(string.Empty,
@@ -95,7 +95,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // VolumeRootedFilePath Append(FileComponent file)
+   // AbsoluteFilePath Append(FileComponent file)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -103,10 +103,10 @@ public class Append
    //WHEN
    //Append
    //THEN
-   //a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned
+   //a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_AbsoluteDirectoryPath_and_a_FileComponent_WHEN_Append_THEN_a_VolumeRootedFilePath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_AbsoluteDirectoryPath_and_a_FileComponent_WHEN_Append_THEN_a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(Volume                   volume,
                                List<DirectoryComponent> initialDirectories,
