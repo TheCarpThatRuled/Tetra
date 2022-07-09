@@ -61,15 +61,11 @@ public class Parent
                                DirectoryComponent[] directories)
       {
          //Arrange
+         var expected = ExpectedPath.Combine(volume,
+                                             directories.SkipLast(1));
+
          var path = AbsoluteDirectoryPath.Create(volume,
                                                  directories);
-         var expected = directories
-                       .SkipLast(1)
-                       .Select(x => x.Value())
-                       .Prepend(volume.Value())
-                       .Aggregate(string.Empty,
-                                  (total,
-                                   next) => $"{total}{next}{Path.DirectorySeparatorChar}");
 
          //Act
          var actual = path.Parent();

@@ -195,11 +195,8 @@ public class Create
                                List<DirectoryComponent> directories)
       {
          //Arrange
-         var expected = directories
-                       .Select(x => x.Value())
-                       .Prepend(volume.Value())
-                       .ToArray()
-                       .ToDelimitedStringWithTrailingDelimiter(Path.DirectorySeparatorChar);
+         var expected = ExpectedPath.Combine(volume,
+                                             directories);
 
          //Act
          var actual = AbsoluteDirectoryPath.Create(volume,

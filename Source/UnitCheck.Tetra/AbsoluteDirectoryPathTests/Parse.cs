@@ -147,8 +147,6 @@ public class Parse
       static Property Property(string path)
       {
          //Arrange
-         var exception = Option<Exception>.None();
-
          //Act
          var actual = AbsoluteDirectoryPath.Parse(path);
 
@@ -179,8 +177,6 @@ public class Parse
       static Property Property(string path)
       {
          //Arrange
-         var exception = Option<Exception>.None();
-
          //Act
          var actual = AbsoluteDirectoryPath.Parse(path);
 

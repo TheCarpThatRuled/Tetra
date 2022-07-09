@@ -179,7 +179,7 @@ public class Equals
       static Property Property(DirectoryComponent original)
       {
          //Arrange
-         var copy     = DirectoryComponent.Create(original.Value());
+         var copy = DirectoryComponent.Create(original.Value());
 
          //Act
          //Assert

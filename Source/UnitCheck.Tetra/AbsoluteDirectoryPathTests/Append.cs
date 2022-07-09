@@ -30,13 +30,11 @@ public class Append
                                DirectoryComponent[] directories)
       {
          //Arrange
+         var expected = ExpectedPath.Combine(volume,
+                                             initialDirectories.Concat(directories));
+
          var path = AbsoluteDirectoryPath.Create(volume,
                                                  initialDirectories);
-
-         var expected = path.Value()
-                      + initialDirectories.Aggregate(string.Empty,
-                                                     (total,
-                                                      next) => $"{total}{next.Value()}{Path.DirectorySeparatorChar}");
 
          //Act
          var actual = path.Append(initialDirectories);
@@ -74,10 +72,9 @@ public class Append
          //Arrange
          var path = AbsoluteDirectoryPath.Create(volume,
                                                  initialDirectories);
-         var expected = path.Value()
-                      + directories.Aggregate(string.Empty,
-                                              (total,
-                                               next) => $"{total}{next.Value()}{Path.DirectorySeparatorChar}");
+
+         var expected = ExpectedPath.Combine(volume,
+                                             initialDirectories.Concat(directories));
 
          //Act
          var actual = path.Append(directories);
@@ -109,14 +106,16 @@ public class Append
    public void GIVEN_a_AbsoluteDirectoryPath_and_a_FileComponent_WHEN_Append_THEN_a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(VolumeComponent          volume,
-                               List<DirectoryComponent> initialDirectories,
+                               List<DirectoryComponent> directories,
                                FileComponent            file)
       {
          //Arrange
          var path = AbsoluteDirectoryPath.Create(volume,
-                                                 initialDirectories);
-         var expected = path.Value()
-                      + file.Value();
+                                                 directories);
+
+         var expected = ExpectedPath.Combine(volume,
+                                             directories,
+                                             file);
 
          //Act
          var actual = path.Append(file);

@@ -60,12 +60,9 @@ public class ParseComponents
                                FileComponent        file)
       {
          //Arrange
-         var path = directories
-                   .Select(x => x.Value())
-                   .Prepend(volume.Value())
-                   .Append(file.Value())
-                   .ToArray()
-                   .ToDelimitedString(Path.DirectorySeparatorChar);
+         var path = ExpectedPath.Combine(volume,
+                                         directories,
+                                         file);
 
          //Act
          var actual = TestPath.TestParseComponents(path,

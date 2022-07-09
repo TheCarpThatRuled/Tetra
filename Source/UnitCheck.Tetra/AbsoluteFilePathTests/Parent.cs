@@ -30,15 +30,12 @@ public class Parent
                                FileComponent        file)
       {
          //Arrange
+         var expected = ExpectedPath.Combine(volume,
+                                             directories);
+
          var path = AbsoluteFilePath.Create(volume,
                                             directories,
                                             file);
-         var expected = directories
-                       .Select(x => x.Value())
-                       .Prepend(volume.Value())
-                       .Aggregate(string.Empty,
-                                  (total,
-                                   next) => $"{total}{next}{Path.DirectorySeparatorChar}");
 
          //Act
          var actual = path.Parent();

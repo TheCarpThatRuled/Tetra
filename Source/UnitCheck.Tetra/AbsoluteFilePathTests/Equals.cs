@@ -27,11 +27,11 @@ public class Equals
    public void
       GIVEN_AbsoluteFilePath_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(AbsoluteFilePath AbsoluteFilePath,
+      static Property Property(AbsoluteFilePath absoluteFilePath,
                                object?          obj)
       {
          //Act
-         var actual = AbsoluteFilePath.Equals(obj);
+         var actual = absoluteFilePath.Equals(obj);
 
          //Assert
          return IsFalse(actual);

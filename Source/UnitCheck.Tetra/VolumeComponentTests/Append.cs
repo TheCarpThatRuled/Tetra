@@ -30,12 +30,8 @@ public class Append
                                DirectoryComponent[] directories)
       {
          //Arrange
-         var expected = directories
-                       .Select(x => x.Value())
-                       .Prepend(volume.Value())
-                       .Aggregate(string.Empty,
-                                  (total,
-                                   next) => $"{total}{next}{Path.DirectorySeparatorChar}");
+         var expected = ExpectedPath.Combine(volume,
+                                             directories);
 
          //Act
          var actual = volume.Append(directories);
@@ -71,12 +67,8 @@ public class Append
                                List<DirectoryComponent> directories)
       {
          //Arrange
-         var expected = directories
-                       .Select(x => x.Value())
-                       .Prepend(volume.Value())
-                       .Aggregate(string.Empty,
-                                  (total,
-                                   next) => $"{total}{next}{Path.DirectorySeparatorChar}");
+         var expected = ExpectedPath.Combine(volume,
+                                             directories);
 
          //Act
          var actual = volume.Append(directories);
@@ -112,9 +104,9 @@ public class Append
                                FileComponent   file)
       {
          //Arrange
-         var expected = volume.Value()
-                      + Path.DirectorySeparatorChar
-                      + file.Value();
+         var expected = ExpectedPath.Combine(volume,
+                                             Array.Empty<DirectoryComponent>(),
+                                             file);
 
          //Act
          var actual = volume.Append(file);

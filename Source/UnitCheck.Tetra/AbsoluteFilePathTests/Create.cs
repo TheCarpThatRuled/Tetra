@@ -256,12 +256,9 @@ public class Create
                                FileComponent            file)
       {
          //Arrange
-         var expected = directories
-                       .Select(x => x.Value())
-                       .Prepend(volume.Value())
-                       .Append(file.Value())
-                       .ToArray()
-                       .ToDelimitedString(Path.DirectorySeparatorChar);
+         var expected = ExpectedPath.Combine(volume,
+                                             directories,
+                                             file);
 
          //Act
          var actual = AbsoluteFilePath.Create(volume,

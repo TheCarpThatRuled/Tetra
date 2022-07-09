@@ -57,11 +57,8 @@ public class ParseComponents
                                DirectoryComponent[] directories)
       {
          //Arrange
-         var path = directories
-                   .Select(x => x.Value())
-                   .Prepend(volume.Value())
-                   .ToArray()
-                   .ToDelimitedString(Path.DirectorySeparatorChar);
+         var path = ExpectedPath.CombineWithoutTrailingDirectorySeparator(volume,
+                                                                          directories);
 
          //Act
          var actual = TestPath.TestParseComponents(path,
@@ -100,11 +97,8 @@ public class ParseComponents
                                DirectoryComponent[] directories)
       {
          //Arrange
-         var path = directories
-                   .Select(x => x.Value())
-                   .Prepend(volume.Value())
-                   .ToArray()
-                   .ToDelimitedStringWithTrailingDelimiter(Path.DirectorySeparatorChar);
+         var path = ExpectedPath.Combine(volume,
+                                         directories);
 
          //Act
          var actual = TestPath.TestParseComponents(path,
@@ -197,8 +191,6 @@ public class ParseComponents
       static Property Property(string path)
       {
          //Arrange
-         var exception = Option<Exception>.None();
-
          //Act
          var actual = TestPath.TestParseComponents(path,
                                                    nameof(TestPath));
