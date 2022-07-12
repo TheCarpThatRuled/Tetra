@@ -23,6 +23,12 @@ public static class VolumeComponent_Extensions
 
    /* ------------------------------------------------------------ */
 
+   public static AbsoluteDirectoryPath Append(this VolumeComponent                    volume,
+                                              RelativeDirectoryPath path)
+      => null;
+
+   /* ------------------------------------------------------------ */
+
    public static AbsoluteFilePath Append(this VolumeComponent volume,
                                          FileComponent        file)
       => AbsoluteFilePath

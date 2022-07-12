@@ -66,7 +66,7 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
       => $"<{_value}>";
 
    /* ------------------------------------------------------------ */
-   // IComparable<FileComponent> Methods
+   // IComparable<AbsoluteFilePath> Methods
    /* ------------------------------------------------------------ */
 
    public int CompareTo(AbsoluteFilePath? other)
@@ -76,7 +76,7 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
                  other?._value);
 
    /* ------------------------------------------------------------ */
-   // IEquatable<FileComponent> Methods
+   // IEquatable<AbsoluteFilePath> Methods
    /* ------------------------------------------------------------ */
 
    public bool Equals(AbsoluteFilePath? other)

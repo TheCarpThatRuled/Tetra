@@ -60,7 +60,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
       => $"<{_value}>";
 
    /* ------------------------------------------------------------ */
-   // IComparable<FileComponent> Methods
+   // IComparable<AbsoluteDirectoryPath> Methods
    /* ------------------------------------------------------------ */
 
    public int CompareTo(AbsoluteDirectoryPath? other)
@@ -70,7 +70,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
                  other?._value);
 
    /* ------------------------------------------------------------ */
-   // IEquatable<FileComponent> Methods
+   // IEquatable<AbsoluteDirectoryPath> Methods
    /* ------------------------------------------------------------ */
 
    public bool Equals(AbsoluteDirectoryPath? other)
@@ -109,11 +109,21 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
 
    /* ------------------------------------------------------------ */
 
+   public AbsoluteDirectoryPath Append(RelativeDirectoryPath path)
+      => null;
+
+   /* ------------------------------------------------------------ */
+
    public AbsoluteFilePath Append(FileComponent file)
       => AbsoluteFilePath
         .Create(_volume,
                 _directories,
                 file);
+
+   /* ------------------------------------------------------------ */
+
+   public AbsoluteFilePath Append(RelativeFilePath path)
+      => null;
 
    /* ------------------------------------------------------------ */
 
