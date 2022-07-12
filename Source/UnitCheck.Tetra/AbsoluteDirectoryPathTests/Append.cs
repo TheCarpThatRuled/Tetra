@@ -37,7 +37,7 @@ public class Append
                                                  initialDirectories);
 
          //Act
-         var actual = path.Append(initialDirectories);
+         var actual = path.Append(directories);
 
          //Assert
          return AreEqual(expected,

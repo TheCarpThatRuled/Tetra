@@ -3,7 +3,7 @@
 namespace Tetra;
 
 public class VolumeComponent : IComparable<VolumeComponent>,
-                      IEquatable<VolumeComponent>
+                               IEquatable<VolumeComponent>
 {
    /* ------------------------------------------------------------ */
    // Factory Functions
@@ -13,8 +13,8 @@ public class VolumeComponent : IComparable<VolumeComponent>,
       => Validate(potentialVolume,
                   VolumeType)
         .Reduce<VolumeComponent>(() => new(potentialVolume),
-                        message => throw new ArgumentException(message.Content(),
-                                                               nameof(potentialVolume)));
+                                 message => throw new ArgumentException(message.Content(),
+                                                                        nameof(potentialVolume)));
 
    /* ------------------------------------------------------------ */
 
