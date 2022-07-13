@@ -7,8 +7,10 @@ public static class AbsoluteFilePath_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static (IReadOnlyList<AbsoluteDirectoryPath> ancestors, AbsoluteFilePath file) Ancestry(this AbsoluteFilePath path)
-      => (Array.Empty<AbsoluteDirectoryPath>(), path);
+   public static (IReadOnlyList<AbsoluteDirectoryPath> ancestors, AbsoluteFilePath leaf) Ancestry(this AbsoluteFilePath path)
+      => (path.Parent()
+              .Ancestry(),
+          path);
 
    /* ------------------------------------------------------------ */
 }

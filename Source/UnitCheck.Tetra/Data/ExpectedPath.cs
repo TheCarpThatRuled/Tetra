@@ -8,6 +8,24 @@ internal static class ExpectedPath
    // Functions
    /* ------------------------------------------------------------ */
 
+   public static IReadOnlyList<AbsoluteDirectoryPath> BuildAncestry(VolumeComponent                 volume,
+                                                                          IEnumerable<DirectoryComponent> directories)
+   {
+      var directoryChains = new List<IEnumerable<DirectoryComponent>> {Array.Empty<DirectoryComponent>(),};
+
+      foreach (var directory in directories)
+      {
+         directoryChains.Add(directoryChains[^1].Append(directory));
+      }
+
+      return directoryChains
+            .Select(x => AbsoluteDirectoryPath.Create(volume,
+                                                      x.ToArray()))
+            .ToArray();
+   }
+
+   /* ------------------------------------------------------------ */
+
    public static string Combine(VolumeComponent                 volume,
                                 IEnumerable<DirectoryComponent> directories)
       => directories
