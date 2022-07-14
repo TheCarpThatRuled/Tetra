@@ -36,20 +36,19 @@ partial class Generators
                                                                                                      Gen<TRight> rightContent)
       => Either(leftContent,
                 rightContent)
-        .Two()
+        .TwoValueTuples()
         .Where(tuple => tuple
-                       .Item1
+                       .first
                        .Reduce(i1 => tuple
-                                    .Item2
+                                    .second
                                     .Reduce(i2 => !Equals(i1,
                                                           i2),
                                             _ => true),
                                i1 => tuple
-                                    .Item2
+                                    .second
                                     .Reduce(i2 => true,
                                             i2 => !Equals(i1,
-                                                          i2))))
-        .Select(tuple => (tuple.Item1, tuple.Item2));
+                                                          i2))));
 
    /* ------------------------------------------------------------ */
 }

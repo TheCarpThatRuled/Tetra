@@ -44,19 +44,18 @@ partial class Generators
 
    public static Gen<(Error, Error)> TwoUniqueErrors(Gen<Message> content)
       => Error(content)
-        .Two()
+        .TwoValueTuples()
         .Where(tuple => tuple
-                       .Item1
+                       .first
                        .Reduce(() => tuple
-                                    .Item2
+                                    .second
                                     .Reduce(() => false,
                                             _ => true),
                                i1 => tuple
-                                    .Item2
+                                    .second
                                     .Reduce(() => true,
                                             i2 => !Equals(i1,
-                                                          i2))))
-        .Select(tuple => (tuple.Item1, tuple.Item2));
+                                                          i2))));
 
    /* ------------------------------------------------------------ */
 
@@ -64,8 +63,7 @@ partial class Generators
                                                                            Gen<(Message, Message)> twoUniqueContents)
       => Gen
         .Frequency(new Tuple<int, Gen<(Error, Message, Message)>>(1,
-                                                                  content.Select(
-                                                                     value => (Tetra.Error.None(), value, value))),
+                                                                  content.Select(value => (Tetra.Error.None(), value, value))),
                    new Tuple<int, Gen<(Error, Message, Message)>>(4,
                                                                   Transitive(twoUniqueContents,
                                                                              Tetra.Error.Some)));

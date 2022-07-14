@@ -63,7 +63,7 @@ public class Parse
          var actual = FileComponent.Parse(value);
 
          //Assert
-         return IsAFailure(Message.Create(IsNotAValidComponent(value,
+         return IsAFailure(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
                                                                HumanReadableName.FileComponent)),
                            actual);
       }

@@ -27,14 +27,11 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<(Message, Message, Message)> ThreeUniqueMessages(Gen<string> @string)
-      => @string
-        .Three()
-        .Where(tuple => tuple.Item1 != tuple.Item2
-                     && tuple.Item1 != tuple.Item3
-                     && tuple.Item2 != tuple.Item3)
-        .Select(tuple => (Tetra.Message.Create(tuple.Item1),
-                          Tetra.Message.Create(tuple.Item2),
-                          Tetra.Message.Create(tuple.Item3)));
+      => Message(@string)
+        .ThreeValueTuples()
+        .Where(tuple => tuple.first.Content()  != tuple.second.Content()
+                     && tuple.first.Content()  != tuple.third.Content()
+                     && tuple.second.Content() != tuple.third.Content());
 
    /* ------------------------------------------------------------ */
 
@@ -44,11 +41,9 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<(Message, Message)> TwoUniqueMessages(Gen<string> @string)
-      => @string
-        .Two()
-        .Where(tuple => tuple.Item1 != tuple.Item2)
-        .Select(tuple => (Tetra.Message.Create(tuple.Item1),
-                          Tetra.Message.Create(tuple.Item2)));
+      => Message(@string)
+        .TwoValueTuples()
+        .Where(tuple => tuple.first.Content() != tuple.second.Content());
 
    /* ------------------------------------------------------------ */
 }

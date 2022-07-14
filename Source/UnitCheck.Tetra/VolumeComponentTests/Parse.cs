@@ -63,8 +63,8 @@ public class Parse
          var actual = VolumeComponent.Parse(value);
 
          //Assert
-         return IsAFailure(Message.Create(IsNotAValidVolumeLabel(value,
-                                                                 HumanReadableName.Volume)),
+         return IsAFailure(Message.Create(IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
+                                                                 HumanReadableName.VolumeComponent)),
                            actual);
       }
 

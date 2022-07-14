@@ -71,8 +71,8 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotAValidVolumeLabel(value,
-                                                                                             HumanReadableName.Volume),
+                                             ArgumentExceptionMessage(IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
+                                                                                             HumanReadableName.VolumeComponent),
                                                                       "potentialVolume"));
       }
 

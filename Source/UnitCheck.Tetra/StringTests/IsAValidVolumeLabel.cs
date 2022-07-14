@@ -35,7 +35,7 @@ public class IsAValidVolumeLabel
          return IsTrue(actual);
       }
 
-      Arb.Register<Libraries.ValidVolumeLabel>();
+      Arb.Register<Libraries.ValidVolumeComponent>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
@@ -62,7 +62,7 @@ public class IsAValidVolumeLabel
          return IsFalse(actual);
       }
 
-      Arb.Register<Libraries.InvalidVolumeLabelWrongNumberOfCharacters>();
+      Arb.Register<Libraries.VolumeComponentWithTheWrongNumberOfCharacters>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
@@ -89,7 +89,7 @@ public class IsAValidVolumeLabel
          return IsFalse(actual);
       }
 
-      Arb.Register<Libraries.InvalidVolumeLabelInvalidFirstCharacter>();
+      Arb.Register<Libraries.VolumeComponentWithAnInvalidFirstCharacter>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
@@ -116,7 +116,7 @@ public class IsAValidVolumeLabel
          return IsFalse(actual);
       }
 
-      Arb.Register<Libraries.InvalidVolumeLabelInvalidSecondCharacter>();
+      Arb.Register<Libraries.VolumeComponentWithInvalidSecondCharacter>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();

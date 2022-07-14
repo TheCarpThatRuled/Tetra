@@ -10,55 +10,76 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    /* ------------------------------------------------------------ */
 
    public static RelativeDirectoryPath Create(string potentialPath)
-      => new();
+      => ParseComponents(potentialPath,
+                         PathType)
+        .Reduce(Exceptions.ThrowArgumentException<RelativeDirectoryPath>(nameof(potentialPath)),
+                Create);
+
+   /* ------------------------------------------------------------ */
+
+   public static RelativeDirectoryPath Create(params DirectoryComponent[] directories)
+      => new(directories);
 
    /* ------------------------------------------------------------ */
 
    public static RelativeDirectoryPath Create(IReadOnlyCollection<DirectoryComponent> directories)
-      => new();
+      => new(directories);
 
    /* ------------------------------------------------------------ */
 
    public static Result<RelativeDirectoryPath> Parse(string potentialPath)
-      => Message.Create(string.Empty);
+      => ParseComponents(potentialPath,
+                         PathType)
+        .Map(Create);
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
    /* ------------------------------------------------------------ */
 
    public override bool Equals(object? obj)
-      => true;
+      => ReferenceEquals(this,
+                         obj)
+      || obj is RelativeDirectoryPath path
+      && Equals(path);
 
    /* ------------------------------------------------------------ */
 
    public override int GetHashCode()
-      => 0;
+      => StringComparer
+        .OrdinalIgnoreCase
+        .GetHashCode(_value);
 
    /* ------------------------------------------------------------ */
 
    public override string ToString()
-      => string.Empty;
+      => $"<{_value}>";
 
    /* ------------------------------------------------------------ */
    // IComparable<RelativeDirectoryPath> Methods
    /* ------------------------------------------------------------ */
 
    public int CompareTo(RelativeDirectoryPath? other)
-      => 0;
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Compare(_value,
+                 other?._value);
 
    /* ------------------------------------------------------------ */
    // IEquatable<RelativeDirectoryPath> Methods
    /* ------------------------------------------------------------ */
 
    public bool Equals(RelativeDirectoryPath? other)
-      => true;
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Equals(_value,
+                other?._value);
 
    /* ------------------------------------------------------------ */
    // Properties
    /* ------------------------------------------------------------ */
 
    public string Value()
-      => string.Empty;
+      => _value;
 
    /* ------------------------------------------------------------ */
    // Methods
@@ -90,7 +111,11 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    /* ------------------------------------------------------------ */
 
    public Option<RelativeDirectoryPath> Parent()
-      => Option<RelativeDirectoryPath>.None();
+      => _directories.Count > 1
+            ? Option.Some(Create(_directories
+                                .SkipLast(1)
+                                .ToArray()))
+            : Option<RelativeDirectoryPath>.None();
 
    /* ------------------------------------------------------------ */
 
@@ -126,6 +151,13 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    // Protected Constructors
    /* ------------------------------------------------------------ */
 
+   private RelativeDirectoryPath(IReadOnlyCollection<DirectoryComponent> directories)
+   {
+      _directories = directories;
+
+      _value = PathBuilder.Combine(directories);
+   }
+
    public RelativeDirectoryPath() { }
 
    /* ------------------------------------------------------------ */
@@ -134,7 +166,32 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
 
    protected static Result<IReadOnlyCollection<DirectoryComponent>> ParseComponents(string potentialPath,
                                                                                     string pathType)
-      => Message.Create(string.Empty);
+   {
+      if (string.IsNullOrEmpty(potentialPath))
+      {
+         return Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(potentialPath,
+                                                                            pathType));
+      }
+
+      var components = potentialPath
+                      .Split(Path.DirectorySeparatorChar,
+                             Path.AltDirectorySeparatorChar)
+                      .ToArray();
+
+      var directoryComponents = components
+                               .Where(x => !string.IsNullOrEmpty(x)) //Todo: Add test for this behaviour
+                               .ToArray();
+
+      if (directoryComponents.Any(x => x.IsNotAValidPathComponent()))
+      {
+         return Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(potentialPath,
+                                                                                         pathType));
+      }
+
+      return directoryComponents
+            .Select(DirectoryComponent.Create)
+            .ToArray();
+   }
 
    /* ------------------------------------------------------------ */
    // Private Constants
@@ -148,6 +205,13 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
 
    private readonly IReadOnlyCollection<DirectoryComponent> _directories;
    private readonly string                                  _value;
+
+   /* ------------------------------------------------------------ */
+   // Private Factory Functions
+   /* ------------------------------------------------------------ */
+
+   private static RelativeDirectoryPath Create(Success<IReadOnlyCollection<DirectoryComponent>> success)
+      => new(success.Content());
 
    /* ------------------------------------------------------------ */
 }

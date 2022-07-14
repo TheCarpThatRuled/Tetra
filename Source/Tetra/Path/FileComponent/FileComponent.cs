@@ -86,8 +86,8 @@ public class FileComponent : IComparable<FileComponent>,
    protected static Error Validate(string potentialComponent,
                                    string componentType)
       => potentialComponent.IsNotAValidPathComponent()
-            ? Error.Some(Message.Create(IsNotAValidComponent(potentialComponent,
-                                                             componentType)))
+            ? Error.Some(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(potentialComponent,
+                                                                                              componentType)))
             : Error.None();
 
    /* ------------------------------------------------------------ */

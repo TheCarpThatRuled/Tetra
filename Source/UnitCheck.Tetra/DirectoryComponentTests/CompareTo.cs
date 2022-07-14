@@ -27,22 +27,20 @@ public class CompareTo
    [TestMethod]
    public void GIVEN_DirectoryComponent_AND_other_is_null_WHEN_CompareTo_THEN_one_is_returned()
    {
-      static Property Property(string value)
+      static Property Property(DirectoryComponent directory)
       {
          //Arrange
-         var directoryComponent = DirectoryComponent.Create(value);
-
          //Act
-         var actual = directoryComponent.CompareTo(null);
+         var actual = directory.CompareTo(null);
 
          //Assert
          return AreEqual(1,
                          actual);
       }
 
-      Arb.Register<Libraries.ValidPathComponent>();
+      Arb.Register<Libraries.DirectoryComponent>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<DirectoryComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 

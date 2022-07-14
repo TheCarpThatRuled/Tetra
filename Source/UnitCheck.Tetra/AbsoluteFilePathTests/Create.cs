@@ -37,7 +37,7 @@ public class Create
                          actual.Value());
       }
 
-      Arb.Register<Libraries.ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator>();
+      Arb.Register<Libraries.ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
@@ -72,12 +72,12 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMayNotEndWithADirectorySeparator(path,
+                                             ArgumentExceptionMessage(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(path,
                                                                          HumanReadableName.AbsoluteFilePath),
                                                                       "potentialPath"));
       }
 
-      Arb.Register<Libraries.ValidPathWithVolumeRootAndTrailingDirectorySeparator>();
+      Arb.Register<Libraries.ValidPathWithAVolumeRootAndATrailingDirectorySeparator>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
@@ -111,7 +111,7 @@ public class Create
       //Assert
       Assert.That
             .AnArgumentExceptionWasThrown(exception,
-                                          ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMayNotBeEmpty(string.Empty,
+                                          ArgumentExceptionMessage(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
                                                                                                                    HumanReadableName.AbsoluteFilePath),
                                                                    "potentialPath"));
    }
@@ -145,12 +145,12 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
+                                             ArgumentExceptionMessage(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
                                                                          HumanReadableName.AbsoluteFilePath),
                                                                       "potentialPath"));
       }
 
-      Arb.Register<Libraries.ValidPathWithoutRoot>();
+      Arb.Register<Libraries.ValidPathWithoutARoot>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
@@ -185,12 +185,12 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
+                                             ArgumentExceptionMessage(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
                                                                          HumanReadableName.AbsoluteFilePath),
                                                                       "potentialPath"));
       }
 
-      Arb.Register<Libraries.PathWithInvalidVolumeRoot>();
+      Arb.Register<Libraries.PathWithAnInvalidVolumeRoot>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
@@ -225,7 +225,7 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMayNotContainTheCharacters(path,
+                                             ArgumentExceptionMessage(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
                                                                          HumanReadableName.AbsoluteFilePath),
                                                                       "potentialPath"));
       }

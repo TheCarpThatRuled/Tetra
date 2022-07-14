@@ -83,7 +83,7 @@ public class Validate
                                                  nameof(TestComponent));
 
          //Assert
-         return IsASome(Message.Create(Messages.IsNotAValidComponent(value,
+         return IsASome(Message.Create(Messages.IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
                                                                      nameof(TestComponent))),
                         actual);
       }

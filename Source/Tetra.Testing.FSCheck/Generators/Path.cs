@@ -41,33 +41,14 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<string> InvalidVolumeLabelInvalidFirstCharacter()
-      => NonAsciiLetter()
-        .Select(x => $"{x}:");
-
-   /* ------------------------------------------------------------ */
-
-   public static Gen<string> InvalidVolumeLabelInvalidSecondCharacter()
-      => AsciiLetter()
-        .Combine(Char().Where(x => x != ':'),
-                 (x, y) => $"{x}{y}");
-
-   /* ------------------------------------------------------------ */
-
-   public static Gen<string> InvalidVolumeLabelWrongNumberOfCharacters()
-      => NonNullString()
-        .Where(x => x.Length != 2);
-
-   /* ------------------------------------------------------------ */
-
-   public static Gen<string> PathWithInvalidVolumeRoot()
+   public static Gen<string> PathWithAnInvalidVolumeRoot()
       => Gen
-        .OneOf(PathWithInvalidVolumeRootAndTrailingDirectorySeparator(),
-               PathWithInvalidVolumeRootButWithoutTrailingDirectorySeparator());
+        .OneOf(PathWithAnInvalidVolumeRootAndATrailingDirectorySeparator(),
+               PathWithAnInvalidVolumeRootButWithoutATrailingDirectorySeparator());
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<string> PathWithInvalidVolumeRootAndTrailingDirectorySeparator()
+   public static Gen<string> PathWithAnInvalidVolumeRootAndATrailingDirectorySeparator()
       => Gen
         .OneOf(NonAsciiLetter().Select(x => x.ToString()),
                TwoOrMoreAsciiLetters())
@@ -77,11 +58,11 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<string> PathWithInvalidVolumeRootButWithoutTrailingDirectorySeparator()
+   public static Gen<string> PathWithAnInvalidVolumeRootButWithoutATrailingDirectorySeparator()
       => Gen
         .OneOf(NonAsciiLetter().Select(x=> x.ToString()),
             TwoOrMoreAsciiLetters())
-        .Combine(ValidPathWithoutRootAndTrailingDirectorySeparator(),
+        .Combine(ValidPathWithoutARootOrATrailingDirectorySeparator(),
                  (volume,
                   directories) => $"{volume}:{Path.DirectorySeparatorChar}{directories}");
 
@@ -89,12 +70,12 @@ partial class Generators
 
    public static Gen<string> PathWithAVolumeRootAndAnInvalidComponent()
       => Gen
-        .OneOf(PathWithAVolumeRootAndAnInvalidComponentAndTrailingDirectorySeparator(),
-               PathWithAVolumeRootAndAnInvalidComponentButWithoutTrailingDirectorySeparator());
+        .OneOf(PathWithAVolumeRootAndAnInvalidComponentAndATrailingDirectorySeparator(),
+               PathWithAVolumeRootAndAnInvalidComponentButWithoutATrailingDirectorySeparator());
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<string> PathWithAVolumeRootAndAnInvalidComponentAndTrailingDirectorySeparator()
+   public static Gen<string> PathWithAVolumeRootAndAnInvalidComponentAndATrailingDirectorySeparator()
       => AsciiLetter()
         .Combine(ListOf(ValidPathComponent()),
                  InvalidPathComponentExcludingDirectorySeparators(),
@@ -115,7 +96,7 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<string> PathWithAVolumeRootAndAnInvalidComponentButWithoutTrailingDirectorySeparator()
+   public static Gen<string> PathWithAVolumeRootAndAnInvalidComponentButWithoutATrailingDirectorySeparator()
       => AsciiLetter()
         .Combine(ListOf(ValidPathComponent()),
                  InvalidPathComponentExcludingDirectorySeparators(),
@@ -136,6 +117,41 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
+   public static Gen<string> PathWithoutARootButWithAnInvalidComponent()
+      => Gen
+        .OneOf(PathWithoutARootAndATrailingDirectorySeparatorButWithAnInvalidComponent(),
+               PathWithoutARootButWithAnInvalidComponentAndATrailingDirectorySeparator());
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<string> PathWithoutARootAndATrailingDirectorySeparatorButWithAnInvalidComponent()
+      => ListOf(ValidPathComponent())
+        .Combine(InvalidPathComponentExcludingDirectorySeparators(),
+                 ListOf(ValidPathComponent()),
+                 (prependedComponents,
+                  invalidComponent,
+                  appendedComponents) => prependedComponents
+                                        .Append(invalidComponent)
+                                        .Concat(appendedComponents)
+                                        .ToArray()
+                                        .ToDelimitedString(Path.DirectorySeparatorChar));
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<string> PathWithoutARootButWithAnInvalidComponentAndATrailingDirectorySeparator()
+      => ListOf(ValidPathComponent())
+        .Combine(InvalidPathComponentExcludingDirectorySeparators(),
+                 ListOf(ValidPathComponent()),
+                 (prependedComponents,
+                  invalidComponent,
+                  appendedComponents) => prependedComponents
+                                        .Append(invalidComponent)
+                                        .Concat(appendedComponents)
+                                        .ToArray()
+                                        .ToDelimitedStringWithTrailingDelimiter(Path.DirectorySeparatorChar));
+
+   /* ------------------------------------------------------------ */
+
    public static Gen<string> ValidOrEmptyPathComponent()
       => NonNullString()
         .Where(path => path.All(character => !Path
@@ -147,9 +163,18 @@ partial class Generators
    public static Gen<string> ValidPathComponent()
       => NonNullOrEmptyString()
         .Select(x => x.Get)
-        .Where(path => path.All(character => !Path
-                                             .GetInvalidFileNameChars()
-                                             .Contains(character)));
+        .Where(path =>
+         {
+            var all = path.All(character =>
+            {
+               var invalidFileNameChars = Path
+                 .GetInvalidFileNameChars();
+               var b = !invalidFileNameChars
+                         .Contains(character);
+               return b;
+            });
+            return all;
+         });
 
    /* ------------------------------------------------------------ */
 
@@ -161,53 +186,71 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<string> ValidPathWithoutRoot()
+   public static Gen<string> ValidPathWithoutARoot()
       => Gen
-        .OneOf(ValidPathWithoutRootAndTrailingDirectorySeparator(),
-               ValidPathWithoutRootButWithTrailingDirectorySeparator());
+        .OneOf(ValidPathWithoutARootOrATrailingDirectorySeparator(),
+               ValidPathWithoutARootButWithATrailingDirectorySeparator());
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<string> ValidPathWithoutRootAndTrailingDirectorySeparator()
+   public static Gen<string> ValidPathWithoutARootOrATrailingDirectorySeparator()
       => NonEmptyListOf(ValidPathComponent())
-        .Select(directories => directories.ToDelimitedString(Path.DirectorySeparatorChar.ToString()));
+        .Select(directories => 
+                   directories.ToDelimitedString(Path.DirectorySeparatorChar.ToString()));
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<string> ValidPathWithoutRootButWithTrailingDirectorySeparator()
+   public static Gen<string> ValidPathWithoutARootButWithATrailingDirectorySeparator()
       => NonEmptyListOf(ValidPathComponent())
-        .Select(directories => directories.Aggregate(string.Empty,
-                                                     (total,
-                                                      next) => $"{total}{next}{Path.DirectorySeparatorChar}"));
+        .Select(directories => directories.ToDelimitedStringWithTrailingDelimiter(Path.DirectorySeparatorChar.ToString()));
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<string> ValidPathWithVolumeRoot()
+   public static Gen<string> ValidPathWithAVolumeRoot()
       => Gen
-        .OneOf(ValidPathWithVolumeRootAndTrailingDirectorySeparator(),
-               ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator());
+        .OneOf(ValidPathWithAVolumeRootAndATrailingDirectorySeparator(),
+               ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator());
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<string> ValidPathWithVolumeRootAndTrailingDirectorySeparator()
+   public static Gen<string> ValidPathWithAVolumeRootAndATrailingDirectorySeparator()
       => AsciiLetter()
-        .Combine(ListOf(ValidPathComponent()),
-                 (volume,
-                  directories) => $"{volume}:{Path.DirectorySeparatorChar}{directories.ToDelimitedStringWithTrailingDelimiter(Path.DirectorySeparatorChar)}");
-
-   /* ------------------------------------------------------------ */
-
-   public static Gen<string> ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator()
-      => AsciiLetter()
-        .Combine(ValidPathWithoutRootAndTrailingDirectorySeparator(),
+        .Combine(ValidPathWithoutARootButWithATrailingDirectorySeparator(),
                  (volume,
                   directories) => $"{volume}:{Path.DirectorySeparatorChar}{directories}");
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<string> ValidVolumeLabel()
+   public static Gen<string> ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator()
       => AsciiLetter()
-        .Select((volume) => $"{volume}:");
+        .Combine(ValidPathWithoutARootOrATrailingDirectorySeparator(),
+                 (volume,
+                  directories) => $"{volume}:{Path.DirectorySeparatorChar}{directories}");
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<string> ValidVolumeComponent()
+      => AsciiLetter()
+        .Select(volume => $"{volume}:");
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<string> VolumeComponentWithInvalidFirstCharacter()
+      => NonAsciiLetter()
+        .Select(x => $"{x}:");
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<string> VolumeComponentWithInvalidSecondCharacter()
+      => AsciiLetter()
+        .Combine(Char().Where(x => x != ':'),
+                 (x, y) => $"{x}{y}");
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<string> VolumeComponentWithTheWrongNumberOfCharacters()
+      => NonNullString()
+        .Where(x => x.Length != 2);
 
    /* ------------------------------------------------------------ */
 }

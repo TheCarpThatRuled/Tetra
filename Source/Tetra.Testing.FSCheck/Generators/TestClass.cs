@@ -42,13 +42,10 @@ partial class Generators
 
    public static Gen<(TestClass, TestClass, TestClass)> ThreeUniqueTestClasses(Gen<TestClass> testStruct)
       => testStruct
-        .Three()
-        .Where(tuple => tuple.Item1 != tuple.Item2
-                     && tuple.Item1 != tuple.Item3
-                     && tuple.Item2 != tuple.Item3)
-        .Select(tuple => (tuple.Item1,
-                          tuple.Item2,
-                          tuple.Item3));
+        .ThreeValueTuples()
+        .Where(tuple => tuple.first  != tuple.second
+                     && tuple.first  != tuple.third
+                     && tuple.second != tuple.third);
 
    /* ------------------------------------------------------------ */
 
@@ -59,10 +56,8 @@ partial class Generators
 
    public static Gen<(TestClass, TestClass)> TwoUniqueTestClasses(Gen<TestClass> testStruct)
       => testStruct
-        .Two()
-        .Where(tuple => tuple.Item1 != tuple.Item2)
-        .Select(tuple => (tuple.Item1,
-                          tuple.Item2));
+        .TwoValueTuples()
+        .Where(tuple => tuple.first != tuple.second);
 
    /* ------------------------------------------------------------ */
 }

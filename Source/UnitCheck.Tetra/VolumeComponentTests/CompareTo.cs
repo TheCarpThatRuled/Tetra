@@ -27,11 +27,9 @@ public class CompareTo
    [TestMethod]
    public void GIVEN_Volume_AND_other_is_null_WHEN_CompareTo_THEN_one_is_returned()
    {
-      static Property Property(char asciiLetter)
+      static Property Property(VolumeComponent volume)
       {
          //Arrange
-         var volume = VolumeComponent.Create(asciiLetter);
-
          //Act
          var actual = volume.CompareTo(null);
 
@@ -40,9 +38,9 @@ public class CompareTo
                          actual);
       }
 
-      Arb.Register<Libraries.AsciiLetters>();
+      Arb.Register<Libraries.VolumeComponent>();
 
-      Prop.ForAll<char>(Property)
+      Prop.ForAll<VolumeComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 

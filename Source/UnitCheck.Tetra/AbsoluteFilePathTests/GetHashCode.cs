@@ -40,7 +40,7 @@ public class GetHashCode
                          actual);
       }
 
-      Arb.Register<Libraries.ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator>();
+      Arb.Register<Libraries.ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();

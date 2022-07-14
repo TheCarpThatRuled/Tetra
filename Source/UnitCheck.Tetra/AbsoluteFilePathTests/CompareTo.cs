@@ -26,22 +26,20 @@ public class CompareTo
    [TestMethod]
    public void GIVEN_AbsoluteFilePath_AND_other_is_null_WHEN_CompareTo_THEN_one_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(AbsoluteFilePath path)
       {
          //Arrange
-         var absoluteFilePath = AbsoluteFilePath.Create(path);
-
          //Act
-         var actual = absoluteFilePath.CompareTo(null);
+         var actual = path.CompareTo(null);
 
          //Assert
          return AreEqual(1,
                          actual);
       }
 
-      Arb.Register<Libraries.ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator>();
+      Arb.Register<Libraries.AbsoluteFilePath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<AbsoluteFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

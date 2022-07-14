@@ -8,7 +8,28 @@ public static class RelativeDirectoryPath_Extensions
    /* ------------------------------------------------------------ */
 
    public static IReadOnlyList<RelativeDirectoryPath> Ancestry(this RelativeDirectoryPath path)
-      => Array.Empty<RelativeDirectoryPath>();
+   {
+      var ancestry = new List<RelativeDirectoryPath> { path, };
+
+      bool hadParent;
+      do
+      {
+         hadParent = path
+                    .Parent()
+                    .Reduce(Function.False,
+                            parent =>
+                            {
+                               ancestry.Add(parent);
+                               path = parent;
+
+                               return true;
+                            });
+      } while (hadParent);
+
+      ancestry.Reverse();
+
+      return ancestry;
+   }
 
    /* ------------------------------------------------------------ */
 }

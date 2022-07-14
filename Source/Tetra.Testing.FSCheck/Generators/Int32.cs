@@ -24,13 +24,10 @@ partial class Generators
 
    public static Gen<(int, int, int)> ThreeUniqueInt32s(Gen<int> int32)
       => int32
-        .Three()
-        .Where(tuple => tuple.Item1 != tuple.Item2
-                     && tuple.Item1 != tuple.Item3
-                     && tuple.Item2 != tuple.Item3)
-        .Select(tuple => (tuple.Item1,
-                          tuple.Item2,
-                          tuple.Item3));
+        .ThreeValueTuples()
+        .Where(tuple => tuple.first  != tuple.second
+                     && tuple.first  != tuple.third
+                     && tuple.second != tuple.third);
 
    /* ------------------------------------------------------------ */
 
@@ -41,10 +38,8 @@ partial class Generators
 
    public static Gen<(int, int)> TwoUniqueInt32s(Gen<int> int32)
       => int32
-        .Two()
-        .Where(tuple => tuple.Item1 != tuple.Item2)
-        .Select(tuple => (tuple.Item1,
-                          tuple.Item2));
+        .TwoValueTuples()
+        .Where(tuple => tuple.first != tuple.second);
 
    /* ------------------------------------------------------------ */
 }

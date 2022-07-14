@@ -29,18 +29,17 @@ partial class Generators
 
    public static Gen<(Option<T>, Option<T>)> TwoUniqueOptions<T>(Gen<T> content)
       => Option(content)
-        .Two()
+        .TwoValueTuples()
         .Where(tuple => tuple
-                       .Item1
+                       .first
                        .Reduce(() => tuple
-                                    .Item2
+                                    .second
                                     .IsASome(),
                                i1 => tuple
-                                    .Item2
+                                    .second
                                     .Reduce(true,
                                             i2 => !Equals(i1,
-                                                          i2))))
-        .Select(tuple => (tuple.Item1, tuple.Item2));
+                                                          i2))));
 
    /* ------------------------------------------------------------ */
 

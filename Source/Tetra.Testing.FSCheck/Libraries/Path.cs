@@ -26,7 +26,7 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class InvalidVolumeLabelInvalidFirstCharacter
+   public sealed class PathWithAnInvalidVolumeRoot
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -34,61 +34,7 @@ public static partial class Libraries
 
       public static Arbitrary<string> String()
          => Generators
-           .InvalidVolumeLabelInvalidFirstCharacter()
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
-   public sealed class InvalidVolumeLabelInvalidSecondCharacter
-   {
-      /* ------------------------------------------------------------ */
-      // Functions
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<string> String()
-         => Generators
-           .InvalidVolumeLabelInvalidSecondCharacter()
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
-   public sealed class InvalidVolumeLabelWrongNumberOfCharacters
-   {
-      /* ------------------------------------------------------------ */
-      // Functions
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<string> String()
-         => Generators
-           .InvalidVolumeLabelWrongNumberOfCharacters()
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
-   public sealed class PathWithInvalidVolumeRoot
-   {
-      /* ------------------------------------------------------------ */
-      // Functions
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<string> String()
-         => Generators
-           .PathWithInvalidVolumeRoot()
+           .PathWithAnInvalidVolumeRoot()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -116,6 +62,24 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
+   public sealed class PathWithoutARootButWithAnInvalidComponent
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<string> String()
+         => Generators
+           .PathWithoutARootButWithAnInvalidComponent()
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
    public sealed class ValidPathComponent
    {
       /* ------------------------------------------------------------ */
@@ -134,7 +98,7 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class ValidPathWithoutRoot
+   public sealed class ValidPathWithAVolumeRootAndATrailingDirectorySeparator
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -142,7 +106,7 @@ public static partial class Libraries
 
       public static Arbitrary<string> String()
          => Generators
-           .ValidPathWithoutRoot()
+           .ValidPathWithAVolumeRootAndATrailingDirectorySeparator()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -152,7 +116,7 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class ValidPathWithVolumeRootAndTrailingDirectorySeparator
+   public sealed class ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -160,7 +124,7 @@ public static partial class Libraries
 
       public static Arbitrary<string> String()
          => Generators
-           .ValidPathWithVolumeRootAndTrailingDirectorySeparator()
+           .ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -170,7 +134,7 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator
+   public sealed class ValidPathWithoutARoot
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -178,7 +142,7 @@ public static partial class Libraries
 
       public static Arbitrary<string> String()
          => Generators
-           .ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator()
+           .ValidPathWithoutARoot()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -188,7 +152,7 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class ValidVolumeLabel
+   public sealed class ValidPathWithoutARootButWithATrailingDirectorySeparator
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -196,7 +160,97 @@ public static partial class Libraries
 
       public static Arbitrary<string> String()
          => Generators
-           .ValidVolumeLabel()
+           .ValidPathWithoutARootButWithATrailingDirectorySeparator()
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class ValidPathWithoutARootOrATrailingDirectorySeparator
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<string> String()
+         => Generators
+           .ValidPathWithoutARootOrATrailingDirectorySeparator()
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class ValidVolumeComponent
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<string> String()
+         => Generators
+           .ValidVolumeComponent()
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class VolumeComponentWithAnInvalidFirstCharacter
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<string> String()
+         => Generators
+           .VolumeComponentWithInvalidFirstCharacter()
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class VolumeComponentWithInvalidSecondCharacter
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<string> String()
+         => Generators
+           .VolumeComponentWithInvalidSecondCharacter()
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class VolumeComponentWithTheWrongNumberOfCharacters
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<string> String()
+         => Generators
+           .VolumeComponentWithTheWrongNumberOfCharacters()
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

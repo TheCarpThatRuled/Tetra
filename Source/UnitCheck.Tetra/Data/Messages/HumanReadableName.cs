@@ -11,11 +11,13 @@ partial class Messages
       // Constants
       /* ------------------------------------------------------------ */
 
+      public const string AbsoluteDirectoryPath = "absolute directory path";
+      public const string AbsoluteFilePath      = "absolute file path";
       public const string DirectoryComponent    = "directory component";
       public const string FileComponent         = "file component";
-      public const string Volume                = "volume label";
-      public const string AbsoluteDirectoryPath = "absolute directory path";
-      public const string AbsoluteFilePath  = "volume-rooted file path";
+      public const string RelativeDirectoryPath = "relative directory path";
+      public const string RelativeFilePath      = "relative file path";
+      public const string VolumeComponent       = "volume label";
 
       /* ------------------------------------------------------------ */
    }

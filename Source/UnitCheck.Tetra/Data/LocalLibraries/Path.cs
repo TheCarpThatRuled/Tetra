@@ -8,6 +8,138 @@ partial class LocalLibraries
 {
    /* ------------------------------------------------------------ */
 
+   public sealed class ValidAbsoluteDirectoryPathEqualToValidAbsoluteDirectoryPathCaseInsensitive
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<(string first, string second)> Type()
+         => Generators
+           .ValidPathWithAVolumeRootAndATrailingDirectorySeparator()
+           .Select(path => (path,
+                            path.ToLowerInvariant()))
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public sealed class ValidAbsoluteDirectoryPathGreaterThanValidAbsoluteDirectoryPathCaseInsensitive
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<(string first, string second)> Type()
+         => Generators
+           .ValidPathWithAVolumeRootAndATrailingDirectorySeparator()
+           .TwoValueTuples()
+           .Where(tuple => StringComparer
+                          .OrdinalIgnoreCase
+                          .Compare(tuple.first
+                                        .ToString(),
+                                   tuple.second
+                                        .ToString())
+                         > 0)
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public sealed class ValidAbsoluteDirectoryPathLessThanValidAbsoluteDirectoryPathCaseInsensitive
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<(string first, string second)> Type()
+         => Generators
+           .ValidPathWithAVolumeRootAndATrailingDirectorySeparator()
+           .TwoValueTuples()
+           .Where(tuple => StringComparer
+                          .OrdinalIgnoreCase
+                          .Compare(tuple.first
+                                        .ToString(),
+                                   tuple.second
+                                        .ToString())
+                         < 0)
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public sealed class ValidAbsoluteFilePathEqualToValidAbsoluteFilePathCaseInsensitive
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<(string first, string second)> Type()
+         => Generators
+           .ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator()
+           .Select(path => (path,
+                            path.ToLowerInvariant()))
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public sealed class ValidAbsoluteFilePathGreaterThanValidAbsoluteFilePathCaseInsensitive
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<(string first, string second)> Type()
+         => Generators
+           .ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator()
+           .TwoValueTuples()
+           .Where(tuple => StringComparer
+                          .OrdinalIgnoreCase
+                          .Compare(tuple.first
+                                        .ToString(),
+                                   tuple.second
+                                        .ToString())
+                         > 0)
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public sealed class ValidAbsoluteFilePathLessThanValidAbsoluteFilePathCaseInsensitive
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<(string first, string second)> Type()
+         => Generators
+           .ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator()
+           .TwoValueTuples()
+           .Where(tuple => StringComparer
+                          .OrdinalIgnoreCase
+                          .Compare(tuple.first
+                                        .ToString(),
+                                   tuple.second
+                                        .ToString())
+                         < 0)
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
    public sealed class ValidPathComponentEqualToValidPathComponentCaseInsensitive
    {
       /* ------------------------------------------------------------ */
@@ -74,7 +206,7 @@ partial class LocalLibraries
 
    /* ------------------------------------------------------------ */
 
-   public sealed class ValidAbsoluteDirectoryPathEqualToValidAbsoluteDirectoryPathCaseInsensitive
+   public sealed class ValidRelativeDirectoryPathEqualToValidRelativeDirectoryPathCaseInsensitive
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -82,7 +214,7 @@ partial class LocalLibraries
 
       public static Arbitrary<(string first, string second)> Type()
          => Generators
-           .ValidPathWithVolumeRootAndTrailingDirectorySeparator()
+           .ValidPathWithoutARootButWithATrailingDirectorySeparator()
            .Select(path => (path,
                             path.ToLowerInvariant()))
            .ToArbitrary();
@@ -92,7 +224,7 @@ partial class LocalLibraries
 
    /* ------------------------------------------------------------ */
 
-   public sealed class ValidAbsoluteDirectoryPathGreaterThanValidAbsoluteDirectoryPathCaseInsensitive
+   public sealed class ValidRelativeDirectoryPathGreaterThanValidRelativeDirectoryPathCaseInsensitive
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -100,7 +232,7 @@ partial class LocalLibraries
 
       public static Arbitrary<(string first, string second)> Type()
          => Generators
-           .ValidPathWithVolumeRootAndTrailingDirectorySeparator()
+           .ValidPathWithoutARootButWithATrailingDirectorySeparator()
            .TwoValueTuples()
            .Where(tuple => StringComparer
                           .OrdinalIgnoreCase
@@ -116,7 +248,7 @@ partial class LocalLibraries
 
    /* ------------------------------------------------------------ */
 
-   public sealed class ValidAbsoluteDirectoryPathLessThanValidAbsoluteDirectoryPathCaseInsensitive
+   public sealed class ValidRelativeDirectoryPathLessThanValidRelativeDirectoryPathCaseInsensitive
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -124,7 +256,7 @@ partial class LocalLibraries
 
       public static Arbitrary<(string first, string second)> Type()
          => Generators
-           .ValidPathWithVolumeRootAndTrailingDirectorySeparator()
+           .ValidPathWithoutARootButWithATrailingDirectorySeparator()
            .TwoValueTuples()
            .Where(tuple => StringComparer
                           .OrdinalIgnoreCase
@@ -140,7 +272,7 @@ partial class LocalLibraries
 
    /* ------------------------------------------------------------ */
 
-   public sealed class ValidAbsoluteFilePathEqualToValidAbsoluteFilePathCaseInsensitive
+   public sealed class ValidRelativeFilePathEqualToValidRelativeFilePathCaseInsensitive
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -148,7 +280,7 @@ partial class LocalLibraries
 
       public static Arbitrary<(string first, string second)> Type()
          => Generators
-           .ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator()
+           .ValidPathWithoutARootOrATrailingDirectorySeparator()
            .Select(path => (path,
                             path.ToLowerInvariant()))
            .ToArbitrary();
@@ -158,7 +290,7 @@ partial class LocalLibraries
 
    /* ------------------------------------------------------------ */
 
-   public sealed class ValidAbsoluteFilePathGreaterThanValidAbsoluteFilePathCaseInsensitive
+   public sealed class ValidRelativeFilePathGreaterThanValidRelativeFilePathCaseInsensitive
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -166,7 +298,7 @@ partial class LocalLibraries
 
       public static Arbitrary<(string first, string second)> Type()
          => Generators
-           .ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator()
+           .ValidPathWithoutARootOrATrailingDirectorySeparator()
            .TwoValueTuples()
            .Where(tuple => StringComparer
                           .OrdinalIgnoreCase
@@ -182,7 +314,7 @@ partial class LocalLibraries
 
    /* ------------------------------------------------------------ */
 
-   public sealed class ValidAbsoluteFilePathLessThanValidAbsoluteFilePathCaseInsensitive
+   public sealed class ValidRelativeFilePathLessThanValidRelativeFilePathCaseInsensitive
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -190,7 +322,7 @@ partial class LocalLibraries
 
       public static Arbitrary<(string first, string second)> Type()
          => Generators
-           .ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator()
+           .ValidPathWithoutARootOrATrailingDirectorySeparator()
            .TwoValueTuples()
            .Where(tuple => StringComparer
                           .OrdinalIgnoreCase

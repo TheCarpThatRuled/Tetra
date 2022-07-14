@@ -84,7 +84,7 @@ public class Validate
                                                        nameof(TestVolumeComponent));
 
          //Assert
-         return IsASome(Message.Create(Messages.IsNotAValidVolumeLabel(value,
+         return IsASome(Message.Create(Messages.IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
                                                                        nameof(TestVolumeComponent))),
                         actual);
       }

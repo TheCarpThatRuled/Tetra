@@ -27,22 +27,20 @@ public class CompareTo
    [TestMethod]
    public void GIVEN_FileComponent_AND_other_is_null_WHEN_CompareTo_THEN_one_is_returned()
    {
-      static Property Property(string value)
+      static Property Property(FileComponent file)
       {
          //Arrange
-         var fileComponent = FileComponent.Create(value);
-
          //Act
-         var actual = fileComponent.CompareTo(null);
+         var actual = file.CompareTo(null);
 
          //Assert
          return AreEqual(1,
                          actual);
       }
 
-      Arb.Register<Libraries.ValidPathComponent>();
+      Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<FileComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 

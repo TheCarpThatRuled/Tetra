@@ -9,7 +9,7 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<AbsoluteDirectoryPath> AbsoluteDirectoryPath()
-      => ValidPathWithVolumeRootAndTrailingDirectorySeparator()
+      => ValidPathWithAVolumeRootAndATrailingDirectorySeparator()
         .Select(Tetra
                .AbsoluteDirectoryPath
                .Create);
@@ -19,17 +19,17 @@ partial class Generators
    public static Gen<(AbsoluteDirectoryPath, AbsoluteDirectoryPath, AbsoluteDirectoryPath)> ThreeUniqueAbsoluteDirectoryPaths()
       => AbsoluteDirectoryPath()
         .ThreeValueTuples()
-        .Where(tuple => !StringComparer.OrdinalIgnoreCase.Equals(tuple.Item1.Value(),
-                                                                 tuple.Item2.Value())
-                     && !StringComparer.OrdinalIgnoreCase.Equals(tuple.Item1.Value(),
-                                                                 tuple.Item3.Value())
-                     && !StringComparer.OrdinalIgnoreCase.Equals(tuple.Item2.Value(),
-                                                                 tuple.Item3.Value()));
+        .Where(tuple => !StringComparer.OrdinalIgnoreCase.Equals(tuple.first.Value(),
+                                                                 tuple.second.Value())
+                     && !StringComparer.OrdinalIgnoreCase.Equals(tuple.first.Value(),
+                                                                 tuple.third.Value())
+                     && !StringComparer.OrdinalIgnoreCase.Equals(tuple.second.Value(),
+                                                                 tuple.third.Value()));
 
    /* ------------------------------------------------------------ */
 
    public static Gen<(AbsoluteDirectoryPath, AbsoluteDirectoryPath)> TwoIdenticalAbsoluteDirectoryPaths()
-      => ValidPathWithVolumeRootAndTrailingDirectorySeparator()
+      => ValidPathWithAVolumeRootAndATrailingDirectorySeparator()
         .Select(path => (Tetra.AbsoluteDirectoryPath
                                        .Create(path),
                                   Tetra.AbsoluteDirectoryPath
@@ -40,8 +40,8 @@ partial class Generators
    public static Gen<(AbsoluteDirectoryPath, AbsoluteDirectoryPath)> TwoUniqueAbsoluteDirectoryPaths()
       => AbsoluteDirectoryPath()
         .TwoValueTuples()
-        .Where(tuple => !StringComparer.OrdinalIgnoreCase.Equals(tuple.Item1.Value(),
-                                                                 tuple.Item2.Value()));
+        .Where(tuple => !StringComparer.OrdinalIgnoreCase.Equals(tuple.first.Value(),
+                                                                 tuple.second.Value()));
 
    /* ------------------------------------------------------------ */
 }

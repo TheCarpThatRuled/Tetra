@@ -17,23 +17,22 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<(VolumeComponent, VolumeComponent, VolumeComponent)> ThreeUniqueVolumeComponents()
-      => AsciiLetter()
-        .Three()
-        .Where(tuple => tuple.Item1 != tuple.Item2
-                     && tuple.Item1 != tuple.Item3
-                     && tuple.Item2 != tuple.Item3)
-        .Select(tuple => (Tetra.VolumeComponent.Create(tuple.Item1),
-                          Tetra.VolumeComponent.Create(tuple.Item2),
-                          Tetra.VolumeComponent.Create(tuple.Item3)));
+      => VolumeComponent()
+        .ThreeValueTuples()
+        .Where(tuple => !StringComparer.OrdinalIgnoreCase.Equals(tuple.first.Value(),
+                                                                 tuple.second.Value())
+                     && !StringComparer.OrdinalIgnoreCase.Equals(tuple.first.Value(),
+                                                                 tuple.third.Value())
+                     && !StringComparer.OrdinalIgnoreCase.Equals(tuple.second.Value(),
+                                                                 tuple.third.Value()));
 
    /* ------------------------------------------------------------ */
 
    public static Gen<(VolumeComponent, VolumeComponent)> TwoUniqueVolumeComponents()
-      => AsciiLetter()
-        .Two()
-        .Where(tuple => tuple.Item1 != tuple.Item2)
-        .Select(tuple => (Tetra.VolumeComponent.Create(tuple.Item1),
-                          Tetra.VolumeComponent.Create(tuple.Item2)));
+      => VolumeComponent()
+        .TwoValueTuples()
+        .Where(tuple => !StringComparer.OrdinalIgnoreCase.Equals(tuple.first.Value(),
+                                                                 tuple.second.Value()));
 
    /* ------------------------------------------------------------ */
 }

@@ -8,16 +8,16 @@ partial class Generators
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Gen<FileComponent> FileComponent()
-      => ValidPathComponent()
+   public static Gen<RelativeDirectoryPath> RelativeDirectoryPath()
+      => ValidPathWithoutARootButWithATrailingDirectorySeparator()
         .Select(Tetra
-               .FileComponent
+               .RelativeDirectoryPath
                .Create);
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(FileComponent, FileComponent, FileComponent)> ThreeUniqueFileComponents()
-      => FileComponent()
+   public static Gen<(RelativeDirectoryPath, RelativeDirectoryPath, RelativeDirectoryPath)> ThreeUniqueRelativeDirectoryPaths()
+      => RelativeDirectoryPath()
         .ThreeValueTuples()
         .Where(tuple => !StringComparer.OrdinalIgnoreCase.Equals(tuple.first.Value(),
                                                                  tuple.second.Value())
@@ -28,8 +28,17 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(FileComponent, FileComponent)> TwoUniqueFileComponents()
-      => FileComponent()
+   public static Gen<(RelativeDirectoryPath, RelativeDirectoryPath)> TwoIdenticalRelativeDirectoryPaths()
+      => ValidPathWithoutARootButWithATrailingDirectorySeparator()
+        .Select(path => (Tetra.RelativeDirectoryPath
+                                       .Create(path),
+                                  Tetra.RelativeDirectoryPath
+                                       .Create(path)));
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<(RelativeDirectoryPath, RelativeDirectoryPath)> TwoUniqueRelativeDirectoryPaths()
+      => RelativeDirectoryPath()
         .TwoValueTuples()
         .Where(tuple => !StringComparer.OrdinalIgnoreCase.Equals(tuple.first.Value(),
                                                                  tuple.second.Value()));

@@ -37,7 +37,7 @@ public class Create
                          actual.Value());
       }
 
-      Arb.Register<Libraries.ValidPathWithVolumeRootAndTrailingDirectorySeparator>();
+      Arb.Register<Libraries.ValidPathWithAVolumeRootAndATrailingDirectorySeparator>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
@@ -66,7 +66,7 @@ public class Create
                          actual.Value());
       }
 
-      Arb.Register<Libraries.ValidPathWithVolumeRootButWithoutTrailingDirectorySeparator>();
+      Arb.Register<Libraries.ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
@@ -100,7 +100,7 @@ public class Create
       //Assert
       Assert.That
             .AnArgumentExceptionWasThrown(exception,
-                                          ArgumentExceptionMessage(IsNotAValidVolumeRootedPathBecauseMayNotBeEmpty(string.Empty,
+                                          ArgumentExceptionMessage(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
                                                                                                                    HumanReadableName.AbsoluteDirectoryPath),
                                                                    "potentialPath"));
    }
@@ -119,11 +119,11 @@ public class Create
    {
       static Property Property(string path)
          => AnArgumentExceptionWasThrown(() => AbsoluteDirectoryPath.Create(path),
-                                         IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
+                                         IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
                                                                                                      HumanReadableName.AbsoluteDirectoryPath),
                                          "potentialPath");
 
-      Arb.Register<Libraries.ValidPathWithoutRoot>();
+      Arb.Register<Libraries.ValidPathWithoutARoot>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
@@ -142,11 +142,11 @@ public class Create
    {
       static Property Property(string path)
          => AnArgumentExceptionWasThrown(() => AbsoluteDirectoryPath.Create(path),
-                                         IsNotAValidVolumeRootedPathBecauseMustStartWithAVolumeLabel(path,
+                                         IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
                                                                                                      HumanReadableName.AbsoluteDirectoryPath),
                                          "potentialPath");
 
-      Arb.Register<Libraries.PathWithInvalidVolumeRoot>();
+      Arb.Register<Libraries.PathWithAnInvalidVolumeRoot>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
@@ -166,7 +166,7 @@ public class Create
    {
       static Property Property(string path)
          => AnArgumentExceptionWasThrown(() => AbsoluteDirectoryPath.Create(path),
-                                         IsNotAValidVolumeRootedPathBecauseMayNotContainTheCharacters(path,
+                                         IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
                                                                                                       HumanReadableName.AbsoluteDirectoryPath),
                                          "potentialPath");
 

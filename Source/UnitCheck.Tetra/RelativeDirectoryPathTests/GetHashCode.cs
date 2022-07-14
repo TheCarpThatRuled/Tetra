@@ -4,11 +4,11 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.AbsoluteDirectoryPathTests;
+namespace Check.RelativeDirectoryPathTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.AbsoluteDirectoryPath)]
+[TestCategory(LocalCategories.RelativeDirectoryPath)]
 // ReSharper disable once InconsistentNaming
 public class GetHashCode
 {
@@ -17,19 +17,19 @@ public class GetHashCode
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //AbsoluteDirectoryPath
+   //RelativeDirectoryPath
    //WHEN
    //GetHashCode
    //THEN
    //the_ordinal_ignore_case_hash_code_of_the_value_is_returned
 
    [TestMethod]
-   public void GIVEN_AbsoluteDirectoryPath_WHEN_GetHashCode_THEN_the_ordinal_ignore_case_hash_code_of_the_value_is_returned()
+   public void GIVEN_RelativeDirectoryPath_WHEN_GetHashCode_THEN_the_ordinal_ignore_case_hash_code_of_the_value_is_returned()
    {
       static Property Property(string sourcePath)
       {
          //Arrange
-         var path = AbsoluteDirectoryPath.Create(sourcePath);
+         var path = RelativeDirectoryPath.Create(sourcePath);
 
          //Act
          var actual = path.GetHashCode();
@@ -40,7 +40,7 @@ public class GetHashCode
                          actual);
       }
 
-      Arb.Register<Libraries.ValidPathWithAVolumeRootAndATrailingDirectorySeparator>();
+      Arb.Register<Libraries.ValidPathWithoutARootButWithATrailingDirectorySeparator>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();

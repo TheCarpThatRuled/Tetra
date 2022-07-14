@@ -8,16 +8,16 @@ partial class Generators
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Gen<FileComponent> FileComponent()
-      => ValidPathComponent()
+   public static Gen<RelativeFilePath> RelativeFilePath()
+      => ValidPathWithoutARootOrATrailingDirectorySeparator()
         .Select(Tetra
-               .FileComponent
+               .RelativeFilePath
                .Create);
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(FileComponent, FileComponent, FileComponent)> ThreeUniqueFileComponents()
-      => FileComponent()
+   public static Gen<(RelativeFilePath, RelativeFilePath, RelativeFilePath)> ThreeUniqueRelativeFilePaths()
+      => RelativeFilePath()
         .ThreeValueTuples()
         .Where(tuple => !StringComparer.OrdinalIgnoreCase.Equals(tuple.first.Value(),
                                                                  tuple.second.Value())
@@ -28,8 +28,17 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(FileComponent, FileComponent)> TwoUniqueFileComponents()
-      => FileComponent()
+   public static Gen<(RelativeFilePath, RelativeFilePath)> TwoIdenticalRelativeFilePaths()
+      => ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator()
+        .Select(path => (Tetra.RelativeFilePath
+                                       .Create(path),
+                                  Tetra.RelativeFilePath
+                                       .Create(path)));
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<(RelativeFilePath, RelativeFilePath)> TwoUniqueRelativeFilePaths()
+      => RelativeFilePath()
         .TwoValueTuples()
         .Where(tuple => !StringComparer.OrdinalIgnoreCase.Equals(tuple.first.Value(),
                                                                  tuple.second.Value()));

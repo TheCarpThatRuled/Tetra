@@ -32,7 +32,8 @@ public static partial class Generators
    public static Gen<List<T>> NonEmptyListOf<T>(Gen<T> source)
       => Gen
         .NonEmptyListOf(source)
-        .Select(x => x.ToList());
+        .Select(x => 
+                   x.ToList());
 
    /* ------------------------------------------------------------ */
 

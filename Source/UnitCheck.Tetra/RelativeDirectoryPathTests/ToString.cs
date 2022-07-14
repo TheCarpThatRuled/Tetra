@@ -4,11 +4,11 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.AbsoluteFilePathTests;
+namespace Check.RelativeDirectoryPathTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.AbsoluteFilePath)]
+[TestCategory(LocalCategories.RelativeDirectoryPath)]
 // ReSharper disable once InconsistentNaming
 public class ToString
 {
@@ -17,29 +17,29 @@ public class ToString
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //AbsoluteFilePath
+   //RelativeDirectoryPath
    //WHEN
    //ToString
    //THEN
    //the_value_bounded_by_angle_brackets_is_returned
 
    [TestMethod]
-   public void GIVEN_AbsoluteFilePath_WHEN_ToString_THEN_the_value_bounded_by_angle_brackets_is_returned()
+   public void GIVEN_RelativeDirectoryPath_WHEN_ToString_THEN_the_value_bounded_by_angle_brackets_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(string sourcePath)
       {
          //Arrange
-         var absoluteFilePath = AbsoluteFilePath.Create(path);
+         var path = RelativeDirectoryPath.Create(sourcePath);
 
          //Act
-         var actual = absoluteFilePath.ToString();
+         var actual = path.ToString();
 
          //Assert
-         return AreEqual($"<{path}>",
+         return AreEqual($"<{sourcePath}>",
                          actual);
       }
 
-      Arb.Register<Libraries.ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator>();
+      Arb.Register<Libraries.ValidPathWithoutARootButWithATrailingDirectorySeparator>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();

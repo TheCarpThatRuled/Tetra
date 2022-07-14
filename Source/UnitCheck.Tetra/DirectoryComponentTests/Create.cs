@@ -71,7 +71,7 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotAValidComponent(value,
+                                             ArgumentExceptionMessage(IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
                                                                                            HumanReadableName.DirectoryComponent),
                                                                       "potentialComponent"));
       }

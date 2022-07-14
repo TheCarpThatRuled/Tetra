@@ -21,6 +21,24 @@ public static partial class Libraries
 
       /* ------------------------------------------------------------ */
    }
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class ArrayOfAtLeastTwoDirectoryComponents
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<Tetra.DirectoryComponent[]> Type()
+         => Generators
+           .ArrayOf(Generators.DirectoryComponent())
+           .Where(x=> x.Length > 1)
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
 
    /* ------------------------------------------------------------ */
 
