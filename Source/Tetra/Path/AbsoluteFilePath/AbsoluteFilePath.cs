@@ -29,12 +29,7 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
    public static Result<AbsoluteFilePath> Parse(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
-        .Map(success => new AbsoluteFilePath(success.Content()
-                                                    .directories,
-                                             success.Content()
-                                                    .file,
-                                             success.Content()
-                                                    .volume));
+        .Map(Create);
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods

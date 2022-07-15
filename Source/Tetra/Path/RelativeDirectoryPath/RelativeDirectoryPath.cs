@@ -151,7 +151,7 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    // Protected Constructors
    /* ------------------------------------------------------------ */
 
-   private RelativeDirectoryPath(IReadOnlyCollection<DirectoryComponent> directories)
+   protected RelativeDirectoryPath(IReadOnlyCollection<DirectoryComponent> directories)
    {
       _directories = directories;
 

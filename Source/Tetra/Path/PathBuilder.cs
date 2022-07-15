@@ -105,4 +105,31 @@ internal static class PathBuilder
    }
 
    /* ------------------------------------------------------------ */
+
+   public static void Combine(StringBuilder                   path,
+                              IEnumerable<DirectoryComponent> directories,
+                              FileComponent                   file)
+   {
+      Combine(path,
+              directories);
+
+      Add(path,
+          file);
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public static string Combine(IEnumerable<DirectoryComponent> directories,
+                                FileComponent                   file)
+   {
+      var path = new StringBuilder();
+
+      Combine(path,
+              directories,
+              file);
+
+      return path.ToString();
+   }
+
+   /* ------------------------------------------------------------ */
 }

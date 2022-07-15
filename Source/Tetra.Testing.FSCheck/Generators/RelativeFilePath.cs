@@ -29,7 +29,7 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<(RelativeFilePath, RelativeFilePath)> TwoIdenticalRelativeFilePaths()
-      => ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator()
+      => ValidPathWithoutARootOrATrailingDirectorySeparator()
         .Select(path => (Tetra.RelativeFilePath
                                        .Create(path),
                                   Tetra.RelativeFilePath

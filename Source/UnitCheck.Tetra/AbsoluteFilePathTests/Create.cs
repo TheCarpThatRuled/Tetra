@@ -17,14 +17,14 @@ public class Create
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_valid_volume_rooted_path_without_a_trailing_directory_separator
+   //a_valid_path_with_a_volume_root_but_without_a_trailing_directory_separator
    //WHEN
    //Create
    //THEN
    //a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Create_THEN_a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_valid_path_with_a_volume_root_but_without_a_trailing_directory_separator_WHEN_Create_THEN_a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(string path)
       {
@@ -46,14 +46,14 @@ public class Create
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_valid_volume_rooted_path_with_a_trailing_directory_separator
+   //a_valid_path_with_volume_root_and_a_trailing_directory_separator
    //WHEN
    //Create
    //THEN
    //an_ArgumentException_is_thrown
 
    [TestMethod]
-   public void GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_Create_THEN_an_ArgumentException_is_thrown()
+   public void GIVEN_a_valid_path_with_volume_root_and_a_trailing_directory_separator_WHEN_Create_THEN_an_ArgumentException_is_thrown()
    {
       static Property Property(string path)
       {
@@ -119,14 +119,14 @@ public class Create
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_valid_path_without_a_volume
+   //a_valid_path_without_a_volume_root
    //WHEN
    //Create
    //THEN
    //an_argument_exception_is_thrown
 
    [TestMethod]
-   public void GIVEN_a_valid_path_without_a_volume_WHEN_Create_THEN_an_argument_exception_is_thrown()
+   public void GIVEN_a_valid_path_without_a_volume_root_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
       static Property Property(string path)
       {
@@ -238,18 +238,19 @@ public class Create
 
    /* ------------------------------------------------------------ */
    // AbsoluteFilePath Create(VolumeComponent volume,
-   //                             IReadOnlyCollection<DirectoryComponent> directories)
+   //                         IReadOnlyCollection<DirectoryComponent> directories,
+   //                         FileComponent file)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_Volume_and_a_sequence_of_DirectoryComponents
+   //a_Volume_and_a_sequence_of_DirectoryComponents_and_a_FileComponent
    //WHEN
    //Create
    //THEN
    //a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_WHEN_Create_THEN_a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_and_a_FileComponent_WHEN_Create_THEN_a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(VolumeComponent          volume,
                                List<DirectoryComponent> directories,

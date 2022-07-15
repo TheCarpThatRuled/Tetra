@@ -10,66 +10,85 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
    /* ------------------------------------------------------------ */
 
    public static RelativeFilePath Create(string potentialPath)
-      => new();
+      => ParseComponents(potentialPath,
+                         PathType)
+        .Reduce(Exceptions.ThrowArgumentException<RelativeFilePath>(nameof(potentialPath)),
+                Create);
 
    /* ------------------------------------------------------------ */
 
    public static RelativeFilePath Create(IReadOnlyCollection<DirectoryComponent> directories,
                                          FileComponent                           file)
-      => new();
+      => new(directories,
+             file);
 
    /* ------------------------------------------------------------ */
 
    public static Result<RelativeFilePath> Parse(string potentialPath)
-      => Message.Create(string.Empty);
+      => ParseComponents(potentialPath,
+                         PathType)
+        .Map(Create);
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
    /* ------------------------------------------------------------ */
 
    public override bool Equals(object? obj)
-      => true;
+      => ReferenceEquals(this,
+                         obj)
+      || obj is RelativeFilePath path
+      && Equals(path);
 
    /* ------------------------------------------------------------ */
 
    public override int GetHashCode()
-      => 0;
+      => StringComparer
+        .OrdinalIgnoreCase
+        .GetHashCode(_value);
 
    /* ------------------------------------------------------------ */
 
    public override string ToString()
-      => string.Empty;
+      => $"<{_value}>";
 
    /* ------------------------------------------------------------ */
    // IComparable<RelativeFilePath> Methods
    /* ------------------------------------------------------------ */
 
    public int CompareTo(RelativeFilePath? other)
-      => 0;
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Compare(_value,
+                 other?._value);
 
    /* ------------------------------------------------------------ */
    // IEquatable<RelativeFilePath> Methods
    /* ------------------------------------------------------------ */
 
    public bool Equals(RelativeFilePath? other)
-      => true;
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Equals(_value,
+                other?._value);
 
    /* ------------------------------------------------------------ */
    // Properties
    /* ------------------------------------------------------------ */
 
    public FileComponent File()
-      => null;
+      => _file;
 
    /* ------------------------------------------------------------ */
 
-   public RelativeDirectoryPath Parent()
-      => null;
+   public Option<RelativeDirectoryPath> Parent()
+      => _directories.Any()
+            ? RelativeDirectoryPath.Create(_directories)
+            : Option<RelativeDirectoryPath>.None();
 
    /* ------------------------------------------------------------ */
 
    public string Value()
-      => string.Empty;
+      => _value;
 
    /* ------------------------------------------------------------ */
    // Methods
@@ -99,13 +118,55 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
 
    public RelativeFilePath() { }
 
+   protected RelativeFilePath(IReadOnlyCollection<DirectoryComponent> directories,
+                              FileComponent                           file)
+   {
+      _directories = directories;
+      _file        = file;
+
+      _value = PathBuilder.Combine(directories,
+                                   file);
+   }
+
    /* ------------------------------------------------------------ */
    // Protected Methods
    /* ------------------------------------------------------------ */
 
    protected static Result<(IReadOnlyCollection<DirectoryComponent> directories, FileComponent file)> ParseComponents(string potentialPath,
-      string                                                                                                                                         pathType)
-      => Message.Create(string.Empty);
+                                                                                                                      string pathType)
+   {
+      if (string.IsNullOrEmpty(potentialPath))
+      {
+         return Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(potentialPath,
+                                                                           pathType));
+      }
+
+      var components = potentialPath
+                      .Split(Path.DirectorySeparatorChar,
+                             Path.AltDirectorySeparatorChar)
+                      .ToArray();
+
+      var potentialComponents = components
+                               .Where(x => !string.IsNullOrEmpty(x)) //Todo: Add test for this behaviour
+                               .ToArray();
+
+      if (potentialComponents.Any(x => x.IsNotAValidPathComponent()))
+      {
+         return Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(potentialPath,
+                                                                                        pathType));
+      }
+
+      if (string.IsNullOrEmpty(components[^1]))
+      {
+         return Message.Create(IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(potentialPath,
+                                                                                                  pathType));
+      }
+
+      return (potentialComponents.SkipLast(1)
+                                 .Select(DirectoryComponent.Create)
+                                 .ToArray(),
+              FileComponent.Create(components[^1]));
+   }
 
    /* ------------------------------------------------------------ */
    // Private Constants
@@ -120,6 +181,16 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
    private readonly IReadOnlyCollection<DirectoryComponent> _directories;
    private readonly FileComponent                           _file;
    private readonly string                                  _value;
+
+   /* ------------------------------------------------------------ */
+   // Private Factory Functions
+   /* ------------------------------------------------------------ */
+
+   private static RelativeFilePath Create(Success<(IReadOnlyCollection<DirectoryComponent> directories, FileComponent file)> success)
+      => new(success.Content()
+                    .directories,
+             success.Content()
+                    .file);
 
    /* ------------------------------------------------------------ */
 }
