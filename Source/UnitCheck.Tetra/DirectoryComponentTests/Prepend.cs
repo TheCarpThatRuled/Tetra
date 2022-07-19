@@ -21,10 +21,10 @@ public class Prepend
    //WHEN
    //Prepend
    //THEN
-   //a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned
+   //an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_Directory_and_a_VolumeComponent_WHEN_Prepend_THEN_a_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_Directory_and_a_VolumeComponent_WHEN_Prepend_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(DirectoryComponent directory,
                                VolumeComponent    volume)

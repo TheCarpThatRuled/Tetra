@@ -94,23 +94,42 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
    // Methods
    /* ------------------------------------------------------------ */
 
+   public AbsoluteFilePath Prepend(AbsoluteDirectoryPath path)
+      => AbsoluteFilePath.Create(path.Volume(),
+                                 path._directories
+                                     .Concat(_directories)
+                                     .ToArray(),
+                                 _file);
+
+   /* ------------------------------------------------------------ */
+
    public RelativeFilePath Prepend(params DirectoryComponent[] directories)
-      => new();
+      => Create(directories.Concat(_directories)
+                           .ToArray(),
+                _file);
 
    /* ------------------------------------------------------------ */
 
    public RelativeFilePath Prepend(IEnumerable<DirectoryComponent> directories)
-      => new();
+      => Create(directories.Concat(_directories)
+                           .ToArray(),
+                _file);
 
    /* ------------------------------------------------------------ */
 
    public RelativeFilePath Prepend(RelativeDirectoryPath path)
-      => new();
+      => Create(path._directories
+                    .Concat(_directories)
+                    .ToArray(),
+                _file);
 
    /* ------------------------------------------------------------ */
 
    public AbsoluteFilePath Prepend(VolumeComponent volume)
-      => null;
+      => AbsoluteFilePath
+        .Create(volume,
+                _directories,
+                _file);
 
    /* ------------------------------------------------------------ */
    // Protected Constructors
@@ -178,9 +197,9 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly IReadOnlyCollection<DirectoryComponent> _directories;
-   private readonly FileComponent                           _file;
-   private readonly string                                  _value;
+   internal readonly IReadOnlyCollection<DirectoryComponent> _directories;
+   internal readonly FileComponent                           _file;
+   private readonly  string                                  _value;
 
    /* ------------------------------------------------------------ */
    // Private Factory Functions

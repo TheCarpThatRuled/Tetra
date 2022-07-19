@@ -134,6 +134,25 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
+   public sealed class TwoListsOfDirectoryComponents
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<(List<Tetra.DirectoryComponent>, List<Tetra.DirectoryComponent>)> Type()
+         => Generators
+           .ListOf(Generators.DirectoryComponent())
+           .TwoValueTuples()
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
    public sealed class TwoUniqueDirectoryComponents
    {
       /* ------------------------------------------------------------ */

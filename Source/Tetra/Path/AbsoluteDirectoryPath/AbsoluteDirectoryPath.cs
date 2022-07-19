@@ -102,7 +102,9 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
    /* ------------------------------------------------------------ */
 
    public AbsoluteDirectoryPath Append(RelativeDirectoryPath path)
-      => null;
+      => Create(_volume,
+                _directories.Concat(path._directories)
+                            .ToArray());
 
    /* ------------------------------------------------------------ */
 
@@ -115,7 +117,11 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
    /* ------------------------------------------------------------ */
 
    public AbsoluteFilePath Append(RelativeFilePath path)
-      => null;
+      => AbsoluteFilePath
+        .Create(_volume,
+                _directories.Concat(path._directories)
+                            .ToArray(),
+                path._file);
 
    /* ------------------------------------------------------------ */
 
@@ -193,7 +199,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly IReadOnlyCollection<DirectoryComponent> _directories;
+   internal readonly IReadOnlyCollection<DirectoryComponent> _directories;
    private readonly string                                  _value;
    private readonly VolumeComponent                         _volume;
 

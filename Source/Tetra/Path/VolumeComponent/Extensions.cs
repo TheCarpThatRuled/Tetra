@@ -23,9 +23,11 @@ public static class VolumeComponent_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteDirectoryPath Append(this VolumeComponent                    volume,
+   public static AbsoluteDirectoryPath Append(this VolumeComponent  volume,
                                               RelativeDirectoryPath path)
-      => null;
+      => AbsoluteDirectoryPath
+        .Create(volume,
+                path._directories);
 
    /* ------------------------------------------------------------ */
 
@@ -35,6 +37,15 @@ public static class VolumeComponent_Extensions
         .Create(volume,
                 Array.Empty<DirectoryComponent>(),
                 file);
+
+   /* ------------------------------------------------------------ */
+
+   public static AbsoluteFilePath Append(this VolumeComponent volume,
+                                         RelativeFilePath     path)
+      => AbsoluteFilePath
+        .Create(volume,
+                path._directories,
+                path._file);
 
    /* ------------------------------------------------------------ */
 

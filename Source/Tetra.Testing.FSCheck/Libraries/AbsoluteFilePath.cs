@@ -26,6 +26,26 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
+   public sealed class AbsoluteFilePathAsComponents
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<(Tetra.VolumeComponent, Tetra.DirectoryComponent[], Tetra.FileComponent)> Type()
+         => Generators
+           .VolumeComponent()
+           .ZipValueTuples(Generators.ArrayOf(Generators.DirectoryComponent()),
+                           Generators.FileComponent())
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
    public sealed class ThreeUniqueAbsoluteFilePaths
    {
       /* ------------------------------------------------------------ */

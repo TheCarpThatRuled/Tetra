@@ -21,10 +21,10 @@ public class Create
    //WHEN
    //Create
    //THEN
-   //a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned
+   //an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_valid_path_with_a_volume_root_but_without_a_trailing_directory_separator_WHEN_Create_THEN_a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_valid_path_with_a_volume_root_but_without_a_trailing_directory_separator_WHEN_Create_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(string path)
       {
@@ -247,10 +247,10 @@ public class Create
    //WHEN
    //Create
    //THEN
-   //a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned
+   //an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_and_a_FileComponent_WHEN_Create_THEN_a_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_and_a_FileComponent_WHEN_Create_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(VolumeComponent          volume,
                                List<DirectoryComponent> directories,

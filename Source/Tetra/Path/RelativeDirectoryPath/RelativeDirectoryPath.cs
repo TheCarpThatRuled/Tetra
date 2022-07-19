@@ -119,6 +119,11 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
 
    /* ------------------------------------------------------------ */
 
+   public AbsoluteDirectoryPath Prepend(AbsoluteDirectoryPath path)
+      => null;
+
+   /* ------------------------------------------------------------ */
+
    public RelativeDirectoryPath Prepend(params DirectoryComponent[] directories)
       => new();
 
@@ -203,7 +208,7 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly IReadOnlyCollection<DirectoryComponent> _directories;
+   internal readonly IReadOnlyCollection<DirectoryComponent> _directories;
    private readonly string                                  _value;
 
    /* ------------------------------------------------------------ */

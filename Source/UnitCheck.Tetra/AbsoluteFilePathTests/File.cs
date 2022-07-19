@@ -16,14 +16,14 @@ public class File
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_AbsoluteFilePath
+   //an_AbsoluteFilePath
    //WHEN
    //File
    //THEN
    //a_FileComponent_containing_the_file_is_returned
 
    [TestMethod]
-   public void GIVEN_a_AbsoluteFilePath_WHEN_File_THEN_a_FileComponent_containing_the_File_is_returned()
+   public void GIVEN_an_AbsoluteFilePath_WHEN_File_THEN_a_FileComponent_containing_the_File_is_returned()
    {
       static Property Property(VolumeComponent      volume,
                                DirectoryComponent[] directories,

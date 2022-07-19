@@ -16,14 +16,14 @@ public class Parent
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_AbsoluteDirectoryPath_containing_just_a_volume
+   //an_AbsoluteDirectoryPath_containing_just_a_volume
    //WHEN
    //Parent
    //THEN
    //a_none_is_returned
 
    [TestMethod]
-   public void GIVEN_a_AbsoluteDirectoryPath_containing_just_a_volume_WHEN_Parent_THEN_a_none_is_returned()
+   public void GIVEN_an_AbsoluteDirectoryPath_containing_just_a_volume_WHEN_Parent_THEN_a_none_is_returned()
    {
       static Property Property(VolumeComponent volume)
       {
@@ -47,15 +47,15 @@ public class Parent
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_AbsoluteDirectoryPath_containing_a_volume_and_at_least_one_directory
+   //an_AbsoluteDirectoryPath_containing_a_volume_and_at_least_one_directory
    //WHEN
    //Parent
    //THEN
-   //a_some_containing_a_AbsoluteDirectoryPath_containing_the_parent_directory_is_returned
+   //a_some_containing_an_AbsoluteDirectoryPath_containing_the_parent_directory_is_returned
 
    [TestMethod]
    public void
-      GIVEN_a_AbsoluteDirectoryPath_containing_a_volume_and_at_least_one_directory_WHEN_Parent_THEN_a_some_containing_a_AbsoluteDirectoryPath_containing_the_parent_directory_is_returned()
+      GIVEN_an_AbsoluteDirectoryPath_containing_a_volume_and_at_least_one_directory_WHEN_Parent_THEN_a_some_containing_an_AbsoluteDirectoryPath_containing_the_parent_directory_is_returned()
    {
       static Property Property(VolumeComponent      volume,
                                DirectoryComponent[] directories)

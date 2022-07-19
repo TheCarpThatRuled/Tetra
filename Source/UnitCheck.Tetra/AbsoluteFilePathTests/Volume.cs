@@ -16,14 +16,14 @@ public class VolumeProperty
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_AbsoluteFilePath
+   //an_AbsoluteFilePath
    //WHEN
    //Volume
    //THEN
    //a_VolumeComponent_containing_the_volume_is_returned
 
    [TestMethod]
-   public void GIVEN_a_AbsoluteFilePath_WHEN_Volume_THEN_a_VolumeComponent_containing_the_volume_is_returned()
+   public void GIVEN_an_AbsoluteFilePath_WHEN_Volume_THEN_a_VolumeComponent_containing_the_volume_is_returned()
    {
       static Property Property(VolumeComponent      volume,
                                DirectoryComponent[] directories,

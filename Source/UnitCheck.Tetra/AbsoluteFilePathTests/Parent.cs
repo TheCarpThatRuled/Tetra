@@ -16,14 +16,14 @@ public class Parent
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_AbsoluteFilePath
+   //an_AbsoluteFilePath
    //WHEN
    //Parent
    //THEN
-   //a_AbsoluteDirectoryPath_containing_the_parent_directory_is_returned
+   //an_AbsoluteDirectoryPath_containing_the_parent_directory_is_returned
 
    [TestMethod]
-   public void GIVEN_a_AbsoluteFilePath_WHEN_Parent_THEN_a_AbsoluteDirectoryPath_containing_the_parent_directory_is_returned()
+   public void GIVEN_an_AbsoluteFilePath_WHEN_Parent_THEN_an_AbsoluteDirectoryPath_containing_the_parent_directory_is_returned()
    {
       static Property Property(VolumeComponent      volume,
                                DirectoryComponent[] directories,
