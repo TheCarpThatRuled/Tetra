@@ -30,9 +30,8 @@ public class ParseComponents
       // Constructor
       /* ------------------------------------------------------------ */
 
-      private TestPath(IReadOnlyCollection<DirectoryComponent> directories,
-                       VolumeComponent                         volume) : base(directories,
-                                                                              volume) { }
+      private TestPath() : base(null!,
+                                null!) { }
 
       /* ------------------------------------------------------------ */
    }
@@ -53,30 +52,24 @@ public class ParseComponents
    public void
       GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent      volume,
-                               DirectoryComponent[] directories)
+      static Property Property(TestAbsoluteDirectoryPath testPath)
       {
          //Arrange
-         var path = ExpectedPath.CombineWithoutTrailingDirectorySeparator(volume,
-                                                                          directories);
-
          //Act
-         var actual = TestPath.TestParseComponents(path,
+         var actual = TestPath.TestParseComponents(testPath.PathWithTrailingDirectorySeparator(),
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd(actualComponents => volume.Equals(actualComponents.Content()
-                                                                                .volume)
-                                               && directories.SequenceEqual(actualComponents
-                                                                           .Content()
-                                                                           .directories),
-                              actual);
+         return IsASuccessAnd(actualComponents => AreEqual(testPath,
+                                                           actualComponents.Content(),
+                                                           "ParseComponents"),
+                              actual,
+                              "ParseComponents");
       }
 
-      Arb.Register<Libraries.VolumeComponent>();
-      Arb.Register<Libraries.ArrayOfDirectoryComponents>();
+      Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
 
-      Prop.ForAll<VolumeComponent, DirectoryComponent[]>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -93,31 +86,24 @@ public class ParseComponents
    public void
       GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent      volume,
-                               DirectoryComponent[] directories)
+      static Property Property(TestAbsoluteDirectoryPath testPath)
       {
          //Arrange
-         var path = ExpectedPath.Combine(volume,
-                                         directories);
-
          //Act
-         var actual = TestPath.TestParseComponents(path,
+         var actual = TestPath.TestParseComponents(testPath.PathWithoutTrailingDirectorySeparator(),
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd(actualComponents => volume.Equals(actualComponents.Content()
-                                                                                .volume)
-                                               && directories.SequenceEqual(actualComponents
-                                                                           .Content()
-                                                                           .directories),
-                              actual);
+         return IsASuccessAnd(actualComponents => AreEqual(testPath,
+                                                           actualComponents.Content(),
+                                                           "ParseComponents"),
+                              actual,
+                              "ParseComponents");
       }
 
+      Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
 
-      Arb.Register<Libraries.VolumeComponent>();
-      Arb.Register<Libraries.ArrayOfDirectoryComponents>();
-
-      Prop.ForAll<VolumeComponent, DirectoryComponent[]>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

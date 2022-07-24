@@ -17,6 +17,7 @@ internal static class LocalCategories
    public const string Failure               = nameof(Tetra.Failure);
    public const string FileComponent         = nameof(Tetra.FileComponent);
    public const string Function              = nameof(Tetra.Function);
+   public const string IEnumerable           = nameof(System.Collections.IEnumerable);
    public const string IReadOnlyList         = nameof(IReadOnlyList);
    public const string Left                  = nameof(Left);
    public const string List                  = nameof(List);

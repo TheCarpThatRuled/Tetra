@@ -26,20 +26,21 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_Create_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestAbsoluteDirectoryPath testPath)
       {
          //Arrange
          //Act
-         var actual = AbsoluteDirectoryPath.Create(path);
+         var actual = AbsoluteDirectoryPath.Create(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual(path,
-                         actual.Value());
+         return AreEqual(testPath,
+                         actual,
+                         "Create");
       }
 
-      Arb.Register<Libraries.ValidPathWithAVolumeRootAndATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -55,20 +56,21 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Create_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestAbsoluteDirectoryPath testPath)
       {
          //Arrange
          //Act
-         var actual = AbsoluteDirectoryPath.Create(path);
+         var actual = AbsoluteDirectoryPath.Create(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual($"{path}{Path.DirectorySeparatorChar}",
-                         actual.Value());
+         return AreEqual(testPath,
+                         actual,
+                         "Create");
       }
 
-      Arb.Register<Libraries.ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -101,7 +103,7 @@ public class Create
       Assert.That
             .AnArgumentExceptionWasThrown(exception,
                                           ArgumentExceptionMessage(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
-                                                                                                                   HumanReadableName.AbsoluteDirectoryPath),
+                                                                                                                HumanReadableName.AbsoluteDirectoryPath),
                                                                    "potentialPath"));
    }
 
@@ -120,7 +122,7 @@ public class Create
       static Property Property(string path)
          => AnArgumentExceptionWasThrown(() => AbsoluteDirectoryPath.Create(path),
                                          IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                     HumanReadableName.AbsoluteDirectoryPath),
+                                                                                                  HumanReadableName.AbsoluteDirectoryPath),
                                          "potentialPath");
 
       Arb.Register<Libraries.ValidPathWithoutARoot>();
@@ -143,7 +145,7 @@ public class Create
       static Property Property(string path)
          => AnArgumentExceptionWasThrown(() => AbsoluteDirectoryPath.Create(path),
                                          IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                     HumanReadableName.AbsoluteDirectoryPath),
+                                                                                                  HumanReadableName.AbsoluteDirectoryPath),
                                          "potentialPath");
 
       Arb.Register<Libraries.PathWithAnInvalidVolumeRoot>();
@@ -167,7 +169,7 @@ public class Create
       static Property Property(string path)
          => AnArgumentExceptionWasThrown(() => AbsoluteDirectoryPath.Create(path),
                                          IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
-                                                                                                      HumanReadableName.AbsoluteDirectoryPath),
+                                                                                                   HumanReadableName.AbsoluteDirectoryPath),
                                          "potentialPath");
 
       Arb.Register<Libraries.PathWithAVolumeRootAndAnInvalidComponent>();
@@ -191,26 +193,22 @@ public class Create
    [TestMethod]
    public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_WHEN_Create_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent          volume,
-                               List<DirectoryComponent> directories)
+      static Property Property(TestAbsoluteDirectoryPath testPath)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(volume,
-                                             directories);
-
          //Act
-         var actual = AbsoluteDirectoryPath.Create(volume,
-                                                   directories);
+         var actual = AbsoluteDirectoryPath.Create(testPath.Volume(),
+                                                   testPath.Directories());
 
          //Assert
-         return AreEqual(expected,
-                         actual.Value());
+         return AreEqual(testPath,
+                         actual,
+                         "Create");
       }
 
-      Arb.Register<Libraries.VolumeComponent>();
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
+      Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
 
-      Prop.ForAll<VolumeComponent, List<DirectoryComponent>>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

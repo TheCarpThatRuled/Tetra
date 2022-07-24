@@ -16,6 +16,14 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
+   public static Gen<TestAbsoluteDirectoryPath> TestAbsoluteDirectoryPath()
+      => VolumeComponent()
+        .Combine(ArrayOf(DirectoryComponent()),
+                 Testing.TestAbsoluteDirectoryPath
+                        .Create);
+
+   /* ------------------------------------------------------------ */
+
    public static Gen<(AbsoluteDirectoryPath, AbsoluteDirectoryPath, AbsoluteDirectoryPath)> ThreeUniqueAbsoluteDirectoryPaths()
       => AbsoluteDirectoryPath()
         .ThreeValueTuples()

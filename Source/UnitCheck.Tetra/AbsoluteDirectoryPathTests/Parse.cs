@@ -25,25 +25,25 @@ public class Parse
    //a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void
-      GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestAbsoluteDirectoryPath testPath)
       {
          //Arrange
          //Act
-         var actual = AbsoluteDirectoryPath.Parse(path);
+         var actual = AbsoluteDirectoryPath.Parse(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd(actualPath => path
-                                         == actualPath.Content()
-                                                      .Value(),
-                              actual);
+         return IsASuccessAnd(actualPath => AreEqual(testPath,
+                                                     actualPath.Content(),
+                                                     "Parse"),
+                              actual,
+                              "Parse");
       }
 
-      Arb.Register<Libraries.ValidPathWithAVolumeRootAndATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -60,22 +60,23 @@ public class Parse
    public void
       GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestAbsoluteDirectoryPath testPath)
       {
          //Arrange
          //Act
-         var actual = AbsoluteDirectoryPath.Parse(path);
+         var actual = AbsoluteDirectoryPath.Parse(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd(actualPath => $"{path}{Path.DirectorySeparatorChar}"
-                                         == actualPath.Content()
-                                                      .Value(),
-                              actual);
+         return IsASuccessAnd(actualPath => AreEqual(testPath,
+                                                     actualPath.Content(),
+                                                     "Parse"),
+                              actual,
+                              "Parse");
       }
 
-      Arb.Register<Libraries.ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

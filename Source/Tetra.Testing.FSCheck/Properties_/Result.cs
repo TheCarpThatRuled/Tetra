@@ -111,12 +111,24 @@ partial class Properties
 
    public static Property IsASuccessAnd<T>(Func<Success<T>, bool> property,
                                            Result<T>              result,
-                                           string                 name)
+                                           string                 description)
       => result
-        .Reduce(failure => False(TheResultIsAFailure<T>(name,
+        .Reduce(failure => False(TheResultIsAFailure<T>(description,
                                                         failure.Content())),
                 actual => AsProperty(() => property(actual))
-                  .Label(Failed.Message(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(name),
+                  .Label(Failed.Message(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(description),
+                                        actual)));
+
+   /* ------------------------------------------------------------ */
+
+   public static Property IsASuccessAnd<T>(Func<Success<T>, Property> property,
+                                           Result<T>                  result,
+                                           string                     description)
+      => result
+        .Reduce(failure => False(TheResultIsAFailure<T>(description,
+                                                        failure.Content())),
+                actual => property(actual)
+                  .Label(Failed.Message(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(description),
                                         actual)));
 
    /* ------------------------------------------------------------ */

@@ -83,9 +83,16 @@ public static class Failed
 
    /* ------------------------------------------------------------ */
 
-   public static string ExpectedActual<T>(IReadOnlyCollection<T>? expected,
-                                          IReadOnlyCollection<T>? actual)
+   public static string ExpectedActual<T0, T1>(IReadOnlyCollection<T0>? expected,
+                                               IReadOnlyCollection<T1>? actual)
       => $"Expected:\n{FormatSequence(expected)}\nActual: {FormatSequence(actual)}";
+
+   /* ------------------------------------------------------------ */
+
+   public static string ExpectedActual<T0, T1>(IReadOnlyCollection<T0>? expected,
+                                               IReadOnlyCollection<T1>? actual,
+                                               string description)
+      => $"{description}; Expected:\n{FormatSequence(expected)}\nActual: {FormatSequence(actual)}";
 
    /* ------------------------------------------------------------ */
 

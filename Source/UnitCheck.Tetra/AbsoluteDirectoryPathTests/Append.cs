@@ -25,29 +25,27 @@ public class Append
    [TestMethod]
    public void GIVEN_an_AbsoluteDirectoryPath_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent      volume,
-                               DirectoryComponent[] initialDirectories,
+      static Property Property(TestAbsoluteDirectoryPath testPath,
                                DirectoryComponent[] directories)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(volume,
-                                             initialDirectories.Concat(directories));
+         var expected = testPath.Append(directories);
 
-         var path = AbsoluteDirectoryPath.Create(volume,
-                                                 initialDirectories);
+         var path = testPath.ToTetra();
 
          //Act
          var actual = path.Append(directories);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Append");
       }
 
-      Arb.Register<Libraries.VolumeComponent>();
+      Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
 
-      Prop.ForAll<VolumeComponent, DirectoryComponent[], DirectoryComponent[]>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath, DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -65,29 +63,27 @@ public class Append
    [TestMethod]
    public void GIVEN_an_AbsoluteDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent          volume,
-                               List<DirectoryComponent> initialDirectories,
-                               List<DirectoryComponent> directories)
+      static Property Property(TestAbsoluteDirectoryPath testPath,
+                               List<DirectoryComponent>  directories)
       {
          //Arrange
-         var path = AbsoluteDirectoryPath.Create(volume,
-                                                 initialDirectories);
+         var expected = testPath.Append(directories);
 
-         var expected = ExpectedPath.Combine(volume,
-                                             initialDirectories.Concat(directories));
+         var path = testPath.ToTetra();
 
          //Act
          var actual = path.Append(directories);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Append");
       }
 
-      Arb.Register<Libraries.VolumeComponent>();
+      Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
       Arb.Register<Libraries.ListOfDirectoryComponents>();
 
-      Prop.ForAll<VolumeComponent, List<DirectoryComponent>, List<DirectoryComponent>>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath, List<DirectoryComponent>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
