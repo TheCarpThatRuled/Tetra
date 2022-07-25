@@ -1,6 +1,5 @@
 ﻿using FsCheck;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
@@ -26,22 +25,22 @@ public class ToString
    [TestMethod]
    public void GIVEN_AbsoluteFilePath_WHEN_ToString_THEN_the_value_bounded_by_angle_brackets_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestAbsoluteFilePath testPath)
       {
          //Arrange
-         var absoluteFilePath = AbsoluteFilePath.Create(path);
+         var path = testPath.ToTetra();
 
          //Act
-         var actual = absoluteFilePath.ToString();
+         var actual = path.ToString();
 
          //Assert
-         return AreEqual($"<{path}>",
+         return AreEqual($"<{testPath.PathWithoutTrailingDirectorySeparator()}>",
                          actual);
       }
 
-      Arb.Register<Libraries.ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestAbsoluteFilePath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestAbsoluteFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

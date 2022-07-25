@@ -76,4 +76,15 @@ partial class Properties
                                         actual)));
 
    /* ------------------------------------------------------------ */
+
+   public static Property IsASomeAnd<T>(Func<T, Property> property,
+                                        Option<T>     option,
+                                        string        name)
+      => option
+        .Reduce(() => False(TheOptionIsANone<T>(name)),
+                actual => property(actual)
+                  .Label(Failed.Message(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(name),
+                                        actual)));
+
+   /* ------------------------------------------------------------ */
 }

@@ -61,8 +61,9 @@ public class Parent
                                DirectoryComponent[] directories)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(volume,
-                                             directories.SkipLast(1));
+         var expected = TestAbsoluteDirectoryPath.Create(volume,
+                                                         directories.SkipLast(1)
+                                                                    .ToArray());
 
          var path = AbsoluteDirectoryPath.Create(volume,
                                                  directories);
@@ -71,8 +72,11 @@ public class Parent
          var actual = path.Parent();
 
          //Assert
-         return IsASomeAnd(actualParent => expected == actualParent.Value(),
-                           actual);
+         return IsASomeAnd(actualParent => AreEqual(expected,
+                                                    actualParent,
+                                                    "Parent"),
+                           actual,
+                           "Parent");
       }
 
       Arb.Register<Libraries.VolumeComponent>();

@@ -25,33 +25,28 @@ public class Ancestry
    [TestMethod]
    public void GIVEN_an_AbsoluteFilePath_WHEN_Ancestry_THEN_a_sequence_of_AbsoluteDirectoryPaths_representing_each_node_from_the_root_to_the_parent_and_an_AbsoluteFilePath_representing_the_leaf_is_returned()
    {
-      static Property Property(VolumeComponent      volume,
-                               DirectoryComponent[] directories,
-                               FileComponent file)
+      static Property Property(TestAbsoluteFilePath testPath)
       {
          //Arrange
-         var expected = ExpectedPath.BuildAncestry(volume,
-                                                   directories);
+         var expected = testPath.ToAncestry();
 
-         var path = AbsoluteFilePath.Create(volume,
-                                            directories,
-                                            file);
+         var path = testPath.ToTetra();
 
          //Act
          var (actualAncestors, actualLeaf) = path.Ancestry();
 
          //Assert
          return AreSequenceEqual(expected,
-                                 actualAncestors)
-           .And(AreEqual(path,
-                         actualLeaf));
+                                 actualAncestors,
+               "Ancestry")
+           .And(AreEqual(testPath,
+                         actualLeaf,
+                         "Ancestry"));
       }
 
-      Arb.Register<Libraries.ArrayOfDirectoryComponents>();
-      Arb.Register<Libraries.FileComponent>();
-      Arb.Register<Libraries.VolumeComponent>();
+      Arb.Register<Libraries.TestAbsoluteFilePath>();
 
-      Prop.ForAll<VolumeComponent, DirectoryComponent[], FileComponent>(Property)
+      Prop.ForAll<TestAbsoluteFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

@@ -26,20 +26,21 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_path_with_a_volume_root_but_without_a_trailing_directory_separator_WHEN_Create_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestAbsoluteFilePath testPath)
       {
          //Arrange
          //Act
-         var actual = AbsoluteFilePath.Create(path);
+         var actual = AbsoluteFilePath.Create(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual(path,
-                         actual.Value());
+         return AreEqual(testPath,
+                         actual,
+                         "Create");
       }
 
-      Arb.Register<Libraries.ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestAbsoluteFilePath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestAbsoluteFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -55,7 +56,7 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_path_with_volume_root_and_a_trailing_directory_separator_WHEN_Create_THEN_an_ArgumentException_is_thrown()
    {
-      static Property Property(string path)
+      static Property Property(TestAbsoluteFilePath path)
       {
          //Arrange
          var exception = Option<Exception>.None();
@@ -63,7 +64,7 @@ public class Create
          //Act
          try
          {
-            AbsoluteFilePath.Create(path);
+            AbsoluteFilePath.Create(path.PathWithTrailingDirectorySeparator());
          }
          catch (Exception e)
          {
@@ -72,14 +73,14 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(path,
+                                             ArgumentExceptionMessage(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(path.PathWithTrailingDirectorySeparator(),
                                                                          HumanReadableName.AbsoluteFilePath),
                                                                       "potentialPath"));
       }
 
-      Arb.Register<Libraries.ValidPathWithAVolumeRootAndATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestAbsoluteFilePath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestAbsoluteFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -112,7 +113,7 @@ public class Create
       Assert.That
             .AnArgumentExceptionWasThrown(exception,
                                           ArgumentExceptionMessage(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
-                                                                                                                   HumanReadableName.AbsoluteFilePath),
+                                                                                                                HumanReadableName.AbsoluteFilePath),
                                                                    "potentialPath"));
    }
 
@@ -252,30 +253,23 @@ public class Create
    [TestMethod]
    public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_and_a_FileComponent_WHEN_Create_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent          volume,
-                               List<DirectoryComponent> directories,
-                               FileComponent            file)
+      static Property Property(TestAbsoluteFilePath testPath)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(volume,
-                                             directories,
-                                             file);
-
          //Act
-         var actual = AbsoluteFilePath.Create(volume,
-                                              directories,
-                                              file);
+         var actual = AbsoluteFilePath.Create(testPath.Volume(),
+                                              testPath.Directories(),
+                                              testPath.File());
 
          //Assert
-         return AreEqual(expected,
-                         actual.Value());
+         return AreEqual(testPath,
+                         actual,
+                         "Create");
       }
 
-      Arb.Register<Libraries.VolumeComponent>();
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
-      Arb.Register<Libraries.FileComponent>();
+      Arb.Register<Libraries.TestAbsoluteFilePath>();
 
-      Prop.ForAll<VolumeComponent, List<DirectoryComponent>, FileComponent>(Property)
+      Prop.ForAll<TestAbsoluteFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

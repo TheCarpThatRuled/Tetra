@@ -17,6 +17,15 @@ public static class TestAbsoluteDirectoryPath_Extensions
 
    /* ------------------------------------------------------------ */
 
+   public static TestAbsoluteFilePath Append(this TestAbsoluteDirectoryPath path,
+                                             FileComponent                  file)
+      => TestAbsoluteFilePath
+        .Create(path.Volume(),
+                path.Directories(),
+                file);
+
+   /* ------------------------------------------------------------ */
+
    public static IReadOnlyList<TestAbsoluteDirectoryPath> ToAncestry(this TestAbsoluteDirectoryPath path)
    {
       var directoryChains = new List<IEnumerable<DirectoryComponent>> {Array.Empty<DirectoryComponent>(),};

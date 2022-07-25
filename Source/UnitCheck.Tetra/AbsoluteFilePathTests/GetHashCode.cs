@@ -1,6 +1,5 @@
 ﻿using FsCheck;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
@@ -26,23 +25,23 @@ public class GetHashCode
    [TestMethod]
    public void GIVEN_AbsoluteFilePath_WHEN_GetHashCode_THEN_the_ordinal_ignore_case_hash_code_of_the_value_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestAbsoluteFilePath testPath)
       {
          //Arrange
-         var absoluteFilePath = AbsoluteFilePath.Create(path);
+         var path = testPath.ToTetra();
 
          //Act
-         var actual = absoluteFilePath.GetHashCode();
+         var actual = path.GetHashCode();
 
          //Assert
          return AreEqual(StringComparer.OrdinalIgnoreCase
-                                       .GetHashCode(path),
+                                       .GetHashCode(testPath.PathWithoutTrailingDirectorySeparator()),
                          actual);
       }
 
-      Arb.Register<Libraries.ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestAbsoluteFilePath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestAbsoluteFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

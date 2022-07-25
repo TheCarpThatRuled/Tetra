@@ -29,12 +29,10 @@ public class ParseComponents
       // Constructor
       /* ------------------------------------------------------------ */
 
-      private TestPath(IReadOnlyCollection<DirectoryComponent> directories,
-                       VolumeComponent                         volume,
-                       FileComponent                           file)
-         : base(directories,
-                file,
-                volume) { }
+      private TestPath()
+         : base(null,
+                null,
+                null) { }
 
       /* ------------------------------------------------------------ */
    }
@@ -55,37 +53,24 @@ public class ParseComponents
    public void
       GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_ParseComponents_THEN_a_success_containing_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent      volume,
-                               DirectoryComponent[] directories,
-                               FileComponent        file)
+      static Property Property(TestAbsoluteFilePath testPath)
       {
          //Arrange
-         var path = ExpectedPath.Combine(volume,
-                                         directories,
-                                         file);
-
          //Act
-         var actual = TestPath.TestParseComponents(path,
+         var actual = TestPath.TestParseComponents(testPath.PathWithoutTrailingDirectorySeparator(),
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd(actualComponents => volume.Equals(actualComponents
-                                                               .Content()
-                                                               .volume)
-                                               && directories.SequenceEqual(actualComponents
-                                                                           .Content()
-                                                                           .directories)
-                                               && file.Equals((actualComponents
-                                                              .Content()
-                                                              .file)),
-                              actual);
+         return IsASuccessAnd(actualComponents => AreEqual(testPath,
+                                                           actualComponents.Content(),
+                                                           "ParseComponents"),
+                              actual,
+                              "ParseComponents");
       }
 
-      Arb.Register<Libraries.ArrayOfDirectoryComponents>();
-      Arb.Register<Libraries.FileComponent>();
-      Arb.Register<Libraries.VolumeComponent>();
+      Arb.Register<Libraries.TestAbsoluteFilePath>();
 
-      Prop.ForAll<VolumeComponent, DirectoryComponent[], FileComponent>(Property)
+      Prop.ForAll<TestAbsoluteFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -102,22 +87,22 @@ public class ParseComponents
    public void
       GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_ParseComponents_THEN_a_success_containing_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestAbsoluteFilePath testPath)
       {
          //Arrange
          //Act
-         var actual = TestPath.TestParseComponents(path,
+         var actual = TestPath.TestParseComponents(testPath.PathWithTrailingDirectorySeparator(),
                                                    nameof(TestPath));
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(path,
-                                                                                                             nameof(TestPath))),
+         return IsAFailure(Message.Create(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(testPath.PathWithTrailingDirectorySeparator(),
+                                                                                                              nameof(TestPath))),
                            actual);
       }
 
-      Arb.Register<Libraries.ValidPathWithAVolumeRootAndATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestAbsoluteFilePath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestAbsoluteFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -141,7 +126,7 @@ public class ParseComponents
       //Assert
       Assert.That
             .IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
-                                                                                       nameof(TestPath))),
+                                                                                    nameof(TestPath))),
                         actual);
    }
 
@@ -166,7 +151,7 @@ public class ParseComponents
 
          //Assert
          return IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                      nameof(TestPath))),
+                                                                                                   nameof(TestPath))),
                            actual);
       }
 
@@ -197,7 +182,7 @@ public class ParseComponents
 
          //Assert
          return IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                      nameof(TestPath))),
+                                                                                                   nameof(TestPath))),
                            actual);
       }
 
@@ -228,7 +213,7 @@ public class ParseComponents
 
          //Assert
          return IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
-                                                                                                       nameof(TestPath))),
+                                                                                                    nameof(TestPath))),
                            actual);
       }
 

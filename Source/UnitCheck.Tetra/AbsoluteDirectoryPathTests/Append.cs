@@ -26,7 +26,7 @@ public class Append
    public void GIVEN_an_AbsoluteDirectoryPath_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(TestAbsoluteDirectoryPath testPath,
-                               DirectoryComponent[] directories)
+                               DirectoryComponent[]      directories)
       {
          //Arrange
          var expected = testPath.Append(directories);
@@ -101,30 +101,28 @@ public class Append
    [TestMethod]
    public void GIVEN_an_AbsoluteDirectoryPath_and_a_RelativeDirectoryPath_WHEN_Append_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent          volume,
-                               List<DirectoryComponent> initialDirectories,
+      static Property Property(TestAbsoluteDirectoryPath testPath,
                                List<DirectoryComponent> directories)
       {
          //Arrange
-         var path = AbsoluteDirectoryPath.Create(volume,
-                                                 initialDirectories);
-         var childPath = RelativeDirectoryPath.Create(directories);
+         var expected = testPath.Append(directories);
 
-         var expected = ExpectedPath.Combine(volume,
-                                             initialDirectories.Concat(directories));
+         var path = testPath.ToTetra();
+         var childPath = RelativeDirectoryPath.Create(directories);
 
          //Act
          var actual = path.Append(childPath);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Append");
       }
 
-      Arb.Register<Libraries.VolumeComponent>();
+      Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
       Arb.Register<Libraries.ListOfDirectoryComponents>();
 
-      Prop.ForAll<VolumeComponent, List<DirectoryComponent>, List<DirectoryComponent>>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath, List<DirectoryComponent>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -142,31 +140,27 @@ public class Append
    [TestMethod]
    public void GIVEN_an_AbsoluteDirectoryPath_and_a_FileComponent_WHEN_Append_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent          volume,
-                               List<DirectoryComponent> directories,
-                               FileComponent            file)
+      static Property Property(TestAbsoluteDirectoryPath testPath,
+                               FileComponent             file)
       {
          //Arrange
-         var path = AbsoluteDirectoryPath.Create(volume,
-                                                 directories);
+         var expected = testPath.Append(file);
 
-         var expected = ExpectedPath.Combine(volume,
-                                             directories,
-                                             file);
+         var path = testPath.ToTetra();
 
          //Act
          var actual = path.Append(file);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Append");
       }
 
-      Arb.Register<Libraries.VolumeComponent>();
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
       Arb.Register<Libraries.FileComponent>();
+      Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
 
-      Prop.ForAll<VolumeComponent, List<DirectoryComponent>, FileComponent>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath, FileComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -184,33 +178,33 @@ public class Append
    [TestMethod]
    public void GIVEN_an_AbsoluteDirectoryPath_and_a_RelativeFilePath_WHEN_Append_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent                                                         volume,
-                               (List<DirectoryComponent> initial, List<DirectoryComponent> additional) directories,
-                               FileComponent                                                           file)
+      static Property Property(TestAbsoluteDirectoryPath testPath,
+                               List<DirectoryComponent>  directories,
+                               FileComponent             file)
       {
          //Arrange
-         var path = AbsoluteDirectoryPath.Create(volume,
-                                                 directories.initial);
-         var childPath = RelativeFilePath.Create(directories.additional,
-                                                 file);
+         var expected = testPath
+                       .Append(directories)
+                       .Append(file);
 
-         var expected = ExpectedPath.Combine(volume,
-                                             directories.initial.Concat(directories.additional),
-                                             file);
+         var path = testPath.ToTetra();
+         var childPath = RelativeFilePath.Create(directories,
+                                                 file);
 
          //Act
          var actual = path.Append(childPath);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Append");
       }
 
       Arb.Register<Libraries.FileComponent>();
-      Arb.Register<Libraries.TwoListsOfDirectoryComponents>();
-      Arb.Register<Libraries.VolumeComponent>();
+      Arb.Register<Libraries.ListOfDirectoryComponents>();
+      Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
 
-      Prop.ForAll<VolumeComponent, (List<DirectoryComponent>, List<DirectoryComponent>), FileComponent>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath, List<DirectoryComponent>, FileComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 

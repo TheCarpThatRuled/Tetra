@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="TestAbsoluteFilePath\" />
     <Folder Include="TestRelativeDirectoryPath\" />
     <Folder Include="TestRelativeFilePath\" />
   </ItemGroup>

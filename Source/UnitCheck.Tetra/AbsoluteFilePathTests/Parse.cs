@@ -27,22 +27,23 @@ public class Parse
    public void
       GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestAbsoluteFilePath testPath)
       {
          //Arrange
          //Act
-         var actual = AbsoluteFilePath.Parse(path);
+         var actual = AbsoluteFilePath.Parse(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd(actualPath => path
-                                         == actualPath.Content()
-                                                      .Value(),
-                              actual);
+         return IsASuccessAnd(actualPath => AreEqual(testPath,
+                                                     actualPath.Content(),
+                                                     "Parse"),
+                              actual,
+                              "Parse");
       }
 
-      Arb.Register<Libraries.ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestAbsoluteFilePath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestAbsoluteFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -59,21 +60,21 @@ public class Parse
    public void
       GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_failure_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestAbsoluteFilePath testPath)
       {
          //Arrange
          //Act
-         var actual = AbsoluteFilePath.Parse(path);
+         var actual = AbsoluteFilePath.Parse(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(path,
+         return IsAFailure(Message.Create(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(testPath.PathWithTrailingDirectorySeparator(),
                                                                                                              HumanReadableName.AbsoluteFilePath)),
                            actual);
       }
 
-      Arb.Register<Libraries.ValidPathWithAVolumeRootAndATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestAbsoluteFilePath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestAbsoluteFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
