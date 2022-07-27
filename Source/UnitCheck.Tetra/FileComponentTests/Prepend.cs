@@ -30,7 +30,7 @@ public class Prepend
                                VolumeComponent volume)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(volume,
+         var expected = TestAbsoluteFilePath.Create(volume,
                                              Array.Empty<DirectoryComponent>(),
                                              file);
 
@@ -39,7 +39,8 @@ public class Prepend
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Prepend");
       }
 
       Arb.Register<Libraries.FileComponent>();

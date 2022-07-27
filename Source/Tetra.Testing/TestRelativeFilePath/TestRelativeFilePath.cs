@@ -1,22 +1,15 @@
 ﻿namespace Tetra.Testing;
 
-public sealed class TestAbsoluteDirectoryPath
+public sealed class TestRelativeFilePath
 {
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static TestAbsoluteDirectoryPath Create(VolumeComponent             volume,
-                                                  params DirectoryComponent[] directories)
+   public static TestRelativeFilePath Create(IReadOnlyCollection<DirectoryComponent> directories,
+                                             FileComponent                           file)
       => new(directories,
-             volume);
-
-   /* ------------------------------------------------------------ */
-
-   public static TestAbsoluteDirectoryPath Create(VolumeComponent                         volume,
-                                                  IReadOnlyCollection<DirectoryComponent> directories)
-      => new(directories,
-             volume);
+             file);
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -34,6 +27,11 @@ public sealed class TestAbsoluteDirectoryPath
 
    /* ------------------------------------------------------------ */
 
+   public FileComponent File()
+      => _file;
+
+   /* ------------------------------------------------------------ */
+
    public string PathWithoutTrailingDirectorySeparator()
       => _pathWithoutTrailingDirectorySeparator;
 
@@ -43,32 +41,27 @@ public sealed class TestAbsoluteDirectoryPath
       => _pathWithTrailingDirectorySeparator;
 
    /* ------------------------------------------------------------ */
-
-   public VolumeComponent Volume()
-      => _volume;
-
-   /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
    private readonly IReadOnlyCollection<DirectoryComponent> _directories;
+   private readonly FileComponent                           _file;
    private readonly string                                  _pathWithoutTrailingDirectorySeparator;
    private readonly string                                  _pathWithTrailingDirectorySeparator;
-   private readonly VolumeComponent                         _volume;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private TestAbsoluteDirectoryPath(IReadOnlyCollection<DirectoryComponent> directories,
-                                     VolumeComponent                         volume)
+   private TestRelativeFilePath(IReadOnlyCollection<DirectoryComponent> directories,
+                                FileComponent                           file)
    {
       _directories = directories;
-      _volume      = volume;
+      _file        = file;
 
       var path = directories
                 .Select(directory => directory.Value())
-                .Prepend(volume.Value())
+                .Append(file.Value())
                 .ToArray();
 
       _pathWithoutTrailingDirectorySeparator = path.ToDelimitedString(Path.DirectorySeparatorChar);

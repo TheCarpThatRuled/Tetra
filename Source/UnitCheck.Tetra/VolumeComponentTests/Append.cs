@@ -26,19 +26,20 @@ public class Append
    [TestMethod]
    public void GIVEN_a_VolumeComponent_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent      volume,
-                               DirectoryComponent[] directories)
+      static Property Property(VolumeComponent      parent,
+                               DirectoryComponent[] child)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(volume,
-                                             directories);
+         var expected = TestAbsoluteDirectoryPath.Create(parent,
+                                                         child);
 
          //Act
-         var actual = volume.Append(directories);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Append");
       }
 
       Arb.Register<Libraries.VolumeComponent>();
@@ -63,19 +64,20 @@ public class Append
    [TestMethod]
    public void GIVEN_a_VolumeComponent_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent          volume,
-                               List<DirectoryComponent> directories)
+      static Property Property(VolumeComponent          parent,
+                               List<DirectoryComponent> child)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(volume,
-                                             directories);
+         var expected = TestAbsoluteDirectoryPath.Create(parent,
+                                                         child);
 
          //Act
-         var actual = volume.Append(directories);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Append");
       }
 
       Arb.Register<Libraries.VolumeComponent>();
@@ -100,27 +102,28 @@ public class Append
    [TestMethod]
    public void GIVEN_a_VolumeComponent_and_a_RelativeDirectoryPath_WHEN_Append_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent          volume,
-                               List<DirectoryComponent> directories)
+      static Property Property(VolumeComponent           parent,
+                               TestRelativeDirectoryPath testChild)
       {
          //Arrange
-         var path = RelativeDirectoryPath.Create(directories);
+         var expected = TestAbsoluteDirectoryPath.Create(parent,
+                                                         testChild.Directories());
 
-         var expected = ExpectedPath.Combine(volume,
-                                             directories);
+         var child = testChild.ToTetra();
 
          //Act
-         var actual = volume.Append(path);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Append");
       }
 
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
       Arb.Register<Libraries.VolumeComponent>();
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
 
-      Prop.ForAll<VolumeComponent, List<DirectoryComponent>>(Property)
+      Prop.ForAll<VolumeComponent, TestRelativeDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -139,20 +142,21 @@ public class Append
    [TestMethod]
    public void GIVEN_a_VolumeComponent_and_a_FileComponent_WHEN_Append_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent volume,
-                               FileComponent   file)
+      static Property Property(VolumeComponent parent,
+                               FileComponent   child)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(volume,
-                                             Array.Empty<DirectoryComponent>(),
-                                             file);
+         var expected = TestAbsoluteFilePath.Create(parent,
+                                                    Array.Empty<DirectoryComponent>(),
+                                                    child);
 
          //Act
-         var actual = volume.Append(file);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Append");
       }
 
       Arb.Register<Libraries.VolumeComponent>();
@@ -177,31 +181,29 @@ public class Append
    [TestMethod]
    public void GIVEN_a_VolumeComponent_and_a_RelativeFilePath_WHEN_Append_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(VolumeComponent          volume,
-                               List<DirectoryComponent> directories,
-                               FileComponent            file)
+      static Property Property(VolumeComponent      parent,
+                               TestRelativeFilePath testChild)
       {
          //Arrange
-         var path = RelativeFilePath.Create(directories,
-                                            file);
+         var expected = TestAbsoluteFilePath.Create(parent,
+                                                    testChild.Directories(),
+                                                    testChild.File());
 
-         var expected = ExpectedPath.Combine(volume,
-                                             directories,
-                                             file);
+         var child = testChild.ToTetra();
 
          //Act
-         var actual = volume.Append(path);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Append");
       }
 
-      Arb.Register<Libraries.FileComponent>();
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
+      Arb.Register<Libraries.TestRelativeFilePath>();
       Arb.Register<Libraries.VolumeComponent>();
 
-      Prop.ForAll<VolumeComponent, List<DirectoryComponent>, FileComponent>(Property)
+      Prop.ForAll<VolumeComponent, TestRelativeFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

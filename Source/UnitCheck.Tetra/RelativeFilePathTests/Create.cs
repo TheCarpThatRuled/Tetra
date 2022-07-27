@@ -26,20 +26,21 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_path_without_a_root_or_a_trailing_directory_separator_WHEN_Create_THEN_a_RelativeFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestRelativeFilePath testPath)
       {
          //Arrange
          //Act
-         var actual = RelativeFilePath.Create(path);
+         var actual = RelativeFilePath.Create(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual(path,
-                         actual.Value());
+         return AreEqual(testPath,
+                         actual,
+                         "Create");
       }
 
-      Arb.Register<Libraries.ValidPathWithoutARootOrATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestRelativeFilePath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestRelativeFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -55,7 +56,7 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_path_without_a_root_but_with_a_trailing_directory_separator_WHEN_Create_THEN_an_ArgumentException_is_thrown()
    {
-      static Property Property(string path)
+      static Property Property(TestRelativeFilePath testPath)
       {
          //Arrange
          var exception = Option<Exception>.None();
@@ -63,7 +64,7 @@ public class Create
          //Act
          try
          {
-            RelativeFilePath.Create(path);
+            RelativeFilePath.Create(testPath.PathWithTrailingDirectorySeparator());
          }
          catch (Exception e)
          {
@@ -72,14 +73,15 @@ public class Create
 
          //Assert
          return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(path,
+                                             ArgumentExceptionMessage(IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(
+                                                                         testPath.PathWithTrailingDirectorySeparator(),
                                                                          HumanReadableName.RelativeFilePath),
                                                                       "potentialPath"));
       }
 
-      Arb.Register<Libraries.ValidPathWithoutARootButWithATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestRelativeFilePath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestRelativeFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -171,26 +173,22 @@ public class Create
    [TestMethod]
    public void GIVEN_a_sequence_of_DirectoryComponents_and_a_FileComponent_WHEN_Create_THEN_a_RelativeFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(List<DirectoryComponent> directories,
-                               FileComponent            file)
+      static Property Property(TestRelativeFilePath testPath)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(directories,
-                                             file);
-
          //Act
-         var actual = RelativeFilePath.Create(directories,
-                                              file);
+         var actual = RelativeFilePath.Create(testPath.Directories(),
+                                              testPath.File());
 
          //Assert
-         return AreEqual(expected,
-                         actual.Value());
+         return AreEqual(testPath,
+                         actual,
+                         "Create");
       }
 
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
-      Arb.Register<Libraries.FileComponent>();
+      Arb.Register<Libraries.TestRelativeFilePath>();
 
-      Prop.ForAll<List<DirectoryComponent>, FileComponent>(Property)
+      Prop.ForAll<TestRelativeFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

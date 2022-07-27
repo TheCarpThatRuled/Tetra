@@ -59,7 +59,9 @@ public class Parent
       static Property Property(DirectoryComponent[] directories)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(directories.SkipLast(1));
+         var expected = TestRelativeDirectoryPath.Create(directories
+                                                        .SkipLast(1)
+                                                        .ToArray());
 
          var path = RelativeDirectoryPath.Create(directories);
 
@@ -67,8 +69,11 @@ public class Parent
          var actual = path.Parent();
 
          //Assert
-         return IsASomeAnd(actualParent => expected == actualParent.Value(),
-                           actual);
+         return IsASomeAnd(actualParent => AreEqual(expected,
+                                                    actualParent,
+                                                    "Parent"),
+                           actual,
+                           "Parent");
       }
 
       Arb.Register<Libraries.ArrayOfAtLeastTwoDirectoryComponents>();

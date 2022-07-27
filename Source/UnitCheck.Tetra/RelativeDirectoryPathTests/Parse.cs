@@ -27,22 +27,23 @@ public class Parse
    public void
       GIVEN_a_valid_path_without_a_root_but_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_RelativeDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestRelativeDirectoryPath testPath)
       {
          //Arrange
          //Act
-         var actual = RelativeDirectoryPath.Parse(path);
+         var actual = RelativeDirectoryPath.Parse(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd(actualPath => path
-                                         == actualPath.Content()
-                                                      .Value(),
-                              actual);
+         return IsASuccessAnd(actualPath => AreEqual(testPath,
+                                                     actualPath.Content(),
+                                                     "Parse"),
+                              actual,
+                              "Parse");
       }
 
-      Arb.Register<Libraries.ValidPathWithoutARootButWithATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -59,22 +60,23 @@ public class Parse
    public void
       GIVEN_a_valid_path_without_a_root_or_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_RelativeDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestRelativeDirectoryPath testPath)
       {
          //Arrange
          //Act
-         var actual = RelativeDirectoryPath.Parse(path);
+         var actual = RelativeDirectoryPath.Parse(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd(actualPath => $"{path}{Path.DirectorySeparatorChar}"
-                                         == actualPath.Content()
-                                                      .Value(),
-                              actual);
+         return IsASuccessAnd(actualPath => AreEqual(testPath,
+                                                     actualPath.Content(),
+                                                     "Parse"),
+                              actual,
+                              "Parse");
       }
 
-      Arb.Register<Libraries.ValidPathWithoutARootOrATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

@@ -17,6 +17,24 @@ public static class TestAbsoluteDirectoryPath_Extensions
 
    /* ------------------------------------------------------------ */
 
+   public static TestAbsoluteDirectoryPath Append(this TestAbsoluteDirectoryPath parent,
+                                                  TestRelativeDirectoryPath      child)
+      => TestAbsoluteDirectoryPath
+        .Create(parent.Volume(),
+                parent.Directories()
+                      .Concat(child.Directories())
+                      .ToArray());
+
+   /* ------------------------------------------------------------ */
+
+   public static TestAbsoluteFilePath Append(this TestAbsoluteDirectoryPath parent,
+                                             TestRelativeFilePath           child)
+      => parent
+        .Append(child.Directories())
+        .Append(child.File());
+
+   /* ------------------------------------------------------------ */
+
    public static TestAbsoluteFilePath Append(this TestAbsoluteDirectoryPath path,
                                              FileComponent                  file)
       => TestAbsoluteFilePath

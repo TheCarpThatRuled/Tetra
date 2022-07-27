@@ -26,22 +26,22 @@ public class ToString
    [TestMethod]
    public void GIVEN_RelativeDirectoryPath_WHEN_ToString_THEN_the_value_bounded_by_angle_brackets_is_returned()
    {
-      static Property Property(string sourcePath)
+      static Property Property(TestRelativeDirectoryPath testPath)
       {
          //Arrange
-         var path = RelativeDirectoryPath.Create(sourcePath);
+         var path = testPath.ToTetra();
 
          //Act
          var actual = path.ToString();
 
          //Assert
-         return AreEqual($"<{sourcePath}>",
+         return AreEqual($"<{testPath.PathWithTrailingDirectorySeparator()}>",
                          actual);
       }
 
-      Arb.Register<Libraries.ValidPathWithoutARootButWithATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

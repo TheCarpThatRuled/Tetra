@@ -26,20 +26,21 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_path_without_a_root_but_with_a_trailing_directory_separator_WHEN_Create_THEN_a_RelativeDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestRelativeDirectoryPath testPath)
       {
          //Arrange
          //Act
-         var actual = RelativeDirectoryPath.Create(path);
+         var actual = RelativeDirectoryPath.Create(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual(path,
-                         actual.Value());
+         return AreEqual(testPath,
+                         actual,
+                         "Create");
       }
 
-      Arb.Register<Libraries.ValidPathWithoutARootButWithATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -55,20 +56,21 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_path_without_a_root_or_a_trailing_directory_separator_WHEN_Create_THEN_a_RelativeDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestRelativeDirectoryPath testPath)
       {
          //Arrange
          //Act
-         var actual = RelativeDirectoryPath.Create(path);
+         var actual = RelativeDirectoryPath.Create(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual($"{path}{Path.DirectorySeparatorChar}",
-                         actual.Value());
+         return AreEqual(testPath,
+                         actual,
+                         "Create");
       }
 
-      Arb.Register<Libraries.ValidPathWithoutARootOrATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -146,14 +148,15 @@ public class Create
       static Property Property(DirectoryComponent[] directories)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(directories);
+         var expected = TestRelativeDirectoryPath.Create(directories);
 
          //Act
          var actual = RelativeDirectoryPath.Create(directories);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Create");
       }
 
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
@@ -161,8 +164,6 @@ public class Create
       Prop.ForAll<DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
    }
-
-   /* ------------------------------------------------------------ */
 
    /* ------------------------------------------------------------ */
    // public static RelativeDirectoryPath Create(IReadOnlyCollection<DirectoryComponent> directories)
@@ -181,14 +182,15 @@ public class Create
       static Property Property(List<DirectoryComponent> directories)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(directories);
+         var expected = TestRelativeDirectoryPath.Create(directories);
 
          //Act
          var actual = RelativeDirectoryPath.Create(directories);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Create");
       }
 
       Arb.Register<Libraries.ListOfDirectoryComponents>();

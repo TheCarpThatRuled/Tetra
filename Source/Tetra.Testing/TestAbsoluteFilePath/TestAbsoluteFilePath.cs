@@ -10,8 +10,8 @@ public sealed class TestAbsoluteFilePath
                                              IReadOnlyCollection<DirectoryComponent> directories,
                                              FileComponent                           file)
       => new(directories,
-             volume,
-             file);
+             file,
+             volume);
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -62,12 +62,12 @@ public sealed class TestAbsoluteFilePath
    /* ------------------------------------------------------------ */
 
    private TestAbsoluteFilePath(IReadOnlyCollection<DirectoryComponent> directories,
-                                VolumeComponent                         volume,
-                                FileComponent                           file)
+                                FileComponent                           file,
+                                VolumeComponent                         volume)
    {
-      _volume      = volume;
-      _file        = file;
       _directories = directories;
+      _file        = file;
+      _volume      = volume;
 
       var path = directories
                 .Select(directory => directory.Value())

@@ -44,31 +44,24 @@ public class ParseComponents
    public void
       GIVEN_a_valid_path_without_a_root_or_a_trailing_directory_separator_WHEN_ParseComponents_THEN_a_success_containing_RelativeFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(DirectoryComponent[] directories,
-                               FileComponent        file)
+      static Property Property(TestRelativeFilePath testPath)
       {
          //Arrange
-         var path = ExpectedPath.Combine(directories,
-                                         file);
-
          //Act
-         var actual = TestPath.TestParseComponents(path,
+         var actual = TestPath.TestParseComponents(testPath.PathWithoutTrailingDirectorySeparator(),
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd(actualComponents => directories.SequenceEqual(actualComponents
-                                                                           .Content()
-                                                                           .directories)
-                                               && file.Equals(actualComponents
-                                                             .Content()
-                                                             .file),
-                              actual);
+         return IsASuccessAnd(actualComponents => AreEqual(testPath,
+                                                           actualComponents.Content(),
+                                                           "ParseComponents"),
+                              actual,
+                              "ParseComponents");
       }
 
-      Arb.Register<Libraries.ArrayOfDirectoryComponents>();
-      Arb.Register<Libraries.FileComponent>();
+      Arb.Register<Libraries.TestRelativeFilePath>();
 
-      Prop.ForAll<DirectoryComponent[], FileComponent>(Property)
+      Prop.ForAll<TestRelativeFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

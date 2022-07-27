@@ -101,17 +101,17 @@ public class Append
    [TestMethod]
    public void GIVEN_an_AbsoluteDirectoryPath_and_a_RelativeDirectoryPath_WHEN_Append_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(TestAbsoluteDirectoryPath testPath,
-                               List<DirectoryComponent> directories)
+      static Property Property(TestAbsoluteDirectoryPath testParentPath,
+                               TestRelativeDirectoryPath testChildPath)
       {
          //Arrange
-         var expected = testPath.Append(directories);
+         var expected = testParentPath.Append(testChildPath);
 
-         var path = testPath.ToTetra();
-         var childPath = RelativeDirectoryPath.Create(directories);
+         var parentPath = testParentPath.ToTetra();
+         var childPath  = testChildPath.ToTetra();
 
          //Act
-         var actual = path.Append(childPath);
+         var actual = parentPath.Append(childPath);
 
          //Assert
          return AreEqual(expected,
@@ -120,9 +120,9 @@ public class Append
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<TestAbsoluteDirectoryPath, List<DirectoryComponent>>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath, TestRelativeDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -178,21 +178,17 @@ public class Append
    [TestMethod]
    public void GIVEN_an_AbsoluteDirectoryPath_and_a_RelativeFilePath_WHEN_Append_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(TestAbsoluteDirectoryPath testPath,
-                               List<DirectoryComponent>  directories,
-                               FileComponent             file)
+      static Property Property(TestAbsoluteDirectoryPath testParentPath,
+                               TestRelativeFilePath      testChildPath)
       {
          //Arrange
-         var expected = testPath
-                       .Append(directories)
-                       .Append(file);
+         var expected = testParentPath.Append(testChildPath);
 
-         var path = testPath.ToTetra();
-         var childPath = RelativeFilePath.Create(directories,
-                                                 file);
+         var parentPath = testParentPath.ToTetra();
+         var childPath  = testChildPath.ToTetra();
 
          //Act
-         var actual = path.Append(childPath);
+         var actual = parentPath.Append(childPath);
 
          //Assert
          return AreEqual(expected,
@@ -200,11 +196,10 @@ public class Append
                          "Append");
       }
 
-      Arb.Register<Libraries.FileComponent>();
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
+      Arb.Register<Libraries.TestRelativeFilePath>();
 
-      Prop.ForAll<TestAbsoluteDirectoryPath, List<DirectoryComponent>, FileComponent>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath, TestRelativeFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

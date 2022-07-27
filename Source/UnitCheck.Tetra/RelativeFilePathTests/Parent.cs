@@ -60,7 +60,7 @@ public class Parent
                                FileComponent        file)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(directories);
+         var expected = TestRelativeDirectoryPath.Create(directories);
 
          var path = RelativeFilePath.Create(directories,
                                             file);
@@ -69,8 +69,11 @@ public class Parent
          var actual = path.Parent();
 
          //Assert
-         return IsASomeAnd(actualParent => expected == actualParent.Value(),
-                           actual);
+         return IsASomeAnd(actualParent => AreEqual(expected,
+                                                    actualParent,
+                                                    "Parent"),
+                           actual,
+                           "Parent");
       }
 
       Arb.Register<Libraries.NonEmptyArrayOfDirectoryComponents>();

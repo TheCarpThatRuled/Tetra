@@ -25,29 +25,27 @@ public class Prepend
    [TestMethod]
    public void GIVEN_a_RelativeFilePath_and_an_Array_of_DirectoryComponents_WHEN_Prepend_THEN_a_RelativeFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property((DirectoryComponent[] directories,
-                                  FileComponent file) relativeFilePath,
-                               DirectoryComponent[] directories)
+      static Property Property(TestRelativeFilePath testChild,
+                               DirectoryComponent[] parent)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(directories.Concat(relativeFilePath.directories),
-                                             relativeFilePath.file);
+         var expected = testChild.Prepend(parent);
 
-         var path = RelativeFilePath.Create(relativeFilePath.directories,
-                                            relativeFilePath.file);
+         var child = testChild.ToTetra();
 
          //Act
-         var actual = path.Prepend(directories);
+         var actual = child.Prepend(parent);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Prepend");
       }
 
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
-      Arb.Register<Libraries.RelativeFilePathAsComponents>();
+      Arb.Register<Libraries.TestRelativeFilePath>();
 
-      Prop.ForAll<(DirectoryComponent[], FileComponent), DirectoryComponent[]>(Property)
+      Prop.ForAll<TestRelativeFilePath, DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -65,29 +63,27 @@ public class Prepend
    [TestMethod]
    public void GIVEN_a_RelativeFilePath_and_a_sequence_of_DirectoryComponents_WHEN_Prepend_THEN_a_RelativeFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property((DirectoryComponent[] directories,
-                                  FileComponent file) relativeFilePath,
-                               List<DirectoryComponent> directories)
+      static Property Property(TestRelativeFilePath     testChild,
+                               List<DirectoryComponent> parent)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(directories.Concat(relativeFilePath.directories),
-                                             relativeFilePath.file);
+         var expected = testChild.Prepend(parent);
 
-         var path = RelativeFilePath.Create(relativeFilePath.directories,
-                                            relativeFilePath.file);
+         var child = testChild.ToTetra();
 
          //Act
-         var actual = path.Prepend(directories);
+         var actual = child.Prepend(parent);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Prepend");
       }
 
       Arb.Register<Libraries.ListOfDirectoryComponents>();
-      Arb.Register<Libraries.RelativeFilePathAsComponents>();
+      Arb.Register<Libraries.TestRelativeFilePath>();
 
-      Prop.ForAll<(DirectoryComponent[], FileComponent), List<DirectoryComponent>>(Property)
+      Prop.ForAll<TestRelativeFilePath, List<DirectoryComponent>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -105,31 +101,28 @@ public class Prepend
    [TestMethod]
    public void GIVEN_a_RelativeFilePath_and_a_RelativeDirectoryPath_WHEN_Prepend_THEN_a_RelativeFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property((DirectoryComponent[] directories,
-                                  FileComponent file) relativeFilePath,
-                               List<DirectoryComponent> directories)
+      static Property Property(TestRelativeFilePath      testChild,
+                               TestRelativeDirectoryPath testParent)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(directories.Concat(relativeFilePath.directories),
-                                             relativeFilePath.file);
+         var expected = testChild.Prepend(testParent);
 
-         var initialPath = RelativeFilePath.Create(relativeFilePath.directories,
-                                                   relativeFilePath.file);
-
-         var path = RelativeDirectoryPath.Create(directories);
+         var child  = testChild.ToTetra();
+         var parent = testParent.ToTetra();
 
          //Act
-         var actual = initialPath.Prepend(path);
+         var actual = child.Prepend(parent);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Prepend");
       }
 
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
-      Arb.Register<Libraries.RelativeFilePathAsComponents>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
+      Arb.Register<Libraries.TestRelativeFilePath>();
 
-      Prop.ForAll<(DirectoryComponent[], FileComponent), List<DirectoryComponent>>(Property)
+      Prop.ForAll<TestRelativeFilePath, TestRelativeDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -147,30 +140,27 @@ public class Prepend
    [TestMethod]
    public void GIVEN_a_RelativeFilePath_and_a_VolumeComponent_WHEN_Prepend_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property((DirectoryComponent[] directories,
-                                  FileComponent file) relativeFilePath,
-                               VolumeComponent      volume)
+      static Property Property(TestRelativeFilePath testChild,
+                               VolumeComponent      parent)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(volume,
-                                             relativeFilePath.directories,
-                                             relativeFilePath.file);
+         var expected = testChild.Prepend(parent);
 
-         var path = RelativeFilePath.Create(relativeFilePath.directories,
-                                            relativeFilePath.file);
+         var child = testChild.ToTetra();
 
          //Act
-         var actual = path.Prepend(volume);
+         var actual = child.Prepend(parent);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Parse");
       }
 
-      Arb.Register<Libraries.RelativeFilePathAsComponents>();
+      Arb.Register<Libraries.TestRelativeFilePath>();
       Arb.Register<Libraries.VolumeComponent>();
 
-      Prop.ForAll<(DirectoryComponent[], FileComponent), VolumeComponent>(Property)
+      Prop.ForAll<TestRelativeFilePath, VolumeComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -188,34 +178,28 @@ public class Prepend
    [TestMethod]
    public void GIVEN_a_RelativeFilePath_and_a_AbsoluteDirectoryPath_WHEN_Prepend_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property((DirectoryComponent[] directories,
-                                  FileComponent file) relativeFilePath,
-                               (VolumeComponent volume,
-                                  DirectoryComponent[] directories) absoluteDirectoryPath)
+      static Property Property(TestRelativeFilePath      testChild,
+                               TestAbsoluteDirectoryPath testParent)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(absoluteDirectoryPath.volume,
-                                             absoluteDirectoryPath.directories
-                                                                  .Concat(relativeFilePath.directories),
-                                             relativeFilePath.file);
+         var expected = testChild.Prepend(testParent);
 
-         var child = RelativeFilePath.Create(relativeFilePath.directories,
-                                             relativeFilePath.file);
-         var parent = AbsoluteDirectoryPath.Create(absoluteDirectoryPath.volume,
-                                                   absoluteDirectoryPath.directories);
+         var child  = testChild.ToTetra();
+         var parent = testParent.ToTetra();
 
          //Act
          var actual = child.Prepend(parent);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Parse");
       }
 
-      Arb.Register<Libraries.RelativeFilePathAsComponents>();
-      Arb.Register<Libraries.AbsoluteDirectoryPathAsComponents>();
+      Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
+      Arb.Register<Libraries.TestRelativeFilePath>();
 
-      Prop.ForAll<(DirectoryComponent[], FileComponent), (VolumeComponent, DirectoryComponent[])>(Property)
+      Prop.ForAll<TestRelativeFilePath, TestAbsoluteDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

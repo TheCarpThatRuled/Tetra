@@ -27,22 +27,23 @@ public class Parse
    public void
       GIVEN_a_valid_path_without_a_root_or_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_RelativeFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestRelativeFilePath testPath)
       {
          //Arrange
          //Act
-         var actual = RelativeFilePath.Parse(path);
+         var actual = RelativeFilePath.Parse(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd(actualPath => path
-                                         == actualPath.Content()
-                                                      .Value(),
-                              actual);
+         return IsASuccessAnd(actualPath => AreEqual(testPath,
+                                                     actualPath.Content(),
+                                                     "Parse"),
+                              actual,
+                              "Parse");
       }
 
-      Arb.Register<Libraries.ValidPathWithoutARootOrATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestRelativeFilePath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestRelativeFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -59,21 +60,21 @@ public class Parse
    public void
       GIVEN_a_valid_path_without_a_root_but_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_failure_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestRelativeFilePath testPath)
       {
          //Arrange
          //Act
-         var actual = RelativeFilePath.Parse(path);
+         var actual = RelativeFilePath.Parse(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(path,
+         return IsAFailure(Message.Create(IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(testPath.PathWithTrailingDirectorySeparator(),
                                                                                                              HumanReadableName.RelativeFilePath)),
                            actual);
       }
 
-      Arb.Register<Libraries.ValidPathWithoutARootButWithATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestRelativeFilePath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestRelativeFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

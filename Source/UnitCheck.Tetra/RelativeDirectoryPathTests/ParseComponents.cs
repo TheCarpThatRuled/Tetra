@@ -22,7 +22,7 @@ public class ParseComponents
       /* ------------------------------------------------------------ */
 
       public static Result<IReadOnlyCollection<DirectoryComponent>> TestParseComponents(string potentialPath,
-         string                                                                         pathType)
+                                                                                        string pathType)
          => ParseComponents(potentialPath,
                             pathType);
 
@@ -45,24 +45,24 @@ public class ParseComponents
    public void
       GIVEN_a_valid_path_without_a_root_but_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_RelativeDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(DirectoryComponent[] directories)
+      static Property Property(TestRelativeDirectoryPath testPath)
       {
          //Arrange
-         var path = ExpectedPath.Combine(directories);
-
          //Act
-         var actual = TestPath.TestParseComponents(path,
+         var actual = TestPath.TestParseComponents(testPath.PathWithTrailingDirectorySeparator(),
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd(actualComponents => directories.SequenceEqual(actualComponents
-                                                                           .Content()),
-                              actual);
+         return IsASuccessAnd(actualComponents => AreEqual(testPath,
+                                                           actualComponents.Content(),
+                                                           "ParseComponents"),
+                              actual,
+                              "ParseComponents");
       }
       
-      Arb.Register<Libraries.NonEmptyArrayOfDirectoryComponents>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<DirectoryComponent[]>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -79,25 +79,25 @@ public class ParseComponents
    public void
       GIVEN_a_valid_path_without_a_root_or_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_RelativeDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(DirectoryComponent[] directories)
+      static Property Property(TestRelativeDirectoryPath testPath)
       {
          //Arrange
-         var path = ExpectedPath.CombineWithoutTrailingDirectorySeparator(directories);
-
          //Act
-         var actual = TestPath.TestParseComponents(path,
+         var actual = TestPath.TestParseComponents(testPath.PathWithoutTrailingDirectorySeparator(),
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd(actualComponents => directories.SequenceEqual(actualComponents
-                                                                           .Content()),
-                              actual);
+         return IsASuccessAnd(actualComponents => AreEqual(testPath,
+                                                           actualComponents.Content(),
+                                                           "ParseComponents"),
+                              actual,
+                              "ParseComponents");
       }
 
       
-      Arb.Register<Libraries.NonEmptyArrayOfDirectoryComponents>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<DirectoryComponent[]>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

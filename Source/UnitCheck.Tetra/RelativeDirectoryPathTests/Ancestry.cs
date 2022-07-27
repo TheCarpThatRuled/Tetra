@@ -25,22 +25,25 @@ public class Ancestry
    [TestMethod]
    public void GIVEN_a_RelativeDirectoryPath_WHEN_Ancestry_THEN_a_sequence_of_RelativeDirectoryPaths_representing_each_node_from_the_root_to_the_leaf_is_returned()
    {
-      static Property Property(DirectoryComponent[] directories)
+      static Property Property(TestRelativeDirectoryPath testPath)
       {
          //Arrange
-         var expected = ExpectedPath.BuildAncestry(directories);
+         var expected = testPath.ToAncestry();
+
+         var path = testPath.ToTetra();
 
          //Act
-         var actual = expected[^1].Ancestry();
+         var actual = path.Ancestry();
 
          //Assert
          return AreSequenceEqual(expected,
-                                 actual);
+                                 actual,
+                                 "Ancestry");
       }
 
-      Arb.Register<Libraries.NonEmptyArrayOfDirectoryComponents>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<DirectoryComponent[]>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

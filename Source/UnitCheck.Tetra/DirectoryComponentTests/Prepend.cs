@@ -26,19 +26,20 @@ public class Prepend
    [TestMethod]
    public void GIVEN_a_Directory_and_a_VolumeComponent_WHEN_Prepend_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(DirectoryComponent directory,
-                               VolumeComponent    volume)
+      static Property Property(DirectoryComponent child,
+                               VolumeComponent    parent)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(volume,
-                                             new[] {directory});
+         var expected = TestAbsoluteDirectoryPath.Create(parent,
+                                                         child);
 
          //Act
-         var actual = directory.Prepend(volume);
+         var actual = child.Prepend(parent);
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Prepend");
       }
 
       Arb.Register<Libraries.DirectoryComponent>();

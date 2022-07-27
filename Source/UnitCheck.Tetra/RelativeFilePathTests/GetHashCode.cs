@@ -26,23 +26,23 @@ public class GetHashCode
    [TestMethod]
    public void GIVEN_RelativeFilePath_WHEN_GetHashCode_THEN_the_ordinal_ignore_case_hash_code_of_the_value_is_returned()
    {
-      static Property Property(string path)
+      static Property Property(TestRelativeFilePath testPath)
       {
          //Arrange
-         var relativeFilePath = RelativeFilePath.Create(path);
+         var path = testPath.ToTetra();
 
          //Act
-         var actual = relativeFilePath.GetHashCode();
+         var actual = path.GetHashCode();
 
          //Assert
          return AreEqual(StringComparer.OrdinalIgnoreCase
-                                       .GetHashCode(path),
+                                       .GetHashCode(testPath.PathWithoutTrailingDirectorySeparator()),
                          actual);
       }
 
-      Arb.Register<Libraries.ValidPathWithoutARootOrATrailingDirectorySeparator>();
+      Arb.Register<Libraries.TestRelativeFilePath>();
 
-      Prop.ForAll<string>(Property)
+      Prop.ForAll<TestRelativeFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

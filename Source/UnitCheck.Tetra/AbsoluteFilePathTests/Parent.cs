@@ -30,8 +30,8 @@ public class Parent
                                FileComponent        file)
       {
          //Arrange
-         var expected = ExpectedPath.Combine(volume,
-                                             directories);
+         var expected = TestAbsoluteDirectoryPath.Create(volume,
+                                                         directories);
 
          var path = AbsoluteFilePath.Create(volume,
                                             directories,
@@ -42,7 +42,8 @@ public class Parent
 
          //Assert
          return AreEqual(expected,
-                         actual.Value());
+                         actual,
+                         "Parent");
       }
 
       Arb.Register<Libraries.VolumeComponent>();
