@@ -34,7 +34,8 @@ public class False_Reduce
 
       //Assert
       Assert.That
-            .IsFalse(actual);
+            .IsFalse("Return value",
+                     actual);
    }
 
    /* ------------------------------------------------------------ */

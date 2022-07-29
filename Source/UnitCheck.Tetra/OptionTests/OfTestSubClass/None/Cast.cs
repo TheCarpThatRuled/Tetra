@@ -32,7 +32,8 @@ public class None_Cast
 
       //Assert
       Assert.That
-            .IsANone(actual);
+            .IsANone("Return value",
+                     actual);
    }
 
    /* ------------------------------------------------------------ */
@@ -55,7 +56,8 @@ public class None_Cast
 
       //Assert
       Assert.That
-            .IsANone(actual);
+            .IsANone("Return value",
+                     actual);
    }
 
    /* ------------------------------------------------------------ */
@@ -78,7 +80,8 @@ public class None_Cast
 
       //Assert
       Assert.That
-            .IsANone(actual);
+            .IsANone("Return value",
+                     actual);
    }
 
    /* ------------------------------------------------------------ */
@@ -101,7 +104,8 @@ public class None_Cast
 
       //Assert
       Assert.That
-            .IsANone(actual);
+            .IsANone("Return value",
+                     actual);
    }
 
    /* ------------------------------------------------------------ */

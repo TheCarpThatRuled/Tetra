@@ -29,7 +29,8 @@ public class NoneFactory
 
       //Assert
       Assert.That
-            .IsANone(actual);
+            .IsANone("Return value",
+                     actual);
    }
    /* ------------------------------------------------------------ */
 }

@@ -60,11 +60,11 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd(actualComponents => AreEqual(testPath,
-                                                           actualComponents.Content(),
-                                                           "ParseComponents"),
-                              actual,
-                              "ParseComponents");
+         return IsASuccessAnd("ParseComponents",
+                              actualComponents => AreEqual("ParseComponents",
+                                                           testPath,
+                                                           ((VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories)) actualComponents.Content()),
+                              actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
@@ -94,11 +94,11 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd(actualComponents => AreEqual(testPath,
-                                                           actualComponents.Content(),
-                                                           "ParseComponents"),
-                              actual,
-                              "ParseComponents");
+         return IsASuccessAnd("ParseComponents",
+                              actualComponents => AreEqual("ParseComponents",
+                                                           testPath,
+                                                           ((VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories)) actualComponents.Content()),
+                              actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
@@ -126,8 +126,9 @@ public class ParseComponents
 
       //Assert
       Assert.That
-            .IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
-                                                                                       nameof(TestPath))),
+            .IsAFailure("ParseComponents",
+                        Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
+                                                                                    nameof(TestPath))),
                         actual);
    }
 

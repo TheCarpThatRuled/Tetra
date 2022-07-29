@@ -16,11 +16,11 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsANone(Error  error,
-                                  string name)
+   public static Property IsANone(string description,
+                                  Error  error)
       => AsProperty(() => error.Reduce(Function.True,
                                        Function.False))
-        .Label(TheErrorIsASome(name));
+        .Label(TheErrorIsASome(description));
 
    /* ------------------------------------------------------------ */
 

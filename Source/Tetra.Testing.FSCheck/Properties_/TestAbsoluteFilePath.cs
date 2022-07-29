@@ -9,9 +9,9 @@ partial class Properties
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static Property AreEqual(TestAbsoluteFilePath expected,
-                                   AbsoluteFilePath     actual,
-                                   string               description)
+   public static Property AreEqual(string               description,
+                                   TestAbsoluteFilePath expected,
+                                   AbsoluteFilePath     actual)
       => AreEqual($"{description} - Value() returns an unexpected value",
                   expected.PathWithoutTrailingDirectorySeparator(),
                   actual.Value())
@@ -24,39 +24,43 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreEqual(TestAbsoluteFilePath                                                                              expected,
-                                   (VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories, FileComponent file) actual,
-                                   string                                                                                            description)
+   public static Property AreEqual(string                                                                                            description,
+                                   TestAbsoluteFilePath                                                                              expected,
+                                   (VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories, FileComponent file) actual)
       => AreEqual($"{description} - the volumes do not match",
                   expected.Volume(),
                   actual.volume)
-        .And(AreSequenceEqual(expected.Directories(),
-                              actual.directories,
-                              $"{description} - directories"))
+        .And(AreSequenceEqual($"{description} - directories",
+                              expected.Directories(),
+                              actual.directories))
         .And(AreEqual($"{description} - the files do not match",
                       expected.File(),
                       actual.file));
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreSequenceEqual(IEnumerable<TestAbsoluteFilePath> expected,
-                                           IEnumerable<AbsoluteFilePath>     actual,
-                                           string                            description)
-      => AreSequenceEqual(expected.ToArray(),
-                          actual.ToArray(),
-                          description);
+   public static Property AreSequenceEqual(string                            description,
+                                           IEnumerable<TestAbsoluteFilePath> expected,
+                                           IEnumerable<AbsoluteFilePath>     actual)
+      => AreSequenceEqual(description,
+                          expected.ToArray(),
+                          actual.ToArray());
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreSequenceEqual(IReadOnlyCollection<TestAbsoluteFilePath> expected,
-                                           IReadOnlyCollection<AbsoluteFilePath>     actual,
-                                           string                                    description)
-      => AreSequenceEqual(expected,
+   public static Property AreSequenceEqual(string                                    description,
+                                           IReadOnlyCollection<TestAbsoluteFilePath> expected,
+                                           IReadOnlyCollection<AbsoluteFilePath>     actual)
+      => AreSequenceEqual(description,
+                          expected,
                           actual,
                           x => x.PathWithoutTrailingDirectorySeparator(),
                           x => x.Value(),
-                          AreEqual,
-                          description);
+                          (expected1,
+                           actual1,
+                           description1) => AreEqual(description1,
+                                                     expected1,
+                                                     actual1));
 
    /* ------------------------------------------------------------ */
 }

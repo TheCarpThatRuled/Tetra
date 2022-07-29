@@ -33,9 +33,9 @@ public class Create
          var actual = RelativeFilePath.Create(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual(testPath,
-                         actual,
-                         "Create");
+         return AreEqual("Create",
+                         testPath,
+                         actual);
       }
 
       Arb.Register<Libraries.TestRelativeFilePath>();
@@ -57,27 +57,10 @@ public class Create
    public void GIVEN_a_valid_path_without_a_root_but_with_a_trailing_directory_separator_WHEN_Create_THEN_an_ArgumentException_is_thrown()
    {
       static Property Property(TestRelativeFilePath testPath)
-      {
-         //Arrange
-         var exception = Option<Exception>.None();
-
-         //Act
-         try
-         {
-            RelativeFilePath.Create(testPath.PathWithTrailingDirectorySeparator());
-         }
-         catch (Exception e)
-         {
-            exception = e;
-         }
-
-         //Assert
-         return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(
-                                                                         testPath.PathWithTrailingDirectorySeparator(),
-                                                                         HumanReadableName.RelativeFilePath),
-                                                                      "potentialPath"));
-      }
+         => AnArgumentExceptionWasThrown(() => RelativeFilePath.Create(testPath.PathWithTrailingDirectorySeparator()),
+                                         IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(testPath.PathWithTrailingDirectorySeparator(),
+                                                                                                            HumanReadableName.RelativeFilePath),
+                                         "potentialPath");
 
       Arb.Register<Libraries.TestRelativeFilePath>();
 
@@ -112,10 +95,10 @@ public class Create
 
       //Assert
       Assert.That
-            .AnArgumentExceptionWasThrown(exception,
-                                          ArgumentExceptionMessage(IsNotValidBecauseARelativePathMayNotBeEmpty(string.Empty,
+            .AnArgumentExceptionWasThrown(ArgumentExceptionMessage(IsNotValidBecauseARelativePathMayNotBeEmpty(string.Empty,
                                                                                                                HumanReadableName.RelativeFilePath),
-                                                                   "potentialPath"));
+                                                                   "potentialPath"),
+                                          exception);
    }
 
    /* ------------------------------------------------------------ */
@@ -131,26 +114,10 @@ public class Create
    public void GIVEN_a_path_without_a_root_but_with_an_invalid_component_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
       static Property Property(string path)
-      {
-         //Arrange
-         var exception = Option<Exception>.None();
-
-         //Act
-         try
-         {
-            RelativeFilePath.Create(path);
-         }
-         catch (Exception e)
-         {
-            exception = e;
-         }
-
-         //Assert
-         return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotValidBecauseARelativePathMayNotContainTheCharacters(path,
-                                                                         HumanReadableName.RelativeFilePath),
-                                                                      "potentialPath"));
-      }
+         => AnArgumentExceptionWasThrown(() => RelativeFilePath.Create(path),
+                                         IsNotValidBecauseARelativePathMayNotContainTheCharacters(path,
+                                                                                                  HumanReadableName.RelativeFilePath),
+                                         "potentialPath");
 
       Arb.Register<Libraries.PathWithoutARootButWithAnInvalidComponent>();
 
@@ -181,9 +148,9 @@ public class Create
                                               testPath.File());
 
          //Assert
-         return AreEqual(testPath,
-                         actual,
-                         "Create");
+         return AreEqual("Create",
+                         testPath,
+                         actual);
       }
 
       Arb.Register<Libraries.TestRelativeFilePath>();

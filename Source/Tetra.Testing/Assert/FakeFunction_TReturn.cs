@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static Tetra.Testing.AssertMessages;
 
 namespace Tetra.Testing;
 
@@ -10,13 +10,14 @@ partial class Assert_Extensions
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Assert WasInvoked<TReturn>(this Assert assert,
+   public static Assert WasInvoked<TReturn>(this Assert           assert,
+                                            string                description,
                                             FakeFunction<TReturn> function,
-                                            int numberOfInvocations)
+                                            int                   numberOfInvocations)
    {
       if (function.Invocations() != numberOfInvocations)
       {
-         throw Failed.Assert($"The FakeFunction<{typeof(TReturn).Name}> was invoked an unexpected number of times",
+         throw Failed.Assert(TheFakeFunctionWasInvokedAnUnexpectedNumberOfTimes<TReturn>(description),
                              numberOfInvocations,
                              function.Invocations());
       }
@@ -26,19 +27,30 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert WasInvokedOnce<TReturn>(this Assert assert,
+   public static Assert WasInvokedOnce<TReturn>(this Assert           assert,
+                                                string                description,
                                                 FakeFunction<TReturn> function)
       => assert
-        .WasInvoked(function,
+        .WasInvoked(description,
+                    function,
                     1);
 
    /* ------------------------------------------------------------ */
 
-   public static Assert WasNotInvoked<TReturn>(this Assert assert,
+   public static Assert WasNotInvoked<TReturn>(this Assert           assert,
+                                               string                description,
                                                FakeFunction<TReturn> function)
-      => assert
-        .WasInvoked(function,
-                    0);
+   {
+      if (function
+         .Invocations()
+       != 0)
+      {
+         throw Failed.Assert(TheFakeFunctionWasInvokedWhenWeExpectedItNotToBe<TReturn>(description),
+                             function.Invocations());
+      }
+
+      return assert;
+   }
 
    /* ------------------------------------------------------------ */
 }

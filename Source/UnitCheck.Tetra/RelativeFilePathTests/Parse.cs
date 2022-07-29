@@ -34,11 +34,11 @@ public class Parse
          var actual = RelativeFilePath.Parse(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd(actualPath => AreEqual(testPath,
-                                                     actualPath.Content(),
-                                                     "Parse"),
-                              actual,
-                              "Parse");
+         return IsASuccessAnd("Return value",
+                              actualPath => AreEqual("Return value",
+                                                     testPath,
+                                                     actualPath.Content()),
+                              actual);
       }
 
       Arb.Register<Libraries.TestRelativeFilePath>();
@@ -94,7 +94,8 @@ public class Parse
 
       //Assert
       Assert.That
-            .IsAFailure(Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(string.Empty,
+            .IsAFailure("Return value",
+                        Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(string.Empty,
                                                                                    HumanReadableName.RelativeFilePath)),
                         actual);
    }

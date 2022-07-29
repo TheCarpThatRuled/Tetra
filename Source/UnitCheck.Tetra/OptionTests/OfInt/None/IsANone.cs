@@ -32,7 +32,8 @@ public class None_IsANone
 
       //Assert
       Assert.That
-            .IsTrue(actual);
+            .IsTrue("Return value",
+                    actual);
    }
 
    /* ------------------------------------------------------------ */

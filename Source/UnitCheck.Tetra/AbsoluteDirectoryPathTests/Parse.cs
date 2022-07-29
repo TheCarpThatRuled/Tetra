@@ -34,11 +34,11 @@ public class Parse
          var actual = AbsoluteDirectoryPath.Parse(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd(actualPath => AreEqual(testPath,
-                                                     actualPath.Content(),
-                                                     "Parse"),
-                              actual,
-                              "Parse");
+         return IsASuccessAnd("Parse",
+                              actualPath => AreEqual("Parse",
+                                                     testPath,
+                                                     (AbsoluteDirectoryPath) actualPath.Content()),
+                              actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
@@ -67,11 +67,11 @@ public class Parse
          var actual = AbsoluteDirectoryPath.Parse(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd(actualPath => AreEqual(testPath,
-                                                     actualPath.Content(),
-                                                     "Parse"),
-                              actual,
-                              "Parse");
+         return IsASuccessAnd("Parse",
+                              actualPath => AreEqual("Parse",
+                                                     testPath,
+                                                     (AbsoluteDirectoryPath) actualPath.Content()),
+                              actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
@@ -98,8 +98,9 @@ public class Parse
 
       //Assert
       Assert.That
-            .IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
-                                                                                       HumanReadableName.AbsoluteDirectoryPath)),
+            .IsAFailure("Parse",
+                        Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
+                                                                                    HumanReadableName.AbsoluteDirectoryPath)),
                         actual);
    }
 

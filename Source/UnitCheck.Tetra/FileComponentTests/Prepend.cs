@@ -38,9 +38,9 @@ public class Prepend
          var actual = file.Prepend(volume);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Prepend");
+         return AreEqual("Prepend",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.FileComponent>();

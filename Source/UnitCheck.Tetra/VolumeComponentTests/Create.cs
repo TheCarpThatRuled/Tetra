@@ -55,26 +55,10 @@ public class Create
    public void GIVEN_a_non_ASCII_letter_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
       static Property Property(char value)
-      {
-         //Arrange
-         var exception = Option<Exception>.None();
-
-         //Act
-         try
-         {
-            VolumeComponent.Create(value);
-         }
-         catch (Exception e)
-         {
-            exception = e;
-         }
-
-         //Assert
-         return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
-                                                                                             HumanReadableName.VolumeComponent),
-                                                                      "potentialVolume"));
-      }
+         => AnArgumentExceptionWasThrown(() => VolumeComponent.Create(value),
+                                         IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
+                                                                                          HumanReadableName.VolumeComponent),
+                                         "potentialVolume");
 
       Arb.Register<Libraries.NonAsciiLetters>();
 

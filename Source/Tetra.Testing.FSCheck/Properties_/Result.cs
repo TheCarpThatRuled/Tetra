@@ -15,8 +15,8 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsAFailure<T>(Result<T> result,
-                                        string    name)
+   public static Property IsAFailure<T>(string    name,
+                                        Result<T> result)
       => AsProperty(result.IsAFailure)
         .Label(TheResultIsASuccess<T>(name));
 
@@ -32,9 +32,9 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsAFailure<T>(Message   expected,
-                                        Result<T> result,
-                                        string    name)
+   public static Property IsAFailure<T>(string    name,
+                                        Message   expected,
+                                        Result<T> result)
       => result
         .Reduce(actual => AreEqual(TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(name),
                                    expected,
@@ -53,9 +53,9 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsAIsAFailureAnd<T>(Func<Failure, bool> property,
-                                              Result<T>           result,
-                                              string              name)
+   public static Property IsAIsAFailureAnd<T>(string              name,
+                                              Func<Failure, bool> property,
+                                              Result<T>           result)
       => result
         .Reduce(actual => AsProperty(() => property(actual))
                   .Label(Failed.Message(TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(name),
@@ -70,8 +70,8 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsASuccess<T>(Result<T> result,
-                                        string    name)
+   public static Property IsASuccess<T>(string    name,
+                                        Result<T> result)
       => AsProperty(result.IsASuccess)
         .Label(TheResultIsAFailure<T>(name));
 
@@ -87,9 +87,9 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsASuccess<T>(T         expected,
-                                        Result<T> result,
-                                        string    name)
+   public static Property IsASuccess<T>(string    name,
+                                        T         expected,
+                                        Result<T> result)
       => result
         .Reduce(failure => False(TheResultIsAFailure<T>(name,
                                                         failure.Content())),
@@ -109,9 +109,9 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsASuccessAnd<T>(Func<Success<T>, bool> property,
-                                           Result<T>              result,
-                                           string                 description)
+   public static Property IsASuccessAnd<T>(string                 description,
+                                           Func<Success<T>, bool> property,
+                                           Result<T>              result)
       => result
         .Reduce(failure => False(TheResultIsAFailure<T>(description,
                                                         failure.Content())),
@@ -121,9 +121,9 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsASuccessAnd<T>(Func<Success<T>, Property> property,
-                                           Result<T>                  result,
-                                           string                     description)
+   public static Property IsASuccessAnd<T>(string                     description,
+                                           Func<Success<T>, Property> property,
+                                           Result<T>                  result)
       => result
         .Reduce(failure => False(TheResultIsAFailure<T>(description,
                                                         failure.Content())),

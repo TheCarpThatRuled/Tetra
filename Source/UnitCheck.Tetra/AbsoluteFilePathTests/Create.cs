@@ -33,9 +33,9 @@ public class Create
          var actual = AbsoluteFilePath.Create(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual(testPath,
-                         actual,
-                         "Create");
+         return AreEqual("Create",
+                         testPath,
+                         actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteFilePath>();
@@ -57,26 +57,10 @@ public class Create
    public void GIVEN_a_valid_path_with_volume_root_and_a_trailing_directory_separator_WHEN_Create_THEN_an_ArgumentException_is_thrown()
    {
       static Property Property(TestAbsoluteFilePath path)
-      {
-         //Arrange
-         var exception = Option<Exception>.None();
-
-         //Act
-         try
-         {
-            AbsoluteFilePath.Create(path.PathWithTrailingDirectorySeparator());
-         }
-         catch (Exception e)
-         {
-            exception = e;
-         }
-
-         //Assert
-         return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(path.PathWithTrailingDirectorySeparator(),
-                                                                         HumanReadableName.AbsoluteFilePath),
-                                                                      "potentialPath"));
-      }
+         => AnArgumentExceptionWasThrown(() => AbsoluteFilePath.Create(path.PathWithTrailingDirectorySeparator()),
+                                         IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(path.PathWithTrailingDirectorySeparator(),
+                                                                                                             HumanReadableName.AbsoluteFilePath),
+                                         "potentialPath");
 
       Arb.Register<Libraries.TestAbsoluteFilePath>();
 
@@ -111,10 +95,10 @@ public class Create
 
       //Assert
       Assert.That
-            .AnArgumentExceptionWasThrown(exception,
-                                          ArgumentExceptionMessage(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
+            .AnArgumentExceptionWasThrown(ArgumentExceptionMessage(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
                                                                                                                 HumanReadableName.AbsoluteFilePath),
-                                                                   "potentialPath"));
+                                                                   "potentialPath"),
+                                          exception);
    }
 
    /* ------------------------------------------------------------ */
@@ -130,26 +114,10 @@ public class Create
    public void GIVEN_a_valid_path_without_a_volume_root_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
       static Property Property(string path)
-      {
-         //Arrange
-         var exception = Option<Exception>.None();
-
-         //Act
-         try
-         {
-            AbsoluteFilePath.Create(path);
-         }
-         catch (Exception e)
-         {
-            exception = e;
-         }
-
-         //Assert
-         return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                         HumanReadableName.AbsoluteFilePath),
-                                                                      "potentialPath"));
-      }
+         => AnArgumentExceptionWasThrown(() => AbsoluteFilePath.Create(path),
+                                         IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
+                                                                                                  HumanReadableName.AbsoluteFilePath),
+                                         "potentialPath");
 
       Arb.Register<Libraries.ValidPathWithoutARoot>();
 
@@ -170,26 +138,10 @@ public class Create
    public void GIVEN_a_path_with_an_invalid_volume_root_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
       static Property Property(string path)
-      {
-         //Arrange
-         var exception = Option<Exception>.None();
-
-         //Act
-         try
-         {
-            AbsoluteFilePath.Create(path);
-         }
-         catch (Exception e)
-         {
-            exception = e;
-         }
-
-         //Assert
-         return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                         HumanReadableName.AbsoluteFilePath),
-                                                                      "potentialPath"));
-      }
+         => AnArgumentExceptionWasThrown(() => AbsoluteFilePath.Create(path),
+                                         IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
+                                                                                                  HumanReadableName.AbsoluteFilePath),
+                                         "potentialPath");
 
       Arb.Register<Libraries.PathWithAnInvalidVolumeRoot>();
 
@@ -210,26 +162,10 @@ public class Create
    public void GIVEN_a_path_with_a_volume_root_and_an_invalid_component_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
       static Property Property(string path)
-      {
-         //Arrange
-         var exception = Option<Exception>.None();
-
-         //Act
-         try
-         {
-            AbsoluteFilePath.Create(path);
-         }
-         catch (Exception e)
-         {
-            exception = e;
-         }
-
-         //Assert
-         return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
-                                                                         HumanReadableName.AbsoluteFilePath),
-                                                                      "potentialPath"));
-      }
+         => AnArgumentExceptionWasThrown(() => AbsoluteFilePath.Create(path),
+                                         IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
+                                                                                                   HumanReadableName.AbsoluteFilePath),
+                                         "potentialPath");
 
       Arb.Register<Libraries.PathWithAVolumeRootAndAnInvalidComponent>();
 
@@ -262,9 +198,9 @@ public class Create
                                               testPath.File());
 
          //Assert
-         return AreEqual(testPath,
-                         actual,
-                         "Create");
+         return AreEqual("Create",
+                         testPath,
+                         actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteFilePath>();

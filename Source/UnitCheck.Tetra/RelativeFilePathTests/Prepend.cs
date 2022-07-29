@@ -37,9 +37,9 @@ public class Prepend
          var actual = child.Prepend(parent);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Prepend");
+         return AreEqual("Prepend",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
@@ -75,9 +75,9 @@ public class Prepend
          var actual = child.Prepend(parent);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Prepend");
+         return AreEqual("Prepend",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.ListOfDirectoryComponents>();
@@ -114,9 +114,9 @@ public class Prepend
          var actual = child.Prepend(parent);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Prepend");
+         return AreEqual("Prepend",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.TestRelativeDirectoryPath>();
@@ -152,9 +152,9 @@ public class Prepend
          var actual = child.Prepend(parent);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Parse");
+         return AreEqual("Parse",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.TestRelativeFilePath>();
@@ -191,9 +191,9 @@ public class Prepend
          var actual = child.Prepend(parent);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Parse");
+         return AreEqual("Parse",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();

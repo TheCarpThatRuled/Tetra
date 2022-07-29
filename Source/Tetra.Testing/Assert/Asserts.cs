@@ -11,31 +11,17 @@ public static partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert AreEqual(this Assert assert,
-                                 object? expected,
-                                 object? actual)
+                                 string      description,
+                                 object?     expected,
+                                 object?     actual)
    {
-      Log.ToDebugOutput_AreEqual(expected,
-                                 actual);
-
-      Assert.AreEqual(expected,
-                      actual);
-
-      return assert;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public static Assert AreEqual(this Assert assert,
-                                 object? expected,
-                                 object? actual,
-                                 string message)
-   {
-      Log.ToDebugOutput_AreEqual(expected,
+      Log.ToDebugOutput_AreEqual(description,
+                                 expected,
                                  actual);
 
       Assert.AreEqual(expected,
                       actual,
-                      message);
+                      description);
 
       return assert;
    }
@@ -45,9 +31,14 @@ public static partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsFalse(this Assert assert,
-                                bool actual)
+                                string      description,
+                                bool        actual)
    {
-      Assert.IsFalse(actual);
+      Log.ToDebugOutput_IsFalse(description,
+                                 actual);
+
+      Assert.IsFalse(actual,
+                     description);
 
       return assert;
    }
@@ -55,9 +46,14 @@ public static partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsTrue(this Assert assert,
-                               bool actual)
+                               string      description,
+                               bool        actual)
    {
-      Assert.IsTrue(actual);
+      Log.ToDebugOutput_IsTrue(description,
+                                actual);
+
+      Assert.IsTrue(actual,
+                    description);
 
       return assert;
    }

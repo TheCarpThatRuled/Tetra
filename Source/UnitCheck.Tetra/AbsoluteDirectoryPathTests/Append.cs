@@ -37,9 +37,9 @@ public class Append
          var actual = path.Append(directories);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Append");
+         return AreEqual("Append",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
@@ -75,9 +75,9 @@ public class Append
          var actual = path.Append(directories);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Append");
+         return AreEqual("Append",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
@@ -114,9 +114,9 @@ public class Append
          var actual = parentPath.Append(childPath);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Append");
+         return AreEqual("Append",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
@@ -152,9 +152,9 @@ public class Append
          var actual = path.Append(file);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Append");
+         return AreEqual("Append",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.FileComponent>();
@@ -191,9 +191,9 @@ public class Append
          var actual = parentPath.Append(childPath);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Append");
+         return AreEqual("Append",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();

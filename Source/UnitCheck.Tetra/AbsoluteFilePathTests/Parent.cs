@@ -41,9 +41,9 @@ public class Parent
          var actual = path.Parent();
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Parent");
+         return AreEqual("Parent",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.VolumeComponent>();

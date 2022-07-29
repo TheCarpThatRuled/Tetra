@@ -6,39 +6,36 @@ public static partial class AssertMessages
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static string TheOptionIsASomeButDoesNotContainTheExpectedContent<T>()
-      => Option<T>()
-       + IsASomeButDoesNotContainTheExpectedContent;
-
-   /* ------------------------------------------------------------ */
-
-   public static string TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(string name)
-      => Option<T>(name)
-       + IsASomeButDoesNotContainTheExpectedContent;
-
-   /* ------------------------------------------------------------ */
-
    public static string TheOptionIsANone<T>()
-      => Option<T>()
+      => TheOption<T>()
        + IsANoneWhenWeExpectedItToBeASome;
 
    /* ------------------------------------------------------------ */
 
-   public static string TheOptionIsANone<T>(string name)
-      => Option<T>(name)
-       + IsANoneWhenWeExpectedItToBeASome;
+   public static string TheOptionIsANone<T>(string description)
+      => $"{description}: {TheOption<T>()}{IsANoneWhenWeExpectedItToBeASome}";
+
+   /* ------------------------------------------------------------ */
+
+   public static string TheOptionIsASomeButDoesNotContainTheExpectedContent<T>()
+      => TheOption<T>()
+       + IsASomeButDoesNotContainTheExpectedContent;
+
+   /* ------------------------------------------------------------ */
+
+   public static string TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(string description)
+      => $"{description}: {TheOption<T>()}{IsASomeButDoesNotContainTheExpectedContent}";
 
    /* ------------------------------------------------------------ */
 
    public static string TheOptionIsASome<T>()
-      => Option<T>()
+      => TheOption<T>()
        + IsASomeWhenWeExpectedItToBeANone;
 
    /* ------------------------------------------------------------ */
 
-   public static string TheOptionIsASome<T>(string name)
-      => Option<T>(name)
-       + IsASomeWhenWeExpectedItToBeANone;
+   public static string TheOptionIsASome<T>(string description)
+      => $"{description}: {TheOption<T>()}{IsASomeWhenWeExpectedItToBeANone}";
 
    /* ------------------------------------------------------------ */
    // Private Constants
@@ -52,17 +49,8 @@ public static partial class AssertMessages
    // Private Functions
    /* ------------------------------------------------------------ */
 
-   private static string Option<T>(string? name = null)
-   {
-      var result = $@"The Option<{typeof(T).Name}> ";
-
-      if (name is not null)
-      {
-         result += $@"""{name}"" ";
-      }
-
-      return result;
-   }
+   private static string TheOption<T>()
+      => $@"The Option<{typeof(T).Name}> ";
 
    /* ------------------------------------------------------------ */
 }

@@ -52,11 +52,11 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd(actualComponents => AreEqual(testPath,
-                                                           actualComponents.Content(),
-                                                           "ParseComponents"),
-                              actual,
-                              "ParseComponents");
+         return IsASuccessAnd("Return value",
+                              actualComponents => AreEqual("Return value",
+                                                           testPath,
+                                                           actualComponents.Content()),
+                              actual);
       }
 
       Arb.Register<Libraries.TestRelativeFilePath>();
@@ -116,7 +116,8 @@ public class ParseComponents
 
       //Assert
       Assert.That
-            .IsAFailure(Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(string.Empty,
+            .IsAFailure("Return value",
+                        Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(string.Empty,
                                                                                    nameof(TestPath))),
                         actual);
    }

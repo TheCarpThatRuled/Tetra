@@ -36,9 +36,9 @@ public class Ancestry
          var actual = path.Ancestry();
 
          //Assert
-         return AreSequenceEqual(expected,
-                                 actual,
-                                 "Ancestry");
+         return AreSequenceEqual("Ancestry",
+                                 expected,
+                                 actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();

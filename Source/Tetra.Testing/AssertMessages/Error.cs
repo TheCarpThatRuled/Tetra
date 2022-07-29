@@ -7,54 +7,48 @@ public static partial class AssertMessages
    /* ------------------------------------------------------------ */
 
    public static string TheErrorIsASomeButDoesNotContainTheExpectedContent()
-      => Error()
+      => TheError
        + IsASomeButDoesNotContainTheExpectedContent;
 
    /* ------------------------------------------------------------ */
 
-   public static string TheErrorIsASomeButDoesNotContainTheExpectedContent(string name)
-      => Error(name)
-       + IsASomeButDoesNotContainTheExpectedContent;
+   public static string TheErrorIsASomeButDoesNotContainTheExpectedContent(string description)
+      => $"{description}: {TheError}{IsASomeButDoesNotContainTheExpectedContent}";
 
    /* ------------------------------------------------------------ */
 
    public static string TheErrorIsANone()
-      => Error()
+      => TheError
        + IsANoneWhenWeExpectedItToBeASome;
 
    /* ------------------------------------------------------------ */
 
-   public static string TheErrorIsANone(string name)
-      => Error(name)
-       + IsANoneWhenWeExpectedItToBeASome;
+   public static string TheErrorIsANone(string description)
+      => $"{description}: {TheError}{IsANoneWhenWeExpectedItToBeASome}";
 
    /* ------------------------------------------------------------ */
 
    public static string TheErrorIsASome()
-      => Error()
+      => TheError
        + IsASomeWhenWeExpectedItToBeANone;
 
    /* ------------------------------------------------------------ */
 
-   public static string TheErrorIsASome(string name)
-      => Error(name)
-       + IsASomeWhenWeExpectedItToBeANone;
+   public static string TheErrorIsASome(string description)
+      => $"{description}: {TheError}{IsASomeWhenWeExpectedItToBeANone}";
 
    /* ------------------------------------------------------------ */
-   // Private Functions
+
+   public static string TheErrorIsASome(string description,
+                                        Message actual)
+      => $"{description}: {TheError}{IsASomeWhenWeExpectedItToBeANone}\nActual message: {actual.Content()}";
+
+   /* ------------------------------------------------------------ */
+   // Private Constants
    /* ------------------------------------------------------------ */
 
-   private static string Error(string? name = null)
-   {
-      var result = $@"The Error ";
 
-      if (name is not null)
-      {
-         result += $@"""{name}"" ";
-      }
-
-      return result;
-   }
+   private const string TheError = "The Error ";
 
    /* ------------------------------------------------------------ */
 }

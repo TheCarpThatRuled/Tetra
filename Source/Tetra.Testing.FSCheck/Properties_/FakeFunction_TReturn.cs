@@ -9,7 +9,7 @@ partial class Properties
    /* ------------------------------------------------------------ */
 
    public static Property WasInvoked<TReturn>(FakeFunction<TReturn> function,
-                                              int numberOfInvocations)
+                                              int                   numberOfInvocations)
       => AsProperty(() => function.Invocations() == numberOfInvocations)
         .Label(Failed.Message($"The FakeFunction<{typeof(TReturn).Name}> was invoked an unexpected number of times",
                               numberOfInvocations,

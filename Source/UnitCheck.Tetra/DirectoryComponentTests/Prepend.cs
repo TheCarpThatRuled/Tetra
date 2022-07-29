@@ -37,9 +37,9 @@ public class Prepend
          var actual = child.Prepend(parent);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Prepend");
+         return AreEqual("Prepend",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.DirectoryComponent>();

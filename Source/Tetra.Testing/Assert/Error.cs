@@ -24,12 +24,12 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsANone(this Assert assert,
-                                Error       error,
-                                string      name)
+                                string      description,
+                                Error       error)
    {
       if (error.IsASome())
       {
-         throw Failed.Assert(TheErrorIsASome(name));
+         throw Failed.Assert(TheErrorIsASome(description));
       }
 
       return assert;
@@ -51,12 +51,12 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsASome(this Assert assert,
-                                Error       error,
-                                string      name)
+                                string      description,
+                                Error       error)
    {
       if (error.IsANone())
       {
-         throw Failed.Assert(TheErrorIsANone(name));
+         throw Failed.Assert(TheErrorIsANone(description));
       }
 
       return assert;
@@ -71,9 +71,9 @@ partial class Assert_Extensions
       if (error.Reduce(Function.True,
                        actual =>
                        {
-                          assert.AreEqual(expected,
-                                          actual,
-                                          TheErrorIsASomeButDoesNotContainTheExpectedContent());
+                          assert.AreEqual(TheErrorIsASomeButDoesNotContainTheExpectedContent(),
+                                          expected,
+                                          actual);
 
                           return false;
                        }))
@@ -87,21 +87,21 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsASome(this Assert assert,
+                                string      description,
                                 Message     expected,
-                                Error       error,
-                                string      name)
+                                Error       error)
    {
       if (error.Reduce(Function.True,
                        actual =>
                        {
-                          assert.AreEqual(expected,
-                                          actual,
-                                          TheErrorIsASomeButDoesNotContainTheExpectedContent(name));
+                          assert.AreEqual(TheErrorIsASomeButDoesNotContainTheExpectedContent(description),
+                                          expected,
+                                          actual);
 
                           return false;
                        }))
       {
-         throw Failed.Assert(TheErrorIsANone(name));
+         throw Failed.Assert(TheErrorIsANone(description));
       }
 
       return assert;
@@ -134,23 +134,23 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsASomeAnd(this Assert         assert,
+                                   string              description,
                                    Func<Message, bool> property,
-                                   Error               error,
-                                   string              name)
+                                   Error               error)
    {
       if (error.Reduce(Function.True,
                        actual =>
                        {
                           if (!property(actual))
                           {
-                             throw Failed.Assert(TheErrorIsASomeButDoesNotContainTheExpectedContent(name),
+                             throw Failed.Assert(TheErrorIsASomeButDoesNotContainTheExpectedContent(description),
                                                  actual);
                           }
 
                           return false;
                        }))
       {
-         throw Failed.Assert(TheErrorIsANone(name));
+         throw Failed.Assert(TheErrorIsANone(description));
       }
 
       return assert;

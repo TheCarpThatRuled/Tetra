@@ -26,10 +26,11 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreSequenceEqual<T>(IReadOnlyCollection<T>? expected,
-                                              IReadOnlyCollection<T>? actual,
-                                              string                  description)
-      => AreSequenceEqual(expected,
+   public static Property AreSequenceEqual<T>(string                  description,
+                                              IReadOnlyCollection<T>? expected,
+                                              IReadOnlyCollection<T>? actual)
+      => AreSequenceEqual(description,
+                          expected,
                           actual,
                           x => x?.ToString() ?? string.Empty,
                           x => x?.ToString() ?? string.Empty,
@@ -37,17 +38,16 @@ partial class Properties
                            a,
                            d) => AreEqual(d,
                                           e,
-                                          a),
-                          description);
+                                          a));
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreSequenceEqual<T0, T1>(IReadOnlyCollection<T0>?       expected,
+   public static Property AreSequenceEqual<T0, T1>(string                         description,
+                                                   IReadOnlyCollection<T0>?       expected,
                                                    IReadOnlyCollection<T1>?       actual,
                                                    Func<T0, string>               t0ToString,
                                                    Func<T1, string>               t1ToString,
-                                                   Func<T0, T1, string, Property> compareItem,
-                                                   string                         description)
+                                                   Func<T0, T1, string, Property> compareItem)
    {
       if (expected is null)
       {

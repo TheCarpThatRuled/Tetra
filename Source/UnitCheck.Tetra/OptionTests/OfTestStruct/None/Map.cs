@@ -167,8 +167,10 @@ public class None_Map
 
       //Assert
       Assert.That
-            .IsANone(actual)
-            .WasNotInvoked(whenSome);
+            .IsANone("Return value",
+                     actual)
+            .WasNotInvoked(nameof(whenSome),
+                           whenSome);
    }
 
    /* ------------------------------------------------------------ */
@@ -194,8 +196,10 @@ public class None_Map
 
       //Assert
       Assert.That
-            .IsANone(actual)
-            .WasNotInvoked(whenSome);
+            .IsANone("Return value",
+                     actual)
+            .WasNotInvoked(nameof(whenSome),
+                           whenSome);
    }
 
    /* ------------------------------------------------------------ */
@@ -221,8 +225,10 @@ public class None_Map
 
       //Assert
       Assert.That
-            .IsANone(actual)
-            .WasNotInvoked(whenSome);
+            .IsANone("Return value",
+                     actual)
+            .WasNotInvoked(nameof(whenSome),
+                           whenSome);
    }
 
    /* ------------------------------------------------------------ */
@@ -248,8 +254,10 @@ public class None_Map
 
       //Assert
       Assert.That
-            .IsANone(actual)
-            .WasNotInvoked(whenSome);
+            .IsANone("Return value",
+                     actual)
+            .WasNotInvoked(nameof(whenSome),
+                           whenSome);
    }
 
    /* ------------------------------------------------------------ */

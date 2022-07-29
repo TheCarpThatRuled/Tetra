@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static Tetra.Testing.AssertMessages;
 
 namespace Tetra.Testing;
 
@@ -11,6 +11,7 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert WasInvokedOnce<T, TReturn>(this Assert assert,
+                                                   string description,
                                                    T expected,
                                                    FakeFunction<T, TReturn> function)
    {
@@ -19,7 +20,7 @@ partial class Assert_Extensions
          .Count
        == 0)
       {
-         throw Failed.Assert($"The {Name<T, TReturn>()} was invoked more than once."
+         throw Failed.Assert(TheFakeFunctionWasInvokedMoreThanOnce<T,TReturn>(description)
                            + "\nExpected:"
                            + $"\n{expected}"
                            + "\nActual:"
@@ -31,15 +32,16 @@ partial class Assert_Extensions
          .Count
        != 1)
       {
-         throw Failed.Assert(
-            $"The {Name<T, TReturn>()} was not invoked, when we expected it to be. Expected:\n {expected}");
+         throw Failed.Assert(TheFakeFunctionWasNotInvokedWheWeExpectedToBe<T,TReturn>(description)
+                           + "\nExpected:"
+                           + $"\n {expected}");
       }
 
       if (!function
           .Invocations()[0]!
           .Equals(expected))
       {
-         throw Failed.Assert($"The {Name<T, TReturn>()} was invoked with an unexpected argument"
+         throw Failed.Assert(TheFakeFunctionWasInvokedWithAnUnexpectedArgument<T,TReturn>(description)
                            + $"\nExpected: {expected}"
                            + $"\nActual: {function.Invocations()[0]}");
       }
@@ -49,7 +51,8 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert WasNotInvoked<T, TReturn>(this Assert assert,
+   public static Assert WasNotInvoked<T, TReturn>(this Assert              assert,
+                                                  string                   description,
                                                   FakeFunction<T, TReturn> function)
    {
       if (function
@@ -57,20 +60,13 @@ partial class Assert_Extensions
          .Count
        != 0)
       {
-         throw Failed.Assert($"The {Name<T, TReturn>()} was invoked, when we expected it not to be.",
+         throw Failed.Assert(TheFakeFunctionWasInvokedWhenWeExpectedItNotToBe<T,TReturn>(description),
                              function.Invocations()
                                      .Count);
       }
 
       return assert;
    }
-
-   /* ------------------------------------------------------------ */
-   // Private Functions
-   /* ------------------------------------------------------------ */
-
-   private static string Name<T, TReturn>()
-      => $"FakeFunction <{typeof(T).Namespace},{typeof(TReturn).Name}>";
 
    /* ------------------------------------------------------------ */
 }

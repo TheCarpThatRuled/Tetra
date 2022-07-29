@@ -69,11 +69,11 @@ public class Parent
          var actual = path.Parent();
 
          //Assert
-         return IsASomeAnd(actualParent => AreEqual(expected,
-                                                    actualParent,
-                                                    "Parent"),
-                           actual,
-                           "Parent");
+         return IsASomeAnd("Parent",
+                           actualParent => AreEqual("Parent",
+                                                    expected,
+                                                    actualParent),
+                           actual);
       }
 
       Arb.Register<Libraries.ArrayOfAtLeastTwoDirectoryComponents>();

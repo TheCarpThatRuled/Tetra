@@ -7,37 +7,35 @@ public static partial class AssertMessages
    /* ------------------------------------------------------------ */
 
    public static string TheResultIsAFailureButDoesNotContainTheExpectedContent<T>()
-      => Result<T>()
+      => TheResult<T>()
        + IsAFailureButDoesNotContainTheExpectedContent;
 
    /* ------------------------------------------------------------ */
 
-   public static string TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(string name)
-      => Result<T>(name)
-       + IsAFailureButDoesNotContainTheExpectedContent;
+   public static string TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(string description)
+      => $"{description}: {TheResult<T>()}{IsAFailureButDoesNotContainTheExpectedContent}";
 
    /* ------------------------------------------------------------ */
 
    public static string TheResultIsASuccessButDoesNotContainTheExpectedContent<T>()
-      => Result<T>()
+      => TheResult<T>()
        + IsASuccessButDoesNotContainTheExpectedContent;
 
    /* ------------------------------------------------------------ */
 
-   public static string TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(string name)
-      => Result<T>(name)
-       + IsASuccessButDoesNotContainTheExpectedContent;
+   public static string TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(string description)
+      => $"{description}: {TheResult<T>()}{IsASuccessButDoesNotContainTheExpectedContent}";
 
    /* ------------------------------------------------------------ */
 
    public static string TheResultIsAFailure<T>()
-      => Result<T>()
+      => TheResult<T>()
        + IsAFailureWhenWeExpectedItToBeASuccess;
 
    /* ------------------------------------------------------------ */
 
    public static string TheResultIsAFailure<T>(Message message)
-      => Result<T>()
+      => TheResult<T>()
        + IsAFailureWhenWeExpectedItToBeASuccess
        + "\n"
        + "Actual message: "
@@ -45,31 +43,25 @@ public static partial class AssertMessages
 
    /* ------------------------------------------------------------ */
 
-   public static string TheResultIsAFailure<T>(string name)
-      => Result<T>(name)
-       + IsAFailureWhenWeExpectedItToBeASuccess;
+   public static string TheResultIsAFailure<T>(string description)
+      => $"{description}: {TheResult<T>()}{IsAFailureWhenWeExpectedItToBeASuccess}";
 
    /* ------------------------------------------------------------ */
 
-   public static string TheResultIsAFailure<T>(string  name,
+   public static string TheResultIsAFailure<T>(string  description,
                                                Message message)
-      => Result<T>(name)
-       + IsAFailureWhenWeExpectedItToBeASuccess
-       + "\n"
-       + "Actual message: "
-       + message.Content();
+      => $"{description}: {TheResult<T>()}{IsAFailureWhenWeExpectedItToBeASuccess}\n Actual message:{message.Content()}";
 
    /* ------------------------------------------------------------ */
 
    public static string TheResultIsASuccess<T>()
-      => Result<T>()
+      => TheResult<T>()
        + IsASuccessWhenWeExpectedItToBeAFailure;
 
    /* ------------------------------------------------------------ */
 
-   public static string TheResultIsASuccess<T>(string name)
-      => Result<T>(name)
-       + IsASuccessWhenWeExpectedItToBeAFailure;
+   public static string TheResultIsASuccess<T>(string description)
+      => $"{description}: {TheResult<T>()}{IsASuccessWhenWeExpectedItToBeAFailure}";
 
    /* ------------------------------------------------------------ */
    // Private Constants
@@ -84,17 +76,8 @@ public static partial class AssertMessages
    // Private Functions
    /* ------------------------------------------------------------ */
 
-   private static string Result<T>(string? name = null)
-   {
-      var result = $@"The Result<{typeof(T).Name}> ";
-
-      if (name is not null)
-      {
-         result += $@"""{name}"" ";
-      }
-
-      return result;
-   }
+   private static string TheResult<T>()
+      => $@"The Result<{typeof(T).Name}> ";
 
    /* ------------------------------------------------------------ */
 }

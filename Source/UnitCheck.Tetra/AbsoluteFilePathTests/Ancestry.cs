@@ -36,12 +36,12 @@ public class Ancestry
          var (actualAncestors, actualLeaf) = path.Ancestry();
 
          //Assert
-         return AreSequenceEqual(expected,
-                                 actualAncestors,
-               "Ancestry")
-           .And(AreEqual(testPath,
-                         actualLeaf,
-                         "Ancestry"));
+         return AreSequenceEqual("Ancestry",
+                                 expected,
+                                 actualAncestors)
+           .And(AreEqual("Ancestry",
+                         testPath,
+                         actualLeaf));
       }
 
       Arb.Register<Libraries.TestAbsoluteFilePath>();

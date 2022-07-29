@@ -26,7 +26,7 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<T, TReturn>(T                                 expected,
+   public static Property WasInvokedOnce<T, TReturn>(T                              expected,
                                                      FakeFunction<Left<T>, TReturn> function)
       => WasInvokedOnce(actual => Equals(expected,
                                          actual.Content()),
@@ -35,7 +35,7 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<T, TReturn>(T                                 expected,
+   public static Property WasInvokedOnce<T, TReturn>(T                               expected,
                                                      FakeFunction<Right<T>, TReturn> function)
       => WasInvokedOnce(actual => Equals(expected,
                                          actual.Content()),
@@ -56,9 +56,13 @@ partial class Properties
    public static Property WasInvokedOnce<T, TReturn>(Func<T, bool>            property,
                                                      string                   expectedString,
                                                      FakeFunction<T, TReturn> function)
-      => function.Invocations().Count == 0
+      => function.Invocations()
+                 .Count
+      == 0
             ? False($"The {Name<T, TReturn>()} was not invoked, when we expected it to be. Expected:\n {expectedString}")
-            : function.Invocations().Count != 1
+            : function.Invocations()
+                      .Count
+           != 1
                ? False($"The {Name<T, TReturn>()} was invoked more than once."
                      + "\nExpected:"
                      + $"\n{expectedString}"
@@ -76,8 +80,7 @@ partial class Properties
                          .Invocations()
                          .Count
                        == 0)
-        .Label(
-            $"The {Name<T, TReturn>()} was invoked, when we expected it not to be. Actual: {function.Invocations().Count}");
+        .Label($"The {Name<T, TReturn>()} was invoked, when we expected it not to be. Actual: {function.Invocations().Count}");
 
    /* ------------------------------------------------------------ */
    // Private Functions

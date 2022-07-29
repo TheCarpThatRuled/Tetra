@@ -33,9 +33,9 @@ public class Create
          var actual = AbsoluteDirectoryPath.Create(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual(testPath,
-                         actual,
-                         "Create");
+         return AreEqual("Create",
+                         testPath,
+                         actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
@@ -63,9 +63,9 @@ public class Create
          var actual = AbsoluteDirectoryPath.Create(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual(testPath,
-                         actual,
-                         "Create");
+         return AreEqual("Create",
+                         testPath,
+                         actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
@@ -101,10 +101,10 @@ public class Create
 
       //Assert
       Assert.That
-            .AnArgumentExceptionWasThrown(exception,
-                                          ArgumentExceptionMessage(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
+            .AnArgumentExceptionWasThrown(ArgumentExceptionMessage(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
                                                                                                                 HumanReadableName.AbsoluteDirectoryPath),
-                                                                   "potentialPath"));
+                                                                   "potentialPath"),
+                                          exception);
    }
 
    /* ------------------------------------------------------------ */
@@ -201,9 +201,9 @@ public class Create
                                                    testPath.Directories());
 
          //Assert
-         return AreEqual(testPath,
-                         actual,
-                         "Create");
+         return AreEqual("Create",
+                         testPath,
+                         actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();

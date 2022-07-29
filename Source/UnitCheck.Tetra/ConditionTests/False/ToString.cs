@@ -32,7 +32,8 @@ public class False_ToString
 
       //Assert
       Assert.That
-            .AreEqual("False",
+            .AreEqual("Return value",
+                      "False",
                       actual);
    }
 

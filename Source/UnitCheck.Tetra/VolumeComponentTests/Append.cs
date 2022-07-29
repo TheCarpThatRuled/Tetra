@@ -37,9 +37,9 @@ public class Append
          var actual = parent.Append(child);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Append");
+         return AreEqual("Append",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.VolumeComponent>();
@@ -75,9 +75,9 @@ public class Append
          var actual = parent.Append(child);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Append");
+         return AreEqual("Append",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.VolumeComponent>();
@@ -115,9 +115,9 @@ public class Append
          var actual = parent.Append(child);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Append");
+         return AreEqual("Append",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.TestRelativeDirectoryPath>();
@@ -154,9 +154,9 @@ public class Append
          var actual = parent.Append(child);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Append");
+         return AreEqual("Append",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.VolumeComponent>();
@@ -195,9 +195,9 @@ public class Append
          var actual = parent.Append(child);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Append");
+         return AreEqual("Append",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.TestRelativeFilePath>();

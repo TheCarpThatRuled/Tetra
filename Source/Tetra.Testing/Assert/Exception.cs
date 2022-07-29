@@ -10,8 +10,8 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert AnArgumentExceptionWasThrown(this Assert       asserts,
-                                                     Option<Exception> actual,
-                                                     string            expectedMessage)
+                                                     string            expectedMessage,
+                                                     Option<Exception> actual)
       => actual
         .Reduce(() => throw Failed.Assert("No exception was thrown"),
                 exception =>
@@ -21,9 +21,9 @@ partial class Assert_Extensions
                    Assert.IsNull(exception.InnerException,
                                  "The exception contains an inner exception ");
                    Assert.That
-                         .AreEqual(expectedMessage,
-                                   exception.Message,
-                                   $"The exception does contain the expected message.\nExpected: \"{expectedMessage}\"\nActual: \"{exception.Message}\"");
+                         .AreEqual($"The exception does contain the expected message.\nExpected: \"{expectedMessage}\"\nActual: \"{exception.Message}\"",
+                                   expectedMessage,
+                                   exception.Message);
 
                    return asserts;
                 });

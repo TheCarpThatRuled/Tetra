@@ -31,7 +31,8 @@ public class True
 
       //Assert
       Assert.That
-            .IsTrue(actual);
+            .IsTrue("Return value",
+                    actual);
    }
 
    /* ------------------------------------------------------------ */

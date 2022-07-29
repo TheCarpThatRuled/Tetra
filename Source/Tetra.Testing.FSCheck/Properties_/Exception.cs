@@ -27,16 +27,16 @@ partial class Properties
       }
 
       //Assert
-      return AnArgumentExceptionWasThrown(exception,
-                                          ArgumentExceptionMessage(expectedMessage,
-                                                                   expectedParameter));
+      return AnArgumentExceptionWasThrown(ArgumentExceptionMessage(expectedMessage,
+                                                                   expectedParameter),
+                                          exception);
 
    }
 
    /* ------------------------------------------------------------ */
 
-   public static Property AnArgumentExceptionWasThrown(Option<Exception> actual,
-                                                       string            expectedMessage)
+   public static Property AnArgumentExceptionWasThrown(string            expectedMessage,
+                                                       Option<Exception> actual)
       => actual
         .Reduce(() => False("No exception was thrown"),
                 exception => AsProperty(() => exception is ArgumentException)

@@ -32,14 +32,14 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsALeft<TLeft, TRight>(TLeft                 expected,
-                                                 Either<TLeft, TRight> either,
-                                                 string                name)
+   public static Property IsALeft<TLeft, TRight>(string                description,
+                                                 TLeft                 expected,
+                                                 Either<TLeft, TRight> either)
       => either
-        .Reduce(actual => AreEqual(TheEitherIsALeftButDoesNotContainTheExpectedContent<TLeft, TRight>(name),
+        .Reduce(actual => AreEqual(TheEitherIsALeftButDoesNotContainTheExpectedContent<TLeft, TRight>(description),
                                    expected,
                                    actual.Content()),
-                _ => False(TheEitherIsARight<TLeft, TRight>(name)));
+                _ => False(TheEitherIsARight<TLeft, TRight>(description)));
 
    /* ------------------------------------------------------------ */
 
@@ -53,14 +53,14 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsAIsALeftAnd<TLeft, TRight>(Func<Left<TLeft>, bool> property,
-                                                       Either<TLeft, TRight>   either,
-                                                       string                  name)
+   public static Property IsAIsALeftAnd<TLeft, TRight>(string                  description,
+                                                       Func<Left<TLeft>, bool> property,
+                                                       Either<TLeft, TRight>   either)
       => either
         .Reduce(actual => AsProperty(() => property(actual))
-                  .Label(Failed.Message(TheEitherIsALeftButDoesNotContainTheExpectedContent<TLeft, TRight>(name),
+                  .Label(Failed.Message(TheEitherIsALeftButDoesNotContainTheExpectedContent<TLeft, TRight>(description),
                                         actual)),
-                _ => False(TheEitherIsARight<TLeft, TRight>(name)));
+                _ => False(TheEitherIsARight<TLeft, TRight>(description)));
 
    /* ------------------------------------------------------------ */
 
@@ -70,10 +70,10 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsARight<TLeft, TRight>(Either<TLeft, TRight> either,
-                                                  string                name)
+   public static Property IsARight<TLeft, TRight>(string                description,
+                                                  Either<TLeft, TRight> either)
       => AsProperty(either.IsARight)
-        .Label(TheEitherIsALeft<TLeft, TRight>(name));
+        .Label(TheEitherIsALeft<TLeft, TRight>(description));
 
    /* ------------------------------------------------------------ */
 

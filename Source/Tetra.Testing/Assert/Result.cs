@@ -11,11 +11,12 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsAFailure<T>(this Assert assert,
+                                      string      description,
                                       Result<T>   result)
    {
       if (result.IsASuccess())
       {
-         throw Failed.Assert(TheResultIsASuccess<T>());
+         throw Failed.Assert(TheResultIsASuccess<T>(description));
       }
 
       return assert;
@@ -24,57 +25,21 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsAFailure<T>(this Assert assert,
-                                      Result<T>   result,
-                                      string      name)
-   {
-      if (result.IsASuccess())
-      {
-         throw Failed.Assert(TheResultIsASuccess<T>(name));
-      }
-
-      return assert;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public static Assert IsAFailure<T>(this Assert assert,
+                                      string      description,
                                       Message     expected,
                                       Result<T>   result)
    {
       if (result.Reduce(actual =>
                         {
-                           assert.AreEqual(expected,
-                                           actual.Content(),
-                                           TheResultIsAFailureButDoesNotContainTheExpectedContent<T>());
+                           assert.AreEqual(TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(description),
+                                           expected,
+                                           actual.Content());
 
                            return false;
                         },
                         Function.True))
       {
-         throw Failed.Assert(TheResultIsASuccess<T>());
-      }
-
-      return assert;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public static Assert IsAFailure<T>(this Assert assert,
-                                      Message     expected,
-                                      Result<T>   result,
-                                      string      name)
-   {
-      if (result.Reduce(actual =>
-                        {
-                           assert.AreEqual(expected,
-                                           actual.Content(),
-                                           TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(name));
-
-                           return false;
-                        },
-                        Function.True))
-      {
-         throw Failed.Assert(TheResultIsASuccess<T>(name));
+         throw Failed.Assert(TheResultIsASuccess<T>(description));
       }
 
       return assert;
@@ -83,6 +48,7 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsAFailureAnd<T>(this Assert         assert,
+                                         string              description,
                                          Func<Failure, bool> property,
                                          Result<T>           result)
    {
@@ -90,7 +56,7 @@ partial class Assert_Extensions
                         {
                            if (!property(actual))
                            {
-                              throw Failed.Assert(TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(),
+                              throw Failed.Assert(TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(description),
                                                   actual);
                            }
 
@@ -98,32 +64,7 @@ partial class Assert_Extensions
                         },
                         Function.True))
       {
-         throw Failed.Assert(TheResultIsASuccess<T>());
-      }
-
-      return assert;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public static Assert IsAFailureAnd<T>(this Assert         assert,
-                                         Func<Failure, bool> property,
-                                         Result<T>           result,
-                                         string              name)
-   {
-      if (result.Reduce(actual =>
-                        {
-                           if (!property(actual))
-                           {
-                              throw Failed.Assert(TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(name),
-                                                  actual);
-                           }
-
-                           return false;
-                        },
-                        Function.True))
-      {
-         throw Failed.Assert(TheResultIsASuccess<T>(name));
+         throw Failed.Assert(TheResultIsASuccess<T>(description));
       }
 
       return assert;
@@ -132,11 +73,12 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsASuccess<T>(this Assert assert,
+                                      string      description,
                                       Result<T>   result)
    {
       if (result.IsAFailure())
       {
-         throw Failed.Assert(TheResultIsAFailure<T>());
+         throw Failed.Assert(TheResultIsAFailure<T>(description));
       }
 
       return assert;
@@ -145,57 +87,21 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsASuccess<T>(this Assert assert,
-                                      Result<T>   result,
-                                      string      name)
-   {
-      if (result.IsAFailure())
-      {
-         throw Failed.Assert(TheResultIsAFailure<T>(name));
-      }
-
-      return assert;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public static Assert IsASuccess<T>(this Assert assert,
+                                      string      description,
                                       T           expected,
                                       Result<T>   result)
    {
       if (result.Reduce(Function.True,
                         actual =>
                         {
-                           assert.AreEqual(expected,
-                                           actual.Content(),
-                                           TheResultIsASuccessButDoesNotContainTheExpectedContent<T>());
+                           assert.AreEqual(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(description),
+                                           expected,
+                                           actual.Content());
 
                            return false;
                         }))
       {
-         throw Failed.Assert(TheResultIsAFailure<T>());
-      }
-
-      return assert;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public static Assert IsASuccess<T>(this Assert assert,
-                                      T           expected,
-                                      Result<T>   result,
-                                      string      name)
-   {
-      if (result.Reduce(Function.True,
-                        actual =>
-                        {
-                           assert.AreEqual(expected,
-                                           actual.Content(),
-                                           TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(name));
-
-                           return false;
-                        }))
-      {
-         throw Failed.Assert(TheResultIsAFailure<T>(name));
+         throw Failed.Assert(TheResultIsAFailure<T>(description));
       }
 
       return assert;
@@ -204,6 +110,7 @@ partial class Assert_Extensions
    /* ------------------------------------------------------------ */
 
    public static Assert IsASuccessAnd<T>(this Assert            assert,
+                                         string                 description,
                                          Func<Success<T>, bool> property,
                                          Result<T>              result)
    {
@@ -212,39 +119,14 @@ partial class Assert_Extensions
                         {
                            if (!property(actual))
                            {
-                              throw Failed.Assert(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(),
+                              throw Failed.Assert(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(description),
                                                   actual);
                            }
 
                            return false;
                         }))
       {
-         throw Failed.Assert(TheResultIsAFailure<T>());
-      }
-
-      return assert;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public static Assert IsASuccessAnd<T>(this Assert            assert,
-                                         Func<Success<T>, bool> property,
-                                         Result<T>              result,
-                                         string                 name)
-   {
-      if (result.Reduce(Function.True,
-                        actual =>
-                        {
-                           if (!property(actual))
-                           {
-                              throw Failed.Assert(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(name),
-                                                  actual);
-                           }
-
-                           return false;
-                        }))
-      {
-         throw Failed.Assert(TheResultIsAFailure<T>(name));
+         throw Failed.Assert(TheResultIsAFailure<T>(description));
       }
 
       return assert;

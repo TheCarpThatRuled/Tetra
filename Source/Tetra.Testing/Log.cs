@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿#if DEBUG
+using System.Diagnostics;
+#endif
 
 namespace Tetra.Testing;
 
@@ -10,46 +12,57 @@ public static class Log
 
    public static void ToDebugOutput(string message)
    {
-   #if DEBUG
+#if DEBUG
       Debug.WriteLine(message);
-   #endif
+#endif
    }
 
    /* ------------------------------------------------------------ */
 
-   public static void ToDebugOutput_AreEqual(object? expected,
-                                             object? actual)
-   {
-      ToDebugOutput($"Expected: {expected}, Actual: {actual}");
-      ToDebugOutput(string.Empty);
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public static void ToDebugOutput_AreEqual(string message,
+   public static void ToDebugOutput_AreEqual(string  message,
                                              object? expected,
                                              object? actual)
    {
       ToDebugOutput(message);
-      ToDebugOutput_AreEqual(expected,
-                             actual);
+      ToDebugOutput($"Test are equal; Expected: '{expected}', Actual: '{actual}'");
+      ToDebugOutput_NewLine();
    }
 
    /* ------------------------------------------------------------ */
 
-   public static void ToDebugOutput_AreEqual(DateTime expected,
-                                             DateTime actual)
-      => ToDebugOutput_AreEqual(expected.ToString("O"),
-                                actual.ToString("O"));
-
-   /* ------------------------------------------------------------ */
-
-   public static void ToDebugOutput_AreEqual(string message,
+   public static void ToDebugOutput_AreEqual(string   message,
                                              DateTime expected,
                                              DateTime actual)
       => ToDebugOutput_AreEqual(message,
                                 expected.ToString("O"),
                                 actual.ToString("O"));
+
+   /* ------------------------------------------------------------ */
+
+   public static void ToDebugOutput_IsFalse(string message,
+                                            bool   actual)
+   {
+      ToDebugOutput(message);
+      ToDebugOutput($"Test is false;'{actual}'");
+      ToDebugOutput_NewLine();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public static void ToDebugOutput_IsTrue(string message,
+                                           bool   actual)
+   {
+      ToDebugOutput(message);
+      ToDebugOutput($"Test is true;'{actual}'");
+      ToDebugOutput_NewLine();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public static void ToDebugOutput_NewLine()
+   {
+      ToDebugOutput(string.Empty);
+   }
 
    /* ------------------------------------------------------------ */
    // ToStandardOutput Functions

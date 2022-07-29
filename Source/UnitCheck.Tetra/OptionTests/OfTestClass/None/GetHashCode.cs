@@ -32,7 +32,8 @@ public class None_GetHashCode
 
       //Assert
       Assert.That
-            .AreEqual(typeof(TestClass).GetHashCode(),
+            .AreEqual("Return value",
+                      typeof(TestClass).GetHashCode(),
                       actual);
    }
 

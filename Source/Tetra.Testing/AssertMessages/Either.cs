@@ -7,50 +7,46 @@ public static partial class AssertMessages
    /* ------------------------------------------------------------ */
 
    public static string TheEitherIsALeftButDoesNotContainTheExpectedContent<TLeft, TRight>()
-      => Either<TLeft, TRight>()
+      => TheEither<TLeft, TRight>()
        + IsALeftButDoesNotContainTheExpectedContent;
 
    /* ------------------------------------------------------------ */
 
-   public static string TheEitherIsALeftButDoesNotContainTheExpectedContent<TLeft, TRight>(string name)
-      => Either<TLeft, TRight>(name)
-       + IsALeftButDoesNotContainTheExpectedContent;
-
-   /* ------------------------------------------------------------ */
-
-   public static string TheEitherIsARightButDoesNotContainTheExpectedContent<TLeft, TRight>()
-      => Either<TLeft, TRight>()
-       + IsARightButDoesNotContainTheExpectedContent;
-
-   /* ------------------------------------------------------------ */
-
-   public static string TheEitherIsARightButDoesNotContainTheExpectedContent<TLeft, TRight>(string name)
-      => Either<TLeft, TRight>(name)
-       + IsARightButDoesNotContainTheExpectedContent;
+   public static string TheEitherIsALeftButDoesNotContainTheExpectedContent<TLeft, TRight>(string description)
+      => $"{description}: {TheEither<TLeft, TRight>()}{IsALeftButDoesNotContainTheExpectedContent}";
 
    /* ------------------------------------------------------------ */
 
    public static string TheEitherIsALeft<TLeft, TRight>()
-      => Either<TLeft, TRight>()
+      => TheEither<TLeft, TRight>()
        + IsALeftWhenWeExpectedItToBeARight;
 
    /* ------------------------------------------------------------ */
 
-   public static string TheEitherIsALeft<TLeft, TRight>(string name)
-      => Either<TLeft, TRight>(name)
-       + IsALeftWhenWeExpectedItToBeARight;
+   public static string TheEitherIsALeft<TLeft, TRight>(string description)
+      => $"{description}: {TheEither<TLeft, TRight>()}{IsALeftWhenWeExpectedItToBeARight}";
 
    /* ------------------------------------------------------------ */
 
    public static string TheEitherIsARight<TLeft, TRight>()
-      => Either<TLeft, TRight>()
+      => TheEither<TLeft, TRight>()
        + IsARightWhenWeExpectedItToBeALeft;
 
    /* ------------------------------------------------------------ */
 
-   public static string TheEitherIsARight<TLeft, TRight>(string name)
-      => Either<TLeft, TRight>(name)
-       + IsARightWhenWeExpectedItToBeALeft;
+   public static string TheEitherIsARight<TLeft, TRight>(string description)
+      => $"{description}: {TheEither<TLeft, TRight>()}{IsARightWhenWeExpectedItToBeALeft}";
+
+   /* ------------------------------------------------------------ */
+
+   public static string TheEitherIsARightButDoesNotContainTheExpectedContent<TLeft, TRight>()
+      => TheEither<TLeft, TRight>()
+       + IsARightButDoesNotContainTheExpectedContent;
+
+   /* ------------------------------------------------------------ */
+
+   public static string TheEitherIsARightButDoesNotContainTheExpectedContent<TLeft, TRight>(string description)
+      => $"{description}: {TheEither<TLeft, TRight>()}{IsARightButDoesNotContainTheExpectedContent}";
 
    /* ------------------------------------------------------------ */
    // Private Constants
@@ -65,17 +61,8 @@ public static partial class AssertMessages
    // Private Functions
    /* ------------------------------------------------------------ */
 
-   private static string Either<TLeft, TRight>(string? name = null)
-   {
-      var result = $@"The Either<{typeof(TLeft).Name}, {typeof(TRight).Name}> ";
-
-      if (name is not null)
-      {
-         result += $@"""{name}"" ";
-      }
-
-      return result;
-   }
+   private static string TheEither<TLeft, TRight>()
+      => $@"The Either<{typeof(TLeft).Name}, {typeof(TRight).Name}> ";
 
    /* ------------------------------------------------------------ */
 }

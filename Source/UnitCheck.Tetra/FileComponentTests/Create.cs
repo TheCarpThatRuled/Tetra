@@ -55,26 +55,10 @@ public class Create
    public void GIVEN_a_string_containing_an_invalid_character_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
       static Property Property(string value)
-      {
-         //Arrange
-         var exception = Option<Exception>.None();
-
-         //Act
-         try
-         {
-            FileComponent.Create(value);
-         }
-         catch (Exception e)
-         {
-            exception = e;
-         }
-
-         //Assert
-         return AnArgumentExceptionWasThrown(exception,
-                                             ArgumentExceptionMessage(IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
-                                                                                           HumanReadableName.FileComponent),
-                                                                      "potentialComponent"));
-      }
+         => AnArgumentExceptionWasThrown(() => FileComponent.Create(value),
+                                         IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
+                                                                                               HumanReadableName.FileComponent),
+                                         "potentialComponent");
 
       Arb.Register<Libraries.InvalidPathComponent>();
 

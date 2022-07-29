@@ -32,7 +32,8 @@ public class None_IsASome
 
       //Assert
       Assert.That
-            .IsFalse(actual);
+            .IsFalse("Return value",
+                     actual);
    }
 
    /* ------------------------------------------------------------ */

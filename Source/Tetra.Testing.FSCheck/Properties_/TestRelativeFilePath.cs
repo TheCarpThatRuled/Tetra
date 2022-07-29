@@ -9,9 +9,9 @@ partial class Properties
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static Property AreEqual(TestRelativeFilePath expected,
-                                   RelativeFilePath     actual,
-                                   string               description)
+   public static Property AreEqual(string               description,
+                                   TestRelativeFilePath expected,
+                                   RelativeFilePath     actual)
       => AreEqual($"{description} - Value() returns an unexpected value",
                   expected.PathWithoutTrailingDirectorySeparator(),
                   actual.Value())
@@ -21,36 +21,40 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreEqual(TestRelativeFilePath                                                      expected,
-                                   (IReadOnlyCollection<DirectoryComponent> directories, FileComponent file) actual,
-                                   string                                                                    description)
-      => AreSequenceEqual(expected.Directories(),
-                          actual.directories,
-                          $"{description} - directories")
+   public static Property AreEqual(string                                                                    description,
+                                   TestRelativeFilePath                                                      expected,
+                                   (IReadOnlyCollection<DirectoryComponent> directories, FileComponent file) actual)
+      => AreSequenceEqual($"{description} - directories",
+                          expected.Directories(),
+                          actual.directories)
         .And(AreEqual($"{description} - the files do not match",
                       expected.File(),
                       actual.file));
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreSequenceEqual(IEnumerable<TestRelativeFilePath> expected,
-                                           IEnumerable<RelativeFilePath>     actual,
-                                           string                            description)
-      => AreSequenceEqual(expected.ToArray(),
-                          actual.ToArray(),
-                          description);
+   public static Property AreSequenceEqual(string                            description,
+                                           IEnumerable<TestRelativeFilePath> expected,
+                                           IEnumerable<RelativeFilePath>     actual)
+      => AreSequenceEqual(description,
+                          expected.ToArray(),
+                          actual.ToArray());
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreSequenceEqual(IReadOnlyCollection<TestRelativeFilePath> expected,
-                                           IReadOnlyCollection<RelativeFilePath>     actual,
-                                           string                                    description)
-      => AreSequenceEqual(expected,
+   public static Property AreSequenceEqual(string                                    description,
+                                           IReadOnlyCollection<TestRelativeFilePath> expected,
+                                           IReadOnlyCollection<RelativeFilePath>     actual)
+      => AreSequenceEqual(description,
+                          expected,
                           actual,
                           x => x.PathWithoutTrailingDirectorySeparator(),
                           x => x.Value(),
-                          AreEqual,
-                          description);
+                          (expected1,
+                           actual1,
+                           description1) => AreEqual(description1,
+                                                     expected1,
+                                                     actual1));
 
    /* ------------------------------------------------------------ */
 }

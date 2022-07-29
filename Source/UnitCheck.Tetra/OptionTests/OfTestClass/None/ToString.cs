@@ -32,7 +32,8 @@ public class None_ToString
 
       //Assert
       Assert.That
-            .AreEqual("None of TestClass",
+            .AreEqual("Return value",
+                      "None of TestClass",
                       actual);
    }
 

@@ -33,9 +33,9 @@ public class Create
          var actual = RelativeDirectoryPath.Create(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual(testPath,
-                         actual,
-                         "Create");
+         return AreEqual("Create",
+                         testPath,
+                         actual);
       }
 
       Arb.Register<Libraries.TestRelativeDirectoryPath>();
@@ -63,9 +63,9 @@ public class Create
          var actual = RelativeDirectoryPath.Create(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual(testPath,
-                         actual,
-                         "Create");
+         return AreEqual("Create",
+                         testPath,
+                         actual);
       }
 
       Arb.Register<Libraries.TestRelativeDirectoryPath>();
@@ -101,10 +101,10 @@ public class Create
 
       //Assert
       Assert.That
-            .AnArgumentExceptionWasThrown(exception,
-                                          ArgumentExceptionMessage(IsNotValidBecauseARelativePathMayNotBeEmpty(string.Empty,
+            .AnArgumentExceptionWasThrown(ArgumentExceptionMessage(IsNotValidBecauseARelativePathMayNotBeEmpty(string.Empty,
                                                                                                                HumanReadableName.RelativeDirectoryPath),
-                                                                   "potentialPath"));
+                                                                   "potentialPath"),
+                                          exception);
    }
 
    /* ------------------------------------------------------------ */
@@ -154,9 +154,9 @@ public class Create
          var actual = RelativeDirectoryPath.Create(directories);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Create");
+         return AreEqual("Create",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
@@ -188,9 +188,9 @@ public class Create
          var actual = RelativeDirectoryPath.Create(directories);
 
          //Assert
-         return AreEqual(expected,
-                         actual,
-                         "Create");
+         return AreEqual("Create",
+                         expected,
+                         actual);
       }
 
       Arb.Register<Libraries.ListOfDirectoryComponents>();
