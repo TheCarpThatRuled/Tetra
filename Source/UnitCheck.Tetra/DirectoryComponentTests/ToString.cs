@@ -35,7 +35,8 @@ public class ToString
          var actual = directoryComponent.ToString();
 
          //Assert
-         return AreEqual($"<{value}>",
+         return AreEqual(AssertMessages.ReturnValue,
+                         $"<{value}>",
                          actual);
       }
 

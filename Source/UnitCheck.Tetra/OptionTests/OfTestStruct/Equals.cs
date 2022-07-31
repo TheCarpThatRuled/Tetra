@@ -34,7 +34,8 @@ public class Equals
          var actual = option.Equals(obj);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.OptionOfTestStruct>();
@@ -224,7 +225,8 @@ public class Equals
          var actual = value.Equals(null);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.OptionOfTestStruct>();
@@ -347,7 +349,8 @@ public class Equals
          var actual = option.Equals(value);
 
          //Assert
-         return IsTrue(actual);
+         return IsTrue(AssertMessages.ReturnValue,
+                       actual);
       }
 
       Arb.Register<Libraries.TestStruct>();

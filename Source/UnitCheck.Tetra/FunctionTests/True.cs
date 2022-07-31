@@ -31,7 +31,7 @@ public class True
 
       //Assert
       Assert.That
-            .IsTrue("Return value",
+            .IsTrue(AssertMessages.ReturnValue,
                     actual);
    }
 
@@ -55,7 +55,8 @@ public class True
          var actual = Function.True(value);
 
          //Assert
-         return IsTrue(actual);
+         return IsTrue(AssertMessages.ReturnValue,
+                       actual);
       }
 
       Prop.ForAll<int>(Property)
@@ -80,7 +81,8 @@ public class True
          var actual = Function.True(value);
 
          //Assert
-         return IsTrue(actual);
+         return IsTrue(AssertMessages.ReturnValue,
+                       actual);
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -107,7 +109,8 @@ public class True
          var actual = Function.True(value);
 
          //Assert
-         return IsTrue(actual);
+         return IsTrue(AssertMessages.ReturnValue,
+                       actual);
       }
 
       Arb.Register<Libraries.TestStruct>();

@@ -33,7 +33,8 @@ public class CompareTo
          var actual = path.CompareTo(null);
 
          //Assert
-         return AreEqual(1,
+         return AreEqual(AssertMessages.ReturnValue,
+                         1,
                          actual);
       }
 
@@ -65,7 +66,8 @@ public class CompareTo
          var actual = firstAbsoluteDirectoryPath.CompareTo(secondAbsoluteDirectoryPath);
 
          //Assert
-         return AreEqual(0,
+         return AreEqual(AssertMessages.ReturnValue,
+                         0,
                          actual);
       }
 
@@ -98,7 +100,8 @@ public class CompareTo
          var actual = firstAbsoluteDirectoryPath.CompareTo(secondAbsoluteDirectoryPath);
 
          //Assert
-         return AreEqual(StringComparer.OrdinalIgnoreCase
+         return AreEqual(AssertMessages.ReturnValue,
+                         StringComparer.OrdinalIgnoreCase
                                        .Compare(args.first,
                                                 args.second),
                          actual);
@@ -133,7 +136,8 @@ public class CompareTo
          var actual = firstAbsoluteDirectoryPath.CompareTo(secondAbsoluteDirectoryPath);
 
          //Assert
-         return AreEqual(StringComparer.OrdinalIgnoreCase
+         return AreEqual(AssertMessages.ReturnValue,
+                         StringComparer.OrdinalIgnoreCase
                                        .Compare(args.first,
                                                 args.second),
                          actual);

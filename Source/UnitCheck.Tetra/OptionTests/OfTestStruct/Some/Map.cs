@@ -39,9 +39,11 @@ public class Some_Map
          var actual = option.Map(whenSomeFunc.Func);
 
          //Assert
-         return IsASome(whenSome,
+         return IsASome(AssertMessages.ReturnValue,
+                        whenSome,
                         actual)
-           .And(WasInvokedOnce(value,
+           .And(WasInvokedOnce(nameof(whenSome),
+                               value,
                                whenSomeFunc));
       }
 
@@ -76,9 +78,11 @@ public class Some_Map
          var actual = option.Map(whenSomeFunc.Func);
 
          //Assert
-         return IsASome(whenSome,
+         return IsASome(AssertMessages.ReturnValue,
+                        whenSome,
                         actual)
-           .And(WasInvokedOnce(value,
+           .And(WasInvokedOnce(nameof(whenSome),
+                               value,
                                whenSomeFunc));
       }
 
@@ -113,9 +117,11 @@ public class Some_Map
          var actual = option.Map(whenSomeFunc.Func);
 
          //Assert
-         return IsASome(whenSome,
+         return IsASome(AssertMessages.ReturnValue,
+                        whenSome,
                         actual)
-           .And(WasInvokedOnce(value,
+           .And(WasInvokedOnce(nameof(whenSome),
+                               value,
                                whenSomeFunc));
       }
 
@@ -150,9 +156,11 @@ public class Some_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsASome(args.whenSome,
+         return IsASome(AssertMessages.ReturnValue,
+                        args.whenSome,
                         actual)
-           .And(WasInvokedOnce(args.value,
+           .And(WasInvokedOnce(nameof(whenSome),
+                               args.value,
                                whenSome));
       }
 
@@ -188,8 +196,10 @@ public class Some_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsANone(actual)
-           .And(WasInvokedOnce(value,
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasInvokedOnce(nameof(whenSome),
+                               value,
                                whenSome));
       }
 
@@ -223,8 +233,10 @@ public class Some_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsANone(actual)
-           .And(WasInvokedOnce(value,
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasInvokedOnce(nameof(whenSome),
+                               value,
                                whenSome));
       }
 
@@ -258,8 +270,10 @@ public class Some_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsANone(actual)
-           .And(WasInvokedOnce(value,
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasInvokedOnce(nameof(whenSome),
+                               value,
                                whenSome));
       }
 
@@ -293,8 +307,10 @@ public class Some_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsANone(actual)
-           .And(WasInvokedOnce(value,
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasInvokedOnce(nameof(whenSome),
+                               value,
                                whenSome));
       }
 
@@ -329,9 +345,11 @@ public class Some_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsASome(newValue,
+         return IsASome(AssertMessages.ReturnValue,
+                        newValue,
                         actual)
-           .And(WasInvokedOnce(value,
+           .And(WasInvokedOnce(nameof(whenSome),
+                               value,
                                whenSome));
       }
 
@@ -365,9 +383,11 @@ public class Some_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsASome(newValue,
+         return IsASome(AssertMessages.ReturnValue,
+                        newValue,
                         actual)
-           .And(WasInvokedOnce(value,
+           .And(WasInvokedOnce(nameof(whenSome),
+                               value,
                                whenSome));
       }
 
@@ -402,9 +422,11 @@ public class Some_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsASome(newValue,
+         return IsASome(AssertMessages.ReturnValue,
+                        newValue,
                         actual)
-           .And(WasInvokedOnce(value,
+           .And(WasInvokedOnce(nameof(whenSome),
+                               value,
                                whenSome));
       }
 
@@ -439,9 +461,11 @@ public class Some_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsASome(args.newValue,
+         return IsASome(AssertMessages.ReturnValue,
+                        args.newValue,
                         actual)
-           .And(WasInvokedOnce(args.value,
+           .And(WasInvokedOnce(nameof(whenSome),
+                               args.value,
                                whenSome));
       }
 

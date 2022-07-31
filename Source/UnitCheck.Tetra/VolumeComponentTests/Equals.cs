@@ -34,7 +34,8 @@ public class Equals
          var actual = volume.Equals(obj);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<ObjIsNullOrANonEquatableType>();
@@ -154,7 +155,8 @@ public class Equals
          var actual = value.Equals(null);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.VolumeComponent>();

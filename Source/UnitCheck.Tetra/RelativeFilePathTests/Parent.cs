@@ -35,7 +35,8 @@ public class Parent
          var actual = path.Parent();
 
          //Assert
-         return IsANone(actual);
+         return IsANone(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.FileComponent>();
@@ -69,8 +70,8 @@ public class Parent
          var actual = path.Parent();
 
          //Assert
-         return IsASomeAnd("Parent",
-                           actualParent => AreEqual("Parent",
+         return IsASomeAnd(AssertMessages.ReturnValue,
+                           actualParent => AreEqual(AssertMessages.ReturnValue,
                                                     expected,
                                                     actualParent),
                            actual);

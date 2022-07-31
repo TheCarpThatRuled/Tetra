@@ -36,7 +36,8 @@ public class Some_MapToResult
          var actual = error.MapToResult(whenNone);
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 
@@ -68,7 +69,8 @@ public class Some_MapToResult
          var actual = error.MapToResult(whenNone);
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 
@@ -101,7 +103,8 @@ public class Some_MapToResult
          var actual = error.MapToResult(whenNone);
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 
@@ -138,9 +141,11 @@ public class Some_MapToResult
          var actual = error.MapToResult(whenNone.Func);
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual)
-           .And(WasNotInvoked(whenNone));
+           .And(WasNotInvoked(nameof(whenNone),
+                              whenNone));
       }
 
       Arb.Register<Libraries.Message>();
@@ -173,9 +178,11 @@ public class Some_MapToResult
          var actual = error.MapToResult(whenNone.Func);
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual)
-           .And(WasNotInvoked(whenNone));
+           .And(WasNotInvoked(nameof(whenNone),
+                              whenNone));
       }
 
       Arb.Register<Libraries.Message>();
@@ -209,9 +216,11 @@ public class Some_MapToResult
          var actual = error.MapToResult(whenNone.Func);
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual)
-           .And(WasNotInvoked(whenNone));
+           .And(WasNotInvoked(nameof(whenNone),
+                              whenNone));
       }
 
       Arb.Register<Libraries.Message>();

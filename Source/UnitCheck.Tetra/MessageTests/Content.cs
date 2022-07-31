@@ -35,7 +35,8 @@ public class Content
          var actual = message.Content();
 
          //Assert
-         return AreEqual(value,
+         return AreEqual(AssertMessages.ReturnValue,
+                         value,
                          actual);
       }
 

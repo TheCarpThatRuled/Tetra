@@ -36,7 +36,8 @@ public class ToDelimitedString
          var actual = list.ToDelimitedString(delimiter);
 
          //Assert
-         return AreEqual(string.Empty,
+         return AreEqual(AssertMessages.ReturnValue,
+                         string.Empty,
                          actual);
       }
 
@@ -66,7 +67,8 @@ public class ToDelimitedString
          var actual = list.ToDelimitedString(delimiter);
 
          //Assert
-         return AreEqual(value,
+         return AreEqual(AssertMessages.ReturnValue,
+                         value,
                          actual);
       }
 
@@ -105,7 +107,8 @@ public class ToDelimitedString
          var actual = list.ToDelimitedString(delimiter);
 
          //Assert
-         return AreEqual(expected.ToString(),
+         return AreEqual(AssertMessages.ReturnValue,
+                         expected.ToString(),
                          actual);
       }
 
@@ -139,7 +142,8 @@ public class ToDelimitedString
          var actual = list.ToDelimitedString(delimiter);
 
          //Assert
-         return AreEqual(string.Empty,
+         return AreEqual(AssertMessages.ReturnValue,
+                         string.Empty,
                          actual);
       }
 
@@ -171,7 +175,8 @@ public class ToDelimitedString
          var actual = list.ToDelimitedString(delimiter);
          
          //Assert
-         return AreEqual(value,
+         return AreEqual(AssertMessages.ReturnValue,
+                         value,
                          actual);
       }
 
@@ -210,7 +215,8 @@ public class ToDelimitedString
          var actual = list.ToDelimitedString(delimiter);
 
          //Assert
-         return AreEqual(expected.ToString(),
+         return AreEqual(AssertMessages.ReturnValue,
+                         expected.ToString(),
                          actual);
       }
 

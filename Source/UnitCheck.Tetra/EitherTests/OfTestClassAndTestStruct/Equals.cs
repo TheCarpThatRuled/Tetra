@@ -34,7 +34,8 @@ public class Equals
          var actual = either.Equals(other);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.EitherOfTestClassAndTestStruct>();
@@ -160,7 +161,8 @@ public class Equals
          var actual = either.Equals(default(Either<TestClass, TestStruct>));
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.EitherOfTestClassAndTestStruct>();

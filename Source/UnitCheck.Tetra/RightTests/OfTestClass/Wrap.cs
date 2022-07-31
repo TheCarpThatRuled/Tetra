@@ -40,9 +40,11 @@ public class Wrap
          var actual = wrappedFunc(right);
 
          //Assert
-         return AreEqual(newValue,
+         return AreEqual(AssertMessages.ReturnValue,
+                         newValue,
                          actual)
-           .And(WasInvokedOnce(func));
+           .And(WasInvokedOnce(nameof(func),
+                               func));
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -76,9 +78,11 @@ public class Wrap
          var actual = wrappedFunc(right);
 
          //Assert
-         return AreEqual(args.newValue,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.newValue,
                          actual)
-           .And(WasInvokedOnce(func));
+           .And(WasInvokedOnce(nameof(func),
+                               func));
       }
 
       Arb.Register<Libraries.TwoUniqueTestClasses>();
@@ -113,9 +117,11 @@ public class Wrap
          var actual = wrappedFunc(right);
 
          //Assert
-         return AreEqual(newValue,
+         return AreEqual(AssertMessages.ReturnValue,
+                         newValue,
                          actual)
-           .And(WasInvokedOnce(func));
+           .And(WasInvokedOnce(nameof(func),
+                               func));
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -153,9 +159,11 @@ public class Wrap
          var actual = wrappedFunc(right);
 
          //Assert
-         return AreEqual(newValue,
+         return AreEqual(AssertMessages.ReturnValue,
+                         newValue,
                          actual)
-           .And(WasInvokedOnce(content,
+           .And(WasInvokedOnce(nameof(func),
+                               content,
                                func));
       }
 
@@ -190,9 +198,11 @@ public class Wrap
          var actual = wrappedFunc(right);
 
          //Assert
-         return AreEqual(args.newValue,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.newValue,
                          actual)
-           .And(WasInvokedOnce(args.content,
+           .And(WasInvokedOnce(nameof(func),
+                               args.content,
                                func));
       }
 
@@ -228,9 +238,11 @@ public class Wrap
          var actual = wrappedFunc(right);
 
          //Assert
-         return AreEqual(newValue,
+         return AreEqual(AssertMessages.ReturnValue,
+                         newValue,
                          actual)
-           .And(WasInvokedOnce(content,
+           .And(WasInvokedOnce(nameof(func),
+                               content,
                                func));
       }
 

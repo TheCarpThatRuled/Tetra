@@ -35,7 +35,8 @@ public class Some_IsANone
          var actual = option.IsANone();
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Prop.ForAll<int>(Property)

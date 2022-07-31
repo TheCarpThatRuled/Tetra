@@ -36,7 +36,8 @@ public class Some_Reduce
          var actual = option.Reduce(args.whenNone);
 
          //Assert
-         return AreEqual(args.value,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.value,
                          actual);
       }
 
@@ -72,9 +73,11 @@ public class Some_Reduce
          var actual = option.Reduce(whenNone.Func);
 
          //Assert
-         return AreEqual(args.value,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.value,
                          actual)
-           .And(WasNotInvoked(whenNone));
+           .And(WasNotInvoked(nameof(whenNone),
+                              whenNone));
       }
 
       Arb.Register<Libraries.TwoUniqueTestClasses>();
@@ -111,9 +114,11 @@ public class Some_Reduce
                                     whenSome.Func);
 
          //Assert
-         return AreEqual(args.whenSome,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenSome,
                          actual)
-               .And(WasInvokedOnce(value,
+               .And(WasInvokedOnce(nameof(whenSome),
+                                   value,
                                    whenSome));
       }
 
@@ -149,9 +154,11 @@ public class Some_Reduce
                                     whenSome.Func);
 
          //Assert
-         return AreEqual(args.whenSome,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenSome,
                          actual)
-               .And(WasInvokedOnce(args.value,
+               .And(WasInvokedOnce(nameof(whenSome),
+                                   args.value,
                                    whenSome));
       }
 
@@ -186,9 +193,11 @@ public class Some_Reduce
                                     whenSome.Func);
 
          //Assert
-         return AreEqual(args.whenSome,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenSome,
                          actual)
-               .And(WasInvokedOnce(value,
+               .And(WasInvokedOnce(nameof(whenSome),
+                                   value,
                                    whenSome));
       }
 
@@ -228,10 +237,13 @@ public class Some_Reduce
                                     whenSome.Func);
 
          //Assert
-         return AreEqual(args.whenSome,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenSome,
                          actual)
-               .And(WasNotInvoked(whenNone))
-               .And(WasInvokedOnce(value,
+               .And(WasNotInvoked(nameof(whenNone),
+                                  whenNone))
+               .And(WasInvokedOnce(nameof(whenSome),
+                                   value,
                                    whenSome));
       }
 
@@ -268,10 +280,13 @@ public class Some_Reduce
                                     whenSome.Func);
 
          //Assert
-         return AreEqual(args.whenSome,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenSome,
                          actual)
-               .And(WasNotInvoked(whenNone))
-               .And(WasInvokedOnce(args.value,
+               .And(WasNotInvoked(nameof(whenNone),
+                                  whenNone))
+               .And(WasInvokedOnce(nameof(whenSome),
+                                   args.value,
                                    whenSome));
       }
 
@@ -307,10 +322,13 @@ public class Some_Reduce
                                     whenSome.Func);
 
          //Assert
-         return AreEqual(args.whenSome,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenSome,
                          actual)
-               .And(WasNotInvoked(whenNone))
-               .And(WasInvokedOnce(value,
+               .And(WasNotInvoked(nameof(whenNone),
+                                  whenNone))
+               .And(WasInvokedOnce(nameof(whenSome),
+                                   value,
                                    whenSome));
       }
 

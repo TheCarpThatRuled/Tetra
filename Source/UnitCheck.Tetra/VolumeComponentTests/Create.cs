@@ -32,7 +32,8 @@ public class Create
          var actual = VolumeComponent.Create(value);
 
          //Assert
-         return AreEqual($"{value}:",
+         return AreEqual(AssertMessages.ReturnValue,
+                         $"{value}:",
                          actual.Value());
       }
 

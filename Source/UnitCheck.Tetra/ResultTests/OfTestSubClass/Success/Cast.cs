@@ -36,7 +36,8 @@ public class Success_Cast
          var actual = result.Cast<int>();
 
          //Assert
-         return IsAFailure(Messages.CastFailed<TestSubClass, int>(),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Messages.CastFailed<TestSubClass, int>(),
                            actual);
       }
 
@@ -67,7 +68,8 @@ public class Success_Cast
          var actual = result.Cast<TestClass>();
 
          //Assert
-         return IsASuccess(content,
+         return IsASuccess(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 
@@ -98,7 +100,8 @@ public class Success_Cast
          var actual = result.Cast<TestStruct>();
 
          //Assert
-         return IsAFailure(Messages.CastFailed<TestSubClass, TestStruct>(),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Messages.CastFailed<TestSubClass, TestStruct>(),
                            actual);
       }
 
@@ -129,7 +132,8 @@ public class Success_Cast
          var actual = result.Cast<TestSubClass>();
 
          //Assert
-         return IsASuccess(content,
+         return IsASuccess(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 
@@ -162,7 +166,8 @@ public class Success_Cast
          var actual = result.Cast<int>(whenCastFails);
 
          //Assert
-         return IsAFailure(whenCastFails,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           whenCastFails,
                            actual);
       }
 
@@ -194,7 +199,8 @@ public class Success_Cast
          var actual = result.Cast<TestClass>(whenCastFails);
 
          //Assert
-         return IsASuccess(content,
+         return IsASuccess(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 
@@ -226,7 +232,8 @@ public class Success_Cast
          var actual = result.Cast<TestStruct>(whenCastFails);
 
          //Assert
-         return IsAFailure(whenCastFails,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           whenCastFails,
                            actual);
       }
 
@@ -258,7 +265,8 @@ public class Success_Cast
          var actual = result.Cast<TestSubClass>(whenCastFails);
 
          //Assert
-         return IsASuccess(content,
+         return IsASuccess(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 
@@ -294,9 +302,11 @@ public class Success_Cast
          var actual = result.Cast<int>(whenCastFailsFunc.Func);
 
          //Assert
-         return IsAFailure(whenCastFails,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           whenCastFails,
                            actual)
-           .And(WasInvokedOnce(content,
+           .And(WasInvokedOnce(nameof(whenCastFails),
+                               content,
                                whenCastFailsFunc));
       }
 
@@ -330,9 +340,11 @@ public class Success_Cast
          var actual = result.Cast<TestClass>(whenCastFailsFunc.Func);
 
          //Assert
-         return IsASuccess(content,
+         return IsASuccess(AssertMessages.ReturnValue,
+                           content,
                            actual)
-           .And(WasNotInvoked(whenCastFailsFunc));
+           .And(WasNotInvoked(nameof(whenCastFails),
+                              whenCastFailsFunc));
       }
 
       Arb.Register<Libraries.Message>();
@@ -365,9 +377,11 @@ public class Success_Cast
          var actual = result.Cast<TestStruct>(whenCastFailsFunc.Func);
 
          //Assert
-         return IsAFailure(whenCastFails,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           whenCastFails,
                            actual)
-           .And(WasInvokedOnce(content,
+           .And(WasInvokedOnce(nameof(whenCastFails),
+                               content,
                                whenCastFailsFunc));
       }
 
@@ -401,9 +415,11 @@ public class Success_Cast
          var actual = result.Cast<TestSubClass>(whenCastFailsFunc.Func);
 
          //Assert
-         return IsASuccess(content,
+         return IsASuccess(AssertMessages.ReturnValue,
+                           content,
                            actual)
-           .And(WasNotInvoked(whenCastFailsFunc));
+           .And(WasNotInvoked(nameof(whenCastFails),
+                              whenCastFailsFunc));
       }
 
       Arb.Register<Libraries.Message>();

@@ -33,7 +33,7 @@ public class Create
          var actual = AbsoluteDirectoryPath.Create(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual("Create",
+         return AreEqual(AssertMessages.ReturnValue,
                          testPath,
                          actual);
       }
@@ -63,7 +63,7 @@ public class Create
          var actual = AbsoluteDirectoryPath.Create(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual("Create",
+         return AreEqual(AssertMessages.ReturnValue,
                          testPath,
                          actual);
       }
@@ -201,7 +201,7 @@ public class Create
                                                    testPath.Directories());
 
          //Assert
-         return AreEqual("Create",
+         return AreEqual(AssertMessages.ReturnValue,
                          testPath,
                          actual);
       }

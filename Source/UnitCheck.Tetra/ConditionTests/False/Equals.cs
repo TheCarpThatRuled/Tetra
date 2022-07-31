@@ -35,7 +35,8 @@ public class False_Equals
                      .Equals(obj);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<ObjIsNullOrANonEquatableType>();
@@ -113,7 +114,7 @@ public class False_Equals
 
       //Assert
       Assert.That
-            .IsTrue("Return value",
+            .IsTrue(AssertMessages.ReturnValue,
                     actual);
    }
 
@@ -137,7 +138,7 @@ public class False_Equals
 
       //Assert
       Assert.That
-            .IsFalse("Return value",
+            .IsFalse(AssertMessages.ReturnValue,
                      actual);
    }
 
@@ -161,7 +162,7 @@ public class False_Equals
 
       //Assert
       Assert.That
-            .IsFalse("Return value",
+            .IsFalse(AssertMessages.ReturnValue,
                      actual);
    }
 
@@ -187,7 +188,7 @@ public class False_Equals
 
       //Assert
       Assert.That
-            .IsFalse("Return value",
+            .IsFalse(AssertMessages.ReturnValue,
                      actual);
    }
 
@@ -234,7 +235,7 @@ public class False_Equals
 
       //Assert
       Assert.That
-            .IsFalse("Return value",
+            .IsFalse(AssertMessages.ReturnValue,
                      actual);
    }
 
@@ -260,7 +261,7 @@ public class False_Equals
 
       //Assert
       Assert.That
-            .IsTrue("Return value",
+            .IsTrue(AssertMessages.ReturnValue,
                     actual);
    }
 
@@ -284,7 +285,7 @@ public class False_Equals
 
       //Assert
       Assert.That
-            .IsFalse("Return value",
+            .IsFalse(AssertMessages.ReturnValue,
                      actual);
    }
 

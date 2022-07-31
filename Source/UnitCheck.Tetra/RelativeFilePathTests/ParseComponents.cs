@@ -52,8 +52,8 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd("Return value",
-                              actualComponents => AreEqual("Return value",
+         return IsASuccessAnd(AssertMessages.ReturnValue,
+                              actualComponents => AreEqual(AssertMessages.ReturnValue,
                                                            testPath,
                                                            actualComponents.Content()),
                               actual);
@@ -86,7 +86,8 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(path,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(path,
                                                                                                              nameof(TestPath))),
                            actual);
       }
@@ -116,7 +117,7 @@ public class ParseComponents
 
       //Assert
       Assert.That
-            .IsAFailure("Return value",
+            .IsAFailure(AssertMessages.ReturnValue,
                         Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(string.Empty,
                                                                                    nameof(TestPath))),
                         actual);
@@ -142,7 +143,8 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(path,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(path,
                                                                                                    nameof(TestPath))),
                            actual);
       }

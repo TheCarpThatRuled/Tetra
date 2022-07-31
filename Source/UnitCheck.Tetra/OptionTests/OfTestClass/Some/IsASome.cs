@@ -35,7 +35,8 @@ public class Some_IsASome
          var actual = option.IsASome();
 
          //Assert
-         return IsTrue(actual);
+         return IsTrue(AssertMessages.ReturnValue,
+                       actual);
       }
 
       Arb.Register<Libraries.TestClass>();

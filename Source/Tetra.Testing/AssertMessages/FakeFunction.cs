@@ -1,9 +1,9 @@
 ﻿namespace Tetra.Testing;
 
-public static partial class AssertMessages
+partial class AssertMessages
 {
    /* ------------------------------------------------------------ */
-   // Private Functions
+   // Functions
    /* ------------------------------------------------------------ */
 
    public static string TheFakeFunctionWasInvokedAnUnexpectedNumberOfTimes<TReturn>(string description)

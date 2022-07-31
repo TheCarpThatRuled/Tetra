@@ -32,7 +32,8 @@ public class SomeFactory
          var actual = Error.Some(value);
 
          //Assert
-         return IsASome(value,
+         return IsASome(AssertMessages.ReturnValue,
+                        value,
                         actual);
       }
 

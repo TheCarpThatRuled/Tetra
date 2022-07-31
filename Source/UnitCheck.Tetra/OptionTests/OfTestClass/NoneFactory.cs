@@ -29,7 +29,7 @@ public class NoneFactory
 
       //Assert
       Assert.That
-            .IsANone("Return value",
+            .IsANone(AssertMessages.ReturnValue,
                      actual);
    }
    /* ------------------------------------------------------------ */

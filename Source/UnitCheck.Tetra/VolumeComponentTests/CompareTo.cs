@@ -34,7 +34,8 @@ public class CompareTo
          var actual = volume.CompareTo(null);
 
          //Assert
-         return AreEqual(1,
+         return AreEqual(AssertMessages.ReturnValue,
+                         1,
                          actual);
       }
 
@@ -66,7 +67,8 @@ public class CompareTo
          var actual = firstVolume.CompareTo(secondVolume);
 
          //Assert
-         return AreEqual(0,
+         return AreEqual(AssertMessages.ReturnValue,
+                         0,
                          actual);
       }
 
@@ -98,7 +100,8 @@ public class CompareTo
          var actual = firstVolume.CompareTo(secondVolume);
 
          //Assert
-         return AreEqual(char.ToLowerInvariant(args.first) - char.ToLowerInvariant(args.second),
+         return AreEqual(AssertMessages.ReturnValue,
+                         char.ToLowerInvariant(args.first) - char.ToLowerInvariant(args.second),
                          actual);
       }
 
@@ -130,7 +133,8 @@ public class CompareTo
          var actual = firstVolume.CompareTo(secondVolume);
 
          //Assert
-         return AreEqual(char.ToLowerInvariant(args.first) - char.ToLowerInvariant(args.second),
+         return AreEqual(AssertMessages.ReturnValue,
+                         char.ToLowerInvariant(args.first) - char.ToLowerInvariant(args.second),
                          actual);
       }
 

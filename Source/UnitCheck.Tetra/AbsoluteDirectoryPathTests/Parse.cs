@@ -34,10 +34,10 @@ public class Parse
          var actual = AbsoluteDirectoryPath.Parse(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd("Parse",
-                              actualPath => AreEqual("Parse",
+         return IsASuccessAnd(AssertMessages.ReturnValue,
+                              actualPath => AreEqual(AssertMessages.ReturnValue,
                                                      testPath,
-                                                     (AbsoluteDirectoryPath) actualPath.Content()),
+                                                     actualPath.Content()),
                               actual);
       }
 
@@ -67,10 +67,10 @@ public class Parse
          var actual = AbsoluteDirectoryPath.Parse(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd("Parse",
-                              actualPath => AreEqual("Parse",
+         return IsASuccessAnd(AssertMessages.ReturnValue,
+                              actualPath => AreEqual(AssertMessages.ReturnValue,
                                                      testPath,
-                                                     (AbsoluteDirectoryPath) actualPath.Content()),
+                                                     actualPath.Content()),
                               actual);
       }
 
@@ -98,7 +98,7 @@ public class Parse
 
       //Assert
       Assert.That
-            .IsAFailure("Parse",
+            .IsAFailure(AssertMessages.ReturnValue,
                         Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
                                                                                     HumanReadableName.AbsoluteDirectoryPath)),
                         actual);
@@ -123,8 +123,9 @@ public class Parse
          var actual = AbsoluteDirectoryPath.Parse(path);
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                      HumanReadableName.AbsoluteDirectoryPath)),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
+                                                                                                   HumanReadableName.AbsoluteDirectoryPath)),
                            actual);
       }
 
@@ -153,8 +154,9 @@ public class Parse
          var actual = AbsoluteDirectoryPath.Parse(path);
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                      HumanReadableName.AbsoluteDirectoryPath)),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
+                                                                                                   HumanReadableName.AbsoluteDirectoryPath)),
                            actual);
       }
 
@@ -183,8 +185,9 @@ public class Parse
          var actual = AbsoluteDirectoryPath.Parse(path);
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
-                                                                                                       HumanReadableName.AbsoluteDirectoryPath)),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
+                                                                                                    HumanReadableName.AbsoluteDirectoryPath)),
                            actual);
       }
 

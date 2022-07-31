@@ -33,7 +33,8 @@ public class SuccessFactory
          var actual = Result<int>.Success(content);
 
          //Assert
-         return IsASuccess(content,
+         return IsASuccess(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 
@@ -61,7 +62,8 @@ public class SuccessFactory
          var actual = Result.Success(content);
 
          //Assert
-         return IsASuccess(content,
+         return IsASuccess(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 

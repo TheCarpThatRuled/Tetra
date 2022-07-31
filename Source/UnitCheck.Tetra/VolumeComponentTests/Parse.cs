@@ -32,7 +32,8 @@ public class Parse
          var actual = VolumeComponent.Parse(value);
 
          //Assert
-         return IsASuccessAnd(actualVolume => $"{value}:"
+         return IsASuccessAnd(AssertMessages.ReturnValue,
+                              actualVolume => $"{value}:"
                                            == actualVolume
                                              .Content()
                                              .Value(),
@@ -63,8 +64,9 @@ public class Parse
          var actual = VolumeComponent.Parse(value);
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
-                                                                 HumanReadableName.VolumeComponent)),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
+                                                                                           HumanReadableName.VolumeComponent)),
                            actual);
       }
 

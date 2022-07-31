@@ -35,7 +35,8 @@ public class GetHashCode
          var actual = directoryComponent.GetHashCode();
 
          //Assert
-         return AreEqual(StringComparer.OrdinalIgnoreCase
+         return AreEqual(AssertMessages.ReturnValue,
+                         StringComparer.OrdinalIgnoreCase
                                        .GetHashCode(value),
                          actual);
       }

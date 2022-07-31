@@ -36,7 +36,8 @@ public class None_MapToResult
          var actual = error.MapToResult(whenNone);
 
          //Assert
-         return IsASuccess(whenNone,
+         return IsASuccess(AssertMessages.ReturnValue,
+                           whenNone,
                            actual);
       }
 
@@ -66,7 +67,8 @@ public class None_MapToResult
          var actual = error.MapToResult(whenNone);
 
          //Assert
-         return IsASuccess(whenNone,
+         return IsASuccess(AssertMessages.ReturnValue,
+                           whenNone,
                            actual);
       }
 
@@ -99,7 +101,8 @@ public class None_MapToResult
          var actual = error.MapToResult(whenNone);
 
          //Assert
-         return IsASuccess(whenNone,
+         return IsASuccess(AssertMessages.ReturnValue,
+                           whenNone,
                            actual);
       }
 
@@ -135,9 +138,11 @@ public class None_MapToResult
          var actual = error.MapToResult(whenNone.Func);
 
          //Assert
-         return IsASuccess(value,
+         return IsASuccess(AssertMessages.ReturnValue,
+                           value,
                            actual)
-           .And(WasInvokedOnce(whenNone));
+           .And(WasInvokedOnce(nameof(whenNone),
+                               whenNone));
       }
 
       Prop.ForAll<int>(Property)
@@ -168,9 +173,11 @@ public class None_MapToResult
          var actual = error.MapToResult(whenNone.Func);
 
          //Assert
-         return IsASuccess(value,
+         return IsASuccess(AssertMessages.ReturnValue,
+                           value,
                            actual)
-           .And(WasInvokedOnce(whenNone));
+           .And(WasInvokedOnce(nameof(whenNone),
+                               whenNone));
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -203,9 +210,11 @@ public class None_MapToResult
          var actual = error.MapToResult(whenNone.Func);
 
          //Assert
-         return IsASuccess(value,
+         return IsASuccess(AssertMessages.ReturnValue,
+                           value,
                            actual)
-           .And(WasInvokedOnce(whenNone));
+           .And(WasInvokedOnce(nameof(whenNone),
+                               whenNone));
       }
 
       Arb.Register<Libraries.TestStruct>();

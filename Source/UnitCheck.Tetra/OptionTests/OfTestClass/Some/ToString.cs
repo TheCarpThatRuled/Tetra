@@ -35,7 +35,8 @@ public class Some_ToString
          var actual = option.ToString();
 
          //Assert
-         return AreEqual($"Some ({value})",
+         return AreEqual(AssertMessages.ReturnValue,
+                         $"Some ({value})",
                          actual);
       }
 

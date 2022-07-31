@@ -35,7 +35,8 @@ public class Success_ToString
          var actual = result.ToString();
 
          //Assert
-         return AreEqual($"Success ({value})",
+         return AreEqual(AssertMessages.ReturnValue,
+                         $"Success ({value})",
                          actual);
       }
 

@@ -14,12 +14,6 @@ public static partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property False()
-      => false
-        .ToProperty();
-
-   /* ------------------------------------------------------------ */
-
    public static Property False(string message)
       => false
         .Label(message);
@@ -27,8 +21,7 @@ public static partial class Properties
    /* ------------------------------------------------------------ */
 
    public static Property True()
-      => true
-        .ToProperty();
+      => AsProperty(() => true);
 
    /* ------------------------------------------------------------ */
 

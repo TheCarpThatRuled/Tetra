@@ -9,81 +9,49 @@ partial class Properties
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Property IsANone<T>(Option<T> option)
-      => AsProperty(option.IsANone)
-        .Label(TheOptionIsASome<T>());
-
-   /* ------------------------------------------------------------ */
-
-   public static Property IsANone<T>(string    name,
+   public static Property IsANone<T>(string    description,
                                      Option<T> option)
       => AsProperty(option.IsANone)
-        .Label(TheOptionIsASome<T>(name));
+        .Label(TheOptionIsASome<T>(description));
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsASome<T>(Option<T> option)
-      => AsProperty(option.IsASome)
-        .Label(TheOptionIsANone<T>());
-
-   /* ------------------------------------------------------------ */
-
-   public static Property IsASome<T>(string    name,
+   public static Property IsASome<T>(string    description,
                                      Option<T> option)
       => AsProperty(option.IsASome)
-        .Label(TheOptionIsANone<T>(name));
+        .Label(TheOptionIsANone<T>(description));
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsASome<T>(T         expected,
-                                     Option<T> option)
-      => option
-        .Reduce(() => False(TheOptionIsANone<T>()),
-                some => AreEqual(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(),
-                                 expected,
-                                 some));
-
-   /* ------------------------------------------------------------ */
-
-   public static Property IsASome<T>(string    name,
+   public static Property IsASome<T>(string    description,
                                      T         expected,
                                      Option<T> option)
       => option
-        .Reduce(() => False(TheOptionIsANone<T>(name)),
-                some => AreEqual(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(name),
+        .Reduce(() => False(TheOptionIsANone<T>(description)),
+                some => AreEqual(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(description),
                                  expected,
                                  some));
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsASomeAnd<T>(Func<T, bool> property,
-                                        Option<T>     option)
-      => option
-        .Reduce(() => False(TheOptionIsANone<T>()),
-                actual => AsProperty(() => property(actual))
-                  .Label(Failed.Message(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(),
-                                        actual)));
-
-   /* ------------------------------------------------------------ */
-
-   public static Property IsASomeAnd<T>(string        name,
+   public static Property IsASomeAnd<T>(string        description,
                                         Func<T, bool> property,
                                         Option<T>     option)
       => option
-        .Reduce(() => False(TheOptionIsANone<T>(name)),
+        .Reduce(() => False(TheOptionIsANone<T>(description)),
                 actual => AsProperty(() => property(actual))
-                  .Label(Failed.Message(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(name),
+                  .Label(Failed.Message(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(description),
                                         actual)));
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsASomeAnd<T>(string            name,
+   public static Property IsASomeAnd<T>(string            description,
                                         Func<T, Property> property,
                                         Option<T>         option)
       => option
-        .Reduce(() => False(TheOptionIsANone<T>(name)),
+        .Reduce(() => False(TheOptionIsANone<T>(description)),
                 actual => property(actual)
-                  .Label(Failed.Message(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(name),
+                  .Label(Failed.Message(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(description),
                                         actual)));
 
    /* ------------------------------------------------------------ */

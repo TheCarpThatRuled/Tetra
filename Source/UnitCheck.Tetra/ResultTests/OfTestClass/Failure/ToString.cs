@@ -35,7 +35,8 @@ public class Failure_ToString
          var actual = result.ToString();
 
          //Assert
-         return AreEqual($"Failure ({content})",
+         return AreEqual(AssertMessages.ReturnValue,
+                         $"Failure ({content})",
                          actual);
       }
 

@@ -1,4 +1,5 @@
 ﻿using FsCheck;
+using static Tetra.Testing.AssertMessages;
 
 namespace Tetra.Testing;
 
@@ -8,86 +9,93 @@ partial class Properties
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<T, TReturn>(T                        expected,
+   public static Property WasInvokedOnce<T, TReturn>(string                   description,
+                                                     T                        expected,
                                                      FakeFunction<T, TReturn> function)
-      => WasInvokedOnce(actual => Equals(expected,
+      => WasInvokedOnce(description,
+                        actual => Equals(expected,
                                          actual),
                         expected?.ToString() ?? string.Empty,
                         function);
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<TReturn>(Message                        expected,
+   public static Property WasInvokedOnce<TReturn>(string                         description,
+                                                  Message                        expected,
                                                   FakeFunction<Failure, TReturn> function)
-      => WasInvokedOnce(actual => Equals(expected,
+      => WasInvokedOnce(description,
+                        actual => Equals(expected,
                                          actual.Content()),
                         expected.ToString(),
                         function);
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<T, TReturn>(T                              expected,
+   public static Property WasInvokedOnce<T, TReturn>(string                         description,
+                                                     T                              expected,
                                                      FakeFunction<Left<T>, TReturn> function)
-      => WasInvokedOnce(actual => Equals(expected,
+      => WasInvokedOnce(description,
+                        actual => Equals(expected,
                                          actual.Content()),
                         expected?.ToString() ?? string.Empty,
                         function);
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<T, TReturn>(T                               expected,
+   public static Property WasInvokedOnce<T, TReturn>(string                          description,
+                                                     T                               expected,
                                                      FakeFunction<Right<T>, TReturn> function)
-      => WasInvokedOnce(actual => Equals(expected,
+      => WasInvokedOnce(description,
+                        actual => Equals(expected,
                                          actual.Content()),
                         expected?.ToString() ?? string.Empty,
                         function);
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<T, TReturn>(T                                 expected,
+   public static Property WasInvokedOnce<T, TReturn>(string                            description,
+                                                     T                                 expected,
                                                      FakeFunction<Success<T>, TReturn> function)
-      => WasInvokedOnce(actual => Equals(expected,
+      => WasInvokedOnce(description,
+                        actual => Equals(expected,
                                          actual.Content()),
                         expected?.ToString() ?? string.Empty,
                         function);
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<T, TReturn>(Func<T, bool>            property,
+   public static Property WasInvokedOnce<T, TReturn>(string                   description,
+                                                     Func<T, bool>            property,
                                                      string                   expectedString,
                                                      FakeFunction<T, TReturn> function)
       => function.Invocations()
                  .Count
       == 0
-            ? False($"The {Name<T, TReturn>()} was not invoked, when we expected it to be. Expected:\n {expectedString}")
+            ? False(TheFakeFunctionWasNotInvokedWheWeExpectedToBe<T, TReturn>(description)
+                  + "\nExpected:"
+                  + $"\n {expectedString}")
             : function.Invocations()
                       .Count
            != 1
-               ? False($"The {Name<T, TReturn>()} was invoked more than once."
+               ? False(TheFakeFunctionWasInvokedMoreThanOnce<T, TReturn>(description)
                      + "\nExpected:"
                      + $"\n{expectedString}"
                      + "\nActual:"
                      + $"\n{function.Invocations().Count}")
                : AsProperty(() => property(function.Invocations()[0]!))
-                 .Label($"The {Name<T, TReturn>()} was invoked with an unexpected argument"
+                 .Label(TheFakeFunctionWasInvokedWithAnUnexpectedArgument<T, TReturn>(description)
                       + $"\nExpected: {expectedString}"
                       + $"\nActual: {function.Invocations()[0]}");
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasNotInvoked<T, TReturn>(FakeFunction<T, TReturn> function)
+   public static Property WasNotInvoked<T, TReturn>(string                   description,
+                                                    FakeFunction<T, TReturn> function)
       => AsProperty(() => function
                          .Invocations()
                          .Count
                        == 0)
-        .Label($"The {Name<T, TReturn>()} was invoked, when we expected it not to be. Actual: {function.Invocations().Count}");
-
-   /* ------------------------------------------------------------ */
-   // Private Functions
-   /* ------------------------------------------------------------ */
-
-   private static string Name<T, TReturn>()
-      => $"FakeFunction <{typeof(T).Namespace},{typeof(TReturn).Name}>";
+        .Label(TheFakeFunctionWasInvokedWhenWeExpectedItNotToBe<T, TReturn>(description));
 
    /* ------------------------------------------------------------ */
 }

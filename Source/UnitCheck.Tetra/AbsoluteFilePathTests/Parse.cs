@@ -34,10 +34,10 @@ public class Parse
          var actual = AbsoluteFilePath.Parse(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd("Parse",
-                              actualPath => AreEqual("Parse",
+         return IsASuccessAnd(AssertMessages.ReturnValue,
+                              actualPath => AreEqual(AssertMessages.ReturnValue,
                                                      testPath,
-                                                     (AbsoluteFilePath) actualPath.Content()),
+                                                     actualPath.Content()),
                               actual);
       }
 
@@ -67,8 +67,9 @@ public class Parse
          var actual = AbsoluteFilePath.Parse(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(testPath.PathWithTrailingDirectorySeparator(),
-                                                                                                             HumanReadableName.AbsoluteFilePath)),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(testPath.PathWithTrailingDirectorySeparator(),
+                                                                                                              HumanReadableName.AbsoluteFilePath)),
                            actual);
       }
 
@@ -94,7 +95,7 @@ public class Parse
 
       //Assert
       Assert.That
-            .IsAFailure("Parse",
+            .IsAFailure(AssertMessages.ReturnValue,
                         Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
                                                                                     HumanReadableName.AbsoluteFilePath)),
                         actual);
@@ -119,8 +120,9 @@ public class Parse
          var actual = AbsoluteFilePath.Parse(path);
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                      HumanReadableName.AbsoluteFilePath)),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
+                                                                                                   HumanReadableName.AbsoluteFilePath)),
                            actual);
       }
 
@@ -149,8 +151,9 @@ public class Parse
          var actual = AbsoluteFilePath.Parse(path);
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                      HumanReadableName.AbsoluteFilePath)),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
+                                                                                                   HumanReadableName.AbsoluteFilePath)),
                            actual);
       }
 
@@ -178,8 +181,9 @@ public class Parse
          var actual = AbsoluteFilePath.Parse(path);
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
-                                                                                                       HumanReadableName.AbsoluteFilePath)),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
+                                                                                                    HumanReadableName.AbsoluteFilePath)),
                            actual);
       }
 

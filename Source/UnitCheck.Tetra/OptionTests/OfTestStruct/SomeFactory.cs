@@ -32,7 +32,8 @@ public class SomeFactory
          var actual = Option<TestStruct>.Some(value);
 
          //Assert
-         return IsASome(value,
+         return IsASome(AssertMessages.ReturnValue,
+                        value,
                         actual);
       }
 
@@ -62,7 +63,8 @@ public class SomeFactory
          var actual = Option.Some(value);
 
          //Assert
-         return IsASome(value,
+         return IsASome(AssertMessages.ReturnValue,
+                        value,
                         actual);
       }
 

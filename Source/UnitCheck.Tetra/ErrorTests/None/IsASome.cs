@@ -32,7 +32,7 @@ public class None_IsASome
 
       //Assert
       Assert.That
-            .IsFalse("Return value",
+            .IsFalse(AssertMessages.ReturnValue,
                      actual);
    }
 

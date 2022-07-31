@@ -32,7 +32,8 @@ public class Parse
          var actual = DirectoryComponent.Parse(value);
 
          //Assert
-         return IsASuccessAnd(actualDirectoryComponent => value
+         return IsASuccessAnd(AssertMessages.ReturnValue,
+                              actualDirectoryComponent => value
                                                        == actualDirectoryComponent
                                                          .Content()
                                                          .Value(),
@@ -63,8 +64,9 @@ public class Parse
          var actual = DirectoryComponent.Parse(value);
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
-                                                               HumanReadableName.DirectoryComponent)),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
+                                                                                                HumanReadableName.DirectoryComponent)),
                            actual);
       }
 

@@ -35,7 +35,8 @@ public class Right_ToString
          var actual = result.ToString();
 
          //Assert
-         return AreEqual($"Right ({content})",
+         return AreEqual(AssertMessages.ReturnValue,
+                         $"Right ({content})",
                          actual);
       }
 

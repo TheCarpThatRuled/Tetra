@@ -35,7 +35,8 @@ public class ToDirectoryPath
          var actual = volume.ToDirectoryPath();
 
          //Assert
-         return AreEqual(expected,
+         return AreEqual(AssertMessages.ReturnValue,
+                         expected,
                          actual.Value());
       }
 

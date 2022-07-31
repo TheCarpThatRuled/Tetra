@@ -38,9 +38,11 @@ public class Failure_Map
          var actual = result.Map(whenFailure.Func);
 
          //Assert
-         return IsAFailure(args.whenFailure,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           args.whenFailure,
                            actual)
-           .And(WasInvokedOnce(args.content,
+           .And(WasInvokedOnce(nameof(whenFailure),
+                               args.content,
                                whenFailure));
       }
 
@@ -77,9 +79,11 @@ public class Failure_Map
          var actual = result.Map(whenSuccessFunc.Func);
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual)
-           .And(WasNotInvoked(whenSuccessFunc));
+           .And(WasNotInvoked(nameof(whenSuccess),
+                              whenSuccessFunc));
       }
 
       Arb.Register<Libraries.Message>();
@@ -113,9 +117,11 @@ public class Failure_Map
          var actual = result.Map(whenSuccessFunc.Func);
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual)
-           .And(WasNotInvoked(whenSuccessFunc));
+           .And(WasNotInvoked(nameof(whenSuccess),
+                              whenSuccessFunc));
       }
 
       Arb.Register<Libraries.Message>();
@@ -150,9 +156,11 @@ public class Failure_Map
          var actual = result.Map(whenSuccessFunc.Func);
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual)
-           .And(WasNotInvoked(whenSuccessFunc));
+           .And(WasNotInvoked(nameof(whenSuccess),
+                              whenSuccessFunc));
       }
 
       Arb.Register<Libraries.Message>();

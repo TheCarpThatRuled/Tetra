@@ -33,7 +33,8 @@ public class Right_IsALeft
          var actual = either.IsALeft();
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.RightEitherOfTestClassAndTestStruct>();

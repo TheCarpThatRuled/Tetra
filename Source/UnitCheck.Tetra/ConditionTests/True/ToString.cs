@@ -32,7 +32,7 @@ public class True_ToString
 
       //Assert
       Assert.That
-            .AreEqual("Return value",
+            .AreEqual(AssertMessages.ReturnValue,
                       "True",
                       actual);
    }

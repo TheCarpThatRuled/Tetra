@@ -35,7 +35,8 @@ public class Failure_Cast
          var actual = result.Cast<int>();
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 
@@ -66,7 +67,8 @@ public class Failure_Cast
          var actual = result.Cast<TestClass>();
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 
@@ -97,7 +99,8 @@ public class Failure_Cast
          var actual = result.Cast<TestStruct>();
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 
@@ -128,7 +131,8 @@ public class Failure_Cast
          var actual = result.Cast<TestSubClass>();
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 
@@ -161,7 +165,8 @@ public class Failure_Cast
          var actual = result.Cast<DateTime>(args.whenCastFails);
 
          //Assert
-         return IsAFailure(args.content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           args.content,
                            actual);
       }
 
@@ -192,7 +197,8 @@ public class Failure_Cast
          var actual = result.Cast<int>(args.whenCastFails);
 
          //Assert
-         return IsAFailure(args.content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           args.content,
                            actual);
       }
 
@@ -223,7 +229,8 @@ public class Failure_Cast
          var actual = result.Cast<TestClass>(args.whenCastFails);
 
          //Assert
-         return IsAFailure(args.content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           args.content,
                            actual);
       }
 
@@ -254,7 +261,8 @@ public class Failure_Cast
          var actual = result.Cast<TestStruct>(args.whenCastFails);
 
          //Assert
-         return IsAFailure(args.content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           args.content,
                            actual);
       }
 
@@ -285,7 +293,8 @@ public class Failure_Cast
          var actual = result.Cast<TestSubClass>(args.whenCastFails);
 
          //Assert
-         return IsAFailure(args.content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           args.content,
                            actual);
       }
 
@@ -320,9 +329,11 @@ public class Failure_Cast
          var actual = result.Cast<int>(whenCastFails.Func);
 
          //Assert
-         return IsAFailure(args.content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           args.content,
                            actual)
-           .And(WasNotInvoked(whenCastFails));
+           .And(WasNotInvoked(nameof(whenCastFails),
+                              whenCastFails));
       }
 
       Arb.Register<Libraries.TwoUniqueMessages>();
@@ -354,9 +365,11 @@ public class Failure_Cast
          var actual = result.Cast<TestClass>(whenCastFails.Func);
 
          //Assert
-         return IsAFailure(args.content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           args.content,
                            actual)
-           .And(WasNotInvoked(whenCastFails));
+           .And(WasNotInvoked(nameof(whenCastFails),
+                              whenCastFails));
       }
 
       Arb.Register<Libraries.TwoUniqueMessages>();
@@ -388,9 +401,11 @@ public class Failure_Cast
          var actual = result.Cast<TestStruct>(whenCastFails.Func);
 
          //Assert
-         return IsAFailure(args.content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           args.content,
                            actual)
-           .And(WasNotInvoked(whenCastFails));
+           .And(WasNotInvoked(nameof(whenCastFails),
+                              whenCastFails));
       }
 
       Arb.Register<Libraries.TwoUniqueMessages>();
@@ -422,9 +437,11 @@ public class Failure_Cast
          var actual = result.Cast<TestSubClass>(whenCastFails.Func);
 
          //Assert
-         return IsAFailure(args.content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           args.content,
                            actual)
-           .And(WasNotInvoked(whenCastFails));
+           .And(WasNotInvoked(nameof(whenCastFails),
+                              whenCastFails));
       }
 
       Arb.Register<Libraries.TwoUniqueMessages>();

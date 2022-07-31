@@ -25,7 +25,8 @@ public class WHEN_the_client_checks_if_a_directory_exists
          var actual = fileSystem.Exists(currentDirectory);
 
          //Assert
-         return IsTrue(actual);
+         return IsTrue(AssertMessages.ReturnValue,
+                       actual);
       }
 
       Arb.Register<Libraries.AbsoluteDirectoryPath>();
@@ -48,7 +49,8 @@ public class WHEN_the_client_checks_if_a_directory_exists
          var actual = fileSystem.Exists(args.otherDirectory);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.TwoUniqueAbsoluteDirectoryPaths>();

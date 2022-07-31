@@ -35,7 +35,8 @@ public class Some_IsASome
          var actual = error.IsASome();
 
          //Assert
-         return IsTrue(actual);
+         return IsTrue(AssertMessages.ReturnValue,
+                       actual);
       }
 
       Arb.Register<Libraries.Message>();

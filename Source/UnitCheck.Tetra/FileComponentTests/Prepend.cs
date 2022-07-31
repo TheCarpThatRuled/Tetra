@@ -38,7 +38,7 @@ public class Prepend
          var actual = file.Prepend(volume);
 
          //Assert
-         return AreEqual("Prepend",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }

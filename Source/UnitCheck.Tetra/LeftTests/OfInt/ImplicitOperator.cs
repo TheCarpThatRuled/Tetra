@@ -35,7 +35,8 @@ public class ImplicitOperator
          var actual = left.Content();
 
          //Assert
-         return AreEqual(content,
+         return AreEqual(AssertMessages.ReturnValue,
+                         content,
                          actual);
       }
 
@@ -66,7 +67,8 @@ public class ImplicitOperator
          var actual = left.Content();
 
          //Assert
-         return AreEqual(content,
+         return AreEqual(AssertMessages.ReturnValue,
+                         content,
                          actual);
       }
 

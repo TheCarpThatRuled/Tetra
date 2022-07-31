@@ -35,7 +35,8 @@ public class GetHashCode
          var actual = volume.GetHashCode();
 
          //Assert
-         return AreEqual(StringComparer.OrdinalIgnoreCase
+         return AreEqual(AssertMessages.ReturnValue,
+                         StringComparer.OrdinalIgnoreCase
                                        .GetHashCode($"{asciiLetter}:"),
                          actual);
       }

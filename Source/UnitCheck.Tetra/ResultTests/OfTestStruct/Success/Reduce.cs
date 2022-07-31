@@ -39,9 +39,11 @@ public class Success_Reduce
          var actual = result.Reduce(whenFailure.Func);
 
          //Assert
-         return AreEqual(args.content,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.content,
                          actual)
-           .And(WasNotInvoked(whenFailure));
+           .And(WasNotInvoked(nameof(whenFailure),
+                              whenFailure));
       }
 
       Arb.Register<Libraries.TwoUniqueTestStructs>();
@@ -77,9 +79,11 @@ public class Success_Reduce
          var actual = result.Reduce(whenSuccessFunc.Func);
 
          //Assert
-         return AreEqual(whenSuccess,
+         return AreEqual(AssertMessages.ReturnValue,
+                         whenSuccess,
                          actual)
-           .And(WasInvokedOnce(content,
+           .And(WasInvokedOnce(nameof(whenSuccess),
+                               content,
                                whenSuccessFunc));
       }
 
@@ -120,10 +124,13 @@ public class Success_Reduce
                                     whenSuccess.Func);
 
          //Assert
-         return AreEqual(args.whenSuccess,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenSuccess,
                          actual)
-               .And(WasNotInvoked(whenFailure))
-               .And(WasInvokedOnce(value,
+               .And(WasNotInvoked(nameof(whenFailure),
+                                  whenFailure))
+               .And(WasInvokedOnce(nameof(whenSuccess),
+                                   value,
                                    whenSuccess));
       }
 
@@ -161,10 +168,13 @@ public class Success_Reduce
                                     whenSuccess.Func);
 
          //Assert
-         return AreEqual(args.whenSuccess,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenSuccess,
                          actual)
-               .And(WasNotInvoked(whenFailure))
-               .And(WasInvokedOnce(value,
+               .And(WasNotInvoked(nameof(whenFailure),
+                                  whenFailure))
+               .And(WasInvokedOnce(nameof(whenSuccess),
+                                   value,
                                    whenSuccess));
       }
 
@@ -201,10 +211,13 @@ public class Success_Reduce
                                     whenSuccess.Func);
 
          //Assert
-         return AreEqual(args.whenSuccess,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenSuccess,
                          actual)
-               .And(WasNotInvoked(whenFailure))
-               .And(WasInvokedOnce(args.value,
+               .And(WasNotInvoked(nameof(whenFailure),
+                                  whenFailure))
+               .And(WasInvokedOnce(nameof(whenSuccess),
+                                   args.value,
                                    whenSuccess));
       }
 

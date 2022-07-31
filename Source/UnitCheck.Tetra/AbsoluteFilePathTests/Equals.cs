@@ -34,7 +34,8 @@ public class Equals
          var actual = absoluteFilePath.Equals(obj);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<ObjIsNullOrANonEquatableType>();
@@ -152,7 +153,8 @@ public class Equals
          var actual = value.Equals(null);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.AbsoluteFilePath>();
@@ -179,8 +181,8 @@ public class Equals
          //Arrange
          //Act
          //Assert
-         return IEquatableIsReflexive<AbsoluteFilePath>(args.original,
-                                                        args.copy);
+         return IEquatableIsReflexive(args.original,
+                                      args.copy);
       }
 
       Arb.Register<Libraries.TwoIdenticalAbsoluteFilePaths>();
@@ -203,7 +205,7 @@ public class Equals
    {
       Arb.Register<Libraries.AbsoluteFilePath>();
 
-      Prop.ForAll<AbsoluteFilePath, AbsoluteFilePath>(IEquatableIsSymmetric<AbsoluteFilePath>)
+      Prop.ForAll<AbsoluteFilePath, AbsoluteFilePath>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 

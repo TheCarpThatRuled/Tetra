@@ -39,9 +39,11 @@ public class Failure_Reduce
          var actual = result.Reduce(whenFailureFunc.Func);
 
          //Assert
-         return AreEqual(whenFailure,
+         return AreEqual(AssertMessages.ReturnValue,
+                         whenFailure,
                          actual)
-           .And(WasInvokedOnce(content,
+           .And(WasInvokedOnce(nameof(whenFailure),
+                               content,
                                whenFailureFunc));
       }
 
@@ -77,9 +79,11 @@ public class Failure_Reduce
          var actual = result.Reduce(whenSuccess.Func);
 
          //Assert
-         return AreEqual(args.content,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.content,
                          actual)
-           .And(WasNotInvoked(whenSuccess));
+           .And(WasNotInvoked(nameof(whenSuccess),
+                              whenSuccess));
       }
 
       Arb.Register<Libraries.TwoUniqueMessages>();
@@ -118,11 +122,14 @@ public class Failure_Reduce
                                     whenSuccess.Func);
 
          //Assert
-         return AreEqual(args.whenFailure,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenFailure,
                          actual)
-               .And(WasInvokedOnce(content,
+               .And(WasInvokedOnce(nameof(whenFailure),
+                                   content,
                                    whenFailure))
-               .And(WasNotInvoked(whenSuccess));
+               .And(WasNotInvoked(nameof(whenSuccess),
+                                  whenSuccess));
       }
 
       Arb.Register<Libraries.Message>();
@@ -159,11 +166,14 @@ public class Failure_Reduce
                                     whenSuccess.Func);
 
          //Assert
-         return AreEqual(args.whenFailure,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenFailure,
                          actual)
-               .And(WasInvokedOnce(content,
+               .And(WasInvokedOnce(nameof(whenFailure),
+                                   content,
                                    whenFailure))
-               .And(WasNotInvoked(whenSuccess));
+               .And(WasNotInvoked(nameof(whenSuccess),
+                                  whenSuccess));
       }
 
       Arb.Register<Libraries.Message>();
@@ -200,11 +210,14 @@ public class Failure_Reduce
                                     whenSuccess.Func);
 
          //Assert
-         return AreEqual(args.whenFailure,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenFailure,
                          actual)
-               .And(WasInvokedOnce(content,
+               .And(WasInvokedOnce(nameof(whenFailure),
+                                   content,
                                    whenFailure))
-               .And(WasNotInvoked(whenSuccess));
+               .And(WasNotInvoked(nameof(whenSuccess),
+                                  whenSuccess));
       }
 
       Arb.Register<Libraries.Message>();

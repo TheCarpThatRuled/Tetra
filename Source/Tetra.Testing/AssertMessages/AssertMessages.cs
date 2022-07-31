@@ -1,14 +1,12 @@
 ﻿namespace Tetra.Testing;
 
-partial class AssertMessages
+public static partial class AssertMessages
 {
    /* ------------------------------------------------------------ */
-   // Functions
+   // Private Constants
    /* ------------------------------------------------------------ */
 
-   public static string ArgumentExceptionMessage(string message,
-                                                 string parameterName)
-      => $"{message} (Parameter '{parameterName}')";
+   public const string ReturnValue = "Return value";
 
    /* ------------------------------------------------------------ */
 }

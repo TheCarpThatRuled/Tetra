@@ -35,7 +35,8 @@ public class ToString
          var actual = path.ToString();
 
          //Assert
-         return AreEqual($"<{testPath.PathWithTrailingDirectorySeparator()}>",
+         return AreEqual(AssertMessages.ReturnValue,
+                         $"<{testPath.PathWithTrailingDirectorySeparator()}>",
                          actual);
       }
 

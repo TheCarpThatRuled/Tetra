@@ -35,7 +35,8 @@ public class ToString
          var actual = path.ToString();
 
          //Assert
-         return AreEqual($"<{sourcePath}>",
+         return AreEqual(AssertMessages.ReturnValue,
+                         $"<{sourcePath}>",
                          actual);
       }
 

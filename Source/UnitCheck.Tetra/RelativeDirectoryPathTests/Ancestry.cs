@@ -36,7 +36,7 @@ public class Ancestry
          var actual = path.Ancestry();
 
          //Assert
-         return AreSequenceEqual("Ancestry",
+         return AreSequenceEqual(AssertMessages.ReturnValue,
                                  expected,
                                  actual);
       }

@@ -55,7 +55,8 @@ public class Validate
                                                  nameof(TestComponent));
 
          //Assert
-         return IsANone(actual);
+         return IsANone(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.ValidPathComponent>();
@@ -83,8 +84,9 @@ public class Validate
                                                  nameof(TestComponent));
 
          //Assert
-         return IsASome(Message.Create(Messages.IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
-                                                                     nameof(TestComponent))),
+         return IsASome(AssertMessages.ReturnValue,
+                        Message.Create(Messages.IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
+                                                                                                      nameof(TestComponent))),
                         actual);
       }
 

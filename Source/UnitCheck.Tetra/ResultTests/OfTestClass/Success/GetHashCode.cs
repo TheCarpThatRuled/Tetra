@@ -35,7 +35,8 @@ public class Success_GetHashCode
          var actual = result.GetHashCode();
 
          //Assert
-         return AreEqual(value.GetHashCode(),
+         return AreEqual(AssertMessages.ReturnValue,
+                         value.GetHashCode(),
                          actual);
       }
 

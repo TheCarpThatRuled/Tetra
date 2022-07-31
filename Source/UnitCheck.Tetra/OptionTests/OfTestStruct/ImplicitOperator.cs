@@ -32,7 +32,8 @@ public class ImplicitOperator
          Option<TestStruct> actual = value;
 
          //Assert
-         return IsASome(value,
+         return IsASome(AssertMessages.ReturnValue,
+                        value,
                         actual);
       }
 

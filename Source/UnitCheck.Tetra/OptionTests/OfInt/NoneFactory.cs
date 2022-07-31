@@ -29,7 +29,7 @@ public class NoneFactory
 
       //Assert
       Assert.That
-            .IsANone("Option<int>.None()",
+            .IsANone(AssertMessages.ReturnValue,
                      actual);
    }
    /* ------------------------------------------------------------ */

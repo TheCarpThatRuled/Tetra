@@ -25,11 +25,12 @@ public class WHEN_the_client_creates_a_directory
          var actual = fileSystem.Create(args.otherDirectory);
 
          //Assert
-         return IsANone(actual)
-               .And(IsTrue(args
-                          .otherDirectory
-                          .Ancestry()
-                          .All(fileSystem.Exists)));
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
+           .And(IsTrue("Directories created",
+                       args.otherDirectory
+                           .Ancestry()
+                           .All(fileSystem.Exists)));
       }
 
       Arb.Register<Libraries.TwoUniqueAbsoluteDirectoryPaths>();

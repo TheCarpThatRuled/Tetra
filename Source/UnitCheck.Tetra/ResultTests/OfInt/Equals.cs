@@ -35,7 +35,8 @@ public class Equals
          var actual = result.Equals(obj);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.ResultOfInt32>();
@@ -232,7 +233,8 @@ public class Equals
          var actual = content.Equals(null);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.ResultOfInt32>();
@@ -360,7 +362,8 @@ public class Equals
          var actual = result.Equals(content);
 
          //Assert
-         return IsTrue(actual);
+         return IsTrue(AssertMessages.ReturnValue,
+                       actual);
       }
 
       Prop.ForAll<int>(Property)

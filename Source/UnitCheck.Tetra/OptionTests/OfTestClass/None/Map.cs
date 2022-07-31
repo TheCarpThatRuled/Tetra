@@ -37,8 +37,10 @@ public class None_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsANone(actual)
-           .And(WasNotInvoked(whenSome));
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasNotInvoked(nameof(whenSome),
+                              whenSome));
       }
 
       Prop.ForAll<int>(Property)
@@ -69,8 +71,10 @@ public class None_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsANone(actual)
-           .And(WasNotInvoked(whenSome));
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasNotInvoked(nameof(whenSome),
+                              whenSome));
       }
 
       Prop.ForAll<string>(Property)
@@ -100,8 +104,10 @@ public class None_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsANone(actual)
-           .And(WasNotInvoked(whenSome));
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasNotInvoked(nameof(whenSome),
+                              whenSome));
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -133,8 +139,10 @@ public class None_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsANone(actual)
-           .And(WasNotInvoked(whenSome));
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasNotInvoked(nameof(whenSome),
+                              whenSome));
       }
 
       Arb.Register<Libraries.TestStruct>();
@@ -168,7 +176,7 @@ public class None_Map
 
       //Assert
       Assert.That
-            .IsANone("Return value",
+            .IsANone(AssertMessages.ReturnValue,
                      actual)
             .WasNotInvoked(nameof(whenSome),
                            whenSome);
@@ -197,7 +205,7 @@ public class None_Map
 
       //Assert
       Assert.That
-            .IsANone("Return value",
+            .IsANone(AssertMessages.ReturnValue,
                      actual)
             .WasNotInvoked(nameof(whenSome),
                            whenSome);
@@ -226,7 +234,7 @@ public class None_Map
 
       //Assert
       Assert.That
-            .IsANone("Return value",
+            .IsANone(AssertMessages.ReturnValue,
                      actual)
             .WasNotInvoked(nameof(whenSome),
                            whenSome);
@@ -255,7 +263,7 @@ public class None_Map
 
       //Assert
       Assert.That
-            .IsANone("Return value",
+            .IsANone(AssertMessages.ReturnValue,
                      actual)
             .WasNotInvoked(nameof(whenSome),
                            whenSome);
@@ -285,8 +293,10 @@ public class None_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsANone(actual)
-           .And(WasNotInvoked(whenSome));
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasNotInvoked(nameof(whenSome),
+                              whenSome));
       }
 
       Prop.ForAll<int>(Property)
@@ -317,8 +327,10 @@ public class None_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsANone(actual)
-           .And(WasNotInvoked(whenSome));
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasNotInvoked(nameof(whenSome),
+                              whenSome));
       }
 
       Prop.ForAll<string>(Property)
@@ -349,8 +361,10 @@ public class None_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsANone(actual)
-           .And(WasNotInvoked(whenSome));
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasNotInvoked(nameof(whenSome),
+                              whenSome));
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -383,8 +397,10 @@ public class None_Map
          var actual = option.Map(whenSome.Func);
 
          //Assert
-         return IsANone(actual)
-           .And(WasNotInvoked(whenSome));
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasNotInvoked(nameof(whenSome),
+                              whenSome));
       }
 
       Arb.Register<Libraries.TestStruct>();

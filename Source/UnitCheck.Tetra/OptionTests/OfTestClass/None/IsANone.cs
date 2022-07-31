@@ -32,7 +32,7 @@ public class None_IsANone
 
       //Assert
       Assert.That
-            .IsTrue("Return value",
+            .IsTrue(AssertMessages.ReturnValue,
                     actual);
    }
 

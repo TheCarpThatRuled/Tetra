@@ -34,10 +34,10 @@ public class Parse
          var actual = RelativeDirectoryPath.Parse(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd("Parse",
-                              actualPath => AreEqual("Parse",
+         return IsASuccessAnd(AssertMessages.ReturnValue,
+                              actualPath => AreEqual(AssertMessages.ReturnValue,
                                                      testPath,
-                                                     (RelativeDirectoryPath) actualPath.Content()),
+                                                     actualPath.Content()),
                               actual);
       }
 
@@ -67,10 +67,10 @@ public class Parse
          var actual = RelativeDirectoryPath.Parse(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd("Parse",
-                              actualPath => AreEqual("Parse",
+         return IsASuccessAnd(AssertMessages.ReturnValue,
+                              actualPath => AreEqual(AssertMessages.ReturnValue,
                                                      testPath,
-                                                     (RelativeDirectoryPath) actualPath.Content()),
+                                                     actualPath.Content()),
                               actual);
       }
 
@@ -98,7 +98,7 @@ public class Parse
 
       //Assert
       Assert.That
-            .IsAFailure("Parse",
+            .IsAFailure(AssertMessages.ReturnValue,
                         Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(string.Empty,
                                                                                    HumanReadableName.RelativeDirectoryPath)),
                         actual);
@@ -123,7 +123,8 @@ public class Parse
          var actual = RelativeDirectoryPath.Parse(path);
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(path,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(path,
                                                                                                    HumanReadableName.RelativeDirectoryPath)),
                            actual);
       }

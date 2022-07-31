@@ -35,7 +35,8 @@ public class Success_IsAFailure
          var actual = result.IsAFailure();
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.TestClass>();

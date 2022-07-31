@@ -37,7 +37,7 @@ public class Prepend
          var actual = child.Prepend(parent);
 
          //Assert
-         return AreEqual("Prepend",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }
@@ -75,7 +75,7 @@ public class Prepend
          var actual = child.Prepend(parent);
 
          //Assert
-         return AreEqual("Prepend",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }
@@ -114,7 +114,7 @@ public class Prepend
          var actual = child.Prepend(parent);
 
          //Assert
-         return AreEqual("Prepend",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }
@@ -152,7 +152,7 @@ public class Prepend
          var actual = child.Prepend(parent);
 
          //Assert
-         return AreEqual("Parse",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }
@@ -191,7 +191,7 @@ public class Prepend
          var actual = child.Prepend(parent);
 
          //Assert
-         return AreEqual("Parse",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }

@@ -55,7 +55,8 @@ public class Validate
                                                        nameof(TestVolumeComponent));
 
          //Assert
-         return IsANone(actual);
+         return IsANone(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.AsciiLetters>();
@@ -84,8 +85,9 @@ public class Validate
                                                        nameof(TestVolumeComponent));
 
          //Assert
-         return IsASome(Message.Create(Messages.IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
-                                                                       nameof(TestVolumeComponent))),
+         return IsASome(AssertMessages.ReturnValue,
+                        Message.Create(Messages.IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
+                                                                                                 nameof(TestVolumeComponent))),
                         actual);
       }
 

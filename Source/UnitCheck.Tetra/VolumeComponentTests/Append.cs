@@ -37,7 +37,7 @@ public class Append
          var actual = parent.Append(child);
 
          //Assert
-         return AreEqual("Append",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }
@@ -75,7 +75,7 @@ public class Append
          var actual = parent.Append(child);
 
          //Assert
-         return AreEqual("Append",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }
@@ -115,7 +115,7 @@ public class Append
          var actual = parent.Append(child);
 
          //Assert
-         return AreEqual("Append",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }
@@ -154,7 +154,7 @@ public class Append
          var actual = parent.Append(child);
 
          //Assert
-         return AreEqual("Append",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }
@@ -195,7 +195,7 @@ public class Append
          var actual = parent.Append(child);
 
          //Assert
-         return AreEqual("Append",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }

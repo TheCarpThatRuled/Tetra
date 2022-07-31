@@ -35,7 +35,8 @@ public class Some_Cast
          var actual = option.Cast<int>();
 
          //Assert
-         return IsANone(actual);
+         return IsANone(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -65,7 +66,8 @@ public class Some_Cast
          var actual = option.Cast<string>();
 
          //Assert
-         return IsANone(actual);
+         return IsANone(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -95,7 +97,8 @@ public class Some_Cast
          var actual = option.Cast<TestClass>();
 
          //Assert
-         return IsASome(content,
+         return IsASome(AssertMessages.ReturnValue,
+                        content,
                         actual);
       }
 
@@ -126,7 +129,8 @@ public class Some_Cast
          var actual = option.Cast<TestClass>();
 
          //Assert
-         return IsASome(content,
+         return IsASome(AssertMessages.ReturnValue,
+                        content,
                         actual);
       }
 
@@ -157,7 +161,8 @@ public class Some_Cast
          var actual = option.Cast<TestStruct>();
 
          //Assert
-         return IsANone(actual);
+         return IsANone(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -187,7 +192,8 @@ public class Some_Cast
          var actual = option.Cast<TestSubClass>();
 
          //Assert
-         return IsANone(actual);
+         return IsANone(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Prop.ForAll<TestClass>(Property)

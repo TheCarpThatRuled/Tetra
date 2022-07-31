@@ -35,7 +35,8 @@ public class Create
          var actual = left.Content();
 
          //Assert
-         return AreEqual(content,
+         return AreEqual(AssertMessages.ReturnValue,
+                         content,
                          actual);
       }
 

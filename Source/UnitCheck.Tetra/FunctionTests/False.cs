@@ -31,7 +31,7 @@ public class False
 
       //Assert
       Assert.That
-            .IsFalse("Return value",
+            .IsFalse(AssertMessages.ReturnValue,
                      actual);
    }
 
@@ -55,7 +55,8 @@ public class False
          var actual = Function.False(value);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Prop.ForAll<int>(Property)
@@ -80,7 +81,8 @@ public class False
          var actual = Function.False(value);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -107,7 +109,8 @@ public class False
          var actual = Function.False(value);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.TestStruct>();

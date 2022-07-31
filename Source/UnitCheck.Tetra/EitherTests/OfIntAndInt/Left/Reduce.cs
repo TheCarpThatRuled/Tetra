@@ -112,11 +112,14 @@ public class Left_Reduce
                                     whenRight.Func);
 
          //Assert
-         return AreEqual(args.whenLeft,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenLeft,
                          actual)
-               .And(WasInvokedOnce(args.content,
+               .And(WasInvokedOnce(nameof(whenLeft),
+                                   args.content,
                                    whenLeft))
-               .And(WasNotInvoked(whenRight));
+               .And(WasNotInvoked(nameof(whenRight),
+                                  whenRight));
       }
 
       Arb.Register<Libraries.ThreeUniqueInt32s>();
@@ -150,11 +153,14 @@ public class Left_Reduce
                                     whenRight.Func);
 
          //Assert
-         return AreEqual(args.whenLeft,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenLeft,
                          actual)
-               .And(WasInvokedOnce(content,
+               .And(WasInvokedOnce(nameof(whenLeft),
+                                   content,
                                    whenLeft))
-               .And(WasNotInvoked(whenRight));
+               .And(WasNotInvoked(nameof(whenRight),
+                                  whenRight));
       }
 
       Arb.Register<Libraries.TwoUniqueTestClasses>();
@@ -188,11 +194,14 @@ public class Left_Reduce
                                     whenRight.Func);
 
          //Assert
-         return AreEqual(args.whenLeft,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenLeft,
                          actual)
-               .And(WasInvokedOnce(content,
+               .And(WasInvokedOnce(nameof(whenLeft),
+                                   content,
                                    whenLeft))
-               .And(WasNotInvoked(whenRight));
+               .And(WasNotInvoked(nameof(whenRight),
+                                  whenRight));
       }
 
       Arb.Register<Libraries.TwoUniqueTestStructs>();

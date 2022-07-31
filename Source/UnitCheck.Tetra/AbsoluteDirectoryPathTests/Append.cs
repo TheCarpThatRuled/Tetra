@@ -37,7 +37,7 @@ public class Append
          var actual = path.Append(directories);
 
          //Assert
-         return AreEqual("Append",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }
@@ -75,7 +75,7 @@ public class Append
          var actual = path.Append(directories);
 
          //Assert
-         return AreEqual("Append",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }
@@ -114,7 +114,7 @@ public class Append
          var actual = parentPath.Append(childPath);
 
          //Assert
-         return AreEqual("Append",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }
@@ -152,7 +152,7 @@ public class Append
          var actual = path.Append(file);
 
          //Assert
-         return AreEqual("Append",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }
@@ -191,7 +191,7 @@ public class Append
          var actual = parentPath.Append(childPath);
 
          //Assert
-         return AreEqual("Append",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }

@@ -37,10 +37,10 @@ public class Ancestry
          var (actualAncestors, actualLeaf) = path.Ancestry();
 
          //Assert
-         return AreSequenceEqual("Ancestry",
+         return AreSequenceEqual(AssertMessages.ReturnValue,
                                  expected,
                                  actualAncestors)
-           .And(AreEqual("Ancestry",
+           .And(AreEqual(AssertMessages.ReturnValue,
                          testPath,
                          actualLeaf));
       }

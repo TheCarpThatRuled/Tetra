@@ -40,10 +40,13 @@ public class Right_Reduce
                                     whenRight.Func);
 
          //Assert
-         return AreEqual(args.whenRight,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenRight,
                          actual)
-               .And(WasNotInvoked(whenLeft))
-               .And(WasInvokedOnce(content,
+               .And(WasNotInvoked(nameof(whenLeft),
+                                  whenLeft))
+               .And(WasInvokedOnce(nameof(whenRight),
+                                   content,
                                    whenRight));
       }
 
@@ -79,10 +82,13 @@ public class Right_Reduce
                                     whenRight.Func);
 
          //Assert
-         return AreEqual(args.whenRight,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenRight,
                          actual)
-               .And(WasNotInvoked(whenLeft))
-               .And(WasInvokedOnce(content,
+               .And(WasNotInvoked(nameof(whenLeft),
+                                  whenLeft))
+               .And(WasInvokedOnce(nameof(whenRight),
+                                   content,
                                    whenRight));
       }
 
@@ -118,10 +124,13 @@ public class Right_Reduce
                                     whenRight.Func);
 
          //Assert
-         return AreEqual(args.whenRight,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenRight,
                          actual)
-               .And(WasNotInvoked(whenLeft))
-               .And(WasInvokedOnce(args.content,
+               .And(WasNotInvoked(nameof(whenLeft),
+                                  whenLeft))
+               .And(WasInvokedOnce(nameof(whenRight),
+                                   args.content,
                                    whenRight));
       }
 

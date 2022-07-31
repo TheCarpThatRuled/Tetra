@@ -23,7 +23,8 @@ public class WHEN_the_client_creates_the_FileSystem
          var fileSystem = FileSystem.From(path);
 
          //Assert
-         return AreEqual(path,
+         return AreEqual("Current directory",
+                         path,
                          fileSystem.CurrentDirectory());
       }
 

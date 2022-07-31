@@ -35,7 +35,8 @@ public class Success_IsASuccess
          var actual = result.IsASuccess();
 
          //Assert
-         return IsTrue(actual);
+         return IsTrue(AssertMessages.ReturnValue,
+                       actual);
       }
 
       Prop.ForAll<int>(Property)

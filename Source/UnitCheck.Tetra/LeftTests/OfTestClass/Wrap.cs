@@ -38,9 +38,11 @@ public class Wrap
          var actual = wrappedFunc(left);
 
          //Assert
-         return AreEqual(newValue,
+         return AreEqual(AssertMessages.ReturnValue,
+                         newValue,
                          actual)
-           .And(WasInvokedOnce(func));
+           .And(WasInvokedOnce(nameof(func),
+                               func));
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -73,9 +75,11 @@ public class Wrap
          var actual = wrappedFunc(left);
 
          //Assert
-         return AreEqual(args.newValue,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.newValue,
                          actual)
-           .And(WasInvokedOnce(func));
+           .And(WasInvokedOnce(nameof(func),
+                               func));
       }
 
       Arb.Register<Libraries.TwoUniqueTestClasses>();
@@ -108,9 +112,11 @@ public class Wrap
          var actual = wrappedFunc(left);
 
          //Assert
-         return AreEqual(newValue,
+         return AreEqual(AssertMessages.ReturnValue,
+                         newValue,
                          actual)
-           .And(WasInvokedOnce(func));
+           .And(WasInvokedOnce(nameof(func),
+                               func));
       }
 
       Arb.Register<Libraries.TestClass>();
@@ -140,15 +146,17 @@ public class Wrap
          var func = FakeFunction<TestClass, int>.Create(newValue);
 
          var wrappedFunc = Left<TestClass>.Wrap(func.Func);
-         var left = Left<TestClass>.Create(content);
+         var left        = Left<TestClass>.Create(content);
 
          //Act
          var actual = wrappedFunc(left);
 
          //Assert
-         return AreEqual(newValue,
+         return AreEqual(AssertMessages.ReturnValue,
+                         newValue,
                          actual)
-           .And(WasInvokedOnce(content,
+           .And(WasInvokedOnce(nameof(func),
+                               content,
                                func));
       }
 
@@ -176,15 +184,17 @@ public class Wrap
          var func = FakeFunction<TestClass, TestClass>.Create(args.newValue);
 
          var wrappedFunc = Left<TestClass>.Wrap(func.Func);
-         var left = Left<TestClass>.Create(args.content);
+         var left        = Left<TestClass>.Create(args.content);
 
          //Act
          var actual = wrappedFunc(left);
 
          //Assert
-         return AreEqual(args.newValue,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.newValue,
                          actual)
-           .And(WasInvokedOnce(args.content,
+           .And(WasInvokedOnce(nameof(func),
+                               args.content,
                                func));
       }
 
@@ -212,15 +222,17 @@ public class Wrap
          var func = FakeFunction<TestClass, TestStruct>.Create(newValue);
 
          var wrappedFunc = Left<TestClass>.Wrap(func.Func);
-         var left = Left<TestClass>.Create(content);
+         var left        = Left<TestClass>.Create(content);
 
          //Act
          var actual = wrappedFunc(left);
 
          //Assert
-         return AreEqual(newValue,
+         return AreEqual(AssertMessages.ReturnValue,
+                         newValue,
                          actual)
-           .And(WasInvokedOnce(content,
+           .And(WasInvokedOnce(nameof(func),
+                               content,
                                func));
       }
 

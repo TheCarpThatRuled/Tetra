@@ -31,7 +31,8 @@ public class IsAValidPathComponent
          var actual = value.IsAValidPathComponent();
 
          //Assert
-         return IsTrue(actual);
+         return IsTrue(AssertMessages.ReturnValue,
+                       actual);
       }
 
       Arb.Register<Libraries.ValidPathComponent>();
@@ -58,7 +59,8 @@ public class IsAValidPathComponent
          var actual = value.IsAValidPathComponent();
          
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.InvalidPathComponent>();

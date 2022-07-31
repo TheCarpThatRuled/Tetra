@@ -35,7 +35,8 @@ public class Some_IsANone
          var actual = error.IsANone();
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.Message>();

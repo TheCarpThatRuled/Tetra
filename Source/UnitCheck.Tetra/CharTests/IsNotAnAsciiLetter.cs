@@ -31,7 +31,8 @@ public class IsNotAnAsciiLetter
          var actual = value.IsNotAnAsciiLetter();
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.AsciiLetters>();
@@ -58,7 +59,8 @@ public class IsNotAnAsciiLetter
          var actual = value.IsNotAnAsciiLetter();
          
          //Assert
-         return IsTrue(actual);
+         return IsTrue(AssertMessages.ReturnValue,
+                       actual);
       }
 
       Arb.Register<Libraries.NonAsciiLetters>();

@@ -25,32 +25,25 @@ public class Parent
    [TestMethod]
    public void GIVEN_an_AbsoluteFilePath_WHEN_Parent_THEN_an_AbsoluteDirectoryPath_containing_the_parent_directory_is_returned()
    {
-      static Property Property(VolumeComponent      volume,
-                               DirectoryComponent[] directories,
-                               FileComponent        file)
+      static Property Property(TestAbsoluteFilePath testPath)
       {
          //Arrange
-         var expected = TestAbsoluteDirectoryPath.Create(volume,
-                                                         directories);
+         var expected = testPath.Parent();
 
-         var path = AbsoluteFilePath.Create(volume,
-                                            directories,
-                                            file);
+         var path = testPath.ToTetra();
 
          //Act
          var actual = path.Parent();
 
          //Assert
-         return AreEqual("Parent",
+         return AreEqual(AssertMessages.ReturnValue,
                          expected,
                          actual);
       }
 
-      Arb.Register<Libraries.VolumeComponent>();
-      Arb.Register<Libraries.ArrayOfDirectoryComponents>();
-      Arb.Register<Libraries.FileComponent>();
+      Arb.Register<Libraries.TestAbsoluteFilePath>();
 
-      Prop.ForAll<VolumeComponent, DirectoryComponent[], FileComponent>(Property)
+      Prop.ForAll<TestAbsoluteFilePath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

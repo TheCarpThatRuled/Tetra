@@ -32,7 +32,7 @@ public class True_GetHashCode
 
       //Assert
       Assert.That
-            .AreEqual("Return value",
+            .AreEqual(AssertMessages.ReturnValue,
                       true.GetHashCode(),
                       actual);
    }

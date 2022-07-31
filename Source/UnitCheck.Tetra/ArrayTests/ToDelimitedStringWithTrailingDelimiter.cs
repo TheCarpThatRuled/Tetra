@@ -36,7 +36,8 @@ public class ToDelimitedStringWithTrailingDelimiter
          var actual = array.ToDelimitedStringWithTrailingDelimiter(delimiter);
 
          //Assert
-         return AreEqual(string.Empty,
+         return AreEqual(AssertMessages.ReturnValue,
+                         string.Empty,
                          actual);
       }
 
@@ -66,7 +67,8 @@ public class ToDelimitedStringWithTrailingDelimiter
          var actual = array.ToDelimitedStringWithTrailingDelimiter(delimiter);
 
          //Assert
-         return AreEqual($"{value}{delimiter}",
+         return AreEqual(AssertMessages.ReturnValue,
+                         $"{value}{delimiter}",
                          actual);
       }
 
@@ -103,7 +105,8 @@ public class ToDelimitedStringWithTrailingDelimiter
          var actual = array.ToDelimitedStringWithTrailingDelimiter(delimiter);
 
          //Assert
-         return AreEqual(expected.ToString(),
+         return AreEqual(AssertMessages.ReturnValue,
+                         expected.ToString(),
                          actual);
       }
 
@@ -137,7 +140,8 @@ public class ToDelimitedStringWithTrailingDelimiter
          var actual = array.ToDelimitedStringWithTrailingDelimiter(delimiter);
 
          //Assert
-         return AreEqual(string.Empty,
+         return AreEqual(AssertMessages.ReturnValue,
+                         string.Empty,
                          actual);
       }
 
@@ -169,7 +173,8 @@ public class ToDelimitedStringWithTrailingDelimiter
          var actual = array.ToDelimitedStringWithTrailingDelimiter(delimiter);
          
          //Assert
-         return AreEqual($"{value}{delimiter}",
+         return AreEqual(AssertMessages.ReturnValue,
+                         $"{value}{delimiter}",
                          actual);
       }
 
@@ -206,7 +211,8 @@ public class ToDelimitedStringWithTrailingDelimiter
          var actual = array.ToDelimitedStringWithTrailingDelimiter(delimiter);
 
          //Assert
-         return AreEqual(expected.ToString(),
+         return AreEqual(AssertMessages.ReturnValue,
+                         expected.ToString(),
                          actual);
       }
 

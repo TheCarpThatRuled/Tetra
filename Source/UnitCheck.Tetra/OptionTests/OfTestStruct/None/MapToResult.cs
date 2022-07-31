@@ -36,7 +36,8 @@ public class None_MapToResult
          var actual = option.MapToResult(whenNone);
 
          //Assert
-         return IsAFailure(whenNone,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           whenNone,
                            actual);
       }
 
@@ -72,9 +73,11 @@ public class None_MapToResult
          var actual = option.MapToResult(whenNone.Func);
 
          //Assert
-         return IsAFailure(value,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           value,
                            actual)
-           .And(WasInvokedOnce(whenNone));
+           .And(WasInvokedOnce(nameof(whenNone),
+                               whenNone));
       }
 
       Arb.Register<Libraries.Message>();

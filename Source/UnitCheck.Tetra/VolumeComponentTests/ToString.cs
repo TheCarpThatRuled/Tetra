@@ -35,7 +35,8 @@ public class ToString
          var actual = volume.ToString();
 
          //Assert
-         return AreEqual($"<{asciiLetter}:>",
+         return AreEqual(AssertMessages.ReturnValue,
+                         $"<{asciiLetter}:>",
                          actual);
       }
 

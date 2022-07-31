@@ -32,7 +32,8 @@ public class Parse
          var actual = FileComponent.Parse(value);
 
          //Assert
-         return IsASuccessAnd(actualFileComponent => value
+         return IsASuccessAnd(AssertMessages.ReturnValue,
+                              actualFileComponent => value
                                                   == actualFileComponent
                                                     .Content()
                                                     .Value(),
@@ -63,8 +64,9 @@ public class Parse
          var actual = FileComponent.Parse(value);
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
-                                                               HumanReadableName.FileComponent)),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
+                                                                                                HumanReadableName.FileComponent)),
                            actual);
       }
 

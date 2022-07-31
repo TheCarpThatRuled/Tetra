@@ -34,7 +34,8 @@ public class Equals
          var actual = either.Equals(other);
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.EitherOfTestClassAndTestClass>();
@@ -98,8 +99,10 @@ public class Equals
          var rightEqualsLeft = right.Equals((object) left);
 
          //Assert
-         return IsFalse(leftEqualsRight)
-           .And(IsFalse((rightEqualsLeft)));
+         return IsFalse(nameof(leftEqualsRight),
+                        leftEqualsRight)
+           .And(IsFalse(nameof(rightEqualsLeft),
+                        rightEqualsLeft));
       }
 
       Prop.ForAll<TestClass>(Property)
@@ -192,7 +195,8 @@ public class Equals
          var actual = either.Equals(default(Either<TestClass, TestClass>));
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.EitherOfTestClassAndTestClass>();
@@ -225,8 +229,10 @@ public class Equals
          var rightEqualsLeft = right.Equals(left);
 
          //Assert
-         return IsFalse(leftEqualsRight)
-           .And(IsFalse((rightEqualsLeft)));
+         return IsFalse(nameof(leftEqualsRight),
+                        leftEqualsRight)
+           .And(IsFalse(nameof(rightEqualsLeft),
+                        rightEqualsLeft));
       }
 
       Prop.ForAll<TestClass>(Property)

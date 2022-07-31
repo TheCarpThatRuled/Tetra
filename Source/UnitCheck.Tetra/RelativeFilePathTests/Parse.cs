@@ -34,8 +34,8 @@ public class Parse
          var actual = RelativeFilePath.Parse(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd("Return value",
-                              actualPath => AreEqual("Return value",
+         return IsASuccessAnd(AssertMessages.ReturnValue,
+                              actualPath => AreEqual(AssertMessages.ReturnValue,
                                                      testPath,
                                                      actualPath.Content()),
                               actual);
@@ -67,7 +67,8 @@ public class Parse
          var actual = RelativeFilePath.Parse(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(testPath.PathWithTrailingDirectorySeparator(),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(testPath.PathWithTrailingDirectorySeparator(),
                                                                                                              HumanReadableName.RelativeFilePath)),
                            actual);
       }
@@ -94,7 +95,7 @@ public class Parse
 
       //Assert
       Assert.That
-            .IsAFailure("Return value",
+            .IsAFailure(AssertMessages.ReturnValue,
                         Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(string.Empty,
                                                                                    HumanReadableName.RelativeFilePath)),
                         actual);
@@ -118,7 +119,8 @@ public class Parse
          var actual = RelativeFilePath.Parse(path);
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(path,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(path,
                                                                                                    HumanReadableName.RelativeFilePath)),
                            actual);
       }

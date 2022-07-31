@@ -36,7 +36,8 @@ public class None_Reduce
          var actual = option.Reduce(whenNone);
 
          //Assert
-         return AreEqual(whenNone,
+         return AreEqual(AssertMessages.ReturnValue,
+                         whenNone,
                          actual);
       }
 
@@ -70,9 +71,11 @@ public class None_Reduce
          var actual = option.Reduce(whenNoneFunc.Func);
 
          //Assert
-         return AreEqual(whenNone,
+         return AreEqual(AssertMessages.ReturnValue,
+                         whenNone,
                          actual)
-               .And(WasInvokedOnce(whenNoneFunc));
+               .And(WasInvokedOnce(nameof(whenNone),
+                                   whenNoneFunc));
       }
 
       Prop.ForAll<int>(Property)
@@ -107,9 +110,11 @@ public class None_Reduce
                                     whenSome.Func);
 
          //Assert
-         return AreEqual(args.whenNone,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenNone,
                          actual)
-               .And(WasNotInvoked(whenSome));
+               .And(WasNotInvoked(nameof(whenSome),
+                                  whenSome));
       }
 
       Arb.Register<Libraries.TwoUniqueInt32s>();
@@ -143,9 +148,11 @@ public class None_Reduce
                                     whenSome.Func);
 
          //Assert
-         return AreEqual(args.whenNone,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenNone,
                          actual)
-               .And(WasNotInvoked(whenSome));
+               .And(WasNotInvoked(nameof(whenSome),
+                                  whenSome));
       }
 
       Arb.Register<Libraries.TwoUniqueTestClasses>();
@@ -179,9 +186,11 @@ public class None_Reduce
                                     whenSome.Func);
 
          //Assert
-         return AreEqual(args.whenNone,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenNone,
                          actual)
-               .And(WasNotInvoked(whenSome));
+               .And(WasNotInvoked(nameof(whenSome),
+                                  whenSome));
       }
 
       Arb.Register<Libraries.TwoUniqueTestStructs>();
@@ -219,10 +228,13 @@ public class None_Reduce
                                     whenSome.Func);
 
          //Assert
-         return AreEqual(args.whenNone,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenNone,
                          actual)
-               .And(WasInvokedOnce(whenNone))
-               .And(WasNotInvoked(whenSome));
+               .And(WasInvokedOnce(nameof(whenNone),
+                                   whenNone))
+               .And(WasNotInvoked(nameof(whenSome),
+                                  whenSome));
       }
 
       Arb.Register<Libraries.TwoUniqueInt32s>();
@@ -257,10 +269,13 @@ public class None_Reduce
                                     whenSome.Func);
 
          //Assert
-         return AreEqual(args.whenNone,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenNone,
                          actual)
-               .And(WasInvokedOnce(whenNone))
-               .And(WasNotInvoked(whenSome));
+               .And(WasInvokedOnce(nameof(whenNone),
+                                   whenNone))
+               .And(WasNotInvoked(nameof(whenSome),
+                                  whenSome));
       }
 
       Arb.Register<Libraries.TwoUniqueTestClasses>();
@@ -295,10 +310,13 @@ public class None_Reduce
                                     whenSome.Func);
 
          //Assert
-         return AreEqual(args.whenNone,
+         return AreEqual(AssertMessages.ReturnValue,
+                         args.whenNone,
                          actual)
-               .And(WasInvokedOnce(whenNone))
-               .And(WasNotInvoked(whenSome));
+               .And(WasInvokedOnce(nameof(whenNone),
+                                   whenNone))
+               .And(WasNotInvoked(nameof(whenSome),
+                                  whenSome));
       }
 
       Arb.Register<Libraries.TwoUniqueTestStructs>();

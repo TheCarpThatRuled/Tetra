@@ -60,10 +60,10 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd("ParseComponents",
-                              actualComponents => AreEqual("ParseComponents",
+         return IsASuccessAnd(AssertMessages.ReturnValue,
+                              actualComponents => AreEqual(AssertMessages.ReturnValue,
                                                            testPath,
-                                                           ((VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories)) actualComponents.Content()),
+                                                           actualComponents.Content()),
                               actual);
       }
 
@@ -94,10 +94,10 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd("ParseComponents",
-                              actualComponents => AreEqual("ParseComponents",
+         return IsASuccessAnd(AssertMessages.ReturnValue,
+                              actualComponents => AreEqual(AssertMessages.ReturnValue,
                                                            testPath,
-                                                           ((VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories)) actualComponents.Content()),
+                                                           actualComponents.Content()),
                               actual);
       }
 
@@ -126,7 +126,7 @@ public class ParseComponents
 
       //Assert
       Assert.That
-            .IsAFailure("ParseComponents",
+            .IsAFailure(AssertMessages.ReturnValue,
                         Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
                                                                                     nameof(TestPath))),
                         actual);
@@ -152,8 +152,9 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                      nameof(TestPath))),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
+                                                                                                   nameof(TestPath))),
                            actual);
       }
 
@@ -183,8 +184,9 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                      nameof(TestPath))),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
+                                                                                                   nameof(TestPath))),
                            actual);
       }
 
@@ -209,15 +211,14 @@ public class ParseComponents
       static Property Property(string path)
       {
          //Arrange
-         var exception = Option<Exception>.None();
-
          //Act
          var actual = TestPath.TestParseComponents(path,
                                                    nameof(TestPath));
 
          //Assert
-         return IsAFailure(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
-                                                                                                       nameof(TestPath))),
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
+                                                                                                    nameof(TestPath))),
                            actual);
       }
 

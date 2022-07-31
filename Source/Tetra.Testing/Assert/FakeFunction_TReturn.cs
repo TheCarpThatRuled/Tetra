@@ -45,8 +45,7 @@ partial class Assert_Extensions
          .Invocations()
        != 0)
       {
-         throw Failed.Assert(TheFakeFunctionWasInvokedWhenWeExpectedItNotToBe<TReturn>(description),
-                             function.Invocations());
+         throw Failed.Assert(TheFakeFunctionWasInvokedWhenWeExpectedItNotToBe<TReturn>(description));
       }
 
       return assert;

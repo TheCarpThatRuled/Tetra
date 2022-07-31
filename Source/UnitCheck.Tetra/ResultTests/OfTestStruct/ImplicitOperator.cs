@@ -32,8 +32,9 @@ public class ImplicitOperator
          Result<TestStruct> actual = content;
 
          //Assert
-         return IsASuccess(content,
-                        actual);
+         return IsASuccess(AssertMessages.ReturnValue,
+                           content,
+                           actual);
       }
 
       Arb.Register<Libraries.TestStruct>();
@@ -62,7 +63,8 @@ public class ImplicitOperator
          Result<TestStruct> actual = content;
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 

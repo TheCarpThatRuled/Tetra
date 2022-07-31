@@ -8,15 +8,17 @@ partial class Properties
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Property IsFalse(bool actual)
+   public static Property IsFalse(string description,
+                                  bool actual)
       => (!actual)
-        .Label("The boolean was true when we expected it to be false");
+        .Label($"{description}: The boolean was true when we expected it to be false");
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsTrue(bool actual)
+   public static Property IsTrue(string description,
+                                 bool   actual)
       => actual
-        .Label("The boolean was false when we expected it to be true");
+        .Label($"{description}: The boolean was false when we expected it to be true");
 
    /* ------------------------------------------------------------ */
 }

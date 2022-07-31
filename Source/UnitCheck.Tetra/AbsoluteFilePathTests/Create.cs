@@ -33,7 +33,7 @@ public class Create
          var actual = AbsoluteFilePath.Create(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return AreEqual("Create",
+         return AreEqual(AssertMessages.ReturnValue,
                          testPath,
                          actual);
       }
@@ -198,7 +198,7 @@ public class Create
                                               testPath.File());
 
          //Assert
-         return AreEqual("Create",
+         return AreEqual(AssertMessages.ReturnValue,
                          testPath,
                          actual);
       }

@@ -32,7 +32,7 @@ public class None_ToString
 
       //Assert
       Assert.That
-            .AreEqual("Return value",
+            .AreEqual(AssertMessages.ReturnValue,
                       "None of Int32",
                       actual);
    }

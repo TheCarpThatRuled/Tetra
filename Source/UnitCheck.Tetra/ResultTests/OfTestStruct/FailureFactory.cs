@@ -32,7 +32,8 @@ public class FailureFactory
          var actual = Result<TestStruct>.Failure(content);
 
          //Assert
-         return IsAFailure(content,
+         return IsAFailure(AssertMessages.ReturnValue,
+                           content,
                            actual);
       }
 

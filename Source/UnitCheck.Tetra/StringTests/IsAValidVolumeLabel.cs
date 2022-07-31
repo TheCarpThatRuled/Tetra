@@ -32,7 +32,8 @@ public class IsAValidVolumeLabel
          var actual = value.IsAValidVolumeLabel();
 
          //Assert
-         return IsTrue(actual);
+         return IsTrue(AssertMessages.ReturnValue,
+                       actual);
       }
 
       Arb.Register<Libraries.ValidVolumeComponent>();
@@ -59,7 +60,8 @@ public class IsAValidVolumeLabel
          var actual = value.IsAValidVolumeLabel();
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.VolumeComponentWithTheWrongNumberOfCharacters>();
@@ -86,7 +88,8 @@ public class IsAValidVolumeLabel
          var actual = value.IsAValidVolumeLabel();
          
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.VolumeComponentWithAnInvalidFirstCharacter>();
@@ -113,7 +116,8 @@ public class IsAValidVolumeLabel
          var actual = value.IsAValidVolumeLabel();
 
          //Assert
-         return IsFalse(actual);
+         return IsFalse(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.VolumeComponentWithInvalidSecondCharacter>();

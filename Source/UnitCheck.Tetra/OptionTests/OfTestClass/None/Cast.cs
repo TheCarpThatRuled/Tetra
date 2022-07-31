@@ -32,7 +32,7 @@ public class None_Cast
 
       //Assert
       Assert.That
-            .IsANone("Return value",
+            .IsANone(AssertMessages.ReturnValue,
                      actual);
    }
 
@@ -56,7 +56,7 @@ public class None_Cast
 
       //Assert
       Assert.That
-            .IsANone("Return value",
+            .IsANone(AssertMessages.ReturnValue,
                      actual);
    }
 
@@ -80,7 +80,7 @@ public class None_Cast
 
       //Assert
       Assert.That
-            .IsANone("Return value",
+            .IsANone(AssertMessages.ReturnValue,
                      actual);
    }
 
@@ -104,7 +104,7 @@ public class None_Cast
 
       //Assert
       Assert.That
-            .IsANone("Return value",
+            .IsANone(AssertMessages.ReturnValue,
                      actual);
    }
 
@@ -128,7 +128,7 @@ public class None_Cast
 
       //Assert
       Assert.That
-            .IsANone("Return value",
+            .IsANone(AssertMessages.ReturnValue,
                      actual);
    }
 
