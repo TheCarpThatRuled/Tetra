@@ -33,10 +33,11 @@ public class Parse
 
          //Assert
          return IsASuccessAnd(AssertMessages.ReturnValue,
-                              actualDirectoryComponent => value
-                                                       == actualDirectoryComponent
-                                                         .Content()
-                                                         .Value(),
+                              (description,
+                               actualDirectoryComponent) => AreEqual(description,
+                                                                     value,
+                                                                     actualDirectoryComponent.Content()
+                                                                                             .Value()),
                               actual);
       }
 

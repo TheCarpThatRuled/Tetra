@@ -35,9 +35,10 @@ public class Parse
 
          //Assert
          return IsASuccessAnd(AssertMessages.ReturnValue,
-                              actualPath => AreEqual(AssertMessages.ReturnValue,
-                                                     testPath,
-                                                     actualPath.Content()),
+                              (description,
+                               actualPath) => AreEqual(description,
+                                                       testPath,
+                                                       actualPath.Content()),
                               actual);
       }
 

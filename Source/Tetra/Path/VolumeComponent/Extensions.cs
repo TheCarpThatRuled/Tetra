@@ -7,49 +7,46 @@ public static class VolumeComponent_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteDirectoryPath Append(this   VolumeComponent      volume,
-                                              params DirectoryComponent[] directories)
+   public static AbsoluteDirectoryPath Append(this   VolumeComponent      parent,
+                                              params DirectoryComponent[] child)
       => AbsoluteDirectoryPath
-        .Create(volume,
-                directories);
+        .Create(parent,
+                child);
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteDirectoryPath Append(this VolumeComponent                    volume,
-                                              IReadOnlyCollection<DirectoryComponent> directories)
+   public static AbsoluteDirectoryPath Append(this VolumeComponent                    parent,
+                                              IReadOnlyCollection<DirectoryComponent> child)
       => AbsoluteDirectoryPath
-        .Create(volume,
-                directories);
+        .Create(parent,
+                child);
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteDirectoryPath Append(this VolumeComponent  volume,
-                                              RelativeDirectoryPath path)
-      => AbsoluteDirectoryPath
-        .Create(volume,
-                path._directories);
+   public static AbsoluteDirectoryPath Append(this VolumeComponent  parent,
+                                              RelativeDirectoryPath child)
+      => child
+        .Prepend(parent);
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteFilePath Append(this VolumeComponent volume,
-                                         FileComponent        file)
+   public static AbsoluteFilePath Append(this VolumeComponent parent,
+                                         FileComponent        child)
       => AbsoluteFilePath
-        .Create(volume,
+        .Create(parent,
                 Array.Empty<DirectoryComponent>(),
-                file);
+                child);
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteFilePath Append(this VolumeComponent volume,
-                                         RelativeFilePath     path)
-      => AbsoluteFilePath
-        .Create(volume,
-                path._directories,
-                path._file);
+   public static AbsoluteFilePath Append(this VolumeComponent parent,
+                                         RelativeFilePath     child)
+      => child
+        .Prepend(parent);
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteDirectoryPath ToDirectoryPath(this VolumeComponent volume)
+   public static AbsoluteDirectoryPath ToPath(this VolumeComponent volume)
       => AbsoluteDirectoryPath
         .Create(volume,
                 Array.Empty<DirectoryComponent>());

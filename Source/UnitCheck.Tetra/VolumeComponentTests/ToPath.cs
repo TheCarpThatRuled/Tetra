@@ -9,35 +9,35 @@ namespace Check.VolumeComponentTests;
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
 [TestCategory(LocalCategories.VolumeComponent)]
-public class ToDirectoryPath
+public class ToPath
 {
    /* ------------------------------------------------------------ */
-   // AbsoluteDirectoryPath ToDirectoryPath(this VolumeComponent volume)
+   // AbsoluteDirectoryPath ToPath(this VolumeComponent volume)
    /* ------------------------------------------------------------ */
 
    //GIVEN
    //a_Volume
    //WHEN
-   //ToDirectoryPath
+   //ToPath
    //THEN
    //an_AbsoluteDirectoryPath_with_the_value_plus_the_directory_separator_is_returned
 
    [TestMethod]
-   public void GIVEN_a_Volume_WHEN_Create_THEN_an_AbsoluteDirectoryPath_with_the_value_plus_the_directory_separator_is_returned()
+   public void GIVEN_a_Volume_WHEN_ToPath_THEN_an_AbsoluteDirectoryPath_with_the_value_plus_the_directory_separator_is_returned()
    {
       static Property Property(VolumeComponent volume)
       {
          //Arrange
-         var expected = volume.Value()
-                      + Path.DirectorySeparatorChar;
+         var expected = TestAbsoluteDirectoryPath.Create(volume,
+                                                         Array.Empty<DirectoryComponent>());
 
          //Act
-         var actual = volume.ToDirectoryPath();
+         var actual = volume.ToPath();
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
                          expected,
-                         actual.Value());
+                         actual);
       }
 
       Arb.Register<Libraries.VolumeComponent>();

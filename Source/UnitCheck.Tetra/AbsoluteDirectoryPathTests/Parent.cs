@@ -74,9 +74,10 @@ public class Parent
 
          //Assert
          return IsASomeAnd(AssertMessages.ReturnValue,
-                           actualParent => AreEqual("Parent",
-                                                    expected,
-                                                    actualParent),
+                           (description,
+                            actualParent) => AreEqual(description,
+                                                      expected,
+                                                      actualParent),
                            actual);
       }
 

@@ -4,29 +4,30 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.RelativeFilePathTests;
+namespace Check.RelativeDirectoryPathTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
-[TestCategory(LocalCategories.RelativeFilePath)]
+[TestCategory(LocalCategories.RelativeDirectoryPath)]
 public class Prepend
 {
    /* ------------------------------------------------------------ */
-   // public RelativeFilePath Prepend(params DirectoryComponent[] directories)
+   // public RelativeDirectoryPath Prepend(params DirectoryComponent[] directories)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_RelativeFilePath_AND_an_Array_of_DirectoryComponents
+   //a_RelativeDirectoryPath_AND_an_Array_of_DirectoryComponents
    //WHEN
    //Prepend
    //THEN
-   //a_RelativeFilePath_containing_the_RelativeFilePath_and_the_Array_of_DirectoryComponents_is_returned
+   //a_RelativeDirectoryPath_containing_the_RelativeDirectoryPath_and_the_Array_of_DirectoryComponents_is_returned
 
    [TestMethod]
-   public void GIVEN_a_RelativeFilePath_and_an_Array_of_DirectoryComponents_WHEN_Prepend_THEN_a_RelativeFilePath_containing_the_RelativeFilePath_and_the_Array_of_DirectoryComponents_is_returned()
+   public void
+      GIVEN_a_RelativeDirectoryPath_and_an_Array_of_DirectoryComponents_WHEN_Prepend_THEN_a_RelativeDirectoryPath_containing_the_RelativeDirectoryPath_and_the_Array_of_DirectoryComponents_is_returned()
    {
-      static Property Property(TestRelativeFilePath testChild,
-                               DirectoryComponent[] parent)
+      static Property Property(TestRelativeDirectoryPath testChild,
+                               DirectoryComponent[]      parent)
       {
          //Arrange
          var expected = testChild.Prepend(parent);
@@ -43,28 +44,29 @@ public class Prepend
       }
 
       Arb.Register<Libraries.ArrayOfDirectoryComponents>();
-      Arb.Register<Libraries.TestRelativeFilePath>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<TestRelativeFilePath, DirectoryComponent[]>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath, DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // public RelativeFilePath Prepend(IReadOnlyCollection<DirectoryComponent> directories)
+   // public RelativeDirectoryPath Prepend(IReadOnlyCollection<DirectoryComponent> directories)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_RelativeFilePath_AND_a_sequence_of_DirectoryComponents
+   //a_RelativeDirectoryPath_AND_a_sequence_of_DirectoryComponents
    //WHEN
    //Prepend
    //THEN
-   //a_RelativeFilePath_containing_the_RelativeFilePath_and_the_sequence_of_DirectoryComponents_is_returned
+   //a_RelativeDirectoryPath_containing_the_RelativeDirectoryPath_and_the_sequence_of_DirectoryComponents_is_returned
 
    [TestMethod]
-   public void GIVEN_a_RelativeFilePath_and_a_sequence_of_DirectoryComponents_WHEN_Prepend_THEN_a_RelativeFilePath_containing_the_RelativeFilePath_and_the_sequence_of_DirectoryComponents_is_returned()
+   public void
+      GIVEN_a_RelativeDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Prepend_THEN_a_RelativeDirectoryPath_containing_the_RelativeDirectoryPath_and_the_sequence_of_DirectoryComponents_is_returned()
    {
-      static Property Property(TestRelativeFilePath     testChild,
-                               List<DirectoryComponent> parent)
+      static Property Property(TestRelativeDirectoryPath testChild,
+                               List<DirectoryComponent>  parent)
       {
          //Arrange
          var expected = testChild.Prepend(parent);
@@ -81,27 +83,28 @@ public class Prepend
       }
 
       Arb.Register<Libraries.ListOfDirectoryComponents>();
-      Arb.Register<Libraries.TestRelativeFilePath>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<TestRelativeFilePath, List<DirectoryComponent>>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath, List<DirectoryComponent>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // public RelativeFilePath Prepend(RelativeDirectoryPath path)
+   // public RelativeDirectoryPath Prepend(RelativeDirectoryPath path)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_RelativeFilePath_AND_a_RelativeDirectoryPath
+   //a_RelativeDirectoryPath_AND_a_RelativeDirectoryPath
    //WHEN
    //Prepend
    //THEN
-   //a_RelativeFilePath_containing_the_RelativeFilePath_and_the_RelativeDirectoryPath_is_returned
+   //a_RelativeDirectoryPath_containing_the_RelativeDirectoryPath_and_the_RelativeDirectoryPath_is_returned
 
    [TestMethod]
-   public void GIVEN_a_RelativeFilePath_and_a_RelativeDirectoryPath_WHEN_Prepend_THEN_a_RelativeFilePath_containing_the_RelativeFilePath_and_the_RelativeDirectoryPath_is_returned()
+   public void
+      GIVEN_a_RelativeDirectoryPath_and_a_RelativeDirectoryPath_WHEN_Prepend_THEN_a_RelativeDirectoryPath_containing_the_RelativeDirectoryPath_and_the_RelativeDirectoryPath_is_returned()
    {
-      static Property Property(TestRelativeFilePath      testChild,
+      static Property Property(TestRelativeDirectoryPath testChild,
                                TestRelativeDirectoryPath testParent)
       {
          //Arrange
@@ -120,28 +123,29 @@ public class Prepend
       }
 
       Arb.Register<Libraries.TestRelativeDirectoryPath>();
-      Arb.Register<Libraries.TestRelativeFilePath>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<TestRelativeFilePath, TestRelativeDirectoryPath>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath, TestRelativeDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // public AbsoluteFilePath Prepend(VolumeComponent path)
+   // public AbsoluteDirectoryPath Prepend(VolumeComponent path)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_RelativeFilePath_AND_a_VolumeComponent
+   //a_RelativeDirectoryPath_AND_a_VolumeComponent
    //WHEN
    //Prepend
    //THEN
-   //an_AbsoluteFilePath_containing_the_RelativeFilePath_and_the_VolumeComponent_is_returned
+   //an_AbsoluteDirectoryPath_containing_the_RelativeDirectoryPath_and_the_VolumeComponent_is_returned
 
    [TestMethod]
-   public void GIVEN_a_RelativeFilePath_and_a_VolumeComponent_WHEN_Prepend_THEN_an_AbsoluteFilePath_containing_the_RelativeFilePath_and_the_VolumeComponent_is_returned()
+   public void
+      GIVEN_a_RelativeDirectoryPath_and_a_VolumeComponent_WHEN_Prepend_THEN_an_AbsoluteDirectoryPath_containing_the_RelativeDirectoryPath_and_the_VolumeComponent_is_returned()
    {
-      static Property Property(TestRelativeFilePath testChild,
-                               VolumeComponent      parent)
+      static Property Property(TestRelativeDirectoryPath testChild,
+                               VolumeComponent           parent)
       {
          //Arrange
          var expected = testChild.Prepend(parent);
@@ -157,28 +161,29 @@ public class Prepend
                          actual);
       }
 
-      Arb.Register<Libraries.TestRelativeFilePath>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
       Arb.Register<Libraries.VolumeComponent>();
 
-      Prop.ForAll<TestRelativeFilePath, VolumeComponent>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath, VolumeComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // public AbsoluteFilePath Prepend(AbsoluteDirectoryPath path)
+   // public AbsoluteDirectoryPath Prepend(AbsoluteDirectoryPath path)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_RelativeFilePath_AND_a_AbsoluteDirectoryPath
+   //a_RelativeDirectoryPath_AND_a_AbsoluteDirectoryPath
    //WHEN
    //Prepend
    //THEN
-   //an_AbsoluteFilePath_containing_the_RelativeFilePath_and_the_AbsoluteDirectoryPath_is_returned
+   //an_AbsoluteDirectoryPath_containing_the_RelativeDirectoryPath_and_the_AbsoluteDirectoryPath_is_returned
 
    [TestMethod]
-   public void GIVEN_a_RelativeFilePath_and_a_AbsoluteDirectoryPath_WHEN_Prepend_THEN_an_AbsoluteFilePath_containing_the_RelativeFilePath_and_the_AbsoluteDirectoryPath_is_returned()
+   public void
+      GIVEN_a_RelativeDirectoryPath_and_a_AbsoluteDirectoryPath_WHEN_Prepend_THEN_an_AbsoluteDirectoryPath_containing_the_RelativeDirectoryPath_and_the_AbsoluteDirectoryPath_is_returned()
    {
-      static Property Property(TestRelativeFilePath      testChild,
+      static Property Property(TestRelativeDirectoryPath testChild,
                                TestAbsoluteDirectoryPath testParent)
       {
          //Arrange
@@ -197,9 +202,9 @@ public class Prepend
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
-      Arb.Register<Libraries.TestRelativeFilePath>();
+      Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<TestRelativeFilePath, TestAbsoluteDirectoryPath>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath, TestAbsoluteDirectoryPath>(Property)
           .QuickCheckThrowOnFailure();
    }
 

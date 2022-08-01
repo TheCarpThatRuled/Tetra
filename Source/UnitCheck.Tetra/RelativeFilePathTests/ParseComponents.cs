@@ -21,9 +21,16 @@ public class ParseComponents
       /* ------------------------------------------------------------ */
 
       public static Result<(IReadOnlyCollection<DirectoryComponent> directories, FileComponent file)> TestParseComponents(string potentialPath,
-         string                                                                                                                  pathType)
+                                                                                                                          string                                                                                                                  pathType)
          => ParseComponents(potentialPath,
                             pathType);
+
+      /* ------------------------------------------------------------ */
+      // Constructors
+      /* ------------------------------------------------------------ */
+
+      public TestPath() : base(null!,
+                               null!) { }
 
       /* ------------------------------------------------------------ */
    }
@@ -53,9 +60,10 @@ public class ParseComponents
 
          //Assert
          return IsASuccessAnd(AssertMessages.ReturnValue,
-                              actualComponents => AreEqual(AssertMessages.ReturnValue,
-                                                           testPath,
-                                                           actualComponents.Content()),
+                              (description,
+                               actualComponents) => AreEqual(description,
+                                                             testPath,
+                                                             actualComponents.Content()),
                               actual);
       }
 

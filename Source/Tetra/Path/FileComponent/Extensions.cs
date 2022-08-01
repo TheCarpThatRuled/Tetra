@@ -7,35 +7,49 @@ public static class FileComponent_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static RelativeFilePath Prepend(this   FileComponent        file,
-                                          params DirectoryComponent[] directories)
-      => null;
+   public static AbsoluteFilePath Prepend(this FileComponent    child,
+                                          AbsoluteDirectoryPath parent)
+      => parent
+        .Append(child);
 
    /* ------------------------------------------------------------ */
 
-   public static RelativeFilePath Prepend(this FileComponent              file,
-                                          IEnumerable<DirectoryComponent> directories)
-      => null;
+   public static RelativeFilePath Prepend(this   FileComponent        child,
+                                          params DirectoryComponent[] parent)
+      => RelativeFilePath
+        .Create(parent,
+                child);
 
    /* ------------------------------------------------------------ */
 
-   public static RelativeDirectoryPath Prepend(this FileComponent    file,
-                                               RelativeDirectoryPath path)
-      => null;
+   public static RelativeFilePath Prepend(this FileComponent              child,
+                                          IEnumerable<DirectoryComponent> parent)
+      => RelativeFilePath
+        .Create(parent.ToArray(),
+                child);
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteFilePath Prepend(this FileComponent file,
-                                          VolumeComponent    volume)
+   public static RelativeFilePath Prepend(this FileComponent    child,
+                                          RelativeDirectoryPath parent)
+      => parent
+        .Append(child);
+
+   /* ------------------------------------------------------------ */
+
+   public static AbsoluteFilePath Prepend(this FileComponent child,
+                                          VolumeComponent    parent)
       => AbsoluteFilePath
-        .Create(volume,
+        .Create(parent,
                 Array.Empty<DirectoryComponent>(),
-                file);
+                child);
 
    /* ------------------------------------------------------------ */
 
    public static RelativeFilePath ToPath(this FileComponent file)
-      => null;
+      => RelativeFilePath
+        .Create(Array.Empty<DirectoryComponent>(),
+                file);
 
    /* ------------------------------------------------------------ */
 }

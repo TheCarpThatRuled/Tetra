@@ -87,41 +87,39 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
    // Methods
    /* ------------------------------------------------------------ */
 
-   public AbsoluteDirectoryPath Append(params DirectoryComponent[] directories)
+   public AbsoluteDirectoryPath Append(params DirectoryComponent[] child)
       => Create(_volume,
-                _directories.Concat(directories)
+                _directories.Concat(child)
                             .ToArray());
 
    /* ------------------------------------------------------------ */
 
-   public AbsoluteDirectoryPath Append(IEnumerable<DirectoryComponent> directories)
+   public AbsoluteDirectoryPath Append(IEnumerable<DirectoryComponent> child)
       => Create(_volume,
-                _directories.Concat(directories)
+                _directories.Concat(child)
                             .ToArray());
 
    /* ------------------------------------------------------------ */
 
-   public AbsoluteDirectoryPath Append(RelativeDirectoryPath path)
-      => Create(_volume,
-                _directories.Concat(path._directories)
-                            .ToArray());
+   public AbsoluteDirectoryPath Append(RelativeDirectoryPath child)
+      => child
+        .Prepend(_directories)
+        .Prepend(_volume);
 
    /* ------------------------------------------------------------ */
 
-   public AbsoluteFilePath Append(FileComponent file)
+   public AbsoluteFilePath Append(FileComponent child)
       => AbsoluteFilePath
         .Create(_volume,
                 _directories,
-                file);
+                child);
 
    /* ------------------------------------------------------------ */
 
-   public AbsoluteFilePath Append(RelativeFilePath path)
-      => AbsoluteFilePath
-        .Create(_volume,
-                _directories.Concat(path._directories)
-                            .ToArray(),
-                path._file);
+   public AbsoluteFilePath Append(RelativeFilePath child)
+      => child
+        .Prepend(_directories)
+        .Prepend(_volume);
 
    /* ------------------------------------------------------------ */
 

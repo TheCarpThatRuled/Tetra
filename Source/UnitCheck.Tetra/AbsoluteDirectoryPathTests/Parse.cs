@@ -25,7 +25,8 @@ public class Parse
    //a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned
 
    [TestMethod]
-   public void GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   public void
+      GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
       static Property Property(TestAbsoluteDirectoryPath testPath)
       {
@@ -35,9 +36,10 @@ public class Parse
 
          //Assert
          return IsASuccessAnd(AssertMessages.ReturnValue,
-                              actualPath => AreEqual(AssertMessages.ReturnValue,
-                                                     testPath,
-                                                     actualPath.Content()),
+                              (description,
+                               actualPath) => AreEqual(description,
+                                                       testPath,
+                                                       actualPath.Content()),
                               actual);
       }
 
@@ -68,9 +70,10 @@ public class Parse
 
          //Assert
          return IsASuccessAnd(AssertMessages.ReturnValue,
-                              actualPath => AreEqual(AssertMessages.ReturnValue,
-                                                     testPath,
-                                                     actualPath.Content()),
+                              (description,
+                               actualPath) => AreEqual(description,
+                                                       testPath,
+                                                       actualPath.Content()),
                               actual);
       }
 

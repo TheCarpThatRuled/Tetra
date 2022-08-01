@@ -94,48 +94,43 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
    // Methods
    /* ------------------------------------------------------------ */
 
-   public AbsoluteFilePath Prepend(AbsoluteDirectoryPath path)
-      => AbsoluteFilePath.Create(path.Volume(),
-                                 path._directories
-                                     .Concat(_directories)
-                                     .ToArray(),
-                                 _file);
+   public AbsoluteFilePath Prepend(AbsoluteDirectoryPath parent)
+      => parent
+        .Append(_directories)
+        .Append(_file);
 
    /* ------------------------------------------------------------ */
 
-   public RelativeFilePath Prepend(params DirectoryComponent[] directories)
-      => Create(directories.Concat(_directories)
+   public RelativeFilePath Prepend(params DirectoryComponent[] parent)
+      => Create(parent.Concat(_directories)
                            .ToArray(),
                 _file);
 
    /* ------------------------------------------------------------ */
 
-   public RelativeFilePath Prepend(IEnumerable<DirectoryComponent> directories)
-      => Create(directories.Concat(_directories)
+   public RelativeFilePath Prepend(IEnumerable<DirectoryComponent> parent)
+      => Create(parent.Concat(_directories)
                            .ToArray(),
                 _file);
 
    /* ------------------------------------------------------------ */
 
-   public RelativeFilePath Prepend(RelativeDirectoryPath path)
-      => Create(path._directories
-                    .Concat(_directories)
-                    .ToArray(),
-                _file);
+   public RelativeFilePath Prepend(RelativeDirectoryPath parent)
+      => parent
+        .Append(_directories)
+        .Append(_file);
 
    /* ------------------------------------------------------------ */
 
-   public AbsoluteFilePath Prepend(VolumeComponent volume)
+   public AbsoluteFilePath Prepend(VolumeComponent parent)
       => AbsoluteFilePath
-        .Create(volume,
+        .Create(parent,
                 _directories,
                 _file);
 
    /* ------------------------------------------------------------ */
    // Protected Constructors
    /* ------------------------------------------------------------ */
-
-   public RelativeFilePath() { }
 
    protected RelativeFilePath(IReadOnlyCollection<DirectoryComponent> directories,
                               FileComponent                           file)
@@ -197,8 +192,8 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   internal readonly IReadOnlyCollection<DirectoryComponent> _directories;
-   internal readonly FileComponent                           _file;
+   private readonly IReadOnlyCollection<DirectoryComponent> _directories;
+   private readonly FileComponent                           _file;
    private readonly  string                                  _value;
 
    /* ------------------------------------------------------------ */

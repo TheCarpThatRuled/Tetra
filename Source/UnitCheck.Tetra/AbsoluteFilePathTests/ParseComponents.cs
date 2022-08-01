@@ -62,9 +62,10 @@ public class ParseComponents
 
          //Assert
          return IsASuccessAnd(AssertMessages.ReturnValue,
-                              actualComponents => AreEqual(AssertMessages.ReturnValue,
-                                                           testPath,
-                                                           actualComponents.Content()),
+                              (description,
+                               actualComponents) => AreEqual(description,
+                                                             testPath,
+                                                             actualComponents.Content()),
                               actual);
       }
 

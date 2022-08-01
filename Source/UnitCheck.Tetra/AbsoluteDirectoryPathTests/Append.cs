@@ -12,7 +12,7 @@ namespace Check.AbsoluteDirectoryPathTests;
 public class Append
 {
    /* ------------------------------------------------------------ */
-   // public static AbsoluteDirectoryPath Append(params DirectoryComponent[] directories)
+   // public AbsoluteDirectoryPath Append(params DirectoryComponent[] child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -20,10 +20,10 @@ public class Append
    //WHEN
    //Append
    //THEN
-   //an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned
+   //an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_Array_of_DirectoryComponents_is_returned
 
    [TestMethod]
-   public void GIVEN_an_AbsoluteDirectoryPath_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_an_AbsoluteDirectoryPath_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_Array_of_DirectoryComponents_is_returned()
    {
       static Property Property(TestAbsoluteDirectoryPath testPath,
                                DirectoryComponent[]      directories)
@@ -50,7 +50,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // public static AbsoluteDirectoryPath Append(IEnumerable<DirectoryComponent> directories)
+   // public AbsoluteDirectoryPath Append(IEnumerable<DirectoryComponent> child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -58,10 +58,10 @@ public class Append
    //WHEN
    //Append
    //THEN
-   //an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned
+   //an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_sequence_of_DirectoryComponents_is_returned
 
    [TestMethod]
-   public void GIVEN_an_AbsoluteDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_an_AbsoluteDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_sequence_of_DirectoryComponents_is_returned()
    {
       static Property Property(TestAbsoluteDirectoryPath testPath,
                                List<DirectoryComponent>  directories)
@@ -88,7 +88,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // public static AbsoluteDirectoryPath Append(RelativeDirectoryPath path)
+   // public AbsoluteDirectoryPath Append(RelativeDirectoryPath child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -96,10 +96,10 @@ public class Append
    //WHEN
    //Append
    //THEN
-   //an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned
+   //an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_RelativeDirectoryPath_is_returned
 
    [TestMethod]
-   public void GIVEN_an_AbsoluteDirectoryPath_and_a_RelativeDirectoryPath_WHEN_Append_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_an_AbsoluteDirectoryPath_and_a_RelativeDirectoryPath_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_RelativeDirectoryPath_is_returned()
    {
       static Property Property(TestAbsoluteDirectoryPath testParentPath,
                                TestRelativeDirectoryPath testChildPath)
@@ -127,7 +127,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // public static AbsoluteFilePath Append(FileComponent file)
+   // public AbsoluteFilePath Append(FileComponent child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -135,10 +135,10 @@ public class Append
    //WHEN
    //Append
    //THEN
-   //an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned
+   //an_AbsoluteFilePath_containing_the_AbsoluteDirectoryPath_and_the_FileComponent_is_returned
 
    [TestMethod]
-   public void GIVEN_an_AbsoluteDirectoryPath_and_a_FileComponent_WHEN_Append_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_an_AbsoluteDirectoryPath_and_a_FileComponent_WHEN_Append_THEN_an_AbsoluteFilePath_containing_the_AbsoluteDirectoryPath_and_the_FileComponent_is_returned()
    {
       static Property Property(TestAbsoluteDirectoryPath testPath,
                                FileComponent             file)
@@ -165,7 +165,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // public static AbsoluteFilePath Append(RelativeFilePath path)
+   // public AbsoluteFilePath Append(RelativeFilePath child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -173,10 +173,10 @@ public class Append
    //WHEN
    //Append
    //THEN
-   //an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned
+   //an_AbsoluteFilePath_containing_the_AbsoluteDirectoryPath_and_the_RelativeFilePath_is_returned
 
    [TestMethod]
-   public void GIVEN_an_AbsoluteDirectoryPath_and_a_RelativeFilePath_WHEN_Append_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
+   public void GIVEN_an_AbsoluteDirectoryPath_and_a_RelativeFilePath_WHEN_Append_THEN_an_AbsoluteFilePath_containing_the_AbsoluteDirectoryPath_and_the_RelativeFilePath_is_returned()
    {
       static Property Property(TestAbsoluteDirectoryPath testParentPath,
                                TestRelativeFilePath      testChildPath)

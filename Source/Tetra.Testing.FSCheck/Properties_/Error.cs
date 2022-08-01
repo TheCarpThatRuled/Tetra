@@ -36,14 +36,13 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsASomeAnd(string              description,
-                                     Func<Message, bool> property,
-                                     Error               error)
+   public static Property IsASomeAnd(string                          description,
+                                     Func<string, Message, Property> property,
+                                     Error                           error)
       => error
         .Reduce(() => False(TheErrorIsANone(description)),
-                actual => AsProperty(() => property(actual))
-                  .Label(Failed.Message(TheErrorIsASomeButDoesNotContainTheExpectedContent(description),
-                                        actual)));
+                actual => property(TheErrorIsASomeButDoesNotContainTheExpectedContent(description),
+                                   actual));
 
    /* ------------------------------------------------------------ */
 }

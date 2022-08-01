@@ -33,10 +33,11 @@ public class Parse
 
          //Assert
          return IsASuccessAnd(AssertMessages.ReturnValue,
-                              actualVolume => $"{value}:"
-                                           == actualVolume
-                                             .Content()
-                                             .Value(),
+                              (description,
+                               actualVolume) => AreEqual(description,
+                                                         $"{value}:",
+                                                         actualVolume.Content()
+                                                                     .Value()),
                               actual);
       }
 

@@ -27,11 +27,12 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsAIsALeftAnd<TLeft, TRight>(string                  description,
-                                                       Func<Left<TLeft>, Property> property,
-                                                       Either<TLeft, TRight>   either)
+   public static Property IsAIsALeftAnd<TLeft, TRight>(string                              description,
+                                                       Func<string, Left<TLeft>, Property> property,
+                                                       Either<TLeft, TRight>               either)
       => either
-        .Reduce(property,
+        .Reduce(left => property(TheEitherIsALeftButDoesNotContainTheExpectedContent<TLeft, TRight>(description),
+                                 left),
                 _ => False(TheEitherIsARight<TLeft, TRight>(description)));
 
    /* ------------------------------------------------------------ */
@@ -43,23 +44,24 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsARight<TLeft, TRight>(TRight                expected,
-                                                  Either<TLeft, TRight> either,
-                                                  string                name)
+   public static Property IsARight<TLeft, TRight>(string                description,
+                                                  TRight                expected,
+                                                  Either<TLeft, TRight> either)
       => either
-        .Reduce(_ => False(TheEitherIsALeft<TLeft, TRight>(name)),
-                actual => AreEqual(TheEitherIsARightButDoesNotContainTheExpectedContent<TLeft, TRight>(name),
+        .Reduce(_ => False(TheEitherIsALeft<TLeft, TRight>(description)),
+                actual => AreEqual(TheEitherIsARightButDoesNotContainTheExpectedContent<TLeft, TRight>(description),
                                    expected,
                                    actual.Content()));
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsARightAnd<TLeft, TRight>(Func<Right<TRight>, Property> property,
-                                                     Either<TLeft, TRight>     either,
-                                                     string                    name)
+   public static Property IsARightAnd<TLeft, TRight>(string                                description,
+                                                     Func<string, Right<TRight>, Property> property,
+                                                     Either<TLeft, TRight>                 either)
       => either
-        .Reduce(_ => False(TheEitherIsALeft<TLeft, TRight>(name)),
-                property);
+        .Reduce(_ => False(TheEitherIsALeft<TLeft, TRight>(description)),
+                right => property(TheEitherIsARightButDoesNotContainTheExpectedContent<TLeft, TRight>(description),
+                                  right));
 
    /* ------------------------------------------------------------ */
 }

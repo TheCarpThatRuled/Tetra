@@ -85,28 +85,36 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    // Methods
    /* ------------------------------------------------------------ */
 
-   public RelativeDirectoryPath Append(params DirectoryComponent[] directories)
-      => new();
+   public RelativeDirectoryPath Append(params DirectoryComponent[] child)
+      => Create(_directories
+               .Concat(child)
+               .ToArray());
 
    /* ------------------------------------------------------------ */
 
-   public RelativeDirectoryPath Append(IEnumerable<DirectoryComponent> directories)
-      => new();
+   public RelativeDirectoryPath Append(IEnumerable<DirectoryComponent> child)
+      => Create(_directories
+               .Concat(child)
+               .ToArray());
 
    /* ------------------------------------------------------------ */
 
-   public RelativeDirectoryPath Append(RelativeDirectoryPath path)
-      => new();
+   public RelativeDirectoryPath Append(RelativeDirectoryPath child)
+      => child
+        .Prepend(_directories);
 
    /* ------------------------------------------------------------ */
 
-   public RelativeFilePath Append(FileComponent file)
-      => new();
+   public RelativeFilePath Append(FileComponent child)
+      => RelativeFilePath
+        .Create(_directories,
+                child);
 
    /* ------------------------------------------------------------ */
 
-   public RelativeFilePath Append(RelativeFilePath path)
-      => new();
+   public RelativeFilePath Append(RelativeFilePath child)
+      => child
+        .Prepend(_directories);
 
    /* ------------------------------------------------------------ */
 
@@ -119,38 +127,36 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
 
    /* ------------------------------------------------------------ */
 
-   public AbsoluteDirectoryPath Prepend(AbsoluteDirectoryPath path)
-      => null;
+   public AbsoluteDirectoryPath Prepend(AbsoluteDirectoryPath parent)
+      => parent
+        .Append(_directories);
 
    /* ------------------------------------------------------------ */
 
-   public RelativeDirectoryPath Prepend(params DirectoryComponent[] directories)
-      => new();
+   public RelativeDirectoryPath Prepend(params DirectoryComponent[] parent)
+      => Create(parent
+               .Concat(_directories)
+               .ToArray());
 
    /* ------------------------------------------------------------ */
 
-   public RelativeDirectoryPath Prepend(IEnumerable<DirectoryComponent> directories)
-      => new();
+   public RelativeDirectoryPath Prepend(IEnumerable<DirectoryComponent> parent)
+      => Create(parent
+               .Concat(_directories)
+               .ToArray());
 
    /* ------------------------------------------------------------ */
 
-   public RelativeDirectoryPath Prepend(RelativeDirectoryPath path)
-      => new();
+   public RelativeDirectoryPath Prepend(RelativeDirectoryPath parent)
+      => parent
+        .Append(_directories);
 
    /* ------------------------------------------------------------ */
 
-   public RelativeFilePath Prepend(FileComponent file)
-      => new();
-
-   /* ------------------------------------------------------------ */
-
-   public RelativeFilePath Prepend(RelativeFilePath path)
-      => new();
-
-   /* ------------------------------------------------------------ */
-
-   public AbsoluteDirectoryPath Prepend(VolumeComponent volume)
-      => null;
+   public AbsoluteDirectoryPath Prepend(VolumeComponent parent)
+      => AbsoluteDirectoryPath
+        .Create(parent,
+                _directories);
 
    /* ------------------------------------------------------------ */
    // Protected Constructors
@@ -162,8 +168,6 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
 
       _value = PathBuilder.Combine(directories);
    }
-
-   public RelativeDirectoryPath() { }
 
    /* ------------------------------------------------------------ */
    // Protected Methods
@@ -208,7 +212,7 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   internal readonly IReadOnlyCollection<DirectoryComponent> _directories;
+   private readonly IReadOnlyCollection<DirectoryComponent> _directories;
    private readonly string                                  _value;
 
    /* ------------------------------------------------------------ */

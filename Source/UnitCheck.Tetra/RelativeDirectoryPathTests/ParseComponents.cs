@@ -27,6 +27,12 @@ public class ParseComponents
                             pathType);
 
       /* ------------------------------------------------------------ */
+      // Constructors
+      /* ------------------------------------------------------------ */
+
+      public TestPath() : base(null!) { }
+
+      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */
@@ -54,12 +60,13 @@ public class ParseComponents
 
          //Assert
          return IsASuccessAnd(AssertMessages.ReturnValue,
-                              actualComponents => AreEqual(AssertMessages.ReturnValue,
-                                                           testPath,
-                                                           actualComponents.Content()),
+                              (description,
+                               actualComponents) => AreEqual(description,
+                                                             testPath,
+                                                             actualComponents.Content()),
                               actual);
       }
-      
+
       Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
       Prop.ForAll<TestRelativeDirectoryPath>(Property)
@@ -88,13 +95,14 @@ public class ParseComponents
 
          //Assert
          return IsASuccessAnd(AssertMessages.ReturnValue,
-                              actualComponents => AreEqual(AssertMessages.ReturnValue,
-                                                           testPath,
-                                                           actualComponents.Content()),
+                              (description,
+                               actualComponents) => AreEqual(description,
+                                                             testPath,
+                                                             actualComponents.Content()),
                               actual);
       }
 
-      
+
       Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
       Prop.ForAll<TestRelativeDirectoryPath>(Property)
