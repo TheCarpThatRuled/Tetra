@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static Tetra.Testing.AssertMessages;
 
 namespace Tetra.Testing;
 

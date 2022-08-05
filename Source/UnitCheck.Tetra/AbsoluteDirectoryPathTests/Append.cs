@@ -25,16 +25,16 @@ public class Append
    [TestMethod]
    public void GIVEN_an_AbsoluteDirectoryPath_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_Array_of_DirectoryComponents_is_returned()
    {
-      static Property Property(TestAbsoluteDirectoryPath testPath,
-                               DirectoryComponent[]      directories)
+      static Property Property(TestAbsoluteDirectoryPath testParent,
+                               DirectoryComponent[]      child)
       {
          //Arrange
-         var expected = testPath.Append(directories);
+         var expected = testParent.Append(child);
 
-         var path = testPath.ToTetra();
+         var parent = testParent.ToTetra();
 
          //Act
-         var actual = path.Append(directories);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
@@ -63,16 +63,16 @@ public class Append
    [TestMethod]
    public void GIVEN_an_AbsoluteDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_sequence_of_DirectoryComponents_is_returned()
    {
-      static Property Property(TestAbsoluteDirectoryPath testPath,
-                               List<DirectoryComponent>  directories)
+      static Property Property(TestAbsoluteDirectoryPath testParent,
+                               List<DirectoryComponent>  child)
       {
          //Arrange
-         var expected = testPath.Append(directories);
+         var expected = testParent.Append(child);
 
-         var path = testPath.ToTetra();
+         var parent = testParent.ToTetra();
 
          //Act
-         var actual = path.Append(directories);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
@@ -101,17 +101,17 @@ public class Append
    [TestMethod]
    public void GIVEN_an_AbsoluteDirectoryPath_and_a_RelativeDirectoryPath_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_RelativeDirectoryPath_is_returned()
    {
-      static Property Property(TestAbsoluteDirectoryPath testParentPath,
-                               TestRelativeDirectoryPath testChildPath)
+      static Property Property(TestAbsoluteDirectoryPath testParent,
+                               TestRelativeDirectoryPath testChild)
       {
          //Arrange
-         var expected = testParentPath.Append(testChildPath);
+         var expected = testParent.Append(testChild);
 
-         var parentPath = testParentPath.ToTetra();
-         var childPath  = testChildPath.ToTetra();
+         var parent = testParent.ToTetra();
+         var child  = testChild.ToTetra();
 
          //Act
-         var actual = parentPath.Append(childPath);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
@@ -140,16 +140,16 @@ public class Append
    [TestMethod]
    public void GIVEN_an_AbsoluteDirectoryPath_and_a_FileComponent_WHEN_Append_THEN_an_AbsoluteFilePath_containing_the_AbsoluteDirectoryPath_and_the_FileComponent_is_returned()
    {
-      static Property Property(TestAbsoluteDirectoryPath testPath,
-                               FileComponent             file)
+      static Property Property(TestAbsoluteDirectoryPath testParent,
+                               FileComponent             child)
       {
          //Arrange
-         var expected = testPath.Append(file);
+         var expected = testParent.Append(child);
 
-         var path = testPath.ToTetra();
+         var parent = testParent.ToTetra();
 
          //Act
-         var actual = path.Append(file);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
@@ -178,17 +178,17 @@ public class Append
    [TestMethod]
    public void GIVEN_an_AbsoluteDirectoryPath_and_a_RelativeFilePath_WHEN_Append_THEN_an_AbsoluteFilePath_containing_the_AbsoluteDirectoryPath_and_the_RelativeFilePath_is_returned()
    {
-      static Property Property(TestAbsoluteDirectoryPath testParentPath,
-                               TestRelativeFilePath      testChildPath)
+      static Property Property(TestAbsoluteDirectoryPath testParent,
+                               TestRelativeFilePath      testChild)
       {
          //Arrange
-         var expected = testParentPath.Append(testChildPath);
+         var expected = testParent.Append(testChild);
 
-         var parentPath = testParentPath.ToTetra();
-         var childPath  = testChildPath.ToTetra();
+         var parent = testParent.ToTetra();
+         var child  = testChild.ToTetra();
 
          //Act
-         var actual = parentPath.Append(childPath);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,

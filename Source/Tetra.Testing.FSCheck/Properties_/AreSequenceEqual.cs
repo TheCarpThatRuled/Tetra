@@ -8,6 +8,15 @@ partial class Properties
    // Functions
    /* ------------------------------------------------------------ */
 
+   public static Property AreSequenceEqual<T>(string          description,
+                                              IEnumerable<T>? expected,
+                                              IEnumerable<T>? actual)
+      => AreSequenceEqual(description,
+                          expected?.ToArray(),
+                          actual?.ToArray());
+
+   /* ------------------------------------------------------------ */
+
    public static Property AreSequenceEqual<T>(string                  description,
                                               IReadOnlyCollection<T>? expected,
                                               IReadOnlyCollection<T>? actual)
