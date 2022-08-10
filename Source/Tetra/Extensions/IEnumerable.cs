@@ -10,7 +10,13 @@ public static class IEnumerable_Extensions
    /* ------------------------------------------------------------ */
 
    public static ISequence<T> Materialise<T>(this IEnumerable<T> sequence)
-      => null;
+      => sequence switch
+         {
+            Sequence<T> s => s,
+            T[] array     => new((T[])array.Clone()),
+            List<T> list  => new(list.ToArray()),
+            _             => new(sequence.ToArray()),
+         };
 
    /* ------------------------------------------------------------ */
 
