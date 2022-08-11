@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfTestStruct;
 public class None_Map
 {
    /* ------------------------------------------------------------ */
-   // Option<TNew> Map<TNew>(Func<T, TNew> whenSome)
+   // public Option<TNew> Map<TNew>(Func<T, TNew> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -151,7 +151,7 @@ public class None_Map
    }
 
    /* ------------------------------------------------------------ */
-   // Option<TNew> Map<TNew>(Func<T, Option<TNew>> whenSome)
+   // public Option<TNew> Map<TNew>(Func<T, Option<TNew>> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN

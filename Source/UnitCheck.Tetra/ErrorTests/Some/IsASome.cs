@@ -13,7 +13,7 @@ namespace Check.ErrorTests;
 public class Some_IsASome
 {
    /* ------------------------------------------------------------ */
-   // bool IsASome()
+   // public bool IsASome()
    /* ------------------------------------------------------------ */
 
    //GIVEN

@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfTestClass;
 public class None_Reduce
 {
    /* ------------------------------------------------------------ */
-   // T Reduce(T whenNone)
+   // public T Reduce(T whenNone)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -48,7 +48,7 @@ public class None_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // T Reduce(Func<T> whenNone)
+   // public T Reduce(Func<T> whenNone)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -87,8 +87,8 @@ public class None_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // TNew Reduce<TNew>(Func<TNew> whenNone,
-   //                   Func<T, TNew> whenSome)
+   // public TNew Reduce<TNew>(Func<TNew>    whenNone,
+   //                          Func<T, TNew> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -117,8 +117,8 @@ public class None_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenNone,
                          actual)
-               .And(WasNotInvoked(nameof(whenSome),
-                                  whenSome));
+           .And(WasNotInvoked(nameof(whenSome),
+                              whenSome));
       }
 
       Arb.Register<Libraries.TwoUniqueInt32s>();
@@ -155,8 +155,8 @@ public class None_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenNone,
                          actual)
-               .And(WasNotInvoked(nameof(whenSome),
-                                  whenSome));
+           .And(WasNotInvoked(nameof(whenSome),
+                              whenSome));
       }
 
       Arb.Register<Libraries.TwoUniqueTestClasses>();
@@ -193,8 +193,8 @@ public class None_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenNone,
                          actual)
-               .And(WasNotInvoked(nameof(whenSome),
-                                  whenSome));
+           .And(WasNotInvoked(nameof(whenSome),
+                              whenSome));
       }
 
       Arb.Register<Libraries.TwoUniqueTestStructs>();
@@ -204,8 +204,8 @@ public class None_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // TNew Reduce<TNew>(Func<TNew> whenNone,
-   //                   Func<T, TNew> whenSome)
+   // public TNew Reduce<TNew>(Func<TNew>    whenNone,
+   //                          Func<T, TNew> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN

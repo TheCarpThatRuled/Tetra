@@ -13,7 +13,7 @@ namespace Check.ErrorTests;
 public class Equals
 {
    /* ------------------------------------------------------------ */
-   // bool Equals(object? obj)
+   // public bool Equals(object? obj)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -234,7 +234,7 @@ public class Equals
    }
 
    /* ------------------------------------------------------------ */
-   // bool Equals(Error? other)
+   // public bool Equals(Error? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN

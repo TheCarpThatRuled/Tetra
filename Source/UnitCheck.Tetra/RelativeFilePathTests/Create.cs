@@ -13,7 +13,7 @@ namespace Check.RelativeFilePathTests;
 public class Create
 {
    /* ------------------------------------------------------------ */
-   // RelativeFilePath Create(string potentialPath)
+   // public static RelativeFilePath Create(string potentialPath)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -126,8 +126,8 @@ public class Create
    }
 
    /* ------------------------------------------------------------ */
-   // RelativeFilePath Create(IReadOnlyCollection<DirectoryComponent> directories,
-   //                         FileComponent file)
+   // public static RelativeFilePath Create(ISequence<DirectoryComponent> directories,
+   //                                       FileComponent                 file)
    /* ------------------------------------------------------------ */
 
    //GIVEN

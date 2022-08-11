@@ -12,7 +12,7 @@ namespace Check.AbsoluteDirectoryPathTests;
 public class Ancestry
 {
    /* ------------------------------------------------------------ */
-   // public static IReadOnlyList<AbsoluteDirectoryPath> Ancestry(this AbsoluteDirectoryPath path)
+   // public ISequence<AbsoluteDirectoryPath> Ancestry()
    /* ------------------------------------------------------------ */
 
    //GIVEN

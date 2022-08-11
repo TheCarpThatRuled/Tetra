@@ -13,7 +13,7 @@ namespace Check.ErrorTests;
 public class Some_GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // int GetHashCode()
+   // public int GetHashCode()
    /* ------------------------------------------------------------ */
 
    //GIVEN

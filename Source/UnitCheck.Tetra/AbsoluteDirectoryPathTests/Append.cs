@@ -42,8 +42,8 @@ public class Append
                          actual);
       }
 
+      Arb.Register<Libraries.DirectoryComponent>();
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
-      Arb.Register<Libraries.ArrayOfDirectoryComponents>();
 
       Prop.ForAll<TestAbsoluteDirectoryPath, DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
@@ -64,7 +64,7 @@ public class Append
    public void GIVEN_an_AbsoluteDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_sequence_of_DirectoryComponents_is_returned()
    {
       static Property Property(TestAbsoluteDirectoryPath testParent,
-                               List<DirectoryComponent>  child)
+                               ISequence<DirectoryComponent>  child)
       {
          //Arrange
          var expected = testParent.Append(child);
@@ -80,10 +80,10 @@ public class Append
                          actual);
       }
 
+      Arb.Register<Libraries.SequenceOfDirectoryComponents>();
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
 
-      Prop.ForAll<TestAbsoluteDirectoryPath, List<DirectoryComponent>>(Property)
+      Prop.ForAll<TestAbsoluteDirectoryPath, ISequence<DirectoryComponent>>(Property)
           .QuickCheckThrowOnFailure();
    }
 

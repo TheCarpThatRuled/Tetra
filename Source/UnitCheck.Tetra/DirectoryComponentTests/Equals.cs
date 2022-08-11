@@ -13,7 +13,7 @@ namespace Check.DirectoryComponentTests;
 public class Equals
 {
    /* ------------------------------------------------------------ */
-   // bool Equals(object? obj)
+   // public bool Equals(object? obj)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -28,7 +28,7 @@ public class Equals
       GIVEN_DirectoryComponent_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
       static Property Property(DirectoryComponent directoryComponent,
-                               object? obj)
+                               object?            obj)
       {
          //Act
          var actual = directoryComponent.Equals(obj);
@@ -59,9 +59,9 @@ public class Equals
          => Gen
            .OneOf(Gen.Constant(default(object?)),
                   Generators.Int32()
-                            .Select(x => (object?)x),
+                            .Select(x => (object?) x),
                   Generators.String()
-                            .Select(x => (object?)x))
+                            .Select(x => (object?) x))
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -135,7 +135,7 @@ public class Equals
    }
 
    /* ------------------------------------------------------------ */
-   // bool Equals(DirectoryComponent? other)
+   // public bool Equals(DirectoryComponent? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN

@@ -13,7 +13,7 @@ namespace Check.LeftTests.OfInt;
 public class Create
 {
    /* ------------------------------------------------------------ */
-   // Left<T> Create(T content)
+   // public static Left<T> Create(T content)
    /* ------------------------------------------------------------ */
 
    //GIVEN

@@ -12,7 +12,7 @@ namespace Check.IEnumerableTests;
 public class WithIndices
 {
    /* ------------------------------------------------------------ */
-   // public static IEnumerable<(T item, int index)> WithIndices<T>(this IEnumerable<T> sequence)
+   // public IEnumerable<(T item, int index)> WithIndices<T>()
    /* ------------------------------------------------------------ */
 
    //GIVEN

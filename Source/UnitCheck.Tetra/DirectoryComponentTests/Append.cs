@@ -12,8 +12,7 @@ namespace Check.DirectoryComponentTests;
 public class Append
 {
    /* ------------------------------------------------------------ */
-   // public static RelativeDirectoryPath Append(this DirectoryComponent parent,
-   //                                            params DirectoryComponent[] child)
+   // public RelativeDirectoryPath Append(params DirectoryComponent[] child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -44,7 +43,6 @@ public class Append
                          actual);
       }
 
-      Arb.Register<Libraries.ArrayOfDirectoryComponents>();
       Arb.Register<Libraries.DirectoryComponent>();
 
       Prop.ForAll<DirectoryComponent, DirectoryComponent[]>(Property)
@@ -52,8 +50,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // public static RelativeDirectoryPath Append(this DirectoryComponent parent,
-   //                                            IReadOnlyCollection<DirectoryComponent> child)
+   // public RelativeDirectoryPath Append(ISequence<DirectoryComponent> child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -67,8 +64,8 @@ public class Append
    public void
       GIVEN_a_DirectoryComponent_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_a_RelativeDirectoryPath_containing_the_DirectoryComponent_and_the_sequence_of_DirectoryComponents_is_returned()
    {
-      static Property Property(DirectoryComponent       parent,
-                               List<DirectoryComponent> child)
+      static Property Property(DirectoryComponent            parent,
+                               ISequence<DirectoryComponent> child)
       {
          //Arrange
          var expected = TestRelativeDirectoryPath.Create(child
@@ -85,15 +82,14 @@ public class Append
       }
 
       Arb.Register<Libraries.DirectoryComponent>();
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
+      Arb.Register<Libraries.SequenceOfDirectoryComponents>();
 
-      Prop.ForAll<DirectoryComponent, List<DirectoryComponent>>(Property)
+      Prop.ForAll<DirectoryComponent, ISequence<DirectoryComponent>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // public static RelativeDirectoryPath Append(this DirectoryComponent parent,
-   //                                            RelativeDirectoryPath child)
+   // public RelativeDirectoryPath Append(RelativeDirectoryPath child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -132,8 +128,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // public static RelativeFilePath Append(this DirectoryComponent parent,
-   //                                       FileComponent child)
+   // public RelativeFilePath Append(FileComponent child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -150,7 +145,7 @@ public class Append
                                FileComponent      child)
       {
          //Arrange
-         var expected = TestRelativeFilePath.Create(new[] {parent,},
+         var expected = TestRelativeFilePath.Create(Sequence.From(parent),
                                                     child);
 
          //Act
@@ -170,8 +165,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // public static RelativeFilePath Append(this DirectoryComponent parent,
-   //                                       RelativeFilePath child)
+   // public RelativeFilePath Append(RelativeFilePath child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -188,7 +182,7 @@ public class Append
                                TestRelativeFilePath testChild)
       {
          //Arrange
-         var expected = testChild.Prepend(new[] {parent,});
+         var expected = testChild.Prepend(Sequence.From(parent));
 
          var child = testChild.ToTetra();
 

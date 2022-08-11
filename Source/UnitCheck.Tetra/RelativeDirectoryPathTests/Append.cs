@@ -12,7 +12,7 @@ namespace Check.RelativeDirectoryPathTests;
 public class Append
 {
    /* ------------------------------------------------------------ */
-   // public RelativeDirectoryPath Append(params DirectoryComponent[] directories)
+   // public RelativeDirectoryPath Append(params DirectoryComponent[] child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -26,16 +26,16 @@ public class Append
    public void
       GIVEN_a_RelativeDirectoryPath_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_a_RelativeDirectoryPath_containing_the_RelativeDirectoryPath_and_the_Array_of_DirectoryComponents_is_returned()
    {
-      static Property Property(TestRelativeDirectoryPath testChild,
-                               DirectoryComponent[]      parent)
+      static Property Property(TestRelativeDirectoryPath testParent,
+                               DirectoryComponent[]      child)
       {
          //Arrange
-         var expected = testChild.Append(parent);
+         var expected = testParent.Append(child);
 
-         var child = testChild.ToTetra();
+         var parent = testParent.ToTetra();
 
          //Act
-         var actual = child.Append(parent);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
@@ -43,7 +43,7 @@ public class Append
                          actual);
       }
 
-      Arb.Register<Libraries.ArrayOfDirectoryComponents>();
+      Arb.Register<Libraries.DirectoryComponent>();
       Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
       Prop.ForAll<TestRelativeDirectoryPath, DirectoryComponent[]>(Property)
@@ -51,7 +51,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // public RelativeDirectoryPath Append(IReadOnlyCollection<DirectoryComponent> directories)
+   // public RelativeDirectoryPath Append(IEnumerable<DirectoryComponent> child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -65,16 +65,16 @@ public class Append
    public void
       GIVEN_a_RelativeDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_a_RelativeDirectoryPath_containing_the_RelativeDirectoryPath_and_the_sequence_of_DirectoryComponents_is_returned()
    {
-      static Property Property(TestRelativeDirectoryPath testChild,
-                               List<DirectoryComponent>  parent)
+      static Property Property(TestRelativeDirectoryPath     testParent,
+                               ISequence<DirectoryComponent> child)
       {
          //Arrange
-         var expected = testChild.Append(parent);
+         var expected = testParent.Append(child);
 
-         var child = testChild.ToTetra();
+         var parent = testParent.ToTetra();
 
          //Act
-         var actual = child.Append(parent);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
@@ -82,15 +82,15 @@ public class Append
                          actual);
       }
 
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
+      Arb.Register<Libraries.SequenceOfDirectoryComponents>();
       Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<TestRelativeDirectoryPath, List<DirectoryComponent>>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath, ISequence<DirectoryComponent>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // public RelativeDirectoryPath Append(RelativeDirectoryPath path)
+   // public RelativeDirectoryPath Append(RelativeDirectoryPath child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -104,17 +104,17 @@ public class Append
    public void
       GIVEN_a_RelativeDirectoryPath_and_a_RelativeDirectoryPath_WHEN_Append_THEN_a_RelativeDirectoryPath_containing_the_RelativeDirectoryPath_and_the_RelativeDirectoryPath_is_returned()
    {
-      static Property Property(TestRelativeDirectoryPath testChild,
-                               TestRelativeDirectoryPath testParent)
+      static Property Property(TestRelativeDirectoryPath testParent,
+                               TestRelativeDirectoryPath testChild)
       {
          //Arrange
-         var expected = testChild.Append(testParent);
+         var expected = testParent.Append(testChild);
 
-         var child  = testChild.ToTetra();
          var parent = testParent.ToTetra();
+         var child  = testChild.ToTetra();
 
          //Act
-         var actual = child.Append(parent);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
@@ -130,7 +130,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // public RelativeFilePath Append(FileComponent path)
+   // public RelativeFilePath Append(FileComponent child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -144,16 +144,16 @@ public class Append
    public void
       GIVEN_a_RelativeDirectoryPath_and_a_FileComponent_WHEN_Append_THEN_an_RelativeFilePath_containing_the_RelativeDirectoryPath_and_the_FileComponent_is_returned()
    {
-      static Property Property(TestRelativeDirectoryPath testChild,
-                               FileComponent parent)
+      static Property Property(TestRelativeDirectoryPath testParent,
+                               FileComponent             child)
       {
          //Arrange
-         var expected = testChild.Append(parent);
+         var expected = testParent.Append(child);
 
-         var child = testChild.ToTetra();
+         var parent = testParent.ToTetra();
 
          //Act
-         var actual = child.Append(parent);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
@@ -169,7 +169,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // public RelativeFilePath Append(RelativeFilePath path)
+   // public RelativeFilePath Append(RelativeFilePath child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -183,17 +183,17 @@ public class Append
    public void
       GIVEN_a_RelativeDirectoryPath_and_a_RelativeFilePath_WHEN_Append_THEN_an_RelativeFilePath_containing_the_RelativeDirectoryPath_and_the_RelativeFilePath_is_returned()
    {
-      static Property Property(TestRelativeDirectoryPath testChild,
-                               TestRelativeFilePath testParent)
+      static Property Property(TestRelativeDirectoryPath testParent,
+                               TestRelativeFilePath      testChild)
       {
          //Arrange
-         var expected = testChild.Append(testParent);
+         var expected = testParent.Append(testChild);
 
-         var child  = testChild.ToTetra();
          var parent = testParent.ToTetra();
+         var child  = testChild.ToTetra();
 
          //Act
-         var actual = child.Append(parent);
+         var actual = parent.Append(child);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,

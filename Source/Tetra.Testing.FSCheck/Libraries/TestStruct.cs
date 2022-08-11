@@ -44,6 +44,42 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
+   public sealed class NonEmptySequenceOfTestStruct
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<ISequence<Testing.TestStruct>> Type()
+         => Generators
+           .NonEmptySequenceOf(Generators.TestStruct())
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class SequenceOfTestStruct
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<ISequence<Testing.TestStruct>> Type()
+         => Generators
+           .SequenceOf(Generators.TestStruct())
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
    public sealed class TestStruct
    {
       /* ------------------------------------------------------------ */

@@ -12,7 +12,7 @@ namespace Check.FileComponentTests;
 public class ToPath
 {
    /* ------------------------------------------------------------ */
-   // public static RelativeFilePath ToPath(this FileComponent File)
+   // public RelativeFilePath ToPath()
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -28,7 +28,7 @@ public class ToPath
       static Property Property(FileComponent file)
       {
          //Arrange
-         var expected = TestRelativeFilePath.Create(Array.Empty<DirectoryComponent>(),
+         var expected = TestRelativeFilePath.Create(Sequence<DirectoryComponent>.Empty(),
                                                     file);
 
          //Act

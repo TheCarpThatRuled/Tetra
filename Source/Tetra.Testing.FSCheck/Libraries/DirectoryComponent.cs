@@ -8,23 +8,6 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class ArrayOfDirectoryComponents
-   {
-      /* ------------------------------------------------------------ */
-      // Functions
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<Tetra.DirectoryComponent[]> Type()
-         => Generators
-           .ArrayOf(Generators.DirectoryComponent())
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
    public sealed class ArrayOfAtLeastTwoDirectoryComponents
    {
       /* ------------------------------------------------------------ */
@@ -39,25 +22,7 @@ public static partial class Libraries
 
       /* ------------------------------------------------------------ */
    }
-
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
-   public sealed class NonEmptyArrayOfDirectoryComponents
-   {
-      /* ------------------------------------------------------------ */
-      // Functions
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<Tetra.DirectoryComponent[]> Type()
-         => Generators
-           .NonEmptyArrayOf(Generators.DirectoryComponent())
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-
+   
    /* ------------------------------------------------------------ */
 
    // ReSharper disable once ClassNeverInstantiated.Local
@@ -89,6 +54,79 @@ public static partial class Libraries
       public static Arbitrary<List<Tetra.DirectoryComponent>> Type()
          => Generators
            .ListOf(Generators.DirectoryComponent())
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class NonEmptyArrayOfDirectoryComponents
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<Tetra.DirectoryComponent[]> Type()
+         => Generators
+           .NonEmptyArrayOf(Generators.DirectoryComponent())
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class NonEmptySequenceOfDirectoryComponents
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<ISequence<Tetra.DirectoryComponent>> Type()
+         => Generators
+           .NonEmptySequenceOf(Generators.DirectoryComponent())
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class SequenceOfDirectoryComponents
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<ISequence<Tetra.DirectoryComponent>> Type()
+         => Generators
+           .SequenceOf(Generators.DirectoryComponent())
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   public sealed class SequenceOfAtLeastTwoDirectoryComponents
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<ISequence<Tetra.DirectoryComponent>> Type()
+         => Generators
+           .SequenceOf(Generators.DirectoryComponent())
+           .Where(x => x.Length() > 1)
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

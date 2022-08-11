@@ -13,7 +13,7 @@ namespace Check.RightTests.OfTestStruct;
 public class Wrap
 {
    /* ------------------------------------------------------------ */
-   // Func<Right<T>, TNew> Wrap<TNew>(Func<TNew> func)
+   // public static Func<Right<T>, TNew> Wrap<TNew>(Func<TNew> func)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -132,7 +132,7 @@ public class Wrap
    }
 
    /* ------------------------------------------------------------ */
-   // Func<Right<T>, TNew> Wrap<TNew>(Func<T, TNew> func)
+   // public static Func<Right<T>, TNew> Wrap<TNew>(Func<T, TNew> func)
    /* ------------------------------------------------------------ */
 
    //GIVEN

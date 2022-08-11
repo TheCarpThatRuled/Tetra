@@ -13,7 +13,7 @@ namespace Check.MessageTests;
 public class GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // int GetHashCode()
+   // public int GetHashCode()
    /* ------------------------------------------------------------ */
 
    //GIVEN

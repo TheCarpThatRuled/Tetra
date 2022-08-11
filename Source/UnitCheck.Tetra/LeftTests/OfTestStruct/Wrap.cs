@@ -13,7 +13,7 @@ namespace Check.LeftTests.OfTestStruct;
 public class Wrap
 {
    /* ------------------------------------------------------------ */
-   // Func<Left<T>, TNew> Wrap<TNew>(Func<TNew> func)
+   // public static Func<Left<T>, TNew> Wrap<TNew>(Func<TNew> func)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -24,9 +24,11 @@ public class Wrap
    //func_is_invoked_once_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_TestStruct_Wrap_AND_func_is_Func_of_int_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_TestStruct_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Left_of_TestStruct_Wrap_AND_func_is_Func_of_int_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_TestStruct_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(TestStruct content, int newValue)
+      static Property Property(TestStruct content,
+                               int        newValue)
       {
          //Arrange
          var func = FakeFunction<int>.Create(newValue);
@@ -61,9 +63,11 @@ public class Wrap
    //func_is_invoked_once_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_TestStruct_Wrap_AND_func_is_Func_of_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_TestStruct_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Left_of_TestStruct_Wrap_AND_func_is_Func_of_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_TestStruct_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(TestStruct content, TestClass newValue)
+      static Property Property(TestStruct content,
+                               TestClass  newValue)
       {
          //Arrange
          var func = FakeFunction<TestClass>.Create(newValue);
@@ -85,7 +89,7 @@ public class Wrap
       Arb.Register<Libraries.TestStruct>();
       Arb.Register<Libraries.TestClass>();
 
-      Prop.ForAll<TestStruct, TestClass> (Property)
+      Prop.ForAll<TestStruct, TestClass>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -99,7 +103,8 @@ public class Wrap
    //func_is_invoked_once_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_TestStruct_Wrap_AND_func_is_Func_of_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_TestStruct_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Left_of_TestStruct_Wrap_AND_func_is_Func_of_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_TestStruct_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
    {
       static Property Property((TestStruct content, TestStruct newValue) args)
       {
@@ -127,7 +132,7 @@ public class Wrap
    }
 
    /* ------------------------------------------------------------ */
-   // Func<Left<T>, TNew> Wrap<TNew>(Func<T, TNew> func)
+   // public static Func<Left<T>, TNew> Wrap<TNew>(Func<T, TNew> func)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -138,9 +143,11 @@ public class Wrap
    //func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_TestStruct_Wrap_AND_func_is_Func_of_TestStruct_to_int_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_TestStruct_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Left_of_TestStruct_Wrap_AND_func_is_Func_of_TestStruct_to_int_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_TestStruct_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(TestStruct content, int newValue)
+      static Property Property(TestStruct content,
+                               int        newValue)
       {
          //Arrange
          var func = FakeFunction<TestStruct, int>.Create(newValue);
@@ -176,9 +183,11 @@ public class Wrap
    //func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_TestStruct_Wrap_AND_func_is_Func_of_TestStruct_to_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_TestStruct_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Left_of_TestStruct_Wrap_AND_func_is_Func_of_TestStruct_to_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_TestStruct_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(TestStruct content, TestClass newValue)
+      static Property Property(TestStruct content,
+                               TestClass  newValue)
       {
          //Arrange
          var func = FakeFunction<TestStruct, TestClass>.Create(newValue);
@@ -215,7 +224,8 @@ public class Wrap
    //func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_TestStruct_Wrap_AND_func_is_Func_of_TestStruct_to_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_TestStruct_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Left_of_TestStruct_Wrap_AND_func_is_Func_of_TestStruct_to_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_TestStruct_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
    {
       static Property Property((TestStruct content, TestStruct newValue) args)
       {

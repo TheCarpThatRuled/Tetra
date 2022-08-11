@@ -13,7 +13,7 @@ namespace Check.DirectoryComponentTests;
 public class Create
 {
    /* ------------------------------------------------------------ */
-   // DirectoryComponent Create(string potentialComponent)
+   // public static DirectoryComponent Create(string potentialComponent)
    /* ------------------------------------------------------------ */
 
    //GIVEN

@@ -11,7 +11,7 @@ namespace Check.OptionTests.OfTestStruct;
 public class NoneFactory
 {
    /* ------------------------------------------------------------ */
-   // Option<T> None()
+   // public static Option<T> None()
    /* ------------------------------------------------------------ */
 
    //GIVEN

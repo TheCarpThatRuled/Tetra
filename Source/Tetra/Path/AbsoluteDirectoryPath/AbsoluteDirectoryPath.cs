@@ -17,8 +17,15 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteDirectoryPath Create(VolumeComponent                         volume,
-                                              IReadOnlyCollection<DirectoryComponent> directories)
+   public static AbsoluteDirectoryPath Create(VolumeComponent               volume,
+                                              params DirectoryComponent[] directories)
+      => new(directories.Materialise(),
+             volume);
+
+   /* ------------------------------------------------------------ */
+
+   public static AbsoluteDirectoryPath Create(VolumeComponent               volume,
+                                              ISequence<DirectoryComponent> directories)
       => new(directories,
              volume);
 
@@ -90,14 +97,14 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
    public AbsoluteDirectoryPath Append(params DirectoryComponent[] child)
       => Create(_volume,
                 _directories.Concat(child)
-                            .ToArray());
+                            .Materialise());
 
    /* ------------------------------------------------------------ */
 
    public AbsoluteDirectoryPath Append(IEnumerable<DirectoryComponent> child)
       => Create(_volume,
                 _directories.Concat(child)
-                            .ToArray());
+                            .Materialise());
 
    /* ------------------------------------------------------------ */
 
@@ -127,15 +134,15 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
       => _directories.Any()
             ? Option.Some(Create(_volume,
                                  _directories.SkipLast(1)
-                                             .ToArray()))
+                                             .Materialise()))
             : Option<AbsoluteDirectoryPath>.None();
 
    /* ------------------------------------------------------------ */
    // Protected Constructors
    /* ------------------------------------------------------------ */
 
-   protected AbsoluteDirectoryPath(IReadOnlyCollection<DirectoryComponent> directories,
-                                   VolumeComponent                         volume)
+   protected AbsoluteDirectoryPath(ISequence<DirectoryComponent> directories,
+                                   VolumeComponent               volume)
    {
       _directories = directories;
       _volume      = volume;
@@ -148,9 +155,8 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static Result<(VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories)> ParseComponents(
-      string potentialPath,
-      string pathType)
+   protected static Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories)> ParseComponents(string potentialPath,
+                                                                                                                string pathType)
    {
       if (string.IsNullOrEmpty(potentialPath))
       {
@@ -184,7 +190,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
 
       return (VolumeComponent.Create(potentialVolume[0]),
               directoryComponents.Select(DirectoryComponent.Create)
-                                 .ToArray());
+                                 .Materialise());
    }
 
    /* ------------------------------------------------------------ */
@@ -197,15 +203,15 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   internal readonly IReadOnlyCollection<DirectoryComponent> _directories;
-   private readonly string                                  _value;
-   private readonly VolumeComponent                         _volume;
+   private readonly ISequence<DirectoryComponent> _directories;
+   private readonly string                        _value;
+   private readonly VolumeComponent               _volume;
 
    /* ------------------------------------------------------------ */
    // Private Factory Functions
    /* ------------------------------------------------------------ */
 
-   private static AbsoluteDirectoryPath Create(Success<(VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories)> success)
+   private static AbsoluteDirectoryPath Create(Success<(VolumeComponent volume, ISequence<DirectoryComponent> directories)> success)
       => new(success.Content()
                     .directories,
              success.Content()

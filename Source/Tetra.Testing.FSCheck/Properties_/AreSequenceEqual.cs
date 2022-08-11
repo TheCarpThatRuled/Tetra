@@ -12,14 +12,14 @@ partial class Properties
                                               IEnumerable<T>? expected,
                                               IEnumerable<T>? actual)
       => AreSequenceEqual(description,
-                          expected?.ToArray(),
-                          actual?.ToArray());
+                          expected?.Materialise(),
+                          actual?.Materialise());
 
    /* ------------------------------------------------------------ */
 
    public static Property AreSequenceEqual<T>(string                  description,
-                                              IReadOnlyCollection<T>? expected,
-                                              IReadOnlyCollection<T>? actual)
+                                              ISequence<T>? expected,
+                                              ISequence<T>? actual)
       => AreSequenceEqual(description,
                           expected,
                           actual,
@@ -34,8 +34,8 @@ partial class Properties
    /* ------------------------------------------------------------ */
 
    public static Property AreSequenceEqual<T0, T1>(string                         description,
-                                                   IReadOnlyCollection<T0>?       expected,
-                                                   IReadOnlyCollection<T1>?       actual,
+                                                   ISequence<T0>?       expected,
+                                                   ISequence<T1>?       actual,
                                                    Func<T0, string>               t0ToString,
                                                    Func<T1, string>               t1ToString,
                                                    Func<T0, T1, string, Property> compareItem)
@@ -59,7 +59,7 @@ partial class Properties
                           .Select(t1ToString)
                           .ToArray();
 
-      if (expected.Count != actual.Count)
+      if (expected.Length() != actual.Length())
       {
          return False(Failed.Message($"{description} - The sequences are unequal in length",
                                      expectedAsString,

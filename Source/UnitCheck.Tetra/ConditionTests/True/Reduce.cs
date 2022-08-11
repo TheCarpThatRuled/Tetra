@@ -13,7 +13,7 @@ namespace Check.ConditionTests;
 public class True_Reduce
 {
    /* ------------------------------------------------------------ */
-   // bool Reduce()
+   // public bool Reduce()
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -39,8 +39,8 @@ public class True_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // T Reduce<T>(T whenFalse,
-   //             T whenTrue)
+   // public T Reduce<T>(T whenFalse,
+   //                   T whenTrue)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -141,8 +141,8 @@ public class True_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // T Reduce<T>(T whenFalse,
-   //             Func<T> whenTrue)
+   // public T Reduce<T>(T       whenFalse,
+   //                    Func<T> whenTrue)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -170,8 +170,8 @@ public class True_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenTrue,
                          actual)
-               .And(WasInvokedOnce(nameof(whenTrue),
-                                   whenTrue));
+           .And(WasInvokedOnce(nameof(whenTrue),
+                               whenTrue));
       }
 
       Arb.Register<Libraries.TwoUniqueInt32s>();
@@ -207,8 +207,8 @@ public class True_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenTrue,
                          actual)
-               .And(WasInvokedOnce(nameof(whenTrue),
-                                   whenTrue));
+           .And(WasInvokedOnce(nameof(whenTrue),
+                               whenTrue));
       }
 
       Arb.Register<Libraries.TwoUniqueTestClasses>();
@@ -244,8 +244,8 @@ public class True_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenTrue,
                          actual)
-               .And(WasInvokedOnce(nameof(whenTrue),
-                                   whenTrue));
+           .And(WasInvokedOnce(nameof(whenTrue),
+                               whenTrue));
       }
 
       Arb.Register<Libraries.TwoUniqueTestStructs>();
@@ -255,8 +255,8 @@ public class True_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // T Reduce<T>(Func<T> whenFalse,
-   //             T whenTrue)
+   // public T Reduce<T>(Func<T> whenFalse,
+   //                    T       whenTrue)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -285,8 +285,8 @@ public class True_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenTrue,
                          actual)
-               .And(WasNotInvoked(nameof(whenFalse),
-                                  whenFalse));
+           .And(WasNotInvoked(nameof(whenFalse),
+                              whenFalse));
       }
 
       Arb.Register<Libraries.TwoUniqueInt32s>();
@@ -323,8 +323,8 @@ public class True_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenTrue,
                          actual)
-               .And(WasNotInvoked(nameof(whenFalse),
-                                  whenFalse));
+           .And(WasNotInvoked(nameof(whenFalse),
+                              whenFalse));
       }
 
       Arb.Register<Libraries.TwoUniqueTestClasses>();
@@ -361,8 +361,8 @@ public class True_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenTrue,
                          actual)
-               .And(WasNotInvoked(nameof(whenFalse),
-                                  whenFalse));
+           .And(WasNotInvoked(nameof(whenFalse),
+                              whenFalse));
       }
 
       Arb.Register<Libraries.TwoUniqueInt32s>();
@@ -372,8 +372,8 @@ public class True_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // T Reduce<T>(Func<T> whenFalse,
-   //             Func<T> whenTrue)
+   // public T Reduce<T>(Func<T> whenFalse,
+   //                    Func<T> whenTrue)
    /* ------------------------------------------------------------ */
 
    //GIVEN

@@ -12,8 +12,7 @@ namespace Check.FileComponentTests;
 public class Prepend
 {
    /* ------------------------------------------------------------ */
-   // public static AbsoluteDirectoryPath Prepend(this DirectoryComponent,
-   //                                             VolumeComponent volume)
+   // public AbsoluteDirectoryPath Prepend(VolumeComponent parent)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -51,8 +50,7 @@ public class Prepend
    }
 
    /* ------------------------------------------------------------ */
-   // public static RelativeDirectoryPath Prepend(this DirectoryComponent parent,
-   //                                             params DirectoryComponent[] child)
+   // public RelativeDirectoryPath Prepend(params DirectoryComponent[] child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -70,8 +68,8 @@ public class Prepend
                                DirectoryComponent[] parent)
       {
          //Arrange
-         var expected = TestRelativeFilePath.Create(parent,
-         child);
+         var expected = TestRelativeFilePath.Create(parent.Materialise(),
+                                                    child);
 
          //Act
          var actual = child.Prepend(parent);
@@ -82,7 +80,7 @@ public class Prepend
                          actual);
       }
 
-      Arb.Register<Libraries.ArrayOfDirectoryComponents>();
+      Arb.Register<Libraries.DirectoryComponent>();
       Arb.Register<Libraries.FileComponent>();
 
       Prop.ForAll<FileComponent, DirectoryComponent[]>(Property)
@@ -90,8 +88,7 @@ public class Prepend
    }
 
    /* ------------------------------------------------------------ */
-   // public static RelativeDirectoryPath Prepend(this DirectoryComponent parent,
-   //                                             IReadOnlyCollection<DirectoryComponent> child)
+   // public RelativeDirectoryPath Prepend(IReadOnlyCollection<DirectoryComponent> child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -105,8 +102,8 @@ public class Prepend
    public void
       GIVEN_a_FileComponent_and_a_sequence_of_DirectoryComponents_WHEN_Prepend_THEN_a_RelativeFilePath_containing_the_FileComponent_and_the_sequence_of_DirectoryComponents_is_returned()
    {
-      static Property Property(FileComponent            child,
-                               List<DirectoryComponent> parent)
+      static Property Property(FileComponent                 child,
+                               ISequence<DirectoryComponent> parent)
       {
          //Arrange
          var expected = TestRelativeFilePath.Create(parent,
@@ -122,15 +119,14 @@ public class Prepend
       }
 
       Arb.Register<Libraries.FileComponent>();
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
+      Arb.Register<Libraries.SequenceOfDirectoryComponents>();
 
-      Prop.ForAll<FileComponent, List<DirectoryComponent>>(Property)
+      Prop.ForAll<FileComponent, ISequence<DirectoryComponent>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // public static RelativeDirectoryPath Prepend(this DirectoryComponent parent,
-   //                                            RelativeDirectoryPath child)
+   // public RelativeDirectoryPath Prepend(RelativeDirectoryPath child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -170,8 +166,7 @@ public class Prepend
    }
 
    /* ------------------------------------------------------------ */
-   // public static AbsoluteFilePath Append(this FileComponent file,
-   //                                       FileComponent volume)
+   // public AbsoluteFilePath Append(VolumeComponent volume)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -189,7 +184,7 @@ public class Prepend
       {
          //Arrange
          var expected = TestAbsoluteFilePath.Create(parent,
-                                                    Array.Empty<DirectoryComponent>(),
+                                                    Sequence<DirectoryComponent>.Empty(),
                                                     child);
 
          //Act

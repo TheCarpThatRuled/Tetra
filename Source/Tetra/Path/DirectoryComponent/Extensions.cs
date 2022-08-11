@@ -35,7 +35,7 @@ public static class DirectoryComponent_Extensions
    public static RelativeFilePath Append(this DirectoryComponent parent,
                                          FileComponent           child)
       => RelativeFilePath
-        .Create(new[] {parent},
+        .Create(Sequence.From(parent),
                 child);
 
    /* ------------------------------------------------------------ */
@@ -83,7 +83,7 @@ public static class DirectoryComponent_Extensions
                                                VolumeComponent         parent)
       => AbsoluteDirectoryPath
         .Create(parent,
-                new[] {child});
+                Sequence.From(child));
 
    /* ------------------------------------------------------------ */
 

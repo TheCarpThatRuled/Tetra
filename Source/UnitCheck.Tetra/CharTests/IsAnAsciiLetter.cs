@@ -12,7 +12,7 @@ namespace Check.CharTests;
 public class IsAnAsciiLetter
 {
    /* ------------------------------------------------------------ */
-   // bool IsAnAsciiLetter(this char character)
+   // public bool IsAnAsciiLetter()
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -57,7 +57,7 @@ public class IsAnAsciiLetter
       {
          //Act
          var actual = value.IsAnAsciiLetter();
-         
+
          //Assert
          return IsFalse(AssertMessages.ReturnValue,
                         actual);

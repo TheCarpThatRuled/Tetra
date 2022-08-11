@@ -32,8 +32,14 @@ public static partial class Generators
    public static Gen<List<T>> NonEmptyListOf<T>(Gen<T> source)
       => Gen
         .NonEmptyListOf(source)
-        .Select(x => 
-                   x.ToList());
+        .Select(x => x.ToList());
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<ISequence<T>> NonEmptySequenceOf<T>(Gen<T> source)
+      => Gen
+        .NonEmptyListOf(source)
+        .Select(x => x.Materialise());
 
    /* ------------------------------------------------------------ */
 
@@ -41,6 +47,13 @@ public static partial class Generators
       where T : class
       => source
         .Where(x => x is not null);
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<ISequence<T>> SequenceOf<T>(Gen<T> source)
+      => Gen
+        .ArrayOf(source)
+        .Select(x => x.Materialise());
 
    /* ------------------------------------------------------------ */
 

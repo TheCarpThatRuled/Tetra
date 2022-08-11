@@ -13,7 +13,7 @@ namespace Check.AbsoluteFilePathTests;
 public class Create
 {
    /* ------------------------------------------------------------ */
-   // AbsoluteFilePath Create(string potentialPath)
+   // public static AbsoluteFilePath Create(string potentialPath)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -174,9 +174,9 @@ public class Create
    }
 
    /* ------------------------------------------------------------ */
-   // AbsoluteFilePath Create(VolumeComponent volume,
-   //                         IReadOnlyCollection<DirectoryComponent> directories,
-   //                         FileComponent file)
+   // public static AbsoluteFilePath Create(VolumeComponent               volume,
+   //                                       ISequence<DirectoryComponent> directories,
+   //                                       FileComponent                 file)
    /* ------------------------------------------------------------ */
 
    //GIVEN

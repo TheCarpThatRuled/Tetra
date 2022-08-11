@@ -11,7 +11,7 @@ namespace Check.ErrorTests;
 public class NoneFactory
 {
    /* ------------------------------------------------------------ */
-   // Error None()
+   // public static Error None()
    /* ------------------------------------------------------------ */
 
    //GIVEN

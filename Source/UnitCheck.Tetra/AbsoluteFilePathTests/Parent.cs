@@ -12,7 +12,7 @@ namespace Check.AbsoluteFilePathTests;
 public class Parent
 {
    /* ------------------------------------------------------------ */
-   // AbsoluteDirectoryPath Parent()
+   // public AbsoluteDirectoryPath Parent()
    /* ------------------------------------------------------------ */
 
    //GIVEN

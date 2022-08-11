@@ -13,7 +13,7 @@ namespace Check.RelativeFilePathTests;
 public class Parse
 {
    /* ------------------------------------------------------------ */
-   // RelativeFilePath Parse(string potentialPath)
+   // public static RelativeFilePath Parse(string potentialPath)
    /* ------------------------------------------------------------ */
 
    //GIVEN

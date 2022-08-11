@@ -12,7 +12,7 @@ namespace Check.RelativeFilePathTests;
 public class Ancestry
 {
    /* ------------------------------------------------------------ */
-   // public static (IReadOnlyList<RelativeDirectoryPath> ancestors, RelativeFilePath file) Ancestry(this RelativeFilePath path)
+   // public (ISequence<RelativeDirectoryPath> ancestors, RelativeFilePath file) Ancestry()
    /* ------------------------------------------------------------ */
 
    //GIVEN

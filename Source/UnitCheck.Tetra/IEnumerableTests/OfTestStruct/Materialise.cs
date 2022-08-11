@@ -12,7 +12,7 @@ namespace Check.IEnumerableTests.OfTestStruct;
 public class Materialise
 {
    /* ------------------------------------------------------------ */
-   // public static ISequence<T> Materialise<T>(this IEnumerable<T> sequence)
+   // public ISequence<T> Materialise<T>()
    /* ------------------------------------------------------------ */
 
    //GIVEN

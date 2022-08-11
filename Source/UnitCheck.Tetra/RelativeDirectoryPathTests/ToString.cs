@@ -13,7 +13,7 @@ namespace Check.RelativeDirectoryPathTests;
 public class ToString
 {
    /* ------------------------------------------------------------ */
-   // string ToString()
+   // public string ToString()
    /* ------------------------------------------------------------ */
 
    //GIVEN

@@ -13,7 +13,7 @@ namespace Check.ErrorTests;
 public class Some_Map
 {
    /* ------------------------------------------------------------ */
-   // Error Map(Func<Message, Message> whenSome)
+   // public Error Map(Func<Message, Message> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -24,9 +24,10 @@ public class Some_Map
    //whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_WHEN_Map_AND_whenSome_is_a_Func_of_Message_to_Message_THEN_whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned()
+   public void
+      GIVEN_Some_WHEN_Map_AND_whenSome_is_a_Func_of_Message_to_Message_THEN_whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned()
    {
-      static Property Property((Message value,Message whenSome) args)
+      static Property Property((Message value, Message whenSome) args)
       {
          //Arrange
          var whenSome = FakeFunction<Message, Message>.Create(args.whenSome);
@@ -47,12 +48,12 @@ public class Some_Map
 
       Arb.Register<Libraries.TwoUniqueMessages>();
 
-      Prop.ForAll<(Message,Message)>(Property)
+      Prop.ForAll<(Message, Message)>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // Error Map(Func<Message, Error> whenSome)
+   // public Error Map(Func<Message, Error> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -124,7 +125,7 @@ public class Some_Map
 
       Arb.Register<Libraries.TwoUniqueMessages>();
 
-      Prop.ForAll<(Message,Message)>(Property)
+      Prop.ForAll<(Message, Message)>(Property)
           .QuickCheckThrowOnFailure();
    }
 

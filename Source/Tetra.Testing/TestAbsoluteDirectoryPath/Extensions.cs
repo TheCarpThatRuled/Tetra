@@ -8,12 +8,22 @@ public static class TestAbsoluteDirectoryPath_Extensions
    /* ------------------------------------------------------------ */
 
    public static TestAbsoluteDirectoryPath Append(this TestAbsoluteDirectoryPath  path,
+                                                  params DirectoryComponent[] directories)
+      => TestAbsoluteDirectoryPath
+        .Create(path.Volume(),
+                path.Directories()
+                    .Concat(directories)
+                    .Materialise());
+
+   /* ------------------------------------------------------------ */
+
+   public static TestAbsoluteDirectoryPath Append(this TestAbsoluteDirectoryPath  path,
                                                   IEnumerable<DirectoryComponent> directories)
       => TestAbsoluteDirectoryPath
         .Create(path.Volume(),
                 path.Directories()
                     .Concat(directories)
-                    .ToArray());
+                    .Materialise());
 
    /* ------------------------------------------------------------ */
 
@@ -23,7 +33,7 @@ public static class TestAbsoluteDirectoryPath_Extensions
         .Create(parent.Volume(),
                 parent.Directories()
                       .Concat(child.Directories())
-                      .ToArray());
+                      .Materialise());
 
    /* ------------------------------------------------------------ */
 
@@ -44,7 +54,7 @@ public static class TestAbsoluteDirectoryPath_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static IReadOnlyList<TestAbsoluteDirectoryPath> ToAncestry(this TestAbsoluteDirectoryPath path)
+   public static ISequence<TestAbsoluteDirectoryPath> ToAncestry(this TestAbsoluteDirectoryPath path)
    {
       var directoryChains = new List<IEnumerable<DirectoryComponent>> {Array.Empty<DirectoryComponent>(),};
 
@@ -57,7 +67,7 @@ public static class TestAbsoluteDirectoryPath_Extensions
       return directoryChains
             .Select(x => TestAbsoluteDirectoryPath.Create(path.Volume(),
                                                           x.ToArray()))
-            .ToArray();
+            .Materialise();
    }
 
    /* ------------------------------------------------------------ */

@@ -13,7 +13,7 @@ namespace Check.FileComponentTests;
 public class Parse
 {
    /* ------------------------------------------------------------ */
-   // Result<FileComponent> Parse(string potentialComponent)
+   // public static Result<FileComponent> Parse(string potentialComponent)
    /* ------------------------------------------------------------ */
 
    //GIVEN

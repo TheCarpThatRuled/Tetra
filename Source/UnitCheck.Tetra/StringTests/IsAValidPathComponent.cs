@@ -12,7 +12,7 @@ namespace Check.StringTests;
 public class IsAValidPathComponent
 {
    /* ------------------------------------------------------------ */
-   // bool IsAValidPathComponent(this string value)
+   // public bool IsAValidPathComponent()
    /* ------------------------------------------------------------ */
 
    //GIVEN

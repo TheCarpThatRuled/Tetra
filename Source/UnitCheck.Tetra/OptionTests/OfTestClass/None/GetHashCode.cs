@@ -11,7 +11,7 @@ namespace Check.OptionTests.OfTestClass;
 public class None_GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // int GetHashCode()
+   // public int GetHashCode()
    /* ------------------------------------------------------------ */
 
    //GIVEN

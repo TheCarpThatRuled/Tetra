@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfInt;
 public class None_Map
 {
    /* ------------------------------------------------------------ */
-   // Option<TNew> Map<TNew>(Func<T, TNew> whenSome)
+   // public Option<TNew> Map<TNew>(Func<T, TNew> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -155,7 +155,7 @@ public class None_Map
    }
 
    /* ------------------------------------------------------------ */
-   // Option<TNew> Map<TNew>(Func<T, Option<TNew>> whenSome)
+   // public Option<TNew> Map<TNew>(Func<T, Option<TNew>> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -268,7 +268,7 @@ public class None_Map
       Assert.That
             .IsANone(AssertMessages.ReturnValue,
                      actual)
-            .WasNotInvoked(nameof(whenSome), 
+            .WasNotInvoked(nameof(whenSome),
                            whenSome);
    }
 

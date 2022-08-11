@@ -159,14 +159,14 @@ public class Create
                          actual);
       }
 
-      Arb.Register<Libraries.ArrayOfDirectoryComponents>();
+      Arb.Register<Libraries.DirectoryComponent>();
 
       Prop.ForAll<DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // public static RelativeDirectoryPath Create(IReadOnlyCollection<DirectoryComponent> directories)
+   // public static RelativeDirectoryPath Create(ISequence<DirectoryComponent> directories)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -179,7 +179,7 @@ public class Create
    [TestMethod]
    public void GIVEN_a_sequence_of_DirectoryComponents_WHEN_Create_THEN_a_RelativeDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(List<DirectoryComponent> directories)
+      static Property Property(ISequence<DirectoryComponent> directories)
       {
          //Arrange
          var expected = TestRelativeDirectoryPath.Create(directories);
@@ -193,9 +193,9 @@ public class Create
                          actual);
       }
 
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
+      Arb.Register<Libraries.SequenceOfDirectoryComponents>();
 
-      Prop.ForAll<List<DirectoryComponent>>(Property)
+      Prop.ForAll<ISequence<DirectoryComponent>>(Property)
           .QuickCheckThrowOnFailure();
    }
 

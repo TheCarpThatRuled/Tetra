@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfInt;
 public class Some_GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // int GetHashCode()
+   // public int GetHashCode()
    /* ------------------------------------------------------------ */
 
    //GIVEN

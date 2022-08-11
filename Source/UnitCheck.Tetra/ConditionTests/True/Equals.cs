@@ -13,7 +13,7 @@ namespace Check.ConditionTests;
 public class True_Equals
 {
    /* ------------------------------------------------------------ */
-   // bool Equals(object? obj)
+   // public bool Equals(object? obj)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -59,13 +59,13 @@ public class True_Equals
          => Gen
            .OneOf(Gen.Constant(default(object?)),
                   Generators.Int32()
-                            .Select(x => (object?)x),
+                            .Select(x => (object?) x),
                   Generators.String()
-                            .Select(x => (object?)x),
+                            .Select(x => (object?) x),
                   Generators.Option(Generators.Bool())
-                            .Select(x => (object?)x),
+                            .Select(x => (object?) x),
                   Generators.Result(Generators.Bool())
-                            .Select(x => (object?)x))
+                            .Select(x => (object?) x))
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -134,7 +134,7 @@ public class True_Equals
       var condition = Condition.True();
 
       //Act
-      var actual = condition.Equals((object?)Condition.False());
+      var actual = condition.Equals((object?) Condition.False());
 
       //Assert
       Assert.That
@@ -240,7 +240,7 @@ public class True_Equals
    }
 
    /* ------------------------------------------------------------ */
-   // bool Equals(bool? other)
+   // public bool Equals(bool? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN

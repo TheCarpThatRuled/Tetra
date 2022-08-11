@@ -24,9 +24,9 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreEqual(string                                                                                            description,
-                                   TestAbsoluteFilePath                                                                              expected,
-                                   (VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories, FileComponent file) actual)
+   public static Property AreEqual(string                                                                                  description,
+                                   TestAbsoluteFilePath                                                                    expected,
+                                   (VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file) actual)
       => AreEqual($"{description} - the volumes do not match",
                   expected.Volume(),
                   actual.volume)
@@ -43,14 +43,14 @@ partial class Properties
                                            IEnumerable<TestAbsoluteFilePath> expected,
                                            IEnumerable<AbsoluteFilePath>     actual)
       => AreSequenceEqual(description,
-                          expected.ToArray(),
-                          actual.ToArray());
+                          expected.Materialise(),
+                          actual.Materialise());
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreSequenceEqual(string                                    description,
-                                           IReadOnlyCollection<TestAbsoluteFilePath> expected,
-                                           IReadOnlyCollection<AbsoluteFilePath>     actual)
+   public static Property AreSequenceEqual(string                          description,
+                                           ISequence<TestAbsoluteFilePath> expected,
+                                           ISequence<AbsoluteFilePath>     actual)
       => AreSequenceEqual(description,
                           expected,
                           actual,

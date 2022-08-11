@@ -12,7 +12,7 @@ namespace Check.RelativeDirectoryPathTests;
 public class Prepend
 {
    /* ------------------------------------------------------------ */
-   // public RelativeDirectoryPath Prepend(params DirectoryComponent[] directories)
+   // public RelativeDirectoryPath Prepend(params DirectoryComponent[] parent)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -43,7 +43,7 @@ public class Prepend
                          actual);
       }
 
-      Arb.Register<Libraries.ArrayOfDirectoryComponents>();
+      Arb.Register<Libraries.DirectoryComponent>();
       Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
       Prop.ForAll<TestRelativeDirectoryPath, DirectoryComponent[]>(Property)
@@ -51,7 +51,7 @@ public class Prepend
    }
 
    /* ------------------------------------------------------------ */
-   // public RelativeDirectoryPath Prepend(IReadOnlyCollection<DirectoryComponent> directories)
+   // public RelativeDirectoryPath Prepend(IEnumerable<DirectoryComponent> parent)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -65,8 +65,8 @@ public class Prepend
    public void
       GIVEN_a_RelativeDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Prepend_THEN_a_RelativeDirectoryPath_containing_the_RelativeDirectoryPath_and_the_sequence_of_DirectoryComponents_is_returned()
    {
-      static Property Property(TestRelativeDirectoryPath testChild,
-                               List<DirectoryComponent>  parent)
+      static Property Property(TestRelativeDirectoryPath     testChild,
+                               ISequence<DirectoryComponent> parent)
       {
          //Arrange
          var expected = testChild.Prepend(parent);
@@ -82,15 +82,15 @@ public class Prepend
                          actual);
       }
 
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
+      Arb.Register<Libraries.SequenceOfDirectoryComponents>();
       Arb.Register<Libraries.TestRelativeDirectoryPath>();
 
-      Prop.ForAll<TestRelativeDirectoryPath, List<DirectoryComponent>>(Property)
+      Prop.ForAll<TestRelativeDirectoryPath, ISequence<DirectoryComponent>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // public RelativeDirectoryPath Prepend(RelativeDirectoryPath path)
+   // public RelativeDirectoryPath Prepend(RelativeDirectoryPath parent)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -130,7 +130,7 @@ public class Prepend
    }
 
    /* ------------------------------------------------------------ */
-   // public AbsoluteDirectoryPath Prepend(VolumeComponent path)
+   // public AbsoluteDirectoryPath Prepend(VolumeComponent parent)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -169,7 +169,7 @@ public class Prepend
    }
 
    /* ------------------------------------------------------------ */
-   // public AbsoluteDirectoryPath Prepend(AbsoluteDirectoryPath path)
+   // public AbsoluteDirectoryPath Prepend(AbsoluteDirectoryPath parent)
    /* ------------------------------------------------------------ */
 
    //GIVEN

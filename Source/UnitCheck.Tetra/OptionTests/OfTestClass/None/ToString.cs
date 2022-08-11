@@ -11,7 +11,7 @@ namespace Check.OptionTests.OfTestClass;
 public class None_ToString
 {
    /* ------------------------------------------------------------ */
-   // string ToString()
+   // public string ToString()
    /* ------------------------------------------------------------ */
 
    //GIVEN

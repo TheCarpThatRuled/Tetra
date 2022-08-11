@@ -11,7 +11,7 @@ namespace Check.ConditionTests;
 public class False_GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // int GetHashCode()
+   // public int GetHashCode()
    /* ------------------------------------------------------------ */
 
    //GIVEN

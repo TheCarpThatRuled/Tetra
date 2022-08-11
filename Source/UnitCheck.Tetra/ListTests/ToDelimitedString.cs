@@ -13,8 +13,7 @@ namespace Check.ListTests;
 public class ToDelimitedString
 {
    /* ------------------------------------------------------------ */
-   // string ToDelimitedString<T>(this IReadOnlyList<T> sequence,
-   //                             char delimiter)
+   // public string ToDelimitedString<T>(char delimiter)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -58,10 +57,10 @@ public class ToDelimitedString
    public void GIVEN_an_List_with_one_string_AND_delimiter_is_a_char_WHEN_ToDelimitedString_THEN_the_item_is_returned()
    {
       static Property Property(string value,
-                               char delimiter)
+                               char   delimiter)
       {
          //Arrange
-         var list = new List<string> { value, };
+         var list = new List<string> {value,};
 
          //Act
          var actual = list.ToDelimitedString(delimiter);
@@ -91,7 +90,7 @@ public class ToDelimitedString
    public void GIVEN_an_List_with_more_than_one_string_AND_delimiter_is_a_char_WHEN_ToDelimitedString_THEN_the_items_concatenated_by_the_delimiter_is_returned()
    {
       static Property Property(List<string> list,
-                               char delimiter)
+                               char         delimiter)
       {
          //Arrange
          var expected = new StringBuilder();
@@ -119,8 +118,7 @@ public class ToDelimitedString
    }
 
    /* ------------------------------------------------------------ */
-// string ToDelimitedString<T>(this IReadOnlyList<T> sequence,
-   //                             string delimiter)
+   // public string ToDelimitedString<T>(string delimiter)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -173,7 +171,7 @@ public class ToDelimitedString
 
          //Act
          var actual = list.ToDelimitedString(delimiter);
-         
+
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
                          value,
@@ -182,7 +180,7 @@ public class ToDelimitedString
 
       Arb.Register<Libraries.NonNullString>();
 
-      Prop.ForAll<string,string>(Property)
+      Prop.ForAll<string, string>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -199,7 +197,7 @@ public class ToDelimitedString
    public void GIVEN_an_List_with_more_than_one_string_AND_delimiter_is_a_string_WHEN_ToDelimitedString_THEN_the_items_concatenated_by_the_delimiter_is_returned()
    {
       static Property Property(List<string> list,
-                               string delimiter)
+                               string       delimiter)
       {
          //Arrange
          var expected = new StringBuilder();

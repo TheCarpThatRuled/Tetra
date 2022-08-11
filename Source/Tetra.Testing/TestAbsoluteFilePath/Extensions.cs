@@ -14,7 +14,7 @@ public static class TestAbsoluteFilePath_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static IReadOnlyList<TestAbsoluteDirectoryPath> ToAncestry(this TestAbsoluteFilePath path)
+   public static ISequence<TestAbsoluteDirectoryPath> ToAncestry(this TestAbsoluteFilePath path)
       => path
         .Parent()
         .ToAncestry();

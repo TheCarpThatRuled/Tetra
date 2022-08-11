@@ -13,7 +13,7 @@ namespace Check.AbsoluteFilePathTests;
 public class CompareTo
 {
    /* ------------------------------------------------------------ */
-   // int CompareTo(AbsoluteFilePath? other)
+   // public int CompareTo(AbsoluteFilePath? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN

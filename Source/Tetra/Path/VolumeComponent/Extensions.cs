@@ -15,8 +15,8 @@ public static class VolumeComponent_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteDirectoryPath Append(this VolumeComponent                    parent,
-                                              IReadOnlyCollection<DirectoryComponent> child)
+   public static AbsoluteDirectoryPath Append(this VolumeComponent          parent,
+                                              ISequence<DirectoryComponent> child)
       => AbsoluteDirectoryPath
         .Create(parent,
                 child);
@@ -34,7 +34,7 @@ public static class VolumeComponent_Extensions
                                          FileComponent        child)
       => AbsoluteFilePath
         .Create(parent,
-                Array.Empty<DirectoryComponent>(),
+                Sequence<DirectoryComponent>.Empty(),
                 child);
 
    /* ------------------------------------------------------------ */
@@ -49,7 +49,7 @@ public static class VolumeComponent_Extensions
    public static AbsoluteDirectoryPath ToPath(this VolumeComponent volume)
       => AbsoluteDirectoryPath
         .Create(volume,
-                Array.Empty<DirectoryComponent>());
+                Sequence<DirectoryComponent>.Empty());
 
    /* ------------------------------------------------------------ */
 }

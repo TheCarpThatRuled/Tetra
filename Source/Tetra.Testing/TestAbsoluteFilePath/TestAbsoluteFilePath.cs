@@ -6,9 +6,9 @@ public sealed class TestAbsoluteFilePath
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static TestAbsoluteFilePath Create(VolumeComponent                         volume,
-                                             IReadOnlyCollection<DirectoryComponent> directories,
-                                             FileComponent                           file)
+   public static TestAbsoluteFilePath Create(VolumeComponent               volume,
+                                             ISequence<DirectoryComponent> directories,
+                                             FileComponent                 file)
       => new(directories,
              file,
              volume);
@@ -24,7 +24,7 @@ public sealed class TestAbsoluteFilePath
    // Properties
    /* ------------------------------------------------------------ */
 
-   public IReadOnlyCollection<DirectoryComponent> Directories()
+   public ISequence<DirectoryComponent> Directories()
       => _directories;
 
    /* ------------------------------------------------------------ */
@@ -51,19 +51,19 @@ public sealed class TestAbsoluteFilePath
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly IReadOnlyCollection<DirectoryComponent> _directories;
-   private readonly FileComponent                           _file;
-   private readonly string                                  _pathWithoutTrailingDirectorySeparator;
-   private readonly string                                  _pathWithTrailingDirectorySeparator;
-   private readonly VolumeComponent                         _volume;
+   private readonly ISequence<DirectoryComponent> _directories;
+   private readonly FileComponent                 _file;
+   private readonly string                        _pathWithoutTrailingDirectorySeparator;
+   private readonly string                        _pathWithTrailingDirectorySeparator;
+   private readonly VolumeComponent               _volume;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private TestAbsoluteFilePath(IReadOnlyCollection<DirectoryComponent> directories,
-                                FileComponent                           file,
-                                VolumeComponent                         volume)
+   private TestAbsoluteFilePath(ISequence<DirectoryComponent> directories,
+                                FileComponent                 file,
+                                VolumeComponent               volume)
    {
       _directories = directories;
       _file        = file;

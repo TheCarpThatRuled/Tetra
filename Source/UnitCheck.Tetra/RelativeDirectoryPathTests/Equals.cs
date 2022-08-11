@@ -13,7 +13,7 @@ namespace Check.RelativeDirectoryPathTests;
 public class Equals
 {
    /* ------------------------------------------------------------ */
-   // bool Equals(object? obj)
+   // public bool Equals(object? obj)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -133,7 +133,7 @@ public class Equals
    }
 
    /* ------------------------------------------------------------ */
-   // bool Equals(RelativeDirectoryPath? other)
+   // public bool Equals(RelativeDirectoryPath? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN

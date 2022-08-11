@@ -13,7 +13,7 @@ namespace Check.LeftTests.OfInt;
 public class Wrap
 {
    /* ------------------------------------------------------------ */
-   // Func<Left<T>, TNew> Wrap<TNew>(Func<TNew> func)
+   // public static Func<Left<T>, TNew> Wrap<TNew>(Func<TNew> func)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -24,7 +24,8 @@ public class Wrap
    //func_is_invoked_once_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_int_Wrap_AND_func_is_Func_of_int_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_int_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Left_of_int_Wrap_AND_func_is_Func_of_int_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_int_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
    {
       static Property Property((int content, int newValue) args)
       {
@@ -61,9 +62,11 @@ public class Wrap
    //func_is_invoked_once_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_int_Wrap_AND_func_is_Func_of_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_int_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Left_of_int_Wrap_AND_func_is_Func_of_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_int_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(int content, TestClass newValue)
+      static Property Property(int       content,
+                               TestClass newValue)
       {
          //Arrange
          var func = FakeFunction<TestClass>.Create(newValue);
@@ -84,7 +87,7 @@ public class Wrap
 
       Arb.Register<Libraries.TestClass>();
 
-      Prop.ForAll<int, TestClass> (Property)
+      Prop.ForAll<int, TestClass>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -98,9 +101,11 @@ public class Wrap
    //func_is_invoked_once_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_int_Wrap_AND_func_is_Func_of_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_int_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Left_of_int_Wrap_AND_func_is_Func_of_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_int_THEN_func_is_invoked_once_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(int content, TestStruct newValue)
+      static Property Property(int        content,
+                               TestStruct newValue)
       {
          //Arrange
          var func = FakeFunction<TestStruct>.Create(newValue);
@@ -126,7 +131,7 @@ public class Wrap
    }
 
    /* ------------------------------------------------------------ */
-   // Func<Left<T>, TNew> Wrap<TNew>(Func<T, TNew> func)
+   // public static Func<Left<T>, TNew> Wrap<TNew>(Func<T, TNew> func)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -137,7 +142,8 @@ public class Wrap
    //func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_int_Wrap_AND_func_is_Func_of_int_to_int_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_int_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Left_of_int_Wrap_AND_func_is_Func_of_int_to_int_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_int_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
    {
       static Property Property((int content, int newValue) args)
       {
@@ -145,7 +151,7 @@ public class Wrap
          var func = FakeFunction<int, int>.Create(args.newValue);
 
          var wrappedFunc = Left<int>.Wrap(func.Func);
-         var left = Left<int>.Create(args.content);
+         var left        = Left<int>.Create(args.content);
 
          //Act
          var actual = wrappedFunc(left);
@@ -175,15 +181,17 @@ public class Wrap
    //func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_int_Wrap_AND_func_is_Func_of_int_to_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_int_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Left_of_int_Wrap_AND_func_is_Func_of_int_to_TestClass_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_int_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(int content, TestClass newValue)
+      static Property Property(int       content,
+                               TestClass newValue)
       {
          //Arrange
          var func = FakeFunction<int, TestClass>.Create(newValue);
 
          var wrappedFunc = Left<int>.Wrap(func.Func);
-         var left = Left<int>.Create(content);
+         var left        = Left<int>.Create(content);
 
          //Act
          var actual = wrappedFunc(left);
@@ -213,15 +221,17 @@ public class Wrap
    //func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_int_Wrap_AND_func_is_Func_of_int_to_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_int_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
+   public void
+      GIVEN_Left_of_int_Wrap_AND_func_is_Func_of_int_to_TestStruct_WHEN_the_wrapped_func_is_invoked_with_a_Left_of_int_THEN_func_is_invoked_once_with_the_content_AND_the_return_value_of_func_is_returned()
    {
-      static Property Property(int content, TestStruct newValue)
+      static Property Property(int        content,
+                               TestStruct newValue)
       {
          //Arrange
          var func = FakeFunction<int, TestStruct>.Create(newValue);
 
          var wrappedFunc = Left<int>.Wrap(func.Func);
-         var left = Left<int>.Create(content);
+         var left        = Left<int>.Create(content);
 
          //Act
          var actual = wrappedFunc(left);

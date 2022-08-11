@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfTestStruct;
 public class SomeFactory
 {
    /* ------------------------------------------------------------ */
-   // Option<T> Some(T content)
+   // public static Option<T> Some(T content)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -44,7 +44,7 @@ public class SomeFactory
    }
 
    /* ------------------------------------------------------------ */
-   // Option<T> Some<T>(T content)
+   // public static Option<T> Some<T>(T content)
    /* ------------------------------------------------------------ */
 
    //GIVEN

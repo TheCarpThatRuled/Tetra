@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfTestStruct;
 public class Some_IsASome
 {
    /* ------------------------------------------------------------ */
-   // bool IsASome()
+   // public bool IsASome()
    /* ------------------------------------------------------------ */
 
    //GIVEN

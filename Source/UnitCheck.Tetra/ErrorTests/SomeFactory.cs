@@ -13,7 +13,7 @@ namespace Check.ErrorTests;
 public class SomeFactory
 {
    /* ------------------------------------------------------------ */
-   // Error Some(Message content)
+   // public static Error Some(Message content)
    /* ------------------------------------------------------------ */
 
    //GIVEN

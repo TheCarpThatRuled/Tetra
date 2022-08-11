@@ -17,15 +17,15 @@ public static class FileComponent_Extensions
    public static RelativeFilePath Prepend(this   FileComponent        child,
                                           params DirectoryComponent[] parent)
       => RelativeFilePath
-        .Create(parent,
+        .Create(parent.Materialise(),
                 child);
 
    /* ------------------------------------------------------------ */
 
    public static RelativeFilePath Prepend(this FileComponent              child,
-                                          IEnumerable<DirectoryComponent> parent)
+                                          ISequence<DirectoryComponent> parent)
       => RelativeFilePath
-        .Create(parent.ToArray(),
+        .Create(parent,
                 child);
 
    /* ------------------------------------------------------------ */
@@ -41,14 +41,14 @@ public static class FileComponent_Extensions
                                           VolumeComponent    parent)
       => AbsoluteFilePath
         .Create(parent,
-                Array.Empty<DirectoryComponent>(),
+                Sequence<DirectoryComponent>.Empty(),
                 child);
 
    /* ------------------------------------------------------------ */
 
    public static RelativeFilePath ToPath(this FileComponent file)
       => RelativeFilePath
-        .Create(Array.Empty<DirectoryComponent>(),
+        .Create(Sequence<DirectoryComponent>.Empty(),
                 file);
 
    /* ------------------------------------------------------------ */

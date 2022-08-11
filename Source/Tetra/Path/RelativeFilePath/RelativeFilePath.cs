@@ -17,8 +17,8 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
 
    /* ------------------------------------------------------------ */
 
-   public static RelativeFilePath Create(IReadOnlyCollection<DirectoryComponent> directories,
-                                         FileComponent                           file)
+   public static RelativeFilePath Create(ISequence<DirectoryComponent> directories,
+                                         FileComponent                 file)
       => new(directories,
              file);
 
@@ -103,14 +103,14 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
 
    public RelativeFilePath Prepend(params DirectoryComponent[] parent)
       => Create(parent.Concat(_directories)
-                           .ToArray(),
+                      .Materialise(),
                 _file);
 
    /* ------------------------------------------------------------ */
 
    public RelativeFilePath Prepend(IEnumerable<DirectoryComponent> parent)
       => Create(parent.Concat(_directories)
-                           .ToArray(),
+                      .Materialise(),
                 _file);
 
    /* ------------------------------------------------------------ */
@@ -132,8 +132,8 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
    // Protected Constructors
    /* ------------------------------------------------------------ */
 
-   protected RelativeFilePath(IReadOnlyCollection<DirectoryComponent> directories,
-                              FileComponent                           file)
+   protected RelativeFilePath(ISequence<DirectoryComponent> directories,
+                              FileComponent                 file)
    {
       _directories = directories;
       _file        = file;
@@ -146,8 +146,8 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static Result<(IReadOnlyCollection<DirectoryComponent> directories, FileComponent file)> ParseComponents(string potentialPath,
-                                                                                                                      string pathType)
+   protected static Result<(ISequence<DirectoryComponent> directories, FileComponent file)> ParseComponents(string potentialPath,
+                                                                                                            string pathType)
    {
       if (string.IsNullOrEmpty(potentialPath))
       {
@@ -178,7 +178,7 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
 
       return (potentialComponents.SkipLast(1)
                                  .Select(DirectoryComponent.Create)
-                                 .ToArray(),
+                                 .Materialise(),
               FileComponent.Create(components[^1]));
    }
 
@@ -192,15 +192,15 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly IReadOnlyCollection<DirectoryComponent> _directories;
-   private readonly FileComponent                           _file;
-   private readonly  string                                  _value;
+   private readonly ISequence<DirectoryComponent> _directories;
+   private readonly FileComponent                 _file;
+   private readonly string                        _value;
 
    /* ------------------------------------------------------------ */
    // Private Factory Functions
    /* ------------------------------------------------------------ */
 
-   private static RelativeFilePath Create(Success<(IReadOnlyCollection<DirectoryComponent> directories, FileComponent file)> success)
+   private static RelativeFilePath Create(Success<(ISequence<DirectoryComponent> directories, FileComponent file)> success)
       => new(success.Content()
                     .directories,
              success.Content()

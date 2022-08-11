@@ -7,9 +7,9 @@ public static class RelativeFilePath_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static (IReadOnlyList<RelativeDirectoryPath> ancestors, RelativeFilePath file) Ancestry(this RelativeFilePath path)
+   public static (ISequence<RelativeDirectoryPath> ancestors, RelativeFilePath file) Ancestry(this RelativeFilePath path)
       => (path.Parent()
-              .Reduce(Array.Empty<RelativeDirectoryPath>(),
+              .Reduce(Sequence<RelativeDirectoryPath>.Empty(),
                       x => x.Ancestry()),
           path);
 

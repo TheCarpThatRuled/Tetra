@@ -13,7 +13,7 @@ namespace Check.ErrorTests;
 public class Some_IsANone
 {
    /* ------------------------------------------------------------ */
-   // bool IsANone()
+   // public bool IsANone()
    /* ------------------------------------------------------------ */
 
    //GIVEN

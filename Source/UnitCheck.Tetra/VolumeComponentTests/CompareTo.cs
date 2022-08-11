@@ -13,7 +13,7 @@ namespace Check.VolumeComponentTests;
 public class CompareTo
 {
    /* ------------------------------------------------------------ */
-   // int CompareTo(VolumeComponent? other)
+   // public int CompareTo(VolumeComponent? other)
    /* ------------------------------------------------------------ */
 
 

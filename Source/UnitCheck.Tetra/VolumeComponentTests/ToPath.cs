@@ -12,7 +12,7 @@ namespace Check.VolumeComponentTests;
 public class ToPath
 {
    /* ------------------------------------------------------------ */
-   // AbsoluteDirectoryPath ToPath(this VolumeComponent volume)
+   // public AbsoluteDirectoryPath ToPath()
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -29,7 +29,7 @@ public class ToPath
       {
          //Arrange
          var expected = TestAbsoluteDirectoryPath.Create(volume,
-                                                         Array.Empty<DirectoryComponent>());
+                                                         Sequence<DirectoryComponent>.Empty());
 
          //Act
          var actual = volume.ToPath();

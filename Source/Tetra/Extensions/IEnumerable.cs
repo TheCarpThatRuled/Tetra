@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace Tetra;
+﻿namespace Tetra;
 
 // ReSharper disable once InconsistentNaming
 public static class IEnumerable_Extensions

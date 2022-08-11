@@ -13,7 +13,7 @@ namespace Check.VolumeComponentTests;
 public class GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // int GetHashCode()
+   // public int GetHashCode()
    /* ------------------------------------------------------------ */
 
    //GIVEN

@@ -10,7 +10,7 @@ partial class Generators
 
    public static Gen<TestAbsoluteFilePath> TestAbsoluteFilePath()
       => VolumeComponent()
-        .Combine(ArrayOf(DirectoryComponent()),
+        .Combine(SequenceOf(DirectoryComponent()),
                  FileComponent(),
                  Testing.TestAbsoluteFilePath
                         .Create);

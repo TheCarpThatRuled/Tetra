@@ -13,7 +13,7 @@ namespace Check.EitherTests.OfTestClassAndTestStruct;
 public class Right_GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // int GetHashCode()
+   // public int GetHashCode()
    /* ------------------------------------------------------------ */
 
    //GIVEN

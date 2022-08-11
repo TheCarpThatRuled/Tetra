@@ -13,7 +13,7 @@ namespace Check.RelativeDirectoryPathTests;
 public class GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // int GetHashCode()
+   // public int GetHashCode()
    /* ------------------------------------------------------------ */
 
    //GIVEN

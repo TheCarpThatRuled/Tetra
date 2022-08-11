@@ -35,7 +35,7 @@ public class Validate
    }
 
    /* ------------------------------------------------------------ */
-   // VolumeComponent Validate(char potentialVolume)
+   // protected static VolumeComponent Validate(char potentialVolume)
    /* ------------------------------------------------------------ */
 
    //GIVEN

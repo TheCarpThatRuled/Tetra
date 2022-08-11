@@ -12,7 +12,7 @@ namespace Check.ListTests.OfTestStruct;
 public class Materialise
 {
    /* ------------------------------------------------------------ */
-   // public static ISequence<T> Materialise<T>(this IEnumerable<T> sequence)
+   // public ISequence<T> Materialise<T>()
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -62,7 +62,8 @@ public class Materialise
          var sequence = source.Materialise();
 
          //Act
-         source[0] = new(90, 90);
+         source[0] = new(90,
+                         90);
 
          //Assert
          return AreSequenceEqual(AssertMessages.ReturnValue,

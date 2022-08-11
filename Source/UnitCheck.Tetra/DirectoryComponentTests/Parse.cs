@@ -13,7 +13,7 @@ namespace Check.DirectoryComponentTests;
 public class Parse
 {
    /* ------------------------------------------------------------ */
-   // Result<DirectoryComponent> Parse(string potentialComponent)
+   // public static Result<DirectoryComponent> Parse(string potentialComponent)
    /* ------------------------------------------------------------ */
 
    //GIVEN

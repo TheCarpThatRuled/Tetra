@@ -6,8 +6,8 @@ public sealed class TestRelativeFilePath
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static TestRelativeFilePath Create(IReadOnlyCollection<DirectoryComponent> directories,
-                                             FileComponent                           file)
+   public static TestRelativeFilePath Create(ISequence<DirectoryComponent> directories,
+                                             FileComponent                 file)
       => new(directories,
              file);
 
@@ -22,7 +22,7 @@ public sealed class TestRelativeFilePath
    // Properties
    /* ------------------------------------------------------------ */
 
-   public IReadOnlyCollection<DirectoryComponent> Directories()
+   public ISequence<DirectoryComponent> Directories()
       => _directories;
 
    /* ------------------------------------------------------------ */
@@ -44,17 +44,17 @@ public sealed class TestRelativeFilePath
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly IReadOnlyCollection<DirectoryComponent> _directories;
-   private readonly FileComponent                           _file;
-   private readonly string                                  _pathWithoutTrailingDirectorySeparator;
-   private readonly string                                  _pathWithTrailingDirectorySeparator;
+   private readonly ISequence<DirectoryComponent> _directories;
+   private readonly FileComponent                 _file;
+   private readonly string                        _pathWithoutTrailingDirectorySeparator;
+   private readonly string                        _pathWithTrailingDirectorySeparator;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private TestRelativeFilePath(IReadOnlyCollection<DirectoryComponent> directories,
-                                FileComponent                           file)
+   private TestRelativeFilePath(ISequence<DirectoryComponent> directories,
+                                FileComponent                 file)
    {
       _directories = directories;
       _file        = file;

@@ -54,7 +54,7 @@ public sealed class FileSystem : IFileSystem
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly List<AbsoluteDirectoryPath> _directories = new List<AbsoluteDirectoryPath>();
+   private readonly List<AbsoluteDirectoryPath> _directories = new();
 
    //Mutable
    private Func<AbsoluteDirectoryPath, Error> _setCurrentDirectory;

@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tetra.Testing;
 
+// ReSharper disable once InconsistentNaming
 partial class Assert_Extensions
 {
    /* ------------------------------------------------------------ */
@@ -15,15 +16,15 @@ partial class Assert_Extensions
                                             IEnumerable<T>? actual)
       => assert
         .AreSequenceEqual(description,
-                          expected?.ToArray(),
-                          actual?.ToArray());
+                          expected?.Materialise(),
+                          actual?.Materialise());
 
    /* ------------------------------------------------------------ */
 
-   public static Assert AreSequenceEqual<T>(this Assert       assert,
-                                            string            description,
-                                            IReadOnlyList<T>? expected,
-                                            IReadOnlyList<T>? actual)
+   public static Assert AreSequenceEqual<T>(this Assert   assert,
+                                            string        description,
+                                            ISequence<T>? expected,
+                                            ISequence<T>? actual)
       => assert
         .AreSequenceEqual(description,
                           expected,
@@ -40,8 +41,8 @@ partial class Assert_Extensions
 
    public static Assert AreSequenceEqual<T0, T1>(this Assert            assert,
                                                  string                 description,
-                                                 IReadOnlyList<T0>?     expected,
-                                                 IReadOnlyList<T1>?     actual,
+                                                 ISequence<T0>?         expected,
+                                                 ISequence<T1>?         actual,
                                                  Func<T0, string>       t0ToString,
                                                  Func<T1, string>       t1ToString,
                                                  Action<T0, T1, string> compareItem)
@@ -65,7 +66,7 @@ partial class Assert_Extensions
                           .Select(t1ToString)
                           .ToArray();
 
-      if (expected.Count != actual.Count)
+      if (expected.Length() != actual.Length())
       {
          throw Failed.Assert($"{description} - The sequences are unequal in length",
                              expectedAsString,

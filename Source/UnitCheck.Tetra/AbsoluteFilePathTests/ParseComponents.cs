@@ -20,7 +20,7 @@ public class ParseComponents
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Result<(VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories, FileComponent file)> TestParseComponents(string potentialPath,
+      public static Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file)> TestParseComponents(string potentialPath,
          string                                                                                                                                          pathType)
          => ParseComponents(potentialPath,
                             pathType);
@@ -38,8 +38,8 @@ public class ParseComponents
    }
 
    /* ------------------------------------------------------------ */
-   // protected Result(VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories, FileComponent file) ParseComponents(string potentialPath,
-   //                                                                                                                          string pathType)
+   // protected Result(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file) ParseComponents(string potentialPath,
+   //                                                                                                                         string pathType)
    /* ------------------------------------------------------------ */
 
    //GIVEN

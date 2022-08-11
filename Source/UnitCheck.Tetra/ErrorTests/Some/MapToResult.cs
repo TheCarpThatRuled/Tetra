@@ -13,7 +13,7 @@ namespace Check.ErrorTests;
 public class Some_MapToResult
 {
    /* ------------------------------------------------------------ */
-   // Result<T> MapToResult<T>(T whenNone);
+   // public Result<T> MapToResult<T>(T whenNone);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -27,7 +27,8 @@ public class Some_MapToResult
    public void
       GIVEN_Some_WHEN_MapToResult_AND_whenNone_is_an_int_THEN_a_failure_containing_the_content_is_returned()
    {
-      static Property Property(Message content, int whenNone)
+      static Property Property(Message content,
+                               int     whenNone)
       {
          //Arrange
          var error = Error.Some(content);
@@ -60,7 +61,8 @@ public class Some_MapToResult
    public void
       GIVEN_Some_WHEN_MapToResult_AND_whenNone_is_a_TestClass_THEN_a_failure_containing_the_content_is_returned()
    {
-      static Property Property(Message content, TestClass whenNone)
+      static Property Property(Message   content,
+                               TestClass whenNone)
       {
          //Arrange
          var error = Error.Some(content);
@@ -94,7 +96,8 @@ public class Some_MapToResult
    public void
       GIVEN_Some_WHEN_MapToResult_AND_whenNone_is_a_TestStruct_THEN_a_failure_containing_the_content_is_returned()
    {
-      static Property Property(Message content, TestStruct whenNone)
+      static Property Property(Message    content,
+                               TestStruct whenNone)
       {
          //Arrange
          var error = Error.Some(content);
@@ -116,7 +119,7 @@ public class Some_MapToResult
    }
 
    /* ------------------------------------------------------------ */
-   // Result<T> MapToResult<T>(Func<T> whenNone);
+   // public Result<T> MapToResult<T>(Func<T> whenNone);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -130,7 +133,8 @@ public class Some_MapToResult
    public void
       GIVEN_Some_WHEN_MapToResult_AND_whenNone_is_a_Func_of_int_THEN_whenNone_was_not_invoked_AND_a_failure_containing_the_content_is_returned()
    {
-      static Property Property(Message content, int value)
+      static Property Property(Message content,
+                               int     value)
       {
          //Arrange
          var whenNone = FakeFunction<int>.Create(value);
@@ -167,7 +171,8 @@ public class Some_MapToResult
    public void
       GIVEN_Some_WHEN_MapToResult_AND_whenNone_is_a_Func_of_TestClass_THEN_whenNone_was_not_invoked_AND_a_failure_containing_the_content_is_returned()
    {
-      static Property Property(Message content, TestClass value)
+      static Property Property(Message   content,
+                               TestClass value)
       {
          //Arrange
          var whenNone = FakeFunction<TestClass>.Create(value);
@@ -205,7 +210,8 @@ public class Some_MapToResult
    public void
       GIVEN_Some_WHEN_MapToResult_AND_whenNone_is_a_Func_of_TestStruct_THEN_whenNone_was_not_invoked_AND_a_failure_containing_the_content_is_returned()
    {
-      static Property Property(Message content, TestStruct value)
+      static Property Property(Message    content,
+                               TestStruct value)
       {
          //Arrange
          var whenNone = FakeFunction<TestStruct>.Create(value);

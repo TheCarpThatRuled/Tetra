@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfInt;
 public class Equals
 {
    /* ------------------------------------------------------------ */
-   // bool Equals(object? obj)
+   // public bool Equals(object? obj)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -203,7 +203,7 @@ public class Equals
    }
 
    /* ------------------------------------------------------------ */
-   // bool Equals(Option<T>? other)
+   // public bool Equals(Option<T>? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN

@@ -13,7 +13,7 @@ namespace Check.EitherTests.OfIntAndInt;
 public class Left_Reduce
 {
    /* ------------------------------------------------------------ */
-   // TLeft Reduce(Func<Right<TRight>,TLeft> whenRight)
+   // public TLeft Reduce(Func<Right<TRight>,TLeft> whenRight)
    /* ------------------------------------------------------------ * /
 
    //GIVEN
@@ -47,8 +47,9 @@ public class Left_Reduce
       Prop.ForAll<(int, int)>(Property)
           .QuickCheckThrowOnFailure();
    }
+
    /* ------------------------------------------------------------ */
-   // TRight Reduce>(Func<Left<TLeft>,TRight> whenLeft)
+   // public TRight Reduce>(Func<Left<TLeft>,TRight> whenLeft)
    /* ------------------------------------------------------------ * /
 
    //GIVEN
@@ -85,8 +86,8 @@ public class Left_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // T Reduce<T>(Func<Left<TLeft>,T> whenLeft,
-   //             Func<Right<TRight>, T> whenRight)
+   // public T Reduce<T>(Func<Left<TLeft>,T>    whenLeft,
+   //                    Func<Right<TRight>, T> whenRight)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -97,7 +98,8 @@ public class Left_Reduce
    //whenLeft_was_invoked_once_with_the_content_AND_whenRight_was_not_invoked_AND_the_return_value_of_whenLeft_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_int_WHEN_Reduce_AND_whenLeft_is_a_Func_of_Left_of_int_to_int_AND_whenRight_is_a_Func_of_Right_of_int_to_int_THEN_whenLeft_was_invoked_once_with_the_content_AND_whenRight_was_not_invoked_AND_the_return_value_of_whenLeft_is_returned()
+   public void
+      GIVEN_Left_of_int_WHEN_Reduce_AND_whenLeft_is_a_Func_of_Left_of_int_to_int_AND_whenRight_is_a_Func_of_Right_of_int_to_int_THEN_whenLeft_was_invoked_once_with_the_content_AND_whenRight_was_not_invoked_AND_the_return_value_of_whenLeft_is_returned()
    {
       static Property Property((int content, int whenLeft, int whenRight) args)
       {
@@ -138,9 +140,11 @@ public class Left_Reduce
    //whenLeft_was_invoked_once_with_the_content_AND_whenRight_was_not_invoked_AND_the_return_value_of_whenLeft_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_int_WHEN_Reduce_AND_whenLeft_is_a_Func_of_Left_of_int_to_TestClass_AND_whenRight_is_a_Func_of_Right_of_int_to_TestClass_THEN_whenLeft_was_invoked_once_with_the_content_AND_whenRight_was_not_invoked_AND_the_return_value_of_whenLeft_is_returned()
+   public void
+      GIVEN_Left_of_int_WHEN_Reduce_AND_whenLeft_is_a_Func_of_Left_of_int_to_TestClass_AND_whenRight_is_a_Func_of_Right_of_int_to_TestClass_THEN_whenLeft_was_invoked_once_with_the_content_AND_whenRight_was_not_invoked_AND_the_return_value_of_whenLeft_is_returned()
    {
-      static Property Property(int content, (TestClass whenLeft, TestClass whenRight) args)
+      static Property Property(int                                       content,
+                               (TestClass whenLeft, TestClass whenRight) args)
       {
          //Arrange
          var whenLeft  = FakeFunction<Left<int>, TestClass>.Create(args.whenLeft);
@@ -179,9 +183,11 @@ public class Left_Reduce
    //whenLeft_was_invoked_once_with_the_content_AND_whenRight_was_not_invoked_AND_the_return_value_of_whenLeft_is_returned
 
    [TestMethod]
-   public void GIVEN_Left_of_int_WHEN_Reduce_AND_whenLeft_is_a_Func_of_Left_of_int_to_TestStruct_AND_whenRight_is_a_Func_of_Right_of_int_to_TestStruct_THEN_whenLeft_was_invoked_once_with_the_content_AND_whenRight_was_not_invoked_AND_the_return_value_of_whenLeft_is_returned()
+   public void
+      GIVEN_Left_of_int_WHEN_Reduce_AND_whenLeft_is_a_Func_of_Left_of_int_to_TestStruct_AND_whenRight_is_a_Func_of_Right_of_int_to_TestStruct_THEN_whenLeft_was_invoked_once_with_the_content_AND_whenRight_was_not_invoked_AND_the_return_value_of_whenLeft_is_returned()
    {
-      static Property Property(int content, (TestStruct whenLeft, TestStruct whenRight) args)
+      static Property Property(int                                         content,
+                               (TestStruct whenLeft, TestStruct whenRight) args)
       {
          //Arrange
          var whenLeft  = FakeFunction<Left<int>, TestStruct>.Create(args.whenLeft);

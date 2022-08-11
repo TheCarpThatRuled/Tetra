@@ -13,7 +13,7 @@ namespace Check.ResultTests.OfTestSubClass;
 public class Failure_Cast
 {
    /* ------------------------------------------------------------ */
-   // Result<TNew> Cast<TNew>()
+   // public static Result<TNew> Cast<TNew>()
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -143,7 +143,7 @@ public class Failure_Cast
    }
 
    /* ------------------------------------------------------------ */
-   // Result<TNew> Cast<TNew>(Message whenCastFails)
+   // public static Result<TNew> Cast<TNew>(Message whenCastFails)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -305,7 +305,7 @@ public class Failure_Cast
    }
 
    /* ------------------------------------------------------------ */
-   // Result<TNew> Cast<TNew>(Func<Success<T>, Message> whenCastFails)
+   // public static Result<TNew> Cast<TNew>(Func<Success<T>, Message> whenCastFails)
    /* ------------------------------------------------------------ */
 
    //GIVEN

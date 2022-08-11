@@ -13,8 +13,7 @@ namespace Check.ListTests;
 public class ToDelimitedStringWithTrailingDelimiter
 {
    /* ------------------------------------------------------------ */
-   // string ToDelimitedStringWithTrailingDelimiter<T>(this IReadOnlyList<T> sequence,
-   //                                                  char delimiter)
+   // public string ToDelimitedStringWithTrailingDelimiter<T>(char delimiter)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -117,8 +116,7 @@ public class ToDelimitedStringWithTrailingDelimiter
    }
 
    /* ------------------------------------------------------------ */
-   // string ToDelimitedStringWithTrailingDelimiter<T>(this IReadOnlyList<T> sequence,
-   //                                                  string delimiter)
+   // public string ToDelimitedStringWithTrailingDelimiter<T>(string delimiter)
    /* ------------------------------------------------------------ */
 
    //GIVEN

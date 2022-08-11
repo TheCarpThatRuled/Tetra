@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfTestStruct;
 public class Some_Reduce
 {
    /* ------------------------------------------------------------ */
-   // T Reduce(T whenNone)
+   // public T Reduce(T whenNone)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -48,7 +48,7 @@ public class Some_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // T Reduce(Func<T> whenNone)
+   // public T Reduce(Func<T> whenNone)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -87,8 +87,8 @@ public class Some_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // TNew Reduce<TNew>(TNew whenNone,
-   //                   Func<T, TNew> whenSome)
+   // public TNew Reduce<TNew>(TNew          whenNone,
+   //                          Func<T, TNew> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -102,7 +102,8 @@ public class Some_Reduce
    public void
       GIVEN_Some_of_TestStruct_WHEN_Reduce_AND_whenNone_is_a_int_AND_whenSome_is_a_Func_of_TestStruct_to_int_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_returned()
    {
-      static Property Property(TestStruct value, (int whenNone, int whenSome) args)
+      static Property Property(TestStruct                   value,
+                               (int whenNone, int whenSome) args)
       {
          //Arrange
          var whenSome = FakeFunction<TestStruct, int>.Create(args.whenSome);
@@ -117,9 +118,9 @@ public class Some_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenSome,
                          actual)
-               .And(WasInvokedOnce(nameof(whenSome),
-                                   value,
-                                   whenSome));
+           .And(WasInvokedOnce(nameof(whenSome),
+                               value,
+                               whenSome));
       }
 
       Arb.Register<Libraries.TestStruct>();
@@ -142,7 +143,8 @@ public class Some_Reduce
    public void
       GIVEN_Some_of_TestStruct_WHEN_Reduce_AND_whenNone_is_a_TestClass_AND_whenSome_is_a_Func_of_TestStruct_to_TestClass_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_returned()
    {
-      static Property Property(TestStruct value, (TestClass whenNone, TestClass whenSome) args)
+      static Property Property(TestStruct                               value,
+                               (TestClass whenNone, TestClass whenSome) args)
       {
          //Arrange
          var whenSome = FakeFunction<TestStruct, TestClass>.Create(args.whenSome);
@@ -157,9 +159,9 @@ public class Some_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenSome,
                          actual)
-               .And(WasInvokedOnce(nameof(whenSome),
-                                   value,
-                                   whenSome));
+           .And(WasInvokedOnce(nameof(whenSome),
+                               value,
+                               whenSome));
       }
 
       Arb.Register<Libraries.TestStruct>();
@@ -197,9 +199,9 @@ public class Some_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenSome,
                          actual)
-               .And(WasInvokedOnce(nameof(whenSome),
-                                   args.value,
-                                   whenSome));
+           .And(WasInvokedOnce(nameof(whenSome),
+                               args.value,
+                               whenSome));
       }
 
       Arb.Register<Libraries.ThreeUniqueTestStructs>();
@@ -209,8 +211,8 @@ public class Some_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // TNew Reduce<TNew>(Func<TNew> whenNone,
-   //                   Func<T, TNew> whenSome)
+   // public TNew Reduce<TNew>(Func<TNew>    whenNone,
+   //                          Func<T, TNew> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -224,7 +226,8 @@ public class Some_Reduce
    public void
       GIVEN_Some_of_TestStruct_WHEN_Reduce_AND_whenNone_is_a_Func_of_int_AND_whenSome_is_a_Func_of_TestStruct_to_int_THEN_whenNone_was_not_invoked_AND_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_returned()
    {
-      static Property Property(TestStruct value, (int whenNone, int whenSome) args)
+      static Property Property(TestStruct                   value,
+                               (int whenNone, int whenSome) args)
       {
          //Arrange
          var whenNone = FakeFunction<int>.Create(args.whenNone);
@@ -267,7 +270,8 @@ public class Some_Reduce
    public void
       GIVEN_Some_of_TestStruct_WHEN_Reduce_AND_whenNone_is_a_Func_of_TestClass_AND_whenSome_is_a_Func_of_TestStruct_to_TestClass_THEN_whenNone_was_not_invoked_AND_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_returned()
    {
-      static Property Property(TestStruct value, (TestClass whenNone, TestClass whenSome) args)
+      static Property Property(TestStruct                               value,
+                               (TestClass whenNone, TestClass whenSome) args)
       {
          //Arrange
          var whenNone = FakeFunction<TestClass>.Create(args.whenNone);
@@ -310,7 +314,7 @@ public class Some_Reduce
    public void
       GIVEN_Some_of_TestStruct_WHEN_Reduce_AND_whenNone_is_a_Func_of_TestStruct_AND_whenSome_is_a_Func_of_TestStruct_to_TestStruct_THEN_whenNone_was_not_invoked_AND_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_returned()
    {
-      static Property Property((TestStruct value,TestStruct whenNone, TestStruct whenSome) args)
+      static Property Property((TestStruct value, TestStruct whenNone, TestStruct whenSome) args)
       {
          //Arrange
          var whenNone = FakeFunction<TestStruct>.Create(args.whenNone);
@@ -335,7 +339,7 @@ public class Some_Reduce
 
       Arb.Register<Libraries.ThreeUniqueTestStructs>();
 
-      Prop.ForAll< (TestStruct, TestStruct, TestStruct)>(Property)
+      Prop.ForAll<(TestStruct, TestStruct, TestStruct)>(Property)
           .QuickCheckThrowOnFailure();
    }
 

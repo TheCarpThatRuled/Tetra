@@ -13,8 +13,8 @@ namespace Check.EitherTests.OfTestClassAndTestStruct;
 public class Right_Reduce
 {
    /* ------------------------------------------------------------ */
-   // T Reduce<T>(Func<Left<TLeft>,T> whenLeft,
-   //             Func<Right<TRight>, T> whenRight)
+   // public T Reduce<T>(Func<Left<TLeft>,T>    whenLeft,
+   //                    Func<Right<TRight>, T> whenRight)
    /* ------------------------------------------------------------ */
 
    //GIVEN

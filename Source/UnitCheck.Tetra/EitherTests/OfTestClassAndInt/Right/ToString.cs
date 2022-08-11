@@ -13,7 +13,7 @@ namespace Check.EitherTests.OfTestClassAndInt;
 public class Right_ToString
 {
    /* ------------------------------------------------------------ */
-   // string ToString()
+   // public string ToString()
    /* ------------------------------------------------------------ */
 
    //GIVEN

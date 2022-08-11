@@ -13,8 +13,7 @@ namespace Check.AbsoluteDirectoryPathTests;
 public class Parse
 {
    /* ------------------------------------------------------------ */
-   // AbsoluteDirectoryPath Parse(VolumeComponent volume,
-   //                                  IReadOnlyCollection<DirectoryComponent> directories)
+   // public static AbsoluteDirectoryPath Parse(string potentialPath)
    /* ------------------------------------------------------------ */
 
    //GIVEN

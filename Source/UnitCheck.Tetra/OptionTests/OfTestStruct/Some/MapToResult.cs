@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfTestStruct;
 public class Some_MapToResult
 {
    /* ------------------------------------------------------------ */
-   // Result<T> MapToResult(Message whenNone);
+   // public Result<T> MapToResult(Message whenNone);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -27,7 +27,8 @@ public class Some_MapToResult
    public void
       GIVEN_Some_WHEN_MapToResult_AND_whenNone_is_a_Message_THEN_a_success_containing_the_content_is_returned()
    {
-      static Property Property(TestStruct content, Message whenNone)
+      static Property Property(TestStruct content,
+                               Message    whenNone)
       {
          //Arrange
          var option = Option.Some(content);
@@ -49,7 +50,7 @@ public class Some_MapToResult
    }
 
    /* ------------------------------------------------------------ */
-   // Result<T> MapToResult(Func<Message> whenNone);
+   // public Result<T> MapToResult(Func<Message> whenNone);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -63,7 +64,8 @@ public class Some_MapToResult
    public void
       GIVEN_Some_WHEN_MapToResult_AND_whenNone_is_a_Func_of_Message_THEN_whenNone_was_not_invoked_AND_a_success_containing_the_content_is_returned()
    {
-      static Property Property(TestStruct content, Message value)
+      static Property Property(TestStruct content,
+                               Message    value)
       {
          //Arrange
          var whenNone = FakeFunction<Message>.Create(value);
@@ -87,6 +89,6 @@ public class Some_MapToResult
       Prop.ForAll<TestStruct, Message>(Property)
           .QuickCheckThrowOnFailure();
    }
-   
+
    /* ------------------------------------------------------------ */
 }

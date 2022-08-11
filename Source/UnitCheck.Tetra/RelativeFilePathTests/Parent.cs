@@ -12,7 +12,7 @@ namespace Check.RelativeFilePathTests;
 public class Parent
 {
    /* ------------------------------------------------------------ */
-   // Option<RelativeDirectoryPath> Parent()
+   // public Option<RelativeDirectoryPath> Parent()
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -28,7 +28,7 @@ public class Parent
       static Property Property(FileComponent file)
       {
          //Arrange
-         var path = RelativeFilePath.Create(Array.Empty<DirectoryComponent>(),
+         var path = RelativeFilePath.Create(Sequence<DirectoryComponent>.Empty(),
                                             file);
 
          //Act
@@ -57,8 +57,8 @@ public class Parent
    [TestMethod]
    public void GIVEN_a_RelativeFilePath_containing_more_than_one_directory_WHEN_Parent_THEN_a_RelativeDirectoryPath_containing_the_parent_directory_is_returned()
    {
-      static Property Property(DirectoryComponent[] directories,
-                               FileComponent        file)
+      static Property Property(ISequence<DirectoryComponent> directories,
+                               FileComponent                 file)
       {
          //Arrange
          var expected = TestRelativeDirectoryPath.Create(directories);
@@ -78,10 +78,10 @@ public class Parent
                            actual);
       }
 
-      Arb.Register<Libraries.NonEmptyArrayOfDirectoryComponents>();
+      Arb.Register<Libraries.NonEmptySequenceOfDirectoryComponents>();
       Arb.Register<Libraries.FileComponent>();
 
-      Prop.ForAll<DirectoryComponent[], FileComponent>(Property)
+      Prop.ForAll<ISequence<DirectoryComponent>, FileComponent>(Property)
           .QuickCheckThrowOnFailure();
    }
 

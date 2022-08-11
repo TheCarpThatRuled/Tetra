@@ -13,7 +13,7 @@ namespace Check.EitherTests.OfTestStructAndInt;
 public class Equals
 {
    /* ------------------------------------------------------------ */
-   // bool Equals(object? obj)
+   // public bool Equals(object? obj)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -141,7 +141,7 @@ public class Equals
    }
 
    /* ------------------------------------------------------------ */
-   // bool Equals(Either<TLeft, TRight>? other)
+   // public bool Equals(Either<TLeft, TRight>? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN

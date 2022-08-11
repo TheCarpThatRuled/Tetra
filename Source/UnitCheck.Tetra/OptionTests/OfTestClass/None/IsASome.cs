@@ -11,7 +11,7 @@ namespace Check.OptionTests.OfTestClass;
 public class None_IsASome
 {
    /* ------------------------------------------------------------ */
-   // bool IsASome()
+   // public bool IsASome()
    /* ------------------------------------------------------------ */
 
    //GIVEN

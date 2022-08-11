@@ -13,7 +13,7 @@ namespace Check.FileComponentTests;
 public class CompareTo
 {
    /* ------------------------------------------------------------ */
-   // int CompareTo(FileComponent? other)
+   // public int CompareTo(FileComponent? other)
    /* ------------------------------------------------------------ */
 
 

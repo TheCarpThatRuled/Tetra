@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfTestClass;
 public class None_Map
 {
    /* ------------------------------------------------------------ */
-   // Option<TNew> Map<TNew>(Func<T, TNew> whenSome)
+   // public Option<TNew> Map<TNew>(Func<T, TNew> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -96,7 +96,7 @@ public class None_Map
       static Property Property(TestClass value)
       {
          //Arrange
-         var whenSome = FakeFunction<TestClass,TestClass>.Create(value);
+         var whenSome = FakeFunction<TestClass, TestClass>.Create(value);
 
          var option = Option<TestClass>.None();
 
@@ -131,7 +131,7 @@ public class None_Map
       static Property Property(TestStruct value)
       {
          //Arrange
-         var whenSome = FakeFunction<TestClass,TestStruct>.Create(value);
+         var whenSome = FakeFunction<TestClass, TestStruct>.Create(value);
 
          var option = Option<TestClass>.None();
 
@@ -152,7 +152,7 @@ public class None_Map
    }
 
    /* ------------------------------------------------------------ */
-   // Option<TNew> Map<TNew>(Func<T, Option<TNew>> whenSome)
+   // public Option<TNew> Map<TNew>(Func<T, Option<TNew>> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN

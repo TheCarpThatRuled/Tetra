@@ -13,7 +13,7 @@ namespace Check.MessageTests;
 public class Content
 {
    /* ------------------------------------------------------------ */
-   // string Content()
+   // public string Content()
    /* ------------------------------------------------------------ */
 
    //GIVEN

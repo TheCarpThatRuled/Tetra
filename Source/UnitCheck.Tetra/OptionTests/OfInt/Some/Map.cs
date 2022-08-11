@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfInt;
 public class Some_Map
 {
    /* ------------------------------------------------------------ */
-   // Option<TNew> Map<TNew>(Func<T, TNew> whenSome)
+   // public Option<TNew> Map<TNew>(Func<T, TNew> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -24,9 +24,10 @@ public class Some_Map
    //whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_int_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_int_THEN_whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned()
+   public void
+      GIVEN_Some_of_int_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_int_THEN_whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned()
    {
-      static Property Property((int value,int whenSome) args)
+      static Property Property((int value, int whenSome) args)
       {
          //Arrange
          var whenSome = FakeFunction<int, int>.Create(args.whenSome);
@@ -47,7 +48,7 @@ public class Some_Map
 
       Arb.Register<Libraries.TwoUniqueInt32s>();
 
-      Prop.ForAll<(int,int)>(Property)
+      Prop.ForAll<(int, int)>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -61,9 +62,11 @@ public class Some_Map
    //whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_int_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_TestClass_THEN_whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned()
+   public void
+      GIVEN_Some_of_int_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_TestClass_THEN_whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned()
    {
-      static Property Property(int value, TestClass whenSome)
+      static Property Property(int       value,
+                               TestClass whenSome)
       {
          //Arrange
          var whenSomeFunc = FakeFunction<int, TestClass>.Create(whenSome);
@@ -98,9 +101,11 @@ public class Some_Map
    //whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_int_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_TestStruct_THEN_whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned()
+   public void
+      GIVEN_Some_of_int_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_TestStruct_THEN_whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned()
    {
-      static Property Property(int value, TestStruct whenSome)
+      static Property Property(int        value,
+                               TestStruct whenSome)
       {
          //Arrange
          var whenSomeFunc = FakeFunction<int, TestStruct>.Create(whenSome);
@@ -135,9 +140,11 @@ public class Some_Map
    //whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned
 
    [TestMethod]
-   public void GIVEN_Some_of_int_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_uint_THEN_whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned()
+   public void
+      GIVEN_Some_of_int_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_uint_THEN_whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned()
    {
-      static Property Property(int value, uint whenSome)
+      static Property Property(int  value,
+                               uint whenSome)
       {
          //Arrange
          var whenSomeFunc = FakeFunction<int, uint>.Create(whenSome);
@@ -161,7 +168,7 @@ public class Some_Map
    }
 
    /* ------------------------------------------------------------ */
-   // Option<TNew> Map<TNew>(Func<T, Option<TNew>> whenSome)
+   // public Option<TNew> Map<TNew>(Func<T, Option<TNew>> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -336,7 +343,7 @@ public class Some_Map
 
       Arb.Register<Libraries.TwoUniqueInt32s>();
 
-      Prop.ForAll<(int,int)>(Property)
+      Prop.ForAll<(int, int)>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -353,7 +360,7 @@ public class Some_Map
    public void
       GIVEN_Some_of_int_AND_whenSome_returns_a_some_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_Option_of_TestClass_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return()
    {
-      static Property Property(int value,
+      static Property Property(int       value,
                                TestClass newValue)
       {
          //Arrange
@@ -392,7 +399,7 @@ public class Some_Map
    public void
       GIVEN_Some_of_int_AND_whenSome_returns_a_some_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_Option_of_TestStruct_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return()
    {
-      static Property Property(int value,
+      static Property Property(int        value,
                                TestStruct newValue)
       {
          //Arrange
@@ -431,7 +438,8 @@ public class Some_Map
    public void
       GIVEN_Some_of_int_AND_whenSome_returns_a_some_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_Option_of_uint_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return()
    {
-      static Property Property(int value, uint newValue)
+      static Property Property(int  value,
+                               uint newValue)
       {
          //Arrange
          var whenSome = FakeFunction<int, Option<uint>>.Create(newValue);

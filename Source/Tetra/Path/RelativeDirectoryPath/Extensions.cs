@@ -7,7 +7,7 @@ public static class RelativeDirectoryPath_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static IReadOnlyList<RelativeDirectoryPath> Ancestry(this RelativeDirectoryPath path)
+   public static ISequence<RelativeDirectoryPath> Ancestry(this RelativeDirectoryPath path)
    {
       var ancestry = new List<RelativeDirectoryPath> { path, };
 
@@ -28,7 +28,7 @@ public static class RelativeDirectoryPath_Extensions
 
       ancestry.Reverse();
 
-      return ancestry;
+      return ancestry.Materialise();
    }
 
    /* ------------------------------------------------------------ */

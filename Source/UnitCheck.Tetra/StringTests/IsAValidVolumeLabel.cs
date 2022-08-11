@@ -12,7 +12,7 @@ namespace Check.StringTests;
 public class IsAValidVolumeLabel
 {
    /* ------------------------------------------------------------ */
-   // bool IsAValidVolumeLabel(this string value)
+   // public bool IsAValidVolumeLabel()
    /* ------------------------------------------------------------ */
 
    //GIVEN

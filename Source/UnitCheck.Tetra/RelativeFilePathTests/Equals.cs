@@ -13,7 +13,7 @@ namespace Check.RelativeFilePathTests;
 public class Equals
 {
    /* ------------------------------------------------------------ */
-   // bool Equals(object? obj)
+   // public bool Equals(object? obj)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -133,7 +133,7 @@ public class Equals
    }
 
    /* ------------------------------------------------------------ */
-   // bool Equals(RelativeFilePath? other)
+   // public bool Equals(RelativeFilePath? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN

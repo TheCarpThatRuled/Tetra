@@ -13,7 +13,7 @@ namespace Check.EitherTests.OfTestClassAndInt;
 public class Right_IsALeft
 {
    /* ------------------------------------------------------------ */
-   // bool IsALeft()
+   // public bool IsALeft()
    /* ------------------------------------------------------------ */
 
    //GIVEN

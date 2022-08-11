@@ -11,7 +11,7 @@ namespace Check.ConditionTests;
 public class False_ToString
 {
    /* ------------------------------------------------------------ */
-   // string ToString()
+   // public string ToString()
    /* ------------------------------------------------------------ */
 
    //GIVEN

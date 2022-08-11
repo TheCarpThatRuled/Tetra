@@ -12,8 +12,7 @@ namespace Check.VolumeComponentTests;
 public class Append
 {
    /* ------------------------------------------------------------ */
-   // public static AbsoluteDirectoryPath Append(this VolumeComponent parent,
-   //                                            params DirectoryComponent[] child)
+   // public AbsoluteDirectoryPath Append(params DirectoryComponent[] child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -24,7 +23,8 @@ public class Append
    //an_AbsoluteDirectoryPath_containing_the_VolumeComponent_and_the_Array_of_DirectoryComponents_is_returned
 
    [TestMethod]
-   public void GIVEN_a_VolumeComponent_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_VolumeComponent_and_the_Array_of_DirectoryComponents_is_returned()
+   public void
+      GIVEN_a_VolumeComponent_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_VolumeComponent_and_the_Array_of_DirectoryComponents_is_returned()
    {
       static Property Property(VolumeComponent      parent,
                                DirectoryComponent[] child)
@@ -42,8 +42,8 @@ public class Append
                          actual);
       }
 
+      Arb.Register<Libraries.DirectoryComponent>();
       Arb.Register<Libraries.VolumeComponent>();
-      Arb.Register<Libraries.ArrayOfDirectoryComponents>();
 
       Prop.ForAll<VolumeComponent, DirectoryComponent[]>(Property)
           .QuickCheckThrowOnFailure();
@@ -51,7 +51,7 @@ public class Append
 
    /* ------------------------------------------------------------ */
    // public static AbsoluteDirectoryPath Append(this VolumeComponent parent,
-   //                                            IReadOnlyCollection<DirectoryComponent> child)
+   //                                            ISequence<DirectoryComponent> child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -62,10 +62,11 @@ public class Append
    //an_AbsoluteDirectoryPath_containing_the_VolumeComponent_and_the_sequence_of_DirectoryComponents_is_returned
 
    [TestMethod]
-   public void GIVEN_a_VolumeComponent_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_VolumeComponent_and_the_sequence_of_DirectoryComponents_is_returned()
+   public void
+      GIVEN_a_VolumeComponent_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_VolumeComponent_and_the_sequence_of_DirectoryComponents_is_returned()
    {
-      static Property Property(VolumeComponent          parent,
-                               List<DirectoryComponent> child)
+      static Property Property(VolumeComponent               parent,
+                               ISequence<DirectoryComponent> child)
       {
          //Arrange
          var expected = TestAbsoluteDirectoryPath.Create(parent,
@@ -80,16 +81,15 @@ public class Append
                          actual);
       }
 
+      Arb.Register<Libraries.SequenceOfDirectoryComponents>();
       Arb.Register<Libraries.VolumeComponent>();
-      Arb.Register<Libraries.ListOfDirectoryComponents>();
 
-      Prop.ForAll<VolumeComponent, List<DirectoryComponent>>(Property)
+      Prop.ForAll<VolumeComponent, ISequence<DirectoryComponent>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
-   // public static AbsoluteDirectoryPath Append(this VolumeComponent parent,
-   //                                            RelativeDirectoryPath child)
+   // public AbsoluteDirectoryPath Append(RelativeDirectoryPath child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -100,7 +100,8 @@ public class Append
    //an_AbsoluteDirectoryPath_containing_the_VolumeComponent_and_the_RelativeDirectoryPath_is_returned
 
    [TestMethod]
-   public void GIVEN_a_VolumeComponent_and_a_RelativeDirectoryPath_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_VolumeComponent_and_the_RelativeDirectoryPath_is_returned()
+   public void
+      GIVEN_a_VolumeComponent_and_a_RelativeDirectoryPath_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_VolumeComponent_and_the_RelativeDirectoryPath_is_returned()
    {
       static Property Property(VolumeComponent           parent,
                                TestRelativeDirectoryPath testChild)
@@ -128,8 +129,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // public static AbsoluteFilePath Append(this VolumeComponent parent,
-   //                                       FileComponent child)
+   // public AbsoluteFilePath Append(FileComponent child)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -147,7 +147,7 @@ public class Append
       {
          //Arrange
          var expected = TestAbsoluteFilePath.Create(parent,
-                                                    Array.Empty<DirectoryComponent>(),
+                                                    Sequence<DirectoryComponent>.Empty(),
                                                     child);
 
          //Act
@@ -167,8 +167,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // public static AbsoluteFilePath Append(this VolumeComponent parent,
-   //                                       RelativeFilePath child)
+   // public AbsoluteFilePath Append(RelativeFilePath child)
    /* ------------------------------------------------------------ */
 
    //GIVEN

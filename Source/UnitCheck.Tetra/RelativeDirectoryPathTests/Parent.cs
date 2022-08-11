@@ -12,7 +12,7 @@ namespace Check.RelativeDirectoryPathTests;
 public class Parent
 {
    /* ------------------------------------------------------------ */
-   // Option<RelativeDirectoryPath> Parent()
+   // public Option<RelativeDirectoryPath> Parent()
    /* ------------------------------------------------------------ */
 
    //GIVEN

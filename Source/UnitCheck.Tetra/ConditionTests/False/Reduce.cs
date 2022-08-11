@@ -13,7 +13,7 @@ namespace Check.ConditionTests;
 public class False_Reduce
 {
    /* ------------------------------------------------------------ */
-   // bool Reduce()
+   // public bool Reduce()
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -39,8 +39,8 @@ public class False_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // T Reduce<T>(T whenFalse,
-   //             T whenTrue)
+   // public T Reduce<T>(T whenFalse,
+   //                    T whenTrue)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -141,8 +141,8 @@ public class False_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // T Reduce<T>(T whenFalse,
-   //             Func<T> whenTrue)
+   // public T Reduce<T>(T       whenFalse,
+   //                    Func<T> whenTrue)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -244,8 +244,8 @@ public class False_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenFalse,
                          actual)
-               .And(WasNotInvoked(nameof(whenTrue),
-                                  whenTrue));
+           .And(WasNotInvoked(nameof(whenTrue),
+                              whenTrue));
       }
 
       Arb.Register<Libraries.TwoUniqueTestStructs>();
@@ -255,8 +255,8 @@ public class False_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // T Reduce<T>(Func<T> whenFalse,
-   //             T whenTrue)
+   // public T Reduce<T>(Func<T> whenFalse,
+   //                    T       whenTrue)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -285,8 +285,8 @@ public class False_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenFalse,
                          actual)
-               .And(WasInvokedOnce(nameof(whenFalse),
-                                   whenFalse));
+           .And(WasInvokedOnce(nameof(whenFalse),
+                               whenFalse));
       }
 
       Arb.Register<Libraries.TwoUniqueInt32s>();
@@ -323,8 +323,8 @@ public class False_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenFalse,
                          actual)
-               .And(WasInvokedOnce(nameof(whenFalse),
-                                   whenFalse));
+           .And(WasInvokedOnce(nameof(whenFalse),
+                               whenFalse));
       }
 
       Arb.Register<Libraries.TwoUniqueTestClasses>();
@@ -361,8 +361,8 @@ public class False_Reduce
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenFalse,
                          actual)
-               .And(WasInvokedOnce(nameof(whenFalse),
-                                   whenFalse));
+           .And(WasInvokedOnce(nameof(whenFalse),
+                               whenFalse));
       }
 
       Arb.Register<Libraries.TwoUniqueInt32s>();
@@ -372,8 +372,8 @@ public class False_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // T Reduce<T>(Func<T> whenFalse,
-   //             Func<T> whenTrue)
+   // public T Reduce<T>(Func<T> whenFalse,
+   //                    Func<T> whenTrue)
    /* ------------------------------------------------------------ */
 
    //GIVEN

@@ -35,7 +35,7 @@ public class Validate
    }
 
    /* ------------------------------------------------------------ */
-   // Result<DirectoryComponent> Validate(string potentialComponent)
+   // protected static Result<DirectoryComponent> Validate(string potentialComponent)
    /* ------------------------------------------------------------ */
 
    //GIVEN

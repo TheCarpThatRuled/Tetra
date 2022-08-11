@@ -13,7 +13,7 @@ namespace Check.VolumeComponentTests;
 public class Parse
 {
    /* ------------------------------------------------------------ */
-   // Result<VolumeComponent> Parse(char potentialVolume)
+   // public static Result<VolumeComponent> Parse(char potentialVolume)
    /* ------------------------------------------------------------ */
 
    //GIVEN

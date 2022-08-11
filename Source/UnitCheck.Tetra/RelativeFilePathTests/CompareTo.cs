@@ -13,7 +13,7 @@ namespace Check.RelativeFilePathTests;
 public class CompareTo
 {
    /* ------------------------------------------------------------ */
-   // int CompareTo(RelativeFilePath? other)
+   // public int CompareTo(RelativeFilePath? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN

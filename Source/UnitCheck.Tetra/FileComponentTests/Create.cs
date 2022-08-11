@@ -13,7 +13,7 @@ namespace Check.FileComponentTests;
 public class Create
 {
    /* ------------------------------------------------------------ */
-   // FileComponent Create(string potentialComponent)
+   // public static FileComponent Create(string potentialComponent)
    /* ------------------------------------------------------------ */
 
    //GIVEN

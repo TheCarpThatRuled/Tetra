@@ -12,7 +12,7 @@ namespace Check.DirectoryComponentTests;
 public class ToPath
 {
    /* ------------------------------------------------------------ */
-   // public static RelativeDirectoryPath ToPath(this DirectoryComponent directory)
+   // public RelativeDirectoryPath ToPath()
    /* ------------------------------------------------------------ */
 
    //GIVEN

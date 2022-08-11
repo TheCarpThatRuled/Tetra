@@ -13,8 +13,7 @@ namespace Check.ArrayTests;
 public class ToDelimitedString
 {
    /* ------------------------------------------------------------ */
-   // string ToDelimitedString<T>(this IReadOnlyList<T> sequence,
-   //                             char delimiter)
+   // public string ToDelimitedString<T>(char delimiter)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -61,7 +60,7 @@ public class ToDelimitedString
                                char   delimiter)
       {
          //Arrange
-         var array = new[] { value, };
+         var array = new[] {value,};
 
          //Act
          var actual = array.ToDelimitedString(delimiter);
@@ -91,7 +90,7 @@ public class ToDelimitedString
    public void GIVEN_an_Array_with_more_than_one_string_AND_delimiter_is_a_char_WHEN_ToDelimitedString_THEN_the_items_concatenated_by_the_delimiter_is_returned()
    {
       static Property Property(string[] array,
-                               char delimiter)
+                               char     delimiter)
       {
          //Arrange
          var expected = new StringBuilder();
@@ -119,8 +118,7 @@ public class ToDelimitedString
    }
 
    /* ------------------------------------------------------------ */
-   // string ToDelimitedString<T>(this IReadOnlyList<T> sequence,
-   //                             string delimiter)
+   // public string ToDelimitedString<T>(string delimiter)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -173,7 +171,7 @@ public class ToDelimitedString
 
          //Act
          var actual = array.ToDelimitedString(delimiter);
-         
+
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
                          value,
@@ -182,7 +180,7 @@ public class ToDelimitedString
 
       Arb.Register<Libraries.NonNullString>();
 
-      Prop.ForAll<string,string>(Property)
+      Prop.ForAll<string, string>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -196,10 +194,11 @@ public class ToDelimitedString
    //the_items_concatenated_by_the_delimiter_is_returned
 
    [TestMethod]
-   public void GIVEN_an_Array_with_more_than_one_string_AND_delimiter_is_a_string_AND_delimiter_is_a_string_WHEN_ToDelimitedString_THEN_the_items_concatenated_by_the_delimiter_is_returned()
+   public void
+      GIVEN_an_Array_with_more_than_one_string_AND_delimiter_is_a_string_AND_delimiter_is_a_string_WHEN_ToDelimitedString_THEN_the_items_concatenated_by_the_delimiter_is_returned()
    {
       static Property Property(string[] array,
-                               string delimiter)
+                               string   delimiter)
       {
          //Arrange
          var expected = new StringBuilder();

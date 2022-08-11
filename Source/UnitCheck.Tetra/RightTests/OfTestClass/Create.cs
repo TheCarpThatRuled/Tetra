@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using FsCheck;
+﻿using FsCheck;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
@@ -14,7 +13,7 @@ namespace Check.RightTests.OfTestClass;
 public class Create
 {
    /* ------------------------------------------------------------ */
-   // Right<T> Create(T content)
+   // public static Right<T> Create(T content)
    /* ------------------------------------------------------------ */
 
    //GIVEN

@@ -1,7 +1,4 @@
-﻿using System.Text;
-using Tetra;
-
-namespace Check;
+﻿namespace Check;
 
 partial class Messages
 {

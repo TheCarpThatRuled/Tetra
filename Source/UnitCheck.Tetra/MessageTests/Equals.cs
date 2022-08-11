@@ -13,7 +13,7 @@ namespace Check.MessageTests;
 public class Equals
 {
    /* ------------------------------------------------------------ */
-   // bool Equals(object? obj)
+   // public bool Equals(object? obj)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -135,7 +135,7 @@ public class Equals
    }
 
    /* ------------------------------------------------------------ */
-   // bool Equals(Message? other)
+   // public bool Equals(Message? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN

@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfInt;
 public class None_MapToResult
 {
    /* ------------------------------------------------------------ */
-   // Result<T> MapToResult(Message whenNone);
+   // public Result<T> MapToResult(Message whenNone);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -48,7 +48,7 @@ public class None_MapToResult
    }
 
    /* ------------------------------------------------------------ */
-   // Result<T> MapToResult(Func<Message> whenNone);
+   // public Result<T> MapToResult(Func<Message> whenNone);
    /* ------------------------------------------------------------ */
 
    //GIVEN

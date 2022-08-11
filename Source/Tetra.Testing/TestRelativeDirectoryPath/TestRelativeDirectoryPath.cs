@@ -7,11 +7,11 @@ public sealed class TestRelativeDirectoryPath
    /* ------------------------------------------------------------ */
 
    public static TestRelativeDirectoryPath Create(params DirectoryComponent[] directories)
-      => new(directories);
+      => new(directories.Materialise());
 
    /* ------------------------------------------------------------ */
 
-   public static TestRelativeDirectoryPath Create(IReadOnlyCollection<DirectoryComponent> directories)
+   public static TestRelativeDirectoryPath Create(ISequence<DirectoryComponent> directories)
       => new(directories);
 
    /* ------------------------------------------------------------ */
@@ -25,7 +25,7 @@ public sealed class TestRelativeDirectoryPath
    // Properties
    /* ------------------------------------------------------------ */
 
-   public IReadOnlyCollection<DirectoryComponent> Directories()
+   public ISequence<DirectoryComponent> Directories()
       => _directories;
 
    /* ------------------------------------------------------------ */
@@ -42,15 +42,15 @@ public sealed class TestRelativeDirectoryPath
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly IReadOnlyCollection<DirectoryComponent> _directories;
-   private readonly string                                  _pathWithoutTrailingDirectorySeparator;
-   private readonly string                                  _pathWithTrailingDirectorySeparator;
+   private readonly ISequence<DirectoryComponent> _directories;
+   private readonly string                        _pathWithoutTrailingDirectorySeparator;
+   private readonly string                        _pathWithTrailingDirectorySeparator;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private TestRelativeDirectoryPath(IReadOnlyCollection<DirectoryComponent> directories)
+   private TestRelativeDirectoryPath(ISequence<DirectoryComponent> directories)
    {
       _directories = directories;
 

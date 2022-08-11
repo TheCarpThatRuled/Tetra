@@ -13,7 +13,7 @@ namespace Check.RightTests.OfTestStruct;
 public class Create
 {
    /* ------------------------------------------------------------ */
-   // Right<T> Create(T content)
+   // public static Right<T> Create(T content)
    /* ------------------------------------------------------------ */
 
    //GIVEN

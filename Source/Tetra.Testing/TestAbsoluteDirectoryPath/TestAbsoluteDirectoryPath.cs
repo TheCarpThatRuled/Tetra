@@ -8,13 +8,13 @@ public sealed class TestAbsoluteDirectoryPath
 
    public static TestAbsoluteDirectoryPath Create(VolumeComponent             volume,
                                                   params DirectoryComponent[] directories)
-      => new(directories,
+      => new(directories.Materialise(),
              volume);
 
    /* ------------------------------------------------------------ */
 
-   public static TestAbsoluteDirectoryPath Create(VolumeComponent                         volume,
-                                                  IReadOnlyCollection<DirectoryComponent> directories)
+   public static TestAbsoluteDirectoryPath Create(VolumeComponent               volume,
+                                                  ISequence<DirectoryComponent> directories)
       => new(directories,
              volume);
 
@@ -29,7 +29,7 @@ public sealed class TestAbsoluteDirectoryPath
    // Properties
    /* ------------------------------------------------------------ */
 
-   public IReadOnlyCollection<DirectoryComponent> Directories()
+   public ISequence<DirectoryComponent> Directories()
       => _directories;
 
    /* ------------------------------------------------------------ */
@@ -51,17 +51,17 @@ public sealed class TestAbsoluteDirectoryPath
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly IReadOnlyCollection<DirectoryComponent> _directories;
-   private readonly string                                  _pathWithoutTrailingDirectorySeparator;
-   private readonly string                                  _pathWithTrailingDirectorySeparator;
-   private readonly VolumeComponent                         _volume;
+   private readonly ISequence<DirectoryComponent> _directories;
+   private readonly string                        _pathWithoutTrailingDirectorySeparator;
+   private readonly string                        _pathWithTrailingDirectorySeparator;
+   private readonly VolumeComponent               _volume;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private TestAbsoluteDirectoryPath(IReadOnlyCollection<DirectoryComponent> directories,
-                                     VolumeComponent                         volume)
+   private TestAbsoluteDirectoryPath(ISequence<DirectoryComponent> directories,
+                                     VolumeComponent               volume)
    {
       _directories = directories;
       _volume      = volume;

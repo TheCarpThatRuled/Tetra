@@ -13,8 +13,7 @@ namespace Check.IReadOnlyListTests;
 public class ToDelimitedString
 {
    /* ------------------------------------------------------------ */
-   // string ToDelimitedString<T>(this IReadOnlyList<T> sequence,
-   //                             char delimiter)
+   // public string ToDelimitedString<T>(char delimiter)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -61,7 +60,7 @@ public class ToDelimitedString
                                char   delimiter)
       {
          //Arrange
-         IReadOnlyList<string> readOnlyList = new[] { value, };
+         IReadOnlyList<string> readOnlyList = new[] {value,};
 
          //Act
          var actual = readOnlyList.ToDelimitedString(delimiter);
@@ -91,7 +90,7 @@ public class ToDelimitedString
    public void GIVEN_a_IReadOnlyList_with_more_than_one_string_AND_delimiter_is_a_char_WHEN_ToDelimitedString_THEN_the_items_concatenated_by_the_delimiter_is_returned()
    {
       static Property Property(string[] array,
-                               char delimiter)
+                               char     delimiter)
       {
          //Arrange
          var expected = new StringBuilder();
@@ -104,7 +103,7 @@ public class ToDelimitedString
          expected.Append(array[^1]);
 
          //Act
-         var actual = ((IReadOnlyList<string>)array).ToDelimitedString(delimiter);
+         var actual = ((IReadOnlyList<string>) array).ToDelimitedString(delimiter);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
@@ -119,8 +118,7 @@ public class ToDelimitedString
    }
 
    /* ------------------------------------------------------------ */
-   // string ToDelimitedString<T>(this IReadOnlyList<T> sequence,
-   //                             string delimiter)
+   // public string ToDelimitedString<T>(string delimiter)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -139,7 +137,7 @@ public class ToDelimitedString
          var array = Array.Empty<string>();
 
          //Act
-         var actual = ((IReadOnlyList<string>)array).ToDelimitedString(delimiter);
+         var actual = ((IReadOnlyList<string>) array).ToDelimitedString(delimiter);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
@@ -172,8 +170,8 @@ public class ToDelimitedString
          var array = new[] {value,};
 
          //Act
-         var actual = ((IReadOnlyList<string>)array).ToDelimitedString(delimiter);
-         
+         var actual = ((IReadOnlyList<string>) array).ToDelimitedString(delimiter);
+
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
                          value,
@@ -182,7 +180,7 @@ public class ToDelimitedString
 
       Arb.Register<Libraries.NonNullString>();
 
-      Prop.ForAll<string,string>(Property)
+      Prop.ForAll<string, string>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -199,7 +197,7 @@ public class ToDelimitedString
    public void GIVEN_a_IReadOnlyList_with_more_than_one_string_AND_delimiter_is_a_string_WHEN_ToDelimitedString_THEN_the_items_concatenated_by_the_delimiter_is_returned()
    {
       static Property Property(string[] array,
-                               string delimiter)
+                               string   delimiter)
       {
          //Arrange
          var expected = new StringBuilder();
@@ -212,7 +210,7 @@ public class ToDelimitedString
          expected.Append(array[^1]);
 
          //Act
-         var actual = ((IReadOnlyList<string>)array).ToDelimitedString(delimiter);
+         var actual = ((IReadOnlyList<string>) array).ToDelimitedString(delimiter);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,

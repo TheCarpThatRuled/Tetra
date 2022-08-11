@@ -20,7 +20,7 @@ partial class Properties
 
    public static Property AreEqual(string                                  description,
                                    TestRelativeDirectoryPath               expected,
-                                   IReadOnlyCollection<DirectoryComponent> actual)
+                                   ISequence<DirectoryComponent> actual)
       => AreSequenceEqual($"{description} - directories",
                           expected.Directories(),
                           actual);
@@ -31,14 +31,14 @@ partial class Properties
                                            IEnumerable<TestRelativeDirectoryPath> expected,
                                            IEnumerable<RelativeDirectoryPath>     actual)
       => AreSequenceEqual(description,
-                          expected.ToArray(),
-                          actual.ToArray());
+                          expected.Materialise(),
+                          actual.Materialise());
 
    /* ------------------------------------------------------------ */
 
    public static Property AreSequenceEqual(string                                         description,
-                                           IReadOnlyCollection<TestRelativeDirectoryPath> expected,
-                                           IReadOnlyCollection<RelativeDirectoryPath>     actual)
+                                           ISequence<TestRelativeDirectoryPath> expected,
+                                           ISequence<RelativeDirectoryPath>     actual)
       => AreSequenceEqual(description,
                           expected,
                           actual,

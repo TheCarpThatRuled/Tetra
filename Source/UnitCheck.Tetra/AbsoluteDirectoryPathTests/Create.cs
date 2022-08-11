@@ -180,7 +180,42 @@ public class Create
 
    /* ------------------------------------------------------------ */
    // AbsoluteDirectoryPath Create(VolumeComponent volume,
-   //                              IReadOnlyCollection<DirectoryComponent> directories)
+   //                              params DirectoryComponent[] directories)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //a_Volume_and_an_Array_of_DirectoryComponents
+   //WHEN
+   //Create
+   //THEN
+   //an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned
+
+   [TestMethod]
+   public void GIVEN_a_Volume_and_an_Array_of_DirectoryComponents_WHEN_Create_THEN_an_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
+   {
+      static Property Property(TestAbsoluteDirectoryPath testPath)
+      {
+         //Arrange
+         //Act
+         var actual = AbsoluteDirectoryPath.Create(testPath.Volume(),
+                                                   testPath.Directories()
+                                                           .ToArray());
+
+         //Assert
+         return AreEqual(AssertMessages.ReturnValue,
+                         testPath,
+                         actual);
+      }
+
+      Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
+
+      Prop.ForAll<TestAbsoluteDirectoryPath>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+   // AbsoluteDirectoryPath Create(VolumeComponent volume,
+   //                              ISequence<DirectoryComponent> directories)
    /* ------------------------------------------------------------ */
 
    //GIVEN

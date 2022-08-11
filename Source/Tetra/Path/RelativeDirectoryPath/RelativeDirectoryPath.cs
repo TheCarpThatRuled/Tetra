@@ -18,11 +18,11 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    /* ------------------------------------------------------------ */
 
    public static RelativeDirectoryPath Create(params DirectoryComponent[] directories)
-      => new(directories);
+      => new(directories.Materialise());
 
    /* ------------------------------------------------------------ */
 
-   public static RelativeDirectoryPath Create(IReadOnlyCollection<DirectoryComponent> directories)
+   public static RelativeDirectoryPath Create(ISequence<DirectoryComponent> directories)
       => new(directories);
 
    /* ------------------------------------------------------------ */
@@ -119,7 +119,7 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    /* ------------------------------------------------------------ */
 
    public Option<RelativeDirectoryPath> Parent()
-      => _directories.Count > 1
+      => _directories.Length() > 1
             ? Option.Some(Create(_directories
                                 .SkipLast(1)
                                 .ToArray()))
@@ -162,7 +162,7 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    // Protected Constructors
    /* ------------------------------------------------------------ */
 
-   protected RelativeDirectoryPath(IReadOnlyCollection<DirectoryComponent> directories)
+   protected RelativeDirectoryPath(ISequence<DirectoryComponent> directories)
    {
       _directories = directories;
 
@@ -173,8 +173,8 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static Result<IReadOnlyCollection<DirectoryComponent>> ParseComponents(string potentialPath,
-                                                                                    string pathType)
+   protected static Result<ISequence<DirectoryComponent>> ParseComponents(string potentialPath,
+                                                                          string pathType)
    {
       if (string.IsNullOrEmpty(potentialPath))
       {
@@ -197,9 +197,9 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
                                                                                          pathType));
       }
 
-      return directoryComponents
-            .Select(DirectoryComponent.Create)
-            .ToArray();
+      return Result.Success(directoryComponents
+                           .Select(DirectoryComponent.Create)
+                           .Materialise());
    }
 
    /* ------------------------------------------------------------ */
@@ -212,14 +212,14 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly IReadOnlyCollection<DirectoryComponent> _directories;
-   private readonly string                                  _value;
+   private readonly ISequence<DirectoryComponent> _directories;
+   private readonly string                        _value;
 
    /* ------------------------------------------------------------ */
    // Private Factory Functions
    /* ------------------------------------------------------------ */
 
-   private static RelativeDirectoryPath Create(Success<IReadOnlyCollection<DirectoryComponent>> success)
+   private static RelativeDirectoryPath Create(Success<ISequence<DirectoryComponent>> success)
       => new(success.Content());
 
    /* ------------------------------------------------------------ */

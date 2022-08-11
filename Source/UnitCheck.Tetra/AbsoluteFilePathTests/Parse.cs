@@ -13,7 +13,7 @@ namespace Check.AbsoluteFilePathTests;
 public class Parse
 {
    /* ------------------------------------------------------------ */
-   // AbsoluteFilePath Parse(string potentialPath)
+   // public static AbsoluteFilePath Parse(string potentialPath)
    /* ------------------------------------------------------------ */
 
    //GIVEN

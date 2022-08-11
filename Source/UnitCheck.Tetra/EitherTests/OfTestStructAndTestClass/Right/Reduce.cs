@@ -13,8 +13,8 @@ namespace Check.EitherTests.OfTestStructAndTestClass;
 public class Right_Reduce
 {
    /* ------------------------------------------------------------ */
-   // T Reduce<T>(Func<Left<TLeft>,T> whenLeft,
-   //             Func<Right<TRight>, T> whenRight)
+   // public T Reduce<T>(Func<Left<TLeft>,T>    whenLeft,
+   //                    Func<Right<TRight>, T> whenRight)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -25,9 +25,11 @@ public class Right_Reduce
    //whenLeft_was_invoked_once_with_the_content_was_not_invoked_AND_whenRight_was_invoked_once_with_the_content_AND_the_return_value_of_whenRight_is_returned
 
    [TestMethod]
-   public void GIVEN_Right_of_TestClass_WHEN_Reduce_AND_whenLeft_is_a_Func_of_Left_of_TestStruct_to_int_AND_whenRight_is_a_Func_of_Right_of_TestClass_to_int_THEN_whenLeft_was_invoked_once_with_the_content_was_not_invoked_AND_whenRight_was_invoked_once_with_the_content_AND_the_return_value_of_whenRight_is_returned()
+   public void
+      GIVEN_Right_of_TestClass_WHEN_Reduce_AND_whenLeft_is_a_Func_of_Left_of_TestStruct_to_int_AND_whenRight_is_a_Func_of_Right_of_TestClass_to_int_THEN_whenLeft_was_invoked_once_with_the_content_was_not_invoked_AND_whenRight_was_invoked_once_with_the_content_AND_the_return_value_of_whenRight_is_returned()
    {
-      static Property Property(TestClass content, (int whenLeft, int whenRight) args)
+      static Property Property(TestClass                     content,
+                               (int whenLeft, int whenRight) args)
       {
          //Arrange
          var whenLeft  = FakeFunction<Left<TestStruct>, int>.Create(args.whenLeft);
@@ -67,7 +69,8 @@ public class Right_Reduce
    //whenLeft_was_invoked_once_with_the_content_was_not_invoked_AND_whenRight_was_invoked_once_with_the_content_AND_the_return_value_of_whenRight_is_returned
 
    [TestMethod]
-   public void GIVEN_Right_of_TestClass_WHEN_Reduce_AND_whenLeft_is_a_Func_of_Left_of_TestStruct_to_TestClass_AND_whenRight_is_a_Func_of_Right_of_TestClass_to_TestClass_THEN_whenLeft_was_invoked_once_with_the_content_was_not_invoked_AND_whenRight_was_invoked_once_with_the_content_AND_the_return_value_of_whenRight_is_returned()
+   public void
+      GIVEN_Right_of_TestClass_WHEN_Reduce_AND_whenLeft_is_a_Func_of_Left_of_TestStruct_to_TestClass_AND_whenRight_is_a_Func_of_Right_of_TestClass_to_TestClass_THEN_whenLeft_was_invoked_once_with_the_content_was_not_invoked_AND_whenRight_was_invoked_once_with_the_content_AND_the_return_value_of_whenRight_is_returned()
    {
       static Property Property((TestClass content, TestClass whenLeft, TestClass whenRight) args)
       {
@@ -108,9 +111,11 @@ public class Right_Reduce
    //whenLeft_was_invoked_once_with_the_content_was_not_invoked_AND_whenRight_was_invoked_once_with_the_content_AND_the_return_value_of_whenRight_is_returned
 
    [TestMethod]
-   public void GIVEN_Right_of_TestClass_WHEN_Reduce_AND_whenLeft_is_a_Func_of_Left_of_TestStruct_to_TestStruct_AND_whenRight_is_a_Func_of_Right_of_TestClass_to_TestStruct_THEN_whenLeft_was_invoked_once_with_the_content_was_not_invoked_AND_whenRight_was_invoked_once_with_the_content_AND_the_return_value_of_whenRight_is_returned()
+   public void
+      GIVEN_Right_of_TestClass_WHEN_Reduce_AND_whenLeft_is_a_Func_of_Left_of_TestStruct_to_TestStruct_AND_whenRight_is_a_Func_of_Right_of_TestClass_to_TestStruct_THEN_whenLeft_was_invoked_once_with_the_content_was_not_invoked_AND_whenRight_was_invoked_once_with_the_content_AND_the_return_value_of_whenRight_is_returned()
    {
-      static Property Property(TestClass content, (TestStruct whenLeft, TestStruct whenRight) args)
+      static Property Property(TestClass                                   content,
+                               (TestStruct whenLeft, TestStruct whenRight) args)
       {
          //Arrange
          var whenLeft  = FakeFunction<Left<TestStruct>, TestStruct>.Create(args.whenLeft);

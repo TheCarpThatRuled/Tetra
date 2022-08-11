@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfTestStruct;
 public class Some_ToString
 {
    /* ------------------------------------------------------------ */
-   // string ToString()
+   // public string ToString()
    /* ------------------------------------------------------------ */
 
    //GIVEN

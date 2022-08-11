@@ -21,9 +21,9 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreEqual(string                                                                        description,
-                                   TestAbsoluteDirectoryPath                                                     expected,
-                                   (VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories) actual)
+   public static Property AreEqual(string                                                              description,
+                                   TestAbsoluteDirectoryPath                                           expected,
+                                   (VolumeComponent volume, ISequence<DirectoryComponent> directories) actual)
       => AreEqual($"{description} - the volumes do not match",
                   expected.Volume(),
                   actual.volume)
@@ -37,14 +37,14 @@ partial class Properties
                                            IEnumerable<TestAbsoluteDirectoryPath> expected,
                                            IEnumerable<AbsoluteDirectoryPath>     actual)
       => AreSequenceEqual(description,
-                          expected.ToArray(),
-                          actual.ToArray());
+                          expected.Materialise(),
+                          actual.Materialise());
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreSequenceEqual(string                                         description,
-                                           IReadOnlyCollection<TestAbsoluteDirectoryPath> expected,
-                                           IReadOnlyCollection<AbsoluteDirectoryPath>     actual)
+   public static Property AreSequenceEqual(string                               description,
+                                           ISequence<TestAbsoluteDirectoryPath> expected,
+                                           ISequence<AbsoluteDirectoryPath>     actual)
       => AreSequenceEqual(description,
                           expected,
                           actual,

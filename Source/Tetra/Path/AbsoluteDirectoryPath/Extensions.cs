@@ -7,7 +7,7 @@ public static class AbsoluteDirectoryPath_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static IReadOnlyList<AbsoluteDirectoryPath> Ancestry(this AbsoluteDirectoryPath path)
+   public static ISequence<AbsoluteDirectoryPath> Ancestry(this AbsoluteDirectoryPath path)
    {
       var ancestry = new List<AbsoluteDirectoryPath> {path,};
 
@@ -28,7 +28,7 @@ public static class AbsoluteDirectoryPath_Extensions
 
       ancestry.Reverse();
 
-      return ancestry;
+      return ancestry.Materialise();
    }
 
    /* ------------------------------------------------------------ */

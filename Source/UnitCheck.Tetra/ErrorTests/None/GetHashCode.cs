@@ -11,7 +11,7 @@ namespace Check.ErrorTests;
 public class None_GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // int GetHashCode()
+   // public int GetHashCode()
    /* ------------------------------------------------------------ */
 
    //GIVEN

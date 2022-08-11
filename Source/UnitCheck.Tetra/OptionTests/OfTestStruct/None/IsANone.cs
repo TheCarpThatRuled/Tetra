@@ -11,7 +11,7 @@ namespace Check.OptionTests.OfTestStruct;
 public class None_IsANone
 {
    /* ------------------------------------------------------------ */
-   // bool IsANone()
+   // public bool IsANone()
    /* ------------------------------------------------------------ */
 
    //GIVEN

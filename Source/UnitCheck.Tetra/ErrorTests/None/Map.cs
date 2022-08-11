@@ -13,7 +13,7 @@ namespace Check.ErrorTests;
 public class None_Map
 {
    /* ------------------------------------------------------------ */
-   // Error Map(Func<Message, Message> whenSome)
+   // public Error Map(Func<Message, Message> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -51,7 +51,7 @@ public class None_Map
    }
 
    /* ------------------------------------------------------------ */
-   // Error Map(Func<Message, Error> whenSome)
+   // public Error Map(Func<Message, Error> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -80,7 +80,7 @@ public class None_Map
             .WasNotInvoked(nameof(whenSome),
                            whenSome);
 
-   }/* ------------------------------------------------------------ */
+   } /* ------------------------------------------------------------ */
 
    //GIVEN
    //None_AND_whenSome_returns_a_some

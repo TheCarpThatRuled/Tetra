@@ -1,5 +1,4 @@
 ﻿using FsCheck;
-using Tetra;
 using Tetra.Testing;
 
 namespace Check;

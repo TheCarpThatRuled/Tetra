@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfTestStruct;
 public class Some_Map
 {
    /* ------------------------------------------------------------ */
-   // Option<TNew> Map<TNew>(Func<T, TNew> whenSome)
+   // public Option<TNew> Map<TNew>(Func<T, TNew> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -28,7 +28,7 @@ public class Some_Map
       GIVEN_Some_of_TestStruct_WHEN_Map_AND_whenSome_is_a_Func_of_TestStruct_to_DateTime_THEN_whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned()
    {
       static Property Property(TestStruct value,
-                               DateTime whenSome)
+                               DateTime   whenSome)
       {
          //Arrange
          var whenSomeFunc = FakeFunction<TestStruct, DateTime>.Create(whenSome);
@@ -67,7 +67,7 @@ public class Some_Map
       GIVEN_Some_of_TestStruct_WHEN_Map_AND_whenSome_is_a_Func_of_TestStruct_to_int_THEN_whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned()
    {
       static Property Property(TestStruct value,
-                               int whenSome)
+                               int        whenSome)
       {
          //Arrange
          var whenSomeFunc = FakeFunction<TestStruct, int>.Create(whenSome);
@@ -106,7 +106,7 @@ public class Some_Map
       GIVEN_Some_of_TestStruct_WHEN_Map_AND_whenSome_is_a_Func_of_TestStruct_to_TestClass_THEN_whenSome_was_invoked_with_the_content_AND_a_some_containing_the_return_value_of_whenSome_is_returned()
    {
       static Property Property(TestStruct value,
-                               TestClass whenSome)
+                               TestClass  whenSome)
       {
          //Arrange
          var whenSomeFunc = FakeFunction<TestStruct, TestClass>.Create(whenSome);
@@ -171,7 +171,7 @@ public class Some_Map
    }
 
    /* ------------------------------------------------------------ */
-   // Option<TNew> Map<TNew>(Func<T, Option<TNew>> whenSome)
+   // public Option<TNew> Map<TNew>(Func<T, Option<TNew>> whenSome)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -334,7 +334,7 @@ public class Some_Map
       GIVEN_Some_of_TestStruct_AND_whenSome_returns_a_some_WHEN_Map_AND_whenSome_is_a_Func_of_TestStruct_to_Option_of_DateTime_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return()
    {
       static Property Property(TestStruct value,
-                               DateTime newValue)
+                               DateTime   newValue)
       {
          //Arrange
          var whenSome = FakeFunction<TestStruct, Option<DateTime>>.Create(newValue);
@@ -372,7 +372,8 @@ public class Some_Map
    public void
       GIVEN_Some_of_TestStruct_AND_whenSome_returns_a_some_WHEN_Map_AND_whenSome_is_a_Func_of_TestStruct_to_Option_of_int_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return()
    {
-      static Property Property(TestStruct value, int newValue)
+      static Property Property(TestStruct value,
+                               int        newValue)
       {
          //Arrange
          var whenSome = FakeFunction<TestStruct, Option<int>>.Create(newValue);
@@ -411,7 +412,7 @@ public class Some_Map
       GIVEN_Some_of_TestStruct_AND_whenSome_returns_a_some_WHEN_Map_AND_whenSome_is_a_Func_of_TestStruct_to_Option_of_TestClass_THEN_whenSome_was_invoked_once_with_the_content_AND_the_return_value_of_whenSome_is_return()
    {
       static Property Property(TestStruct value,
-                               TestClass newValue)
+                               TestClass  newValue)
       {
          //Arrange
          var whenSome = FakeFunction<TestStruct, Option<TestClass>>.Create(newValue);

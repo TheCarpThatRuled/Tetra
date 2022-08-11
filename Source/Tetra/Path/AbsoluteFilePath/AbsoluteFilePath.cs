@@ -18,7 +18,7 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
    /* ------------------------------------------------------------ */
 
    public static AbsoluteFilePath Create(VolumeComponent                         volume,
-                                         IReadOnlyCollection<DirectoryComponent> directories,
+                                         ISequence<DirectoryComponent> directories,
                                          FileComponent                           file)
       => new(directories,
              file,
@@ -101,7 +101,7 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
    // Protected Constructors
    /* ------------------------------------------------------------ */
 
-   protected AbsoluteFilePath(IReadOnlyCollection<DirectoryComponent> directories,
+   protected AbsoluteFilePath(ISequence<DirectoryComponent> directories,
                               FileComponent                           file,
                               VolumeComponent                         volume)
    {
@@ -118,7 +118,7 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static Result<(VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories, FileComponent file)> ParseComponents(string potentialPath,
+   protected static Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file)> ParseComponents(string potentialPath,
       string                                                                                                                                         pathType)
    {
       if (string.IsNullOrEmpty(potentialPath))
@@ -160,7 +160,7 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
       return (VolumeComponent.Create(potentialVolume[0]),
               potentialComponents.SkipLast(1)
                                  .Select(DirectoryComponent.Create)
-                                 .ToArray(),
+                                 .Materialise(),
               FileComponent.Create(components[^1]));
    }
 
@@ -174,16 +174,16 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly IReadOnlyCollection<DirectoryComponent> _directories;
-   private readonly FileComponent                           _file;
-   private readonly string                                  _value;
-   private readonly VolumeComponent                         _volume;
+   private readonly ISequence<DirectoryComponent> _directories;
+   private readonly FileComponent                 _file;
+   private readonly string                        _value;
+   private readonly VolumeComponent               _volume;
 
    /* ------------------------------------------------------------ */
    // Private Factory Functions
    /* ------------------------------------------------------------ */
 
-   private static AbsoluteFilePath Create(Success<(VolumeComponent volume, IReadOnlyCollection<DirectoryComponent> directories, FileComponent file)> success)
+   private static AbsoluteFilePath Create(Success<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file)> success)
       => new(success.Content()
                     .directories,
              success.Content()

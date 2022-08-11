@@ -98,9 +98,9 @@ partial class Generators
 
    public static Gen<string> PathWithAVolumeRootAndAnInvalidComponentButWithoutATrailingDirectorySeparator()
       => AsciiLetter()
-        .Combine(ListOf(ValidPathComponent()),
+        .Combine(SequenceOf(ValidPathComponent()),
                  InvalidPathComponentExcludingDirectorySeparators(),
-                 ListOf(ValidPathComponent()),
+                 SequenceOf(ValidPathComponent()),
                  (volume,
                   prependedComponents,
                   invalidComponent,

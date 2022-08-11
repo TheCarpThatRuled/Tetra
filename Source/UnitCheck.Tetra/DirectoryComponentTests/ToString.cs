@@ -13,7 +13,7 @@ namespace Check.DirectoryComponentTests;
 public class ToString
 {
    /* ------------------------------------------------------------ */
-   // string ToString()
+   // public string ToString()
    /* ------------------------------------------------------------ */
 
    //GIVEN

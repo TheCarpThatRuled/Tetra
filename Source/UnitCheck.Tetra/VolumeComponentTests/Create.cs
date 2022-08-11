@@ -13,7 +13,7 @@ namespace Check.VolumeComponentTests;
 public class Create
 {
    /* ------------------------------------------------------------ */
-   // VolumeComponent Create(char potentialVolume)
+   // public static VolumeComponent Create(char potentialVolume)
    /* ------------------------------------------------------------ */
 
    //GIVEN

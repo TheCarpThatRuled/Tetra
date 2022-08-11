@@ -13,7 +13,7 @@ namespace Check.ErrorTests;
 public class None_MapToResult
 {
    /* ------------------------------------------------------------ */
-   // Result<T> MapToResult<T>(T whenNone);
+   // public Result<T> MapToResult<T>(T whenNone);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -113,7 +113,7 @@ public class None_MapToResult
    }
 
    /* ------------------------------------------------------------ */
-   // Result<T> MapToResult<T>(Func<T> whenNone);
+   // public Result<T> MapToResult<T>(Func<T> whenNone);
    /* ------------------------------------------------------------ */
 
    //GIVEN

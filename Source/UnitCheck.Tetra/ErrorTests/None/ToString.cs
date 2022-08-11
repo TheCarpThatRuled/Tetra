@@ -11,7 +11,7 @@ namespace Check.ErrorTests;
 public class None_ToString
 {
    /* ------------------------------------------------------------ */
-   // string ToString()
+   // public string ToString()
    /* ------------------------------------------------------------ */
 
    //GIVEN

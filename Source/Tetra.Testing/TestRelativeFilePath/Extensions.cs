@@ -17,7 +17,7 @@ public static class TestRelativeFilePath_Extensions
                                               IEnumerable<DirectoryComponent> parent)
       => TestRelativeFilePath
         .Create(parent.Concat(child.Directories())
-                           .ToArray(),
+                      .Materialise(),
                 child.File());
 
    /* ------------------------------------------------------------ */
@@ -28,7 +28,7 @@ public static class TestRelativeFilePath_Extensions
         .Create(parent.Volume(),
                 parent.Directories()
                       .Concat(child.Directories())
-                      .ToArray(),
+                      .Materialise(),
                 child.File());
 
    /* ------------------------------------------------------------ */
@@ -38,7 +38,7 @@ public static class TestRelativeFilePath_Extensions
       => TestRelativeFilePath
         .Create(parent.Directories()
                       .Concat(child.Directories())
-                      .ToArray(),
+                      .Materialise(),
                 child.File());
 
    /* ------------------------------------------------------------ */
@@ -52,7 +52,7 @@ public static class TestRelativeFilePath_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static IReadOnlyList<TestRelativeDirectoryPath> ToAncestry(this TestRelativeFilePath path)
+   public static ISequence<TestRelativeDirectoryPath> ToAncestry(this TestRelativeFilePath path)
       => path
         .Parent()
         .ToAncestry();

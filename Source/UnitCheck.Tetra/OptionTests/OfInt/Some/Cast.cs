@@ -13,7 +13,7 @@ namespace Check.OptionTests.OfInt;
 public class Some_Cast
 {
    /* ------------------------------------------------------------ */
-   // Option<TNew> Cast<TNew>()
+   // public Option<TNew> Cast<TNew>()
    /* ------------------------------------------------------------ */
 
    //GIVEN
