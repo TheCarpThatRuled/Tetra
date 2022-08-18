@@ -1,34 +1,47 @@
 ﻿namespace Tetra;
 
-public interface IFileSystem
+public sealed class Locked
 {
    /* ------------------------------------------------------------ */
-   // Properties
+   // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public AbsoluteDirectoryPath CurrentDirectory();
 
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
-   public Error Create(AbsoluteDirectoryPath path);
+   /// <summary>
+   /// A message describing the error.
+   /// </summary>
+   public Message Message()
+      => _message;
 
    /* ------------------------------------------------------------ */
 
-   public bool Exists(AbsoluteDirectoryPath path);
+   /// <summary>
+   /// The path of the locked file.
+   /// </summary>
+   public AbsoluteFilePath Path()
+      => _path;
 
    /* ------------------------------------------------------------ */
-
-   public IOpenFileResult<Stream> Open(AbsoluteFilePath path);
-
+   // Internal Constructors
    /* ------------------------------------------------------------ */
 
-   public IOpenFileResult<string> Read(AbsoluteFilePath path);
+   internal Locked(Message          message,
+                   AbsoluteFilePath path)
+   {
+      _message = message;
+      _path    = path;
+   }
 
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
 
-   public Error SetCurrentDirectory(AbsoluteDirectoryPath path);
+   private readonly Message          _message;
+   private readonly AbsoluteFilePath _path;
 
    /* ------------------------------------------------------------ */
 }

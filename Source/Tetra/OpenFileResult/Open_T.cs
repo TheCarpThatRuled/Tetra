@@ -1,34 +1,34 @@
 ﻿namespace Tetra;
 
-public interface IFileSystem
+public sealed class Open<T> : IOpenFileResult<T>.IOpen
 {
    /* ------------------------------------------------------------ */
-   // Properties
+   // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public AbsoluteDirectoryPath CurrentDirectory();
 
    /* ------------------------------------------------------------ */
-   // Methods
+   // IOpenFileResult<T>.IOpen Methods
    /* ------------------------------------------------------------ */
 
-   public Error Create(AbsoluteDirectoryPath path);
+   /// <summary>
+   /// The content of this <c>Open</c>.
+   /// </summary>
+   public T Content()
+      => _content;
 
    /* ------------------------------------------------------------ */
-
-   public bool Exists(AbsoluteDirectoryPath path);
-
+   // Internal Constructors
    /* ------------------------------------------------------------ */
 
-   public IOpenFileResult<Stream> Open(AbsoluteFilePath path);
+   internal Open(T content)
+      => _content = content;
 
    /* ------------------------------------------------------------ */
-
-   public IOpenFileResult<string> Read(AbsoluteFilePath path);
-
+   // Private Fields
    /* ------------------------------------------------------------ */
 
-   public Error SetCurrentDirectory(AbsoluteDirectoryPath path);
+   private readonly T _content;
 
    /* ------------------------------------------------------------ */
 }

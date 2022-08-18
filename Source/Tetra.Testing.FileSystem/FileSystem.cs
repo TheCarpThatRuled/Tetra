@@ -35,6 +35,16 @@ public sealed class FileSystem : IFileSystem
 
    /* ------------------------------------------------------------ */
 
+   public IOpenFileResult<Stream> Open(AbsoluteFilePath path)
+      => throw new NotImplementedException();
+
+   /* ------------------------------------------------------------ */
+
+   public IOpenFileResult<string> Read(AbsoluteFilePath path)
+      => throw new NotImplementedException();
+
+   /* ------------------------------------------------------------ */
+
    public Error SetCurrentDirectory(AbsoluteDirectoryPath path)
       => _setCurrentDirectory(path);
 
