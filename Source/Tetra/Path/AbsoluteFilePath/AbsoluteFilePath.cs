@@ -17,9 +17,9 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteFilePath Create(VolumeComponent                         volume,
+   public static AbsoluteFilePath Create(VolumeComponent               volume,
                                          ISequence<DirectoryComponent> directories,
-                                         FileComponent                           file)
+                                         FileComponent                 file)
       => new(directories,
              file,
              volume);

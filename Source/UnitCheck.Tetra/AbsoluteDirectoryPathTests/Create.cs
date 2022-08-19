@@ -96,7 +96,7 @@ public class Create
       }
       catch (Exception e)
       {
-         exception = e;
+         exception = Option.Some(e);
       }
 
       //Assert

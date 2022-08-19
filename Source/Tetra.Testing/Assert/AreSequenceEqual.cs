@@ -59,14 +59,14 @@ partial class Assert_Extensions
          throw Failed.Assert($"{description} - the actual sequence was null, when we expected it to be non-null");
       }
 
-      var expectedAsString = expected
+      var expectedAsString = expected?
                             .Select(t0ToString)
                             .ToArray();
       var actualAsString = actual
                           .Select(t1ToString)
                           .ToArray();
 
-      if (expected.Length() != actual.Length())
+      if (expected?.Length() != actual.Length())
       {
          throw Failed.Assert($"{description} - The sequences are unequal in length",
                              expectedAsString,

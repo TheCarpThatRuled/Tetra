@@ -9,9 +9,9 @@ partial class Assert_Extensions
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Assert AnArgumentExceptionWasThrown(this Assert       asserts,
-                                                     string            expectedMessage,
-                                                     Option<Exception> actual)
+   public static Assert AnArgumentExceptionWasThrown(this Assert        asserts,
+                                                     string             expectedMessage,
+                                                     IOption<Exception> actual)
       => actual
         .Reduce(() => throw Failed.Assert("No exception was thrown"),
                 exception =>

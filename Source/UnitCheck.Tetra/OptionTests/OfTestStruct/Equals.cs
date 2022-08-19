@@ -27,7 +27,7 @@ public class Equals
    public void
       GIVEN_Option_of_TestStruct_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(Option<TestStruct> option,
+      static Property Property(IOption<TestStruct> option,
                                object? obj)
       {
          //Act
@@ -41,7 +41,7 @@ public class Equals
       Arb.Register<Libraries.OptionOfTestStruct>();
       Arb.Register<ObjIsNullOrANonEquatableType>();
 
-      Prop.ForAll<Option<TestStruct>, object?>(Property)
+      Prop.ForAll<IOption<TestStruct>, object?>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -141,7 +141,7 @@ public class Equals
    {
       Arb.Register<Libraries.OptionOfTestStruct>();
 
-      Prop.ForAll<Option<TestStruct>, Option<TestStruct>>(EqualsIsSymmetric)
+      Prop.ForAll<IOption<TestStruct>, IOption<TestStruct>>(EqualsIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -161,7 +161,7 @@ public class Equals
    {
       Arb.Register<Libraries.TransitiveOptionsOfTestStruct>();
 
-      Prop.ForAll<(Option<TestStruct>, Option<TestStruct>, Option<TestStruct>)>(EqualsIsTransitive<Option<TestStruct>>)
+      Prop.ForAll<(IOption<TestStruct>, IOption<TestStruct>, IOption<TestStruct>)>(EqualsIsTransitive<IOption<TestStruct>>)
           .QuickCheckThrowOnFailure();
    }
 
@@ -181,7 +181,7 @@ public class Equals
    {
       Arb.Register<Library_OptionOfTestStruct_AND_ObjIsAnTestStruct>();
 
-      Prop.ForAll<(Option<TestStruct>, TestStruct, TestStruct)>(EqualsIsTransitive)
+      Prop.ForAll<(IOption<TestStruct>, TestStruct, TestStruct)>(EqualsIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 
@@ -195,7 +195,7 @@ public class Equals
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Option<TestStruct>, TestStruct, TestStruct)> Type()
+      public static Arbitrary<(IOption<TestStruct>, TestStruct, TestStruct)> Type()
          => Generators
            .TransitiveOptionAndT(Generators.TestStruct(),
                                  Generators.TwoUniqueTestStructs())
@@ -205,7 +205,7 @@ public class Equals
    }
 
    /* ------------------------------------------------------------ */
-   // public bool Equals(Option<T>? other)
+   // public bool Equals(IOption<T>? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -219,7 +219,7 @@ public class Equals
    public void
       GIVEN_Option_of_TestStruct_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_Option_of_TestStruct_THEN_false_is_returned()
    {
-      static Property Property(Option<TestStruct> value)
+      static Property Property(IOption<TestStruct> value)
       {
          //act
          var actual = value.Equals(null);
@@ -231,7 +231,7 @@ public class Equals
 
       Arb.Register<Libraries.OptionOfTestStruct>();
 
-      Prop.ForAll<Option<TestStruct>>(Property)
+      Prop.ForAll<IOption<TestStruct>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -304,7 +304,7 @@ public class Equals
    {
       Arb.Register<Libraries.OptionOfTestStruct>();
 
-      Prop.ForAll<Option<TestStruct>, Option<TestStruct>>(IEquatableIsSymmetric)
+      Prop.ForAll<IOption<TestStruct>, IOption<TestStruct>>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -322,7 +322,7 @@ public class Equals
    {
       Arb.Register<Libraries.TransitiveOptionsOfTestStruct>();
 
-      Prop.ForAll<(Option<TestStruct>, Option<TestStruct>, Option<TestStruct>)>(IEquatableIsTransitive<Option<TestStruct>>)
+      Prop.ForAll<(IOption<TestStruct>, IOption<TestStruct>, IOption<TestStruct>)>(IEquatableIsTransitive<IOption<TestStruct>>)
           .QuickCheckThrowOnFailure();
    }
 
@@ -373,7 +373,7 @@ public class Equals
    {
       Arb.Register<Library_OptionOfTestStruct_AND_ObjIsAnTestStruct>();
 
-      Prop.ForAll<(Option<TestStruct>, TestStruct, TestStruct)>(IEquatableIsTransitive)
+      Prop.ForAll<(IOption<TestStruct>, TestStruct, TestStruct)>(IEquatableIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 

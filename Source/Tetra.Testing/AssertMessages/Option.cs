@@ -7,35 +7,35 @@ public static partial class AssertMessages
    /* ------------------------------------------------------------ */
 
    public static string TheOptionIsANone<T>()
-      => TheOption<T>()
+      => TheIOption<T>()
        + IsANoneWhenWeExpectedItToBeASome;
 
    /* ------------------------------------------------------------ */
 
    public static string TheOptionIsANone<T>(string description)
-      => $"{description}: {TheOption<T>()}{IsANoneWhenWeExpectedItToBeASome}";
+      => $"{description}: {TheIOption<T>()}{IsANoneWhenWeExpectedItToBeASome}";
 
    /* ------------------------------------------------------------ */
 
    public static string TheOptionIsASomeButDoesNotContainTheExpectedContent<T>()
-      => TheOption<T>()
+      => TheIOption<T>()
        + IsASomeButDoesNotContainTheExpectedContent;
 
    /* ------------------------------------------------------------ */
 
    public static string TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(string description)
-      => $"{description}: {TheOption<T>()}{IsASomeButDoesNotContainTheExpectedContent}";
+      => $"{description}: {TheIOption<T>()}{IsASomeButDoesNotContainTheExpectedContent}";
 
    /* ------------------------------------------------------------ */
 
    public static string TheOptionIsASome<T>()
-      => TheOption<T>()
+      => TheIOption<T>()
        + IsASomeWhenWeExpectedItToBeANone;
 
    /* ------------------------------------------------------------ */
 
    public static string TheOptionIsASome<T>(string description)
-      => $"{description}: {TheOption<T>()}{IsASomeWhenWeExpectedItToBeANone}";
+      => $"{description}: {TheIOption<T>()}{IsASomeWhenWeExpectedItToBeANone}";
 
    /* ------------------------------------------------------------ */
    // Private Constants
@@ -49,8 +49,8 @@ public static partial class AssertMessages
    // Private Functions
    /* ------------------------------------------------------------ */
 
-   private static string TheOption<T>()
-      => $@"The Option<{typeof(T).Name}> ";
+   private static string TheIOption<T>()
+      => $@"The IOption<{typeof(T).Name}> ";
 
    /* ------------------------------------------------------------ */
 }

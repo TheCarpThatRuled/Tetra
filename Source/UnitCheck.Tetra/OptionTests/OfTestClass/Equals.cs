@@ -27,7 +27,7 @@ public class Equals
    public void
       GIVEN_Option_of_TestClass_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(Option<TestClass> option,
+      static Property Property(IOption<TestClass> option,
                                object? obj)
       {
          //Act
@@ -41,7 +41,7 @@ public class Equals
       Arb.Register<Libraries.OptionOfTestClass>();
       Arb.Register<ObjIsNullOrANonEquatableType>();
 
-      Prop.ForAll<Option<TestClass>, object?>(Property)
+      Prop.ForAll<IOption<TestClass>, object?>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -141,7 +141,7 @@ public class Equals
    {
       Arb.Register<Libraries.OptionOfTestClass>();
 
-      Prop.ForAll<Option<TestClass>, Option<TestClass>>(EqualsIsSymmetric)
+      Prop.ForAll<IOption<TestClass>, IOption<TestClass>>(EqualsIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -161,7 +161,7 @@ public class Equals
    {
       Arb.Register<Libraries.TransitiveOptionsOfTestClass>();
 
-      Prop.ForAll<(Option<TestClass>, Option<TestClass>, Option<TestClass>)>(EqualsIsTransitive<Option<TestClass>>)
+      Prop.ForAll<(IOption<TestClass>, IOption<TestClass>, IOption<TestClass>)>(EqualsIsTransitive<IOption<TestClass>>)
           .QuickCheckThrowOnFailure();
    }
 
@@ -181,7 +181,7 @@ public class Equals
    {
       Arb.Register<Library_OptionOfTestClass_AND_ObjIsATestClass>();
 
-      Prop.ForAll<(Option<TestClass>, TestClass, TestClass)>(EqualsIsTransitive)
+      Prop.ForAll<(IOption<TestClass>, TestClass, TestClass)>(EqualsIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 
@@ -195,7 +195,7 @@ public class Equals
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Option<TestClass>, TestClass, TestClass)> Type()
+      public static Arbitrary<(IOption<TestClass>, TestClass, TestClass)> Type()
          => Generators
            .TransitiveOptionAndT(Generators.TestClass(),
                                  Generators.TwoUniqueTestClasses())
@@ -205,7 +205,7 @@ public class Equals
    }
 
    /* ------------------------------------------------------------ */
-   // public bool Equals(Option<T>? other)
+   // public bool Equals(IOption<T>? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -219,10 +219,10 @@ public class Equals
    public void
       GIVEN_Option_of_TestClass_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_Option_of_TestClass_THEN_false_is_returned()
    {
-      static Property Property(Option<TestClass> value)
+      static Property Property(IOption<TestClass> value)
       {
          //act
-         var actual = value.Equals(null);
+         var actual = value.Equals(default(IOption<TestClass>));
 
          //Assert
          return IsFalse(AssertMessages.ReturnValue,
@@ -231,7 +231,7 @@ public class Equals
 
       Arb.Register<Libraries.OptionOfTestClass>();
 
-      Prop.ForAll<Option<TestClass>>(Property)
+      Prop.ForAll<IOption<TestClass>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -304,7 +304,7 @@ public class Equals
    {
       Arb.Register<Libraries.OptionOfTestClass>();
 
-      Prop.ForAll<Option<TestClass>, Option<TestClass>>(IEquatableIsSymmetric)
+      Prop.ForAll<IOption<TestClass>, IOption<TestClass>>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -322,7 +322,7 @@ public class Equals
    {
       Arb.Register<Libraries.TransitiveOptionsOfTestStruct>();
 
-      Prop.ForAll<(Option<TestClass>, Option<TestClass>, Option<TestClass>)>(IEquatableIsTransitive<Option<TestClass>>)
+      Prop.ForAll<(IOption<TestClass>, IOption<TestClass>, IOption<TestClass>)>(IEquatableIsTransitive<IOption<TestClass>>)
           .QuickCheckThrowOnFailure();
    }
 
@@ -373,7 +373,7 @@ public class Equals
    {
       Arb.Register<Library_OptionOfTestClass_AND_ObjIsATestClass>();
 
-      Prop.ForAll<(Option<TestClass>, TestClass, TestClass)>(IEquatableIsTransitive)
+      Prop.ForAll<(IOption<TestClass>, TestClass, TestClass)>(IEquatableIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 

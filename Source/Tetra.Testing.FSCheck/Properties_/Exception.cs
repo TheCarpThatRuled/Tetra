@@ -23,7 +23,7 @@ partial class Properties
       }
       catch (Exception e)
       {
-         exception = e;
+         exception = Option.Some(e);
       }
 
       //Assert
@@ -36,7 +36,7 @@ partial class Properties
    /* ------------------------------------------------------------ */
 
    public static Property AnArgumentExceptionWasThrown(string            expectedMessage,
-                                                       Option<Exception> actual)
+                                                       IOption<Exception> actual)
       => actual
         .Reduce(() => False("No exception was thrown"),
                 exception => AsProperty(() => exception is ArgumentException)

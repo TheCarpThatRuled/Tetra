@@ -170,7 +170,7 @@ public class None_Map
       GIVEN_None_of_int_AND_whenSome_returns_a_none_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_Option_of_int_THEN_whenSome_was_not_invoked_AND_a_none_is_returned()
    {
       //Arrange
-      var whenSome = FakeFunction<int, Option<int>>.Create(Option.None());
+      var whenSome = FakeFunction<int, IOption<int>>.Create(Option<int>.None());
 
       var option = Option<int>.None();
 
@@ -199,7 +199,7 @@ public class None_Map
       GIVEN_None_of_int_AND_whenSome_returns_a_none_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_Option_of_TestClass_THEN_whenSome_was_not_invoked_AND_a_none_is_returned()
    {
       //Arrange
-      var whenSome = FakeFunction<int, Option<TestClass>>.Create(Option.None());
+      var whenSome = FakeFunction<int, IOption<TestClass>>.Create(Option<TestClass>.None());
 
       var option = Option<int>.None();
 
@@ -228,7 +228,7 @@ public class None_Map
       GIVEN_None_of_int_AND_whenSome_returns_a_none_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_Option_of_TestStruct_THEN_whenSome_was_not_invoked_AND_a_none_is_returned()
    {
       //Arrange
-      var whenSome = FakeFunction<int, Option<TestStruct>>.Create(Option.None());
+      var whenSome = FakeFunction<int, IOption<TestStruct>>.Create(Option<TestStruct>.None());
 
       var option = Option<int>.None();
 
@@ -257,7 +257,7 @@ public class None_Map
       GIVEN_None_of_int_AND_whenSome_returns_a_none_WHEN_Map_AND_whenSome_is_a_Func_of_int_to_Option_of_uint_THEN_whenSome_was_not_invoked_AND_a_none_is_returned()
    {
       //Arrange
-      var whenSome = FakeFunction<int, Option<uint>>.Create(Option.None());
+      var whenSome = FakeFunction<int, IOption<uint>>.Create(Option<uint>.None());
 
       var option = Option<int>.None();
 
@@ -288,7 +288,7 @@ public class None_Map
       static Property Property(int value)
       {
          //Arrange
-         var whenSome = FakeFunction<int, Option<int>>.Create(value);
+         var whenSome = FakeFunction<int, IOption<int>>.Create(Option.Some(value));
 
          var option = Option<int>.None();
 
@@ -322,7 +322,7 @@ public class None_Map
       static Property Property(TestClass value)
       {
          //Arrange
-         var whenSome = FakeFunction<int, Option<TestClass>>.Create(value);
+         var whenSome = FakeFunction<int, IOption<TestClass>>.Create(Option.Some(value));
 
          var option = Option<int>.None();
 
@@ -358,7 +358,7 @@ public class None_Map
       static Property Property(TestStruct value)
       {
          //Arrange
-         var whenSome = FakeFunction<int, Option<TestStruct>>.Create(value);
+         var whenSome = FakeFunction<int, IOption<TestStruct>>.Create(Option.Some(value));
 
          var option = Option<int>.None();
 
@@ -395,7 +395,7 @@ public class None_Map
       static Property Property(uint value)
       {
          //Arrange
-         var whenSome = FakeFunction<int, Option<uint>>.Create(value);
+         var whenSome = FakeFunction<int, IOption<uint>>.Create(Option.Some(value));
 
          var option = Option<int>.None();
 

@@ -14,7 +14,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Option<int>> Type()
+      public static Arbitrary<IOption<int>> Type()
          => Generators
            .Option(Generators.Int32())
            .ToArbitrary();
@@ -32,7 +32,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Option<int>> Type()
+      public static Arbitrary<IOption<int>> Type()
          => Generators
            .SomeOption(Generators.Int32())
            .ToArbitrary();
@@ -50,7 +50,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Option<int>, Option<int>, Option<int>)> Type()
+      public static Arbitrary<(IOption<int>, IOption<int>, IOption<int>)> Type()
          => Generators
            .Transitive(Generators.TwoUniqueOptions(Generators.Int32()))
            .ToArbitrary();

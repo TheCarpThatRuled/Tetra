@@ -80,9 +80,9 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
 
    /* ------------------------------------------------------------ */
 
-   public Option<RelativeDirectoryPath> Parent()
+   public IOption<RelativeDirectoryPath> Parent()
       => _directories.Any()
-            ? RelativeDirectoryPath.Create(_directories)
+            ? Option.Some(RelativeDirectoryPath.Create(_directories))
             : Option<RelativeDirectoryPath>.None();
 
    /* ------------------------------------------------------------ */

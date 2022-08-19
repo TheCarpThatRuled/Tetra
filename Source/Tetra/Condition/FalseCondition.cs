@@ -1,8 +1,8 @@
 ﻿namespace Tetra;
 
-public abstract partial class Condition
+partial class Condition
 {
-   private sealed class FalseCondition : Condition
+   private sealed class FalseCondition : ICondition
    {
       /* ------------------------------------------------------------ */
       // object Overridden Methods
@@ -30,48 +30,48 @@ public abstract partial class Condition
          => "False";
 
       /* ------------------------------------------------------------ */
-      // Condition Overridden Methods
+      // ICondition Methods
       /* ------------------------------------------------------------ */
 
-      public override bool Reduce()
+      public bool Reduce()
          => false;
 
       /* ------------------------------------------------------------ */
 
-      public override T Reduce<T>(T whenFalse,
-                                  T whenTrue)
+      public T Reduce<T>(T whenFalse,
+                         T whenTrue)
          => whenFalse;
 
       /* ------------------------------------------------------------ */
 
-      public override T Reduce<T>(T whenFalse,
-                                  Func<T> whenTrue)
+      public T Reduce<T>(T whenFalse,
+                         Func<T> whenTrue)
          => whenFalse;
 
       /* ------------------------------------------------------------ */
 
-      public override T Reduce<T>(Func<T> whenFalse,
-                                  T whenTrue)
+      public T Reduce<T>(Func<T> whenFalse,
+                         T whenTrue)
          => whenFalse();
 
       /* ------------------------------------------------------------ */
 
-      public override T Reduce<T>(Func<T> whenFalse,
-                                  Func<T> whenTrue)
+      public T Reduce<T>(Func<T> whenFalse,
+                         Func<T> whenTrue)
          => whenFalse();
 
       /* ------------------------------------------------------------ */
-      // IEquatable<Condition> Methods
+      // IEquatable<ICondition> Methods
       /* ------------------------------------------------------------ */
 
-      public override bool Equals(Condition? other)
+      public bool Equals(ICondition? other)
          => other is FalseCondition;
 
       /* ------------------------------------------------------------ */
       // IEquatable<bool> Methods
       /* ------------------------------------------------------------ */
 
-      public override bool Equals(bool other)
+      public bool Equals(bool other)
          => !other;
 
       /* ------------------------------------------------------------ */

@@ -27,7 +27,7 @@ public class Equals
    public void
       GIVEN_Option_of_int_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(Option<int> option,
+      static Property Property(IOption<int> option,
                                object? obj)
       {
          //Act
@@ -41,7 +41,7 @@ public class Equals
       Arb.Register<Libraries.OptionOfInt32>();
       Arb.Register<ObjIsNullOrANonEquatableType>();
 
-      Prop.ForAll<Option<int>, object?>(Property)
+      Prop.ForAll<IOption<int>, object?>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -139,7 +139,7 @@ public class Equals
    {
       Arb.Register<Libraries.OptionOfInt32>();
 
-      Prop.ForAll<Option<int>, Option<int>>(EqualsIsSymmetric)
+      Prop.ForAll<IOption<int>, IOption<int>>(EqualsIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -159,7 +159,7 @@ public class Equals
    {
       Arb.Register<Libraries.TransitiveOptionsOfInt32>();
 
-      Prop.ForAll<(Option<int>, Option<int>, Option<int>)>(EqualsIsTransitive<Option<int>>)
+      Prop.ForAll<(IOption<int>, IOption<int>, IOption<int>)>(EqualsIsTransitive<IOption<int>>)
           .QuickCheckThrowOnFailure();
    }
 
@@ -179,7 +179,7 @@ public class Equals
    {
       Arb.Register<Library_OptionOfInt_AND_ObjIsAnInt>();
 
-      Prop.ForAll<(Option<int>, int, int)>(EqualsIsTransitive)
+      Prop.ForAll<(IOption<int>, int, int)>(EqualsIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 
@@ -193,7 +193,7 @@ public class Equals
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Option<int>, int, int)> Type()
+      public static Arbitrary<(IOption<int>, int, int)> Type()
          => Generators
            .TransitiveOptionAndT(Generators.Int32(),
                                  Generators.TwoUniqueInt32s())
@@ -203,7 +203,7 @@ public class Equals
    }
 
    /* ------------------------------------------------------------ */
-   // public bool Equals(Option<T>? other)
+   // public bool Equals(IOption<T>? other)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -217,7 +217,7 @@ public class Equals
    public void
       GIVEN_Option_of_int_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_Option_of_int_THEN_false_is_returned()
    {
-      static Property Property(Option<int> value)
+      static Property Property(IOption<int> value)
       {
          //act
          var actual = value.Equals(null);
@@ -229,7 +229,7 @@ public class Equals
 
       Arb.Register<Libraries.OptionOfInt32>();
 
-      Prop.ForAll<Option<int>>(Property)
+      Prop.ForAll<IOption<int>>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -300,7 +300,7 @@ public class Equals
    {
       Arb.Register<Libraries.OptionOfInt32>();
 
-      Prop.ForAll<Option<int>, Option<int>>(IEquatableIsSymmetric)
+      Prop.ForAll<IOption<int>, IOption<int>>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -318,7 +318,7 @@ public class Equals
    {
       Arb.Register<Libraries.TransitiveOptionsOfInt32>();
 
-      Prop.ForAll<(Option<int>, Option<int>, Option<int>)>(IEquatableIsTransitive<Option<int>>)
+      Prop.ForAll<(IOption<int>, IOption<int>, IOption<int>)>(IEquatableIsTransitive<IOption<int>>)
           .QuickCheckThrowOnFailure();
    }
 
@@ -367,7 +367,7 @@ public class Equals
    {
       Arb.Register<Library_OptionOfInt_AND_ObjIsAnInt>();
 
-      Prop.ForAll<(Option<int>, int, int)>(IEquatableIsTransitive)
+      Prop.ForAll<(IOption<int>, int, int)>(IEquatableIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 

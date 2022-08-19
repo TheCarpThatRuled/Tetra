@@ -130,7 +130,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
 
    /* ------------------------------------------------------------ */
 
-   public Option<AbsoluteDirectoryPath> Parent()
+   public IOption<AbsoluteDirectoryPath> Parent()
       => _directories.Any()
             ? Option.Some(Create(_volume,
                                  _directories.SkipLast(1)

@@ -185,7 +185,7 @@ public class Some_Map
       static Property Property(int value)
       {
          //Arrange
-         var whenSome = FakeFunction<int, Option<int>>.Create(Option.None());
+         var whenSome = FakeFunction<int, IOption<int>>.Create(Option<int>.None());
 
          var option = Option.Some(value);
 
@@ -220,7 +220,7 @@ public class Some_Map
       static Property Property(int value)
       {
          //Arrange
-         var whenSome = FakeFunction<int, Option<TestClass>>.Create(Option.None());
+         var whenSome = FakeFunction<int, IOption<TestClass>>.Create(Option<TestClass>.None());
 
          var option = Option.Some(value);
 
@@ -255,7 +255,7 @@ public class Some_Map
       static Property Property(int value)
       {
          //Arrange
-         var whenSome = FakeFunction<int, Option<TestStruct>>.Create(Option.None());
+         var whenSome = FakeFunction<int, IOption<TestStruct>>.Create(Option<TestStruct>.None());
 
          var option = Option.Some(value);
 
@@ -290,7 +290,7 @@ public class Some_Map
       static Property Property(int value)
       {
          //Arrange
-         var whenSome = FakeFunction<int, Option<uint>>.Create(Option.None());
+         var whenSome = FakeFunction<int, IOption<uint>>.Create(Option<uint>.None());
 
          var option = Option.Some(value);
 
@@ -325,7 +325,7 @@ public class Some_Map
       static Property Property((int value, int newValue) args)
       {
          //Arrange
-         var whenSome = FakeFunction<int, Option<int>>.Create(args.newValue);
+         var whenSome = FakeFunction<int, IOption<int>>.Create(Option.Some(args.newValue));
 
          var option = Option.Some(args.value);
 
@@ -364,7 +364,7 @@ public class Some_Map
                                TestClass newValue)
       {
          //Arrange
-         var whenSome = FakeFunction<int, Option<TestClass>>.Create(newValue);
+         var whenSome = FakeFunction<int, IOption<TestClass>>.Create(Option.Some(newValue));
 
          var option = Option.Some(value);
 
@@ -403,7 +403,7 @@ public class Some_Map
                                TestStruct newValue)
       {
          //Arrange
-         var whenSome = FakeFunction<int, Option<TestStruct>>.Create(newValue);
+         var whenSome = FakeFunction<int, IOption<TestStruct>>.Create(Option.Some(newValue));
 
          var option = Option.Some(value);
 
@@ -442,7 +442,7 @@ public class Some_Map
                                uint newValue)
       {
          //Arrange
-         var whenSome = FakeFunction<int, Option<uint>>.Create(newValue);
+         var whenSome = FakeFunction<int, IOption<uint>>.Create(Option.Some(newValue));
 
          var option = Option.Some(value);
 

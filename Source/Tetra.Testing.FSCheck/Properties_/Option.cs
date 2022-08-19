@@ -10,14 +10,14 @@ partial class Properties
    /* ------------------------------------------------------------ */
 
    public static Property IsANone<T>(string    description,
-                                     Option<T> option)
+                                     IOption<T> option)
       => AsProperty(option.IsANone)
         .Label(TheOptionIsASome<T>(description));
 
    /* ------------------------------------------------------------ */
 
    public static Property IsASome<T>(string    description,
-                                     Option<T> option)
+                                     IOption<T> option)
       => AsProperty(option.IsASome)
         .Label(TheOptionIsANone<T>(description));
 
@@ -25,7 +25,7 @@ partial class Properties
 
    public static Property IsASome<T>(string    description,
                                      T         expected,
-                                     Option<T> option)
+                                     IOption<T> option)
       => option
         .Reduce(() => False(TheOptionIsANone<T>(description)),
                 some => AreEqual(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(description),
@@ -36,7 +36,7 @@ partial class Properties
 
    public static Property IsASomeAnd<T>(string                    description,
                                         Func<string, T, Property> property,
-                                        Option<T>                 option)
+                                        IOption<T>                 option)
       => option
         .Reduce(() => False(TheOptionIsANone<T>(description)),
                 actual => property(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(description),

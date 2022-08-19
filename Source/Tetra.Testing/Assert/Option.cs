@@ -12,7 +12,7 @@ partial class Assert_Extensions
 
    public static Assert IsANone<T>(this Assert assert,
                                    string      description,
-                                   Option<T>   option)
+                                   IOption<T>   option)
    {
       if (option.IsASome())
       {
@@ -26,7 +26,7 @@ partial class Assert_Extensions
 
    public static Assert IsASome<T>(this Assert assert,
                                    string      description,
-                                   Option<T>   option)
+                                   IOption<T>   option)
    {
       if (option.IsANone())
       {
@@ -41,7 +41,7 @@ partial class Assert_Extensions
    public static Assert IsASome<T>(this Assert assert,
                                    string      description,
                                    T           expected,
-                                   Option<T>   option)
+                                   IOption<T>   option)
    {
       if (option.Reduce(true,
                         actual =>
@@ -64,7 +64,7 @@ partial class Assert_Extensions
    public static Assert IsASomeAnd<T>(this Assert   assert,
                                       string        description,
                                       Func<T, bool> property,
-                                      Option<T>     option)
+                                      IOption<T>     option)
    {
       if (option.Reduce(Function.True,
                         actual =>

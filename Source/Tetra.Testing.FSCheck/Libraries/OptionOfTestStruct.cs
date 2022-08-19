@@ -14,7 +14,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Option<Testing.TestStruct>> Type()
+      public static Arbitrary<IOption<Testing.TestStruct>> Type()
          => Generators
            .Option(Generators.TestStruct())
            .ToArbitrary();
@@ -32,7 +32,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Option<Testing.TestStruct>> Type()
+      public static Arbitrary<IOption<Testing.TestStruct>> Type()
          => Generators
            .SomeOption(Generators.TestStruct())
            .ToArbitrary();
@@ -50,7 +50,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Option<Testing.TestStruct>, Option<Testing.TestStruct>, Option<Testing.TestStruct>)> Type()
+      public static Arbitrary<(IOption<Testing.TestStruct>, IOption<Testing.TestStruct>, IOption<Testing.TestStruct>)> Type()
          => Generators
            .Transitive(Generators.TwoUniqueOptions(Generators.TestStruct()))
            .ToArbitrary();

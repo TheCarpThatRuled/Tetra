@@ -118,7 +118,7 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
 
    /* ------------------------------------------------------------ */
 
-   public Option<RelativeDirectoryPath> Parent()
+   public IOption<RelativeDirectoryPath> Parent()
       => _directories.Length() > 1
             ? Option.Some(Create(_directories
                                 .SkipLast(1)
