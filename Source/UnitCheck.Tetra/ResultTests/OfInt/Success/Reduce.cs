@@ -71,7 +71,7 @@ public class Success_Reduce
                                Message whenSuccess)
       {
          //Arrange
-         var whenSuccessFunc = FakeFunction<Success<int>, Message>.Create(whenSuccess);
+         var whenSuccessFunc = FakeFunction<ISuccess<int>, Message>.Create(whenSuccess);
 
          var result = Result.Success(content);
 
@@ -113,7 +113,7 @@ public class Success_Reduce
       {
          //Arrange
          var whenFailure = FakeFunction<Failure, int>.Create(args.whenFailure);
-         var whenSuccess = FakeFunction<Success<int>, int>.Create(args.whenSuccess);
+         var whenSuccess = FakeFunction<ISuccess<int>, int>.Create(args.whenSuccess);
 
          var result = Result.Success(args.value);
 
@@ -156,7 +156,7 @@ public class Success_Reduce
       {
          //Arrange
          var whenFailure = FakeFunction<Failure, TestClass>.Create(args.whenFailure);
-         var whenSuccess = FakeFunction<Success<int>, TestClass>.Create(args.whenSuccess);
+         var whenSuccess = FakeFunction<ISuccess<int>, TestClass>.Create(args.whenSuccess);
 
          var result = Result.Success(value);
 
@@ -199,7 +199,7 @@ public class Success_Reduce
       {
          //Arrange
          var whenFailure = FakeFunction<Failure, TestStruct>.Create(args.whenFailure);
-         var whenSuccess = FakeFunction<Success<int>, TestStruct>.Create(args.whenSuccess);
+         var whenSuccess = FakeFunction<ISuccess<int>, TestStruct>.Create(args.whenSuccess);
 
          var result = Result.Success(value);
 

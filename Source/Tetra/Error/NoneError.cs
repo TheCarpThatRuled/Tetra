@@ -51,13 +51,15 @@ partial class Error
 
       /* ------------------------------------------------------------ */
 
-      public override Result<T> MapToResult<T>(T whenNone)
-         => whenNone;
+      public override IResult<T> MapToResult<T>(T whenNone)
+         => Result<T>
+           .Success(whenNone);
 
       /* ------------------------------------------------------------ */
 
-      public override Result<T> MapToResult<T>(Func<T> whenNone)
-         => whenNone();
+      public override IResult<T> MapToResult<T>(Func<T> whenNone)
+         => Result<T>
+           .Success(whenNone());
 
       /* ------------------------------------------------------------ */
 

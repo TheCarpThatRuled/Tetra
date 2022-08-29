@@ -72,7 +72,7 @@ public class Failure_Reduce
       static Property Property((Message content, Message whenSuccess) args)
       {
          //Arrange
-         var whenSuccess = FakeFunction<Success<TestClass>, Message>.Create(args.whenSuccess);
+         var whenSuccess = FakeFunction<ISuccess<TestClass>, Message>.Create(args.whenSuccess);
 
          var result = Result<TestClass>.Failure(args.content);
 
@@ -114,7 +114,7 @@ public class Failure_Reduce
       {
          //Arrange
          var whenFailure = FakeFunction<Failure, int>.Create(args.whenFailure);
-         var whenSuccess = FakeFunction<Success<TestClass>, int>.Create(args.whenSuccess);
+         var whenSuccess = FakeFunction<ISuccess<TestClass>, int>.Create(args.whenSuccess);
 
          var result = Result<TestClass>.Failure(content);
 
@@ -158,7 +158,7 @@ public class Failure_Reduce
       {
          //Arrange
          var whenFailure = FakeFunction<Failure, TestClass>.Create(args.whenFailure);
-         var whenSuccess = FakeFunction<Success<TestClass>, TestClass>.Create(args.whenSuccess);
+         var whenSuccess = FakeFunction<ISuccess<TestClass>, TestClass>.Create(args.whenSuccess);
 
          var result = Result<TestClass>.Failure(content);
 
@@ -202,7 +202,7 @@ public class Failure_Reduce
       {
          //Arrange
          var whenFailure = FakeFunction<Failure, TestStruct>.Create(args.whenFailure);
-         var whenSuccess = FakeFunction<Success<TestClass>, TestStruct>.Create(args.whenSuccess);
+         var whenSuccess = FakeFunction<ISuccess<TestClass>, TestStruct>.Create(args.whenSuccess);
 
          var result = Result<TestClass>.Failure(content);
 

@@ -16,7 +16,7 @@ public interface IOpenFileResult<out T>
 
    /* ------------------------------------------------------------ */
 
-   IOpenFileResult<TNew> Map<TNew>(Func<IOpen, Result<TNew>> whenOpen);
+   IOpenFileResult<TNew> Map<TNew>(Func<IOpen, IResult<TNew>> whenOpen);
 
    /* ------------------------------------------------------------ */
 

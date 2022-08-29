@@ -14,7 +14,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Result<int>> Type()
+      public static Arbitrary<IResult<int>> Type()
          => Generators
            .FailureResult<int>()
            .ToArbitrary();
@@ -32,7 +32,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Result<int>> Type()
+      public static Arbitrary<IResult<int>> Type()
          => Generators
            .Result(Generators.Int32())
            .ToArbitrary();
@@ -50,7 +50,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Result<int>> Type()
+      public static Arbitrary<IResult<int>> Type()
          => Generators
            .SuccessResult(Generators.Int32())
            .ToArbitrary();
@@ -68,7 +68,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Result<int>, Result<int>, Result<int>)> Type()
+      public static Arbitrary<(IResult<int>, IResult<int>, IResult<int>)> Type()
          => Generators
            .Transitive(Generators.TwoUniqueResults(Generators.Int32()))
            .ToArbitrary();

@@ -73,7 +73,7 @@ public class Success_Map
                                int       whenSuccess)
       {
          //Arrange
-         var whenSuccessFunc = FakeFunction<Success<TestClass>, int>.Create(whenSuccess);
+         var whenSuccessFunc = FakeFunction<ISuccess<TestClass>, int>.Create(whenSuccess);
 
          var result = Result.Success(content);
 
@@ -111,7 +111,7 @@ public class Success_Map
       static Property Property((TestClass content, TestClass whenSuccess) args)
       {
          //Arrange
-         var whenSuccess = FakeFunction<Success<TestClass>, TestClass>.Create(args.whenSuccess);
+         var whenSuccess = FakeFunction<ISuccess<TestClass>, TestClass>.Create(args.whenSuccess);
 
          var result = Result.Success(args.content);
 
@@ -150,7 +150,7 @@ public class Success_Map
                                TestStruct whenSuccess)
       {
          //Arrange
-         var whenSuccessFunc = FakeFunction<Success<TestClass>, TestStruct>.Create(whenSuccess);
+         var whenSuccessFunc = FakeFunction<ISuccess<TestClass>, TestStruct>.Create(whenSuccess);
 
          var result = Result.Success(content);
 

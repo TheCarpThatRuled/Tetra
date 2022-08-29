@@ -20,8 +20,10 @@ partial class Option<T>
                             obj)
          || obj switch
             {
-               SomeOption some => Equals(some._content),
-               T content       => Equals(content),
+               SomeOption some => Equals(_content,
+                                         some._content),
+               T content       => Equals(_content,
+                                         content),
                _               => false,
             };
 
@@ -36,24 +38,6 @@ partial class Option<T>
 
       public override string ToString()
          => $"Some ({_content})";
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<Option<T>> Methods
-      /* ------------------------------------------------------------ */
-
-      public bool Equals(IOption<T>? other)
-         => ReferenceEquals(this,
-                            other)
-         || other is SomeOption some
-         && Equals(some._content);
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<T> Methods
-      /* ------------------------------------------------------------ */
-
-      public bool Equals(T? other)
-         => Equals(_content,
-                   other);
 
       /* ------------------------------------------------------------ */
       // IOption Methods
@@ -77,7 +61,8 @@ partial class Option<T>
       /* ------------------------------------------------------------ */
 
       public IOption<TNew> Map<TNew>(Func<T, TNew> whenSome)
-         => new Option<TNew>.SomeOption(whenSome(_content));
+         => new Option<TNew>
+            .SomeOption(whenSome(_content));
 
       /* ------------------------------------------------------------ */
 
@@ -86,23 +71,15 @@ partial class Option<T>
 
       /* ------------------------------------------------------------ */
 
-      public Result<T> MapToResult(Message _)
-         => _content;
+      public IResult<T> MapToResult(Message _)
+         => Result<T>
+           .Success(_content);
 
       /* ------------------------------------------------------------ */
 
-      public Result<T> MapToResult(Func<Message> _)
-         => _content;
-
-      /* ------------------------------------------------------------ */
-
-      public T Reduce(T _)
-         => _content;
-
-      /* ------------------------------------------------------------ */
-
-      public T Reduce(Func<T> _)
-         => _content;
+      public IResult<T> MapToResult(Func<Message> _)
+         => Result<T>
+           .Success(_content);
 
       /* ------------------------------------------------------------ */
 

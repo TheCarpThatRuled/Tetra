@@ -12,7 +12,7 @@ partial class Assert_Extensions
 
    public static Assert IsAFailure<T>(this Assert assert,
                                       string      description,
-                                      Result<T>   result)
+                                      IResult<T>   result)
    {
       if (result.IsASuccess())
       {
@@ -27,7 +27,7 @@ partial class Assert_Extensions
    public static Assert IsAFailure<T>(this Assert assert,
                                       string      description,
                                       Message     expected,
-                                      Result<T>   result)
+                                      IResult<T>   result)
    {
       if (result.Reduce(actual =>
                         {
@@ -50,7 +50,7 @@ partial class Assert_Extensions
    public static Assert IsAFailureAnd<T>(this Assert         assert,
                                          string              description,
                                          Func<Failure, bool> property,
-                                         Result<T>           result)
+                                         IResult<T>           result)
    {
       if (result.Reduce(actual =>
                         {
@@ -74,7 +74,7 @@ partial class Assert_Extensions
 
    public static Assert IsASuccess<T>(this Assert assert,
                                       string      description,
-                                      Result<T>   result)
+                                      IResult<T>   result)
    {
       if (result.IsAFailure())
       {
@@ -89,7 +89,7 @@ partial class Assert_Extensions
    public static Assert IsASuccess<T>(this Assert assert,
                                       string      description,
                                       T           expected,
-                                      Result<T>   result)
+                                      IResult<T>   result)
    {
       if (result.Reduce(Function.True,
                         actual =>
@@ -109,10 +109,10 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert IsASuccessAnd<T>(this Assert            assert,
-                                         string                 description,
-                                         Func<Success<T>, bool> property,
-                                         Result<T>              result)
+   public static Assert IsASuccessAnd<T>(this Assert             assert,
+                                         string                  description,
+                                         Func<ISuccess<T>, bool> property,
+                                         IResult<T>              result)
    {
       if (result.Reduce(Function.True,
                         actual =>

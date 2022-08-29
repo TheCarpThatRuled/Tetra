@@ -31,7 +31,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
 
    /* ------------------------------------------------------------ */
 
-   public static Result<AbsoluteDirectoryPath> Parse(string potentialPath)
+   public static IResult<AbsoluteDirectoryPath> Parse(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
         .Map(Create);
@@ -155,13 +155,14 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories)> ParseComponents(string potentialPath,
+   protected static IResult<(VolumeComponent volume, ISequence<DirectoryComponent> directories)> ParseComponents(string potentialPath,
                                                                                                                 string pathType)
    {
       if (string.IsNullOrEmpty(potentialPath))
       {
-         return Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(potentialPath,
-                                                                            pathType));
+         return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories)>
+           .Failure(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(potentialPath,
+                                                                                pathType)));
       }
 
       var components = potentialPath
@@ -173,8 +174,9 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
 
       if (potentialVolume.IsNotAValidVolumeLabel())
       {
-         return Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(potentialPath,
-                                                                                        pathType));
+         return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories)>
+           .Failure(Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(potentialPath,
+                                                                                            pathType)));
       }
 
       var directoryComponents = components
@@ -184,13 +186,15 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
 
       if (directoryComponents.Any(x => x.IsNotAValidPathComponent()))
       {
-         return Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(potentialPath,
-                                                                                         pathType));
+         return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories)>
+           .Failure(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(potentialPath,
+                                                                                             pathType)));
       }
 
-      return (VolumeComponent.Create(potentialVolume[0]),
-              directoryComponents.Select(DirectoryComponent.Create)
-                                 .Materialise());
+      return Result
+        .Success((VolumeComponent.Create(potentialVolume[0]),
+                  directoryComponents.Select(DirectoryComponent.Create)
+                                     .Materialise()));
    }
 
    /* ------------------------------------------------------------ */
@@ -211,7 +215,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
    // Private Factory Functions
    /* ------------------------------------------------------------ */
 
-   private static AbsoluteDirectoryPath Create(Success<(VolumeComponent volume, ISequence<DirectoryComponent> directories)> success)
+   private static AbsoluteDirectoryPath Create(ISuccess<(VolumeComponent volume, ISequence<DirectoryComponent> directories)> success)
       => new(success.Content()
                     .directories,
              success.Content()

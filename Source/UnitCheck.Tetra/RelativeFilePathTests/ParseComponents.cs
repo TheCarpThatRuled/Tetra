@@ -20,7 +20,7 @@ public class ParseComponents
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Result<(ISequence<DirectoryComponent> directories, FileComponent file)> TestParseComponents(string potentialPath,
+      public static IResult<(ISequence<DirectoryComponent> directories, FileComponent file)> TestParseComponents(string potentialPath,
                                                                                                                 string pathType)
          => ParseComponents(potentialPath,
                             pathType);

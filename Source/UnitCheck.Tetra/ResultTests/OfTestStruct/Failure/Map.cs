@@ -71,7 +71,7 @@ public class Failure_Map
                                int     whenSuccess)
       {
          //Arrange
-         var whenSuccessFunc = FakeFunction<Success<TestStruct>, int>.Create(whenSuccess);
+         var whenSuccessFunc = FakeFunction<ISuccess<TestStruct>, int>.Create(whenSuccess);
 
          var result = Result<TestStruct>.Failure(content);
 
@@ -109,7 +109,7 @@ public class Failure_Map
                                TestClass whenSuccess)
       {
          //Arrange
-         var whenSuccessFunc = FakeFunction<Success<TestStruct>, TestClass>.Create(whenSuccess);
+         var whenSuccessFunc = FakeFunction<ISuccess<TestStruct>, TestClass>.Create(whenSuccess);
 
          var result = Result<TestStruct>.Failure(content);
 
@@ -148,7 +148,7 @@ public class Failure_Map
                                TestStruct whenSuccess)
       {
          //Arrange
-         var whenSuccessFunc = FakeFunction<Success<TestStruct>, TestStruct>.Create(whenSuccess);
+         var whenSuccessFunc = FakeFunction<ISuccess<TestStruct>, TestStruct>.Create(whenSuccess);
 
          var result = Result<TestStruct>.Failure(content);
 

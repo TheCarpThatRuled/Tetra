@@ -21,7 +21,7 @@ public class ParseComponents
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories)> TestParseComponents(string potentialPath,
+      public static IResult<(VolumeComponent volume, ISequence<DirectoryComponent> directories)> TestParseComponents(string potentialPath,
          string                                                                                                                      pathType)
          => ParseComponents(potentialPath,
                             pathType);

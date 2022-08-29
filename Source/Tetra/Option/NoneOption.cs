@@ -42,18 +42,12 @@ static partial class Option<T>
             };
 
       /* ------------------------------------------------------------ */
-      // IEquatable<T> Methods
-      /* ------------------------------------------------------------ */
-
-      public bool Equals(T? other)
-         => false;
-
-      /* ------------------------------------------------------------ */
       // IOption Methods
       /* ------------------------------------------------------------ */
 
       public IOption<TNew> Cast<TNew>()
-         => new Option<TNew>.NoneOption();
+         => new Option<TNew>
+            .NoneOption();
 
       /* ------------------------------------------------------------ */
 
@@ -68,32 +62,26 @@ static partial class Option<T>
       /* ------------------------------------------------------------ */
 
       public IOption<TNew> Map<TNew>(Func<T, TNew> whenSome)
-         => new Option<TNew>.NoneOption();
+         => new Option<TNew>
+            .NoneOption();
 
       /* ------------------------------------------------------------ */
 
       public IOption<TNew> Map<TNew>(Func<T, IOption<TNew>> whenSome)
-         => new Option<TNew>.NoneOption();
+         => new Option<TNew>
+            .NoneOption();
 
       /* ------------------------------------------------------------ */
 
-      public Result<T> MapToResult(Message whenNone)
-         => whenNone;
+      public IResult<T> MapToResult(Message whenNone)
+         => Result<T>
+           .Failure(whenNone);
 
       /* ------------------------------------------------------------ */
 
-      public Result<T> MapToResult(Func<Message> whenNone)
-         => whenNone();
-
-      /* ------------------------------------------------------------ */
-
-      public T Reduce(T whenNone)
-         => whenNone;
-
-      /* ------------------------------------------------------------ */
-
-      public T Reduce(Func<T> whenNone)
-         => whenNone();
+      public IResult<T> MapToResult(Func<Message> whenNone)
+         => Result<T>
+           .Failure(whenNone());
 
       /* ------------------------------------------------------------ */
 

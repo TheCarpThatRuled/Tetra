@@ -3,7 +3,7 @@
 /// <summary>
 /// The <c>Success</c> passkey - used to indicate that we are on the success branch of a <c>Result</c>
 /// </summary>
-public sealed class Success<T>
+public sealed class Success<T> : ISuccess<T>
 {
    /* ------------------------------------------------------------ */
    // Factory Functions

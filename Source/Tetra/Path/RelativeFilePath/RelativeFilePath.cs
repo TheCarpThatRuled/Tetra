@@ -24,7 +24,7 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
 
    /* ------------------------------------------------------------ */
 
-   public static Result<RelativeFilePath> Parse(string potentialPath)
+   public static IResult<RelativeFilePath> Parse(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
         .Map(Create);
@@ -146,13 +146,14 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static Result<(ISequence<DirectoryComponent> directories, FileComponent file)> ParseComponents(string potentialPath,
-                                                                                                            string pathType)
+   protected static IResult<(ISequence<DirectoryComponent> directories, FileComponent file)> ParseComponents(string potentialPath,
+                                                                                                             string pathType)
    {
       if (string.IsNullOrEmpty(potentialPath))
       {
-         return Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(potentialPath,
-                                                                           pathType));
+         return Result<(ISequence<DirectoryComponent> directories, FileComponent file)>
+           .Failure(Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(potentialPath,
+                                                                               pathType)));
       }
 
       var components = potentialPath
@@ -166,20 +167,23 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
 
       if (potentialComponents.Any(x => x.IsNotAValidPathComponent()))
       {
-         return Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(potentialPath,
-                                                                                        pathType));
+         return Result<(ISequence<DirectoryComponent> directories, FileComponent file)>
+           .Failure(Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(potentialPath,
+                                                                                            pathType)));
       }
 
       if (string.IsNullOrEmpty(components[^1]))
       {
-         return Message.Create(IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(potentialPath,
-                                                                                                  pathType));
+         return Result<(ISequence<DirectoryComponent> directories, FileComponent file)>
+           .Failure(Message.Create(IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(potentialPath,
+                                                                                                      pathType)));
       }
 
-      return (potentialComponents.SkipLast(1)
-                                 .Select(DirectoryComponent.Create)
-                                 .Materialise(),
-              FileComponent.Create(components[^1]));
+      return Result
+        .Success((potentialComponents.SkipLast(1)
+                                     .Select(DirectoryComponent.Create)
+                                     .Materialise(),
+                  FileComponent.Create(components[^1])));
    }
 
    /* ------------------------------------------------------------ */
@@ -200,7 +204,7 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
    // Private Factory Functions
    /* ------------------------------------------------------------ */
 
-   private static RelativeFilePath Create(Success<(ISequence<DirectoryComponent> directories, FileComponent file)> success)
+   private static RelativeFilePath Create(ISuccess<(ISequence<DirectoryComponent> directories, FileComponent file)> success)
       => new(success.Content()
                     .directories,
              success.Content()

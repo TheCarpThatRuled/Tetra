@@ -53,9 +53,9 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<T, TReturn>(string                            description,
-                                                     T                                 expected,
-                                                     FakeFunction<Success<T>, TReturn> function)
+   public static Property WasInvokedOnce<T, TReturn>(string                             description,
+                                                     T                                  expected,
+                                                     FakeFunction<ISuccess<T>, TReturn> function)
       => WasInvokedOnce(description,
                         actual => Equals(expected,
                                          actual.Content()),

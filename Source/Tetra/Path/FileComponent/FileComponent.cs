@@ -18,7 +18,7 @@ public class FileComponent : IComparable<FileComponent>,
 
    /* ------------------------------------------------------------ */
 
-   public static Result<FileComponent> Parse(string potentialComponent)
+   public static IResult<FileComponent> Parse(string potentialComponent)
       => Validate(potentialComponent,
                   ComponentType)
         .MapToResult(new FileComponent(potentialComponent));

@@ -391,7 +391,7 @@ public class Success_Cast
       static Property Property(TestClass content, Message whenCastFails)
       {
          //Arrange
-         var whenCastFailsFunc = FakeFunction<Success<TestClass>, Message>.Create(whenCastFails);
+         var whenCastFailsFunc = FakeFunction<ISuccess<TestClass>, Message>.Create(whenCastFails);
 
          var result = Result.Success(content);
 
@@ -429,7 +429,7 @@ public class Success_Cast
       static Property Property(TestClass content, Message whenCastFails)
       {
          //Arrange
-         var whenCastFailsFunc = FakeFunction<Success<TestClass>, Message>.Create(whenCastFails);
+         var whenCastFailsFunc = FakeFunction<ISuccess<TestClass>, Message>.Create(whenCastFails);
 
          var result = Result.Success(content);
 
@@ -467,7 +467,7 @@ public class Success_Cast
       static Property Property(TestClass content, Message whenCastFails)
       {
          //Arrange
-         var whenCastFailsFunc = FakeFunction<Success<TestClass>, Message>.Create(whenCastFails);
+         var whenCastFailsFunc = FakeFunction<ISuccess<TestClass>, Message>.Create(whenCastFails);
 
          var result = Result.Success(content);
 
@@ -504,7 +504,7 @@ public class Success_Cast
       static Property Property(TestClass content, Message whenCastFails)
       {
          //Arrange
-         var whenCastFailsFunc = FakeFunction<Success<TestClass>, Message>.Create(whenCastFails);
+         var whenCastFailsFunc = FakeFunction<ISuccess<TestClass>, Message>.Create(whenCastFails);
 
          var result = Result.Success(content);
 
@@ -542,7 +542,7 @@ public class Success_Cast
       static Property Property(TestClass content, Message whenCastFails)
       {
          //Arrange
-         var whenCastFailsFunc = FakeFunction<Success<TestClass>, Message>.Create(whenCastFails);
+         var whenCastFailsFunc = FakeFunction<ISuccess<TestClass>, Message>.Create(whenCastFails);
 
          var result = Result.Success(content);
 

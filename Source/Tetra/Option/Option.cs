@@ -20,6 +20,24 @@ public static class Option
         .Some(content);
 
    /* ------------------------------------------------------------ */
+   // Extensions
+   /* ------------------------------------------------------------ */
+
+   public static T Reduce<T>(this IOption<T> option,
+                             T               whenFailure)
+      => option
+        .Reduce(whenFailure,
+                x => x);
+
+   /* ------------------------------------------------------------ */
+
+   public static T Reduce<T>(this IOption<T> option,
+                             Func<T>         whenFailure)
+      => option
+        .Reduce(whenFailure,
+                x => x);
+
+   /* ------------------------------------------------------------ */
    // Functions
    /* ------------------------------------------------------------ */
 

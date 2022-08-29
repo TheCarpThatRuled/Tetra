@@ -18,7 +18,7 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
 
    /* ------------------------------------------------------------ */
 
-   public static Result<DirectoryComponent> Parse(string potentialComponent)
+   public static IResult<DirectoryComponent> Parse(string potentialComponent)
       => Validate(potentialComponent,
                   ComponentType)
         .MapToResult(new DirectoryComponent(potentialComponent));

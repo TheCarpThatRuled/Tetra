@@ -114,7 +114,7 @@ public abstract partial class Error : IEquatable<Error>,
    /// A failure containing the content of this <c>Error</c> if it is a some;
    /// otherwise a success containing <c>whenNone</c>.
    /// </returns>
-   public abstract Result<T> MapToResult<T>(T whenNone);
+   public abstract IResult<T> MapToResult<T>(T whenNone);
 
    /* ------------------------------------------------------------ */
 
@@ -127,7 +127,7 @@ public abstract partial class Error : IEquatable<Error>,
    /// A failure containing the content of this <c>Error</c> if it is a some;
    /// otherwise a success containing the return value of <c>whenNone</c>.
    /// </returns>
-   public abstract Result<T> MapToResult<T>(Func<T> whenNone);
+   public abstract IResult<T> MapToResult<T>(Func<T> whenNone);
 
    /* ------------------------------------------------------------ */
 

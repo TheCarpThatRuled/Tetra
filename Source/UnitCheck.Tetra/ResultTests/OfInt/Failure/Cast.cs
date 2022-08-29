@@ -353,7 +353,7 @@ public class Failure_Cast
       static Property Property((Message content, Message whenCastFails) args)
       {
          //Arrange
-         var whenCastFails = FakeFunction<Success<int>, Message>.Create(args.whenCastFails);
+         var whenCastFails = FakeFunction<ISuccess<int>, Message>.Create(args.whenCastFails);
 
          var result = Result<int>.Failure(args.content);
 
@@ -389,7 +389,7 @@ public class Failure_Cast
       static Property Property((Message content, Message whenCastFails) args)
       {
          //Arrange
-         var whenCastFails = FakeFunction<Success<int>, Message>.Create(args.whenCastFails);
+         var whenCastFails = FakeFunction<ISuccess<int>, Message>.Create(args.whenCastFails);
 
          var result = Result<int>.Failure(args.content);
 
@@ -425,7 +425,7 @@ public class Failure_Cast
       static Property Property((Message content, Message whenCastFails) args)
       {
          //Arrange
-         var whenCastFails = FakeFunction<Success<int>, Message>.Create(args.whenCastFails);
+         var whenCastFails = FakeFunction<ISuccess<int>, Message>.Create(args.whenCastFails);
 
          var result = Result<int>.Failure(args.content);
 
@@ -461,7 +461,7 @@ public class Failure_Cast
       static Property Property((Message content, Message whenCastFails) args)
       {
          //Arrange
-         var whenCastFails = FakeFunction<Success<int>, Message>.Create(args.whenCastFails);
+         var whenCastFails = FakeFunction<ISuccess<int>, Message>.Create(args.whenCastFails);
 
          var result = Result<int>.Failure(args.content);
 
@@ -497,7 +497,7 @@ public class Failure_Cast
       static Property Property((Message content, Message whenCastFails) args)
       {
          //Arrange
-         var whenCastFails = FakeFunction<Success<int>, Message>.Create(args.whenCastFails);
+         var whenCastFails = FakeFunction<ISuccess<int>, Message>.Create(args.whenCastFails);
 
          var result = Result<int>.Failure(args.content);
 

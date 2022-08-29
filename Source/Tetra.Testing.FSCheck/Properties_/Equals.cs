@@ -21,7 +21,7 @@ partial class Properties
    public static Property EqualsIsReflexive<T0, T1>(T0 original,
                                                     T0 copy,
                                                     T1 otherType)
-      where T0 : notnull, IEquatable<T1>
+      where T0 : notnull
       => AsProperty(() => ((object)original).Equals(original))
         .Label("object.Equals is not reflexive: Comparing against the same instance is not equal")
         .And(AsProperty(() => ((object)original).Equals(copy))
@@ -60,7 +60,7 @@ partial class Properties
    /* ------------------------------------------------------------ */
 
    public static Property EqualsIsTransitive<T0, T1>((T0 a, T1 b, T1 c) values)
-      where T0 : notnull, IEquatable<T1>
+      where T0 : notnull
       where T1 : notnull
    {
       var aEqualB = ((object)values.a).Equals(values.b);

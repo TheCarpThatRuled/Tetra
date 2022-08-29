@@ -27,7 +27,7 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
 
    /* ------------------------------------------------------------ */
 
-   public static Result<RelativeDirectoryPath> Parse(string potentialPath)
+   public static IResult<RelativeDirectoryPath> Parse(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
         .Map(Create);
@@ -173,13 +173,14 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static Result<ISequence<DirectoryComponent>> ParseComponents(string potentialPath,
-                                                                          string pathType)
+   protected static IResult<ISequence<DirectoryComponent>> ParseComponents(string potentialPath,
+                                                                           string pathType)
    {
       if (string.IsNullOrEmpty(potentialPath))
       {
-         return Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(potentialPath,
-                                                                            pathType));
+         return Result<ISequence<DirectoryComponent>>
+           .Failure(Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(potentialPath,
+                                                                               pathType)));
       }
 
       var components = potentialPath
@@ -193,8 +194,9 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
 
       if (directoryComponents.Any(x => x.IsNotAValidPathComponent()))
       {
-         return Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(potentialPath,
-                                                                                         pathType));
+         return Result<ISequence<DirectoryComponent>>
+           .Failure(Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(potentialPath,
+                                                                                            pathType)));
       }
 
       return Result.Success(directoryComponents
@@ -219,7 +221,7 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    // Private Factory Functions
    /* ------------------------------------------------------------ */
 
-   private static RelativeDirectoryPath Create(Success<ISequence<DirectoryComponent>> success)
+   private static RelativeDirectoryPath Create(ISuccess<ISequence<DirectoryComponent>> success)
       => new(success.Content());
 
    /* ------------------------------------------------------------ */

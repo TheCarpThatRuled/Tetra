@@ -14,7 +14,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Result<Testing.TestStruct>> Type()
+      public static Arbitrary<IResult<Testing.TestStruct>> Type()
          => Generators
            .FailureResult<Testing.TestStruct>()
            .ToArbitrary();
@@ -32,7 +32,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Result<Testing.TestStruct>> Type()
+      public static Arbitrary<IResult<Testing.TestStruct>> Type()
          => Generators
            .Result(Generators.TestStruct())
            .ToArbitrary();
@@ -50,7 +50,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Result<Testing.TestStruct>> Type()
+      public static Arbitrary<IResult<Testing.TestStruct>> Type()
          => Generators
            .SuccessResult(Generators.TestStruct())
            .ToArbitrary();
@@ -68,7 +68,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Result<Testing.TestStruct>, Result<Testing.TestStruct>, Result<Testing.TestStruct>)> Type()
+      public static Arbitrary<(IResult<Testing.TestStruct>, IResult<Testing.TestStruct>, IResult<Testing.TestStruct>)> Type()
          => Generators
            .Transitive(Generators.TwoUniqueResults(Generators.TestStruct()))
            .ToArbitrary();

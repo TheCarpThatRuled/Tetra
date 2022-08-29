@@ -18,7 +18,7 @@ internal sealed class LockedResult<T> : IOpenFileResult<T>
 
    /* ------------------------------------------------------------ */
 
-   public IOpenFileResult<TNew> Map<TNew>(Func<IOpenFileResult<T>.IOpen, Result<TNew>> whenOpen)
+   public IOpenFileResult<TNew> Map<TNew>(Func<IOpenFileResult<T>.IOpen, IResult<TNew>> whenOpen)
       => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */

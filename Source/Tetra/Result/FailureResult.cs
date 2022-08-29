@@ -2,7 +2,7 @@
 
 partial class Result<T>
 {
-   private sealed class FailureResult : Result<T>
+   private sealed class FailureResult : IResult<T>
    {
       /* ------------------------------------------------------------ */
       // Constructors
@@ -38,83 +38,57 @@ partial class Result<T>
          => $"Failure ({_failure.Content()})";
 
       /* ------------------------------------------------------------ */
-      // Result<T> Methods
+      // IResult<T> Methods
       /* ------------------------------------------------------------ */
 
-      public override Result<TNew> Cast<TNew>()
+      public IResult<TNew> Cast<TNew>()
          => new Result<TNew>
             .FailureResult(_failure);
 
       /* ------------------------------------------------------------ */
 
-      public override Result<TNew> Cast<TNew>(Message _)
+      public IResult<TNew> Cast<TNew>(Message _)
          => new Result<TNew>
             .FailureResult(_failure);
 
       /* ------------------------------------------------------------ */
 
-      public override Result<TNew> Cast<TNew>(Func<Success<T>, Message> _)
+      public IResult<TNew> Cast<TNew>(Func<ISuccess<T>, Message> _)
          => new Result<TNew>
             .FailureResult(_failure);
 
       /* ------------------------------------------------------------ */
 
-      public override bool IsAFailure()
+      public bool IsAFailure()
          => true;
 
       /* ------------------------------------------------------------ */
 
-      public override bool IsASuccess()
+      public bool IsASuccess()
          => false;
 
       /* ------------------------------------------------------------ */
 
-      public override Result<T> Map(Func<Failure, Message> whenFailure)
-         => whenFailure(_failure);
+      public IResult<T> Map(Func<Failure, Message> whenFailure)
+         => new FailureResult(new(whenFailure(_failure)));
 
       /* ------------------------------------------------------------ */
 
-      public override Result<TNew> Map<TNew>(Func<Success<T>, TNew> _)
+      public IResult<TNew> Map<TNew>(Func<ISuccess<T>, TNew> _)
          => new Result<TNew>
             .FailureResult(_failure);
 
       /* ------------------------------------------------------------ */
 
-      public override T Reduce(Func<Failure, T> whenFailure)
-         => whenFailure(_failure);
-
-      /* ------------------------------------------------------------ */
-
-      public override Message Reduce(Func<Success<T>, Message> _)
+      public Message Reduce(Func<ISuccess<T>, Message> _)
          => _failure
            .Content();
 
       /* ------------------------------------------------------------ */
 
-      public override TNew Reduce<TNew>(Func<Failure, TNew>    whenFailure,
-                                        Func<Success<T>, TNew> _)
+      public TNew Reduce<TNew>(Func<Failure, TNew>             whenFailure,
+                               Func<ISuccess<T>, TNew> _)
          => whenFailure(_failure);
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<Result<T>> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(Result<T>? other)
-         => ReferenceEquals(this,
-                            other)
-         || other is FailureResult failure
-         && _failure
-           .Content()
-           .Equals(failure
-                  ._failure
-                  .Content());
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<T> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(T? other)
-         => false;
 
       /* ------------------------------------------------------------ */
       // Private Fields

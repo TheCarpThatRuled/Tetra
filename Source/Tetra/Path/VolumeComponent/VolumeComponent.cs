@@ -18,7 +18,7 @@ public class VolumeComponent : IComparable<VolumeComponent>,
 
    /* ------------------------------------------------------------ */
 
-   public static Result<VolumeComponent> Parse(char potentialVolume)
+   public static IResult<VolumeComponent> Parse(char potentialVolume)
       => Validate(potentialVolume,
                   VolumeType)
         .MapToResult(new VolumeComponent(potentialVolume));

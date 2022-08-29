@@ -13,8 +13,7 @@
 /// </list>
 /// </summary>
 /// <typeparam name="T">The type of the contained object</typeparam>
-public interface IOption<T> : IEquatable<IOption<T>>,
-                              IEquatable<T>
+public interface IOption<out T>
 {
    /* ------------------------------------------------------------ */
    // Methods
@@ -88,7 +87,7 @@ public interface IOption<T> : IEquatable<IOption<T>>,
    /// A success containing the content of this <c>Option</c> if it is a some;
    /// otherwise a failure containing the return value of <c>whenNone</c>.
    /// </returns>
-   public Result<T> MapToResult(Message whenNone);
+   public IResult<T> MapToResult(Message whenNone);
 
    /* ------------------------------------------------------------ */
 
@@ -100,31 +99,7 @@ public interface IOption<T> : IEquatable<IOption<T>>,
    /// A success containing the content of this <c>Option</c> if it is a some;
    /// otherwise a failure containing the return value of <c>whenNone</c>.
    /// </returns>
-   public Result<T> MapToResult(Func<Message> whenNone);
-
-   /* ------------------------------------------------------------ */
-
-   /// <summary>
-   /// Unifies both branches of the <c>Option</c> by providing a value for the none case.
-   /// </summary>
-   /// <param name="whenNone">A value to use, if the <c>Option</c> is a none.</param>
-   /// <returns>
-   /// The content of this <c>Option</c> if it is a some;
-   /// otherwise <c>whenNone</c>.
-   /// </returns>
-   public T Reduce(T whenNone);
-
-   /* ------------------------------------------------------------ */
-
-   /// <summary>
-   /// Unifies both branches of the <c>Option</c> by providing a function that will create a value for the none case.
-   /// </summary>
-   /// <param name="whenNone">A function that will return the value to use, if the <c>Option</c> is a none.</param>
-   /// <returns>
-   /// The content of this <c>Option</c> if it is a some;
-   /// otherwise the return value of <c>whenNone</c>.
-   /// </returns>
-   public T Reduce(Func<T> whenNone);
+   public IResult<T> MapToResult(Func<Message> whenNone);
 
    /* ------------------------------------------------------------ */
 

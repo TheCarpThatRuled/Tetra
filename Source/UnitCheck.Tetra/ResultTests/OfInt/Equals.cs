@@ -28,7 +28,7 @@ public class Equals
    public void
       GIVEN_Result_of_int_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(Result<int> result,
+      static Property Property(IResult<int> result,
                                object? obj)
       {
          //Act
@@ -42,7 +42,7 @@ public class Equals
       Arb.Register<Libraries.ResultOfInt32>();
       Arb.Register<ObjIsNullOrANonEquatableType>();
 
-      Prop.ForAll<Result<int>, object?>(Property)
+      Prop.ForAll<IResult<int>, object?>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -149,7 +149,7 @@ public class Equals
    {
       Arb.Register<Libraries.ResultOfInt32>();
 
-      Prop.ForAll<Result<int>, Result<int>>(EqualsIsSymmetric)
+      Prop.ForAll<IResult<int>, IResult<int>>(EqualsIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -169,7 +169,7 @@ public class Equals
    {
       Arb.Register<Libraries.TransitiveResultsOfInt32>();
 
-      Prop.ForAll<(Result<int>, Result<int>, Result<int>)>(EqualsIsTransitive<Result<int>>)
+      Prop.ForAll<(IResult<int>, IResult<int>, IResult<int>)>(EqualsIsTransitive<IResult<int>>)
           .QuickCheckThrowOnFailure();
    }
 
@@ -189,7 +189,7 @@ public class Equals
    {
       Arb.Register<Library_ResultOfInt_AND_ObjIsAnInt>();
 
-      Prop.ForAll<(Result<int>, int, int)>(EqualsIsTransitive)
+      Prop.ForAll<(IResult<int>, int, int)>(EqualsIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 
@@ -203,189 +203,13 @@ public class Equals
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Result<int>, int, int)> Type()
+      public static Arbitrary<(IResult<int>, int, int)> Type()
          => Generators
            .TransitiveResultAndT(Generators.Int32(),
                                  Generators.TwoUniqueInt32s())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
-   // bool Equals(Result<T>? other)
-   /* ------------------------------------------------------------ */
-
-   //GIVEN
-   //Result_of_int_AND_other_is_null
-   //WHEN
-   //Equals_AND_other_is_a_nullable_Result_of_int
-   //THEN
-   //false_is_returned
-
-   [TestMethod]
-   public void
-      GIVEN_Result_of_int_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_Result_of_int_THEN_false_is_returned()
-   {
-      static Property Property(Result<int> content)
-      {
-         //act
-         var actual = content.Equals(null);
-
-         //Assert
-         return IsFalse(AssertMessages.ReturnValue,
-                        actual);
-      }
-
-      Arb.Register<Libraries.ResultOfInt32>();
-
-      Prop.ForAll<Result<int>>(Property)
-          .QuickCheckThrowOnFailure();
-   }
-
-   /* ------------------------------------------------------------ */
-
-   //GIVEN
-   //Result_of_int_AND_this_is_a_Failure
-   //WHEN
-   //Equals_AND_other_is_a_nullable_Result_of_int
-   //THEN
-   //is_reflexive
-
-   [TestMethod]
-   public void
-      GIVEN_Result_of_int_AND_this_is_a_Failure_WHEN_Equals_AND_other_is_a_nullable_Result_of_int_THEN_is_reflexive()
-   {
-      static Property Property(Message content)
-      {
-         //Arrange
-         var original = Result<int>.Failure(content);
-         var copy     = Result<int>.Failure(content);
-
-         //Act
-         //Assert
-         return IEquatableIsReflexive(original,
-                                      copy);
-      }
-
-      Arb.Register<Libraries.Message>();
-
-      Prop.ForAll<Message>(Property)
-          .QuickCheckThrowOnFailure();
-   }
-
-   /* ------------------------------------------------------------ */
-
-   //GIVEN
-   //Result_of_int_AND_this_is_a_Success
-   //WHEN
-   //Equals_AND_other_is_a_nullable_Result_of_int
-   //THEN
-   //is_reflexive
-
-   [TestMethod]
-   public void
-      GIVEN_Result_of_int_AND_this_is_a_Success_WHEN_Equals_AND_other_is_a_nullable_Result_of_int_THEN_is_reflexive()
-   {
-      static Property Property(int content)
-      {
-         //Arrange
-         var original = Result.Success(content);
-         var copy     = Result.Success(content);
-
-         //Act
-         //Assert
-         return IEquatableIsReflexive(original,
-                                      copy);
-      }
-
-      Prop.ForAll<int>(Property)
-          .QuickCheckThrowOnFailure();
-   }
-
-   /* ------------------------------------------------------------ */
-
-   //GIVEN
-   //Result_of_int
-   //WHEN
-   //Equals_AND_other_is_a_nullable_Result_of_int
-   //THEN
-   //is_symmetric
-
-   [TestMethod]
-   public void GIVEN_Result_of_int_WHEN_Equals_AND_other_is_a_nullable_Result_of_int_THEN_is_symmetric()
-   {
-      Arb.Register<Libraries.ResultOfInt32>();
-
-      Prop.ForAll<Result<int>, Result<int>>(IEquatableIsSymmetric)
-          .QuickCheckThrowOnFailure();
-   }
-
-   /* ------------------------------------------------------------ */
-
-   //GIVEN
-   //Result_of_int
-   //WHEN
-   //Equals_AND_other_is_a_nullable_Result_of_int
-   //THEN
-   //is_transitive
-
-   [TestMethod]
-   public void GIVEN_Result_of_int_WHEN_Equals_AND_other_is_a_nullable_Result_of_int_THEN_is_transitive()
-   {
-      Arb.Register<Libraries.TransitiveResultsOfInt32>();
-
-      Prop.ForAll<(Result<int>, Result<int>, Result<int>)>(IEquatableIsTransitive<Result<int>>)
-          .QuickCheckThrowOnFailure();
-   }
-
-   /* ------------------------------------------------------------ */
-   // bool Equals(T? other)
-   /* ------------------------------------------------------------ */
-
-   //GIVEN
-   //Result_of_int_AND_this_is_a_Success
-   //WHEN
-   //Equals_AND_other_is_an_int
-   //THEN
-   //is_pseudo_reflexive
-
-   [TestMethod]
-   public void GIVEN_Result_of_int_AND_this_is_a_Success_WHEN_Equals_AND_other_is_an_int_THEN_is_pseudo_reflexive()
-   {
-      static Property Property(int content)
-      {
-         //Arrange
-         var result = Result.Success(content);
-
-         //Act
-         var actual = result.Equals(content);
-
-         //Assert
-         return IsTrue(AssertMessages.ReturnValue,
-                       actual);
-      }
-
-      Prop.ForAll<int>(Property)
-          .QuickCheckThrowOnFailure();
-   }
-
-   /* ------------------------------------------------------------ */
-
-   //GIVEN
-   //Result_of_int_AND_obj_is_an_int
-   //WHEN
-   //Equals_AND_other_is_an_int
-   //THEN
-   //is_transitive
-
-   [TestMethod]
-   public void GIVEN_Result_of_int_WHEN_Equals_AND_other_is_an_int_THEN_is_transitive()
-   {
-      Arb.Register<Library_ResultOfInt_AND_ObjIsAnInt>();
-
-      Prop.ForAll<(Result<int>, int, int)>(IEquatableIsTransitive)
-          .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */

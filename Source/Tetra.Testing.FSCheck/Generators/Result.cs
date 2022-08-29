@@ -8,12 +8,12 @@ partial class Generators
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Gen<Result<T>> FailureResult<T>()
+   public static Gen<IResult<T>> FailureResult<T>()
       => FailureResult<T>(Message());
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<Result<T>> FailureResult<T>(Gen<Message> content)
+   public static Gen<IResult<T>> FailureResult<T>(Gen<Message> content)
       => content
         .Select(Tetra
                .Result<T>
@@ -21,23 +21,23 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<Result<T>> Result<T>(Gen<T> content)
+   public static Gen<IResult<T>> Result<T>(Gen<T> content)
       => Result(content,
                 Message());
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<Result<T>> Result<T>(Gen<T>       successContent,
-                                          Gen<Message> failureContent)
+   public static Gen<IResult<T>> Result<T>(Gen<T>       successContent,
+                                           Gen<Message> failureContent)
       => Gen
-        .Frequency(new Tuple<int, Gen<Result<T>>>(1,
-                                                  FailureResult<T>(failureContent)),
-                   new Tuple<int, Gen<Result<T>>>(7,
-                                                  SuccessResult(successContent)));
+        .Frequency(new Tuple<int, Gen<IResult<T>>>(1,
+                                                   FailureResult<T>(failureContent)),
+                   new Tuple<int, Gen<IResult<T>>>(7,
+                                                   SuccessResult(successContent)));
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<Result<T>> SuccessResult<T>(Gen<T> content)
+   public static Gen<IResult<T>> SuccessResult<T>(Gen<T> content)
       => content
         .Select(Tetra
                .Result
@@ -45,14 +45,14 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(Result<T>, Result<T>)> TwoUniqueResults<T>(Gen<T> content)
+   public static Gen<(IResult<T>, IResult<T>)> TwoUniqueResults<T>(Gen<T> content)
       => TwoUniqueResults(content,
                           Message());
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(Result<T>, Result<T>)> TwoUniqueResults<T>(Gen<T>       successContent,
-                                                                 Gen<Message> failureContent)
+   public static Gen<(IResult<T>, IResult<T>)> TwoUniqueResults<T>(Gen<T>       successContent,
+                                                                   Gen<Message> failureContent)
       => Result(successContent,
                 failureContent)
         .TwoValueTuples()
@@ -71,7 +71,7 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(Result<T>, T, T)> TransitiveResultAndT<T>(Gen<T>      content,
+   public static Gen<(IResult<T>, T, T)> TransitiveResultAndT<T>(Gen<T>      content,
                                                                 Gen<(T, T)> twoUniqueContents)
       where T : notnull
       => TransitiveResultAndT(content,
@@ -80,16 +80,16 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(Result<T>, T, T)> TransitiveResultAndT<T>(Gen<T>       successContent,
+   public static Gen<(IResult<T>, T, T)> TransitiveResultAndT<T>(Gen<T>       successContent,
                                                                 Gen<(T, T)>  twoUniqueSuccessContents,
                                                                 Gen<Message> failureContent)
       where T : notnull
       => Gen
-        .Frequency(new Tuple<int, Gen<(Result<T>, T, T)>>(1,
+        .Frequency(new Tuple<int, Gen<(IResult<T>, T, T)>>(1,
                                                           FailureResult<T>(failureContent)
                                                             .Zip(successContent)
                                                             .Select(tuple => (tuple.Item1, tuple.Item2, tuple.Item2))),
-                   new Tuple<int, Gen<(Result<T>, T, T)>>(4,
+                   new Tuple<int, Gen<(IResult<T>, T, T)>>(4,
                                                           Transitive(twoUniqueSuccessContents,
                                                                      Tetra.Result
                                                                           .Success)));

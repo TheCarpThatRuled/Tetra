@@ -60,13 +60,15 @@ partial class Error
 
       /* ------------------------------------------------------------ */
 
-      public override Result<T> MapToResult<T>(T _)
-         => _content;
+      public override IResult<T> MapToResult<T>(T _)
+         => Result<T>
+           .Failure(_content);
 
       /* ------------------------------------------------------------ */
 
-      public override Result<T> MapToResult<T>(Func<T> _)
-         => _content;
+      public override IResult<T> MapToResult<T>(Func<T> _)
+         => Result<T>
+           .Failure(_content);
 
       /* ------------------------------------------------------------ */
 

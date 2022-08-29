@@ -4,7 +4,7 @@ namespace Tetra;
 
 partial class Result<T>
 {
-   private sealed class SuccessResult : Result<T>
+   private sealed class SuccessResult : IResult<T>
    {
       /* ------------------------------------------------------------ */
       // Constructors
@@ -47,81 +47,56 @@ partial class Result<T>
       // Result<T> Methods
       /* ------------------------------------------------------------ */
 
-      public override Result<TNew> Cast<TNew>()
+      public IResult<TNew> Cast<TNew>()
          => _success.Content() is TNew content
-               ? Result<TNew>.Success(content)
-               : Result<TNew>.Failure(CastFailed<T, TNew>());
+               ? new Result<TNew>.SuccessResult(new(content))
+               : new Result<TNew>.FailureResult(new(CastFailed<T, TNew>()));
 
       /* ------------------------------------------------------------ */
 
-      public override Result<TNew> Cast<TNew>(Message whenCastFails)
+      public IResult<TNew> Cast<TNew>(Message whenCastFails)
          => _success.Content() is TNew content
-               ? Result<TNew>.Success(content)
-               : Result<TNew>.Failure(whenCastFails);
+               ? new Result<TNew>.SuccessResult(new(content))
+               : new Result<TNew>.FailureResult(new(whenCastFails));
 
       /* ------------------------------------------------------------ */
 
-      public override Result<TNew> Cast<TNew>(Func<Success<T>, Message> whenCastFails)
+      public IResult<TNew> Cast<TNew>(Func<ISuccess<T>, Message> whenCastFails)
          => _success.Content() is TNew content
-               ? Result<TNew>.Success(content)
-               : Result<TNew>.Failure(whenCastFails(_success));
+               ? new Result<TNew>.SuccessResult(new(content))
+               : new Result<TNew>.FailureResult(new(whenCastFails(_success)));
 
       /* ------------------------------------------------------------ */
 
-      public override bool IsAFailure()
+      public bool IsAFailure()
          => false;
 
       /* ------------------------------------------------------------ */
 
-      public override bool IsASuccess()
+      public bool IsASuccess()
          => true;
 
       /* ------------------------------------------------------------ */
 
-      public override Result<T> Map(Func<Failure, Message> _)
+      public IResult<T> Map(Func<Failure, Message> _)
          => this;
 
       /* ------------------------------------------------------------ */
 
-      public override Result<TNew> Map<TNew>(Func<Success<T>, TNew> whenSuccess)
+      public IResult<TNew> Map<TNew>(Func<ISuccess<T>, TNew> whenSuccess)
+         => new Result<TNew>
+            .SuccessResult(new(whenSuccess(_success)));
+
+      /* ------------------------------------------------------------ */
+
+      public Message Reduce(Func<ISuccess<T>, Message> whenSuccess)
          => whenSuccess(_success);
 
       /* ------------------------------------------------------------ */
 
-      public override T Reduce(Func<Failure, T> _)
-         => _success
-           .Content();
-
-      /* ------------------------------------------------------------ */
-
-      public override Message Reduce(Func<Success<T>, Message> whenSuccess)
+      public TNew Reduce<TNew>(Func<Failure, TNew>             _,
+                               Func<ISuccess<T>, TNew> whenSuccess)
          => whenSuccess(_success);
-
-      /* ------------------------------------------------------------ */
-
-      public override TNew Reduce<TNew>(Func<Failure, TNew> _,
-                                        Func<Success<T>, TNew> whenSuccess)
-         => whenSuccess(_success);
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<Result<T>> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(Result<T>? other)
-         => ReferenceEquals(this,
-                            other)
-         || other is SuccessResult success
-         && Equals(_success.Content(),
-                   success._success
-                          .Content());
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<T> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(T? other)
-         => Equals(_success.Content(),
-                   other);
 
       /* ------------------------------------------------------------ */
       // Private Fields
