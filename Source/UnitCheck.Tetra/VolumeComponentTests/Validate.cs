@@ -19,7 +19,7 @@ public class Validate
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Error TestValidate(char   potentialVolume,
+      public static IError TestValidate(char   potentialVolume,
                                        string volumeType)
          => Validate(potentialVolume,
                      volumeType);

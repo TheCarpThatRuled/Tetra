@@ -12,7 +12,7 @@ partial class Assert_Extensions
 
    public static Assert IsANone(this Assert assert,
                                 string      description,
-                                Error       error)
+                                IError       error)
    {
       if (error.IsASome())
       {
@@ -26,7 +26,7 @@ partial class Assert_Extensions
 
    public static Assert IsASome(this Assert assert,
                                 string      description,
-                                Error       error)
+                                IError       error)
    {
       if (error.IsANone())
       {
@@ -41,7 +41,7 @@ partial class Assert_Extensions
    public static Assert IsASome(this Assert assert,
                                 string      description,
                                 Message     expected,
-                                Error       error)
+                                IError       error)
    {
       if (error.Reduce(Function.True,
                        actual =>
@@ -64,7 +64,7 @@ partial class Assert_Extensions
    public static Assert IsASomeAnd(this Assert         assert,
                                    string              description,
                                    Func<Message, bool> property,
-                                   Error               error)
+                                   IError               error)
    {
       if (error.Reduce(Function.True,
                        actual =>

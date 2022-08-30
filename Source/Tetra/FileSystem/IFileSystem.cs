@@ -12,7 +12,7 @@ public interface IFileSystem
    // Methods
    /* ------------------------------------------------------------ */
 
-   public Error Create(AbsoluteDirectoryPath path);
+   public IError Create(AbsoluteDirectoryPath path);
 
    /* ------------------------------------------------------------ */
 
@@ -28,7 +28,7 @@ public interface IFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public Error SetCurrentDirectory(AbsoluteDirectoryPath path);
+   public IError SetCurrentDirectory(AbsoluteDirectoryPath path);
 
    /* ------------------------------------------------------------ */
 }

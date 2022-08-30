@@ -83,7 +83,7 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static Error Validate(string potentialComponent,
+   protected static IError Validate(string potentialComponent,
                                    string componentType)
       => potentialComponent.IsNotAValidPathComponent()
             ? Error.Some(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(potentialComponent,

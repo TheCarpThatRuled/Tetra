@@ -2,7 +2,7 @@
 
 partial class Error
 {
-   private sealed class SomeError : Error
+   private sealed class SomeError : IError
    {
       /* ------------------------------------------------------------ */
       // Constructors
@@ -20,8 +20,10 @@ partial class Error
                             obj)
          || obj switch
             {
-               SomeError some  => Equals(some._content),
-               Message content => Equals(content),
+               SomeError some  => Equals(_content,
+                                         some._content),
+               Message content => Equals(_content,
+                                         content),
                _               => false,
             };
 
@@ -37,78 +39,60 @@ partial class Error
          => $"Some ({_content})";
 
       /* ------------------------------------------------------------ */
-      // Error Overridden Methods
+      // IError Methods
       /* ------------------------------------------------------------ */
 
-      public override bool IsANone()
+      public bool IsANone()
          => false;
 
       /* ------------------------------------------------------------ */
 
-      public override bool IsASome()
+      public bool IsASome()
          => true;
 
       /* ------------------------------------------------------------ */
 
-      public override Error Map(Func<Message, Message> whenSome)
+      public IError Map(Func<Message, Message> whenSome)
+         => Error.Some(whenSome(_content));
+
+      /* ------------------------------------------------------------ */
+
+      public IError Map(Func<Message, IError> whenSome)
          => whenSome(_content);
 
       /* ------------------------------------------------------------ */
 
-      public override Error Map(Func<Message, Error> whenSome)
-         => whenSome(_content);
-
-      /* ------------------------------------------------------------ */
-
-      public override IResult<T> MapToResult<T>(T _)
+      public IResult<T> MapToResult<T>(T _)
          => Result<T>
            .Failure(_content);
 
       /* ------------------------------------------------------------ */
 
-      public override IResult<T> MapToResult<T>(Func<T> _)
+      public IResult<T> MapToResult<T>(Func<T> _)
          => Result<T>
            .Failure(_content);
 
       /* ------------------------------------------------------------ */
 
-      public override Message Reduce(Message _)
+      public Message Reduce(Message _)
          => _content;
 
       /* ------------------------------------------------------------ */
 
-      public override Message Reduce(Func<Message> _)
+      public Message Reduce(Func<Message> _)
          => _content;
 
       /* ------------------------------------------------------------ */
 
-      public override TNew Reduce<TNew>(TNew _,
-                                        Func<Message, TNew> whenSome)
+      public TNew Reduce<TNew>(TNew _,
+                               Func<Message, TNew> whenSome)
          => whenSome(_content);
 
       /* ------------------------------------------------------------ */
 
-      public override TNew Reduce<TNew>(Func<TNew> _,
-                                        Func<Message, TNew> whenSome)
+      public TNew Reduce<TNew>(Func<TNew> _,
+                               Func<Message, TNew> whenSome)
          => whenSome(_content);
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<Error> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(Error? other)
-         => ReferenceEquals(this,
-                            other)
-         || other is SomeError some
-         && Equals(some._content);
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<Message> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(Message? other)
-         => Equals(_content,
-                   other);
 
       /* ------------------------------------------------------------ */
       // Private Fields

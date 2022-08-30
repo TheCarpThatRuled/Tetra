@@ -2,7 +2,7 @@
 
 partial class Error
 {
-   private sealed class NoneError : Error
+   private sealed class NoneError : IError
    {
       /* ------------------------------------------------------------ */
       // object Overridden Methods
@@ -25,83 +25,63 @@ partial class Error
       /* ------------------------------------------------------------ */
 
       public override string ToString()
-         => $"None";
+         => "None";
 
       /* ------------------------------------------------------------ */
-      // Error OverriddenMethods
+      // IError  Methods
       /* ------------------------------------------------------------ */
 
-      public override bool IsANone()
+      public bool IsANone()
          => true;
 
       /* ------------------------------------------------------------ */
 
-      public override bool IsASome()
+      public bool IsASome()
          => false;
 
       /* ------------------------------------------------------------ */
 
-      public override Error Map(Func<Message, Message> _)
+      public IError Map(Func<Message, Message> _)
          => this;
 
       /* ------------------------------------------------------------ */
 
-      public override Error Map(Func<Message, Error> _)
+      public IError Map(Func<Message, IError> _)
          => this;
 
       /* ------------------------------------------------------------ */
 
-      public override IResult<T> MapToResult<T>(T whenNone)
+      public IResult<T> MapToResult<T>(T whenNone)
          => Result<T>
            .Success(whenNone);
 
       /* ------------------------------------------------------------ */
 
-      public override IResult<T> MapToResult<T>(Func<T> whenNone)
+      public IResult<T> MapToResult<T>(Func<T> whenNone)
          => Result<T>
            .Success(whenNone());
 
       /* ------------------------------------------------------------ */
 
-      public override Message Reduce(Message whenNone)
+      public Message Reduce(Message whenNone)
          => whenNone;
 
       /* ------------------------------------------------------------ */
 
-      public override Message Reduce(Func<Message> whenNone)
+      public Message Reduce(Func<Message> whenNone)
          => whenNone();
 
       /* ------------------------------------------------------------ */
 
-      public override TNew Reduce<TNew>(TNew whenNone,
-                                        Func<Message, TNew> _)
+      public TNew Reduce<TNew>(TNew whenNone,
+                               Func<Message, TNew> _)
          => whenNone;
 
       /* ------------------------------------------------------------ */
 
-      public override TNew Reduce<TNew>(Func<TNew> whenNone,
-                                        Func<Message, TNew> _)
+      public TNew Reduce<TNew>(Func<TNew> whenNone,
+                               Func<Message, TNew> _)
          => whenNone();
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<Error> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(Error? other)
-         => ReferenceEquals(this,
-                            other)
-         || other switch
-            {
-               NoneError => true,
-               _         => false,
-            };
-
-      /* ------------------------------------------------------------ */
-      // IEquatable<Message> Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(Message? other)
-         => false;
 
       /* ------------------------------------------------------------ */
    }

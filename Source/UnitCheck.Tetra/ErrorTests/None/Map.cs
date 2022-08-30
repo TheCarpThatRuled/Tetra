@@ -66,7 +66,7 @@ public class None_Map
       GIVEN_None_AND_whenSome_returns_a_none_WHEN_Map_AND_whenSome_is_a_Func_of_Message_to_Error_THEN_whenSome_was_not_invoked_AND_a_none_is_returned()
    {
       //Arrange
-      var whenSome = FakeFunction<Message, Error>.Create(Error.None());
+      var whenSome = FakeFunction<Message, IError>.Create(Error.None());
 
       var error = Error.None();
 
@@ -96,7 +96,7 @@ public class None_Map
       static Property Property(Message value)
       {
          //Arrange
-         var whenSome = FakeFunction<Message, Error>.Create(value);
+         var whenSome = FakeFunction<Message, IError>.Create(Error.Some(value));
 
          var error = Error.None();
 

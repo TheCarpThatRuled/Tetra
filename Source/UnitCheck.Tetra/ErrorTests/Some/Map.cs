@@ -70,7 +70,7 @@ public class Some_Map
       static Property Property(Message value)
       {
          //Arrange
-         var whenSome = FakeFunction<Message, Error>.Create(Error.None());
+         var whenSome = FakeFunction<Message, IError>.Create(Error.None());
 
          var error = Error.Some(value);
 
@@ -107,7 +107,7 @@ public class Some_Map
       static Property Property((Message value, Message newValue) args)
       {
          //Arrange
-         var whenSome = FakeFunction<Message, Error>.Create(args.newValue);
+         var whenSome = FakeFunction<Message, IError>.Create(Error.Some(args.newValue));
 
          var error = Error.Some(args.value);
 

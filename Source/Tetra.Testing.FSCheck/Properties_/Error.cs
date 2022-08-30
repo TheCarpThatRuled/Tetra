@@ -10,7 +10,7 @@ partial class Properties
    /* ------------------------------------------------------------ */
 
    public static Property IsANone(string description,
-                                  Error  error)
+                                  IError error)
       => AsProperty(() => error.Reduce(Function.True,
                                        Function.False))
         .Label(TheErrorIsASome(description));
@@ -18,7 +18,7 @@ partial class Properties
    /* ------------------------------------------------------------ */
 
    public static Property IsASome(string description,
-                                  Error  error)
+                                  IError error)
       => AsProperty(() => error.Reduce(Function.False,
                                        Function.True))
         .Label(TheErrorIsANone(description));
@@ -27,7 +27,7 @@ partial class Properties
 
    public static Property IsASome(string  description,
                                   Message expected,
-                                  Error   error)
+                                  IError  error)
       => error
         .Reduce(() => False(TheErrorIsANone(description)),
                 some => AreEqual(TheErrorIsASomeButDoesNotContainTheExpectedContent(description),
@@ -38,7 +38,7 @@ partial class Properties
 
    public static Property IsASomeAnd(string                          description,
                                      Func<string, Message, Property> property,
-                                     Error                           error)
+                                     IError                          error)
       => error
         .Reduce(() => False(TheErrorIsANone(description)),
                 actual => property(TheErrorIsASomeButDoesNotContainTheExpectedContent(description),

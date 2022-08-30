@@ -27,7 +27,7 @@ public class Equals
    public void
       GIVEN_Error_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(Error option,
+      static Property Property(IError option,
                                object? obj)
       {
          //Act
@@ -41,7 +41,7 @@ public class Equals
       Arb.Register<Libraries.Error>();
       Arb.Register<ObjIsNullOrANonEquatableType>();
 
-      Prop.ForAll<Error, object?>(Property)
+      Prop.ForAll<IError, object?>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -170,7 +170,7 @@ public class Equals
    {
       Arb.Register<Libraries.Error>();
 
-      Prop.ForAll<Error, Error>(EqualsIsSymmetric)
+      Prop.ForAll<IError, IError>(EqualsIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 
@@ -190,7 +190,7 @@ public class Equals
    {
       Arb.Register<Libraries.TransitiveErrors>();
 
-      Prop.ForAll<(Error, Error, Error)>(EqualsIsTransitive<Error>)
+      Prop.ForAll<(IError, IError, IError)>(EqualsIsTransitive<IError>)
           .QuickCheckThrowOnFailure();
    }
 
@@ -210,7 +210,7 @@ public class Equals
    {
       Arb.Register<Library_Error_AND_ObjIsAMessage>();
 
-      Prop.ForAll<(Error, Message, Message)>(EqualsIsTransitive)
+      Prop.ForAll<(IError, Message, Message)>(EqualsIsTransitive)
           .QuickCheckThrowOnFailure();
    }
 
@@ -224,7 +224,7 @@ public class Equals
       // Methods
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Error, Message, Message)> Type()
+      public static Arbitrary<(IError, Message, Message)> Type()
          => Generators
            .TransitiveErrorAndMessages(Generators.Message(),
                                        Generators.TwoUniqueMessages())

@@ -83,7 +83,7 @@ public class VolumeComponent : IComparable<VolumeComponent>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static Error Validate(char   potentialVolume,
+   protected static IError Validate(char   potentialVolume,
                                    string volumeType)
       => potentialVolume.IsNotAnAsciiLetter()
             ? Error.Some(Message.Create(IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(potentialVolume,

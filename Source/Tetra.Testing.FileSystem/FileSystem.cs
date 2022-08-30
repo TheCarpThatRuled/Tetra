@@ -20,7 +20,7 @@ public sealed class FileSystem : IFileSystem
    // IFileSystem Methods
    /* ------------------------------------------------------------ */
 
-   public Error Create(AbsoluteDirectoryPath path)
+   public IError Create(AbsoluteDirectoryPath path)
    {
       _directories.AddRange(path.Ancestry());
 
@@ -45,7 +45,7 @@ public sealed class FileSystem : IFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public Error SetCurrentDirectory(AbsoluteDirectoryPath path)
+   public IError SetCurrentDirectory(AbsoluteDirectoryPath path)
       => _setCurrentDirectory(path);
 
    /* ------------------------------------------------------------ */
@@ -67,7 +67,7 @@ public sealed class FileSystem : IFileSystem
    private readonly List<AbsoluteDirectoryPath> _directories = new();
 
    //Mutable
-   private Func<AbsoluteDirectoryPath, Error> _setCurrentDirectory;
+   private Func<AbsoluteDirectoryPath, IError> _setCurrentDirectory;
    private AbsoluteDirectoryPath              _currentDirectory;
 
    /* ------------------------------------------------------------ */
@@ -87,7 +87,7 @@ public sealed class FileSystem : IFileSystem
    // Private Methods
    /* ------------------------------------------------------------ */
 
-   private Error SuccessfullySetCurrentDirectory(AbsoluteDirectoryPath path)
+   private IError SuccessfullySetCurrentDirectory(AbsoluteDirectoryPath path)
    {
       _currentDirectory = path;
 

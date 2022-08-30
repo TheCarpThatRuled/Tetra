@@ -19,7 +19,7 @@ public class Validate
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Error TestValidate(string potentialComponent,
+      public static IError TestValidate(string potentialComponent,
                                        string componentType)
          => Validate(potentialComponent,
                      componentType);
