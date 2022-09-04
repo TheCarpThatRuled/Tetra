@@ -13,27 +13,31 @@ public static class Result
    /// Creates a success.
    /// </summary>
    /// <typeparam name="T">The type of the contained object</typeparam>
-   /// <param name="content">The value the <c>Result</c> shall contain.</param>
-   /// <returns>A success <c>Result</c> that contains <c>content</c>.</returns>
+   /// <param name="content">The value the <c>IResult</c> shall contain.</param>
+   /// <returns>A success <c>IResult</c> that contains <c>content</c>.</returns>
    public static IResult<T> Success<T>(T content)
-      => Result<T>.Success(content);
+      => Result<T>
+        .Success(content);
 
    /* ------------------------------------------------------------ */
    // Extensions
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Unifies both branches of the <c>Result</c> via a mapping function
+   /// Unifies both branches of the <c>IResult</c> via a mapping function
    /// </summary>
-   /// <param name="whenFailure">A mapping function that shall be applied to the content of the <c>Result</c>, if it is a failure.</param>
+   /// <typeparam name="T">The type of this <c>IResult</c>.</typeparam>
+   /// <param name="whenFailure">A mapping function that shall be applied to the content of the <c>IResult</c>, if it is a failure.</param>
    /// <returns>
-   /// The content of this <c>Result</c> if it is a success;
-   /// otherwise the content of this <c>Result</c> mapped through <c>whenFailure</c>.
+   /// The content of this <c>IResult</c> if it is a success;
+   /// otherwise the content of this <c>IResult</c> mapped through <c>whenFailure</c>.
    /// </returns>
-   public static T Reduce<T>(this IResult<T>       result,
+   public static T Reduce<T>(this IResult<T>  result,
                              Func<Failure, T> whenFailure)
-      => result.Reduce(whenFailure,
-                       content => content.Content());
+      => result
+        .Reduce(whenFailure,
+                Tetra.Success<T>
+                     .Content);
 
    /* ------------------------------------------------------------ */
 }

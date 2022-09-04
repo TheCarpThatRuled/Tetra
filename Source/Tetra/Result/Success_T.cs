@@ -1,7 +1,7 @@
 ﻿namespace Tetra;
 
 /// <summary>
-/// The <c>Success</c> passkey - used to indicate that we are on the success branch of a <c>Result</c>
+/// The <c>ISuccess</c> passkey - used to indicate that we are on the success branch of a <c>IResult</c>
 /// </summary>
 public sealed class Success<T> : ISuccess<T>
 {
@@ -10,12 +10,12 @@ public sealed class Success<T> : ISuccess<T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Makes a function callable through the success branch of a <c>Result</c>.
+   /// Makes a function callable through the success branch of a <c>IResult</c>.
    /// </summary>
-   /// <typeparam name="TNew">The type the <c>Success</c> shall be transformed into.</typeparam>
+   /// <typeparam name="TNew">The type the <c>ISuccess</c> shall be transformed into.</typeparam>
    /// <param name="func">The source function</param>
    /// <returns>
-   /// A function that will invoke <c>func</c> when invoked with a <c>Success</c>.
+   /// A function that will invoke <c>func</c> when invoked with a <c>ISuccess</c>.
    /// </returns>
    public static Func<Success<T>, TNew> Wrap<TNew>(Func<TNew> func)
       => _ => func();
@@ -23,24 +23,36 @@ public sealed class Success<T> : ISuccess<T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Makes a function callable through the success branch of a <c>Result</c>.
+   /// Makes a function callable through the success branch of a <c>IResult</c>.
    /// </summary>
-   /// <typeparam name="TNew">The type the contents of the <c>Success</c> shall be transformed into.</typeparam>
+   /// <typeparam name="TNew">The type the contents of the <c>ISuccess</c> shall be transformed into.</typeparam>
    /// <param name="func">The source function</param>
    /// <returns>
-   /// A function that will invoke <c>func</c> when invoked with a <c>Success</c>.
+   /// A function that will invoke <c>func</c> when invoked with a <c>ISuccess</c>.
    /// </returns>
    public static Func<Success<T>, TNew> Wrap<TNew>(Func<T, TNew> func)
       => success => func(success._content);
+
+   /* ------------------------------------------------------------ */
+   // Functions
+   /* ------------------------------------------------------------ */
+   /// <summary>
+   /// Returns the contents of an <c>ISuccess</c>.
+   /// </summary>
+   /// <param name="success">The success that shall have it's contents accessed.</param>
+   /// <returns>The contents of the success.</returns>
+   public static T Content(ISuccess<T> success)
+      => success
+        .Content();
 
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// The content of this <c>Success</c>.
+   /// The content of this <c>ISuccess</c>.
    /// </summary>
-   /// <returns>The content of this <c>Success</c>.</returns>
+   /// <returns>The content of this <c>ISuccess</c>.</returns>
    public T Content()
       => _content;
 

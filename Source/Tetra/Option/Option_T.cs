@@ -12,7 +12,7 @@ public static partial class Option<T>
    /// <summary>
    /// Creates a none.
    /// </summary>
-   /// <returns>A none <c>Option</c>.</returns>
+   /// <returns>A none <c>IOption</c>.</returns>
    public static IOption<T> None()
       => new NoneOption();
 
@@ -21,8 +21,8 @@ public static partial class Option<T>
    /// <summary>
    /// Creates a some.
    /// </summary>
-   /// <param name="content">The value the <c>Option</c> shall contain.</param>
-   /// <returns>A some <c>Option</c> that contains <c>content</c>.</returns>
+   /// <param name="content">The value the <c>IOption</c> shall contain.</param>
+   /// <returns>A some <c>IOption</c> that contains <c>content</c>.</returns>
    public static IOption<T> Some(T content)
       => new SomeOption(content);
 

@@ -86,7 +86,7 @@ partial class Result<T>
 
       /* ------------------------------------------------------------ */
 
-      public TNew Reduce<TNew>(Func<Failure, TNew>             whenFailure,
+      public TNew Reduce<TNew>(Func<Failure, TNew>     whenFailure,
                                Func<ISuccess<T>, TNew> _)
          => whenFailure(_failure);
 

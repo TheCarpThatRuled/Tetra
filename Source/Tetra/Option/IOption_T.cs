@@ -2,7 +2,7 @@
 
 /// <summary>
 /// An implementation of the "option" (Aka "maybe") monad.
-/// An <c>Option</c> may be in one of two states:
+/// An <c>IOption</c> may be in one of two states:
 /// <list type="bullet">
 /// <item>
 /// <description>Some, representing an instance of the contained type;</description>
@@ -20,11 +20,11 @@ public interface IOption<out T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Casts the content of this <c>Option</c> to the new type.
+   /// Casts the content of this <c>IOption</c> to the new type.
    /// </summary>
-   /// <typeparam name="TNew">The type the content of this <c>Option</c> shall be cast into.</typeparam>
+   /// <typeparam name="TNew">The type the content of this <c>IOption</c> shall be cast into.</typeparam>
    /// <returns>
-   /// If <c>Option</c> is a some and the cast was successful, a some of the new type;
+   /// If <c>IOption</c> is a some and the cast was successful, a some of the new type;
    /// otherwise a none.
    /// </returns>
    public IOption<TNew> Cast<TNew>();
@@ -32,10 +32,10 @@ public interface IOption<out T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Identifies if this <c>Option</c> is in the none state.
+   /// Identifies if this <c>IOption</c> is in the none state.
    /// </summary>
    /// <returns>
-   /// <c>true</c> if this <c>Option</c> is a none;
+   /// <c>true</c> if this <c>IOption</c> is a none;
    /// <c>false</c> if it is a some.
    /// </returns>
    public bool IsANone();
@@ -43,10 +43,10 @@ public interface IOption<out T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Identifies if this <c>Option</c> is in the some state.
+   /// Identifies if this <c>IOption</c> is in the some state.
    /// </summary>
    /// <returns>
-   /// <c>true</c> if this <c>Option</c> is a some;
+   /// <c>true</c> if this <c>IOption</c> is a some;
    /// <c>false</c> if it is a none.
    /// </returns>
    public bool IsASome();
@@ -54,12 +54,12 @@ public interface IOption<out T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Maps the contents of the <c>Option</c> into a new form.
+   /// Maps the contents of the <c>IOption</c> into a new form.
    /// </summary>
-   /// <typeparam name="TNew">The type the content of this <c>Option</c> shall be transformed into, if it is a some.</typeparam>
-   /// <param name="whenSome">A mapping function that shall be applied to the content of the <c>Option</c>, if it is a some.</param>
+   /// <typeparam name="TNew">The type the content of this <c>IOption</c> shall be transformed into, if it is a some.</typeparam>
+   /// <param name="whenSome">A mapping function that shall be applied to the content of the <c>IOption</c>, if it is a some.</param>
    /// <returns>
-   /// A some containing the content of this <c>Option</c> mapped through <c>whenSome</c> if it is a some;
+   /// A some containing the content of this <c>IOption</c> mapped through <c>whenSome</c> if it is a some;
    /// otherwise a none.
    /// </returns>
    public IOption<TNew> Map<TNew>(Func<T, TNew> whenSome);
@@ -67,12 +67,12 @@ public interface IOption<out T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Maps the contents of the <c>Option</c> into a new form.
+   /// Maps the contents of the <c>IOption</c> into a new form.
    /// </summary>
-   /// <typeparam name="TNew">The type the content of this <c>Option</c> shall be transformed into, if it is a some.</typeparam>
-   /// <param name="whenSome">A mapping function that shall be applied to the content of the <c>Option</c>, if it is a some.</param>
+   /// <typeparam name="TNew">The type the content of this <c>IOption</c> shall be transformed into, if it is a some.</typeparam>
+   /// <param name="whenSome">A mapping function that shall be applied to the content of the <c>IOption</c>, if it is a some.</param>
    /// <returns>
-   /// The content of this <c>Option</c> mapped through <c>whenSome</c> if it is a some;
+   /// The content of this <c>IOption</c> mapped through <c>whenSome</c> if it is a some;
    /// otherwise a none.
    /// </returns>
    public IOption<TNew> Map<TNew>(Func<T, IOption<TNew>> whenSome);
@@ -80,11 +80,11 @@ public interface IOption<out T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Converts this <c>Option</c> into a <c>Result</c>, that is a success containing the contents if this is a some.
+   /// Converts this <c>IOption</c> into a <c>IResult</c>, that is a success containing the contents if this is a some.
    /// </summary>
    /// <param name="whenNone">The value to populate the failure with, if it is a none.</param>
    /// <returns>
-   /// A success containing the content of this <c>Option</c> if it is a some;
+   /// A success containing the content of this <c>IOption</c> if it is a some;
    /// otherwise a failure containing the return value of <c>whenNone</c>.
    /// </returns>
    public IResult<T> MapToResult(Message whenNone);
@@ -92,11 +92,11 @@ public interface IOption<out T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Converts this <c>Option</c> into a <c>Result</c>, that is a success containing the contents if this is a some.
+   /// Converts this <c>IOption</c> into a <c>IResult</c>, that is a success containing the contents if this is a some.
    /// </summary>
    /// <param name="whenNone">A function that creates a value to populate the failure with, if it is a none.</param>
    /// <returns>
-   /// A success containing the content of this <c>Option</c> if it is a some;
+   /// A success containing the content of this <c>IOption</c> if it is a some;
    /// otherwise a failure containing the return value of <c>whenNone</c>.
    /// </returns>
    public IResult<T> MapToResult(Func<Message> whenNone);
@@ -104,13 +104,13 @@ public interface IOption<out T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Unifies both branches of the <c>Option</c> via a mapping function.
+   /// Unifies both branches of the <c>IOption</c> via a mapping function.
    /// </summary>
-   /// <typeparam name="TNew">The type this <c>Option</c> shall be unified as.</typeparam>
-   /// <param name="whenNone">A value to use, if the <c>Option</c> is a none.</param>
-   /// <param name="whenSome">A mapping function that shall be applied to the content of the <c>Option</c>, if it is a some.</param>
+   /// <typeparam name="TNew">The type this <c>IOption</c> shall be unified as.</typeparam>
+   /// <param name="whenNone">A value to use, if the <c>IOption</c> is a none.</param>
+   /// <param name="whenSome">A mapping function that shall be applied to the content of the <c>IOption</c>, if it is a some.</param>
    /// <returns>
-   /// The content of this <c>Option</c> mapped through <c>whenSome</c> if it is a some;
+   /// The content of this <c>IOption</c> mapped through <c>whenSome</c> if it is a some;
    /// otherwise <c>whenNone</c>.
    /// </returns>
    public TNew Reduce<TNew>(TNew          whenNone,
@@ -119,13 +119,13 @@ public interface IOption<out T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Unifies both branches of the <c>Option</c> via mapping functions.
+   /// Unifies both branches of the <c>IOption</c> via mapping functions.
    /// </summary>
-   /// <typeparam name="TNew">The type this <c>Option</c> shall be unified as.</typeparam>
-   /// <param name="whenNone">A function that will return the value to use, if the <c>Option</c> is a none.</param>
-   /// <param name="whenSome">A mapping function that shall be applied to the content of the <c>Option</c>, if it is a some.</param>
+   /// <typeparam name="TNew">The type this <c>IOption</c> shall be unified as.</typeparam>
+   /// <param name="whenNone">A function that will return the value to use, if the <c>IOption</c> is a none.</param>
+   /// <param name="whenSome">A mapping function that shall be applied to the content of the <c>IOption</c>, if it is a some.</param>
    /// <returns>
-   /// The content of this <c>Option</c> mapped through <c>whenSome</c> if it is a some;
+   /// The content of this <c>IOption</c> mapped through <c>whenSome</c> if it is a some;
    /// otherwise the return value of <c>whenNone</c>.
    /// </returns>
    public TNew Reduce<TNew>(Func<TNew>    whenNone,

@@ -1,7 +1,7 @@
 ﻿namespace Tetra;
 
 /// <summary>
-/// The <c>Failure</c> passkey - used to indicate that we are on the failure branch of a <c>Result</c>
+/// The <c>Failure</c> passkey - used to indicate that we are on the failure branch of a <c>IResult</c>
 /// </summary>
 public sealed class Failure
 {
@@ -10,7 +10,7 @@ public sealed class Failure
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Makes a function callable through the failure branch of a <c>Result</c>.
+   /// Makes a function callable through the failure branch of a <c>IResult</c>.
    /// </summary>
    /// <typeparam name="T">The type the <c>Failure</c> shall be transformed into.</typeparam>
    /// <param name="func">The source function</param>
@@ -23,7 +23,7 @@ public sealed class Failure
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Makes a function callable through the failure branch of a <c>Result</c>.
+   /// Makes a function callable through the failure branch of a <c>IResult</c>.
    /// </summary>
    /// <typeparam name="T">The type the contents of the <c>Failure</c> shall be transformed into.</typeparam>
    /// <param name="func">The source function</param>
