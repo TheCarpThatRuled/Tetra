@@ -188,13 +188,10 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
    // Private Factory Functions
    /* ------------------------------------------------------------ */
 
-   private static AbsoluteFilePath Create(ISuccess<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file)> success)
-      => new(success.Content()
-                    .directories,
-             success.Content()
-                    .file,
-             success.Content()
-                    .volume);
+   private static AbsoluteFilePath Create((VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file) success)
+      => new(success.directories,
+             success.file,
+             success.volume);
 
    /* ------------------------------------------------------------ */
 }

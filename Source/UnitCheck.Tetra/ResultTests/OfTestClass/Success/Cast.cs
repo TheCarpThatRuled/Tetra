@@ -18,14 +18,14 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
    //Cast_to_int
    //THEN
    //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_int_THEN_a_failure_containing_cast_failed_is_returned()
+   public void GIVEN_TestClass_WHEN_Cast_to_int_THEN_a_failure_containing_cast_failed_is_returned()
    {
       static Property Property(TestClass content)
       {
@@ -50,14 +50,14 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
    //Cast_to_string
    //THEN
    //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_string_THEN_a_failure_containing_cast_failed_is_returned()
+   public void GIVEN_TestClass_WHEN_Cast_to_string_THEN_a_failure_containing_cast_failed_is_returned()
    {
       static Property Property(TestClass content)
       {
@@ -82,14 +82,14 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass_AND_the_content_is_a_TestClass
+   //TestClass_AND_the_content_is_a_TestClass
    //WHEN
    //Cast_to_TestClass
    //THEN
    //a_success_containing_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_AND_the_content_is_a_TestClass_WHEN_Cast_to_TestClass_THEN_a_success_containing_the_content_is_returned()
+   public void GIVEN_TestClass_AND_the_content_is_a_TestClass_WHEN_Cast_to_TestClass_THEN_a_success_containing_the_content_is_returned()
    {
       static Property Property(TestClass content)
       {
@@ -114,14 +114,14 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass_AND_the_content_is_a_TestSubClass
+   //TestClass_AND_the_content_is_a_TestSubClass
    //WHEN
    //Cast_to_TestClass
    //THEN
    //a_success_containing_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_AND_the_content_is_a_TestSubClass_WHEN_Cast_to_TestClass_THEN_a_success_containing_the_content_is_returned()
+   public void GIVEN_TestClass_AND_the_content_is_a_TestSubClass_WHEN_Cast_to_TestClass_THEN_a_success_containing_the_content_is_returned()
    {
       static Property Property(TestSubClass content)
       {
@@ -146,14 +146,14 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
    //Cast_to_TestStruct
    //THEN
    //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_TestStruct_THEN_a_failure_containing_cast_failed_is_returned()
+   public void GIVEN_TestClass_WHEN_Cast_to_TestStruct_THEN_a_failure_containing_cast_failed_is_returned()
    {
       static Property Property(TestClass content)
       {
@@ -178,14 +178,14 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
    //Cast_to_TestSubClass
    //THEN
    //a_failure_containing_cast_failed_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_TestSubClass_THEN_a_failure_containing_cast_failed_is_returned()
+   public void GIVEN_TestClass_WHEN_Cast_to_TestSubClass_THEN_a_failure_containing_cast_failed_is_returned()
    {
       static Property Property(TestClass content)
       {
@@ -212,14 +212,14 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
    //Cast_to_int_AND_whenCastFails_is_a_Message
    //THEN
    //a_failure_containing_whenCastFails_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_int_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_whenCastFails_is_returned()
+   public void GIVEN_TestClass_WHEN_Cast_to_int_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_whenCastFails_is_returned()
    {
       static Property Property(TestClass content, Message whenCastFails)
       {
@@ -245,14 +245,14 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
    //Cast_to_string_AND_whenCastFails_is_a_Message
    //THEN
    //a_failure_containing_whenCastFails_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_string_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_whenCastFails_is_returned()
+   public void GIVEN_TestClass_WHEN_Cast_to_string_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_whenCastFails_is_returned()
    {
       static Property Property(TestClass content, Message whenCastFails)
       {
@@ -278,14 +278,14 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
    //Cast_to_TestClass_AND_whenCastFails_is_a_Message
    //THEN
    //a_success_containing_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_TestClass_AND_whenCastFails_is_a_Message_THEN_a_success_containing_the_content_is_returned()
+   public void GIVEN_TestClass_WHEN_Cast_to_TestClass_AND_whenCastFails_is_a_Message_THEN_a_success_containing_the_content_is_returned()
    {
       static Property Property(TestClass content, Message whenCastFails)
       {
@@ -311,14 +311,14 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
    //Cast_to_TestStruct_AND_whenCastFails_is_a_Message
    //THEN
    //a_failure_containing_whenCastFails_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_TestStruct_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_whenCastFails_is_returned()
+   public void GIVEN_TestClass_WHEN_Cast_to_TestStruct_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_whenCastFails_is_returned()
    {
       static Property Property(TestClass content, Message whenCastFails)
       {
@@ -344,14 +344,14 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
    //Cast_to_TestSubClass_AND_whenCastFails_is_a_Message
    //THEN
    //a_failure_containing_whenCastFails_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_TestSubClass_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_whenCastFails_is_returned()
+   public void GIVEN_TestClass_WHEN_Cast_to_TestSubClass_AND_whenCastFails_is_a_Message_THEN_a_failure_containing_whenCastFails_is_returned()
    {
       static Property Property(TestClass content, Message whenCastFails)
       {
@@ -375,23 +375,23 @@ public class Success_Cast
    }
 
    /* ------------------------------------------------------------ */
-   // Result<TNew> Cast<TNew>(Func<Success<T>, Message> whenCastFails)
+   // Result<TNew> Cast<TNew>(Func<T, Message> whenCastFails)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
-   //Cast_to_int_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message
+   //Cast_to_int_AND_whenCastFails_is_a_Func_of_TestClass_to_Message
    //THEN
    //whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_int_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message_THEN_whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned()
+   public void GIVEN_TestClass_WHEN_Cast_to_int_AND_whenCastFails_is_a_Func_of_TestClass_to_Message_THEN_whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned()
    {
       static Property Property(TestClass content, Message whenCastFails)
       {
          //Arrange
-         var whenCastFailsFunc = FakeFunction<ISuccess<TestClass>, Message>.Create(whenCastFails);
+         var whenCastFailsFunc = FakeFunction<TestClass, Message>.Create(whenCastFails);
 
          var result = Result.Success(content);
 
@@ -417,19 +417,19 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
-   //Cast_to_string_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message
+   //Cast_to_string_AND_whenCastFails_is_a_Func_of_TestClass_to_Message
    //THEN
    //whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_string_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message_THEN_whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned()
+   public void GIVEN_TestClass_WHEN_Cast_to_string_AND_whenCastFails_is_a_Func_of_TestClass_to_Message_THEN_whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned()
    {
       static Property Property(TestClass content, Message whenCastFails)
       {
          //Arrange
-         var whenCastFailsFunc = FakeFunction<ISuccess<TestClass>, Message>.Create(whenCastFails);
+         var whenCastFailsFunc = FakeFunction<TestClass, Message>.Create(whenCastFails);
 
          var result = Result.Success(content);
 
@@ -455,19 +455,19 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
-   //Cast_to_TestClass_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message
+   //Cast_to_TestClass_AND_whenCastFails_is_a_Func_of_TestClass_to_Message
    //THEN
    //whenCastFails_was_not_invoked_AND_a_success_containing_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_TestClass_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message_THEN_whenCastFails_was_not_invoked_AND_a_success_containing_the_content_is_returned()
+   public void GIVEN_TestClass_WHEN_Cast_to_TestClass_AND_whenCastFails_is_a_Func_of_TestClass_to_Message_THEN_whenCastFails_was_not_invoked_AND_a_success_containing_the_content_is_returned()
    {
       static Property Property(TestClass content, Message whenCastFails)
       {
          //Arrange
-         var whenCastFailsFunc = FakeFunction<ISuccess<TestClass>, Message>.Create(whenCastFails);
+         var whenCastFailsFunc = FakeFunction<TestClass, Message>.Create(whenCastFails);
 
          var result = Result.Success(content);
 
@@ -492,19 +492,19 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
-   //Cast_to_TestStruct_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message
+   //Cast_to_TestStruct_AND_whenCastFails_is_a_Func_of_TestClass_to_Message
    //THEN
    //whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_TestStruct_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message_THEN_whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned()
+   public void GIVEN_TestClass_WHEN_Cast_to_TestStruct_AND_whenCastFails_is_a_Func_of_TestClass_to_Message_THEN_whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned()
    {
       static Property Property(TestClass content, Message whenCastFails)
       {
          //Arrange
-         var whenCastFailsFunc = FakeFunction<ISuccess<TestClass>, Message>.Create(whenCastFails);
+         var whenCastFailsFunc = FakeFunction<TestClass, Message>.Create(whenCastFails);
 
          var result = Result.Success(content);
 
@@ -530,19 +530,19 @@ public class Success_Cast
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
-   //Cast_to_TestSubClass_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message
+   //Cast_to_TestSubClass_AND_whenCastFails_is_a_Func_of_TestClass_to_Message
    //THEN
    //whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_Cast_to_TestSubClass_AND_whenCastFails_is_a_Func_of_Success_of_TestClass_to_Message_THEN_whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned()
+   public void GIVEN_TestClass_WHEN_Cast_to_TestSubClass_AND_whenCastFails_is_a_Func_of_TestClass_to_Message_THEN_whenCastFails_was_invoked_once_with_the_content_AND_a_failure_containing_the_return_value_whenCastFails_is_returned()
    {
       static Property Property(TestClass content, Message whenCastFails)
       {
          //Arrange
-         var whenCastFailsFunc = FakeFunction<ISuccess<TestClass>, Message>.Create(whenCastFails);
+         var whenCastFailsFunc = FakeFunction<TestClass, Message>.Create(whenCastFails);
 
          var result = Result.Success(content);
 

@@ -51,12 +51,12 @@ public class SuccessFactory
    //GIVEN
    //Result
    //WHEN
-   //Success_of_TestClass
+   //TestClass
    //THEN
    //a_success_containing_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Result_WHEN_Success_of_TestClass_THEN_a_success_containing_content_is_returned()
+   public void GIVEN_Result_WHEN_TestClass_THEN_a_success_containing_content_is_returned()
    {
       static Property Property(TestClass content)
       {

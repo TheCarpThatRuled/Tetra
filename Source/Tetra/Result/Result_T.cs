@@ -35,7 +35,7 @@ public static partial class Result<T>
    /// <param name="content">The value the <c>IResult</c> shall contain.</param>
    /// <returns>A success <c>IResult</c> that contains <c>content</c>.</returns>
    public static IResult<T> Success(T content)
-      => new SuccessResult(new(content));
+      => new SuccessResult(content);
 
    /* ------------------------------------------------------------ */
 }

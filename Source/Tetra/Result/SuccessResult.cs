@@ -10,8 +10,8 @@ partial class Result<T>
       // Constructors
       /* ------------------------------------------------------------ */
 
-      public SuccessResult(Success<T> success)
-         => _success = success;
+      public SuccessResult(T content)
+         => _content = content;
 
       /* ------------------------------------------------------------ */
       // object Overridden Methods
@@ -22,10 +22,9 @@ partial class Result<T>
                             obj)
          || obj switch
             {
-               SuccessResult success => Equals(_success.Content(),
-                                               success._success
-                                                      .Content()),
-               T success => Equals(_success.Content(),
+               SuccessResult success => Equals(_content,
+                                               success._content),
+               T success => Equals(_content,
                                    success),
                _ => false,
             };
@@ -33,38 +32,37 @@ partial class Result<T>
       /* ------------------------------------------------------------ */
 
       public override int GetHashCode()
-         => _success
-           .Content()
+         => _content
           ?.GetHashCode()
          ?? 0;
 
       /* ------------------------------------------------------------ */
 
       public override string ToString()
-         => $"Success ({_success.Content()})";
+         => $"Success ({_content})";
 
       /* ------------------------------------------------------------ */
       // Result<T> Methods
       /* ------------------------------------------------------------ */
 
       public IResult<TNew> Cast<TNew>()
-         => _success.Content() is TNew content
-               ? new Result<TNew>.SuccessResult(new(content))
+         => _content is TNew content
+               ? new Result<TNew>.SuccessResult(content)
                : new Result<TNew>.FailureResult(new(CastFailed<T, TNew>()));
 
       /* ------------------------------------------------------------ */
 
       public IResult<TNew> Cast<TNew>(Message whenCastFails)
-         => _success.Content() is TNew content
-               ? new Result<TNew>.SuccessResult(new(content))
+         => _content is TNew content
+               ? new Result<TNew>.SuccessResult(content)
                : new Result<TNew>.FailureResult(new(whenCastFails));
 
       /* ------------------------------------------------------------ */
 
-      public IResult<TNew> Cast<TNew>(Func<ISuccess<T>, Message> whenCastFails)
-         => _success.Content() is TNew content
-               ? new Result<TNew>.SuccessResult(new(content))
-               : new Result<TNew>.FailureResult(new(whenCastFails(_success)));
+      public IResult<TNew> Cast<TNew>(Func<T, Message> whenCastFails)
+         => _content is TNew content
+               ? new Result<TNew>.SuccessResult(content)
+               : new Result<TNew>.FailureResult(new(whenCastFails(_content)));
 
       /* ------------------------------------------------------------ */
 
@@ -78,31 +76,31 @@ partial class Result<T>
 
       /* ------------------------------------------------------------ */
 
-      public IResult<T> Map(Func<Failure, Message> _)
+      public IResult<T> MapFailure(Func<Failure, Message> _)
          => this;
 
       /* ------------------------------------------------------------ */
 
-      public IResult<TNew> Map<TNew>(Func<ISuccess<T>, TNew> whenSuccess)
+      public IResult<TNew> Map<TNew>(Func<T, TNew> whenSuccess)
          => new Result<TNew>
-            .SuccessResult(new(whenSuccess(_success)));
+            .SuccessResult(whenSuccess(_content));
 
       /* ------------------------------------------------------------ */
 
-      public Message Reduce(Func<ISuccess<T>, Message> whenSuccess)
-         => whenSuccess(_success);
+      public Message Reduce(Func<T, Message> whenSuccess)
+         => whenSuccess(_content);
 
       /* ------------------------------------------------------------ */
 
       public TNew Reduce<TNew>(Func<Failure, TNew>             _,
-                               Func<ISuccess<T>, TNew> whenSuccess)
-         => whenSuccess(_success);
+                               Func<T, TNew> whenSuccess)
+         => whenSuccess(_content);
 
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly Success<T> _success;
+      private readonly T _content;
 
       /* ------------------------------------------------------------ */
    }

@@ -53,7 +53,7 @@ partial class Result<T>
 
       /* ------------------------------------------------------------ */
 
-      public IResult<TNew> Cast<TNew>(Func<ISuccess<T>, Message> _)
+      public IResult<TNew> Cast<TNew>(Func<T, Message> _)
          => new Result<TNew>
             .FailureResult(_failure);
 
@@ -69,25 +69,25 @@ partial class Result<T>
 
       /* ------------------------------------------------------------ */
 
-      public IResult<T> Map(Func<Failure, Message> whenFailure)
+      public IResult<T> MapFailure(Func<Failure, Message> whenFailure)
          => new FailureResult(new(whenFailure(_failure)));
 
       /* ------------------------------------------------------------ */
 
-      public IResult<TNew> Map<TNew>(Func<ISuccess<T>, TNew> _)
+      public IResult<TNew> Map<TNew>(Func<T, TNew> _)
          => new Result<TNew>
             .FailureResult(_failure);
 
       /* ------------------------------------------------------------ */
 
-      public Message Reduce(Func<ISuccess<T>, Message> _)
+      public Message Reduce(Func<T, Message> _)
          => _failure
            .Content();
 
       /* ------------------------------------------------------------ */
 
       public TNew Reduce<TNew>(Func<Failure, TNew>     whenFailure,
-                               Func<ISuccess<T>, TNew> _)
+                               Func<T, TNew> _)
          => whenFailure(_failure);
 
       /* ------------------------------------------------------------ */

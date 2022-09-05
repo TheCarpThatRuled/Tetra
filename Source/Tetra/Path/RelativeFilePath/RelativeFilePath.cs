@@ -204,11 +204,9 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
    // Private Factory Functions
    /* ------------------------------------------------------------ */
 
-   private static RelativeFilePath Create(ISuccess<(ISequence<DirectoryComponent> directories, FileComponent file)> success)
-      => new(success.Content()
-                    .directories,
-             success.Content()
-                    .file);
+   private static RelativeFilePath Create((ISequence<DirectoryComponent> directories, FileComponent file) success)
+      => new(success.directories,
+             success.file);
 
    /* ------------------------------------------------------------ */
 }

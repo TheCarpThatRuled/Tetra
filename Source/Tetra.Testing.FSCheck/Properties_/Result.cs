@@ -52,12 +52,12 @@ partial class Properties
                                                         failure.Content())),
                 actual => AreEqual(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(description),
                                    expected,
-                                   actual.Content()));
+                                   actual));
 
    /* ------------------------------------------------------------ */
 
    public static Property IsASuccessAnd<T>(string                                      description,
-                                           Func<string, ISuccess<T>, Property> property,
+                                           Func<string, T, Property> property,
                                            IResult<T>                                  result)
       => result
         .Reduce(failure => False(TheResultIsAFailure<T>(description,

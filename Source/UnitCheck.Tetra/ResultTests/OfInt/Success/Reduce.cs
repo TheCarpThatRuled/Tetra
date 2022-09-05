@@ -18,7 +18,7 @@ public class Success_Reduce
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_int
+   //int
    //WHEN
    //Reduce_AND_whenFailure_is_a_Func_of_Failure_to_int
    //THEN
@@ -26,7 +26,7 @@ public class Success_Reduce
 
    [TestMethod]
    public void
-      GIVEN_Success_of_int_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_int_THEN_whenFailure_was_not_invoked_AND_the_content_is_returned()
+      GIVEN_int_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_int_THEN_whenFailure_was_not_invoked_AND_the_content_is_returned()
    {
       static Property Property((int content, int whenFailure) args)
       {
@@ -53,25 +53,25 @@ public class Success_Reduce
    }
 
    /* ------------------------------------------------------------ */
-   // Message Reduce(Func<Success<T>, Message> whenSuccess)
+   // Message Reduce(Func<T, Message> whenSuccess)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_int
+   //int
    //WHEN
-   //Reduce_AND_whenSuccess_is_a_Func_of_Success_of_int_to_Message
+   //Reduce_AND_whenSuccess_is_a_Func_of_int_to_Message
    //THEN
    //whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned
 
    [TestMethod]
    public void
-      GIVEN_Success_of_int_WHEN_Reduce_AND_whenSuccess_is_a_Func_of_Success_of_int_to_Message_THEN_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned()
+      GIVEN_int_WHEN_Reduce_AND_whenSuccess_is_a_Func_of_int_to_Message_THEN_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned()
    {
       static Property Property(int     content,
                                Message whenSuccess)
       {
          //Arrange
-         var whenSuccessFunc = FakeFunction<ISuccess<int>, Message>.Create(whenSuccess);
+         var whenSuccessFunc = FakeFunction<int, Message>.Create(whenSuccess);
 
          var result = Result.Success(content);
 
@@ -95,25 +95,25 @@ public class Success_Reduce
 
    /* ------------------------------------------------------------ */
    // TNew Reduce<TNew>(Func<Failure, TNew> whenFailure,
-   //                   Func<Success<T>, TNew> whenSuccess)
+   //                   Func<T, TNew> whenSuccess)
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_int
+   //int
    //WHEN
-   //Reduce_AND_whenFailure_is_a_Func_of_Failure_to_int_AND_whenSuccess_is_a_Func_of_Success_of_int_to_int
+   //Reduce_AND_whenFailure_is_a_Func_of_Failure_to_int_AND_whenSuccess_is_a_Func_of_int_to_int
    //THEN
    //whenFailure_was_not_invoked_AND_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned
 
    [TestMethod]
    public void
-      GIVEN_Success_of_int_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_int_AND_whenSuccess_is_a_Func_of_Success_of_int_to_int_THEN_whenFailure_was_not_invoked_AND_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned()
+      GIVEN_int_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_int_AND_whenSuccess_is_a_Func_of_int_to_int_THEN_whenFailure_was_not_invoked_AND_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned()
    {
       static Property Property((int value, int whenFailure, int whenSuccess) args)
       {
          //Arrange
          var whenFailure = FakeFunction<Failure, int>.Create(args.whenFailure);
-         var whenSuccess = FakeFunction<ISuccess<int>, int>.Create(args.whenSuccess);
+         var whenSuccess = FakeFunction<int, int>.Create(args.whenSuccess);
 
          var result = Result.Success(args.value);
 
@@ -141,22 +141,22 @@ public class Success_Reduce
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_int
+   //int
    //WHEN
-   //Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestClass_AND_whenSuccess_is_a_Func_of_Success_of_int_to_TestClass
+   //Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestClass_AND_whenSuccess_is_a_Func_of_int_to_TestClass
    //THEN
    //whenFailure_was_not_invoked_AND_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned
 
    [TestMethod]
    public void
-      GIVEN_Success_of_int_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestClass_AND_whenSuccess_is_a_Func_of_Success_of_int_to_TestClass_THEN_whenFailure_was_not_invoked_AND_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned()
+      GIVEN_int_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestClass_AND_whenSuccess_is_a_Func_of_int_to_TestClass_THEN_whenFailure_was_not_invoked_AND_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned()
    {
       static Property Property(int                                            value,
                                (TestClass whenFailure, TestClass whenSuccess) args)
       {
          //Arrange
          var whenFailure = FakeFunction<Failure, TestClass>.Create(args.whenFailure);
-         var whenSuccess = FakeFunction<ISuccess<int>, TestClass>.Create(args.whenSuccess);
+         var whenSuccess = FakeFunction<int, TestClass>.Create(args.whenSuccess);
 
          var result = Result.Success(value);
 
@@ -184,22 +184,22 @@ public class Success_Reduce
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_int
+   //int
    //WHEN
-   //Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestStruct_AND_whenSuccess_is_a_Func_of_Success_of_int_to_TestStruct
+   //Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestStruct_AND_whenSuccess_is_a_Func_of_int_to_TestStruct
    //THEN
    //whenFailure_was_not_invoked_AND_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned
 
    [TestMethod]
    public void
-      GIVEN_Success_of_int_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestStruct_AND_whenSuccess_is_a_Func_of_Success_of_int_to_TestStruct_THEN_whenFailure_was_not_invoked_AND_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned()
+      GIVEN_int_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestStruct_AND_whenSuccess_is_a_Func_of_int_to_TestStruct_THEN_whenFailure_was_not_invoked_AND_whenSuccess_was_invoked_once_with_the_content_AND_the_return_value_of_whenSuccess_is_returned()
    {
       static Property Property(int                                              value,
                                (TestStruct whenFailure, TestStruct whenSuccess) args)
       {
          //Arrange
          var whenFailure = FakeFunction<Failure, TestStruct>.Create(args.whenFailure);
-         var whenSuccess = FakeFunction<ISuccess<int>, TestStruct>.Create(args.whenSuccess);
+         var whenSuccess = FakeFunction<int, TestStruct>.Create(args.whenSuccess);
 
          var result = Result.Success(value);
 

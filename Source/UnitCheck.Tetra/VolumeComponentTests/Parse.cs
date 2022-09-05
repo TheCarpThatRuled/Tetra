@@ -36,8 +36,7 @@ public class Parse
                               (description,
                                actualVolume) => AreEqual(description,
                                                          $"{value}:",
-                                                         actualVolume.Content()
-                                                                     .Value()),
+                                                         actualVolume.Value()),
                               actual);
       }
 

@@ -17,14 +17,14 @@ public class Success_IsAFailure
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_int
+   //int
    //WHEN
    //IsAFailure
    //THEN
    //false_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_int_WHEN_IsAFailure_THEN_false_is_returned()
+   public void GIVEN_int_WHEN_IsAFailure_THEN_false_is_returned()
    {
       static Property Property(int content)
       {

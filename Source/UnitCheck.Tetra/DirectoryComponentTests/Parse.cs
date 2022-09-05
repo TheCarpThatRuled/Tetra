@@ -36,8 +36,7 @@ public class Parse
                               (description,
                                actualDirectoryComponent) => AreEqual(description,
                                                                      value,
-                                                                     actualDirectoryComponent.Content()
-                                                                                             .Value()),
+                                                                     actualDirectoryComponent.Value()),
                               actual);
       }
 

@@ -17,14 +17,14 @@ public class Success_GetHashCode
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_int
+   //int
    //WHEN
    //GetHashCode
    //THEN
    //the_hash_code_of_the_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_int_WHEN_GetHashCode_THEN_the_hash_code_of_the_content_is_returned()
+   public void GIVEN_int_WHEN_GetHashCode_THEN_the_hash_code_of_the_content_is_returned()
    {
       static Property Property(int content)
       {

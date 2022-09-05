@@ -36,8 +36,7 @@ public class Parse
                               (description,
                                actualFileComponent) => AreEqual(description,
                                                                 value,
-                                                                actualFileComponent.Content()
-                                                                                   .Value()),
+                                                                actualFileComponent.Value()),
                               actual);
       }
 

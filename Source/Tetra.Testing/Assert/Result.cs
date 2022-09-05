@@ -96,7 +96,7 @@ partial class Assert_Extensions
                         {
                            assert.AreEqual(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(description),
                                            expected,
-                                           actual.Content());
+                                           actual);
 
                            return false;
                         }))
@@ -111,7 +111,7 @@ partial class Assert_Extensions
 
    public static Assert IsASuccessAnd<T>(this Assert             assert,
                                          string                  description,
-                                         Func<ISuccess<T>, bool> property,
+                                         Func<T, bool> property,
                                          IResult<T>              result)
    {
       if (result.Reduce(Function.True,

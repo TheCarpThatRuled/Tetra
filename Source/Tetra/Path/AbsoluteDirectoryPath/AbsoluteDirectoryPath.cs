@@ -215,11 +215,9 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
    // Private Factory Functions
    /* ------------------------------------------------------------ */
 
-   private static AbsoluteDirectoryPath Create(ISuccess<(VolumeComponent volume, ISequence<DirectoryComponent> directories)> success)
-      => new(success.Content()
-                    .directories,
-             success.Content()
-                    .volume);
+   private static AbsoluteDirectoryPath Create((VolumeComponent volume, ISequence<DirectoryComponent> directories) success)
+      => new(success.directories,
+             success.volume);
 
    /* ------------------------------------------------------------ */
 }

@@ -17,14 +17,14 @@ public class Success_IsASuccess
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestStruct
+   //TestStruct
    //WHEN
    //IsASuccess
    //THEN
    //true_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestStruct_WHEN_IsASuccess_THEN_true_is_returned()
+   public void GIVEN_TestStruct_WHEN_IsASuccess_THEN_true_is_returned()
    {
       static Property Property(TestStruct content)
       {

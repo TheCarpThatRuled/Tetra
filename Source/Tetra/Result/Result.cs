@@ -36,8 +36,7 @@ public static class Result
                              Func<Failure, T> whenFailure)
       => result
         .Reduce(whenFailure,
-                Tetra.Success<T>
-                     .Content);
+                Function.PassThrough);
 
    /* ------------------------------------------------------------ */
 }

@@ -64,7 +64,7 @@ public class ParseComponents
                               (description,
                                actualComponents) => AreEqual(description,
                                                              testPath,
-                                                             actualComponents.Content()),
+                                                             actualComponents),
                               actual);
       }
 
@@ -99,7 +99,7 @@ public class ParseComponents
                               (description,
                                actualComponents) => AreEqual(description,
                                                              testPath,
-                                                             actualComponents.Content()),
+                                                             actualComponents),
                               actual);
       }
 

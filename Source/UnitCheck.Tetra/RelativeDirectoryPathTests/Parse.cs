@@ -38,7 +38,7 @@ public class Parse
                               (description,
                                actualPath) => AreEqual(description,
                                                        testPath,
-                                                       actualPath.Content()),
+                                                       actualPath),
                               actual);
       }
 
@@ -72,7 +72,7 @@ public class Parse
                               (description,
                                actualPath) => AreEqual(description,
                                                        testPath,
-                                                       actualPath.Content()),
+                                                       actualPath),
                               actual);
       }
 

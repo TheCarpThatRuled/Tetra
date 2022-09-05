@@ -13,7 +13,7 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
       => ParseComponents(potentialPath,
                          PathType)
         .Reduce(Exceptions.ThrowArgumentException<RelativeDirectoryPath>(nameof(potentialPath)),
-                Create);
+                CreateInternal);
 
    /* ------------------------------------------------------------ */
 
@@ -30,7 +30,7 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    public static IResult<RelativeDirectoryPath> Parse(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
-        .Map(Create);
+        .Map(CreateInternal);
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -221,8 +221,8 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    // Private Factory Functions
    /* ------------------------------------------------------------ */
 
-   private static RelativeDirectoryPath Create(ISuccess<ISequence<DirectoryComponent>> success)
-      => new(success.Content());
+   private static RelativeDirectoryPath CreateInternal(ISequence<DirectoryComponent> success)
+      => new(success);
 
    /* ------------------------------------------------------------ */
 }

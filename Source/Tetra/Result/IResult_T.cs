@@ -56,7 +56,7 @@ public interface IResult<out T>
    /// If <c>IResult</c> is a some and the cast was unsuccessful, a failure containing the return value of <c>whenCastFails</c>;
    /// otherwise a failure containing the content of this <c>IResult</c>.
    /// </returns>
-   public IResult<TNew> Cast<TNew>(Func<ISuccess<T>, Message> whenCastFails);
+   public IResult<TNew> Cast<TNew>(Func<T, Message> whenCastFails);
 
    /* ------------------------------------------------------------ */
 
@@ -83,18 +83,6 @@ public interface IResult<out T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Maps the contents of the <c>IResult</c> into a new form if it is a failure.
-   /// </summary>
-   /// <param name="whenFailure">A mapping function that shall be applied to the content of the <c>IResult</c>, if it is a failure.</param>
-   /// <returns>
-   /// A failure containing the content of this <c>IResult</c> mapped through <c>whenFailure</c> if it is a failure;
-   /// otherwise the same <c>IResult</c>.
-   /// </returns>
-   public IResult<T> Map(Func<Failure, Message> whenFailure);
-
-   /* ------------------------------------------------------------ */
-
-   /// <summary>
    /// Maps the contents of the <c>IResult</c> into a new form if it is a success.
    /// </summary>
    /// <typeparam name="TNew">The type the contents of this <c>IResult</c> shall be transformed into.</typeparam>
@@ -103,7 +91,19 @@ public interface IResult<out T>
    /// A success containing the content of this <c>IResult</c> mapped through <c>whenSuccess</c> if it is a success;
    /// otherwise the failure containing the content of this <c>IResult</c>.
    /// </returns>
-   public IResult<TNew> Map<TNew>(Func<ISuccess<T>, TNew> whenSuccess);
+   public IResult<TNew> Map<TNew>(Func<T, TNew> whenSuccess);
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
+   /// Maps the contents of the <c>IResult</c> into a new form if it is a failure.
+   /// </summary>
+   /// <param name="whenFailure">A mapping function that shall be applied to the content of the <c>IResult</c>, if it is a failure.</param>
+   /// <returns>
+   /// A failure containing the content of this <c>IResult</c> mapped through <c>whenFailure</c> if it is a failure;
+   /// otherwise the same <c>IResult</c>.
+   /// </returns>
+   public IResult<T> MapFailure(Func<Failure, Message> whenFailure);
 
    /* ------------------------------------------------------------ */
 
@@ -115,7 +115,7 @@ public interface IResult<out T>
    /// The content of this <c>IResult</c> if it is a failure;
    /// otherwise the content of this <c>IResult</c> mapped through <c>whenSuccess</c>.
    /// </returns>
-   public Message Reduce(Func<ISuccess<T>, Message> whenSuccess);
+   public Message Reduce(Func<T, Message> whenSuccess);
 
    /* ------------------------------------------------------------ */
 
@@ -130,7 +130,7 @@ public interface IResult<out T>
    /// otherwise the content of this <c>IResult</c> mapped through <c>whenFailure</c>.
    /// </returns>
    public TNew Reduce<TNew>(Func<Failure, TNew>  whenFailure,
-                            Func<ISuccess<T>, TNew> whenSuccess);
+                            Func<T, TNew> whenSuccess);
 
    /* ------------------------------------------------------------ */
 }

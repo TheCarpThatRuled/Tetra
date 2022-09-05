@@ -17,14 +17,14 @@ public class Success_ToString
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Success_of_TestClass
+   //TestClass
    //WHEN
    //ToString
    //THEN
    //Success_brackets_the_content_to_string_is_returned
 
    [TestMethod]
-   public void GIVEN_Success_of_TestClass_WHEN_ToString_THEN_Success_brackets_the_content_to_string_is_returned()
+   public void GIVEN_TestClass_WHEN_ToString_THEN_Success_brackets_the_content_to_string_is_returned()
    {
       static Property Property(TestClass value)
       {
