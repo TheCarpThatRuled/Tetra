@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace Tetra;
+﻿namespace Tetra;
 
 public abstract partial class Either<TLeft, TRight>
 {

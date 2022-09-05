@@ -8,28 +8,17 @@ public interface IOpenFileResult<out T>
 
    IOpenFileResult<T> Do(Action<Locked>  whenLocked,
                          Action<Missing> whenMissing,
-                         Action<IOpen>   whenOpen);
+                         Action<T>       whenOpen);
 
    /* ------------------------------------------------------------ */
 
-   IOpenFileResult<TNew> Map<TNew>(Func<IOpen, TNew> whenOpen);
+   IOpenFileResult<TNew> Map<TNew>(Func<T, TNew> whenOpen);
 
    /* ------------------------------------------------------------ */
 
    TNew Reduce<TNew>(Func<Locked, TNew>  whenLocked,
                      Func<Missing, TNew> whenMissing,
-                     Func<IOpen, TNew> whenOpen);
-
-   /* ------------------------------------------------------------ */
-
-   public interface IOpen
-   {
-      /* ------------------------------------------------------------ */
-
-      public T Content();
-
-      /* ------------------------------------------------------------ */
-   }
+                     Func<T, TNew>       whenOpen);
 
    /* ------------------------------------------------------------ */
 }
