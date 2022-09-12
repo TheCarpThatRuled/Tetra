@@ -24,4 +24,10 @@ internal sealed class LockedResult<T> : IOpenFileResult<T>
       => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */
+   // Internal Fields
+   /* ------------------------------------------------------------ */
+
+   internal readonly Locked Content;
+
+   /* ------------------------------------------------------------ */
 }

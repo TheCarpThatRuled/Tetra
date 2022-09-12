@@ -21,4 +21,8 @@
     <ProjectReference Include="..\Tetra\Tetra.csproj" />
   </ItemGroup>
 
+  <ItemGroup >
+    <InternalsVisibleTo Include="Tetra.Testing.FSCheck"/>
+  </ItemGroup>
+
 </Project>

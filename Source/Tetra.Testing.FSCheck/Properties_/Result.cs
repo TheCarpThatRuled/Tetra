@@ -27,7 +27,7 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsAIsAFailureAnd<T>(string                          description,
+   public static Property IsAFailureAnd<T>(string                          description,
                                               Func<string, Failure, Property> property,
                                               IResult<T>                      result)
       => result

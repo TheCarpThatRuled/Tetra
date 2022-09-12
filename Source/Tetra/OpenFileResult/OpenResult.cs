@@ -24,4 +24,10 @@ internal sealed class OpenResult<T> : IOpenFileResult<T>
       => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */
+   // Internal Fields
+   /* ------------------------------------------------------------ */
+
+   internal readonly T Content;
+
+   /* ------------------------------------------------------------ */
 }

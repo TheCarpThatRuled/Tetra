@@ -24,4 +24,10 @@ internal sealed class MissingResult<T> : IOpenFileResult<T>
       => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */
+   // Internal Fields
+   /* ------------------------------------------------------------ */
+
+   internal readonly Missing Content;
+
+   /* ------------------------------------------------------------ */
 }
