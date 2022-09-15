@@ -3,6 +3,15 @@
 internal sealed class MissingResult<T> : IOpenFileResult<T>
 {
    /* ------------------------------------------------------------ */
+   // Factory Functions
+   /* ------------------------------------------------------------ */
+
+   public static MissingResult<T> Create(Message          message,
+                                         AbsoluteFilePath path)
+      => new(new(message,
+                 path));
+
+   /* ------------------------------------------------------------ */
    // IOpenFileResult<T> Methods
    /* ------------------------------------------------------------ */
 
@@ -14,7 +23,7 @@ internal sealed class MissingResult<T> : IOpenFileResult<T>
    /* ------------------------------------------------------------ */
 
    public IOpenFileResult<TNew> Map<TNew>(Func<T, TNew> whenOpen)
-      => throw new NotImplementedException();
+      => new MissingResult<TNew>(Content);
 
    /* ------------------------------------------------------------ */
 
@@ -28,6 +37,13 @@ internal sealed class MissingResult<T> : IOpenFileResult<T>
    /* ------------------------------------------------------------ */
 
    internal readonly Missing Content;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private MissingResult(Missing content)
+      => Content = content;
 
    /* ------------------------------------------------------------ */
 }

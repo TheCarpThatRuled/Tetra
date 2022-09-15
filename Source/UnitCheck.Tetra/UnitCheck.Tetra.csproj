@@ -28,16 +28,4 @@
     <ProjectReference Include="..\Tetra\Tetra.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="OpenFileResultTests\OfTestStruct\Locked\" />
-    <Folder Include="OpenFileResultTests\OfTestStruct\Missing\" />
-    <Folder Include="OpenFileResultTests\OfTestStruct\Open\" />
-    <Folder Include="OpenFileResultTests\OfTestClass\Locked\" />
-    <Folder Include="OpenFileResultTests\OfTestClass\Missing\" />
-    <Folder Include="OpenFileResultTests\OfTestClass\Open\" />
-    <Folder Include="OpenFileResultTests\OfInt\Missing\" />
-    <Folder Include="OpenFileResultTests\OfInt\Locked\" />
-    <Folder Include="OpenFileResultTests\OfInt\Open\" />
-  </ItemGroup>
-
 </Project>

@@ -23,6 +23,7 @@ internal static class LocalCategories
    public const string List                  = nameof(List);
    public const string Message               = nameof(Tetra.Message);
    public const string Option                = nameof(Tetra.Option);
+   public const string OpenFileResult        = nameof(OpenFileResult);
    public const string RelativeDirectoryPath = nameof(Tetra.RelativeDirectoryPath);
    public const string RelativeFilePath      = nameof(Tetra.RelativeFilePath);
    public const string Result                = nameof(Tetra.Result);

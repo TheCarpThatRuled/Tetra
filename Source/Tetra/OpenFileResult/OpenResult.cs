@@ -3,6 +3,13 @@
 internal sealed class OpenResult<T> : IOpenFileResult<T>
 {
    /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   public OpenResult(T content)
+      => Content = content;
+
+   /* ------------------------------------------------------------ */
    // IOpenFileResult<T> Methods
    /* ------------------------------------------------------------ */
 
@@ -14,7 +21,7 @@ internal sealed class OpenResult<T> : IOpenFileResult<T>
    /* ------------------------------------------------------------ */
 
    public IOpenFileResult<TNew> Map<TNew>(Func<T, TNew> whenOpen)
-      => throw new NotImplementedException();
+      => new OpenResult<TNew>(whenOpen(Content));
 
    /* ------------------------------------------------------------ */
 
