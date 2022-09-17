@@ -42,6 +42,34 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
+   public static Property WasInvokedOnce<TReturn>(string                        description,
+                                                  AbsoluteFilePath              expectedPath,
+                                                  Message                       expectedMessage,
+                                                  FakeFunction<Locked, TReturn> function)
+      => WasInvokedOnce(description,
+                        actual => Equals(expectedPath,
+                                           actual.Path())
+                          && Equals(    expectedMessage,
+                                        actual.Message()),
+                        $"(Path: {expectedPath}, Message: {expectedMessage})",
+                        function);
+
+   /* ------------------------------------------------------------ */
+
+   public static Property WasInvokedOnce<TReturn>(string                        description,
+                                                  AbsoluteFilePath              expectedPath,
+                                                  Message                       expectedMessage,
+                                                  FakeFunction<Missing, TReturn> function)
+      => WasInvokedOnce(description,
+                        actual => Equals(expectedPath,
+                                         actual.Path())
+                               && Equals(expectedMessage,
+                                         actual.Message()),
+                        $"(Path: {expectedPath}, Message: {expectedMessage})",
+                        function);
+
+   /* ------------------------------------------------------------ */
+
    public static Property WasInvokedOnce<T, TReturn>(string                          description,
                                                      T                               expected,
                                                      FakeFunction<Right<T>, TReturn> function)

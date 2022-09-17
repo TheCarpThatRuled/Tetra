@@ -8,6 +8,24 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
+   public sealed class FourUniqueTestStructs
+   {
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<(Testing.TestStruct, Testing.TestStruct, Testing.TestStruct, Testing.TestStruct)> Type()
+         => Generators
+           .FourUniqueTestStructs()
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
    public sealed class NonEmptyArrayOfTestStruct
    {
       /* ------------------------------------------------------------ */

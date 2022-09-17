@@ -51,6 +51,13 @@ public static class Gen_Extensions
 
    /* ------------------------------------------------------------ */
 
+   public static Gen<(T first, T second, T third, T four)> FourValueTuples<T>(this Gen<T> source)
+      => source
+        .Four()
+        .Select(x => (x.Item1, x.Item2, x.Item3, x.Item4));
+
+   /* ------------------------------------------------------------ */
+
    public static Gen<(T first, T second, T third)> ThreeValueTuples<T>(this Gen<T> source)
       => source
         .Three()

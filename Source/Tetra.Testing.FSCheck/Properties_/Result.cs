@@ -28,8 +28,8 @@ partial class Properties
    /* ------------------------------------------------------------ */
 
    public static Property IsAFailureAnd<T>(string                          description,
-                                              Func<string, Failure, Property> property,
-                                              IResult<T>                      result)
+                                           Func<string, Failure, Property> property,
+                                           IResult<T>                      result)
       => result
         .Reduce(actual => property(TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(description),
                                    actual),
@@ -56,9 +56,9 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsASuccessAnd<T>(string                                      description,
+   public static Property IsASuccessAnd<T>(string                    description,
                                            Func<string, T, Property> property,
-                                           IResult<T>                                  result)
+                                           IResult<T>                result)
       => result
         .Reduce(failure => False(TheResultIsAFailure<T>(description,
                                                         failure.Content())),

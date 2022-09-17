@@ -28,7 +28,7 @@ internal sealed class OpenResult<T> : IOpenFileResult<T>
    public TNew Reduce<TNew>(Func<Locked, TNew>  whenLocked,
                             Func<Missing, TNew> whenMissing,
                             Func<T, TNew>       whenOpen)
-      => throw new NotImplementedException();
+      => whenOpen(Content);
 
    /* ------------------------------------------------------------ */
    // Internal Fields

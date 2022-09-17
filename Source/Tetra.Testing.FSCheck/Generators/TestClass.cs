@@ -8,6 +8,23 @@ partial class Generators
    // Functions
    /* ------------------------------------------------------------ */
 
+   public static Gen<(TestClass, TestClass, TestClass, TestClass)> FourUniqueTestClasses()
+      => FourUniqueTestClasses(TestClass());
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<(TestClass, TestClass, TestClass, TestClass)> FourUniqueTestClasses(Gen<TestClass> testClass)
+      => testClass
+        .FourValueTuples()
+        .Where(tuple => tuple.first  != tuple.second
+                     && tuple.first  != tuple.third
+                     && tuple.first  != tuple.four
+                     && tuple.second != tuple.third
+                     && tuple.second != tuple.four
+                     && tuple.third  != tuple.four);
+
+   /* ------------------------------------------------------------ */
+
    public static Gen<TestClass> TestClass()
       => TestClass(Int32(),
                    Float());
@@ -40,8 +57,8 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(TestClass, TestClass, TestClass)> ThreeUniqueTestClasses(Gen<TestClass> testStruct)
-      => testStruct
+   public static Gen<(TestClass, TestClass, TestClass)> ThreeUniqueTestClasses(Gen<TestClass> testClass)
+      => testClass
         .ThreeValueTuples()
         .Where(tuple => tuple.first  != tuple.second
                      && tuple.first  != tuple.third
@@ -54,8 +71,8 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(TestClass, TestClass)> TwoUniqueTestClasses(Gen<TestClass> testStruct)
-      => testStruct
+   public static Gen<(TestClass, TestClass)> TwoUniqueTestClasses(Gen<TestClass> testClass)
+      => testClass
         .TwoValueTuples()
         .Where(tuple => tuple.first != tuple.second);
 

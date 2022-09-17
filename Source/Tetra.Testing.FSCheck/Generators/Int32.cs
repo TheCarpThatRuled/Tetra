@@ -9,6 +9,23 @@ partial class Generators
    // Functions
    /* ------------------------------------------------------------ */
 
+   public static Gen<(int, int, int, int)> FourUniqueInt32s()
+      => FourUniqueInt32s(Int32());
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<(int, int, int, int)> FourUniqueInt32s(Gen<int> int32)
+      => int32
+        .FourValueTuples()
+        .Where(tuple => tuple.first  != tuple.second
+                     && tuple.first  != tuple.third
+                     && tuple.first  != tuple.four
+                     && tuple.second != tuple.third
+                     && tuple.second != tuple.four
+                     && tuple.third  != tuple.four);
+
+   /* ------------------------------------------------------------ */
+
    public static Gen<int> Int32()
       => Arb
         .Default

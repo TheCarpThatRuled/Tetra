@@ -8,6 +8,23 @@ partial class Generators
    // Functions
    /* ------------------------------------------------------------ */
 
+   public static Gen<(TestStruct, TestStruct, TestStruct, TestStruct)> FourUniqueTestStructs()
+      => FourUniqueTestStructs(TestStruct());
+
+   /* ------------------------------------------------------------ */
+
+   public static Gen<(TestStruct, TestStruct, TestStruct, TestStruct)> FourUniqueTestStructs(Gen<TestStruct> testStruct)
+      => testStruct
+        .FourValueTuples()
+        .Where(tuple => tuple.first  != tuple.second
+                     && tuple.first  != tuple.third
+                     && tuple.first  != tuple.four
+                     && tuple.second != tuple.third
+                     && tuple.second != tuple.four
+                     && tuple.third  != tuple.four);
+
+   /* ------------------------------------------------------------ */
+
    public static Gen<TestStruct> TestStruct()
       => TestStruct(Int32(),
                     Float());

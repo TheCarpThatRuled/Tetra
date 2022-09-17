@@ -129,7 +129,7 @@ partial class Properties
    /* ------------------------------------------------------------ */
 
    public static Property IsAnOpen<T>(string             description,
-                                      T expected,
+                                      T                  expected,
                                       IOpenFileResult<T> actual)
       => actual switch
          {
