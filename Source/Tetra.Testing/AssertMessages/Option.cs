@@ -6,51 +6,51 @@ public static partial class AssertMessages
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static string TheOptionIsANone<T>()
-      => TheIOption<T>()
-       + IsANoneWhenWeExpectedItToBeASome;
-
-   /* ------------------------------------------------------------ */
-
-   public static string TheOptionIsANone<T>(string description)
-      => $"{description}: {TheIOption<T>()}{IsANoneWhenWeExpectedItToBeASome}";
-
-   /* ------------------------------------------------------------ */
-
-   public static string TheOptionIsASomeButDoesNotContainTheExpectedContent<T>()
-      => TheIOption<T>()
-       + IsASomeButDoesNotContainTheExpectedContent;
+   public static string TheOptionIsANoneWhenWeExpectedItToBeASome<T>(string description)
+      => $"{description}: {TheIOption<T>()}{Is} {ANone} {WhenWeExpectedItToBe} {ASome}";
 
    /* ------------------------------------------------------------ */
 
    public static string TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(string description)
-      => $"{description}: {TheIOption<T>()}{IsASomeButDoesNotContainTheExpectedContent}";
+      => $"{description}: {TheIOption<T>()} {Is} {ASome} {ButDoesNotContain} {TheExpectedContent}";
 
    /* ------------------------------------------------------------ */
 
-   public static string TheOptionIsASome<T>()
-      => TheIOption<T>()
-       + IsASomeWhenWeExpectedItToBeANone;
+   public static string TheOptionIsASomeWhenWeExpectedItToBeANone<T>(string description)
+      => $"{description}: {TheIOption<T>()} {Is} {ASome} {WhenWeExpectedItToBe} {ANone}";
 
    /* ------------------------------------------------------------ */
 
-   public static string TheOptionIsASome<T>(string description)
-      => $"{description}: {TheIOption<T>()}{IsASomeWhenWeExpectedItToBeANone}";
+   public static string TheOptionIsUnrecognisedWhenWeExpectedItToBeANone<T>(string description)
+      => $"{description}: {TheIOption<T>()} {Is} {Unrecognised} {WhenWeExpectedItToBe} {ANone}";
+
+   /* ------------------------------------------------------------ */
+
+   public static string TheOptionIsIUnrecognisedWhenWeExpectedItToBeASome<T>(string description)
+      => $"{description}: {TheIOption<T>()}{Is} {Unrecognised} {WhenWeExpectedItToBe} {ASome}";
+
+   /* ------------------------------------------------------------ */
+   // Internal Extension
+   /* ------------------------------------------------------------ */
+
+   internal static string ToTestOutput<T>(this Option<T>.SomeOption some)
+      => $@"Some({some.Content})";
+
+   /* ------------------------------------------------------------ */
 
    /* ------------------------------------------------------------ */
    // Private Constants
    /* ------------------------------------------------------------ */
 
-   private const string IsANoneWhenWeExpectedItToBeASome           = "is a none when we expected it to be a some";
-   private const string IsASomeButDoesNotContainTheExpectedContent = "is a some but does not contain the expected content";
-   private const string IsASomeWhenWeExpectedItToBeANone           = "is a some when we expected it to be a none";
+   private const string ANone = "a none";
+   private const string ASome = "a some";
 
    /* ------------------------------------------------------------ */
    // Private Functions
    /* ------------------------------------------------------------ */
 
    private static string TheIOption<T>()
-      => $@"The IOption<{typeof(T).Name}> ";
+      => $@"The IOption<{typeof(T).Name}>";
 
    /* ------------------------------------------------------------ */
 }

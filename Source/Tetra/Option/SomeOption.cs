@@ -2,14 +2,14 @@
 
 partial class Option<T>
 {
-   private sealed class SomeOption : IOption<T>
+   internal sealed class SomeOption : IOption<T>
    {
       /* ------------------------------------------------------------ */
       // Constructors
       /* ------------------------------------------------------------ */
 
       public SomeOption(T content)
-         => _content = content;
+         => Content = content;
 
       /* ------------------------------------------------------------ */
       // object Overridden Methods
@@ -20,9 +20,9 @@ partial class Option<T>
                             obj)
          || obj switch
             {
-               SomeOption some => Equals(_content,
-                                         some._content),
-               T content       => Equals(_content,
+               SomeOption some => Equals(Content,
+                                         some.Content),
+               T content       => Equals(Content,
                                          content),
                _               => false,
             };
@@ -30,21 +30,21 @@ partial class Option<T>
       /* ------------------------------------------------------------ */
 
       public override int GetHashCode()
-         => _content
+         => Content
              ?.GetHashCode()
          ?? 0;
 
       /* ------------------------------------------------------------ */
 
       public override string ToString()
-         => $"Some ({_content})";
+         => $"Some ({Content})";
 
       /* ------------------------------------------------------------ */
       // IOption Methods
       /* ------------------------------------------------------------ */
 
       public IOption<TNew> Cast<TNew>()
-         => _content is TNew content
+         => Content is TNew content
                ? new Option<TNew>.SomeOption(content)
                : new Option<TNew>.NoneOption();
 
@@ -62,42 +62,42 @@ partial class Option<T>
 
       public IOption<TNew> Map<TNew>(Func<T, TNew> whenSome)
          => new Option<TNew>
-            .SomeOption(whenSome(_content));
+            .SomeOption(whenSome(Content));
 
       /* ------------------------------------------------------------ */
 
       public IOption<TNew> Map<TNew>(Func<T, IOption<TNew>> whenSome)
-         => whenSome(_content);
+         => whenSome(Content);
 
       /* ------------------------------------------------------------ */
 
       public IResult<T> MapToResult(Message _)
          => Result<T>
-           .Success(_content);
+           .Success(Content);
 
       /* ------------------------------------------------------------ */
 
       public IResult<T> MapToResult(Func<Message> _)
          => Result<T>
-           .Success(_content);
+           .Success(Content);
 
       /* ------------------------------------------------------------ */
 
       public TNew Reduce<TNew>(TNew          _,
                                Func<T, TNew> whenSome)
-         => whenSome(_content);
+         => whenSome(Content);
 
       /* ------------------------------------------------------------ */
 
       public TNew Reduce<TNew>(Func<TNew>    _,
                                Func<T, TNew> whenSome)
-         => whenSome(_content);
+         => whenSome(Content);
 
       /* ------------------------------------------------------------ */
-      // Private Fields
+      // Internal Fields
       /* ------------------------------------------------------------ */
 
-      private readonly T _content;
+      internal readonly T Content;
 
       /* ------------------------------------------------------------ */
    }

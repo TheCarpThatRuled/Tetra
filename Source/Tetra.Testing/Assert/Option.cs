@@ -12,77 +12,60 @@ partial class Assert_Extensions
 
    public static Assert IsANone<T>(this Assert assert,
                                    string      description,
-                                   IOption<T>   option)
-   {
-      if (option.IsASome())
-      {
-         throw Failed.Assert(TheOptionIsASome<T>(description));
-      }
+                                   IOption<T>  actual)
+      => actual switch
+         {
+            Option<T>.SomeOption some => throw Failed.Assert(TheOptionIsASomeWhenWeExpectedItToBeANone<T>(description),
+                                                             some.ToTestOutput()),
+            not Option<T>.NoneOption => throw Failed.Assert(TheOptionIsUnrecognisedWhenWeExpectedItToBeANone<T>(description)),
 
-      return assert;
-   }
+            _ => assert,
+         };
 
    /* ------------------------------------------------------------ */
 
    public static Assert IsASome<T>(this Assert assert,
                                    string      description,
-                                   IOption<T>   option)
-   {
-      if (option.IsANone())
-      {
-         throw Failed.Assert(TheOptionIsANone<T>(description));
-      }
+                                   IOption<T>  actual)
+      => actual switch
+         {
+            Option<T>.NoneOption     => throw Failed.Assert(TheOptionIsANoneWhenWeExpectedItToBeASome<T>(description)),
+            not Option<T>.SomeOption => throw Failed.Assert(TheOptionIsIUnrecognisedWhenWeExpectedItToBeASome<T>(description)),
 
-      return assert;
-   }
+            _ => assert,
+         };
 
    /* ------------------------------------------------------------ */
 
    public static Assert IsASome<T>(this Assert assert,
                                    string      description,
                                    T           expected,
-                                   IOption<T>   option)
-   {
-      if (option.Reduce(true,
-                        actual =>
-                        {
-                           assert.AreEqual(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(description),
-                                           expected,
-                                           actual);
+                                   IOption<T>  actual)
+      => actual switch
+         {
+            Option<T>.NoneOption => throw Failed.Assert(TheOptionIsANoneWhenWeExpectedItToBeASome<T>(description)),
+            Option<T>.SomeOption some => assert.AreEqual(description,
+                                                         expected,
+                                                         some.Content),
 
-                           return false;
-                        }))
-      {
-         throw Failed.Assert(TheOptionIsANone<T>(description));
-      }
-
-      return assert;
-   }
+            _ => throw Failed.Assert(TheOptionIsIUnrecognisedWhenWeExpectedItToBeASome<T>(description)),
+         };
 
    /* ------------------------------------------------------------ */
 
    public static Assert IsASomeAnd<T>(this Assert   assert,
                                       string        description,
                                       Func<T, bool> property,
-                                      IOption<T>     option)
-   {
-      if (option.Reduce(Function.True,
-                        actual =>
-                        {
-                           if (!property(actual))
-                           {
-                              throw Failed.Assert(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(description),
-                                                  actual);
-                           }
+                                      IOption<T>    actual)
+      => actual switch
+         {
+            Option<T>.NoneOption => throw Failed.Assert(TheOptionIsANoneWhenWeExpectedItToBeASome<T>(description)),
+            Option<T>.SomeOption some => !property(some.Content)
+                                            ? throw Failed.Assert(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(description))
+                                            : assert,
 
-                           return false;
-                        }))
-      {
-         throw Failed.Assert(TheOptionIsANone<T>(description));
-      }
-
-      return assert;
-   }
+            _ => throw Failed.Assert(TheOptionIsIUnrecognisedWhenWeExpectedItToBeASome<T>(description)),
+         };
 
    /* ------------------------------------------------------------ */
 }

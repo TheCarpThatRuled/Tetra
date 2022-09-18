@@ -2,7 +2,7 @@
 
 static partial class Option<T>
 {
-   private sealed class NoneOption : IOption<T>
+   internal sealed class NoneOption : IOption<T>
    {
       /* ------------------------------------------------------------ */
       // object Overridden Methods
