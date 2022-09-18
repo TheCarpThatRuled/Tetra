@@ -13,7 +13,9 @@ namespace Check.OpenFileResultTests.OfInt;
 public class Missing_Reduce
 {
    /* ------------------------------------------------------------ */
-   // IOpenFileResult<TNew> Reduce<TNew>(Func<T, TNew> whenOpen);
+   // TNew Reduce<TNew>(Func<Locked, TNew>  whenLocked,
+   //                   Func<Missing, TNew> whenMissing,
+   //                   Func<T, TNew>       whenOpen)
    /* ------------------------------------------------------------ */
 
    //GIVEN

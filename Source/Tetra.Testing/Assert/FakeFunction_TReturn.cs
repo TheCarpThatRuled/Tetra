@@ -42,7 +42,7 @@ partial class Assert_Extensions
                                                FakeFunction<TReturn> function)
    {
       if (function
-         .Invocations()
+            .Invocations()
        != 0)
       {
          throw Failed.Assert(TheFakeFunctionWasInvokedWhenWeExpectedItNotToBe<TReturn>(description));

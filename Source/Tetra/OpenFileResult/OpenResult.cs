@@ -16,7 +16,11 @@ internal sealed class OpenResult<T> : IOpenFileResult<T>
    public IOpenFileResult<T> Do(Action<Locked>  whenLocked,
                                 Action<Missing> whenMissing,
                                 Action<T>       whenOpen)
-      => throw new NotImplementedException();
+   {
+      whenOpen(Content);
+
+      return this;
+   }
 
    /* ------------------------------------------------------------ */
 
