@@ -12,7 +12,7 @@ partial class Properties
    public static Property IsAFailure<T>(string     description,
                                         IResult<T> result)
       => AsProperty(result.IsAFailure)
-        .Label(TheResultIsASuccess<T>(description));
+        .Label(TheResultIsASuccessWhenWeExpectedItToBeAFailure<T>(description));
 
    /* ------------------------------------------------------------ */
 
@@ -20,10 +20,10 @@ partial class Properties
                                         Message    expected,
                                         IResult<T> result)
       => result
-        .Reduce(actual => AreEqual(TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(description),
+        .Reduce(actual => AreEqual(TheResultIsAFailureButDoesNotContainTheExpectedMessage<T>(description),
                                    expected,
                                    actual.Content()),
-                _ => False(TheResultIsASuccess<T>(description)));
+                _ => False(TheResultIsASuccessWhenWeExpectedItToBeAFailure<T>(description)));
 
    /* ------------------------------------------------------------ */
 
@@ -31,16 +31,16 @@ partial class Properties
                                            Func<string, Failure, Property> property,
                                            IResult<T>                      result)
       => result
-        .Reduce(actual => property(TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(description),
+        .Reduce(actual => property(TheResultIsAFailureButDoesNotContainTheExpectedMessage<T>(description),
                                    actual),
-                _ => False(TheResultIsASuccess<T>(description)));
+                _ => False(TheResultIsASuccessWhenWeExpectedItToBeAFailure<T>(description)));
 
    /* ------------------------------------------------------------ */
 
    public static Property IsASuccess<T>(string     description,
                                         IResult<T> result)
       => AsProperty(result.IsASuccess)
-        .Label(TheResultIsAFailure<T>(description));
+        .Label(TheResultIsAFailureWhenWeExpectedItToBeASuccess<T>(description));
 
    /* ------------------------------------------------------------ */
 
@@ -48,7 +48,7 @@ partial class Properties
                                         T          expected,
                                         IResult<T> result)
       => result
-        .Reduce(failure => False(TheResultIsAFailure<T>(description,
+        .Reduce(failure => False(TheResultIsAFailureWhenWeExpectedItToBeASuccess<T>(description,
                                                         failure.Content())),
                 actual => AreEqual(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(description),
                                    expected,
@@ -60,7 +60,7 @@ partial class Properties
                                            Func<string, T, Property> property,
                                            IResult<T>                result)
       => result
-        .Reduce(failure => False(TheResultIsAFailure<T>(description,
+        .Reduce(failure => False(TheResultIsAFailureWhenWeExpectedItToBeASuccess<T>(description,
                                                         failure.Content())),
                 actual => property(TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(description),
                                    actual));

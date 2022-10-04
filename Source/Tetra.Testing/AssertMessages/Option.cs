@@ -7,7 +7,7 @@ public static partial class AssertMessages
    /* ------------------------------------------------------------ */
 
    public static string TheOptionIsANoneWhenWeExpectedItToBeASome<T>(string description)
-      => $"{description}: {TheIOption<T>()}{Is} {ANone} {WhenWeExpectedItToBe} {ASome}";
+      => $"{description}: {TheIOption<T>()} {Is} {ANone} {WhenWeExpectedItToBe} {ASome}";
 
    /* ------------------------------------------------------------ */
 
@@ -27,7 +27,7 @@ public static partial class AssertMessages
    /* ------------------------------------------------------------ */
 
    public static string TheOptionIsIUnrecognisedWhenWeExpectedItToBeASome<T>(string description)
-      => $"{description}: {TheIOption<T>()}{Is} {Unrecognised} {WhenWeExpectedItToBe} {ASome}";
+      => $"{description}: {TheIOption<T>()} {Is} {Unrecognised} {WhenWeExpectedItToBe} {ASome}";
 
    /* ------------------------------------------------------------ */
    // Internal Extension
@@ -42,15 +42,15 @@ public static partial class AssertMessages
    // Private Constants
    /* ------------------------------------------------------------ */
 
-   private const string ANone = "a none";
-   private const string ASome = "a some";
+   private const string ANone = $"{A} none";
+   private const string ASome = $"{A} some";
 
    /* ------------------------------------------------------------ */
    // Private Functions
    /* ------------------------------------------------------------ */
 
    private static string TheIOption<T>()
-      => $@"The IOption<{typeof(T).Name}>";
+      => $@"{The} IOption<{typeof(T).Name}>";
 
    /* ------------------------------------------------------------ */
 }

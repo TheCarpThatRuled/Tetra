@@ -10,39 +10,56 @@ partial class Properties
    /* ------------------------------------------------------------ */
 
    public static Property IsANone(string description,
-                                  IError error)
-      => AsProperty(() => error.Reduce(Function.True,
-                                       Function.False))
-        .Label(TheErrorIsASome(description));
+                                  IError actual)
+      => actual switch
+         {
+            Error.SomeError some => False(Failed.Message(TheErrorIsASomeWhenWeExpectedItToBeANone(description),
+                                                         some.ToTestOutput())),
+            not Error.NoneError => False(TheErrorIsUnrecognisedWhenWeExpectedItToBeANone(description)),
+
+            _ => True(),
+         };
 
    /* ------------------------------------------------------------ */
 
    public static Property IsASome(string description,
-                                  IError error)
-      => AsProperty(() => error.Reduce(Function.False,
-                                       Function.True))
-        .Label(TheErrorIsANone(description));
+                                  IError actual)
+      => actual switch
+         {
+            Error.NoneError     => False(TheErrorIsANoneWhenWeExpectedItToBeASome(description)),
+            not Error.SomeError => False(TheErrorIsUnrecognisedWhenWeExpectedItToBeASome(description)),
+
+            _ => True(),
+         };
 
    /* ------------------------------------------------------------ */
 
    public static Property IsASome(string  description,
                                   Message expected,
-                                  IError  error)
-      => error
-        .Reduce(() => False(TheErrorIsANone(description)),
-                some => AreEqual(TheErrorIsASomeButDoesNotContainTheExpectedContent(description),
-                                 expected,
-                                 some));
+                                  IError  actual)
+      => actual switch
+         {
+            Error.NoneError => False(TheErrorIsANoneWhenWeExpectedItToBeASome(description)),
+            Error.SomeError some => AreEqual(description,
+                                             expected,
+                                             some.Content),
+
+            _ => False(TheErrorIsUnrecognisedWhenWeExpectedItToBeASome(description)),
+         };
 
    /* ------------------------------------------------------------ */
 
    public static Property IsASomeAnd(string                          description,
                                      Func<string, Message, Property> property,
-                                     IError                          error)
-      => error
-        .Reduce(() => False(TheErrorIsANone(description)),
-                actual => property(TheErrorIsASomeButDoesNotContainTheExpectedContent(description),
-                                   actual));
+                                     IError                          actual)
+      => actual switch
+         {
+            Error.NoneError => False(TheErrorIsANoneWhenWeExpectedItToBeASome(description)),
+            Error.SomeError some => property(TheErrorIsASomeButDoesNotContainTheExpectedContent(description),
+                                             some.Content),
+
+            _ => False(TheErrorIsUnrecognisedWhenWeExpectedItToBeASome(description)),
+         };
 
    /* ------------------------------------------------------------ */
 }

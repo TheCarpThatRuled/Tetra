@@ -16,7 +16,7 @@ partial class Assert_Extensions
    {
       if (either.IsARight())
       {
-         throw Failed.Assert(TheEitherIsARight<TLeft, TRight>(description));
+         throw Failed.Assert(TheEitherIsARightWhenWeExpectItToBeALeft<TLeft, TRight>(description));
       }
 
       return assert;
@@ -39,7 +39,7 @@ partial class Assert_Extensions
                         },
                         Function.True))
       {
-         throw Failed.Assert(TheEitherIsARight<TLeft, TRight>(description));
+         throw Failed.Assert(TheEitherIsARightWhenWeExpectItToBeALeft<TLeft, TRight>(description));
       }
 
       return assert;
@@ -64,7 +64,7 @@ partial class Assert_Extensions
                         },
                         Function.True))
       {
-         throw Failed.Assert(TheEitherIsARight<TLeft, TRight>(description));
+         throw Failed.Assert(TheEitherIsARightWhenWeExpectItToBeALeft<TLeft, TRight>(description));
       }
 
       return assert;
@@ -78,7 +78,7 @@ partial class Assert_Extensions
    {
       if (either.IsALeft())
       {
-         throw Failed.Assert(TheEitherIsALeft<TLeft, TRight>(description));
+         throw Failed.Assert(TheEitherIsALeftWheWeExpectItToBeARight<TLeft, TRight>(description));
       }
 
       return assert;
@@ -101,7 +101,7 @@ partial class Assert_Extensions
                            return false;
                         }))
       {
-         throw Failed.Assert(TheEitherIsALeft<TLeft, TRight>(description));
+         throw Failed.Assert(TheEitherIsALeftWheWeExpectItToBeARight<TLeft, TRight>(description));
       }
 
       return assert;
@@ -126,7 +126,7 @@ partial class Assert_Extensions
                            return false;
                         }))
       {
-         throw Failed.Assert(TheEitherIsALeft<TLeft, TRight>(description));
+         throw Failed.Assert(TheEitherIsALeftWheWeExpectItToBeARight<TLeft, TRight>(description));
       }
 
       return assert;

@@ -85,7 +85,7 @@ public static partial class AssertMessages
       => $"{description}: {TheOpenFileResult<T>()} {Is} {Unrecognised} {WhenWeExpectedItToBe} {AnOpen}";
 
    /* ------------------------------------------------------------ */
-   // Internal Extension
+   // Internal Extensions
    /* ------------------------------------------------------------ */
 
    internal static string ToTestOutput<T>(this LockedResult<T> locked)
@@ -105,16 +105,16 @@ public static partial class AssertMessages
    // Private Constants
    /* ------------------------------------------------------------ */
 
-   private const string ALocked  = "is a locked";
-   private const string AMissing = "is a missing";
-   private const string AnOpen   = "is an open";
+   private const string ALocked  = $"{A} locked";
+   private const string AMissing = $"{A} missing";
+   private const string AnOpen   = $"{An} open";
 
    /* ------------------------------------------------------------ */
    // Private Functions
    /* ------------------------------------------------------------ */
 
    private static string TheOpenFileResult<T>()
-      => $@"The OpenFileResult<{typeof(T).Name}>";
+      => $@"{The} OpenFileResult<{typeof(T).Name}>";
 
    /* ------------------------------------------------------------ */
 }

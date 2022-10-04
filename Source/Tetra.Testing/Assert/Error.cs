@@ -12,77 +12,60 @@ partial class Assert_Extensions
 
    public static Assert IsANone(this Assert assert,
                                 string      description,
-                                IError       error)
-   {
-      if (error.IsASome())
-      {
-         throw Failed.Assert(TheErrorIsASome(description));
-      }
+                                IError      actual)
+      => actual switch
+         {
+            Error.SomeError some => throw Failed.Assert(TheErrorIsASomeWhenWeExpectedItToBeANone(description),
+                                                        some.ToTestOutput()),
+            not Error.NoneError => throw Failed.Assert(TheErrorIsUnrecognisedWhenWeExpectedItToBeANone(description)),
 
-      return assert;
-   }
+            _ => assert,
+         };
 
    /* ------------------------------------------------------------ */
 
    public static Assert IsASome(this Assert assert,
                                 string      description,
-                                IError       error)
-   {
-      if (error.IsANone())
-      {
-         throw Failed.Assert(TheErrorIsANone(description));
-      }
+                                IError      actual)
+      => actual switch
+         {
+            Error.NoneError     => throw Failed.Assert(TheErrorIsANoneWhenWeExpectedItToBeASome(description)),
+            not Error.SomeError => throw Failed.Assert(TheErrorIsUnrecognisedWhenWeExpectedItToBeASome(description)),
 
-      return assert;
-   }
+            _ => assert,
+         };
 
    /* ------------------------------------------------------------ */
 
    public static Assert IsASome(this Assert assert,
                                 string      description,
                                 Message     expected,
-                                IError       error)
-   {
-      if (error.Reduce(Function.True,
-                       actual =>
-                       {
-                          assert.AreEqual(TheErrorIsASomeButDoesNotContainTheExpectedContent(description),
-                                          expected,
-                                          actual);
+                                IError      actual)
+      => actual switch
+         {
+            Error.NoneError => throw Failed.Assert(TheErrorIsANoneWhenWeExpectedItToBeASome(description)),
+            Error.SomeError some => assert.AreEqual(description,
+                                                    expected,
+                                                    some.Content),
 
-                          return false;
-                       }))
-      {
-         throw Failed.Assert(TheErrorIsANone(description));
-      }
-
-      return assert;
-   }
+            _ => throw Failed.Assert(TheErrorIsUnrecognisedWhenWeExpectedItToBeASome(description)),
+         };
 
    /* ------------------------------------------------------------ */
 
    public static Assert IsASomeAnd(this Assert         assert,
                                    string              description,
                                    Func<Message, bool> property,
-                                   IError               error)
-   {
-      if (error.Reduce(Function.True,
-                       actual =>
-                       {
-                          if (!property(actual))
-                          {
-                             throw Failed.Assert(TheErrorIsASomeButDoesNotContainTheExpectedContent(description),
-                                                 actual);
-                          }
+                                   IError              actual)
+      => actual switch
+         {
+            Error.NoneError => throw Failed.Assert(TheErrorIsANoneWhenWeExpectedItToBeASome(description)),
+            Error.SomeError some => !property(some.Content)
+                                       ? throw Failed.Assert(TheErrorIsASomeButDoesNotContainTheExpectedContent(description))
+                                       : assert,
 
-                          return false;
-                       }))
-      {
-         throw Failed.Assert(TheErrorIsANone(description));
-      }
-
-      return assert;
-   }
+            _ => throw Failed.Assert(TheErrorIsUnrecognisedWhenWeExpectedItToBeASome(description)),
+         };
 
    /* ------------------------------------------------------------ */
 }

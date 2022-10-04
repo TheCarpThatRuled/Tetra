@@ -2,7 +2,7 @@
 
 partial class Error
 {
-   private sealed class NoneError : IError
+   internal sealed class NoneError : IError
    {
       /* ------------------------------------------------------------ */
       // object Overridden Methods

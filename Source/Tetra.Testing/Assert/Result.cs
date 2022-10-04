@@ -16,7 +16,7 @@ partial class Assert_Extensions
    {
       if (result.IsASuccess())
       {
-         throw Failed.Assert(TheResultIsASuccess<T>(description));
+         throw Failed.Assert(TheResultIsASuccessWhenWeExpectedItToBeAFailure<T>(description));
       }
 
       return assert;
@@ -31,7 +31,7 @@ partial class Assert_Extensions
    {
       if (result.Reduce(actual =>
                         {
-                           assert.AreEqual(TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(description),
+                           assert.AreEqual(TheResultIsAFailureButDoesNotContainTheExpectedMessage<T>(description),
                                            expected,
                                            actual.Content());
 
@@ -39,7 +39,7 @@ partial class Assert_Extensions
                         },
                         Function.True))
       {
-         throw Failed.Assert(TheResultIsASuccess<T>(description));
+         throw Failed.Assert(TheResultIsASuccessWhenWeExpectedItToBeAFailure<T>(description));
       }
 
       return assert;
@@ -56,7 +56,7 @@ partial class Assert_Extensions
                         {
                            if (!property(actual))
                            {
-                              throw Failed.Assert(TheResultIsAFailureButDoesNotContainTheExpectedContent<T>(description),
+                              throw Failed.Assert(TheResultIsAFailureButDoesNotContainTheExpectedMessage<T>(description),
                                                   actual);
                            }
 
@@ -64,7 +64,7 @@ partial class Assert_Extensions
                         },
                         Function.True))
       {
-         throw Failed.Assert(TheResultIsASuccess<T>(description));
+         throw Failed.Assert(TheResultIsASuccessWhenWeExpectedItToBeAFailure<T>(description));
       }
 
       return assert;
@@ -78,7 +78,7 @@ partial class Assert_Extensions
    {
       if (result.IsAFailure())
       {
-         throw Failed.Assert(TheResultIsAFailure<T>(description));
+         throw Failed.Assert(TheResultIsAFailureWhenWeExpectedItToBeASuccess<T>(description));
       }
 
       return assert;
@@ -101,7 +101,7 @@ partial class Assert_Extensions
                            return false;
                         }))
       {
-         throw Failed.Assert(TheResultIsAFailure<T>(description));
+         throw Failed.Assert(TheResultIsAFailureWhenWeExpectedItToBeASuccess<T>(description));
       }
 
       return assert;
@@ -126,7 +126,7 @@ partial class Assert_Extensions
                            return false;
                         }))
       {
-         throw Failed.Assert(TheResultIsAFailure<T>(description));
+         throw Failed.Assert(TheResultIsAFailureWhenWeExpectedItToBeASuccess<T>(description));
       }
 
       return assert;
