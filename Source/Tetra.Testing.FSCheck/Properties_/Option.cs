@@ -42,7 +42,7 @@ partial class Properties
             Option<T>.NoneOption => False(TheOptionIsANoneWhenWeExpectedItToBeASome<T>(description)),
             Option<T>.SomeOption some => AreEqual(TheOptionIsASomeButDoesNotContainTheExpectedContent<T>(description),
                                                   expected,
-                                                  some),
+                                                  some.Content),
 
             _ => False(TheOptionIsIUnrecognisedWhenWeExpectedItToBeASome<T>(description)),
          };

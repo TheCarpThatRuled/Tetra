@@ -9,6 +9,7 @@ internal static class LocalCategories
    public const string AbsoluteDirectoryPath = nameof(Tetra.AbsoluteDirectoryPath);
    public const string AbsoluteFilePath      = nameof(Tetra.AbsoluteFilePath);
    public const string Array                 = nameof(System.Array);
+   public const string Bind                  = nameof(Tetra.Bind);
    public const string Char                  = nameof(System.Char);
    public const string Condition             = nameof(Tetra.Condition);
    public const string DirectoryComponent    = nameof(Tetra.DirectoryComponent);

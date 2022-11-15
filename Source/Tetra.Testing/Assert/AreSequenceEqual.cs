@@ -47,7 +47,6 @@ partial class Assert_Extensions
                                                  Func<T1, string>       t1ToString,
                                                  Action<T0, T1, string> compareItem)
    {
-
       if (expected is null
        && actual is not null)
       {

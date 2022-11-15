@@ -12,10 +12,10 @@
     <Authors>Tom McFadden</Authors>
   </PropertyGroup>
 
-  <ItemGroup >
-    <InternalsVisibleTo Include="Tetra.Testing"/>
-    <InternalsVisibleTo Include="Tetra.Testing.FSCheck"/>
-    <InternalsVisibleTo Include="UnitCheck.Tetra"/>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Tetra.Testing" />
+    <InternalsVisibleTo Include="Tetra.Testing.FSCheck" />
+    <InternalsVisibleTo Include="UnitCheck.Tetra" />
   </ItemGroup>
 
 </Project>
