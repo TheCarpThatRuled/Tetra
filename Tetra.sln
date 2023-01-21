@@ -15,6 +15,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tetra.Testing.FileSystem", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitCheck.Tetra.Testing.FileSystem", "Source\UnitCheck.Tetra.Testing.FileSystem\UnitCheck.Tetra.Testing.FileSystem.csproj", "{D231A294-D54F-41C0-AB96-1BBEC4211B19}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tetra.Wpf", "Source\Tetra.Wpf\Tetra.Wpf.csproj", "{B0DE1ACB-BDD8-4B03-B856-1121FC7BC0B1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitCheck.Tetra.Wpf", "Source\UnitCheck.Tetra.Wpf\UnitCheck.Tetra.Wpf.csproj", "{B20411DE-2590-4F63-A8B6-C822E2D8D1CA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -45,6 +49,14 @@ Global
 		{D231A294-D54F-41C0-AB96-1BBEC4211B19}.Debug|x64.Build.0 = Debug|x64
 		{D231A294-D54F-41C0-AB96-1BBEC4211B19}.Release|x64.ActiveCfg = Release|x64
 		{D231A294-D54F-41C0-AB96-1BBEC4211B19}.Release|x64.Build.0 = Release|x64
+		{B0DE1ACB-BDD8-4B03-B856-1121FC7BC0B1}.Debug|x64.ActiveCfg = Debug|x64
+		{B0DE1ACB-BDD8-4B03-B856-1121FC7BC0B1}.Debug|x64.Build.0 = Debug|x64
+		{B0DE1ACB-BDD8-4B03-B856-1121FC7BC0B1}.Release|x64.ActiveCfg = Release|x64
+		{B0DE1ACB-BDD8-4B03-B856-1121FC7BC0B1}.Release|x64.Build.0 = Release|x64
+		{B20411DE-2590-4F63-A8B6-C822E2D8D1CA}.Debug|x64.ActiveCfg = Debug|x64
+		{B20411DE-2590-4F63-A8B6-C822E2D8D1CA}.Debug|x64.Build.0 = Debug|x64
+		{B20411DE-2590-4F63-A8B6-C822E2D8D1CA}.Release|x64.ActiveCfg = Release|x64
+		{B20411DE-2590-4F63-A8B6-C822E2D8D1CA}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

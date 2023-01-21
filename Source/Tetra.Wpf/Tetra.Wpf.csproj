@@ -1,9 +1,9 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <Platforms>x64</Platforms>
-    <RootNamespace>Tetra.Testing</RootNamespace>
+    <RootNamespace>Tetra</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <OutputPath>$(SolutionDir)\Build\$(Configuration)</OutputPath>
@@ -11,16 +11,10 @@
 
   <PropertyGroup>
     <Authors>Tom McFadden</Authors>
-    <Product>Tetra</Product>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="FsCheck" Version="2.16.5" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Tetra\Tetra.csproj" />
-    <ProjectReference Include="..\Tetra.Testing\Tetra.Testing.csproj" />
   </ItemGroup>
 
 </Project>
