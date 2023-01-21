@@ -35,7 +35,7 @@ public class Push
          binding.Push(args.pushedValue);
 
          //Assert
-         return WasFireOnce(nameof(updated),
+         return WasFiredOnce(nameof(updated),
                             updated)
            .And(AreEqual(nameof(ITwoWayBinding<int>.Pull),
                          args.pushedValue,
@@ -70,7 +70,7 @@ public class Push
          binding.Push(args.pushedValue);
 
          //Assert
-         return WasFireOnce(nameof(updated),
+         return WasFiredOnce(nameof(updated),
                             updated)
            .And(AreEqual(nameof(ITwoWayBinding<TestClass>.Pull),
                          args.pushedValue,
@@ -105,7 +105,7 @@ public class Push
          binding.Push(args.pushedValue);
 
          //Assert
-         return WasFireOnce(nameof(updated),
+         return WasFiredOnce(nameof(updated),
                             updated)
            .And(AreEqual(nameof(ITwoWayBinding<TestStruct>.Pull),
                          args.pushedValue,

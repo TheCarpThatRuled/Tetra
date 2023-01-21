@@ -17,12 +17,12 @@ partial class AssertMessages
    /* ------------------------------------------------------------ */
 
    public static string TheFakeFunctionWasInvokedWhenWeExpectedItNotToBe<TReturn>(string description)
-      => $"{description}: {TheFakeFunction<TReturn>()} {WasInvokedWhenWeExpectedItNotToBe}.";
+      => $"{description}: {TheFakeFunction<TReturn>()} {WasInvokedWhenWeExpectedItNotToHaveBeen}.";
 
    /* ------------------------------------------------------------ */
 
    public static string TheFakeFunctionWasInvokedWhenWeExpectedItNotToBe<T, TReturn>(string description)
-      => $"{description}: {TheFakeFunction<T, TReturn>()} {WasInvokedWhenWeExpectedItNotToBe}.";
+      => $"{description}: {TheFakeFunction<T, TReturn>()} {WasInvokedWhenWeExpectedItNotToHaveBeen}.";
 
    /* ------------------------------------------------------------ */
 
@@ -32,7 +32,7 @@ partial class AssertMessages
    /* ------------------------------------------------------------ */
 
    public static string TheFakeFunctionWasNotInvokedWheWeExpectedToBe<T, TReturn>(string description)
-      => $"{description}: {TheFakeFunction<T, TReturn>()} {WasNotInvokedWhenWeExpectedItToBe}.";
+      => $"{description}: {TheFakeFunction<T, TReturn>()} {WasNotInvokedWhenWeExpectedItToHaveBeen}.";
 
    /* ------------------------------------------------------------ */
    // Private Functions

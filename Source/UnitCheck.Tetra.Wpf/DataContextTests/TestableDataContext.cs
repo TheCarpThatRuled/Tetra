@@ -86,6 +86,35 @@ internal sealed class TestableDataContext : DataContext
             break;
 
          case OneWayBinding<T>:
+            throw Failed.InTestSetup($@"""{propertyName}"" is a {nameof(OneWayBinding<T>)} which does not support pushing");
+
+         default:
+            throw Failed.InTestSetup($@"By some madness ""{propertyName}"" is not a supported type of DataContext binding...");
+      }
+   }
+
+   /* ------------------------------------------------------------ */
+   public void Set<T>(string propertyName,
+                      T      value)
+   {
+      var hasBinding = _bindings.TryGetValue(propertyName,
+                                             out var binding);
+
+      if (!hasBinding)
+      {
+         throw Failed.InTestSetup($@"The testable data context does not have a binding with the name ""{propertyName}""");
+      }
+
+      switch (binding)
+      {
+         case Binding<T> direct:
+            direct.Set(value);
+            break;
+
+         case TwoWayBinding<T> twoWayBinding:
+            throw Failed.InTestSetup($@"""{propertyName}"" is a {nameof(TwoWayBinding<T>)} which does not support setting");
+
+         case OneWayBinding<T>:
             throw Failed.InTestSetup($@"""{propertyName}"" is a {nameof(OneWayBinding<T>)} which does not support setting");
 
          default:

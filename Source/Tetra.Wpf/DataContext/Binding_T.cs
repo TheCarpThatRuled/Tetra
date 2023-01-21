@@ -5,13 +5,6 @@ partial class DataContext
    protected sealed class Binding<T>
    {
       /* ------------------------------------------------------------ */
-      // Factory Functions
-      /* ------------------------------------------------------------ */
-
-      public static Binding<T> Create(T initialValue)
-         => new(initialValue);
-
-      /* ------------------------------------------------------------ */
       // Properties
       /* ------------------------------------------------------------ */
 
@@ -23,20 +16,44 @@ partial class DataContext
       /* ------------------------------------------------------------ */
 
       public void Push(T value)
+      {
+         _value = value;
+         _onPush();
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public void Set(T value)
          => _value = value;
+
+      /* ------------------------------------------------------------ */
+      // Internal Factory Functions
+      /* ------------------------------------------------------------ */
+
+      internal static Binding<T> Create(T      initialValue,
+                                        Action onPush)
+         => new(onPush,
+                initialValue);
 
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
+      private readonly Action _onPush;
+
+      //Mutable
       private T _value;
 
       /* ------------------------------------------------------------ */
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private Binding(T value)
-         => _value = value;
+      private Binding(Action onPush,
+                      T      value)
+      {
+         _onPush = onPush;
+         _value  = value;
+      }
 
       /* ------------------------------------------------------------ */
    }

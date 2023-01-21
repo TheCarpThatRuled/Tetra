@@ -1,14 +1,22 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Tetra;
 
 public abstract partial class DataContext : INotifyPropertyChanged
 {
    /* ------------------------------------------------------------ */
-   // INotifyPropertyChanged Events
+   // INotifyPropertyChanged Events and Invokers
    /* ------------------------------------------------------------ */
 
    public event PropertyChangedEventHandler? PropertyChanged;
+
+   /* ------------------------------------------------------------ */
+
+   protected void OnPropertyChanged([CallerMemberName] string? memberName = null)
+      => PropertyChanged
+       ?.Invoke(this,
+                new(memberName));
 
    /* ------------------------------------------------------------ */
    // Protected Methods
@@ -17,7 +25,8 @@ public abstract partial class DataContext : INotifyPropertyChanged
    protected Binding<T> Bind<T>(string memberName,
                                 T      initialValue)
       => Binding<T>
-        .Create(initialValue);
+        .Create(initialValue,
+                () => OnPropertyChanged(memberName));
 
    /* ------------------------------------------------------------ */
 

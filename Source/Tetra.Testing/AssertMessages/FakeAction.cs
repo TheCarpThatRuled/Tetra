@@ -17,12 +17,12 @@ partial class AssertMessages
    /* ------------------------------------------------------------ */
 
    public static string TheFakeActionWasInvokedWhenWeExpectedItNotToBe(string description)
-      => $"{description}: {TheFakeAction()} {WasInvokedWhenWeExpectedItNotToBe}.";
+      => $"{description}: {TheFakeAction()} {WasInvokedWhenWeExpectedItNotToHaveBeen}.";
 
    /* ------------------------------------------------------------ */
 
    public static string TheFakeActionWasInvokedWhenWeExpectedItNotToBe<T>(string description)
-      => $"{description}: {TheFakeAction<T>()} {WasInvokedWhenWeExpectedItNotToBe}.";
+      => $"{description}: {TheFakeAction<T>()} {WasInvokedWhenWeExpectedItNotToHaveBeen}.";
 
    /* ------------------------------------------------------------ */
 
@@ -32,7 +32,7 @@ partial class AssertMessages
    /* ------------------------------------------------------------ */
 
    public static string TheFakeActionWasNotInvokedWheWeExpectedToBe<T>(string description)
-      => $"{description}: {TheFakeAction<T>()} {WasNotInvokedWhenWeExpectedItToBe}.";
+      => $"{description}: {TheFakeAction<T>()} {WasNotInvokedWhenWeExpectedItToHaveBeen}.";
 
    /* ------------------------------------------------------------ */
    // Private Actions

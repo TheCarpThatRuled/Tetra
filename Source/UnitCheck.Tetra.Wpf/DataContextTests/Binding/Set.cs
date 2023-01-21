@@ -9,19 +9,19 @@ namespace Check.DataContextTests.Binding;
 [TestClass]
 [TestCategory(GlobalCategories.UnitCheck)]
 [TestCategory(LocalCategories.DataContext)]
-public class Push
+public class Set
 {
    /* ------------------------------------------------------------ */
 
    //GIVEN
    //a_Binding_of_int_has_been_created
    //WHEN
-   //Push
+   //Set
    //THEN
-   //OnPropertyChanged_was_fired_once_with_propertyName_AND_Pull_returns_newValue
+   //OnPropertyChanged_was_not_fired_AND_Pull_returns_newValue
 
    [TestMethod]
-   public void GIVEN_a_Binding_of_int_has_been_created_WHEN_Push_THEN_OnPropertyChanged_was_fired_once_with_propertyName_AND_Pull_returns_newValue()
+   public void GIVEN_a_Binding_of_int_has_been_created_WHEN_Set_THEN_OnPropertyChanged_was_not_fired_AND_Pull_returns_newValue()
    {
       static Property Property(string                           propertyName,
                                (int initialValue, int newValue) args)
@@ -29,22 +29,22 @@ public class Push
          //Arrange
 
          var dataContext       = TestableDataContext.Create();
-         var onPropertyChanged = FakePropertyChangedEventHandler.Create(handler=> dataContext.PropertyChanged += handler);
+         var onPropertyChanged = FakePropertyChangedEventHandler.Create(handler => dataContext.PropertyChanged += handler);
 
          dataContext.CreateBinding(propertyName,
                                    args.initialValue);
 
          //Act
-         dataContext.Push(propertyName,
+         dataContext.Set(propertyName,
                          args.newValue);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
                          args.newValue,
                          dataContext.Pull<int>(propertyName))
-           .And(WasFiredOnce(nameof(DataContext),
-                            onPropertyChanged,
-                            propertyName)); ;
+           .And(WasNotFired(nameof(DataContext),
+                            onPropertyChanged));
+         ;
       }
 
       Arb.Register<Libraries.NonNullString>();
@@ -59,12 +59,12 @@ public class Push
    //GIVEN
    //a_Binding_of_TestClass_has_been_created
    //WHEN
-   //Push
+   //Set
    //THEN
-   //OnPropertyChanged_was_fired_once_with_propertyName_AND_Pull_returns_newValue
+   //OnPropertyChanged_was_not_fired_AND_Pull_returns_newValue
 
    [TestMethod]
-   public void GIVEN_a_Binding_of_TestClass_has_been_created_WHEN_Push_THENOnPropertyChanged_was_fired_once_with_propertyName_AND__Pull_returns_newValue()
+   public void GIVEN_a_Binding_of_TestClass_has_been_created_WHEN_Set_THENOnPropertyChanged_was_not_fired_AND__Pull_returns_newValue()
    {
       static Property Property(string                                       propertyName,
                                (TestClass initialValue, TestClass newValue) args)
@@ -77,16 +77,16 @@ public class Push
                                    args.initialValue);
 
          //Act
-         dataContext.Push(propertyName,
+         dataContext.Set(propertyName,
                          args.newValue);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
                          args.newValue,
                          dataContext.Pull<TestClass>(propertyName))
-           .And(WasFiredOnce(nameof(DataContext),
-                            onPropertyChanged,
-                            propertyName)); ;
+           .And(WasNotFired(nameof(DataContext),
+                            onPropertyChanged));
+         ;
       }
 
       Arb.Register<Libraries.NonNullString>();
@@ -101,12 +101,12 @@ public class Push
    //GIVEN
    //a_Binding_of_TestStruct_has_been_created
    //WHEN
-   //Push
+   //Set
    //THEN
-   //OnPropertyChanged_was_fired_once_with_propertyName_AND_Pull_returns_newValue
+   //OnPropertyChanged_was_not_fired_AND_Pull_returns_newValue
 
    [TestMethod]
-   public void GIVEN_a_Binding_of_TestStruct_has_been_created_WHEN_Push_THENOnPropertyChanged_was_fired_once_with_propertyName_AND__Pull_returns_newValue()
+   public void GIVEN_a_Binding_of_TestStruct_has_been_created_WHEN_Set_THENOnPropertyChanged_was_not_fired_AND__Pull_returns_newValue()
    {
       static Property Property(string                                         propertyName,
                                (TestStruct initialValue, TestStruct newValue) args)
@@ -119,16 +119,15 @@ public class Push
                                    args.initialValue);
 
          //Act
-         dataContext.Push(propertyName,
+         dataContext.Set(propertyName,
                          args.newValue);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
                          args.newValue,
                          dataContext.Pull<TestStruct>(propertyName))
-           .And(WasFiredOnce(nameof(DataContext),
-                            onPropertyChanged,
-                            propertyName));
+           .And(WasNotFired(nameof(DataContext),
+                            onPropertyChanged));
       }
 
       Arb.Register<Libraries.NonNullString>();
