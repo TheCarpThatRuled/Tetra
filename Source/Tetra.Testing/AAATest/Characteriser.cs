@@ -10,17 +10,17 @@ partial class AAATest
       // Methods
       /* ------------------------------------------------------------ */
 
-      public string GenerateCharacterisation()
+      public string GenerateBriefCharacterisation()
       {
          var builder = new StringBuilder();
 
          builder.Append("GIVEN ");
 
-         foreach (var (clause, index) in _givenCharacterisation.WithIndices())
+         foreach (var (clause, index) in _givenBriefCharacterisation.WithIndices())
          {
             builder.Append(clause);
 
-            if (index != _givenCharacterisation.Length() - 1)
+            if (index != _givenBriefCharacterisation.Length() - 1)
             {
                builder.Append(" AND ");
             }
@@ -28,11 +28,11 @@ partial class AAATest
 
          builder.Append(" WHEN ");
 
-         foreach (var (clause, index) in _whenCharacterisation.WithIndices())
+         foreach (var (clause, index) in _whenBriefCharacterisation.WithIndices())
          {
             builder.Append(clause);
 
-            if (index != _whenCharacterisation.Length() - 1)
+            if (index != _whenBriefCharacterisation.Length() - 1)
             {
                builder.Append(" AND ");
             }
@@ -40,11 +40,11 @@ partial class AAATest
 
          builder.Append(" THEN ");
 
-         foreach (var (clause, index) in _thenCharacterisation.WithIndices())
+         foreach (var (clause, index) in _thenBriefCharacterisation.WithIndices())
          {
             builder.Append(clause);
 
-            if (index != _thenCharacterisation.Length() - 1)
+            if (index != _thenBriefCharacterisation.Length() - 1)
             {
                builder.Append(" AND ");
             }
@@ -59,35 +59,35 @@ partial class AAATest
       {
          var builder = new StringBuilder();
 
-         builder.AppendLine("GIVEN");
+         builder.AppendLine(">>> GIVEN <<<");
 
-         foreach (var (clause, index) in _givenCharacterisation.WithIndices())
+         foreach (var (clause, index) in _givenBriefCharacterisation.WithIndices())
          {
             builder.AppendLine(clause);
 
-            if (index != _givenCharacterisation.Length() - 1)
+            if (index != _givenBriefCharacterisation.Length() - 1)
             {
                builder.AppendLine("AND");
             }
          }
 
-         builder.AppendLine("WHEN");
+         builder.AppendLine(">>> WHEN <<<");
 
-         foreach (var (clause, index) in _whenCharacterisation.WithIndices())
+         foreach (var (clause, index) in _whenBriefCharacterisation.WithIndices())
          {
             builder.AppendLine(clause);
 
-            if (index != _whenCharacterisation.Length() - 1)
+            if (index != _whenBriefCharacterisation.Length() - 1)
             {
                builder.AppendLine("AND");
             }
          }
 
-         builder.AppendLine("THEN");
+         builder.AppendLine(">>> THEN <<<");
 
-         foreach (var (clause, index) in _thenCharacterisation.WithIndices())
+         foreach (var (clause, index) in _thenBriefCharacterisation.WithIndices())
          {
-            if (index != _thenCharacterisation.Length() - 1)
+            if (index != _thenBriefCharacterisation.Length() - 1)
             {
                builder.AppendLine(clause);
                builder.AppendLine("AND");
@@ -107,17 +107,17 @@ partial class AAATest
       /* ------------------------------------------------------------ */
 
       public ISequence<string> GivenCharacterisation()
-         => _givenCharacterisation;
+         => _givenBriefCharacterisation;
 
       /* ------------------------------------------------------------ */
 
       public ISequence<string> WhenCharacterisation()
-         => _whenCharacterisation;
+         => _whenBriefCharacterisation;
 
       /* ------------------------------------------------------------ */
 
       public ISequence<string> ThenCharacterisation()
-         => _thenCharacterisation;
+         => _thenBriefCharacterisation;
 
       /* ------------------------------------------------------------ */
 
@@ -138,30 +138,30 @@ partial class AAATest
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal Characteriser(ISequence<string> givenCharacterisation,
-                             ISequence<string> whenCharacterisation,
-                             ISequence<string> thenCharacterisation,
+      internal Characteriser(ISequence<string> givenBriefCharacterisation,
+                             ISequence<string> whenBriefCharacterisation,
+                             ISequence<string> thenBriefCharacterisation,
                              ISequence<string> givenFullCharacterisation,
                              ISequence<string> whenFullCharacterisation,
                              ISequence<string> thenFullCharacterisation)
       {
-         _givenCharacterisation     = givenCharacterisation;
-         _givenFullCharacterisation = givenFullCharacterisation;
-         _whenCharacterisation      = whenCharacterisation;
-         _whenFullCharacterisation  = whenFullCharacterisation;
-         _thenCharacterisation      = thenCharacterisation;
-         _thenFullCharacterisation  = thenFullCharacterisation;
+         _givenBriefCharacterisation = givenBriefCharacterisation;
+         _givenFullCharacterisation  = givenFullCharacterisation;
+         _whenBriefCharacterisation  = whenBriefCharacterisation;
+         _whenFullCharacterisation   = whenFullCharacterisation;
+         _thenBriefCharacterisation  = thenBriefCharacterisation;
+         _thenFullCharacterisation   = thenFullCharacterisation;
       }
 
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly ISequence<string> _givenCharacterisation;
+      private readonly ISequence<string> _givenBriefCharacterisation;
       private readonly ISequence<string> _givenFullCharacterisation;
-      private readonly ISequence<string> _whenCharacterisation;
+      private readonly ISequence<string> _whenBriefCharacterisation;
       private readonly ISequence<string> _whenFullCharacterisation;
-      private readonly ISequence<string> _thenCharacterisation;
+      private readonly ISequence<string> _thenBriefCharacterisation;
       private readonly ISequence<string> _thenFullCharacterisation;
 
       /* ------------------------------------------------------------ */

@@ -13,8 +13,8 @@ public sealed partial class AAATest : ICharacterisable
    // ICharacterisable Methods
    /* ------------------------------------------------------------ */
 
-   public string Characterisation()
-      => _characterisation;
+   public string BriefCharacterisation()
+      => _briefCharacterisation;
 
    /* ------------------------------------------------------------ */
 
@@ -32,7 +32,7 @@ public sealed partial class AAATest : ICharacterisable
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly string                          _characterisation;
+   private readonly string                          _briefCharacterisation;
    private readonly string                          _fullCharacterisation;
    private readonly Func<Disposables, Func<Action>> _test;
 
@@ -40,13 +40,13 @@ public sealed partial class AAATest : ICharacterisable
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private AAATest(string                          characterisation,
+   private AAATest(string                          briefCharacterisation,
                    string                          fullCharacterisation,
                    Func<Disposables, Func<Action>> test)
    {
-      _characterisation     = characterisation;
-      _fullCharacterisation = fullCharacterisation;
-      _test                 = test;
+      _briefCharacterisation = briefCharacterisation;
+      _fullCharacterisation  = fullCharacterisation;
+      _test                  = test;
    }
 
    /* ------------------------------------------------------------ */
@@ -55,7 +55,7 @@ public sealed partial class AAATest : ICharacterisable
 
    private static AAATest Create(Func<Disposables, Func<Action>> test,
                                  Characteriser                   characteriser)
-      => new(characteriser.GenerateCharacterisation(),
+      => new(characteriser.GenerateBriefCharacterisation(),
              characteriser.GenerateFullCharacterisation(),
              test);
 

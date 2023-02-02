@@ -2,7 +2,7 @@
 
 partial class AAATest
 {
-   public sealed class DefineThen<TWhen, TThen>
+   public sealed class DefineThen<TThen>
       where TThen : IAsserts
    {
       /* ------------------------------------------------------------ */
@@ -18,7 +18,7 @@ partial class AAATest
                            var given = _given(disposables);
                            return () =>
                            {
-                              var when = _when(given);
+                              var when = given();
 
                               return () => actualThen(when);
                            };
@@ -31,14 +31,12 @@ partial class AAATest
       /* ------------------------------------------------------------ */
 
       internal DefineThen(Func<Func<Disposables, Func<Action>>, Characteriser, AAATest> create,
-                          Func<Disposables, TWhen>                                      given,
-                          Func<TWhen, TThen>                                            when,
+                          Func<Disposables, Func<TThen>>                                given,
                           ThenCharacteriser                                             characteriser)
       {
          _characteriser = characteriser;
          _create        = create;
          _given         = given;
-         _when          = when;
       }
 
       /* ------------------------------------------------------------ */
@@ -47,8 +45,7 @@ partial class AAATest
 
       private readonly ThenCharacteriser                                             _characteriser;
       private readonly Func<Func<Disposables, Func<Action>>, Characteriser, AAATest> _create;
-      private readonly Func<Disposables, TWhen>                                      _given;
-      private readonly Func<TWhen, TThen>                                            _when;
+      private readonly Func<Disposables, Func<TThen>>                                _given;
 
       /* ------------------------------------------------------------ */
    }

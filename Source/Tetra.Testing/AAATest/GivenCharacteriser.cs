@@ -8,12 +8,18 @@ partial class AAATest
       // Methods
       /* ------------------------------------------------------------ */
 
-      public GivenCharacteriser AddClauseToCharacterisation(string clause)
+      public GivenCharacteriser AddClauseToBriefCharacterisation(string clause)
       {
-         _characterisation.Add(clause);
+         _briefCharacterisation.Add(clause);
 
          return this;
       }
+
+      /* ------------------------------------------------------------ */
+
+      public GivenCharacteriser AddClauseToCharacterisation(string clause)
+         => AddClauseToBriefCharacterisation(clause)
+           .AddClauseToFullCharacterisation(clause);
 
       /* ------------------------------------------------------------ */
 
@@ -36,15 +42,15 @@ partial class AAATest
       /* ------------------------------------------------------------ */
 
       internal WhenCharacteriser When()
-         => new(_characterisation.Materialise(),
+         => new(_briefCharacterisation.Materialise(),
                 _fullCharacterisation.Materialise());
 
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly List<string> _characterisation     = new();
-      private readonly List<string> _fullCharacterisation = new();
+      private readonly List<string> _briefCharacterisation = new();
+      private readonly List<string> _fullCharacterisation  = new();
 
       /* ------------------------------------------------------------ */
       // Private Constructors

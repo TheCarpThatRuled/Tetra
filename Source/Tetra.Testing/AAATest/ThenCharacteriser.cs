@@ -1,68 +1,75 @@
-﻿namespace Tetra.Testing;
-
-partial class AAATest
+﻿namespace Tetra.Testing
 {
-   public sealed class ThenCharacteriser
+   partial class AAATest
    {
-      /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public ThenCharacteriser AddClauseToCharacterisation(string clause)
+      public sealed class ThenCharacteriser
       {
-         _characterisation.Add(clause);
+         /* ------------------------------------------------------------ */
+         // Methods
+         /* ------------------------------------------------------------ */
 
-         return this;
+         public ThenCharacteriser AddClauseToBriefCharacterisation(string clause)
+         {
+            _briefCharacterisation.Add(clause);
+
+            return this;
+         }
+
+         /* ------------------------------------------------------------ */
+
+         public ThenCharacteriser AddClauseToCharacterisation(string clause)
+            => AddClauseToBriefCharacterisation(clause)
+              .AddClauseToFullCharacterisation(clause);
+
+         /* ------------------------------------------------------------ */
+
+         public ThenCharacteriser AddClauseToFullCharacterisation(string clause)
+         {
+            _fullCharacterisation.Add(clause);
+
+            return this;
+         }
+
+         /* ------------------------------------------------------------ */
+         // Internal Constructors
+         /* ------------------------------------------------------------ */
+
+         internal ThenCharacteriser(ISequence<string> givenBriefCharacterisation,
+                                    ISequence<string> whenBriefCharacterisation,
+                                    ISequence<string> givenFullCharacterisation,
+                                    ISequence<string> whenFullCharacterisation)
+         {
+            _givenBriefBriefCharacterisation = givenBriefCharacterisation;
+            _givenFullCharacterisation       = givenFullCharacterisation;
+            _whenBriefBriefCharacterisation  = whenBriefCharacterisation;
+            _whenFullCharacterisation        = whenFullCharacterisation;
+         }
+
+         /* ------------------------------------------------------------ */
+         // Internal Methods
+         /* ------------------------------------------------------------ */
+
+         internal Characteriser Finish()
+            => new(_givenBriefBriefCharacterisation,
+                   _whenBriefBriefCharacterisation,
+                   _briefCharacterisation.Materialise(),
+                   _givenFullCharacterisation,
+                   _whenFullCharacterisation,
+                   _fullCharacterisation.Materialise());
+
+         /* ------------------------------------------------------------ */
+         // Private Fields
+         /* ------------------------------------------------------------ */
+
+         private readonly List<string> _briefCharacterisation = new();
+         private readonly List<string> _fullCharacterisation  = new();
+
+         private readonly ISequence<string> _givenBriefBriefCharacterisation;
+         private readonly ISequence<string> _givenFullCharacterisation;
+         private readonly ISequence<string> _whenBriefBriefCharacterisation;
+         private readonly ISequence<string> _whenFullCharacterisation;
+
+         /* ------------------------------------------------------------ */
       }
-
-      /* ------------------------------------------------------------ */
-
-      public ThenCharacteriser AddClauseToFullCharacterisation(string clause)
-      {
-         _fullCharacterisation.Add(clause);
-
-         return this;
-      }
-
-      /* ------------------------------------------------------------ */
-      // Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal ThenCharacteriser(ISequence<string> givenCharacterisation,
-                                 ISequence<string> whenCharacterisation,
-                                 ISequence<string> givenFullCharacterisation,
-                                 ISequence<string> whenFullCharacterisation)
-      {
-         _givenCharacterisation     = givenCharacterisation;
-         _givenFullCharacterisation = givenFullCharacterisation;
-         _whenCharacterisation      = whenCharacterisation;
-         _whenFullCharacterisation  = whenFullCharacterisation;
-      }
-
-      /* ------------------------------------------------------------ */
-      // Internal Methods
-      /* ------------------------------------------------------------ */
-
-      internal Characteriser Finish()
-         => new(_givenCharacterisation,
-                _whenCharacterisation,
-                _characterisation.Materialise(),
-                _givenFullCharacterisation,
-                _whenFullCharacterisation,
-                _fullCharacterisation.Materialise());
-
-      /* ------------------------------------------------------------ */
-      // Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly List<string> _characterisation     = new();
-      private readonly List<string> _fullCharacterisation = new();
-
-      private readonly ISequence<string> _givenCharacterisation;
-      private readonly ISequence<string> _givenFullCharacterisation;
-      private readonly ISequence<string> _whenCharacterisation;
-      private readonly ISequence<string> _whenFullCharacterisation;
-
-      /* ------------------------------------------------------------ */
    }
 }

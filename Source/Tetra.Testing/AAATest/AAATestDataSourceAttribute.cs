@@ -19,7 +19,7 @@ public abstract class AAATestDataSource : Attribute,
    public string? GetDisplayName(MethodInfo _,
                                  object?[]? data)
       => (data!.First() as AAATest)
-       ?.Characterisation();
+       ?.BriefCharacterisation();
 
    /* ------------------------------------------------------------ */
    // Protected Constructors

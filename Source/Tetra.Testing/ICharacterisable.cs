@@ -6,7 +6,7 @@ public interface ICharacterisable
    // Methods
    /* ------------------------------------------------------------ */
 
-   public string Characterisation();
+   public string BriefCharacterisation();
 
    /* ------------------------------------------------------------ */
 

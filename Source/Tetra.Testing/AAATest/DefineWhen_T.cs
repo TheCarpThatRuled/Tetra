@@ -8,14 +8,17 @@ partial class AAATest
       // Methods
       /* ------------------------------------------------------------ */
 
-      public DefineThen<TWhen, TThen> When<TThen>(Func<WhenCharacteriser, Func<TWhen, TThen>> when)
+      public DefineThen<TThen> When<TThen>(Func<WhenCharacteriser, Func<TWhen, TThen>> when)
          where TThen : IAsserts
       {
          var actualWhen = when(_characteriser);
 
          return new(_create,
-                    _given,
-                    actualWhen,
+                    disposables =>
+                    {
+                       var given = _given(disposables);
+                       return () => actualWhen(given);
+                    },
                     _characteriser.Then());
       }
 
