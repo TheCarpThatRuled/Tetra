@@ -8,6 +8,7 @@
     <IsPackable>false</IsPackable>
     <RootNamespace>Check</RootNamespace>
     <OutputPath>$(SolutionDir)\Test\$(Configuration)</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
   <PropertyGroup>

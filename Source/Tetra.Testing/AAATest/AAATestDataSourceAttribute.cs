@@ -3,7 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tetra.Testing;
 
-public abstract class AAATestDataSource : ITestDataSource
+public abstract class AAATestDataSource : Attribute,
+                                          ITestDataSource
 {
    /* ------------------------------------------------------------ */
    // ITestDataSource Methods
