@@ -60,9 +60,7 @@ public static class Log
    /* ------------------------------------------------------------ */
 
    public static void ToDebugOutput_NewLine()
-   {
-      ToDebugOutput(string.Empty);
-   }
+      => ToDebugOutput(string.Empty);
 
    /* ------------------------------------------------------------ */
    // ToStandardOutput Functions
