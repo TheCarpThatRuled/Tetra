@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <RootNamespace>Check</RootNamespace>
-    <OutputPath>$(SolutionDir)\Test\$(Configuration)</OutputPath>
+    <OutputPath>$(SolutionDir)\Check\$(Configuration)</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
@@ -29,7 +29,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Tetra\Tetra.csproj" />
     <ProjectReference Include="..\Tetra.Testing\Tetra.Testing.csproj" />
-    <ProjectReference Include="..\Tetra.Testing.FileSystem\Tetra.Testing.FileSystem.csproj" />
     <ProjectReference Include="..\Tetra.Testing.FSCheck\Tetra.Testing.FSCheck.csproj" />
   </ItemGroup>
 

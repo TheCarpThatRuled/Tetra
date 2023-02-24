@@ -7,7 +7,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <RootNamespace>Check</RootNamespace>
-    <OutputPath>$(SolutionDir)\Test\$(Configuration)</OutputPath>
+    <OutputPath>$(SolutionDir)\Check\$(Configuration)</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
