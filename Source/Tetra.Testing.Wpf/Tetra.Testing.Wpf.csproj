@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-Windows</TargetFramework>
+    <Platforms>x64</Platforms>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Tetra.Testing</RootNamespace>
+    <OutputPath>$(SolutionDir)\Build\$(Configuration)</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>Tom McFadden</Authors>
+    <Product>Tetra</Product>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tetra.Testing\Tetra.Testing.csproj" />
+    <ProjectReference Include="..\Tetra.Ui.Wpf\Tetra.Ui.Wpf.csproj" />
+    <ProjectReference Include="..\Tetra\Tetra.csproj" />
+  </ItemGroup>
+
+</Project>

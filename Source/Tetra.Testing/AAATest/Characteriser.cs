@@ -61,40 +61,40 @@ partial class AAATest
 
          builder.AppendLine(">>> GIVEN <<<");
 
-         foreach (var (clause, index) in _givenBriefCharacterisation.WithIndices())
+         foreach (var (clause, index) in _givenFullCharacterisation.WithIndices())
          {
-            builder.AppendLine(clause);
+            builder.AppendLine($">>> {clause}");
 
-            if (index != _givenBriefCharacterisation.Length() - 1)
+            if (index != _givenFullCharacterisation.Length() - 1)
             {
-               builder.AppendLine("AND");
+               builder.AppendLine(">>> AND");
             }
          }
 
          builder.AppendLine(">>> WHEN <<<");
 
-         foreach (var (clause, index) in _whenBriefCharacterisation.WithIndices())
+         foreach (var (clause, index) in _whenFullCharacterisation.WithIndices())
          {
-            builder.AppendLine(clause);
+            builder.AppendLine($">>> {clause}");
 
-            if (index != _whenBriefCharacterisation.Length() - 1)
+            if (index != _whenFullCharacterisation.Length() - 1)
             {
-               builder.AppendLine("AND");
+               builder.AppendLine(">>> AND");
             }
          }
 
          builder.AppendLine(">>> THEN <<<");
 
-         foreach (var (clause, index) in _thenBriefCharacterisation.WithIndices())
+         foreach (var (clause, index) in _thenFullCharacterisation.WithIndices())
          {
-            if (index != _thenBriefCharacterisation.Length() - 1)
+            if (index != _thenFullCharacterisation.Length() - 1)
             {
-               builder.AppendLine(clause);
-               builder.AppendLine("AND");
+               builder.AppendLine($">>> {clause}");
+               builder.AppendLine(">>> AND");
             }
             else
             {
-               builder.Append(clause);
+               builder.Append($">>> {clause}");
             }
          }
 

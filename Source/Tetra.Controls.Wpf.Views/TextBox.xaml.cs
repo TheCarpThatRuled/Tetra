@@ -1,17 +1,13 @@
 ﻿namespace Tetra;
 
-public static partial class Function
+public partial class TextBox
 {
    /* ------------------------------------------------------------ */
-   // Functions
+   // Constructors
    /* ------------------------------------------------------------ */
 
-   public static void NoOp<T>(T _) { }
-
-   /* ------------------------------------------------------------ */
-
-   public static T PassThrough<T>(T value)
-      => value;
+   public TextBox()
+      => InitializeComponent();
 
    /* ------------------------------------------------------------ */
 }

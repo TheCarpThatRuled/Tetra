@@ -9,7 +9,7 @@ partial class AAATest
       /* ------------------------------------------------------------ */
 
       public DefineThen<TThen> When<TThen>(Func<WhenCharacteriser, Func<TWhen, TThen>> when)
-         where TThen : IAsserts
+         where TThen : IAssertsInstance
       {
          var actualWhen = when(_characteriser);
 

@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0-Windows</TargetFramework>
+    <Platforms>x64</Platforms>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RootNamespace>Tetra</RootNamespace>
+    <OutputPath>$(SolutionDir)\Build\$(Configuration)</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>Tom McFadden</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tetra.Controls\Tetra.Controls.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+    <ProjectReference Include="..\Tetra\Tetra.csproj" />
+    <ProjectReference Include="..\Tetra.Ui.Wpf\Tetra.Ui.Wpf.csproj" />
+  </ItemGroup>
+
+</Project>

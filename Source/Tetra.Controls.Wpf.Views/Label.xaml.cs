@@ -1,13 +1,13 @@
-﻿namespace Tetra.Testing;
+﻿namespace Tetra;
 
-public interface IAct<out T>
-   where T : IAsserts
+public partial class Label
 {
    /* ------------------------------------------------------------ */
-   // Methods
+   // Constructors
    /* ------------------------------------------------------------ */
 
-   public T Then();
+   public Label()
+      => InitializeComponent();
 
    /* ------------------------------------------------------------ */
 }

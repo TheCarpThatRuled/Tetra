@@ -3,7 +3,7 @@
 partial class AAATest
 {
    public sealed class DefineThen<TThen>
-      where TThen : IAsserts
+      where TThen : IAssertsInstance
    {
       /* ------------------------------------------------------------ */
       // Methods

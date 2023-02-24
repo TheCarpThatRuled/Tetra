@@ -26,10 +26,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tetra.Ui.Wpf\Tetra.Ui.Wpf.csproj" />
+    <ProjectReference Include="..\Check.Tetra.Controls.Wpf.Environment\Check.Tetra.Controls.Wpf.Environment.csproj" />
+    <ProjectReference Include="..\Tetra.Ui\Tetra.Ui.csproj" />
     <ProjectReference Include="..\Tetra\Tetra.csproj" />
     <ProjectReference Include="..\Tetra.Testing\Tetra.Testing.csproj" />
-    <ProjectReference Include="..\Tetra.Testing.FSCheck\Tetra.Testing.FSCheck.csproj" />
   </ItemGroup>
 
 </Project>

@@ -16,20 +16,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.4.1" />
-    <PackageReference Include="MSTest.TestAdapter" Version="3.0.2" />
-    <PackageReference Include="MSTest.TestFramework" Version="3.0.2" />
-    <PackageReference Include="coverlet.collector" Version="3.2.0">
+    <ProjectReference Include="..\Tetra.Controls.Wpf.Contexts\Tetra.Controls.Wpf.Contexts.csproj">
       <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Tetra.Ui.Wpf\Tetra.Ui.Wpf.csproj" />
-    <ProjectReference Include="..\Tetra\Tetra.csproj" />
+    </ProjectReference>
+    <ProjectReference Include="..\Tetra.Controls\Tetra.Controls.csproj">
+      <PrivateAssets>all</PrivateAssets>
+    </ProjectReference>
+    <ProjectReference Include="..\Tetra.Testing.Controls.Wpf\Tetra.Testing.Controls.Wpf.csproj" />
     <ProjectReference Include="..\Tetra.Testing\Tetra.Testing.csproj" />
-    <ProjectReference Include="..\Tetra.Testing.FSCheck\Tetra.Testing.FSCheck.csproj" />
   </ItemGroup>
 
 </Project>

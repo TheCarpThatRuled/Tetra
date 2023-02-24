@@ -11,4 +11,19 @@ public static class Bind
         .Create(initialValue);
 
    /* ------------------------------------------------------------ */
+   // Extensions
+   /* ------------------------------------------------------------ */
+
+   public static IOneWayBinding<TNew> Map<T, TNew>(this IOneWayBinding<T> source,
+                                                   Func<T, TNew>          mapFrom)
+      => null;
+
+   /* ------------------------------------------------------------ */
+
+   public static ITwoWayBinding<TNew> Map<T, TNew>(this ITwoWayBinding<T> source,
+                                                   Func<T, TNew>          mapFrom,
+                                                   Func<TNew, T>          mapTo)
+      => null;
+
+   /* ------------------------------------------------------------ */
 }

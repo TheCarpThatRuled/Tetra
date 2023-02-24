@@ -1,17 +1,15 @@
-﻿namespace Tetra;
+﻿// ReSharper disable InconsistentNaming
 
-public static partial class Function
+namespace Check;
+
+public static class Check_Button
 {
    /* ------------------------------------------------------------ */
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static void NoOp<T>(T _) { }
-
-   /* ------------------------------------------------------------ */
-
-   public static T PassThrough<T>(T value)
-      => value;
+   public static Given GIVEN()
+      => new();
 
    /* ------------------------------------------------------------ */
 }

@@ -39,10 +39,10 @@
                                     ISequence<string> givenFullCharacterisation,
                                     ISequence<string> whenFullCharacterisation)
          {
-            _givenBriefBriefCharacterisation = givenBriefCharacterisation;
-            _givenFullCharacterisation       = givenFullCharacterisation;
-            _whenBriefBriefCharacterisation  = whenBriefCharacterisation;
-            _whenFullCharacterisation        = whenFullCharacterisation;
+            _givenBriefCharacterisation = givenBriefCharacterisation;
+            _givenFullCharacterisation  = givenFullCharacterisation;
+            _whenBriefCharacterisation  = whenBriefCharacterisation;
+            _whenFullCharacterisation   = whenFullCharacterisation;
          }
 
          /* ------------------------------------------------------------ */
@@ -50,8 +50,8 @@
          /* ------------------------------------------------------------ */
 
          internal Characteriser Finish()
-            => new(_givenBriefBriefCharacterisation,
-                   _whenBriefBriefCharacterisation,
+            => new(_givenBriefCharacterisation,
+                   _whenBriefCharacterisation,
                    _briefCharacterisation.Materialise(),
                    _givenFullCharacterisation,
                    _whenFullCharacterisation,
@@ -64,9 +64,9 @@
          private readonly List<string> _briefCharacterisation = new();
          private readonly List<string> _fullCharacterisation  = new();
 
-         private readonly ISequence<string> _givenBriefBriefCharacterisation;
+         private readonly ISequence<string> _givenBriefCharacterisation;
          private readonly ISequence<string> _givenFullCharacterisation;
-         private readonly ISequence<string> _whenBriefBriefCharacterisation;
+         private readonly ISequence<string> _whenBriefCharacterisation;
          private readonly ISequence<string> _whenFullCharacterisation;
 
          /* ------------------------------------------------------------ */
