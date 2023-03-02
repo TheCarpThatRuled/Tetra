@@ -1,16 +1,16 @@
 ﻿namespace Tetra.Testing;
 
-public sealed class FakeAction<T>
+public sealed class FakeAction
 {
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Creates a <c>FakeAction</c> that will record the number of times it was invoked and the parameters it was invoked with.
+   /// Creates a <c>FakeAction</c> that will record the number of times it was invoked.
    /// </summary>
    /// <returns>A <c>FakeAction</c>.</returns>
-   public static FakeAction<T> Create()
+   public static FakeAction Create()
       => new();
 
    /* ------------------------------------------------------------ */
@@ -18,9 +18,9 @@ public sealed class FakeAction<T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// A list of the parameters this <c>FakeAction</c> has been invoked with
+   /// The number of times this <c>FakeAction</c> has been invoked.
    /// </summary>
-   public IReadOnlyList<T> Invocations()
+   public int Invocations()
       => _invocations;
 
    /* ------------------------------------------------------------ */
@@ -30,24 +30,22 @@ public sealed class FakeAction<T>
    /// <summary>
    /// The method that should be passed into the argument that should be faked.
    /// </summary>
-   public void Action(T arg)
-      => _invocations
-        .Add(arg);
+   public void Func()
+      => ++_invocations;
 
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Resets the invocation trace.
+   /// Resets the invocation count.
    /// </summary>
    public void PrepareForAct()
-      => _invocations
-        .Clear();
+      => _invocations = 0;
 
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly List<T> _invocations = new();
+   private int _invocations = 0;
 
    /* ------------------------------------------------------------ */
    // Private Constructors

@@ -5,28 +5,39 @@ partial class DataContext
    protected sealed class OneWayBinding<T>
    {
       /* ------------------------------------------------------------ */
-      // Factory Functions
-      /* ------------------------------------------------------------ */
-
-      public static OneWayBinding<T> Create()
-         => new();
-
-      /* ------------------------------------------------------------ */
       // Properties
       /* ------------------------------------------------------------ */
 
       public T Pull()
-         => default!;
+         => _binding
+           .Pull();
+
+      /* ------------------------------------------------------------ */
+      // Internal Factory Functions
+      /* ------------------------------------------------------------ */
+
+      internal static OneWayBinding<T> Create(IOneWayBinding<T> binding,
+                                              Action            onBindingUpdated)
+         => new(binding,
+                onBindingUpdated);
 
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
+      private readonly IOneWayBinding<T> _binding;
+
       /* ------------------------------------------------------------ */
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private OneWayBinding() { }
+      private OneWayBinding(IOneWayBinding<T> binding,
+                            Action            onBindingUpdated)
+      {
+         _binding = binding;
+
+         _binding.Updated += onBindingUpdated;
+      }
 
       /* ------------------------------------------------------------ */
    }

@@ -16,7 +16,9 @@ public static class Bind
 
    public static IOneWayBinding<TNew> Map<T, TNew>(this IOneWayBinding<T> source,
                                                    Func<T, TNew>          mapFrom)
-      => null;
+      => OneWayMapBinding<T, TNew>
+        .Create(source,
+                mapFrom);
 
    /* ------------------------------------------------------------ */
 

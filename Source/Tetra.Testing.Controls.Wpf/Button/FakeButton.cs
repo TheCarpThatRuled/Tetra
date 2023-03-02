@@ -29,9 +29,13 @@ public sealed class FakeButton
    // Methods
    /* ------------------------------------------------------------ */
 
-   public void Click()
-      => _command
-        .Execute();
+   public void Click(uint numberOfClicks = 1)
+   {
+      for (var i = 0; i < numberOfClicks; ++i)
+      {
+         _command.Execute();
+      }
+   }
 
    /* ------------------------------------------------------------ */
    // Private Fields

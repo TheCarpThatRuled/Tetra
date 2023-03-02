@@ -15,7 +15,7 @@ public sealed class BindingCommand : ICommand
              execute);
 
    /* ------------------------------------------------------------ */
-   // ICommand EventHandlers
+   // ICommand Events
    /* ------------------------------------------------------------ */
 
    public event EventHandler? CanExecuteChanged;
@@ -34,10 +34,10 @@ public sealed class BindingCommand : ICommand
       => _execute();
 
    /* ------------------------------------------------------------ */
-   // Methods
+   // Event Handlers
    /* ------------------------------------------------------------ */
 
-   public void ChangeCanExecute()
+   private void CanExecuteOnUpdated()
       => CanExecuteChanged
        ?.Invoke(this,
                 EventArgs.Empty);
@@ -58,6 +58,8 @@ public sealed class BindingCommand : ICommand
    {
       _canExecute = canExecute;
       _execute    = execute;
+
+      _canExecute.Updated += CanExecuteOnUpdated;
    }
 
    /* ------------------------------------------------------------ */

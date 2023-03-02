@@ -33,7 +33,8 @@ public abstract partial class DataContext : INotifyPropertyChanged
    protected OneWayBinding<T> Bind<T>(string            memberName,
                                       IOneWayBinding<T> binding)
       => OneWayBinding<T>
-        .Create();
+        .Create(binding,
+                () => OnPropertyChanged(memberName));
 
    /* ------------------------------------------------------------ */
 

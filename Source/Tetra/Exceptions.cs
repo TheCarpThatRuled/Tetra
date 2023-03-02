@@ -1,12 +1,23 @@
-﻿namespace Tetra;
+﻿using System.Runtime.CompilerServices;
 
-internal static class Exceptions
+namespace Tetra;
+
+public static class Exceptions
 {
    /* ------------------------------------------------------------ */
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Func<Failure, T> ThrowArgumentException<T>(string parameter)
+   public static NotImplementedException NotImplemented([CallerMemberName] string? memberName = null,
+                                                        [CallerFilePath]   string? filePath   = null,
+                                                        [CallerLineNumber] int     lineNumber = 0)
+      => new($@"{memberName} on line {lineNumber} of <{filePath}> has not been implemented");
+
+   /* ------------------------------------------------------------ */
+   // Internal Functions
+   /* ------------------------------------------------------------ */
+
+   internal static Func<Failure, T> ThrowArgumentException<T>(string parameter)
    {
       T Throw(Failure failure)
          => throw new ArgumentException(failure.Content()

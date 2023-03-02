@@ -16,7 +16,7 @@
   <ItemGroup>
     <InternalsVisibleTo Include="Tetra.Testing" />
     <InternalsVisibleTo Include="Tetra.Testing.FSCheck" />
-    <InternalsVisibleTo Include="UnitCheck.Tetra" />
+    <InternalsVisibleTo Include="Check.Tetra" />
   </ItemGroup>
 
 </Project>
