@@ -7,7 +7,7 @@ using static Tetra.Testing.Properties;
 namespace Check.RelativeDirectoryPathTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.RelativeDirectoryPath)]
 public class Prepend
 {

@@ -7,7 +7,7 @@ using static Tetra.Testing.Properties;
 namespace Check.OptionTests.OfTestStruct;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
 public class Equals

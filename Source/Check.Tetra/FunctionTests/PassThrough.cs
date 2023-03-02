@@ -7,7 +7,7 @@ using static Tetra.Testing.Properties;
 namespace Check.FunctionTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Function)]
 // ReSharper disable once InconsistentNaming
 public class PassThrough

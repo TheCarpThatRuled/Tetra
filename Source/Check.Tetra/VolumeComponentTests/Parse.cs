@@ -8,7 +8,7 @@ using static Tetra.Testing.Properties;
 namespace Check.VolumeComponentTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.VolumeComponent)]
 public class Parse
 {

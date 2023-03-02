@@ -7,7 +7,7 @@ using static Tetra.Testing.Properties;
 namespace Check.MessageTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Message)]
 // ReSharper disable once InconsistentNaming
 public class ToString

@@ -6,7 +6,7 @@ using static Tetra.Testing.Properties;
 namespace Check.DataContextTests.Binding;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.DataContext)]
 public class Pull
 {

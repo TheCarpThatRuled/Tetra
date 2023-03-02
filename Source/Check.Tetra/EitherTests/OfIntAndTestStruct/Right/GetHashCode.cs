@@ -7,7 +7,7 @@ using static Tetra.Testing.Properties;
 namespace Check.EitherTests.OfIntAndTestStruct;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Either)]
 // ReSharper disable once InconsistentNaming
 public class Right_GetHashCode

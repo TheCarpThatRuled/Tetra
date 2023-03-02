@@ -7,8 +7,8 @@ public static class GlobalCategories
    // Constants
    /* ------------------------------------------------------------ */
 
-   public const string SpikeCheck = "Spike Check";
-   public const string UnitCheck  = "Unit Check";
+   public const string Spike = "Spike";
+   public const string Unit  = "Unit";
 
    /* ------------------------------------------------------------ */
 }

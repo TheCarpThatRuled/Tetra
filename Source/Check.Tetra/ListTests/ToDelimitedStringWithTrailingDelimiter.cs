@@ -8,7 +8,7 @@ using static Tetra.Testing.Properties;
 namespace Check.ListTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.List)]
 public class ToDelimitedStringWithTrailingDelimiter
 {

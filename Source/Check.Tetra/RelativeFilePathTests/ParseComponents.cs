@@ -8,7 +8,7 @@ using static Tetra.Testing.Properties;
 namespace Check.RelativeFilePathTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.RelativeFilePath)]
 public class ParseComponents
 {

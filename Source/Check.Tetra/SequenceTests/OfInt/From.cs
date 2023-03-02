@@ -7,7 +7,7 @@ using static Check.SequenceTests.LocalAsserts;
 namespace Check.SequenceTests.OfInt;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Sequence)]
 // ReSharper disable once InconsistentNaming
 public class From

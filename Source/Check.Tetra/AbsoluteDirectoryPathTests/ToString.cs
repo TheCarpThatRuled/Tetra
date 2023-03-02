@@ -7,7 +7,7 @@ using static Tetra.Testing.Properties;
 namespace Check.AbsoluteDirectoryPathTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.AbsoluteDirectoryPath)]
 // ReSharper disable once InconsistentNaming
 public class ToString

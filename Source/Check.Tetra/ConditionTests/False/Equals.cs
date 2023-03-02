@@ -7,7 +7,7 @@ using static Tetra.Testing.Properties;
 namespace Check.ConditionTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Condition)]
 // ReSharper disable once InconsistentNaming
 public class False_Equals

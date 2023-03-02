@@ -7,7 +7,7 @@ using static Tetra.Testing.Properties;
 namespace Check.RelativeFilePathTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.RelativeFilePath)]
 // ReSharper disable once InconsistentNaming
 public class GetHashCode

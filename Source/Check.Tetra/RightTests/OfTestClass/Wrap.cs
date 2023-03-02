@@ -7,7 +7,7 @@ using static Tetra.Testing.Properties;
 namespace Check.RightTests.OfTestClass;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Right)]
 // ReSharper disable once InconsistentNaming
 public class Wrap

@@ -8,7 +8,7 @@ using static Tetra.Testing.Properties;
 namespace Check.AbsoluteFilePathTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.AbsoluteFilePath)]
 public class Create
 {

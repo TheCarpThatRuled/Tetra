@@ -7,7 +7,7 @@ using static Tetra.Testing.Properties;
 namespace Check.OpenFileResultTests.OfTestStruct;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.OpenFileResult)]
 // ReSharper disable once InconsistentNaming
 public class Open_Map

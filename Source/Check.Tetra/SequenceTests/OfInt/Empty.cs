@@ -5,7 +5,7 @@ using Tetra.Testing;
 namespace Check.SequenceTests.OfInt;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Sequence)]
 // ReSharper disable once InconsistentNaming
 public class Empty

@@ -5,7 +5,7 @@ using Tetra.Testing;
 namespace Check.ErrorTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Error)]
 // ReSharper disable once InconsistentNaming
 public class None_IsASome

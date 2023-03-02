@@ -8,7 +8,7 @@ using Result = Tetra.Result;
 namespace Check.ResultTests.OfTestClass;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Result)]
 // ReSharper disable once InconsistentNaming
 public class SuccessFactory

@@ -7,7 +7,7 @@ using static Tetra.Testing.Properties;
 namespace Check.FileComponentTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.FileComponent)]
 public class ToPath
 {

@@ -7,7 +7,7 @@ using static Tetra.Testing.Properties;
 namespace Check.CharTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Char)]
 public class IsAnAsciiLetter
 {

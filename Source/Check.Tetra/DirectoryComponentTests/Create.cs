@@ -8,7 +8,7 @@ using static Tetra.Testing.Properties;
 namespace Check.DirectoryComponentTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.DirectoryComponent)]
 public class Create
 {

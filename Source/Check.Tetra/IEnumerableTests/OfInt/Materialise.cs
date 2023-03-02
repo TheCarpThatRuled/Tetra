@@ -7,7 +7,7 @@ using static Tetra.Testing.Properties;
 namespace Check.IEnumerableTests.OfInt;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.IEnumerable)]
 public class Materialise
 {

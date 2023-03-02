@@ -7,7 +7,7 @@ using Result = Tetra.Result;
 namespace Check.ResultTests.OfTestStruct;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Result)]
 // ReSharper disable once InconsistentNaming
 public class Success_GetHashCode

@@ -5,7 +5,7 @@ using Tetra.Testing;
 namespace Check.ConditionTests;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Condition)]
 // ReSharper disable once InconsistentNaming
 public class True_GetHashCode

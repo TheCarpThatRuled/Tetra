@@ -5,7 +5,7 @@ using Tetra.Testing;
 namespace Check.OptionTests.OfTestClass;
 
 [TestClass]
-[TestCategory(GlobalCategories.UnitCheck)]
+[TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
 public class None_Cast
