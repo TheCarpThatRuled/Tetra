@@ -29,14 +29,16 @@ public class Push
       {
          //Arrange
          var binding = Bind.To(args.initalValue);
-         var updated = FakeEventHandler.Create(handler => binding.Updated += handler);
+         var updated = FakeAction.Create();
+
+         binding.OnUpdated(updated.Action);
 
          //Act
          binding.Push(args.pushedValue);
 
          //Assert
-         return WasFiredOnce(nameof(updated),
-                            updated)
+         return WasInvokedOnce(nameof(updated),
+                               updated)
            .And(AreEqual(nameof(ITwoWayBinding<int>.Pull),
                          args.pushedValue,
                          binding.Pull()));
@@ -64,14 +66,16 @@ public class Push
       {
          //Arrange
          var binding = Bind.To(args.initalValue);
-         var updated = FakeEventHandler.Create(handler => binding.Updated += handler);
+         var updated = FakeAction.Create();
+
+         binding.OnUpdated(updated.Action);
 
          //Act
          binding.Push(args.pushedValue);
 
          //Assert
-         return WasFiredOnce(nameof(updated),
-                            updated)
+         return WasInvokedOnce(nameof(updated),
+                               updated)
            .And(AreEqual(nameof(ITwoWayBinding<TestClass>.Pull),
                          args.pushedValue,
                          binding.Pull()));
@@ -99,14 +103,16 @@ public class Push
       {
          //Arrange
          var binding = Bind.To(args.initalValue);
-         var updated = FakeEventHandler.Create(handler => binding.Updated += handler);
+         var updated = FakeAction.Create();
+
+         binding.OnUpdated(updated.Action);
 
          //Act
          binding.Push(args.pushedValue);
 
          //Assert
-         return WasFiredOnce(nameof(updated),
-                            updated)
+         return WasInvokedOnce(nameof(updated),
+                               updated)
            .And(AreEqual(nameof(ITwoWayBinding<TestStruct>.Pull),
                          args.pushedValue,
                          binding.Pull()));

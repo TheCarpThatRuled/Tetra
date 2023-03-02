@@ -6,6 +6,10 @@ public static partial class Function
    // Functions
    /* ------------------------------------------------------------ */
 
+   public static void NoOp() { }
+
+   /* ------------------------------------------------------------ */
+
    public static T PassThrough<T>(T value)
       => value;
 
