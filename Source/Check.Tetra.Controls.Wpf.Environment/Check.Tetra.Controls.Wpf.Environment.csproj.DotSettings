@@ -5,4 +5,5 @@
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=check_005Fbutton_005Cthebuttonhasnotbeencreated/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=check_005Flabel_005Cthelabelhasbeencreated/@EntryIndexedValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=check_005Flabel_005Cthelabelhasnotbeencreated/@EntryIndexedValue">True</s:Boolean>
-	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=check_005Flabel_005Cthe_005Fui_005Fcreates_005Fa_005Fbutton/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=check_005Flabel_005Cthe_005Fui_005Fcreates_005Fa_005Fbutton/@EntryIndexedValue">True</s:Boolean>
+	<s:Boolean x:Key="/Default/CodeInspection/NamespaceProvider/NamespaceFoldersToSkip/=check_005Flabel_005Cthe_005Fui_005Fcreates_005Fa_005Flabel/@EntryIndexedValue">True</s:Boolean></wpf:ResourceDictionary>

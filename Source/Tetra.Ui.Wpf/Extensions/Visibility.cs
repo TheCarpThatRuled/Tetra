@@ -1,4 +1,6 @@
-﻿namespace Tetra;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Tetra;
 
 // ReSharper disable once InconsistentNaming
 public static class Visibility_Extensions
@@ -7,6 +9,7 @@ public static class Visibility_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
+   [ExcludeFromCodeCoverage]
    public static ArgumentOutOfRangeException OutOfRange(this Visibility visibility,
                                                         string          argumentName)
       => new(argumentName,
@@ -15,6 +18,7 @@ public static class Visibility_Extensions
 
    /* ------------------------------------------------------------ */
 
+   [ExcludeFromCodeCoverage]
    public static ArgumentOutOfRangeException OutOfRange(this System.Windows.Visibility visibility,
                                                         string                         argumentName)
       => new(argumentName,
@@ -29,7 +33,8 @@ public static class Visibility_Extensions
             Visibility.Collapsed => System.Windows.Visibility.Collapsed,
             Visibility.Hidden    => System.Windows.Visibility.Hidden,
             Visibility.Visible   => System.Windows.Visibility.Visible,
-            _                    => throw visibility.OutOfRange(nameof(visibility)),
+            //Code Coverage - Development guard
+            _ => throw visibility.OutOfRange(nameof(visibility)),
          };
 
    /* ------------------------------------------------------------ */
@@ -40,7 +45,8 @@ public static class Visibility_Extensions
             System.Windows.Visibility.Collapsed => Visibility.Collapsed,
             System.Windows.Visibility.Hidden    => Visibility.Hidden,
             System.Windows.Visibility.Visible   => Visibility.Visible,
-            _                                   => throw visibility.OutOfRange(nameof(visibility)),
+            //Code Coverage - Development guard
+            _ => throw visibility.OutOfRange(nameof(visibility)),
          };
 
    /* ------------------------------------------------------------ */

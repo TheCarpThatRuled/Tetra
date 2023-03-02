@@ -1,23 +1,21 @@
-﻿// ReSharper disable InconsistentNaming
+﻿namespace Tetra;
 
-namespace Tetra.Testing;
-
-partial class Expected_button
+partial class Label
 {
-   public sealed class DefineIsEnabled
+   public sealed class DefineContent
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public DefineVisibility IsEnabled_is(bool isEnabled)
-         => new(isEnabled);
+      public DefineVisibility Content(IOneWayBinding<object> content)
+         => new(content);
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal DefineIsEnabled() { }
+      internal DefineContent() { }
 
       /* ------------------------------------------------------------ */
    }

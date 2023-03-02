@@ -2,22 +2,22 @@
 
 namespace Tetra.Testing;
 
-partial class Expected_button
+partial class Expected_label
 {
-   public sealed class DefineIsEnabled
+   public sealed class DefineContent
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public DefineVisibility IsEnabled_is(bool isEnabled)
-         => new(isEnabled);
+      public DefineVisibility Content_is(object content)
+         => new(content);
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal DefineIsEnabled() { }
+      internal DefineContent() { }
 
       /* ------------------------------------------------------------ */
    }

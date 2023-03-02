@@ -1,23 +1,23 @@
 ﻿// ReSharper disable InconsistentNaming
 
-namespace Tetra.Testing;
+namespace Check.Check_Label;
 
-partial class Expected_button
+partial class The_UI_creates_a_label
 {
-   public sealed class DefineIsEnabled
+   public sealed class DefineContent
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public DefineVisibility IsEnabled_is(bool isEnabled)
-         => new(isEnabled);
+      public DefineVisibility Content_is(object content)
+         => new(content);
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal DefineIsEnabled() { }
+      internal DefineContent() { }
 
       /* ------------------------------------------------------------ */
    }

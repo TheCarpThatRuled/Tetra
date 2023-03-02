@@ -1,18 +1,18 @@
 ﻿// ReSharper disable InconsistentNaming
 
-using Tetra;
+using System.Windows;
 
-namespace Check.Check_Label;
+namespace Tetra.Testing;
 
-partial class The_UI_creates_a_label
+partial class Expected_label
 {
    public sealed class DefineVisibility
    {
       /* ------------------------------------------------------------ */
-      // Factory Functions
+      // Methods
       /* ------------------------------------------------------------ */
 
-      public The_UI_creates_a_label Visibility_is(Visibility visibility)
+      public Expected_label Visibility_is(Visibility visibility)
          => new($@"(""{_content}"", {visibility})",
                 _content,
                 $"{{{Environment.NewLine}Content: {_content}{Environment.NewLine}Visibility: {visibility}{Environment.NewLine}}}",
@@ -29,9 +29,7 @@ partial class The_UI_creates_a_label
       /* ------------------------------------------------------------ */
 
       internal DefineVisibility(object content)
-      {
-         _content   = content;
-      }
+         => _content = content;
 
       /* ------------------------------------------------------------ */
    }

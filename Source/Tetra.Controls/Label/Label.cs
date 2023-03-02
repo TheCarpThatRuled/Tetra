@@ -1,12 +1,12 @@
 ﻿namespace Tetra;
 
-public sealed class Label
+public sealed partial class Label
 {
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static Label Factory()
+   public static DefineContent Factory()
       => new();
 
    /* ------------------------------------------------------------ */
@@ -14,18 +14,30 @@ public sealed class Label
    /* ------------------------------------------------------------ */
 
    public IOneWayBinding<object> Content()
-      => null;
+      => _content;
 
    /* ------------------------------------------------------------ */
 
    public IOneWayBinding<Visibility> Visibility()
-      => null;
+      => _visibility;
+
+   /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly IOneWayBinding<object>     _content;
+   private readonly IOneWayBinding<Visibility> _visibility;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private Label() { }
+   private Label(IOneWayBinding<object>     content,
+                 IOneWayBinding<Visibility> visibility)
+   {
+      _content    = content;
+      _visibility = visibility;
+   }
 
    /* ------------------------------------------------------------ */
 }

@@ -10,8 +10,8 @@ public sealed partial class The_UI_creates_a_label
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static DefineVisibility Content_is(object content)
-      => new(content);
+   public static DefineContent Factory()
+      => new();
 
    /* ------------------------------------------------------------ */
    // Properties

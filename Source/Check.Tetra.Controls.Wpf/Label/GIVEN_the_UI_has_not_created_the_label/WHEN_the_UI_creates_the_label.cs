@@ -1,20 +1,21 @@
-﻿using Check.Check_Button;
+﻿using Check.Check_Label;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra.Testing;
 using static Check.Data;
+using static Check.Label.Contents;
 
-namespace Check.Button.The_UI_has_created_the_button;
+namespace Check.Label.GIVEN_the_UI_has_not_created_the_label;
 
 [TestClass]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_system_updates_Visibility : AAATestDataSource
+public class WHEN_the_UI_creates_the_label : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
    // Test
    /* ------------------------------------------------------------ */
 
    [TestMethod]
-   [WHEN_the_system_updates_Visibility]
+   [WHEN_the_UI_creates_the_label]
    public void Run(AAATest test)
    {
       Log.ToStandardOutput(test.FullCharacterisation());
@@ -36,21 +37,21 @@ public class WHEN_the_system_updates_Visibility : AAATestDataSource
    {
       /* ------------------------------------------------------------ */
 
-      foreach (var (initialVisibility, _) in Visibilities)
-      foreach (var updatedVisibility in Visibilities)
+      foreach (var content in RepresentativeContents)
+      foreach (var visibility in Visibilities)
       {
          yield return GIVEN
-                     .The_UI_has_created_the_button(The_UI_creates_a_button
-                                                   .Factory()
-                                                   .IsEnabled_is_enabled()
-                                                   .Visibility_is(initialVisibility))
+                     .The_UI_has_not_created_the_label()
                      .WHEN()
-                     .The_system_updates_Visibility(updatedVisibility.tetra)
+                     .The_UI_creates_the_label(The_UI_creates_a_label
+                                              .Factory()
+                                              .Content_is(content)
+                                              .Visibility_is(visibility.tetra))
                      .THEN()
-                     .The_button.Is_displayed(Expected_button
-                                             .Factory()
-                                             .IsEnabled_is_enabled()
-                                             .Visibility_is(updatedVisibility.wpf))
+                     .The_label.Is_displayed(Expected_label
+                                            .Factory()
+                                            .Content_is(content)
+                                            .Visibility_is(visibility.wpf))
                      .Crystallise();
       }
 

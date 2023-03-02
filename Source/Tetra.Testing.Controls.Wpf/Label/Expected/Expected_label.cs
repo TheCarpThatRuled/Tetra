@@ -2,18 +2,15 @@
 
 namespace Tetra.Testing;
 
-public sealed class Expected_label
+// ReSharper disable once InconsistentNaming
+public sealed partial class Expected_label
 {
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static Expected_label Create(object     content,
-                                      Visibility visibility)
-      => new(string.Empty,
-             content,
-             string.Empty,
-             visibility);
+   public static DefineContent Factory()
+      => new();
 
    /* ------------------------------------------------------------ */
    // ICharacterisable Properties
@@ -53,9 +50,9 @@ public sealed class Expected_label
    /* ------------------------------------------------------------ */
 
    private Expected_label(string     briefCharacterisation,
-                         object     content,
-                         string     fullCharacterisation,
-                         Visibility visibility)
+                          object     content,
+                          string     fullCharacterisation,
+                          Visibility visibility)
    {
       _briefCharacterisation = briefCharacterisation;
       _content               = content;

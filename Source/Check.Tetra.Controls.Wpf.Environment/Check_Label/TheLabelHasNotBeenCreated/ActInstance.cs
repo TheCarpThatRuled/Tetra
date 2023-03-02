@@ -27,7 +27,10 @@ public sealed partial class TheLabelHasNotBeenCreated
       private TheLabelHasBeenCreated.AssertsInstance Create_the_label(The_UI_creates_a_label args)
       {
          var system = FakeSystem.Create(args);
-         return new(FakeLabel.Create(LabelContext.Create(Label.Factory())),
+         return new(FakeLabel.Create(LabelContext.Create(Label
+                                                        .Factory()
+                                                        .Content(system.Content())
+                                                        .Visibility(system.Visibility()))),
                     system);
       }
 

@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra.Testing;
 using static Check.Data;
 
-namespace Check.Button.The_UI_has_created_the_button;
+namespace Check.Button.GIVEN_the_UI_has_created_the_button;
 
 [TestClass]
 // ReSharper disable once InconsistentNaming
