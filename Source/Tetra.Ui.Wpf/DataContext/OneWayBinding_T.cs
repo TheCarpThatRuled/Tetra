@@ -35,8 +35,7 @@ partial class DataContext
                             Action            onBindingUpdated)
       {
          _binding = binding;
-
-         _binding.Updated += onBindingUpdated;
+         _binding.OnUpdated(onBindingUpdated);
       }
 
       /* ------------------------------------------------------------ */

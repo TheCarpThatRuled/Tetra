@@ -27,7 +27,7 @@ public sealed partial class TheButtonHasNotBeenCreated
                                                           .Factory()
                                                           .OnClick(system
                                                                   .OnClick()
-                                                                  .Func)
+                                                                  .Action)
                                                           .IsEnabled(system.IsEnabled())
                                                           .Visibility(system.Visibility()))),
                     system);

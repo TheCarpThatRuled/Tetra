@@ -12,25 +12,17 @@ internal sealed class OneWayMapBinding<T, TNew> : IOneWayBinding<TNew>
              mapFrom);
 
    /* ------------------------------------------------------------ */
-   // IOneWayBinding<TNew> Events
-   /* ------------------------------------------------------------ */
-
-   public event Action? Updated;
-
-   /* ------------------------------------------------------------ */
    // IOneWayBinding<TNew> Methods
+   /* ------------------------------------------------------------ */
+
+   public void OnUpdated(Action onUpdated)
+      => _innerBinding
+        .OnUpdated(onUpdated);
+
    /* ------------------------------------------------------------ */
 
    public TNew Pull()
       => _mapFrom(_innerBinding.Pull());
-
-   /* ------------------------------------------------------------ */
-   // Event Handlers
-   /* ------------------------------------------------------------ */
-
-   private void InnerBindingOnUpdated()
-      => Updated
-       ?.Invoke();
 
    /* ------------------------------------------------------------ */
    // Private Fields
@@ -48,8 +40,6 @@ internal sealed class OneWayMapBinding<T, TNew> : IOneWayBinding<TNew>
    {
       _innerBinding = innerBinding;
       _mapFrom      = mapFrom;
-
-      _innerBinding.Updated += InnerBindingOnUpdated;
    }
 
    /* ------------------------------------------------------------ */

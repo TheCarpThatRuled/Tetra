@@ -37,7 +37,7 @@ public sealed class BindingCommand : ICommand
    // Event Handlers
    /* ------------------------------------------------------------ */
 
-   private void CanExecuteOnUpdated()
+   private void InvokeCanExecuteChanged()
       => CanExecuteChanged
        ?.Invoke(this,
                 EventArgs.Empty);
@@ -59,7 +59,7 @@ public sealed class BindingCommand : ICommand
       _canExecute = canExecute;
       _execute    = execute;
 
-      _canExecute.Updated += CanExecuteOnUpdated;
+      _canExecute.OnUpdated(InvokeCanExecuteChanged);
    }
 
    /* ------------------------------------------------------------ */

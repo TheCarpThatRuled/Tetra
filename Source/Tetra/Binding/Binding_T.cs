@@ -10,13 +10,12 @@ internal sealed class Binding<T> : ITwoWayBinding<T>
       => new(initialValue);
 
    /* ------------------------------------------------------------ */
-   // IOneWayBinding<T> Events
-   /* ------------------------------------------------------------ */
-
-   public event Action? Updated;
-
-   /* ------------------------------------------------------------ */
    // IOneWayBinding<T> Methods
+   /* ------------------------------------------------------------ */
+
+   public void OnUpdated(Action onUpdated)
+      => _onUpdated = onUpdated;
+
    /* ------------------------------------------------------------ */
 
    public T Pull()
@@ -30,15 +29,17 @@ internal sealed class Binding<T> : ITwoWayBinding<T>
    {
       _value = value;
 
-      Updated?.Invoke();
+      _onUpdated();
    }
 
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
+   private Action _onUpdated = Function.NoOp;
+
    private T _value;
-   
+
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */

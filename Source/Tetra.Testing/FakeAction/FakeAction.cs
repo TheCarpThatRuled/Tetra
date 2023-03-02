@@ -30,7 +30,7 @@ public sealed class FakeAction
    /// <summary>
    /// The method that should be passed into the argument that should be faked.
    /// </summary>
-   public void Func()
+   public void Action()
       => ++_invocations;
 
    /* ------------------------------------------------------------ */
