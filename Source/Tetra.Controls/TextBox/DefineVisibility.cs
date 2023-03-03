@@ -1,10 +1,6 @@
-﻿// ReSharper disable InconsistentNaming
+﻿namespace Tetra;
 
-using System.Windows;
-
-namespace Tetra.Testing;
-
-partial class Expected_label
+partial class TextBox
 {
    public sealed class DefineVisibility
    {
@@ -12,24 +8,28 @@ partial class Expected_label
       // Methods
       /* ------------------------------------------------------------ */
 
-      public Expected_label Visibility_is(Visibility visibility)
-         => new($@"(""{_content}"", {visibility})",
-                _content,
-                $"{{{Environment.NewLine}Content: {_content}{Environment.NewLine}Visibility: {visibility}{Environment.NewLine}}}",
+      public TextBox Visibility(IOneWayBinding<Visibility> visibility)
+         => new(_isEnabled,
+                _text,
                 visibility);
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal DefineVisibility(object content)
-         => _content = content;
+      internal DefineVisibility(IOneWayBinding<bool>   isEnabled,
+                                ITwoWayBinding<string> text)
+      {
+         _isEnabled = isEnabled;
+         _text      = text;
+      }
 
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly object _content;
+      private readonly IOneWayBinding<bool>   _isEnabled;
+      private readonly ITwoWayBinding<string> _text;
 
       /* ------------------------------------------------------------ */
    }

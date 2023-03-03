@@ -1,5 +1,8 @@
-﻿namespace Tetra.Testing;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Tetra.Testing;
+
+[ExcludeFromCodeCoverage]
 public readonly struct TestStruct : IEquatable<TestStruct>
 {
    /* ------------------------------------------------------------ */

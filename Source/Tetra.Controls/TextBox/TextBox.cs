@@ -1,12 +1,12 @@
 ﻿namespace Tetra;
 
-public sealed class TextBox
+public sealed partial class TextBox
 {
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static TextBox Factory()
+   public static DefineText Factory()
       => new();
 
    /* ------------------------------------------------------------ */
@@ -14,23 +14,38 @@ public sealed class TextBox
    /* ------------------------------------------------------------ */
 
    public IOneWayBinding<bool> IsEnabled()
-      => null;
+      => _isEnabled;
 
    /* ------------------------------------------------------------ */
 
    public ITwoWayBinding<string> Text()
-      => null;
+      => _text;
 
    /* ------------------------------------------------------------ */
 
    public IOneWayBinding<Visibility> Visibility()
-      => null;
+      => _visibility;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private TextBox() { }
+   private readonly IOneWayBinding<bool>       _isEnabled;
+   private readonly ITwoWayBinding<string>     _text;
+   private readonly IOneWayBinding<Visibility> _visibility;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private TextBox(IOneWayBinding<bool>       isEnabled,
+                   ITwoWayBinding<string>     text,
+                   IOneWayBinding<Visibility> visibility)
+   {
+      _isEnabled  = isEnabled;
+      _text       = text;
+      _visibility = visibility;
+   }
 
    /* ------------------------------------------------------------ */
 }

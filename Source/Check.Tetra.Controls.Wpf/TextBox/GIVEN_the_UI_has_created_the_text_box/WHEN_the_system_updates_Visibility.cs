@@ -1,19 +1,20 @@
-﻿using Check.Check_Button;
+﻿using Check.Check_TextBox;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra.Testing;
+using static Check.Data;
 
-namespace Check.Button.GIVEN_the_button_is_enabled_and_visible;
+namespace Check.TextBox.GIVEN_the_UI_has_created_the_text_box;
 
 [TestClass]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_user_clicks_the_button : AAATestDataSource
+public class WHEN_the_system_updates_Visibility : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
    // Test
    /* ------------------------------------------------------------ */
 
    [TestMethod]
-   [WHEN_the_user_clicks_the_button]
+   [WHEN_the_system_updates_Visibility]
    public void Run(AAATest test)
    {
       Log.ToStandardOutput(test.FullCharacterisation());
@@ -35,19 +36,23 @@ public class WHEN_the_user_clicks_the_button : AAATestDataSource
    {
       /* ------------------------------------------------------------ */
 
-      foreach (var numberOfClicks in Enumerable
-                                    .Range(1,
-                                           10)
-                                    .Select(x => (uint) x))
+      foreach (var (initialVisibility, _) in Visibilities)
+      foreach (var updatedVisibility in Visibilities)
       {
          yield return GIVEN
-                     .The_UI_has_created_the_button(Buttons.Create_enabled_and_visible)
+                     .The_UI_has_created_the_text_box(The_UI_creates_a_text_box
+                                                     .Factory()
+                                                     .Text_is_default()
+                                                     .IsEnabled_is_enabled()
+                                                     .Visibility_is(initialVisibility))
                      .WHEN()
-                     .The_user_clicks_the_button(numberOfClicks)
+                     .The_system_updates_Visibility(updatedVisibility.tetra)
                      .THEN()
-                     .The_button.Is_displayed(Buttons.Enabled_and_visible)
-                     .And()
-                     .The_Click_callback_was_invoked(numberOfClicks)
+                     .The_text_box.Is_displayed(Expected_text_box
+                                               .Factory()
+                                               .Text_is_default()
+                                               .IsEnabled_is_enabled()
+                                               .Visibility_is(updatedVisibility.wpf))
                      .Crystallise();
       }
 

@@ -1,5 +1,8 @@
-﻿namespace Tetra.Testing;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Tetra.Testing;
+
+[ExcludeFromCodeCoverage]
 public sealed class TestSubClass : TestClass,
                                    IEquatable<TestSubClass>
 {

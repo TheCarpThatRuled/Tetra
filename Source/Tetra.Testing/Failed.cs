@@ -1,7 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Tetra.Testing;
 
+[ExcludeFromCodeCoverage]
 public static class Failed
 {
    /* ------------------------------------------------------------ */

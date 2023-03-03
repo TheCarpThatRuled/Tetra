@@ -1,8 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Tetra.Testing;
 
 // ReSharper disable once InconsistentNaming
+
+[ExcludeFromCodeCoverage]
 public static partial class Assert_Extensions
 {
    /* ------------------------------------------------------------ */

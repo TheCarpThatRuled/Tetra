@@ -3,9 +3,9 @@ using Tetra.Testing;
 
 // ReSharper disable InconsistentNaming
 
-namespace Check.Check_Button;
+namespace Check.Check_TextBox;
 
-public sealed partial class TheButtonHasBeenCreated
+public sealed partial class TheTextBoxHasBeenCreated
 {
    public sealed class AssertsInstance : IAssertsInstance
    {
@@ -13,21 +13,23 @@ public sealed partial class TheButtonHasBeenCreated
       // Properties
       /* ------------------------------------------------------------ */
 
-      public ButtonAssertsInstance<AssertsInstance> The_button
+      public TextBoxAssertsInstance<AssertsInstance> The_text_box
          => new("System under test",
-                _button,
+                _text_box,
                 this);
 
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public AssertsInstance The_Click_callback_was_invoked(uint numberOfClicks)
+      public AssertsInstance The_system_Text_is(string expected)
       {
          Assert.That
-               .WasInvoked("On Click",
-                           _system.OnClick(),
-                           (int) numberOfClicks);
+               .AreEqual($"{nameof(_system)}{nameof(_system.Text)}",
+                         expected,
+                         _system.Text()
+                                .Pull());
+
 
          return this;
       }
@@ -36,19 +38,19 @@ public sealed partial class TheButtonHasBeenCreated
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal AssertsInstance(FakeButton button,
-                               FakeSystem system)
+      internal AssertsInstance(FakeTextBox text_box,
+                               FakeSystem  system)
       {
-         _button = button;
-         _system = system;
+         _text_box = text_box;
+         _system   = system;
       }
 
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly FakeButton _button;
-      private readonly FakeSystem _system;
+      private readonly FakeTextBox _text_box;
+      private readonly FakeSystem  _system;
 
       /* ------------------------------------------------------------ */
    }

@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace Tetra.Testing;
 
-partial class Expected_label
+partial class Expected_text_box
 {
    public sealed class DefineVisibility
    {
@@ -12,24 +12,30 @@ partial class Expected_label
       // Methods
       /* ------------------------------------------------------------ */
 
-      public Expected_label Visibility_is(Visibility visibility)
-         => new($@"(""{_content}"", {visibility})",
-                _content,
-                $"{{{Environment.NewLine}Content: {_content}{Environment.NewLine}Visibility: {visibility}{Environment.NewLine}}}",
+      public Expected_text_box Visibility_is(Visibility visibility)
+         => new($@"({_isEnabled}, ""{_text}"", {visibility})",
+                $@"{{{Environment.NewLine}IsEnabled: {_isEnabled}{Environment.NewLine}Text: ""{_text}""{Environment.NewLine}Visibility: {visibility}{Environment.NewLine}}}",
+                _isEnabled,
+                _text,
                 visibility);
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal DefineVisibility(object content)
-         => _content = content;
+      internal DefineVisibility(bool   isEnabled,
+                                string text)
+      {
+         _isEnabled = isEnabled;
+         _text      = text;
+      }
 
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly object _content;
+      private readonly bool   _isEnabled;
+      private readonly string _text;
 
       /* ------------------------------------------------------------ */
    }

@@ -1,5 +1,9 @@
-﻿namespace Tetra.Testing;
+﻿using System.Diagnostics.CodeAnalysis;
 
+namespace Tetra.Testing;
+
+
+[ExcludeFromCodeCoverage]
 public static partial class AssertMessages
 {
    /* ------------------------------------------------------------ */

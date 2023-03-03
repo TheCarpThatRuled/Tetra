@@ -35,7 +35,7 @@ public sealed class FakeTextBox
    // Methods
    /* ------------------------------------------------------------ */
 
-   public void SetText(string text)
+   public void EnterText(string text)
       => _text
         .Set(text);
 

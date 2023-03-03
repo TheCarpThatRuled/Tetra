@@ -1,9 +1,9 @@
 ﻿using Tetra.Testing;
 // ReSharper disable InconsistentNaming
 
-namespace Check.Check_Button;
+namespace Check.Check_TextBox;
 
-public sealed partial class TheButtonHasBeenCreated
+public sealed partial class TheTextBoxHasBeenCreated
 {
    public sealed class Asserts<TThen> : Asserts<TThen, AssertsInstance>
       where TThen : IAssertsInstance
@@ -12,21 +12,21 @@ public sealed partial class TheButtonHasBeenCreated
       // Properties
       /* ------------------------------------------------------------ */
 
-      public ButtonAsserts<Asserts<TThen>, AssertsInstance> The_button
-         => new($"{nameof(The_button)}_",
+      public TextBoxAsserts<Asserts<TThen>, AssertsInstance> The_text_box
+         => new($"{nameof(The_text_box)}_",
                 (characterisation,
                  then) => Add(Create,
                               characterisation,
-                              asserts => then(asserts.The_button)));
+                              asserts => then(asserts.The_text_box)));
 
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public Asserts<TThen> The_Click_callback_was_invoked(uint numberOfClicks = 1)
+      public Asserts<TThen> The_system_Text_is(string expected)
       {
-         Add(characterisation => characterisation.AddClauseToCharacterisation($"{nameof(The_Click_callback_was_invoked)}{ (numberOfClicks != 1 ? $": {numberOfClicks} times" : string.Empty)}"),
-             then => then.The_Click_callback_was_invoked(numberOfClicks));
+         Add(characterisation => characterisation.AddClauseToCharacterisation($@"{nameof(The_system_Text_is)}: ""{expected}"""),
+             then => then.The_system_Text_is(expected));
 
          return this;
       }

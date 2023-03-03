@@ -1,24 +1,20 @@
-﻿using System.Windows;
+﻿// ReSharper disable InconsistentNaming
 
-namespace Tetra.Testing;
+using Tetra;
 
-public sealed class ExpectedTextBox
+namespace Check.Check_TextBox;
+
+public sealed partial class The_UI_creates_a_text_box
 {
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static ExpectedTextBox Create(string     text,
-                                        bool       isEnabled,
-                                        Visibility visibility)
-      => new(string.Empty,
-             string.Empty,
-             isEnabled,
-             text,
-             visibility);
+   public static DefineText Factory()
+      => new();
 
    /* ------------------------------------------------------------ */
-   // ICharacterisable Properties
+   // Properties
    /* ------------------------------------------------------------ */
 
    public string BriefCharacterisation()
@@ -26,15 +22,13 @@ public sealed class ExpectedTextBox
 
    /* ------------------------------------------------------------ */
 
-   public string FullCharacterisation()
-      => _fullCharacterisation;
-
-   /* ------------------------------------------------------------ */
-   // Properties
-   /* ------------------------------------------------------------ */
-
    public bool IsEnabled()
       => _isEnabled;
+
+   /* ------------------------------------------------------------ */
+
+   public string FullCharacterisation()
+      => _fullCharacterisation;
 
    /* ------------------------------------------------------------ */
 
@@ -60,16 +54,16 @@ public sealed class ExpectedTextBox
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private ExpectedTextBox(string     briefCharacterisation,
-                           string     fullCharacterisation,
-                           bool       isEnabled,
-                           string     text,
-                           Visibility visibility)
+   private The_UI_creates_a_text_box(string     briefCharacterisation,
+                                     string     fullCharacterisation,
+                                     bool       isEnabled,
+                                     string     text,
+                                     Visibility visibility)
    {
       _briefCharacterisation = briefCharacterisation;
-      _isEnabled             = isEnabled;
-      _fullCharacterisation  = fullCharacterisation;
       _text                  = text;
+      _fullCharacterisation  = fullCharacterisation;
+      _isEnabled             = isEnabled;
       _visibility            = visibility;
    }
 
