@@ -44,7 +44,6 @@ public class Set
                          dataContext.Pull<int>(propertyName))
            .And(WasNotFired(nameof(DataContext),
                             onPropertyChanged));
-         ;
       }
 
       Arb.Register<Libraries.NonNullString>();
@@ -86,7 +85,6 @@ public class Set
                          dataContext.Pull<TestClass>(propertyName))
            .And(WasNotFired(nameof(DataContext),
                             onPropertyChanged));
-         ;
       }
 
       Arb.Register<Libraries.NonNullString>();

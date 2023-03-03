@@ -5,36 +5,49 @@ partial class DataContext
    protected sealed class TwoWayBinding<T>
    {
       /* ------------------------------------------------------------ */
-      // Factory Functions
-      /* ------------------------------------------------------------ */
-
-      public static TwoWayBinding<T> Create()
-         => new();
-
-      /* ------------------------------------------------------------ */
       // Properties
       /* ------------------------------------------------------------ */
 
       public T Pull()
-         => default!;
+         => _binding
+           .Pull();
 
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public void Push(T value) { }
+      public void Push(T value)
+         => _binding
+           .PushWithoutUpdate(value,
+                              _onBindingUpdated);
+
+      /* ------------------------------------------------------------ */
+      // Internal Factory Functions
+      /* ------------------------------------------------------------ */
+
+      internal static TwoWayBinding<T> Create(ITwoWayBinding<T> binding,
+                                              Action            onBindingUpdated)
+         => new(binding,
+                onBindingUpdated);
 
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
+      private readonly ITwoWayBinding<T> _binding;
+      private readonly Action            _onBindingUpdated;
+
       /* ------------------------------------------------------------ */
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private TwoWayBinding()
+      private TwoWayBinding(ITwoWayBinding<T> binding,
+                            Action            onBindingUpdated)
       {
-         
+         _binding          = binding;
+         _onBindingUpdated = onBindingUpdated;
+
+         _binding.OnUpdated(onBindingUpdated);
       }
 
       /* ------------------------------------------------------------ */

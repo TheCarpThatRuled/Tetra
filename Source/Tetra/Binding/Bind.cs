@@ -28,4 +28,15 @@ public static class Bind
       => null;
 
    /* ------------------------------------------------------------ */
+
+   public static void PushWithoutUpdate<T>(this ITwoWayBinding<T> binding,
+                                           T                      value,
+                                           Action                 onUpdated)
+   {
+      binding.OnUpdated(Function.NoOp);
+      binding.Push(value);
+      binding.OnUpdated(onUpdated);
+   }
+
+   /* ------------------------------------------------------------ */
 }

@@ -4,7 +4,7 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.DataContextTests.Binding;
+namespace Check.DataContextTests.TwoWayBinding;
 
 [TestClass]
 [TestCategory(GlobalCategories.Unit)]
@@ -12,39 +12,40 @@ namespace Check.DataContextTests.Binding;
 public class Push
 {
    /* ------------------------------------------------------------ */
+   // public void Push(T value)
+   /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_Binding_of_int_has_been_created
+   //a_TwoWayBinding_of_int_has_been_created
    //WHEN
    //Push
    //THEN
-   //OnPropertyChanged_was_fired_once_with_propertyName_AND_Pull_returns_newValue
+   //OnPropertyChanged_was_not_fired_AND_Pull_returns_newValue
 
    [TestMethod]
-   public void GIVEN_a_Binding_of_int_has_been_created_WHEN_Push_THEN_OnPropertyChanged_was_fired_once_with_propertyName_AND_Pull_returns_newValue()
+   public void GIVEN_a_TwoWayBinding_of_int_has_been_created_WHEN_Push_THEN_OnPropertyChanged_was_not_fired_AND_Pull_returns_newValue()
    {
       static Property Property(string                           propertyName,
                                (int initialValue, int newValue) args)
       {
          //Arrange
-
+         var binding           = Bind.To(args.initialValue);
          var dataContext       = TestableDataContext.Create();
-         var onPropertyChanged = FakePropertyChangedEventHandler.Create(handler => dataContext.PropertyChanged += handler);
+         var onPropertyChanged = FakePropertyChangedEventHandler.Create(x => dataContext.PropertyChanged += x);
 
          dataContext.CreateBinding(propertyName,
-                                   args.initialValue);
+                                   binding);
 
          //Act
          dataContext.Push(propertyName,
                           args.newValue);
 
          //Assert
-         return AreEqual(AssertMessages.ReturnValue,
+         return WasNotFired(nameof(DataContext),
+                            onPropertyChanged)
+           .And(AreEqual(AssertMessages.ReturnValue,
                          args.newValue,
-                         dataContext.Pull<int>(propertyName))
-           .And(WasFiredOnce(nameof(DataContext),
-                             onPropertyChanged,
-                             propertyName));
+                         dataContext.Pull<int>(propertyName)));
       }
 
       Arb.Register<Libraries.NonNullString>();
@@ -57,36 +58,36 @@ public class Push
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_Binding_of_TestClass_has_been_created
+   //a_TwoWayBinding_of_TestClass_has_been_created
    //WHEN
    //Push
    //THEN
-   //OnPropertyChanged_was_fired_once_with_propertyName_AND_Pull_returns_newValue
+   //OnPropertyChanged_was_not_fired_AND_Pull_returns_newValue
 
    [TestMethod]
-   public void GIVEN_a_Binding_of_TestClass_has_been_created_WHEN_Push_THENOnPropertyChanged_was_fired_once_with_propertyName_AND__Pull_returns_newValue()
+   public void GIVEN_a_TwoWayBinding_of_TestClass_has_been_created_WHEN_Push_THEN_OnPropertyChanged_was_not_fired_AND_Pull_returns_newValue()
    {
       static Property Property(string                                       propertyName,
                                (TestClass initialValue, TestClass newValue) args)
       {
          //Arrange
+         var binding           = Bind.To(args.initialValue);
          var dataContext       = TestableDataContext.Create();
-         var onPropertyChanged = FakePropertyChangedEventHandler.Create(handler => dataContext.PropertyChanged += handler);
+         var onPropertyChanged = FakePropertyChangedEventHandler.Create(x => dataContext.PropertyChanged += x);
 
          dataContext.CreateBinding(propertyName,
-                                   args.initialValue);
+                                   binding);
 
          //Act
          dataContext.Push(propertyName,
                           args.newValue);
 
          //Assert
-         return AreEqual(AssertMessages.ReturnValue,
+         return WasNotFired(nameof(DataContext),
+                            onPropertyChanged)
+           .And(AreEqual(AssertMessages.ReturnValue,
                          args.newValue,
-                         dataContext.Pull<TestClass>(propertyName))
-           .And(WasFiredOnce(nameof(DataContext),
-                             onPropertyChanged,
-                             propertyName));
+                         dataContext.Pull<TestClass>(propertyName)));
       }
 
       Arb.Register<Libraries.NonNullString>();
@@ -99,36 +100,36 @@ public class Push
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_Binding_of_TestStruct_has_been_created
+   //a_TwoWayBinding_of_TestStruct_has_been_created
    //WHEN
    //Push
    //THEN
-   //OnPropertyChanged_was_fired_once_with_propertyName_AND_Pull_returns_newValue
+   //OnPropertyChanged_was_not_fired_AND_Pull_returns_newValue
 
    [TestMethod]
-   public void GIVEN_a_Binding_of_TestStruct_has_been_created_WHEN_Push_THENOnPropertyChanged_was_fired_once_with_propertyName_AND__Pull_returns_newValue()
+   public void GIVEN_a_TwoWayBinding_of_TestStruct_has_been_created_WHEN_Push_THEN_OnPropertyChanged_was_not_fired_AND_Pull_returns_newValue()
    {
       static Property Property(string                                         propertyName,
                                (TestStruct initialValue, TestStruct newValue) args)
       {
          //Arrange
+         var binding           = Bind.To(args.initialValue);
          var dataContext       = TestableDataContext.Create();
-         var onPropertyChanged = FakePropertyChangedEventHandler.Create(handler => dataContext.PropertyChanged += handler);
+         var onPropertyChanged = FakePropertyChangedEventHandler.Create(x => dataContext.PropertyChanged += x);
 
          dataContext.CreateBinding(propertyName,
-                                   args.initialValue);
+                                   binding);
 
          //Act
          dataContext.Push(propertyName,
                           args.newValue);
 
          //Assert
-         return AreEqual(AssertMessages.ReturnValue,
+         return WasNotFired(nameof(DataContext),
+                            onPropertyChanged)
+           .And(AreEqual(AssertMessages.ReturnValue,
                          args.newValue,
-                         dataContext.Pull<TestStruct>(propertyName))
-           .And(WasFiredOnce(nameof(DataContext),
-                             onPropertyChanged,
-                             propertyName));
+                         dataContext.Pull<TestStruct>(propertyName)));
       }
 
       Arb.Register<Libraries.NonNullString>();

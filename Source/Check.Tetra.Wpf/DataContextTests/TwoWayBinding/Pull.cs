@@ -4,7 +4,7 @@ using Tetra;
 using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
-namespace Check.DataContextTests.OneWayBinding;
+namespace Check.DataContextTests.TwoWayBinding;
 
 [TestClass]
 [TestCategory(GlobalCategories.Unit)]
@@ -16,14 +16,14 @@ public class Pull
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_OneWayBinding_of_int_has_been_created
+   //a_TwoWayBinding_of_int_has_been_created
    //WHEN
    //Pull
    //THEN
    //initialValue_is_returned
 
    [TestMethod]
-   public void GIVEN_a_OneWayBinding_of_int_has_been_created_WHEN_Pull_THEN_initialValue_is_returned()
+   public void GIVEN_a_TwoWayBinding_of_int_has_been_created_WHEN_Pull_THEN_initialValue_is_returned()
    {
       static Property Property(string propertyName,
                                int    initialValue)
@@ -33,7 +33,7 @@ public class Pull
          var dataContext = TestableDataContext.Create();
 
          dataContext.CreateBinding(propertyName,
-                                   binding as IOneWayBinding<int>);
+                                   binding);
 
          //Act
          var actual = dataContext.Pull<int>(propertyName);
@@ -53,14 +53,14 @@ public class Pull
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_OneWayBinding_of_TestClass_has_been_created
+   //a_TwoWayBinding_of_TestClass_has_been_created
    //WHEN
    //Pull
    //THEN
    //initialValue_is_returned
 
    [TestMethod]
-   public void GIVEN_a_OneWayBinding_of_TestClass_has_been_created_WHEN_Pull_THEN_initialValue_is_returned()
+   public void GIVEN_a_TwoWayBinding_of_TestClass_has_been_created_WHEN_Pull_THEN_initialValue_is_returned()
    {
       static Property Property(string    propertyName,
                                TestClass initialValue)
@@ -70,7 +70,7 @@ public class Pull
          var dataContext = TestableDataContext.Create();
 
          dataContext.CreateBinding(propertyName,
-                                   binding as IOneWayBinding<TestClass>);
+                                   binding);
 
          //Act
          var actual = dataContext.Pull<TestClass>(propertyName);
@@ -91,14 +91,14 @@ public class Pull
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //a_OneWayBinding_of_TestStruct_has_been_created
+   //a_TwoWayBinding_of_TestStruct_has_been_created
    //WHEN
    //Pull
    //THEN
    //initialValue_is_returned
 
    [TestMethod]
-   public void GIVEN_a_OneWayBinding_of_TestStruct_has_been_created_WHEN_Pull_THEN_initialValue_is_returned()
+   public void GIVEN_a_TwoWayBinding_of_TestStruct_has_been_created_WHEN_Pull_THEN_initialValue_is_returned()
    {
       static Property Property(string     propertyName,
                                TestStruct initialValue)
@@ -108,7 +108,7 @@ public class Pull
          var dataContext = TestableDataContext.Create();
 
          dataContext.CreateBinding(propertyName,
-                                   binding as IOneWayBinding<TestStruct>);
+                                   binding);
 
          //Act
          var actual = dataContext.Pull<TestStruct>(propertyName);

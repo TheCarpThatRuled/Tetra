@@ -41,7 +41,8 @@ public abstract partial class DataContext : INotifyPropertyChanged
    protected TwoWayBinding<T> Bind<T>(string            memberName,
                                       ITwoWayBinding<T> binding)
       => TwoWayBinding<T>
-        .Create();
+        .Create(binding,
+                () => OnPropertyChanged(memberName));
 
    /* ------------------------------------------------------------ */
 

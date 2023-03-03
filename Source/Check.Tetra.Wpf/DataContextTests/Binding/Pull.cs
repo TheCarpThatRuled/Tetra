@@ -95,7 +95,7 @@ public class Pull
    [TestMethod]
    public void GIVEN_a_Binding_of_TestStruct_has_been_created_WHEN_Pull_THEN_initialValue_is_returned()
    {
-      static Property Property(string    propertyName,
+      static Property Property(string     propertyName,
                                TestStruct initialValue)
       {
          //Arrange
