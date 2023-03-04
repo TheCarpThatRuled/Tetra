@@ -12,17 +12,17 @@ public sealed partial class TheLabelHasNotBeenCreated
       /* ------------------------------------------------------------ */
 
       public Act<TheLabelHasBeenCreated.Asserts<TheLabelHasBeenCreated.AssertsInstance>> The_UI_creates_the_label(The_UI_creates_a_label args)
-         => new(new(_factory.When<TheLabelHasBeenCreated.AssertsInstance>(characteriser =>
-                    {
-                       characteriser.AddClauseToBriefCharacterisation($"{nameof(The_UI_creates_the_label)}: {args.BriefCharacterisation()}");
-                       characteriser.AddClauseToFullCharacterisation($"{nameof(The_UI_creates_the_label)}:{Environment.NewLine}{args.FullCharacterisation()}");
+         => new(TheLabelHasBeenCreated.Asserts<TheLabelHasBeenCreated.AssertsInstance>.Create(_factory.When<TheLabelHasBeenCreated.AssertsInstance>(characteriser =>
+                                                                                              {
+                                                                                                 characteriser.AddClauseToBriefCharacterisation($"{nameof(The_UI_creates_the_label)}: {args.BriefCharacterisation()}");
+                                                                                                 characteriser.AddClauseToFullCharacterisation($"{nameof(The_UI_creates_the_label)}:{Environment.NewLine}{args.FullCharacterisation()}");
 
-                       return instance => instance
-                                         .The_UI_creates_the_label(args)
-                                         .THEN();
-                    }),
-                    Function.PassThrough,
-                    Function.PassThrough));
+                                                                                                 return instance => instance
+                                                                                                                   .The_UI_creates_the_label(args)
+                                                                                                                   .THEN();
+                                                                                              }),
+                                                                                              Function.PassThrough,
+                                                                                              Function.PassThrough));
 
       /* ------------------------------------------------------------ */
       // Internal Constructors

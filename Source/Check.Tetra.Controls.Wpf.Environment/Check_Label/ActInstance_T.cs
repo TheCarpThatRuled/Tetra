@@ -9,8 +9,8 @@ public sealed class ActInstance<T>
    // Internal Constructors
    /* ------------------------------------------------------------ */
 
-   internal ActInstance(Func<T> asserts)
-      => _asserts = asserts;
+   internal ActInstance(Func<T> act)
+      => _act = act;
 
    /* ------------------------------------------------------------ */
    // Methods
@@ -18,13 +18,13 @@ public sealed class ActInstance<T>
 
    // ReSharper disable once InconsistentNaming
    public T THEN()
-      => _asserts();
+      => _act();
 
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly Func<T> _asserts;
+   private readonly Func<T> _act;
 
    /* ------------------------------------------------------------ */
 }

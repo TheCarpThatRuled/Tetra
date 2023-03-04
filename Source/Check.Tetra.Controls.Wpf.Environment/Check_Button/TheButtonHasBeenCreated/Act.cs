@@ -12,44 +12,44 @@ public sealed partial class TheButtonHasBeenCreated
       /* ------------------------------------------------------------ */
 
       public Act<Asserts<AssertsInstance>> The_system_updates_IsEnabled(bool isEnabled)
-         => new(new(_factory.When<AssertsInstance>(characteriser =>
-                    {
-                       characteriser.AddClauseToCharacterisation($"{nameof(The_system_updates_IsEnabled)}: {isEnabled}");
+         => new(Asserts<AssertsInstance>.Create(_factory.When<AssertsInstance>(characteriser =>
+                                                 {
+                                                    characteriser.AddClauseToCharacterisation($"{nameof(The_system_updates_IsEnabled)}: {isEnabled}");
 
-                       return instance => instance
-                                         .The_system_updates_IsEnabled(isEnabled)
-                                         .THEN();
-                    }),
-                    Function.PassThrough,
-                    Function.PassThrough));
+                                                    return instance => instance
+                                                                      .The_system_updates_IsEnabled(isEnabled)
+                                                                      .THEN();
+                                                 }),
+                                                 Function.PassThrough,
+                                                 Function.PassThrough));
 
       /* ------------------------------------------------------------ */
 
       public Act<Asserts<AssertsInstance>> The_system_updates_Visibility(Visibility visibility)
-         => new(new(_factory.When<AssertsInstance>(characteriser =>
-                    {
-                       characteriser.AddClauseToCharacterisation($"{nameof(The_system_updates_Visibility)}: {visibility}");
+         => new(Asserts<AssertsInstance>.Create(_factory.When<AssertsInstance>(characteriser =>
+                                                {
+                                                   characteriser.AddClauseToCharacterisation($"{nameof(The_system_updates_Visibility)}: {visibility}");
 
-                       return instance => instance
-                                         .The_system_updates_Visibility(visibility)
-                                         .THEN();
-                    }),
-                    Function.PassThrough,
-                    Function.PassThrough));
+                                                   return instance => instance
+                                                                     .The_system_updates_Visibility(visibility)
+                                                                     .THEN();
+                                                }),
+                                                Function.PassThrough,
+                                                Function.PassThrough));
 
       /* ------------------------------------------------------------ */
 
       public Act<Asserts<AssertsInstance>> The_user_clicks_the_button(uint numberOfClicks = 1)
-         => new(new(_factory.When<AssertsInstance>(characteriser =>
-                    {
-                       characteriser.AddClauseToCharacterisation($"{nameof(The_user_clicks_the_button)}{(numberOfClicks != 1 ? $": {numberOfClicks} times" : string.Empty)}");
+         => new(Asserts<AssertsInstance>.Create(_factory.When<AssertsInstance>(characteriser =>
+                                                {
+                                                   characteriser.AddClauseToCharacterisation($"{nameof(The_user_clicks_the_button)}{(numberOfClicks != 1 ? $": {numberOfClicks} times" : string.Empty)}");
 
-                       return instance => instance
-                                         .The_user_clicks_the_button(numberOfClicks)
-                                         .THEN();
-                    }),
-                    Function.PassThrough,
-                    Function.PassThrough));
+                                                   return instance => instance
+                                                                     .The_user_clicks_the_button(numberOfClicks)
+                                                                     .THEN();
+                                                }),
+                                                Function.PassThrough,
+                                                Function.PassThrough));
 
       /* ------------------------------------------------------------ */
       // Internal Constructors

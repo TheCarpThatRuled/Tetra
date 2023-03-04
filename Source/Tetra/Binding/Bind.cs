@@ -6,6 +6,12 @@ public static class Bind
    // Functions
    /* ------------------------------------------------------------ */
 
+   public static IOneWayBinding<T> Invariant<T>(T initialValue)
+      => InvariantBinding<T>
+        .Create(initialValue);
+
+   /* ------------------------------------------------------------ */
+
    public static ITwoWayBinding<T> To<T>(T initialValue)
       => Binding<T>
         .Create(initialValue);

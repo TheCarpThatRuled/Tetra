@@ -43,12 +43,12 @@ public sealed partial class TheTextBoxHasBeenCreated
                 then);
 
       /* ------------------------------------------------------------ */
-      // Internal Constructors
+      // Private Constructors
       /* ------------------------------------------------------------ */
 
-      internal Asserts(AAATest.DefineThen<TThen>                                  factory,
-                       Func<AAATest.ThenCharacteriser, AAATest.ThenCharacteriser> characterisation,
-                       Func<TThen, AssertsInstance>                               then)
+      private Asserts(AAATest.DefineThen<TThen>                                  factory,
+                      Func<AAATest.ThenCharacteriser, AAATest.ThenCharacteriser> characterisation,
+                      Func<TThen, AssertsInstance>                               then)
          : base(factory,
                 characterisation,
                 then) { }

@@ -25,7 +25,8 @@ public sealed partial class TheButtonHasBeenCreated
 
       public Asserts<TThen> The_Click_callback_was_invoked(uint numberOfClicks = 1)
       {
-         Add(characterisation => characterisation.AddClauseToCharacterisation($"{nameof(The_Click_callback_was_invoked)}{ (numberOfClicks != 1 ? $": {numberOfClicks} times" : string.Empty)}"),
+         Add(characterisation
+                => characterisation.AddClauseToCharacterisation($"{nameof(The_Click_callback_was_invoked)}{(numberOfClicks != 1 ? $": {numberOfClicks} times" : string.Empty)}"),
              then => then.The_Click_callback_was_invoked(numberOfClicks));
 
          return this;
@@ -43,12 +44,12 @@ public sealed partial class TheButtonHasBeenCreated
                 then);
 
       /* ------------------------------------------------------------ */
-      // Internal Constructors
+      // Private Constructors
       /* ------------------------------------------------------------ */
 
-      internal Asserts(AAATest.DefineThen<TThen>                                  factory,
-                       Func<AAATest.ThenCharacteriser, AAATest.ThenCharacteriser> characterisation,
-                       Func<TThen, AssertsInstance>                               then)
+      private Asserts(AAATest.DefineThen<TThen>                                  factory,
+                      Func<AAATest.ThenCharacteriser, AAATest.ThenCharacteriser> characterisation,
+                      Func<TThen, AssertsInstance>                               then)
          : base(factory,
                 characterisation,
                 then) { }

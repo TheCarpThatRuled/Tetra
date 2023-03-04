@@ -12,30 +12,30 @@ public sealed partial class TheLabelHasBeenCreated
       /* ------------------------------------------------------------ */
 
       public Act<Asserts<AssertsInstance>> The_system_updates_Content(object content)
-         => new(new(_factory.When<AssertsInstance>(characteriser =>
-                    {
-                       characteriser.AddClauseToCharacterisation($"{nameof(The_system_updates_Content)}: {content}");
+         => new(Asserts<AssertsInstance>.Create(_factory.When<AssertsInstance>(characteriser =>
+                                                {
+                                                   characteriser.AddClauseToCharacterisation($"{nameof(The_system_updates_Content)}: {content}");
 
-                       return instance => instance
-                                         .The_system_updates_Content(content)
-                                         .THEN();
-                    }),
-                    Function.PassThrough,
-                    Function.PassThrough));
+                                                   return instance => instance
+                                                                     .The_system_updates_Content(content)
+                                                                     .THEN();
+                                                }),
+                                                Function.PassThrough,
+                                                Function.PassThrough));
 
       /* ------------------------------------------------------------ */
 
       public Act<Asserts<AssertsInstance>> The_system_updates_Visibility(Visibility visibility)
-         => new(new(_factory.When<AssertsInstance>(characteriser =>
-                    {
-                       characteriser.AddClauseToCharacterisation($"{nameof(The_system_updates_Visibility)}: {visibility}");
+         => new(Asserts<AssertsInstance>.Create(_factory.When<AssertsInstance>(characteriser =>
+                                                {
+                                                   characteriser.AddClauseToCharacterisation($"{nameof(The_system_updates_Visibility)}: {visibility}");
 
-                       return instance => instance
-                                         .The_system_updates_Visibility(visibility)
-                                         .THEN();
-                    }),
-                    Function.PassThrough,
-                    Function.PassThrough));
+                                                   return instance => instance
+                                                                     .The_system_updates_Visibility(visibility)
+                                                                     .THEN();
+                                                }),
+                                                Function.PassThrough,
+                                                Function.PassThrough));
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
