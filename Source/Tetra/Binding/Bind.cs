@@ -35,6 +35,14 @@ public static class Bind
 
    /* ------------------------------------------------------------ */
 
+   public static ITwoWayBinding<T> OnOuterPush<T>(this ITwoWayBinding<T> source,
+                                                  Action<T>              onOuterPush)
+      => OuterPushBinding<T>
+        .Create(source,
+                onOuterPush);
+
+   /* ------------------------------------------------------------ */
+
    public static void PushWithoutUpdate<T>(this ITwoWayBinding<T> binding,
                                            T                      value,
                                            Action                 onUpdated)

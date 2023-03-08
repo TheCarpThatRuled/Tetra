@@ -21,10 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tetra.Controls.Wpf.Contexts\Tetra.Controls.Wpf.Contexts.csproj" />
-    <ProjectReference Include="..\Tetra.Testing.Wpf\Tetra.Testing.Wpf.csproj" />
-    <ProjectReference Include="..\Tetra.Testing\Tetra.Testing.csproj" />
     <ProjectReference Include="..\Tetra\Tetra.csproj" />
+    <ProjectReference Include="..\Tetra.Controls.Wpf.Contexts\Tetra.Controls.Wpf.Contexts.csproj" />
+    <ProjectReference Include="..\Tetra.Testing\Tetra.Testing.csproj" />
+    <ProjectReference Include="..\Tetra.Testing.Wpf\Tetra.Testing.Wpf.csproj" />
   </ItemGroup>
 
 </Project>

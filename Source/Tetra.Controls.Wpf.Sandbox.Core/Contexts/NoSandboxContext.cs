@@ -1,23 +1,20 @@
 ﻿namespace Tetra;
 
-public partial class Button
+public sealed class NoSandboxContext : DataContext,
+                                       ISandboxContext
 {
    /* ------------------------------------------------------------ */
-   // Constructors
+   // Internal Factory Functions
    /* ------------------------------------------------------------ */
 
-   public Button()
-      => InitializeComponent();
+   internal static NoSandboxContext Create()
+      => new();
 
    /* ------------------------------------------------------------ */
-   // UserControl Hidden Properties
+   // Private Constructors
    /* ------------------------------------------------------------ */
 
-   public object InternalContent
-   {
-      get => Internal.Content;
-      set => Internal.Content = value;
-   }
+   private NoSandboxContext() { }
 
    /* ------------------------------------------------------------ */
 }

@@ -27,9 +27,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Check.Tetra.Controls.Wpf.Environment\Check.Tetra.Controls.Wpf.Environment.csproj" />
-    <ProjectReference Include="..\Tetra.Ui\Tetra.Ui.csproj" />
     <ProjectReference Include="..\Tetra\Tetra.csproj" />
     <ProjectReference Include="..\Tetra.Testing\Tetra.Testing.csproj" />
+    <ProjectReference Include="..\Tetra.Ui\Tetra.Ui.csproj" />
   </ItemGroup>
 
 </Project>

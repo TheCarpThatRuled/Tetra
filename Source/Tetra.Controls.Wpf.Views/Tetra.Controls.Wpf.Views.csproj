@@ -16,8 +16,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Tetra.Controls.Wpf.Contexts\Tetra.Controls.Wpf.Contexts.csproj" />
     <ProjectReference Include="..\Tetra\Tetra.csproj" />
+    <ProjectReference Include="..\Tetra.Controls.Wpf.Contexts\Tetra.Controls.Wpf.Contexts.csproj" />
   </ItemGroup>
 
   <ItemGroup>

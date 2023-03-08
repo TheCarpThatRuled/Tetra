@@ -1,13 +1,14 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <OutputType>WinExe</OutputType>
     <TargetFramework>net6.0-Windows</TargetFramework>
     <Platforms>x64</Platforms>
     <UseWPF>true</UseWPF>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>Tetra</RootNamespace>
-    <OutputPath>$(SolutionDir)Build\$(Configuration)</OutputPath>
+    <OutputPath>$(SolutionDir)Sandbox\$(Configuration)</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 
@@ -17,10 +18,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tetra\Tetra.csproj" />
-    <ProjectReference Include="..\Tetra.Controls\Tetra.Controls.csproj">
-      <PrivateAssets>all</PrivateAssets>
-    </ProjectReference>
-    <ProjectReference Include="..\Tetra.Ui.Wpf\Tetra.Ui.Wpf.csproj" />
+    <ProjectReference Include="..\Tetra.Controls.Wpf.Contexts\Tetra.Controls.Wpf.Contexts.csproj" />
+    <ProjectReference Include="..\Tetra.Controls.Wpf.Sandbox.Core\Tetra.Controls.Wpf.Sandbox.Core.csproj" />
+    <ProjectReference Include="..\Tetra.Controls.Wpf.Views\Tetra.Controls.Wpf.Views.csproj" />
   </ItemGroup>
 
 </Project>

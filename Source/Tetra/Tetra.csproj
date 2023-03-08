@@ -14,9 +14,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <InternalsVisibleTo Include="Check.Tetra" />
     <InternalsVisibleTo Include="Tetra.Testing" />
     <InternalsVisibleTo Include="Tetra.Testing.FSCheck" />
-    <InternalsVisibleTo Include="Check.Tetra" />
   </ItemGroup>
 
 </Project>

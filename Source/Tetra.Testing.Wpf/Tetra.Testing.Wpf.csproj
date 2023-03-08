@@ -21,9 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tetra\Tetra.csproj" />
     <ProjectReference Include="..\Tetra.Testing\Tetra.Testing.csproj" />
     <ProjectReference Include="..\Tetra.Ui.Wpf\Tetra.Ui.Wpf.csproj" />
-    <ProjectReference Include="..\Tetra\Tetra.csproj" />
   </ItemGroup>
 
 </Project>
