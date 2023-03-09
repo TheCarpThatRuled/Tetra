@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0-Windows</TargetFramework>
@@ -7,7 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>Tetra</RootNamespace>
-    <IntermediateOutputPath>$(SolutionDir)Intermediate\$(Configuration)\$(AssemblyName)</IntermediateOutputPath>
+    <IntermediateOutputPath>$(SolutionDir)Intermediate\$(Configuration)\$(MSBuildProjectName)</IntermediateOutputPath>
     <OutputPath>$(SolutionDir)Sandbox\$(Configuration)</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>

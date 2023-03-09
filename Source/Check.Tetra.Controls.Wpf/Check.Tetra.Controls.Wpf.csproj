@@ -7,8 +7,8 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <RootNamespace>Check</RootNamespace>
-    <IntermediateOutputPath>$(SolutionDir)Intermediate\$(Configuration)\$(AssemblyName)</IntermediateOutputPath>
-    <OutputPath>$(SolutionDir)Check\$(Configuration)\$(AssemblyName)</OutputPath>
+    <IntermediateOutputPath>$(SolutionDir)Intermediate\$(Configuration)\$(MSBuildProjectName)</IntermediateOutputPath>
+    <OutputPath>$(SolutionDir)Check\$(Configuration)\$(MSBuildProjectName)</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
 

@@ -7,7 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>Tetra.Testing</RootNamespace>
-    <IntermediateOutputPath>$(SolutionDir)Intermediate\$(Configuration)\$(AssemblyName)</IntermediateOutputPath>
+    <IntermediateOutputPath>$(SolutionDir)Intermediate\$(Configuration)\$(MSBuildProjectName)</IntermediateOutputPath>
     <OutputPath>$(SolutionDir)Build\$(Configuration)</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
