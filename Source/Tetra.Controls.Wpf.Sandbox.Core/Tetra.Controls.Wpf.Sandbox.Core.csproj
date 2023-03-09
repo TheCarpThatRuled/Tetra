@@ -7,6 +7,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <RootNamespace>Tetra</RootNamespace>
+    <IntermediateOutputPath>$(SolutionDir)Intermediate\$(Configuration)\$(AssemblyName)</IntermediateOutputPath>
     <OutputPath>$(SolutionDir)Sandbox\$(Configuration)</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>

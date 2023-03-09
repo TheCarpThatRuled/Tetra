@@ -5,6 +5,7 @@
     <Platforms>x64</Platforms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <IntermediateOutputPath>$(SolutionDir)Intermediate\$(Configuration)\$(AssemblyName)</IntermediateOutputPath>
     <OutputPath>$(SolutionDir)Build\$(Configuration)</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
   </PropertyGroup>
