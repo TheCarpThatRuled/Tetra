@@ -1,32 +1,33 @@
-﻿namespace Tetra;
+﻿using System.Numerics;
 
-internal sealed class Count
-//internal sealed class Counter<T> where T : INumber<T> //Just wait til .Net 7!
+namespace Tetra;
+
+internal sealed class Count<T> where T : INumber<T>
 {
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static Count Create(int initialCount)
+   public static Count<T> Create(T initialCount)
       => new(initialCount);
 
    /* ------------------------------------------------------------ */
 
-   public static Count FromZero()
-      => Create(0);
+   public static Count<T> FromZero()
+      => Create(T.Zero);
 
    /* ------------------------------------------------------------ */
    // Properties
    /* ------------------------------------------------------------ */
 
-   public int Value()
+   public T Value()
       => _value;
 
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
-   public Count Decrement()
+   public Count<T> Decrement()
    {
       --_value;
 
@@ -35,7 +36,7 @@ internal sealed class Count
 
    /* ------------------------------------------------------------ */
 
-   public Count Increment()
+   public Count<T> Increment()
    {
       ++_value;
 
@@ -46,13 +47,13 @@ internal sealed class Count
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private int _value;
+   private T _value;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private Count(int initialCount)
+   private Count(T initialCount)
       => _value = initialCount;
 
    /* ------------------------------------------------------------ */

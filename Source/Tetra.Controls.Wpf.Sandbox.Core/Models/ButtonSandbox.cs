@@ -44,7 +44,7 @@ internal sealed class ButtonSandbox
                                                                     Visibility.Collapsed.ToHumanReadable(),
                                                                     Visibility.Hidden.ToHumanReadable());
 
-   private readonly Count _count = Count.FromZero();
+   private readonly Count<int> _count = Count<int>.FromZero();
 
    private readonly Button                     _button;
    private readonly ITwoWayBinding<Visibility> _buttonVisibility;
@@ -109,7 +109,7 @@ internal sealed class ButtonSandbox
    // Private Functions
    /* ------------------------------------------------------------ */
 
-   private static string CreateMessage(Count count)
+   private static string CreateMessage(Count<int> count)
       => $@"The button has been clicked {count.Value()} time(s)";
 
    /* ------------------------------------------------------------ */
