@@ -18,14 +18,14 @@ public sealed class RecharacterisedArrange<TInitialArranges, TNextArranges> : IA
    /* ------------------------------------------------------------ */
 
    public void AddBriefCharacterisation(AAA_test.GivenCharacteriser characteriser)
-      => _arrange
-        .AddBriefCharacterisation(characteriser);
+      => characteriser
+        .AddClauseToBriefCharacterisation(_characterisation);
 
    /* ------------------------------------------------------------ */
 
    public void AddFullCharacterisation(AAA_test.GivenCharacteriser characteriser)
-      => characteriser
-        .AddClauseToFullCharacterisation(_characterisation);
+      => _arrange
+        .AddFullCharacterisation(characteriser);
 
    /* ------------------------------------------------------------ */
 

@@ -12,7 +12,7 @@ public static class The_label
    public static IAssert<TheLabelHasBeenCreated.Asserts, TheLabelHasBeenCreated.Asserts> Matches(Expected_label expected)
       => A_label
         .Matches<TheLabelHasBeenCreated.Asserts>(expected,
-                                                  $"{nameof(The_label)}.")
+                                                  $"{nameof(The_label)}")
         .Route(environment => environment.The_label)
         .Recharacterise($"{nameof(The_label)}.{nameof(Matches)}: {expected.BriefCharacterisation()}");
 

@@ -9,7 +9,7 @@ public sealed class RoutingAssert<TInitialAsserts, TInnerAsserts> : IAssert<TIni
    /* ------------------------------------------------------------ */
 
    public static RoutingAssert<TInitialAsserts, TInnerAsserts> Create(IAssert<TInnerAsserts, TInitialAsserts> assert,
-                                                                                    Func<TInitialAsserts, TInnerAsserts> map)
+                                                                      Func<TInitialAsserts, TInnerAsserts>    map)
       => new(assert,
              map);
 
@@ -45,7 +45,7 @@ public sealed class RoutingAssert<TInitialAsserts, TInnerAsserts> : IAssert<TIni
    /* ------------------------------------------------------------ */
 
    private RoutingAssert(IAssert<TInnerAsserts, TInitialAsserts> assert,
-                         Func<TInitialAsserts, TInnerAsserts> map)
+                         Func<TInitialAsserts, TInnerAsserts>    map)
    {
       _assert = assert;
       _map    = map;

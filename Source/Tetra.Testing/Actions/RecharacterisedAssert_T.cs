@@ -18,14 +18,14 @@ public sealed class RecharacterisedAssert<TInitialAsserts, TNextAsserts> : IAsse
    /* ------------------------------------------------------------ */
 
    public void AddBriefCharacterisation(AAA_test.ThenCharacteriser characteriser)
-      => _assert
-        .AddBriefCharacterisation(characteriser);
+      => characteriser
+        .AddClauseToBriefCharacterisation(_characterisation);
 
    /* ------------------------------------------------------------ */
 
    public void AddFullCharacterisation(AAA_test.ThenCharacteriser characteriser)
-      => characteriser
-        .AddClauseToFullCharacterisation(_characterisation);
+      => _assert
+        .AddFullCharacterisation(characteriser);
 
    /* ------------------------------------------------------------ */
 

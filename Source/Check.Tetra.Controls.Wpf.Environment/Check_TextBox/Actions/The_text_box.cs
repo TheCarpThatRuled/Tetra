@@ -12,7 +12,7 @@ public static class The_text_box
    public static IAssert<TheTextBoxHasBeenCreated.Asserts, TheTextBoxHasBeenCreated.Asserts> Matches(Expected_text_box expected)
       => A_text_box
         .Matches<TheTextBoxHasBeenCreated.Asserts>(expected,
-                                                  $"{nameof(The_text_box)}.")
+                                                  $"{nameof(The_text_box)}")
         .Route(environment => environment.The_text_box)
         .Recharacterise($"{nameof(The_text_box)}.{nameof(Matches)}: {expected.BriefCharacterisation()}");
 

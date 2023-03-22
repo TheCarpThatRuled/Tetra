@@ -12,7 +12,7 @@ public static class The_button
    public static IAssert<TheButtonHasBeenCreated.Asserts, TheButtonHasBeenCreated.Asserts> Matches(Expected_button expected)
       => A_button
         .Matches<TheButtonHasBeenCreated.Asserts>(expected,
-                                                  $"{nameof(The_button)}.")
+                                                  $"{nameof(The_button)}")
         .Route(environment => environment.The_button)
         .Recharacterise($"{nameof(The_button)}.{nameof(Matches)}: {expected.BriefCharacterisation()}");
 

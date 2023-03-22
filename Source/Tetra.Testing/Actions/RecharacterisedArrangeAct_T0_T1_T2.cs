@@ -19,14 +19,14 @@ public sealed class RecharacterisedArrangeAct<TInitialArranges, TNextArranges, T
    /* ------------------------------------------------------------ */
 
    public void AddBriefCharacterisation(AAA_test.GivenCharacteriser characteriser)
-      => _arrangeAct
-        .AddBriefCharacterisation(characteriser);
+      => characteriser
+        .AddClauseToBriefCharacterisation(_characterisation);
 
    /* ------------------------------------------------------------ */
 
    public void AddFullCharacterisation(AAA_test.GivenCharacteriser characteriser)
-      => characteriser
-        .AddClauseToFullCharacterisation(_characterisation);
+      => _arrangeAct
+        .AddFullCharacterisation(characteriser);
 
    /* ------------------------------------------------------------ */
 
