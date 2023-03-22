@@ -2,7 +2,8 @@
 
 namespace Tetra.Testing;
 
-public static class AButton
+// ReSharper disable once InconsistentNaming
+public static class A_button
 {
    /* ------------------------------------------------------------ */
    // Assert Functions

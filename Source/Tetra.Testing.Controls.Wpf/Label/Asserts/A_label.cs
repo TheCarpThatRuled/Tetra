@@ -2,7 +2,8 @@
 
 namespace Tetra.Testing;
 
-public static class ALabel
+// ReSharper disable once InconsistentNaming
+public static class A_label
 {
    /* ------------------------------------------------------------ */
    // Assert Functions

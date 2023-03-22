@@ -2,7 +2,8 @@
 
 namespace Tetra.Testing;
 
-public static class ATextBox
+// ReSharper disable once InconsistentNaming
+public static class A_text_box
 {
    /* ------------------------------------------------------------ */
    // Assert Functions
