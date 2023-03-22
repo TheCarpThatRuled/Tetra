@@ -1,4 +1,5 @@
 ﻿using Tetra;
+// ReSharper disable InconsistentNaming
 
 namespace Check;
 
@@ -8,8 +9,8 @@ internal static class Data
    // Constants
    /* ------------------------------------------------------------ */
 
-   public static readonly ISequence<bool> TrueAndFalse = Sequence.From(true,
-                                                                       false);
+   public static readonly ISequence<bool> True_and_false = Sequence.From(true,
+                                                                         false);
 
    /* ------------------------------------------------------------ */
 

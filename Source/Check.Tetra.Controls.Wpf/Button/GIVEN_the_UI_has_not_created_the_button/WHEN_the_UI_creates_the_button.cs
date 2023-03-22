@@ -2,11 +2,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra.Testing;
 using static Check.Data;
+// ReSharper disable InconsistentNaming
 
 namespace Check.Button.GIVEN_the_UI_has_not_created_the_button;
 
 [TestClass]
-// ReSharper disable once InconsistentNaming
 public class WHEN_the_UI_creates_the_button : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
@@ -15,7 +15,7 @@ public class WHEN_the_UI_creates_the_button : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_UI_creates_the_button]
-   public void Run(AAATest test)
+   public void Run(AAA_test test)
    {
       Log.ToStandardOutput(test.FullCharacterisation());
 
@@ -32,25 +32,23 @@ public class WHEN_the_UI_creates_the_button : AAATestDataSource
    // Overridden AAATestDataSource Methods
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAATest> GetTests()
+   protected override IEnumerable<AAA_test> GetTests()
    {
       /* ------------------------------------------------------------ */
 
-      foreach (var isEnabled in TrueAndFalse)
+      foreach (var isEnabled in True_and_false)
       foreach (var visibility in Visibilities)
       {
-         yield return GIVEN
-                     .The_UI_has_not_created_the_button()
-                     .WHEN()
-                     .The_UI_creates_the_button(The_UI_creates_a_button
-                                               .Factory()
-                                               .IsEnabled_is(isEnabled)
-                                               .Visibility_is(visibility.tetra))
-                     .THEN()
-                     .The_button.Is_displayed(Expected_button
+         yield return AAA_test
+                     .GIVEN(The_UI.Has_not_created_the_button())
+                     .WHEN(The_UI.Creates_the_button(The_UI_creates_a_button
+                                                    .Factory()
+                                                    .IsEnabled_is(isEnabled)
+                                                    .Visibility_is(visibility.tetra)))
+                     .THEN(The_button.Matches(Expected_button
                                              .Factory()
                                              .IsEnabled_is(isEnabled)
-                                             .Visibility_is(visibility.wpf))
+                                             .Visibility_is(visibility.wpf)))
                      .Crystallise();
       }
 

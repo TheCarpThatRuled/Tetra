@@ -2,14 +2,14 @@
 
 namespace Check.Check_Button;
 
-public sealed class ActInstance<T>
-   where T : IAssertsInstance
+public sealed class Act<T>
+   where T : IAsserts
 {
    /* ------------------------------------------------------------ */
    // Internal Constructors
    /* ------------------------------------------------------------ */
 
-   internal ActInstance(Func<T> act)
+   internal Act(Func<T> act)
       => _act = act;
 
    /* ------------------------------------------------------------ */

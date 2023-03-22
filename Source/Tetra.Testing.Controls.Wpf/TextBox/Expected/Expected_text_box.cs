@@ -41,6 +41,20 @@ public sealed partial class Expected_text_box
       => _visibility;
 
    /* ------------------------------------------------------------ */
+   // Methods
+   /* ------------------------------------------------------------ */
+
+   public ExceptCarrier<Expected_text_box> Except()
+      => new(Function.PassThrough,
+             this);
+
+   /* ------------------------------------------------------------ */
+
+   public ExceptCarrier<T> Except<T>(Func<Expected_text_box, T> createParent)
+      => new(createParent,
+             this);
+
+   /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 

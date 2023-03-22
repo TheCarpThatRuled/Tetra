@@ -2,11 +2,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra.Testing;
 using static Check.TextBox.Text;
+// ReSharper disable InconsistentNaming
 
 namespace Check.TextBox.GIVEN_the_UI_has_created_the_text_box;
 
 [TestClass]
-// ReSharper disable once InconsistentNaming
 public class WHEN_the_system_updates_Text : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
@@ -15,7 +15,7 @@ public class WHEN_the_system_updates_Text : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_system_updates_Text]
-   public void Run(AAATest test)
+   public void Run(AAA_test test)
    {
       Log.ToStandardOutput(test.FullCharacterisation());
 
@@ -32,27 +32,25 @@ public class WHEN_the_system_updates_Text : AAATestDataSource
    // Overridden AAATestDataSource Methods
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAATest> GetTests()
+   protected override IEnumerable<AAA_test> GetTests()
    {
       /* ------------------------------------------------------------ */
 
-      foreach (var initialText in RepresentativeText)
-      foreach (var updatedText in RepresentativeText)
+      foreach (var initial_Text in Representative_text)
+      foreach (var updated_Text in Representative_text)
       {
-         yield return GIVEN
-                     .The_UI_has_created_the_text_box(The_UI_creates_a_text_box
-                                                     .Factory()
-                                                     .Text_is(initialText)
-                                                     .IsEnabled_is_enabled()
-                                                     .Visibility_is_visible())
-                     .WHEN()
-                     .The_system_updates_Text(updatedText)
-                     .THEN()
-                     .The_text_box.Is_displayed(Expected_text_box
+         yield return AAA_test
+                     .GIVEN(The_UI.Has_created_the_text_box(The_UI_creates_a_text_box
+                                                           .Factory()
+                                                           .Text_is(initial_Text)
+                                                           .IsEnabled_is_enabled()
+                                                           .Visibility_is_visible()))
+                     .WHEN(The_system.Updates_Text(updated_Text))
+                     .THEN(The_text_box.Matches(Expected_text_box
                                                .Factory()
-                                               .Text_is(updatedText)
+                                               .Text_is(updated_Text)
                                                .IsEnabled_is_enabled()
-                                               .Visibility_is_visible())
+                                               .Visibility_is_visible()))
                      .Crystallise();
       }
 

@@ -1,4 +1,6 @@
-﻿namespace Tetra;
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Tetra;
 
 // ReSharper disable once InconsistentNaming
 public static class Visibility_Extensions
@@ -7,13 +9,23 @@ public static class Visibility_Extensions
    // Visibility Extensions
    /* ------------------------------------------------------------ */
 
+   [ExcludeFromCodeCoverage]
+   public static ArgumentOutOfRangeException OutOfRange(this Visibility visibility,
+                                                        string          argumentName)
+      => new(argumentName,
+             visibility,
+             $"Unrecognised {typeof(Visibility).FullName}");
+
+   /* ------------------------------------------------------------ */
+
    public static string ToHumanReadable(this Visibility value)
       => value switch
          {
             Visibility.Visible   => "Visible",
             Visibility.Collapsed => "Collapse",
             Visibility.Hidden    => "Hidden",
-            _                    => $"Unknown visibility ({value})",
+            //Code Coverage - Development guard
+            _ => $"Unknown {typeof(Visibility).FullName} ({value})",
          };
 
    /* ------------------------------------------------------------ */
@@ -31,5 +43,5 @@ public static class Visibility_Extensions
                                                        $"Not a recognised {typeof(Visibility).FullName}"),
          };
 
-/* ------------------------------------------------------------ */
+   /* ------------------------------------------------------------ */
 }

@@ -7,6 +7,38 @@ namespace Tetra.Testing;
 public static class Expected_button_Extensions
 {
    /* ------------------------------------------------------------ */
+   // Except Extensions
+   /* ------------------------------------------------------------ */
+
+   public static T IsEnabled_is_enabled<T>(this Expected_button.ExceptCarrier<T> except)
+      => except
+        .IsEnabled_is(true);
+
+   /* ------------------------------------------------------------ */
+
+   public static T IsEnabled_is_disabled<T>(this Expected_button.ExceptCarrier<T> except)
+      => except
+        .IsEnabled_is(false);
+
+   /* ------------------------------------------------------------ */
+
+   public static T Visibility_is_collapsed<T>(this Expected_button.ExceptCarrier<T> except)
+      => except
+        .Visibility_is(Visibility.Collapsed);
+
+   /* ------------------------------------------------------------ */
+
+   public static T Visibility_is_hidden<T>(this Expected_button.ExceptCarrier<T> except)
+      => except
+        .Visibility_is(Visibility.Hidden);
+
+   /* ------------------------------------------------------------ */
+
+   public static T Visibility_is_visible<T>(this Expected_button.ExceptCarrier<T> except)
+      => except
+        .Visibility_is(Visibility.Visible);
+
+   /* ------------------------------------------------------------ */
    // Factory Extensions
    /* ------------------------------------------------------------ */
 

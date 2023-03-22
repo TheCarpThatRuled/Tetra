@@ -3,11 +3,11 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra.Testing;
 using static Check.Data;
 using static Check.Label.Contents;
+// ReSharper disable InconsistentNaming
 
 namespace Check.Label.GIVEN_the_UI_has_not_created_the_label;
 
 [TestClass]
-// ReSharper disable once InconsistentNaming
 public class WHEN_the_UI_creates_the_label : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
@@ -16,7 +16,7 @@ public class WHEN_the_UI_creates_the_label : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_UI_creates_the_label]
-   public void Run(AAATest test)
+   public void Run(AAA_test test)
    {
       Log.ToStandardOutput(test.FullCharacterisation());
 
@@ -33,25 +33,23 @@ public class WHEN_the_UI_creates_the_label : AAATestDataSource
    // Overridden AAATestDataSource Methods
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAATest> GetTests()
+   protected override IEnumerable<AAA_test> GetTests()
    {
       /* ------------------------------------------------------------ */
 
-      foreach (var content in RepresentativeContents)
+      foreach (var content in Representative_contents)
       foreach (var visibility in Visibilities)
       {
-         yield return GIVEN
-                     .The_UI_has_not_created_the_label()
-                     .WHEN()
-                     .The_UI_creates_the_label(The_UI_creates_a_label
-                                              .Factory()
-                                              .Content_is(content)
-                                              .Visibility_is(visibility.tetra))
-                     .THEN()
-                     .The_label.Is_displayed(Expected_label
+         yield return AAA_test
+                     .GIVEN(The_UI.Has_not_created_the_label())
+                     .WHEN(The_UI.Creates_the_label(The_UI_creates_a_label
+                                                   .Factory()
+                                                   .Content_is(content)
+                                                   .Visibility_is(visibility.tetra)))
+                     .THEN(The_label.Matches(Expected_label
                                             .Factory()
                                             .Content_is(content)
-                                            .Visibility_is(visibility.wpf))
+                                            .Visibility_is(visibility.wpf)))
                      .Crystallise();
       }
 

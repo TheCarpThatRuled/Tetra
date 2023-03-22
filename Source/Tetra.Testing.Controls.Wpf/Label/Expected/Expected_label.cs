@@ -37,6 +37,20 @@ public sealed partial class Expected_label
       => _visibility;
 
    /* ------------------------------------------------------------ */
+   // Methods
+   /* ------------------------------------------------------------ */
+
+   public ExceptCarrier<Expected_label> Except()
+      => new(Function.PassThrough,
+             this);
+
+   /* ------------------------------------------------------------ */
+
+   public ExceptCarrier<T> Except<T>(Func<Expected_label, T> createParent)
+      => new(createParent,
+             this);
+
+   /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 

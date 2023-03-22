@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra.Testing;
 using static Check.TextBox.Text;
+// ReSharper disable InconsistentNaming
 
 namespace Check.TextBox.GIVEN_the_text_box_is_enabled_and_visible;
 
@@ -15,7 +16,7 @@ public class WHEN_the_user_enters_text : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_user_enters_text]
-   public void Run(AAATest test)
+   public void Run(AAA_test test)
    {
       Log.ToStandardOutput(test.FullCharacterisation());
 
@@ -32,21 +33,18 @@ public class WHEN_the_user_enters_text : AAATestDataSource
    // Overridden AAATestDataSource Methods
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAATest> GetTests()
+   protected override IEnumerable<AAA_test> GetTests()
    {
       /* ------------------------------------------------------------ */
 
-      foreach (var initialText in RepresentativeText)
-      foreach (var updatedText in RepresentativeText)
+      foreach (var initial_text in Representative_text)
+      foreach (var updated_text in Representative_text)
       {
-         yield return GIVEN
-                     .The_UI_has_created_the_text_box(Text_boxes.Create_enabled_and_visible(initialText))
-                     .WHEN()
-                     .The_user_enters_text(updatedText)
-                     .THEN()
-                     .The_text_box.Is_displayed(Text_boxes.Enabled_and_visible(updatedText))
-                     .And()
-                     .The_system_Text_is(updatedText)
+         yield return AAA_test
+                     .GIVEN(The_UI.Has_created_the_text_box(Text_boxes.Create_enabled_and_visible(initial_text)))
+                     .WHEN(The_user.Enters_text(updated_text))
+                     .THEN(The_text_box.Matches(Text_boxes.Enabled_and_visible(updated_text)))
+                     .And(The_system.Text_is(updated_text))
                      .Crystallise();
       }
 
