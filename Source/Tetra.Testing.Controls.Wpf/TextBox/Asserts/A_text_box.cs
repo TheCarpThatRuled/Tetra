@@ -24,7 +24,7 @@ public static class A_text_box
       => Text_is<T>(expected.Text(),
                     characterisationHeader)
         .And(IsEnabled_is<T>(expected.IsEnabled(),
-                             ""))
+                             characterisationHeader))
         .And(Visibility_is<T>(expected.Visibility(),
                               characterisationHeader))
         .And(ReturnToParent<T>());
