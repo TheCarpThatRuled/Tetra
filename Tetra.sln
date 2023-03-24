@@ -45,6 +45,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tetra.Controls.Wpf.Sandbox"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tetra.Controls.Wpf.Sandbox.Core", "Source\Tetra.Controls.Wpf.Sandbox.Core\Tetra.Controls.Wpf.Sandbox.Core.csproj", "{54EB6597-2E1B-4B9D-87EB-CD550FCEB9B9}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tetra.Windows", "Source\Tetra.Windows\Tetra.Windows.csproj", "{B2CF28C9-6056-48D0-9FAD-7B34CF2ECA95}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Check.Tetra.Windows.Environment", "Source\Check.Tetra.Windows.Environment\Check.Tetra.Windows.Environment.csproj", "{13EA6F28-1E4A-4DE8-B71A-FC9C0A1AB7EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Check.Tetra.Windows", "Source\Check.Tetra.Windows\Check.Tetra.Windows.csproj", "{D76F40F8-6FFD-4577-929B-B81C4E4888CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -123,6 +129,18 @@ Global
 		{54EB6597-2E1B-4B9D-87EB-CD550FCEB9B9}.Debug|x64.Build.0 = Debug|x64
 		{54EB6597-2E1B-4B9D-87EB-CD550FCEB9B9}.Release|x64.ActiveCfg = Release|x64
 		{54EB6597-2E1B-4B9D-87EB-CD550FCEB9B9}.Release|x64.Build.0 = Release|x64
+		{B2CF28C9-6056-48D0-9FAD-7B34CF2ECA95}.Debug|x64.ActiveCfg = Debug|x64
+		{B2CF28C9-6056-48D0-9FAD-7B34CF2ECA95}.Debug|x64.Build.0 = Debug|x64
+		{B2CF28C9-6056-48D0-9FAD-7B34CF2ECA95}.Release|x64.ActiveCfg = Release|x64
+		{B2CF28C9-6056-48D0-9FAD-7B34CF2ECA95}.Release|x64.Build.0 = Release|x64
+		{13EA6F28-1E4A-4DE8-B71A-FC9C0A1AB7EE}.Debug|x64.ActiveCfg = Debug|x64
+		{13EA6F28-1E4A-4DE8-B71A-FC9C0A1AB7EE}.Debug|x64.Build.0 = Debug|x64
+		{13EA6F28-1E4A-4DE8-B71A-FC9C0A1AB7EE}.Release|x64.ActiveCfg = Release|x64
+		{13EA6F28-1E4A-4DE8-B71A-FC9C0A1AB7EE}.Release|x64.Build.0 = Release|x64
+		{D76F40F8-6FFD-4577-929B-B81C4E4888CC}.Debug|x64.ActiveCfg = Debug|x64
+		{D76F40F8-6FFD-4577-929B-B81C4E4888CC}.Debug|x64.Build.0 = Debug|x64
+		{D76F40F8-6FFD-4577-929B-B81C4E4888CC}.Release|x64.ActiveCfg = Release|x64
+		{D76F40F8-6FFD-4577-929B-B81C4E4888CC}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -146,6 +164,9 @@ Global
 		{24096C76-7325-4D11-B098-F1AF9963203D} = {4B86A31C-F3D5-4562-9B12-EFBFA34B9D0A}
 		{504F25F0-CA91-4DD8-B456-1CF6B6B09611} = {CC1DEB2E-9F5A-45C5-B979-C79234D244E5}
 		{54EB6597-2E1B-4B9D-87EB-CD550FCEB9B9} = {CC1DEB2E-9F5A-45C5-B979-C79234D244E5}
+		{B2CF28C9-6056-48D0-9FAD-7B34CF2ECA95} = {E2EE55F6-6147-4DFD-A576-D6E2C103E76B}
+		{13EA6F28-1E4A-4DE8-B71A-FC9C0A1AB7EE} = {E2EE55F6-6147-4DFD-A576-D6E2C103E76B}
+		{D76F40F8-6FFD-4577-929B-B81C4E4888CC} = {E2EE55F6-6147-4DFD-A576-D6E2C103E76B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0C51968D-099A-4C22-A2C4-1B8E4DA238D3}

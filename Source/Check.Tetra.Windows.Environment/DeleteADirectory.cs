@@ -1,38 +1,34 @@
-﻿namespace Tetra;
+﻿namespace Check;
 
-public interface IFileSystem
+internal class DeleteADirectory : IDisposable
 {
    /* ------------------------------------------------------------ */
-   // Properties
+   // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public AbsoluteDirectoryPath CurrentDirectory();
+   public static DeleteADirectory Create(string directory)
+      => new(directory);
 
    /* ------------------------------------------------------------ */
-   // Methods
+   // IDisposable Methods
    /* ------------------------------------------------------------ */
 
-   public IError Create(AbsoluteDirectoryPath path);
+   public void Dispose()
+      => ExternalFileSystem
+        .EnsureADirectoryDoesNotExists(_directory);
 
    /* ------------------------------------------------------------ */
-
-   public bool DoesNotExist(AbsoluteDirectoryPath path);
-
+   // Private Fields
    /* ------------------------------------------------------------ */
 
-   public bool Exists(AbsoluteDirectoryPath path);
+   private readonly string _directory;
 
    /* ------------------------------------------------------------ */
-
-   public IOpenFileResult<Stream> Open(AbsoluteFilePath path);
-
+   // Private Fields
    /* ------------------------------------------------------------ */
 
-   public IOpenFileResult<string> Read(AbsoluteFilePath path);
-
-   /* ------------------------------------------------------------ */
-
-   public IError SetCurrentDirectory(AbsoluteDirectoryPath path);
+   private DeleteADirectory(string directory)
+      => _directory = directory;
 
    /* ------------------------------------------------------------ */
 }

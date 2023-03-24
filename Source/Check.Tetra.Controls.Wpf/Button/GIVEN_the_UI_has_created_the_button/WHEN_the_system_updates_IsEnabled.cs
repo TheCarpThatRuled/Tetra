@@ -1,6 +1,4 @@
 ﻿using Check.Check_Button;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra.Testing;
 using static Check.Data;
 // ReSharper disable InconsistentNaming
 

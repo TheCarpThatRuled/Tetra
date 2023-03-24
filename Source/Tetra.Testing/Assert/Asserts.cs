@@ -29,6 +29,28 @@ public static partial class Assert_Extensions
    }
 
    /* ------------------------------------------------------------ */
+
+   public static Assert AreEqualOrdinalIgnoreCase(this Assert assert,
+                                                  string      description,
+                                                  string      expected,
+                                                  string      actual)
+   {
+      Log.ToDebugOutput_AreEqual(description,
+                                 expected,
+                                 actual);
+
+      if (!expected.Equals(actual,
+                           StringComparison.OrdinalIgnoreCase))
+      {
+         throw Failed.Assert(description,
+                             expected,
+                             actual);
+      }
+
+      return assert;
+   }
+
+   /* ------------------------------------------------------------ */
    // IsBool Extensions
    /* ------------------------------------------------------------ */
 
@@ -37,7 +59,7 @@ public static partial class Assert_Extensions
                                 bool        actual)
    {
       Log.ToDebugOutput_IsFalse(description,
-                                 actual);
+                                actual);
 
       Assert.IsFalse(actual,
                      description);
@@ -52,7 +74,7 @@ public static partial class Assert_Extensions
                                bool        actual)
    {
       Log.ToDebugOutput_IsTrue(description,
-                                actual);
+                               actual);
 
       Assert.IsTrue(actual,
                     description);

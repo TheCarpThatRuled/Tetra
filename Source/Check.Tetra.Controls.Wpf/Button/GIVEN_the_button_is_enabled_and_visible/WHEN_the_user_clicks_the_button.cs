@@ -1,6 +1,5 @@
 ﻿using Check.Check_Button;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra.Testing;
+
 // ReSharper disable InconsistentNaming
 
 namespace Check.Button.GIVEN_the_button_is_enabled_and_visible;

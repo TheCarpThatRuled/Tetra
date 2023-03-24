@@ -3,6 +3,26 @@
 public static class Extensions
 {
    /* ------------------------------------------------------------ */
+   //  IAct<TArranges, TAsserts> Extensions
+   /* ------------------------------------------------------------ */
+
+   public static IAct<TArranges, TAsserts> Recharacterise<TArranges, TAsserts>(this IAct<TArranges, TAsserts> act,
+                                                                               string                         characterisation)
+      where TArranges : IArranges
+      where TAsserts : IAsserts
+      => RecharacterisedAct<TArranges, TAsserts>
+        .Create(act,
+                characterisation);
+
+   /* ------------------------------------------------------------ */
+
+   public static IAct<TArranges, TAsserts> Silence<TArranges, TAsserts>(this IAct<TArranges, TAsserts> act)
+      where TArranges : IArranges
+      where TAsserts : IAsserts
+      => SilentAct<TArranges, TAsserts>
+        .Create(act);
+
+   /* ------------------------------------------------------------ */
    //  IArrange<TArranges> Extensions
    /* ------------------------------------------------------------ */
 
@@ -99,8 +119,8 @@ public static class Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static IAssert<TInitialAsserts, TInitialAsserts> Route<TInitialAsserts, TInnerAsserts>(this IAssert<TInnerAsserts, TInitialAsserts>       assert,
-                                                                                                 Func<TInitialAsserts, TInnerAsserts> map)
+   public static IAssert<TInitialAsserts, TInitialAsserts> Route<TInitialAsserts, TInnerAsserts>(this IAssert<TInnerAsserts, TInitialAsserts> assert,
+                                                                                                 Func<TInitialAsserts, TInnerAsserts>         map)
       where TInitialAsserts : IAsserts
       where TInnerAsserts : IAsserts
       => RoutingAssert<TInitialAsserts, TInnerAsserts>

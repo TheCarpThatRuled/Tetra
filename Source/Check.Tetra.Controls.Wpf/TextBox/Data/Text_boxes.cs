@@ -1,6 +1,5 @@
 ﻿
 using Check.Check_TextBox;
-using Tetra.Testing;
 
 // ReSharper disable InconsistentNaming
 

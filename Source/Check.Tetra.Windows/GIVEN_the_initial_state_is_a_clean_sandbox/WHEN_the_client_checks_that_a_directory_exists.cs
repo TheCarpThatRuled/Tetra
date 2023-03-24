@@ -1,19 +1,16 @@
-﻿using Check.Check_TextBox;
-using static Check.TextBox.Text;
 // ReSharper disable InconsistentNaming
 
-namespace Check.TextBox.GIVEN_the_text_box_is_enabled_and_visible;
+namespace Check.GIVEN_the_initial_state_is_a_clean_sandbox;
 
 [TestClass]
-// ReSharper disable once InconsistentNaming
-public class WHEN_the_user_enters_text : AAATestDataSource
+public class WHEN_the_client_checks_that_a_directory_exists : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
    // Test
    /* ------------------------------------------------------------ */
 
    [TestMethod]
-   [WHEN_the_user_enters_text]
+   [WHEN_the_client_checks_that_a_directory_exists]
    public void Run(AAA_test test)
    {
       Log.ToStandardOutput(test.FullCharacterisation());
@@ -35,16 +32,21 @@ public class WHEN_the_user_enters_text : AAATestDataSource
    {
       /* ------------------------------------------------------------ */
 
-      foreach (var initial_text in Representative_text)
-      foreach (var updated_text in Representative_text)
-      {
-         yield return AAA_test
-                     .GIVEN(The_UI.Has_created_the_text_box(Text_boxes.Create_enabled_and_visible(initial_text)))
-                     .WHEN(The_user.Enters_text(updated_text))
-                     .THEN(The_text_box.Matches(Text_boxes.Enabled_and_visible(updated_text)))
-                     .And(The_system.Text_is(updated_text))
-                     .Crystallise();
-      }
+      yield return AAA_test
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.PathToTheTestSandbox.Value()))
+                  .WHEN(The_client.Checks_that_a_directory_exists(Constants.PathToTheTestSandbox))
+                  .THEN(The_return_value.Was(true))
+                  .Crystallise();
+
+
+      /* ------------------------------------------------------------ */
+
+      yield return AAA_test
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.PathToTheTestSandbox.Value()))
+                  .WHEN(The_client.Checks_that_a_directory_exists(Constants.PathToTheTestSandbox.Append(DirectoryComponent.Create("Non-existent"))))
+                  .THEN(The_return_value.Was(false))
+                  .Crystallise();
+
 
       /* ------------------------------------------------------------ */
 

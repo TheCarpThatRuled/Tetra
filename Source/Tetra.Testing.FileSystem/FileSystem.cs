@@ -29,6 +29,11 @@ public sealed class FileSystem : IFileSystem
 
    /* ------------------------------------------------------------ */
 
+   public bool DoesNotExist(AbsoluteDirectoryPath path)
+      => throw new NotImplementedException();
+
+   /* ------------------------------------------------------------ */
+
    public bool Exists(AbsoluteDirectoryPath path)
       => _directories
         .Contains(path);

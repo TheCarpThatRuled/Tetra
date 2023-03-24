@@ -1,6 +1,4 @@
 ﻿using Check.Check_Label;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra.Testing;
 using static Check.Data;
 using static Check.Label.Contents;
 // ReSharper disable InconsistentNaming
