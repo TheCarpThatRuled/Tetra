@@ -32,12 +32,12 @@ public class WHEN_the_client_creates_a_directory : AAATestDataSource
    {
       /* ------------------------------------------------------------ */
 
-      var directory = Constants.PathToTheTestSandbox.Append(DirectoryComponent.Create("Dir"));
+      var directory = Constants.Path_to_the_test_sandbox.Append(DirectoryComponent.Create("Dir"));
 
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
-                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.PathToTheTestSandbox.Value()))
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
                   .WHEN(The_client.Creates_a_directory(directory))
                   .THEN(The_return_value.Was_not_in_error())
                   .And(The_file_system.Contains_a_directory(directory.Value()))
@@ -46,11 +46,46 @@ public class WHEN_the_client_creates_a_directory : AAATestDataSource
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
-                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.PathToTheTestSandbox.Value()))
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
                   .And(A_directory.Exists(directory.Value()))
                   .WHEN(The_client.Creates_a_directory(directory))
                   .THEN(The_return_value.Was_not_in_error())
                   .And(The_file_system.Contains_a_directory(directory.Value()))
+                  .Crystallise();
+
+      /* ------------------------------------------------------------ */
+
+      yield return AAA_test
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
+                  .And(A_file.Exists(directory.Value()[..^1]))
+                  .WHEN(The_client.Creates_a_directory(directory))
+                  .THEN(The_return_value.Was_in_error(Predicate.Contains_the_text(Error_messages.Partial_cannot_create_exception(directory.Value()[..^1]))))
+                  .And(The_file_system.Contains_a_file(directory.Value()[..^1]))
+                  .Crystallise();
+
+      /* ------------------------------------------------------------ */
+
+      var sub_directory = directory.Append(DirectoryComponent.Create("SubDir"));
+
+      /* ------------------------------------------------------------ */
+
+      yield return AAA_test
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
+                  .WHEN(The_client.Creates_a_directory(sub_directory))
+                  .THEN(The_return_value.Was_not_in_error())
+                  .And(The_file_system.Contains_a_directory(directory.Value()))
+                  .And(The_file_system.Contains_a_directory(sub_directory.Value()))
+                  .Crystallise();
+
+      /* ------------------------------------------------------------ */
+
+      yield return AAA_test
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
+                  .And(A_file.Exists(directory.Value()[..^1]))
+                  .WHEN(The_client.Creates_a_directory(sub_directory))
+                  .THEN(The_return_value.Was_in_error(Predicate.Contains_the_text(Error_messages.Partial_cannot_create_exception(directory.Value()[..^1]))))
+                  .And(The_file_system.Contains_a_file(directory.Value()[..^1]))
+                  .And(The_file_system.Does_not_contains_a_directory(sub_directory.Value()))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */

@@ -1,5 +1,7 @@
 // ReSharper disable InconsistentNaming
 
+using System.IO;
+
 namespace Check.GIVEN_the_initial_state_is_a_clean_sandbox;
 
 [TestClass]
@@ -32,9 +34,13 @@ public class WHEN_the_client_checks_that_a_directory_exists : AAATestDataSource
    {
       /* ------------------------------------------------------------ */
 
+      var directory = Constants.Path_to_the_test_sandbox.Append(DirectoryComponent.Create("Dir"));
+
+      /* ------------------------------------------------------------ */
+
       yield return AAA_test
-                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.PathToTheTestSandbox.Value()))
-                  .WHEN(The_client.Checks_that_a_directory_exists(Constants.PathToTheTestSandbox))
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
+                  .WHEN(The_client.Checks_that_a_directory_exists(Constants.Path_to_the_test_sandbox))
                   .THEN(The_return_value.Was(true))
                   .Crystallise();
 
@@ -42,11 +48,28 @@ public class WHEN_the_client_checks_that_a_directory_exists : AAATestDataSource
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
-                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.PathToTheTestSandbox.Value()))
-                  .WHEN(The_client.Checks_that_a_directory_exists(Constants.PathToTheTestSandbox.Append(DirectoryComponent.Create("Non-existent"))))
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
+                  .WHEN(The_client.Checks_that_a_directory_exists(directory))
                   .THEN(The_return_value.Was(false))
                   .Crystallise();
 
+      /* ------------------------------------------------------------ */
+
+      yield return AAA_test
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
+                  .And(A_directory.Exists(directory.Value()))
+                  .WHEN(The_client.Checks_that_a_directory_exists(directory))
+                  .THEN(The_return_value.Was(true))
+                  .Crystallise();
+
+      /* ------------------------------------------------------------ */
+
+      yield return AAA_test
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
+                  .And(A_file.Exists(directory.Value()[..^1]))
+                  .WHEN(The_client.Checks_that_a_directory_exists(directory))
+                  .THEN(The_return_value.Was(false))
+                  .Crystallise();
 
       /* ------------------------------------------------------------ */
 

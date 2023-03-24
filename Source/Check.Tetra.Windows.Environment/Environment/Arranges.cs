@@ -12,7 +12,7 @@ public sealed class Arranges : IArranges
    {
       _disposables.Register(DeleteADirectory.Create(directory));
 
-      ExternalFileSystem.EnsureADirectoryExists(directory);
+      ExternalFileSystem.EnsureAnEmptyDirectoryExists(directory);
       ExternalFileSystem.SetCurrentDirectory(directory);
 
       return this;

@@ -61,7 +61,8 @@ partial class Assert_Extensions
          {
             Error.NoneError => throw Failed.Assert(TheErrorIsANoneWhenWeExpectedItToBeASome(description)),
             Error.SomeError some => !property(some.Content)
-                                       ? throw Failed.Assert(TheErrorIsASomeButDoesNotContainTheExpectedContent(description))
+                                       ? throw Failed.Assert(TheErrorIsASomeButDoesNotContainTheExpectedContent(description,
+                                                                                                                some.Content.Content()))
                                        : assert,
 
             _ => throw Failed.Assert(TheErrorIsUnrecognisedWhenWeExpectedItToBeASome(description)),

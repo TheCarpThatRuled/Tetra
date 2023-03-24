@@ -32,34 +32,30 @@ public class WHEN_the_client_sets_the_current_directory : AAATestDataSource
    {
       /* ------------------------------------------------------------ */
 
-      var directory = Constants.PathToTheTestSandbox.Append(DirectoryComponent.Create("Dir"));
+      var directory = Constants.Path_to_the_test_sandbox.Append(DirectoryComponent.Create("Dir"));
 
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
-                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.PathToTheTestSandbox.Value()))
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
                   .WHEN(The_client.Sets_the_current_directory(directory))
-                  .THEN(The_return_value.Was_in_error(message => message
-                                                                .Content()
-                                                                .Contains($@"System.IO.DirectoryNotFoundException: Could not find a part of the path '{directory.Value()}'")))
-                  .And(The_file_system.Has_a_current_directory_of(Constants.PathToTheTestSandbox.Value()))
+                  .THEN(The_return_value.Was_in_error(Predicate.Contains_the_text(Error_messages.Partial_DirectoryNotFound_exception(directory.Value()))))
+                  .And(The_file_system.Has_a_current_directory_of(Constants.Path_to_the_test_sandbox.Value()))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
       yield return AAA_test
-                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.PathToTheTestSandbox.Value()))
-                  .And(A_file.Exists(directory.Value()))
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
+                  .And(A_file.Exists(directory.Value()[..^1]))
                   .WHEN(The_client.Sets_the_current_directory(directory))
-                  .THEN(The_return_value.Was_in_error(message => message
-                                                                .Content()
-                                                                .Contains($@"System.IO.DirectoryNotFoundException: Could not find a part of the path '{directory.Value()}'")))
-                  .And(The_file_system.Has_a_current_directory_of(Constants.PathToTheTestSandbox.Value()))
+                  .THEN(The_return_value.Was_in_error(Predicate.Contains_the_text(Error_messages.Partial_directory_name_is_invalid_exception(directory.Value()))))
+                  .And(The_file_system.Has_a_current_directory_of(Constants.Path_to_the_test_sandbox.Value()))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
-                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.PathToTheTestSandbox.Value()))
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
                   .And(A_directory.Exists(directory.Value()))
                   .WHEN(The_client.Sets_the_current_directory(directory))
                   .THEN(The_return_value.Was_not_in_error())
@@ -77,5 +73,3 @@ public class WHEN_the_client_sets_the_current_directory : AAATestDataSource
 
    /* ------------------------------------------------------------ */
 }
-
-/* ------------------------------------------------------------ */

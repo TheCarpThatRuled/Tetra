@@ -6,8 +6,9 @@ public static partial class AssertMessages
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static string TheErrorIsASomeButDoesNotContainTheExpectedContent(string description)
-      => $"{description}: {TheError} {Is} {ASome} {ButDoesNotContain} {TheExpectedContent}";
+   public static string TheErrorIsASomeButDoesNotContainTheExpectedContent(string description,
+                                                                           string actual)
+      => $"{description}: {TheError} {Is} {ASome} {ButDoesNotContain} {TheExpectedContent}: {actual}";
 
    /* ------------------------------------------------------------ */
 
@@ -40,7 +41,7 @@ public static partial class AssertMessages
    // Private Constants
    /* ------------------------------------------------------------ */
 
-   private const string TheError = "The Error ";
+   private const string TheError = "The Error";
 
    /* ------------------------------------------------------------ */
 }

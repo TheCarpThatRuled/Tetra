@@ -13,15 +13,7 @@ internal static class ExternalFileSystem
          return;
       }
 
-      foreach (var subDirectory in Directory.GetDirectories(directory))
-      {
-         EnsureADirectoryDoesNotExists(subDirectory);
-      }
-
-      foreach (var subFile in Directory.GetFiles(directory))
-      {
-         EnsureAFileDoesNotExists(subFile);
-      }
+      EnsureADirectoryIsEmpty(directory);
 
       Directory.Delete(directory);
    }
@@ -49,6 +41,34 @@ internal static class ExternalFileSystem
 
    /* ------------------------------------------------------------ */
 
+   public static void EnsureAnEmptyDirectoryExists(string directory)
+   {
+      EnsureADirectoryExists(directory);
+      EnsureADirectoryIsEmpty(directory);
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public static void EnsureADirectoryIsEmpty(string directory)
+   {
+      if (!Directory.Exists(directory))
+      {
+         return;
+      }
+
+      foreach (var subDirectory in Directory.GetDirectories(directory))
+      {
+         EnsureADirectoryDoesNotExists(subDirectory);
+      }
+
+      foreach (var subFile in Directory.GetFiles(directory))
+      {
+         EnsureAFileDoesNotExists(subFile);
+      }
+   }
+
+   /* ------------------------------------------------------------ */
+
    public static void EnsureAFileDoesNotExists(string file)
    {
       if (File.Exists(file))
@@ -61,9 +81,11 @@ internal static class ExternalFileSystem
 
    public static void EnsureAFileExists(string file)
    {
-      if (File.Exists(file))
+      // ReSharper disable once InvertIf
+      if (!File.Exists(file))
       {
-         File.Create(file);
+         // ReSharper disable once EmptyEmbeddedStatement
+         using (File.Create(file));
       }
    }
 

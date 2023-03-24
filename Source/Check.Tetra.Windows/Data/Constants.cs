@@ -18,7 +18,7 @@ internal static class Constants
 
    /* ------------------------------------------------------------ */
 
-   public static readonly AbsoluteDirectoryPath PathToTheTestSandbox
+   public static readonly AbsoluteDirectoryPath Path_to_the_test_sandbox
       = PathToTheTestExecutionDirectory
         .Append(DirectoryComponent.Create("Sandbox"));
 

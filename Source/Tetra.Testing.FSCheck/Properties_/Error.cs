@@ -55,7 +55,8 @@ partial class Properties
       => actual switch
          {
             Error.NoneError => False(TheErrorIsANoneWhenWeExpectedItToBeASome(description)),
-            Error.SomeError some => property(TheErrorIsASomeButDoesNotContainTheExpectedContent(description),
+            Error.SomeError some => property(TheErrorIsASomeButDoesNotContainTheExpectedContent(description,
+                                                                                                some.Content.Content()),
                                              some.Content),
 
             _ => False(TheErrorIsUnrecognisedWhenWeExpectedItToBeASome(description)),
