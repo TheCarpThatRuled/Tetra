@@ -54,6 +54,17 @@ public static class Extensions
    //   IArrange<TInitialArranges, TNextArranges> Extensions
    /* ------------------------------------------------------------ */
 
+   public static IArrange<TInitialArranges, TNextArranges> And<TInitialArranges, TMiddleArranges, TNextArranges>(this IArrange<TInitialArranges, TMiddleArranges> first,
+                                                                                                                 IArrange<TMiddleArranges, TNextArranges>         second)
+      where TInitialArranges : IArranges
+      where TMiddleArranges : IArranges
+      where TNextArranges : IArranges
+      => CompoundArrange<TInitialArranges, TMiddleArranges, TNextArranges>
+        .Create(first,
+                second);
+
+   /* ------------------------------------------------------------ */
+
    public static IArrange<TInitialArranges, TNextArranges> Recharacterise<TInitialArranges, TNextArranges>(this IArrange<TInitialArranges, TNextArranges> arrange,
                                                                                                            string                                         characterisation)
       where TInitialArranges : IArranges

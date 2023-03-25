@@ -30,13 +30,23 @@ public sealed class FileSystem : IFileSystem
    /* ------------------------------------------------------------ */
 
    public bool DoesNotExist(AbsoluteDirectoryPath path)
-      => throw new NotImplementedException();
+      => !Exists(path);
+
+   /* ------------------------------------------------------------ */
+
+   public bool DoesNotExist(AbsoluteFilePath path)
+      => !Exists(path);
 
    /* ------------------------------------------------------------ */
 
    public bool Exists(AbsoluteDirectoryPath path)
       => _directories
         .Contains(path);
+
+   /* ------------------------------------------------------------ */
+
+   public bool Exists(AbsoluteFilePath path)
+      => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */
 
@@ -52,6 +62,16 @@ public sealed class FileSystem : IFileSystem
 
    public IError SetCurrentDirectory(AbsoluteDirectoryPath path)
       => _setCurrentDirectory(path);
+
+   /* ------------------------------------------------------------ */
+
+   public IResult<ISequence<AbsoluteFilePath>> SubDirectoriesOf(AbsoluteDirectoryPath path)
+      => throw new NotImplementedException();
+
+   /* ------------------------------------------------------------ */
+
+   public IResult<ISequence<AbsoluteFilePath>> SubFileOf(AbsoluteDirectoryPath path)
+      => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */
    // Methods

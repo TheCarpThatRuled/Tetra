@@ -19,6 +19,16 @@ public sealed class Acts : IActs
 
    /* ------------------------------------------------------------ */
 
+   public Act<ReturnAsserts<bool, Asserts>> The_client_checks_that_a_file_does_not_exist(AbsoluteFilePath path)
+      => new(() => Check_that_a_file_does_not_exist(path));
+
+   /* ------------------------------------------------------------ */
+
+   public Act<ReturnAsserts<bool, Asserts>> The_client_checks_that_a_file_exists(AbsoluteFilePath path)
+      => new(() => Check_that_a_file_exists(path));
+
+   /* ------------------------------------------------------------ */
+
    public Act<ErrorAsserts<Asserts>> The_client_creates_a_directory(AbsoluteDirectoryPath path)
       => new(() => Create_a_directory(path));
 
@@ -66,6 +76,22 @@ public sealed class Acts : IActs
    private ReturnAsserts<bool, Asserts> Check_that_a_directory_exists(AbsoluteDirectoryPath path)
       => ReturnAsserts<bool, Asserts>
         .Create($"{nameof(IFileSystem)}.{nameof(IFileSystem.Exists)}({nameof(AbsoluteDirectoryPath)})",
+                _fileSystem.Exists(path),
+                () => Asserts.Create(_fileSystem));
+
+   /* ------------------------------------------------------------ */
+
+   private ReturnAsserts<bool, Asserts> Check_that_a_file_does_not_exist(AbsoluteFilePath path)
+      => ReturnAsserts<bool, Asserts>
+        .Create($"{nameof(IFileSystem)}.{nameof(IFileSystem.DoesNotExist)}({nameof(AbsoluteFilePath)})",
+                _fileSystem.DoesNotExist(path),
+                () => Asserts.Create(_fileSystem));
+
+   /* ------------------------------------------------------------ */
+
+   private ReturnAsserts<bool, Asserts> Check_that_a_file_exists(AbsoluteFilePath path)
+      => ReturnAsserts<bool, Asserts>
+        .Create($"{nameof(IFileSystem)}.{nameof(IFileSystem.Exists)}({nameof(AbsoluteFilePath)})",
                 _fileSystem.Exists(path),
                 () => Asserts.Create(_fileSystem));
 

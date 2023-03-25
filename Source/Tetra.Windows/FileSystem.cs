@@ -40,8 +40,19 @@ public sealed class FileSystem : IFileSystem
 
    /* ------------------------------------------------------------ */
 
+   public bool DoesNotExist(AbsoluteFilePath path)
+      => !Exists(path);
+
+   /* ------------------------------------------------------------ */
+
    public bool Exists(AbsoluteDirectoryPath path)
       => Directory
+        .Exists(path.Value());
+
+   /* ------------------------------------------------------------ */
+
+   public bool Exists(AbsoluteFilePath path)
+      => File
         .Exists(path.Value());
 
    /* ------------------------------------------------------------ */
@@ -69,6 +80,16 @@ public sealed class FileSystem : IFileSystem
          return Error.Some(Message.Create(e.ToString()));
       }
    }
+
+   /* ------------------------------------------------------------ */
+
+   public IResult<ISequence<AbsoluteFilePath>> SubDirectoriesOf(AbsoluteDirectoryPath path)
+      => throw new NotImplementedException();
+
+   /* ------------------------------------------------------------ */
+
+   public IResult<ISequence<AbsoluteFilePath>> SubFileOf(AbsoluteDirectoryPath path)
+      => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */
    // Private Constructors

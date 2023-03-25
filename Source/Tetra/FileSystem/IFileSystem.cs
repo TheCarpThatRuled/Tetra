@@ -20,7 +20,15 @@ public interface IFileSystem
 
    /* ------------------------------------------------------------ */
 
+   public bool DoesNotExist(AbsoluteFilePath path);
+
+   /* ------------------------------------------------------------ */
+
    public bool Exists(AbsoluteDirectoryPath path);
+
+   /* ------------------------------------------------------------ */
+
+   public bool Exists(AbsoluteFilePath path);
 
    /* ------------------------------------------------------------ */
 
@@ -33,6 +41,14 @@ public interface IFileSystem
    /* ------------------------------------------------------------ */
 
    public IError SetCurrentDirectory(AbsoluteDirectoryPath path);
+
+   /* ------------------------------------------------------------ */
+
+   public IResult<ISequence<AbsoluteFilePath>> SubDirectoriesOf(AbsoluteDirectoryPath path);
+
+   /* ------------------------------------------------------------ */
+
+   public IResult<ISequence<AbsoluteFilePath>> SubFileOf(AbsoluteDirectoryPath path);
 
    /* ------------------------------------------------------------ */
 }

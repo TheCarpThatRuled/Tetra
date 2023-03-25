@@ -58,7 +58,7 @@ public sealed class Asserts : IAsserts
    {
       Assert.That
             .AreEqualOrdinalIgnoreCase($"The file system should have a current directory of <{expected}>",
-                                       expected[..^1],
+                                       expected,
                                        Directory.GetCurrentDirectory());
 
       return this;

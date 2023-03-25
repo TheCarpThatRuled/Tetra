@@ -29,6 +29,24 @@ public static class The_client
 
    /* ------------------------------------------------------------ */
 
+   public static IAct<Arranges, ReturnAsserts<bool, Asserts>> Checks_that_a_file_does_not_exist(AbsoluteFilePath path)
+      => AtomicAct<Arranges, ReturnAsserts<bool, Asserts>>
+        .Create(environment => environment.WHEN()
+                                          .The_client_checks_that_a_file_does_not_exist(path)
+                                          .THEN(),
+                $"{nameof(The_client)}.{nameof(Checks_that_a_file_does_not_exist)}: {path}");
+
+   /* ------------------------------------------------------------ */
+
+   public static IAct<Arranges, ReturnAsserts<bool, Asserts>> Checks_that_a_file_exists(AbsoluteFilePath path)
+      => AtomicAct<Arranges, ReturnAsserts<bool, Asserts>>
+        .Create(environment => environment.WHEN()
+                                          .The_client_checks_that_a_file_exists(path)
+                                          .THEN(),
+                $"{nameof(The_client)}.{nameof(Checks_that_a_file_exists)}: {path}");
+
+   /* ------------------------------------------------------------ */
+
    public static IAct<Arranges, ErrorAsserts<Asserts>> Creates_a_directory(AbsoluteDirectoryPath path)
       => AtomicAct<Arranges, ErrorAsserts<Asserts>>
         .Create(environment => environment.WHEN()

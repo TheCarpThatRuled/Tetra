@@ -97,6 +97,15 @@ internal static class ExternalFileSystem
 
    /* ------------------------------------------------------------ */
 
+   public static Stream OpenAFile(string file)
+      => File
+        .Open(file,
+              FileMode.OpenOrCreate,
+              FileAccess.Read,
+              FileShare.None);
+
+   /* ------------------------------------------------------------ */
+
    public static void SetCurrentDirectory(string directory)
       => Directory
         .SetCurrentDirectory(directory);

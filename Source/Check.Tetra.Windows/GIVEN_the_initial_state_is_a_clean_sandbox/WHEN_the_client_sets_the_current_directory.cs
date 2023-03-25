@@ -1,5 +1,8 @@
 // ReSharper disable InconsistentNaming
 
+using static Check.Constants;
+using static Check.Error_messages;
+
 namespace Check.GIVEN_the_initial_state_is_a_clean_sandbox;
 
 [TestClass]
@@ -32,34 +35,54 @@ public class WHEN_the_client_sets_the_current_directory : AAATestDataSource
    {
       /* ------------------------------------------------------------ */
 
-      var directory = Constants.Path_to_the_test_sandbox.Append(DirectoryComponent.Create("Dir"));
+      var directory = Path_to_the_test_sandbox.Append(DirectoryComponent.Create("Dir"));
 
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
-                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
-                  .WHEN(The_client.Sets_the_current_directory(directory))
-                  .THEN(The_return_value.Was_in_error(Predicate.Contains_the_text(Error_messages.Partial_DirectoryNotFound_exception(directory.Value()))))
-                  .And(The_file_system.Has_a_current_directory_of(Constants.Path_to_the_test_sandbox.Value()))
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
+                  .WHEN(The_client.Sets_the_current_directory(Path_to_the_test_sandbox))
+                  .THEN(The_return_value.Is_not_in_error())
+                  .And(The_file_system.Has_a_current_directory_of(Path_to_the_test_sandbox.Value()[..^1]))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
+
       yield return AAA_test
-                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
+                  .WHEN(The_client.Sets_the_current_directory(directory))
+                  .THEN(The_return_value.Is_in_error(Predicate.Contains_the_text(Partial_DirectoryNotFound_exception(directory.Value()))))
+                  .And(The_file_system.Has_a_current_directory_of(Path_to_the_test_sandbox.Value()[..^1]))
+                  .Crystallise();
+
+      /* ------------------------------------------------------------ */
+
+      yield return AAA_test
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
                   .And(A_file.Exists(directory.Value()[..^1]))
                   .WHEN(The_client.Sets_the_current_directory(directory))
-                  .THEN(The_return_value.Was_in_error(Predicate.Contains_the_text(Error_messages.Partial_directory_name_is_invalid_exception(directory.Value()))))
-                  .And(The_file_system.Has_a_current_directory_of(Constants.Path_to_the_test_sandbox.Value()))
+                  .THEN(The_return_value.Is_in_error(Predicate.Contains_the_text(Partial_directory_name_is_invalid_exception(directory.Value()))))
+                  .And(The_file_system.Has_a_current_directory_of(Path_to_the_test_sandbox.Value()[..^1]))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
-                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Constants.Path_to_the_test_sandbox.Value()))
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
+                  .And(A_file.Exists_and_is_locked(directory.Value()[..^1]))
+                  .WHEN(The_client.Sets_the_current_directory(directory))
+                  .THEN(The_return_value.Is_in_error(Predicate.Contains_the_text(Partial_directory_name_is_invalid_exception(directory.Value()))))
+                  .And(The_file_system.Has_a_current_directory_of(Path_to_the_test_sandbox.Value()[..^1]))
+                  .Crystallise();
+
+      /* ------------------------------------------------------------ */
+
+      yield return AAA_test
+                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
                   .And(A_directory.Exists(directory.Value()))
                   .WHEN(The_client.Sets_the_current_directory(directory))
-                  .THEN(The_return_value.Was_not_in_error())
-                  .And(The_file_system.Has_a_current_directory_of(directory.Value()))
+                  .THEN(The_return_value.Is_not_in_error())
+                  .And(The_file_system.Has_a_current_directory_of(directory.Value()[..^1]))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */

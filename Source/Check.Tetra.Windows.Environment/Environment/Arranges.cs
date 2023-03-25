@@ -56,6 +56,24 @@ public sealed class Arranges : IArranges
 
    /* ------------------------------------------------------------ */
 
+   public Arranges A_file_is_locked(string file)
+   {
+      _lockedFiles.LockFile(file);
+
+      return this;
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public Arranges A_file_is_unlocked(string file)
+   {
+      _lockedFiles.UnlockFile(file);
+
+      return this;
+   }
+
+   /* ------------------------------------------------------------ */
+
    public Arranges The_current_directory_is(string directory)
    {
       ExternalFileSystem.SetCurrentDirectory(directory);
@@ -75,9 +93,12 @@ public sealed class Arranges : IArranges
 
    internal static Arranges Create(AAA_test.Disposables disposables)
    {
+      var lockedFiles = LockedFiles.Create();
+      disposables.Register(lockedFiles);
       disposables.Register(SetTheCurrentDirectory.Create(ExternalFileSystem.GetTheCurrentDirectory()));
-
-      return new(disposables);
+ 
+      return new(disposables,
+                 lockedFiles);
    }
 
    /* ------------------------------------------------------------ */
@@ -87,14 +108,17 @@ public sealed class Arranges : IArranges
    private readonly IFileSystem _fileSystem = FileSystem.Create();
 
    private readonly AAA_test.Disposables _disposables;
+   private readonly LockedFiles          _lockedFiles;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private Arranges(AAA_test.Disposables disposables)
+   private Arranges(AAA_test.Disposables disposables,
+                    LockedFiles          lockedFiles)
    {
       _disposables = disposables;
+      _lockedFiles = lockedFiles;
    }
 
    /* ------------------------------------------------------------ */
