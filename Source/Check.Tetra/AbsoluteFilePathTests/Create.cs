@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Check.Messages;
 using static Tetra.Testing.Properties;
 
@@ -13,7 +10,7 @@ namespace Check.AbsoluteFilePathTests;
 public class Create
 {
    /* ------------------------------------------------------------ */
-   // public static AbsoluteFilePath Create(string potentialPath)
+   // static AbsoluteFilePath Create(string potentialPath);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -174,9 +171,9 @@ public class Create
    }
 
    /* ------------------------------------------------------------ */
-   // public static AbsoluteFilePath Create(VolumeComponent               volume,
-   //                                       ISequence<DirectoryComponent> directories,
-   //                                       FileComponent                 file)
+   // static AbsoluteFilePath Create(VolumeComponent               volume,
+   //                                ISequence<DirectoryComponent> directories,
+   //                                FileComponent                 file);
    /* ------------------------------------------------------------ */
 
    //GIVEN

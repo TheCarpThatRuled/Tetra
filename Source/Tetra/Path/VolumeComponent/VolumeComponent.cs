@@ -18,10 +18,10 @@ public class VolumeComponent : IComparable<VolumeComponent>,
 
    /* ------------------------------------------------------------ */
 
-   public static IResult<VolumeComponent> Parse(char potentialVolume)
+   public static IResult<VolumeComponent, Message> Parse(char potentialVolume)
       => Validate(potentialVolume,
                   VolumeType)
-        .MapToResult(new VolumeComponent(potentialVolume));
+        .MapSuccessToType(new VolumeComponent(potentialVolume));
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -83,12 +83,12 @@ public class VolumeComponent : IComparable<VolumeComponent>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static IError Validate(char   potentialVolume,
-                                   string volumeType)
+   protected static IResult<Message> Validate(char   potentialVolume,
+                                             string volumeType)
       => potentialVolume.IsNotAnAsciiLetter()
-            ? Error.Some(Message.Create(IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(potentialVolume,
-                                                                                         volumeType)))
-            : Error.None();
+            ? Result.Failure(Message.Create(IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(potentialVolume,
+                                                                                            volumeType)))
+            : Result<Message>.Success();
 
    /* ------------------------------------------------------------ */
    // Private Constants

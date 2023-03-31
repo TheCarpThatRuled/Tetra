@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.ResultTests.OfTestClass;
@@ -13,7 +10,7 @@ namespace Check.ResultTests.OfTestClass;
 public class Failure_IsAFailure
 {
    /* ------------------------------------------------------------ */
-   // bool IsAFailure()
+   // bool IsAFailure();
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -26,10 +23,10 @@ public class Failure_IsAFailure
    [TestMethod]
    public void GIVEN_Failure_of_TestClass_WHEN_IsAFailure_THEN_true_is_returned()
    {
-      static Property Property(Message content)
+      static Property Property(TestClass value)
       {
          //Arrange
-         var result = Result<TestClass>.Failure(content);
+         var result = Tetra.Result.Failure(value);
 
          //Act
          var actual = result.IsAFailure();
@@ -39,9 +36,9 @@ public class Failure_IsAFailure
                        actual);
       }
 
-      Arb.Register<Libraries.Message>();
+      Arb.Register<Libraries.TestClass>();
 
-      Prop.ForAll<Message>(Property)
+      Prop.ForAll<TestClass>(Property)
           .QuickCheckThrowOnFailure();
    }
 

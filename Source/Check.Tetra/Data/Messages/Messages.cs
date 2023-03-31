@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using Tetra;
 
 namespace Check;
 
@@ -12,12 +11,6 @@ internal static partial class Messages
    public static string ArgumentExceptionMessage(string message,
                                                  string parameterName)
       => $"{message} (Parameter '{parameterName}')";
-
-   /* ------------------------------------------------------------ */
-
-   public static Message CastFailed<TFrom, TTo>()
-      => Message
-        .Create($"Could not cast an instance of {typeof(TFrom).FullName} to {typeof(TTo).FullName}");
 
    /* ------------------------------------------------------------ */
 

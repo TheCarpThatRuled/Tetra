@@ -12,8 +12,8 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    public static RelativeDirectoryPath Create(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
-        .Reduce(Exceptions.ThrowArgumentException<RelativeDirectoryPath>(nameof(potentialPath)),
-                CreateInternal);
+        .Reduce(CreateInternal,
+                Exceptions.ThrowArgumentException<RelativeDirectoryPath>(nameof(potentialPath)));
 
    /* ------------------------------------------------------------ */
 
@@ -27,10 +27,11 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
 
    /* ------------------------------------------------------------ */
 
-   public static IResult<RelativeDirectoryPath> Parse(string potentialPath)
+   public static IResult<RelativeDirectoryPath, Message> Parse(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
-        .Map(CreateInternal);
+        .Map(CreateInternal,
+             Function.PassThrough);
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -173,12 +174,12 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static IResult<ISequence<DirectoryComponent>> ParseComponents(string potentialPath,
-                                                                           string pathType)
+   protected static IResult<ISequence<DirectoryComponent>, Message> ParseComponents(string potentialPath,
+                                                                                    string pathType)
    {
       if (string.IsNullOrEmpty(potentialPath))
       {
-         return Result<ISequence<DirectoryComponent>>
+         return Result<ISequence<DirectoryComponent>, Message>
            .Failure(Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(potentialPath,
                                                                                pathType)));
       }
@@ -194,14 +195,15 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
 
       if (directoryComponents.Any(x => x.IsNotAValidPathComponent()))
       {
-         return Result<ISequence<DirectoryComponent>>
+         return Result<ISequence<DirectoryComponent>, Message>
            .Failure(Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(potentialPath,
                                                                                             pathType)));
       }
 
-      return Result.Success(directoryComponents
-                           .Select(DirectoryComponent.Create)
-                           .Materialise());
+      return Result<ISequence<DirectoryComponent>, Message>
+        .Success(directoryComponents
+                .Select(DirectoryComponent.Create)
+                .Materialise());
    }
 
    /* ------------------------------------------------------------ */

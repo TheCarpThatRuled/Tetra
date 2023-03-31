@@ -1,9 +1,5 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
-using Result = Tetra.Result;
 
 namespace Check.ResultTests.OfInt;
 
@@ -14,120 +10,403 @@ namespace Check.ResultTests.OfInt;
 public class Success_Map
 {
    /* ------------------------------------------------------------ */
-   // IResult<TNew> Map<TNew>(Func<T, TNew> whenSuccess)
+   // IResult<TNew> Map<TNew>(Func<T, TNew> whenFailure);
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //int
+   //Success_of_int
    //WHEN
-   //Map_AND_whenSuccess_is_a_Func_of_int_to_int
+   //Map_AND_whenFailure_is_a_Func_of_int_to_int
    //THEN
-   //whenSuccess_was_invoked_with_the_content_AND_a_success_containing_the_return_value_of_whenSuccess_is_returned
+   //whenFailure_was_not_invoked_AND_a_success_is_returned
 
    [TestMethod]
    public void
-      GIVEN_int_WHEN_Reduce_AND_Map_AND_whenSuccess_is_a_Func_of_int_to_int_THEN_whenSuccess_was_invoked_with_the_content_AND_a_success_containing_the_return_value_of_whenSuccess_is_returned()
+      GIVEN_Success_of_int_WHEN_Map_AND_whenFailure_is_a_Func_of_int_to_int_THEN_whenFailure_was_not_invoked_AND_a_success_is_returned()
    {
-      static Property Property((int content, int whenSuccess) args)
+      static Property Property(int value)
       {
          //Arrange
-         var whenSuccess = FakeFunction<int, int>.Create(args.whenSuccess);
+         var whenFailure = FakeFunction<int, int>.Create(value);
 
-         var result = Result.Success(args.content);
+         var result = Result<int>.Success();
 
          //Act
-         var actual = result.Map(whenSuccess.Func);
+         var actual = result.Map(whenFailure.Func);
 
          //Assert
          return IsASuccess(AssertMessages.ReturnValue,
-                           args.whenSuccess,
-                           actual)
-           .And(WasInvokedOnce(nameof(whenSuccess),
-                               args.content,
-                               whenSuccess));
+                        actual)
+           .And(WasNotInvoked(nameof(whenFailure),
+                              whenFailure));
       }
 
-      Arb.Register<Libraries.TwoUniqueInt32s>();
-
-      Prop.ForAll<(int, int)>(Property)
+      Prop.ForAll<int>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //int
+   //Success_of_int
    //WHEN
-   //Map_AND_whenSuccess_is_a_Func_of_int_to_TestClass
+   //Map_AND_whenFailure_is_a_Func_of_int_to_TestClass
    //THEN
-   //whenSuccess_was_invoked_with_the_content_AND_a_success_containing_the_return_value_of_whenSuccess_is_returned
+   //whenFailure_was_not_invoked_AND_a_success_is_returned
 
    [TestMethod]
    public void
-      GIVEN_int_WHEN_Reduce_AND_Map_AND_whenSuccess_is_a_Func_of_int_to_TestClass_THEN_whenSuccess_was_invoked_with_the_content_AND_a_success_containing_the_return_value_of_whenSuccess_is_returned()
+      GIVEN_Success_of_int_WHEN_Map_AND_whenFailure_is_a_Func_of_int_to_TestClass_THEN_whenFailure_was_not_invoked_AND_a_success_is_returned()
    {
-      static Property Property(int       content,
-                               TestClass whenSuccess)
+      static Property Property(TestClass value)
       {
          //Arrange
-         var whenSuccessFunc = FakeFunction<int, TestClass>.Create(whenSuccess);
+         var whenFailure = FakeFunction<int, TestClass>.Create(value);
 
-         var result = Result.Success(content);
+         var result = Result<int>.Success();
 
          //Act
-         var actual = result.Map(whenSuccessFunc.Func);
+         var actual = result.Map(whenFailure.Func);
 
          //Assert
          return IsASuccess(AssertMessages.ReturnValue,
-                           whenSuccess,
-                           actual)
-           .And(WasInvokedOnce(nameof(whenSuccess),
-                               content,
-                               whenSuccessFunc));
+                        actual)
+           .And(WasNotInvoked(nameof(whenFailure),
+                              whenFailure));
       }
 
       Arb.Register<Libraries.TestClass>();
 
-      Prop.ForAll<int, TestClass>(Property)
+      Prop.ForAll<TestClass>(Property)
           .QuickCheckThrowOnFailure();
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //int
+   //Success_of_int
    //WHEN
-   //Map_AND_whenSuccess_is_a_Func_of_int_to_TestStruct
+   //Map_AND_whenFailure_is_a_Func_of_int_to_TestStruct
    //THEN
-   //whenSuccess_was_invoked_with_the_content_AND_a_success_containing_the_return_value_of_whenSuccess_is_returned
+   //whenFailure_was_not_invoked_AND_a_success_is_returned
 
    [TestMethod]
    public void
-      GIVEN_int_WHEN_Reduce_AND_Map_AND_whenSuccess_is_a_Func_of_int_to_TestStruct_THEN_whenSuccess_was_invoked_with_the_content_AND_a_success_containing_the_return_value_of_whenSuccess_is_returned()
+      GIVEN_Success_of_int_WHEN_Map_AND_whenFailure_is_a_Func_of_int_to_TestStruct_THEN_whenFailure_was_not_invoked_AND_a_success_is_returned()
    {
-      static Property Property(int        content,
-                               TestStruct whenSuccess)
+      static Property Property(TestStruct value)
       {
          //Arrange
-         var whenSuccessFunc = FakeFunction<int, TestStruct>.Create(whenSuccess);
+         var whenFailure = FakeFunction<int, TestStruct>.Create(value);
 
-         var result = Result.Success(content);
+         var result = Result<int>.Success();
 
          //Act
-         var actual = result.Map(whenSuccessFunc.Func);
+         var actual = result.Map(whenFailure.Func);
 
          //Assert
          return IsASuccess(AssertMessages.ReturnValue,
-                           whenSuccess,
-                           actual)
-           .And(WasInvokedOnce(nameof(whenSuccess),
-                               content,
-                               whenSuccessFunc));
+                        actual)
+           .And(WasNotInvoked(nameof(whenFailure),
+                              whenFailure));
       }
 
       Arb.Register<Libraries.TestStruct>();
 
-      Prop.ForAll<int, TestStruct>(Property)
+      Prop.ForAll<TestStruct>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Success_of_int
+   //WHEN
+   //Map_AND_whenFailure_is_a_Func_of_int_to_uint
+   //THEN
+   //whenFailure_was_not_invoked_AND_a_success_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Success_of_int_WHEN_Map_AND_whenFailure_is_a_Func_of_int_to_uint_THEN_whenFailure_was_not_invoked_AND_a_success_is_returned()
+   {
+      static Property Property(uint value)
+      {
+         //Arrange
+         var whenFailure = FakeFunction<int, uint>.Create(value);
+
+         var result = Result<int>.Success();
+
+         //Act
+         var actual = result.Map(whenFailure.Func);
+
+         //Assert
+         return IsASuccess(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasNotInvoked(nameof(whenFailure),
+                              whenFailure));
+      }
+
+      Prop.ForAll<uint>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+   // IResult<TNew> Map<TNew>(Func<T, Result<TNew>> whenFailure);
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Success_of_int_AND_whenFailure_returns_a_success
+   //WHEN
+   //Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_int
+   //THEN
+   //whenFailure_was_not_invoked_AND_a_success_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Success_of_int_AND_whenFailure_returns_a_success_WHEN_Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_int_THEN_whenFailure_was_not_invoked_AND_a_success_is_returned()
+   {
+      //Arrange
+      var whenFailure = FakeFunction<int, IResult<int>>.Create(Result<int>.Success());
+
+      var result = Result<int>.Success();
+
+      //Act
+      var actual = result.Map(whenFailure.Func);
+
+      //Assert
+      Assert.That
+            .IsASuccess(AssertMessages.ReturnValue,
+                     actual)
+            .WasNotInvoked(nameof(whenFailure),
+                           whenFailure);
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Success_of_int_AND_whenFailure_returns_a_success
+   //WHEN
+   //Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_TestClass
+   //THEN
+   //whenFailure_was_not_invoked_AND_a_success_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Success_of_int_AND_whenFailure_returns_a_success_WHEN_Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_TestClass_THEN_whenFailure_was_not_invoked_AND_a_success_is_returned()
+   {
+      //Arrange
+      var whenFailure = FakeFunction<int, IResult<TestClass>>.Create(Result<TestClass>.Success());
+
+      var result = Result<int>.Success();
+
+      //Act
+      var actual = result.Map(whenFailure.Func);
+
+      //Assert
+      Assert.That
+            .IsASuccess(AssertMessages.ReturnValue,
+                     actual)
+            .WasNotInvoked(nameof(whenFailure),
+                           whenFailure);
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Success_of_int_AND_whenFailure_returns_a_success
+   //WHEN
+   //Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_TestStruct
+   //THEN
+   //whenFailure_was_not_invoked_AND_a_success_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Success_of_int_AND_whenFailure_returns_a_success_WHEN_Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_TestStruct_THEN_whenFailure_was_not_invoked_AND_a_success_is_returned()
+   {
+      //Arrange
+      var whenFailure = FakeFunction<int, IResult<TestStruct>>.Create(Result<TestStruct>.Success());
+
+      var result = Result<int>.Success();
+
+      //Act
+      var actual = result.Map(whenFailure.Func);
+
+      //Assert
+      Assert.That
+            .IsASuccess(AssertMessages.ReturnValue,
+                     actual)
+            .WasNotInvoked(nameof(whenFailure),
+                           whenFailure);
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Success_of_int_AND_whenFailure_returns_a_success
+   //WHEN
+   //Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_uint
+   //THEN
+   //whenFailure_was_not_invoked_AND_a_success_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Success_of_int_AND_whenFailure_returns_a_success_WHEN_Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_uint_THEN_whenFailure_was_not_invoked_AND_a_success_is_returned()
+   {
+      //Arrange
+      var whenFailure = FakeFunction<int, IResult<uint>>.Create(Result<uint>.Success());
+
+      var result = Result<int>.Success();
+
+      //Act
+      var actual = result.Map(whenFailure.Func);
+
+      //Assert
+      Assert.That
+            .IsASuccess(AssertMessages.ReturnValue,
+                     actual)
+            .WasNotInvoked(nameof(whenFailure),
+                           whenFailure);
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Success_of_int_AND_whenFailure_returns_a_failure
+   //WHEN
+   //Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_int
+   //THEN
+   //whenFailure_was_not_invoked_AND_a_success_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Success_of_int_AND_whenFailure_returns_a_failure_WHEN_Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_int_THEN_whenFailure_was_not_invoked_AND_a_success_is_returned()
+   {
+      static Property Property(int value)
+      {
+         //Arrange
+         var whenFailure = FakeFunction<int, IResult<int>>.Create(Tetra.Result.Failure(value));
+
+         var result = Result<int>.Success();
+
+         //Act
+         var actual = result.Map(whenFailure.Func);
+
+         //Assert
+         return IsASuccess(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasNotInvoked(nameof(whenFailure),
+                              whenFailure));
+      }
+
+      Prop.ForAll<int>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Success_of_int_AND_whenFailure_returns_a_failure
+   //WHEN
+   //Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_TestClass
+   //THEN
+   //whenFailure_was_not_invoked_AND_a_success_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Success_of_int_AND_whenFailure_returns_a_failure_WHEN_Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_TestClass_THEN_whenFailure_was_not_invoked_AND_a_success_is_returned()
+   {
+      static Property Property(TestClass value)
+      {
+         //Arrange
+         var whenFailure = FakeFunction<int, IResult<TestClass>>.Create(Tetra.Result.Failure(value));
+
+         var result = Result<int>.Success();
+
+         //Act
+         var actual = result.Map(whenFailure.Func);
+
+         //Assert
+         return IsASuccess(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasNotInvoked(nameof(whenFailure),
+                              whenFailure));
+      }
+
+      Arb.Register<Libraries.TestClass>();
+
+      Prop.ForAll<TestClass>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Success_of_int_AND_whenFailure_returns_a_failure
+   //WHEN
+   //Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_TestStruct
+   //THEN
+   //whenFailure_was_not_invoked_AND_a_success_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Success_of_int_AND_whenFailure_returns_a_failure_WHEN_Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_TestStruct_THEN_whenFailure_was_not_invoked_AND_a_success_is_returned()
+   {
+      static Property Property(TestStruct value)
+      {
+         //Arrange
+         var whenFailure = FakeFunction<int, IResult<TestStruct>>.Create(Tetra.Result.Failure(value));
+
+         var result = Result<int>.Success();
+
+         //Act
+         var actual = result.Map(whenFailure.Func);
+
+         //Assert
+         return IsASuccess(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasNotInvoked(nameof(whenFailure),
+                              whenFailure));
+      }
+
+      Arb.Register<Libraries.TestStruct>();
+
+      Prop.ForAll<TestStruct>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+
+   //GIVEN
+   //Success_of_int_AND_whenFailure_returns_a_failure
+   //WHEN
+   //Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_uint
+   //THEN
+   //whenFailure_was_not_invoked_AND_a_success_is_returned
+
+   [TestMethod]
+   public void
+      GIVEN_Success_of_int_AND_whenFailure_returns_a_failure_WHEN_Map_AND_whenFailure_is_a_Func_of_int_to_Result_of_uint_THEN_whenFailure_was_not_invoked_AND_a_success_is_returned()
+   {
+      static Property Property(uint value)
+      {
+         //Arrange
+         var whenFailure = FakeFunction<int, IResult<uint>>.Create(Tetra.Result.Failure(value));
+
+         var result = Result<int>.Success();
+
+         //Act
+         var actual = result.Map(whenFailure.Func);
+
+         //Assert
+         return IsASuccess(AssertMessages.ReturnValue,
+                        actual)
+           .And(WasNotInvoked(nameof(whenFailure),
+                              whenFailure));
+      }
+
+      Prop.ForAll<uint>(Property)
           .QuickCheckThrowOnFailure();
    }
 

@@ -1,10 +1,4 @@
-﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra.Testing;
-using static Tetra.Testing.Properties;
-using Result = Tetra.Result;
-
-namespace Check.ResultTests.OfTestClass;
+﻿namespace Check.ResultTests.OfTestClass;
 
 [TestClass]
 [TestCategory(GlobalCategories.Unit)]
@@ -13,37 +7,30 @@ namespace Check.ResultTests.OfTestClass;
 public class Success_GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // int GetHashCode()
+   // int GetHashCode();
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //TestClass
+   //Success_of_TestClass
    //WHEN
    //GetHashCode
    //THEN
-   //the_hash_code_of_the_content_is_returned
+   //the_hash_code_of_Type_TestClass_is_returned
 
    [TestMethod]
-   public void GIVEN_TestClass_WHEN_GetHashCode_THEN_the_hash_code_of_the_content_is_returned()
+   public void GIVEN_Success_of_TestClass_WHEN_GetHashCode_THEN_the_hash_code_of_Type_TestClass_is_returned()
    {
-      static Property Property(TestClass value)
-      {
-         //Arrange
-         var result = Result.Success(value);
+      //Arrange
+      var result = Result<TestClass>.Success();
 
-         //Act
-         var actual = result.GetHashCode();
+      //Act
+      var actual = result.GetHashCode();
 
-         //Assert
-         return AreEqual(AssertMessages.ReturnValue,
-                         value.GetHashCode(),
-                         actual);
-      }
-
-      Arb.Register<Libraries.TestClass>();
-
-      Prop.ForAll<TestClass>(Property)
-          .QuickCheckThrowOnFailure();
+      //Assert
+      Assert.That
+            .AreEqual(AssertMessages.ReturnValue,
+                      typeof(TestClass).GetHashCode(),
+                      actual);
    }
 
    /* ------------------------------------------------------------ */

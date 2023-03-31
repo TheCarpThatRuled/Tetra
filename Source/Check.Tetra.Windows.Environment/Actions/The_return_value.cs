@@ -18,22 +18,22 @@ public static class The_return_value
 
    /* ------------------------------------------------------------ */
 
-   public static IAssert<ErrorAsserts<Asserts>, Asserts> Is_not_in_error()
-      => AtomicAssert<ErrorAsserts<Asserts>, Asserts>
+   public static IAssert<ResultAsserts<Message, Asserts>, Asserts> Is_not_in_error()
+      => AtomicAssert<ResultAsserts<Message, Asserts>, Asserts>
         .Create(environment => environment.The_returned_value_was_not_in_error(),
                 $"{nameof(The_return_value)}.{nameof(Is_not_in_error)}");
 
    /* ------------------------------------------------------------ */
 
-   public static IAssert<ErrorAsserts<Asserts>, Asserts> Is_in_error(Message expected)
-      => AtomicAssert<ErrorAsserts<Asserts>, Asserts>
+   public static IAssert<ResultAsserts<Message, Asserts>, Asserts> Is_in_error(Message expected)
+      => AtomicAssert<ResultAsserts<Message, Asserts>, Asserts>
         .Create(environment => environment.The_returned_value_was_in_error(expected),
                 $"{nameof(The_return_value)}.{nameof(Is_in_error)}: {expected}");
 
    /* ------------------------------------------------------------ */
 
-   public static IAssert<ErrorAsserts<Asserts>, Asserts> Is_in_error(Func<Message, bool> predicate)
-      => AtomicAssert<ErrorAsserts<Asserts>, Asserts>
+   public static IAssert<ResultAsserts<Message, Asserts>, Asserts> Is_in_error(Func<Message, bool> predicate)
+      => AtomicAssert<ResultAsserts<Message, Asserts>, Asserts>
         .Create(environment => environment.The_returned_value_was_in_error(predicate),
                 $"{nameof(The_return_value)}.{nameof(Is_in_error)}: {nameof(predicate)}");
 

@@ -1,10 +1,4 @@
-﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra.Testing;
-using static Tetra.Testing.Properties;
-using Result = Tetra.Result;
-
-namespace Check.ResultTests.OfTestStruct;
+﻿namespace Check.ResultTests.OfTestStruct;
 
 [TestClass]
 [TestCategory(GlobalCategories.Unit)]
@@ -13,37 +7,30 @@ namespace Check.ResultTests.OfTestStruct;
 public class Success_ToString
 {
    /* ------------------------------------------------------------ */
-   // string ToString()
+   // string ToString();
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //TestStruct
+   //Success_of_TestStruct
    //WHEN
    //ToString
    //THEN
-   //Success_brackets_the_content_to_string_is_returned
+   //Success_of_TestStruct_is_returned
 
    [TestMethod]
-   public void GIVEN_TestStruct_WHEN_ToString_THEN_Success_brackets_the_content_to_string_is_returned()
+   public void GIVEN_Success_of_TestStruct_WHEN_ToString_THEN_Success_of_TestStruct_is_returned()
    {
-      static Property Property(TestStruct content)
-      {
-         //Arrange
-         var result = Result.Success(content);
+      //Arrange
+      var result = Result<TestStruct>.Success();
 
-         //Act
-         var actual = result.ToString();
+      //Act
+      var actual = result.ToString();
 
-         //Assert
-         return AreEqual(AssertMessages.ReturnValue,
-                         $"Success ({content})",
-                         actual);
-      }
-
-      Arb.Register<Libraries.TestStruct>();
-
-      Prop.ForAll<TestStruct>(Property)
-          .QuickCheckThrowOnFailure();
+      //Assert
+      Assert.That
+            .AreEqual(AssertMessages.ReturnValue,
+                      "Success of TestStruct",
+                      actual);
    }
 
    /* ------------------------------------------------------------ */

@@ -14,7 +14,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Either<int, int>> Type()
+      public static Arbitrary<IEither<int, int>> Type()
          => Generators
            .LeftEither<int, int>(Generators.Int32())
            .ToArbitrary();
@@ -32,7 +32,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Either<int, int>> Type()
+      public static Arbitrary<IEither<int, int>> Type()
          => Generators
            .Either(Generators.Int32(),
                    Generators.Int32())
@@ -51,7 +51,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Either<int, int>> Type()
+      public static Arbitrary<IEither<int, int>> Type()
          => Generators
            .RightEither<int, int>(Generators.Int32())
            .ToArbitrary();
@@ -69,7 +69,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Either<int, int>, Either<int, int>, Either<int, int>)> Type()
+      public static Arbitrary<(IEither<int, int>, IEither<int, int>, IEither<int, int>)> Type()
          => Generators
            .Transitive(Generators.TwoUniqueEithers(Generators.Int32(),
                                                    Generators.Int32()))

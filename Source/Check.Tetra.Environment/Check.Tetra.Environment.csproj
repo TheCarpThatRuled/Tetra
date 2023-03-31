@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Platforms>x64</Platforms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>Check</RootNamespace>
+    <IntermediateOutputPath>$(SolutionDir)Intermediate\$(Configuration)\$(MSBuildProjectName)</IntermediateOutputPath>
+    <OutputPath>$(SolutionDir)Check\$(Configuration)\$(MSBuildProjectName)</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Authors>Tom McFadden</Authors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tetra\Tetra.csproj" />
+    <ProjectReference Include="..\Tetra.Testing\Tetra.Testing.csproj" />
+  </ItemGroup>
+
+</Project>

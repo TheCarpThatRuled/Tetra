@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.AbsoluteFilePathTests;
@@ -13,7 +10,7 @@ namespace Check.AbsoluteFilePathTests;
 public class Equals
 {
    /* ------------------------------------------------------------ */
-   // public bool Equals(object? obj)
+   // bool Equals(object? obj);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -55,6 +52,7 @@ public class Equals
       // Methods
       /* ------------------------------------------------------------ */
 
+      // ReSharper disable once UnusedMember.Local
       public static Arbitrary<object?> Obj()
          => Gen
            .OneOf(Gen.Constant(default(object?)),
@@ -133,7 +131,7 @@ public class Equals
    }
 
    /* ------------------------------------------------------------ */
-   // public bool Equals(AbsoluteFilePath? other)
+   // bool Equals(AbsoluteFilePath? other);
    /* ------------------------------------------------------------ */
 
    //GIVEN

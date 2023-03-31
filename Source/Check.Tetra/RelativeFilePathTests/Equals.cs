@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.RelativeFilePathTests;
@@ -27,11 +24,11 @@ public class Equals
    public void
       GIVEN_RelativeFilePath_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(RelativeFilePath RelativeFilePath,
+      static Property Property(RelativeFilePath relativeFilePath,
                                object?          obj)
       {
          //Act
-         var actual = RelativeFilePath.Equals(obj);
+         var actual = relativeFilePath.Equals(obj);
 
          //Assert
          return IsFalse(AssertMessages.ReturnValue,
@@ -55,6 +52,7 @@ public class Equals
       // Methods
       /* ------------------------------------------------------------ */
 
+      // ReSharper disable once UnusedMember.Local
       public static Arbitrary<object?> Obj()
          => Gen
            .OneOf(Gen.Constant(default(object?)),
@@ -205,7 +203,7 @@ public class Equals
    {
       Arb.Register<Libraries.RelativeFilePath>();
 
-      Prop.ForAll<RelativeFilePath, RelativeFilePath>(IEquatableIsSymmetric<RelativeFilePath>)
+      Prop.ForAll<RelativeFilePath, RelativeFilePath>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 

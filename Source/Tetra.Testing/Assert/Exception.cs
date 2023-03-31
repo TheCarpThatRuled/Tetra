@@ -13,20 +13,20 @@ partial class Assert_Extensions
                                                      string             expectedMessage,
                                                      IOption<Exception> actual)
       => actual
-        .Reduce(() => throw Failed.Assert("No exception was thrown"),
-                exception =>
-                {
-                   Assert.IsInstanceOfType(exception,
-                                           typeof(ArgumentException));
-                   Assert.IsNull(exception.InnerException,
-                                 "The exception contains an inner exception ");
-                   Assert.That
-                         .AreEqual($"The exception does contain the expected message.\nExpected: \"{expectedMessage}\"\nActual: \"{exception.Message}\"",
-                                   expectedMessage,
-                                   exception.Message);
+        .Reduce(exception =>
+         {
+            Assert.IsInstanceOfType(exception,
+                                    typeof(ArgumentException));
+            Assert.IsNull(exception.InnerException,
+                          "The exception contains an inner exception ");
+            Assert.That
+                  .AreEqual($"The exception does contain the expected message.\nExpected: \"{expectedMessage}\"\nActual: \"{exception.Message}\"",
+                            expectedMessage,
+                            exception.Message);
 
-                   return asserts;
-                });
+            return asserts;
+         },
+                () => throw Failed.Assert("No exception was thrown"));
 
    /* ------------------------------------------------------------ */
 }

@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.VolumeComponentTests;
@@ -13,14 +10,15 @@ public class Validate
 {
    /* ------------------------------------------------------------ */
 
+   // ReSharper disable once ClassNeverInstantiated.Local
    private sealed class TestVolumeComponent : VolumeComponent
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static IError TestValidate(char   potentialVolume,
-                                       string volumeType)
+      public static IResult<Message> TestValidate(char   potentialVolume,
+                                                  string volumeType)
          => Validate(potentialVolume,
                      volumeType);
 
@@ -43,10 +41,10 @@ public class Validate
    //WHEN
    //Validate
    //THEN
-   //a_none_is_returned
+   //a_success_is_returned
 
    [TestMethod]
-   public void GIVEN_an_ASCII_letter_WHEN_Validate_THEN_a_none_is_returned()
+   public void GIVEN_an_ASCII_letter_WHEN_Validate_THEN_a_success_is_returned()
    {
       static Property Property(char value)
       {
@@ -55,8 +53,8 @@ public class Validate
                                                        nameof(TestVolumeComponent));
 
          //Assert
-         return IsANone(AssertMessages.ReturnValue,
-                        actual);
+         return IsASuccess(AssertMessages.ReturnValue,
+                           actual);
       }
 
       Arb.Register<Libraries.AsciiLetters>();
@@ -72,10 +70,10 @@ public class Validate
    //WHEN
    //Validate
    //THEN
-   //a_some_is_returned
+   //a_failure_is_returned
 
    [TestMethod]
-   public void GIVEN_a_non_ASCII_letter_WHEN_Validate_THEN_a_some_is_returned()
+   public void GIVEN_a_non_ASCII_letter_WHEN_Validate_THEN_a_failure_is_returned()
    {
       static Property Property(char value)
       {
@@ -85,10 +83,10 @@ public class Validate
                                                        nameof(TestVolumeComponent));
 
          //Assert
-         return IsASome(AssertMessages.ReturnValue,
-                        Message.Create(Messages.IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
-                                                                                                 nameof(TestVolumeComponent))),
-                        actual);
+         return IsAFailure(AssertMessages.ReturnValue,
+                           Message.Create(Messages.IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
+                                                                                                    nameof(TestVolumeComponent))),
+                           actual);
       }
 
       Arb.Register<Libraries.NonAsciiLetters>();

@@ -1,11 +1,4 @@
-﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
-using static Tetra.Testing.Properties;
-using Result = Tetra.Result;
-
-namespace Check.ResultTests.OfInt;
+﻿namespace Check.ResultTests.OfInt;
 
 [TestClass]
 [TestCategory(GlobalCategories.Unit)]
@@ -14,35 +7,30 @@ namespace Check.ResultTests.OfInt;
 public class Success_ToString
 {
    /* ------------------------------------------------------------ */
-   // string ToString()
+   // string ToString();
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //int
+   //Success_of_int
    //WHEN
    //ToString
    //THEN
-   //Success_brackets_the_content_to_string_is_returned
+   //Success_of_Int32_is_returned
 
    [TestMethod]
-   public void GIVEN_int_WHEN_ToString_THEN_Success_brackets_the_content_to_string_is_returned()
+   public void GIVEN_Success_of_int_WHEN_ToString_THEN_Success_of_Int32_is_returned()
    {
-      static Property Property(int content)
-      {
-         //Arrange
-         var result = Result.Success(content);
+      //Arrange
+      var result = Result<int>.Success();
 
-         //Act
-         var actual = result.ToString();
+      //Act
+      var actual = result.ToString();
 
-         //Assert
-         return AreEqual(AssertMessages.ReturnValue,
-                         $"Success ({content})",
-                         actual);
-      }
-
-      Prop.ForAll<int>(Property)
-          .QuickCheckThrowOnFailure();
+      //Assert
+      Assert.That
+            .AreEqual(AssertMessages.ReturnValue,
+                      "Success of Int32",
+                      actual);
    }
 
    /* ------------------------------------------------------------ */

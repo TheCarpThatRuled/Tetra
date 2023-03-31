@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Check.Messages;
 using static Tetra.Testing.Properties;
 
@@ -13,7 +10,7 @@ namespace Check.AbsoluteFilePathTests;
 public class Parse
 {
    /* ------------------------------------------------------------ */
-   // public static AbsoluteFilePath Parse(string potentialPath)
+   // static AbsoluteFilePath Parse(string potentialPath);
    /* ------------------------------------------------------------ */
 
    //GIVEN

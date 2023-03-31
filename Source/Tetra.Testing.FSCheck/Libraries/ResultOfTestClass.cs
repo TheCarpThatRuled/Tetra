@@ -8,24 +8,6 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class FailureResultOfTestClass
-   {
-      /* ------------------------------------------------------------ */
-      // Functions
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<IResult<Testing.TestClass>> Type()
-         => Generators
-           .FailureResult<Testing.TestClass>()
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
    public sealed class ResultOfTestClass
    {
       /* ------------------------------------------------------------ */
@@ -44,7 +26,7 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class SuccessResultOfTestClass
+   public sealed class FailureResultOfTestClass
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -52,7 +34,7 @@ public static partial class Libraries
 
       public static Arbitrary<IResult<Testing.TestClass>> Type()
          => Generators
-           .SuccessResult(Generators.TestClass())
+           .FailureResult(Generators.TestClass())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

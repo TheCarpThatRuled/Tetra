@@ -1,8 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
-
-namespace Check.ConditionTests;
+﻿namespace Check.ConditionTests;
 
 [TestClass]
 [TestCategory(GlobalCategories.Unit)]

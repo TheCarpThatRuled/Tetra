@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.AbsoluteDirectoryPathTests;
@@ -13,7 +10,7 @@ namespace Check.AbsoluteDirectoryPathTests;
 public class GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // public int GetHashCode()
+   // int GetHashCode();
    /* ------------------------------------------------------------ */
 
    //GIVEN

@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Check.Messages;
 using static Tetra.Testing.Properties;
 
@@ -14,13 +11,14 @@ public class ParseComponents
 {
    /* ------------------------------------------------------------ */
 
+   // ReSharper disable once ClassNeverInstantiated.Local
    private sealed class TestPath : AbsoluteFilePath
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static IResult<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file)> TestParseComponents(string potentialPath,
+      public static IResult<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message> TestParseComponents(string potentialPath,
          string                                                                                                                                          pathType)
          => ParseComponents(potentialPath,
                             pathType);
@@ -38,8 +36,8 @@ public class ParseComponents
    }
 
    /* ------------------------------------------------------------ */
-   // protected Result(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file) ParseComponents(string potentialPath,
-   //                                                                                                                         string pathType)
+   // IResult<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message> ParseComponents(string potentialPath,
+   //                                                                                                               string pathType)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -82,11 +80,11 @@ public class ParseComponents
    //WHEN
    //ParseComponents
    //THEN
-   //a_failure_isReturned
+   //a_failure_is_returned
 
    [TestMethod]
    public void
-      GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_ParseComponents_THEN_a_success_containing_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
+      GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_ParseComponents_THEN_a_failure_is_returned()
    {
       static Property Property(TestAbsoluteFilePath testPath)
       {

@@ -1,11 +1,4 @@
-﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
-using static Tetra.Testing.Properties;
-using Result = Tetra.Result;
-
-namespace Check.ResultTests.OfTestClass;
+﻿namespace Check.ResultTests.OfTestClass;
 
 [TestClass]
 [TestCategory(GlobalCategories.Unit)]
@@ -14,7 +7,7 @@ namespace Check.ResultTests.OfTestClass;
 public class SuccessFactory
 {
    /* ------------------------------------------------------------ */
-   // Result<T> Success(T content)
+   // public static Result<T> Success()
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -22,58 +15,18 @@ public class SuccessFactory
    //WHEN
    //Success
    //THEN
-   //a_success_containing_content_is_returned
+   //a_success_is_returned
 
    [TestMethod]
-   public void GIVEN_Result_of_TestClass_WHEN_Success_THEN_a_success_containing_content_is_returned()
+   public void GIVEN_Result_of_TestClass_WHEN_Success_THEN_a_success_is_returned()
    {
-      static Property Property(TestClass content)
-      {
-         //Act
-         var actual = Result<TestClass>.Success(content);
+      //Act
+      var actual = Result<TestClass>.Success();
 
-         //Assert
-         return IsASuccess(AssertMessages.ReturnValue,
-                           content,
-                           actual);
-      }
-
-      Arb.Register<Libraries.TestClass>();
-
-      Prop.ForAll<TestClass>(Property)
-          .QuickCheckThrowOnFailure();
+      //Assert
+      Assert.That
+            .IsASuccess(AssertMessages.ReturnValue,
+                     actual);
    }
-
-   /* ------------------------------------------------------------ */
-   // Result<T> Success<T>(T content)
-   /* ------------------------------------------------------------ */
-
-   //GIVEN
-   //Result
-   //WHEN
-   //TestClass
-   //THEN
-   //a_success_containing_content_is_returned
-
-   [TestMethod]
-   public void GIVEN_Result_WHEN_TestClass_THEN_a_success_containing_content_is_returned()
-   {
-      static Property Property(TestClass content)
-      {
-         //Act
-         var actual = Result.Success(content);
-
-         //Assert
-         return IsASuccess(AssertMessages.ReturnValue,
-                           content,
-                           actual);
-      }
-
-      Arb.Register<Libraries.TestClass>();
-
-      Prop.ForAll<TestClass>(Property)
-          .QuickCheckThrowOnFailure();
-   }
-
    /* ------------------------------------------------------------ */
 }

@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.OptionTests.OfTestClass;
@@ -44,6 +41,31 @@ public class Some_GetHashCode
 
       Prop.ForAll<TestClass>(Property)
           .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Some_of_null
+   //WHEN
+   //GetHashCode
+   //THEN
+   //zero_is_returned
+
+   [TestMethod]
+   public void GIVEN_Some_of_null_WHEN_GetHashCode_THEN_zero_is_returned()
+   {
+      //Arrange
+      var option = Option.Some(default(TestClass));
+
+      //Act
+      var actual = option.GetHashCode();
+
+      //Assert
+      Assert.That
+            .AreEqual(AssertMessages.ReturnValue,
+                      0,
+                      actual);
    }
 
    /* ------------------------------------------------------------ */

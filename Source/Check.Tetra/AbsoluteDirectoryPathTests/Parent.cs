@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.AbsoluteDirectoryPathTests;
@@ -12,7 +9,7 @@ namespace Check.AbsoluteDirectoryPathTests;
 public class Parent
 {
    /* ------------------------------------------------------------ */
-   // public Option<AbsoluteDirectoryPath> Parent()
+   // Option<AbsoluteDirectoryPath> Parent();
    /* ------------------------------------------------------------ */
 
    //GIVEN

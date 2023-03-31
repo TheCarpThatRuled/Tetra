@@ -12,8 +12,8 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
    public static AbsoluteFilePath Create(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
-        .Reduce(Exceptions.ThrowArgumentException<AbsoluteFilePath>(nameof(potentialPath)),
-                Create);
+        .Reduce(Create,
+                Exceptions.ThrowArgumentException<AbsoluteFilePath>(nameof(potentialPath)));
 
    /* ------------------------------------------------------------ */
 
@@ -26,10 +26,11 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
 
    /* ------------------------------------------------------------ */
 
-   public static IResult<AbsoluteFilePath> Parse(string potentialPath)
+   public static IResult<AbsoluteFilePath, Message> Parse(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
-        .Map(Create);
+        .Map(Create,
+             Function.PassThrough);
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -118,12 +119,12 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static IResult<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file)> ParseComponents(string potentialPath,
+   protected static IResult<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message> ParseComponents(string potentialPath,
       string                                                                                                                                         pathType)
    {
       if (string.IsNullOrEmpty(potentialPath))
       {
-         return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file)>
+         return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message>
            .Failure(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(potentialPath,
                                                                                 pathType)));
       }
@@ -137,7 +138,7 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
 
       if (potentialVolume.IsNotAValidVolumeLabel())
       {
-         return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file)>
+         return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message>
            .Failure(Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(potentialPath,
                                                                                             pathType)));
       }
@@ -149,19 +150,19 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
 
       if (potentialComponents.Any(x => x.IsNotAValidPathComponent()))
       {
-         return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file)>
+         return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message>
            .Failure(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(potentialPath,
                                                                                              pathType)));
       }
 
       if (string.IsNullOrEmpty(components[^1]))
       {
-         return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file)>
+         return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message>
            .Failure(Message.Create(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(potentialPath,
                                                                                                        pathType)));
       }
 
-      return Result
+      return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message>
         .Success((VolumeComponent.Create(potentialVolume[0]),
                   potentialComponents.SkipLast(1)
                                      .Select(DirectoryComponent.Create)

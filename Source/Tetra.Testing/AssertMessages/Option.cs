@@ -26,7 +26,7 @@ public static partial class AssertMessages
 
    /* ------------------------------------------------------------ */
 
-   public static string TheOptionIsIUnrecognisedWhenWeExpectedItToBeASome<T>(string description)
+   public static string TheOptionIsUnrecognisedWhenWeExpectedItToBeASome<T>(string description)
       => $"{description}: {TheIOption<T>()} {Is} {Unrecognised} {WhenWeExpectedItToBe} {ASome}";
 
    /* ------------------------------------------------------------ */
@@ -35,8 +35,6 @@ public static partial class AssertMessages
 
    internal static string ToTestOutput<T>(this Option<T>.SomeOption some)
       => $@"Some({some.Content})";
-
-   /* ------------------------------------------------------------ */
 
    /* ------------------------------------------------------------ */
    // Private Constants

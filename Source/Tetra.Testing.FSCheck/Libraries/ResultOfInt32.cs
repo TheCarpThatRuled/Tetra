@@ -8,24 +8,6 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class FailureResultOfInt32
-   {
-      /* ------------------------------------------------------------ */
-      // Functions
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<IResult<int>> Type()
-         => Generators
-           .FailureResult<int>()
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
    public sealed class ResultOfInt32
    {
       /* ------------------------------------------------------------ */
@@ -44,7 +26,7 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class SuccessResultOfInt32
+   public sealed class FailureResultOfInt32
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -52,7 +34,7 @@ public static partial class Libraries
 
       public static Arbitrary<IResult<int>> Type()
          => Generators
-           .SuccessResult(Generators.Int32())
+           .FailureResult(Generators.Int32())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

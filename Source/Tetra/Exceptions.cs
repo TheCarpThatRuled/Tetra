@@ -17,11 +17,10 @@ public static class Exceptions
    // Internal Functions
    /* ------------------------------------------------------------ */
 
-   internal static Func<Failure, T> ThrowArgumentException<T>(string parameter)
+   internal static Func<Message, T> ThrowArgumentException<T>(string parameter)
    {
-      T Throw(Failure failure)
-         => throw new ArgumentException(failure.Content()
-                                               .Content(),
+      T Throw(Message message)
+         => throw new ArgumentException(message.Content(),
                                         parameter);
 
       return Throw;

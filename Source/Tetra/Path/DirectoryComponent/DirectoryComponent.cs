@@ -18,10 +18,10 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
 
    /* ------------------------------------------------------------ */
 
-   public static IResult<DirectoryComponent> Parse(string potentialComponent)
+   public static IResult<DirectoryComponent, Message> Parse(string potentialComponent)
       => Validate(potentialComponent,
                   ComponentType)
-        .MapToResult(new DirectoryComponent(potentialComponent));
+        .MapSuccessToType(new DirectoryComponent(potentialComponent));
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -83,12 +83,12 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static IError Validate(string potentialComponent,
+   protected static IResult<Message> Validate(string potentialComponent,
                                    string componentType)
       => potentialComponent.IsNotAValidPathComponent()
-            ? Error.Some(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(potentialComponent,
+            ? Result.Failure(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(potentialComponent,
                                                                                               componentType)))
-            : Error.None();
+            : Result<Message>.Success();
 
    /* ------------------------------------------------------------ */
    // Private Constants

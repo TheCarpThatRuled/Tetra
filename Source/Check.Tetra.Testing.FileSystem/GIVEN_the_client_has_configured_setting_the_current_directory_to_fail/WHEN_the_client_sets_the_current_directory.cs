@@ -16,7 +16,8 @@ public class WHEN_the_client_sets_the_current_directory
    [TestMethod]
    public void THEN_the_current_directory_is_the_directory_passed_in_on_construction_AND_a_failure_containing_the_message_set_up_is_returned()
    {
-      static Property Property((AbsoluteDirectoryPath initialPath, AbsoluteDirectoryPath updatedPath) args, Message message)
+      static Property Property((AbsoluteDirectoryPath initialPath, AbsoluteDirectoryPath updatedPath) args,
+                               Message                                                                message)
       {
          //Arrange
          var fileSystem = FileSystem.From(args.initialPath);
@@ -26,9 +27,9 @@ public class WHEN_the_client_sets_the_current_directory
          var actual = fileSystem.SetCurrentDirectory(args.updatedPath);
 
          //Assert
-         return IsASome(AssertMessages.ReturnValue,
-                        message,
-                        actual)
+         return IsAFailure(AssertMessages.ReturnValue,
+                           message,
+                           actual)
            .And(AreEqual("Current directory",
                          args.initialPath,
                          fileSystem.CurrentDirectory()));

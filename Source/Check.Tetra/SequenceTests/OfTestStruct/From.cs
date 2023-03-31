@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Check.SequenceTests.LocalAsserts;
 
 namespace Check.SequenceTests.OfTestStruct;

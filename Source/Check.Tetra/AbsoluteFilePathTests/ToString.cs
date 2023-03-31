@@ -1,6 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.AbsoluteFilePathTests;
@@ -12,7 +10,7 @@ namespace Check.AbsoluteFilePathTests;
 public class ToString
 {
    /* ------------------------------------------------------------ */
-   // public string ToString()
+   // string ToString();
    /* ------------------------------------------------------------ */
 
    //GIVEN

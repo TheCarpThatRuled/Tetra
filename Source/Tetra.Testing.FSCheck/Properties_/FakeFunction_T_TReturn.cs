@@ -22,22 +22,11 @@ partial class Properties
 
    public static Property WasInvokedOnce<TReturn>(string                         description,
                                                   Message                        expected,
-                                                  FakeFunction<Failure, TReturn> function)
+                                                  FakeFunction<Message, TReturn> function)
       => WasInvokedOnce(description,
                         actual => Equals(expected,
-                                         actual.Content()),
+                                         actual),
                         expected.ToString(),
-                        function);
-
-   /* ------------------------------------------------------------ */
-
-   public static Property WasInvokedOnce<T, TReturn>(string                         description,
-                                                     T                              expected,
-                                                     FakeFunction<Left<T>, TReturn> function)
-      => WasInvokedOnce(description,
-                        actual => Equals(expected,
-                                         actual.Content()),
-                        expected?.ToString() ?? string.Empty,
                         function);
 
    /* ------------------------------------------------------------ */
@@ -66,17 +55,6 @@ partial class Properties
                                && Equals(expectedMessage,
                                          actual.Message()),
                         $"(Path: {expectedPath}, Message: {expectedMessage})",
-                        function);
-
-   /* ------------------------------------------------------------ */
-
-   public static Property WasInvokedOnce<T, TReturn>(string                          description,
-                                                     T                               expected,
-                                                     FakeFunction<Right<T>, TReturn> function)
-      => WasInvokedOnce(description,
-                        actual => Equals(expected,
-                                         actual.Content()),
-                        expected?.ToString() ?? string.Empty,
                         function);
 
    /* ------------------------------------------------------------ */

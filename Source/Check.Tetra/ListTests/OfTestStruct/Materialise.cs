@@ -1,14 +1,11 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.ListTests.OfTestStruct;
 
 [TestClass]
 [TestCategory(GlobalCategories.Unit)]
-[TestCategory(LocalCategories.IEnumerable)]
+[TestCategory(LocalCategories.List)]
 public class Materialise
 {
    /* ------------------------------------------------------------ */

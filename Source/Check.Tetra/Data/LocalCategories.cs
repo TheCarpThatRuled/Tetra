@@ -13,14 +13,11 @@ internal static class LocalCategories
    public const string Char                  = nameof(System.Char);
    public const string Condition             = nameof(Tetra.Condition);
    public const string DirectoryComponent    = nameof(Tetra.DirectoryComponent);
-   public const string Either                = nameof(Tetra.Either);
-   public const string Error                 = nameof(Tetra.Error);
-   public const string Failure               = nameof(Tetra.Failure);
+   public const string Either                = nameof(Either);
    public const string FileComponent         = nameof(Tetra.FileComponent);
    public const string Function              = nameof(Tetra.Function);
    public const string IEnumerable           = nameof(System.Collections.IEnumerable);
    public const string IReadOnlyList         = nameof(IReadOnlyList);
-   public const string Left                  = nameof(Left);
    public const string List                  = nameof(List);
    public const string Message               = nameof(Tetra.Message);
    public const string Option                = nameof(Tetra.Option);
@@ -28,7 +25,6 @@ internal static class LocalCategories
    public const string RelativeDirectoryPath = nameof(Tetra.RelativeDirectoryPath);
    public const string RelativeFilePath      = nameof(Tetra.RelativeFilePath);
    public const string Result                = nameof(Tetra.Result);
-   public const string Right                 = nameof(Right);
    public const string Sequence              = nameof(Tetra.Sequence);
    public const string String                = nameof(System.String);
    public const string Success               = nameof(Success);

@@ -14,7 +14,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Either<int, Testing.TestStruct>> Type()
+      public static Arbitrary<IEither<int, Testing.TestStruct>> Type()
          => Generators
            .LeftEither<int, Testing.TestStruct>(Generators.Int32())
            .ToArbitrary();
@@ -32,7 +32,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Either<int, Testing.TestStruct>> Type()
+      public static Arbitrary<IEither<int, Testing.TestStruct>> Type()
          => Generators
            .Either(Generators.Int32(),
                    Generators.TestStruct())
@@ -51,7 +51,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Either<int, Testing.TestStruct>> Type()
+      public static Arbitrary<IEither<int, Testing.TestStruct>> Type()
          => Generators
            .RightEither<int, Testing.TestStruct>(Generators.TestStruct())
            .ToArbitrary();
@@ -69,7 +69,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Either<int, Testing.TestStruct>, Either<int, Testing.TestStruct>, Either<int, Testing.TestStruct>)> Type()
+      public static Arbitrary<(IEither<int, Testing.TestStruct>, IEither<int, Testing.TestStruct>, IEither<int, Testing.TestStruct>)> Type()
          => Generators
            .Transitive(Generators.TwoUniqueEithers(Generators.Int32(),
                                                    Generators.TestStruct()))

@@ -22,9 +22,9 @@ partial class Option<T>
             {
                SomeOption some => Equals(Content,
                                          some.Content),
-               T content       => Equals(Content,
-                                         content),
-               _               => false,
+               T content => Equals(Content,
+                                   content),
+               _ => false,
             };
 
       /* ------------------------------------------------------------ */
@@ -40,14 +40,7 @@ partial class Option<T>
          => $"Some ({Content})";
 
       /* ------------------------------------------------------------ */
-      // IOption Methods
-      /* ------------------------------------------------------------ */
-
-      public IOption<TNew> Cast<TNew>()
-         => Content is TNew content
-               ? new Option<TNew>.SomeOption(content)
-               : new Option<TNew>.NoneOption();
-
+      // IOption<T> Methods
       /* ------------------------------------------------------------ */
 
       public bool IsANone()
@@ -60,37 +53,44 @@ partial class Option<T>
 
       /* ------------------------------------------------------------ */
 
-      public IOption<TNew> Map<TNew>(Func<T, TNew> whenSome)
-         => new Option<TNew>
-            .SomeOption(whenSome(Content));
+
+      public IOption<T> Do(Action<T> whenSome,
+                           Action    whenNone)
+      {
+         whenSome(Content);
+
+         return this;
+      }
 
       /* ------------------------------------------------------------ */
+
+
+      public IOption<TNew> Map<TNew>(Func<T, TNew> whenSome)
+         => new Option<TNew>.SomeOption(whenSome(Content));
+
+      /* ------------------------------------------------------------ */
+
 
       public IOption<TNew> Map<TNew>(Func<T, IOption<TNew>> whenSome)
          => whenSome(Content);
 
       /* ------------------------------------------------------------ */
 
-      public IResult<T> MapToResult(Message _)
-         => Result<T>
-           .Success(Content);
+
+      public IResult<T, TNew> MapToResult<TNew>(TNew whenNone)
+         => new Result<T, TNew>.SuccessResult(Content);
 
       /* ------------------------------------------------------------ */
 
-      public IResult<T> MapToResult(Func<Message> _)
-         => Result<T>
-           .Success(Content);
+
+      public IResult<T, TNew> MapToResult<TNew>(Func<TNew> whenNone)
+         => new Result<T, TNew>.SuccessResult(Content);
 
       /* ------------------------------------------------------------ */
 
-      public TNew Reduce<TNew>(TNew          _,
-                               Func<T, TNew> whenSome)
-         => whenSome(Content);
 
-      /* ------------------------------------------------------------ */
-
-      public TNew Reduce<TNew>(Func<TNew>    _,
-                               Func<T, TNew> whenSome)
+      public TNew Reduce<TNew>(Func<T, TNew> whenSome,
+                               Func<TNew>    whenNone)
          => whenSome(Content);
 
       /* ------------------------------------------------------------ */

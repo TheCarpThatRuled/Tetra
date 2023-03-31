@@ -6,35 +6,76 @@ public static partial class AssertMessages
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static string TheResultIsAFailureButDoesNotContainTheExpectedMessage<T>(string description)
-      => $"{description}: {TheResult<T>()} {Is} {AFailure} {ButDoesNotContain} {TheExpectedMessage}.";
+   public static string TheResultIsAFailureButDoesNotContainTheExpectedContent<TSuccess>(string description)
+      => $"{description}: {TheResult<TSuccess>()} {Is} {AFailure} {ButDoesNotContain} {TheExpectedContent}";
 
    /* ------------------------------------------------------------ */
 
-   public static string TheResultIsAFailureButDoesNotContainTheExpectedMessage<T>(string  description,
-                                                                                  Message message)
-      => $"{description}: {TheResult<T>()} {Is} {AFailure} {ButDoesNotContain} {TheExpectedMessage}\n Actual message:{message.Content()}";
+   public static string TheResultIsAFailureButDoesNotContainTheExpectedContent<TSuccess, TFailure>(string description)
+      => $"{description}: {TheResult<TSuccess, TFailure>()} {Is} {AFailure} {ButDoesNotContain} {TheExpectedContent}.";
 
    /* ------------------------------------------------------------ */
 
-   public static string TheResultIsASuccessButDoesNotContainTheExpectedContent<T>(string description)
-      => $"{description}: {TheResult<T>()} {Is} {ASuccess} {ButDoesNotContain} {TheExpectedContent}.";
+   public static string TheResultIsAFailureWhenWeExpectedItToBeASuccess<TSuccess>(string description)
+      => $"{description}: {TheResult<TSuccess>()} {Is} {AFailure} {WhenWeExpectedItToBe} {ASuccess}";
 
    /* ------------------------------------------------------------ */
 
-   public static string TheResultIsAFailureWhenWeExpectedItToBeASuccess<T>(string description)
-      => $"{description}: {TheResult<T>()} {Is} {AFailure} {WhenWeExpectedItToBe} {ASuccess}.";
+   public static string TheResultIsAFailureWhenWeExpectedItToBeASuccess<TSuccess, TFailure>(string description)
+      => $"{description}: {TheResult<TSuccess, TFailure>()} {Is} {AFailure} {WhenWeExpectedItToBe} {ASuccess}.";
 
    /* ------------------------------------------------------------ */
 
-   public static string TheResultIsAFailureWhenWeExpectedItToBeASuccess<T>(string  description,
-                                                                           Message message)
-      => $"{description}: {TheResult<T>()} {Is} {AFailure} {WhenWeExpectedItToBe} {ASuccess}\n Actual message:{message.Content()}";
+   public static string TheResultIsASuccessButDoesNotContainTheExpectedContent<TSuccess, TFailure>(string description)
+      => $"{description}: {TheResult<TSuccess, TFailure>()} {Is} {ASuccess} {ButDoesNotContain} {TheExpectedContent}.";
 
    /* ------------------------------------------------------------ */
 
-   public static string TheResultIsASuccessWhenWeExpectedItToBeAFailure<T>(string description)
-      => $"{description}: {TheResult<T>()} {Is} {ASuccess} {WhenWeExpectedItToBe} {AFailure}.";
+   public static string TheResultIsASuccessWhenWeExpectedItToBeAFailure<TSuccess>(string description)
+      => $"{description}: {TheResult<TSuccess>()} {Is} {ASuccess} {WhenWeExpectedItToBe} {AFailure}";
+
+   /* ------------------------------------------------------------ */
+
+   public static string TheResultIsASuccessWhenWeExpectedItToBeAFailure<TSuccess, TFailure>(string description)
+      => $"{description}: {TheResult<TSuccess, TFailure>()} {Is} {ASuccess} {WhenWeExpectedItToBe} {AFailure}.";
+
+   /* ------------------------------------------------------------ */
+
+   public static string TheResultIsUnrecognisedWhenWeExpectedItToBeAFailure<TSuccess>(string description)
+      => $"{description}: {TheResult<TSuccess>()}{Is} {Unrecognised} {WhenWeExpectedItToBe} {AFailure}";
+
+   /* ------------------------------------------------------------ */
+
+   public static string TheResultIsUnrecognisedWhenWeExpectedItToBeAFailure<TSuccess, TFailure>(string description)
+      => $"{description}: {TheResult<TSuccess, TFailure>()} {Is} {Unrecognised} {WhenWeExpectedItToBe} {AFailure}.";
+
+   /* ------------------------------------------------------------ */
+
+   public static string TheResultIsUnrecognisedWhenWeExpectedItToBeASuccess<TSuccess>(string description)
+      => $"{description}: {TheResult<TSuccess>()} {Is} {Unrecognised} {WhenWeExpectedItToBe} {ASuccess}";
+
+   /* ------------------------------------------------------------ */
+
+   public static string TheResultIsUnrecognisedWhenWeExpectedItToBeASuccess<TSuccess, TFailure>(string description)
+      => $"{description}: {TheResult<TSuccess, TFailure>()} {Is} {Unrecognised} {WhenWeExpectedItToBe} {ASuccess}.";
+
+   /* ------------------------------------------------------------ */
+   // Internal Extensions
+   /* ------------------------------------------------------------ */
+
+   internal static string ToTestOutput<TSuccess>(this Result<TSuccess>.FailureResult failure)
+      => $@"Failure(""{failure.Content}"")";
+
+   /* ------------------------------------------------------------ */
+
+
+   internal static string ToTestOutput<TSuccess, TFailure>(this Result<TSuccess,TFailure>.FailureResult failure)
+      => $@"Failure(""{failure.Content}"")";
+
+   /* ------------------------------------------------------------ */
+
+   internal static string ToTestOutput<TSuccess, TFailure>(this Result<TSuccess, TFailure>.SuccessResult success)
+      => $@"Success(""{success.Content}"")";
 
    /* ------------------------------------------------------------ */
    // Private Constants
@@ -47,8 +88,13 @@ public static partial class AssertMessages
    // Private Functions
    /* ------------------------------------------------------------ */
 
-   private static string TheResult<T>()
-      => $@"{The} Result<{typeof(T).Name}> ";
+   private static string TheResult<TSuccess>()
+      => $"The Result<{typeof(TSuccess).Name}>";
+
+   /* ------------------------------------------------------------ */
+
+   private static string TheResult<TSuccess, TFailure>()
+      => $@"{The} Result<{typeof(TSuccess).Name}, {typeof(TFailure).Name}> ";
 
    /* ------------------------------------------------------------ */
 }

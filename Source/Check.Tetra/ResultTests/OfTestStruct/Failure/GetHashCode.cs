@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.ResultTests.OfTestStruct;
@@ -13,7 +10,7 @@ namespace Check.ResultTests.OfTestStruct;
 public class Failure_GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // int GetHashCode()
+   // int GetHashCode();
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -26,23 +23,23 @@ public class Failure_GetHashCode
    [TestMethod]
    public void GIVEN_Failure_of_TestStruct_WHEN_GetHashCode_THEN_the_hash_code_of_the_content_is_returned()
    {
-      static Property Property(Message content)
+      static Property Property(TestStruct value)
       {
          //Arrange
-         var result = Result<TestStruct>.Failure(content);
+         var result = Tetra.Result.Failure(value);
 
          //Act
          var actual = result.GetHashCode();
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
-                         content.GetHashCode(),
+                         value.GetHashCode(),
                          actual);
       }
 
-      Arb.Register<Libraries.Message>();
+      Arb.Register<Libraries.TestStruct>();
 
-      Prop.ForAll<Message>(Property)
+      Prop.ForAll<TestStruct>(Property)
           .QuickCheckThrowOnFailure();
    }
 

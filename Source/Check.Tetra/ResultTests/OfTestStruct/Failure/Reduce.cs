@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.ResultTests.OfTestStruct;
@@ -13,130 +10,49 @@ namespace Check.ResultTests.OfTestStruct;
 public class Failure_Reduce
 {
    /* ------------------------------------------------------------ */
-   // T Reduce(Func<Failure, T> whenFailure)
+   // TNew Reduce<TNew>(Func<TNew>    whenSuccess,
+   //                   Func<T, TNew> whenFailure);
    /* ------------------------------------------------------------ */
 
    //GIVEN
    //Failure_of_TestStruct
    //WHEN
-   //Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestStruct
+   //Reduce_AND_whenSuccess_is_a_Func_of_int_AND_whenFailure_is_a_Func_of_TestStruct_to_int
    //THEN
-   //whenFailure_was_invoked_once_with_the_content_AND_the_return_value_of_whenFailure_is_returned
+   //whenSuccess_was_not_invoked_AND_whenFailure_was_invoked_once_with_the_content_AND_the_return_value_of_whenFailure_is_returned
 
    [TestMethod]
    public void
-      GIVEN_Failure_of_TestStruct_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestStruct_THEN_whenFailure_was_invoked_once_with_the_content_AND_the_return_value_of_whenFailure_is_returned()
+      GIVEN_Failure_of_TestStruct_WHEN_Reduce_AND_whenSuccess_is_a_Func_of_int_AND_whenFailure_is_a_Func_of_TestStruct_to_int_THEN_whenSuccess_was_not_invoked_AND_whenFailure_was_invoked_once_with_the_content_AND_the_return_value_of_whenFailure_is_returned()
    {
-      static Property Property(Message    content,
-                               TestStruct whenFailure)
+      static Property Property(TestStruct                   value,
+                               (int whenSuccess, int whenFailure) args)
       {
          //Arrange
-         var whenFailureFunc = FakeFunction<Failure, TestStruct>.Create(whenFailure);
+         var whenSuccess = FakeFunction<int>.Create(args.whenSuccess);
+         var whenFailure = FakeFunction<TestStruct, int>.Create(args.whenFailure);
 
-         var result = Result<TestStruct>.Failure(content);
-
-         //Act
-         var actual = result.Reduce(whenFailureFunc.Func);
-
-         //Assert
-         return AreEqual(AssertMessages.ReturnValue,
-                         whenFailure,
-                         actual)
-           .And(WasInvokedOnce(nameof(whenFailure),
-                               content,
-                               whenFailureFunc));
-      }
-
-      Arb.Register<Libraries.Message>();
-      Arb.Register<Libraries.TestStruct>();
-
-      Prop.ForAll<Message, TestStruct>(Property)
-          .QuickCheckThrowOnFailure();
-   }
-
-   /* ------------------------------------------------------------ */
-   // Message Reduce(Func<T, Message> whenSuccess)
-   /* ------------------------------------------------------------ */
-
-   //GIVEN
-   //Failure_of_TestStruct
-   //WHEN
-   //Reduce_AND_whenSuccess_is_a_Func_of_int_to_Message
-   //THEN
-   //whenSuccess_was_not_invoked_AND_the_content_is_returned
-
-   [TestMethod]
-   public void
-      GIVEN_Failure_of_TestStruct_WHEN_Reduce_AND_whenSuccess_is_a_Func_of_int_to_Message_THEN_whenSuccess_was_not_invoked_AND_the_content_is_returned()
-   {
-      static Property Property((Message content, Message whenSuccess) args)
-      {
-         //Arrange
-         var whenSuccess = FakeFunction<TestStruct, Message>.Create(args.whenSuccess);
-
-         var result = Result<TestStruct>.Failure(args.content);
+         var result = Tetra.Result.Failure(value);
 
          //Act
-         var actual = result.Reduce(whenSuccess.Func);
-
-         //Assert
-         return AreEqual(AssertMessages.ReturnValue,
-                         args.content,
-                         actual)
-           .And(WasNotInvoked(nameof(whenSuccess),
-                              whenSuccess));
-      }
-
-      Arb.Register<Libraries.TwoUniqueMessages>();
-
-      Prop.ForAll<(Message, Message)>(Property)
-          .QuickCheckThrowOnFailure();
-   }
-
-   /* ------------------------------------------------------------ */
-   // TNew Reduce<TNew>(Func<Failure, TNew> whenFailure,
-   //                   Func<T, TNew> whenSuccess)
-   /* ------------------------------------------------------------ */
-
-   //GIVEN
-   //Failure_of_TestStruct
-   //WHEN
-   //Reduce_AND_whenFailure_is_a_Func_of_Failure_to_int_AND_whenSuccess_is_a_Func_of_TestStruct_to_int
-   //THEN
-   //whenFailure_was_invoked_once_with_the_content_AND_whenSuccess_was_not_invoked_AND_the_return_value_of_whenFailure_is_returned
-
-   [TestMethod]
-   public void
-      GIVEN_Failure_of_TestStruct_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_int_AND_whenSuccess_is_a_Func_of_TestStruct_to_int_THEN_whenFailure_was_invoked_once_with_the_content_AND_whenSuccess_was_not_invoked_AND_the_return_value_of_whenFailure_is_returned()
-   {
-      static Property Property(Message                            content,
-                               (int whenFailure, int whenSuccess) args)
-      {
-         //Arrange
-         var whenFailure = FakeFunction<Failure, int>.Create(args.whenFailure);
-         var whenSuccess = FakeFunction<TestStruct, int>.Create(args.whenSuccess);
-
-         var result = Result<TestStruct>.Failure(content);
-
-         //Act
-         var actual = result.Reduce(whenFailure.Func,
-                                    whenSuccess.Func);
+         var actual = result.Reduce(whenSuccess.Func,
+                                    whenFailure.Func);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenFailure,
                          actual)
-               .And(WasInvokedOnce(nameof(whenFailure),
-                                   content,
-                                   whenFailure))
                .And(WasNotInvoked(nameof(whenSuccess),
-                                  whenSuccess));
+                                  whenSuccess))
+               .And(WasInvokedOnce(nameof(whenFailure),
+                                   value,
+                                   whenFailure));
       }
 
-      Arb.Register<Libraries.Message>();
+      Arb.Register<Libraries.TestStruct>();
       Arb.Register<Libraries.TwoUniqueInt32s>();
 
-      Prop.ForAll<Message, (int, int)>(Property)
+      Prop.ForAll<TestStruct, (int, int)>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -145,42 +61,42 @@ public class Failure_Reduce
    //GIVEN
    //Failure_of_TestStruct
    //WHEN
-   //Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestClass_AND_whenSuccess_is_a_Func_of_TestStruct_to_TestClass
+   //Reduce_AND_whenSuccess_is_a_Func_of_TestClass_AND_whenFailure_is_a_Func_of_TestStruct_to_TestClass
    //THEN
-   //whenFailure_was_invoked_once_with_the_content_AND_whenSuccess_was_not_invoked_AND_the_return_value_of_whenFailure_is_returned
+   //whenSuccess_was_not_invoked_AND_whenFailure_was_invoked_once_with_the_content_AND_the_return_value_of_whenFailure_is_returned
 
    [TestMethod]
    public void
-      GIVEN_Failure_of_TestStruct_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestClass_AND_whenSuccess_is_a_Func_of_TestStruct_to_TestClass_THEN_whenFailure_was_invoked_once_with_the_content_AND_whenSuccess_was_not_invoked_AND_the_return_value_of_whenFailure_is_returned()
+      GIVEN_Failure_of_TestStruct_WHEN_Reduce_AND_whenSuccess_is_a_Func_of_TestClass_AND_whenFailure_is_a_Func_of_TestStruct_to_TestClass_THEN_whenSuccess_was_not_invoked_AND_whenFailure_was_invoked_once_with_the_content_AND_the_return_value_of_whenFailure_is_returned()
    {
-      static Property Property(Message                                        content,
-                               (TestClass whenFailure, TestClass whenSuccess) args)
+      static Property Property(TestStruct                               value,
+                               (TestClass whenSuccess, TestClass whenFailure) args)
       {
          //Arrange
-         var whenFailure = FakeFunction<Failure, TestClass>.Create(args.whenFailure);
-         var whenSuccess = FakeFunction<TestStruct, TestClass>.Create(args.whenSuccess);
+         var whenSuccess = FakeFunction<TestClass>.Create(args.whenSuccess);
+         var whenFailure = FakeFunction<TestStruct, TestClass>.Create(args.whenFailure);
 
-         var result = Result<TestStruct>.Failure(content);
+         var result = Tetra.Result.Failure(value);
 
          //Act
-         var actual = result.Reduce(whenFailure.Func,
-                                    whenSuccess.Func);
+         var actual = result.Reduce(whenSuccess.Func,
+                                    whenFailure.Func);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenFailure,
                          actual)
-               .And(WasInvokedOnce(nameof(whenFailure),
-                                   content,
-                                   whenFailure))
                .And(WasNotInvoked(nameof(whenSuccess),
-                                  whenSuccess));
+                                  whenSuccess))
+               .And(WasInvokedOnce(nameof(whenFailure),
+                                   value,
+                                   whenFailure));
       }
 
-      Arb.Register<Libraries.Message>();
+      Arb.Register<Libraries.TestStruct>();
       Arb.Register<Libraries.TwoUniqueTestClasses>();
 
-      Prop.ForAll<Message, (TestClass, TestClass)>(Property)
+      Prop.ForAll<TestStruct, (TestClass, TestClass)>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -189,42 +105,40 @@ public class Failure_Reduce
    //GIVEN
    //Failure_of_TestStruct
    //WHEN
-   //Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestStruct_AND_whenSuccess_is_a_Func_of_TestStruct_to_TestStruct
+   //Reduce_AND_whenSuccess_is_a_Func_of_TestStruct_AND_whenFailure_is_a_Func_of_TestStruct_to_TestStruct
    //THEN
-   //whenFailure_was_invoked_once_with_the_content_AND_whenSuccess_was_not_invoked_AND_the_return_value_of_whenFailure_is_returned
+   //whenSuccess_was_not_invoked_AND_whenFailure_was_invoked_once_with_the_content_AND_the_return_value_of_whenFailure_is_returned
 
    [TestMethod]
    public void
-      GIVEN_Failure_of_TestStruct_WHEN_Reduce_AND_whenFailure_is_a_Func_of_Failure_to_TestStruct_AND_whenSuccess_is_a_Func_of_TestStruct_to_TestStruct_THEN_whenFailure_was_invoked_once_with_the_content_AND_whenSuccess_was_not_invoked_AND_the_return_value_of_whenFailure_is_returned()
+      GIVEN_Failure_of_TestStruct_WHEN_Reduce_AND_whenSuccess_is_a_Func_of_TestStruct_AND_whenFailure_is_a_Func_of_TestStruct_to_TestStruct_THEN_whenSuccess_was_not_invoked_AND_whenFailure_was_invoked_once_with_the_content_AND_the_return_value_of_whenFailure_is_returned()
    {
-      static Property Property(Message                                          content,
-                               (TestStruct whenFailure, TestStruct whenSuccess) args)
+      static Property Property((TestStruct value, TestStruct whenSuccess, TestStruct whenFailure) args)
       {
          //Arrange
-         var whenFailure = FakeFunction<Failure, TestStruct>.Create(args.whenFailure);
-         var whenSuccess = FakeFunction<TestStruct, TestStruct>.Create(args.whenSuccess);
+         var whenSuccess = FakeFunction<TestStruct>.Create(args.whenSuccess);
+         var whenFailure = FakeFunction<TestStruct, TestStruct>.Create(args.whenFailure);
 
-         var result = Result<TestStruct>.Failure(content);
+         var result = Tetra.Result.Failure(args.value);
 
          //Act
-         var actual = result.Reduce(whenFailure.Func,
-                                    whenSuccess.Func);
+         var actual = result.Reduce(whenSuccess.Func,
+                                    whenFailure.Func);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
                          args.whenFailure,
                          actual)
-               .And(WasInvokedOnce(nameof(whenFailure),
-                                   content,
-                                   whenFailure))
                .And(WasNotInvoked(nameof(whenSuccess),
-                                  whenSuccess));
+                                  whenSuccess))
+               .And(WasInvokedOnce(nameof(whenFailure),
+                                   args.value,
+                                   whenFailure));
       }
 
-      Arb.Register<Libraries.Message>();
-      Arb.Register<Libraries.TwoUniqueTestStructs>();
+      Arb.Register<Libraries.ThreeUniqueTestStructs>();
 
-      Prop.ForAll<Message, (TestStruct, TestStruct)>(Property)
+      Prop.ForAll<(TestStruct, TestStruct, TestStruct)>(Property)
           .QuickCheckThrowOnFailure();
    }
 
