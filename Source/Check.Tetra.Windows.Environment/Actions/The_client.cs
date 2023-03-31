@@ -47,8 +47,8 @@ public static class The_client
 
    /* ------------------------------------------------------------ */
 
-   public static IAct<Arranges, ErrorAsserts<Asserts>> Creates_a_directory(AbsoluteDirectoryPath path)
-      => AtomicAct<Arranges, ErrorAsserts<Asserts>>
+   public static IAct<Arranges, ResultAsserts<Message, Asserts>> Creates_a_directory(AbsoluteDirectoryPath path)
+      => AtomicAct<Arranges, ResultAsserts<Message, Asserts>>
         .Create(environment => environment.WHEN()
                                           .The_client_creates_a_directory(path)
                                           .THEN(),
@@ -65,8 +65,8 @@ public static class The_client
 
    /* ------------------------------------------------------------ */
 
-   public static IAct<Arranges, ErrorAsserts<Asserts>> Sets_the_current_directory(AbsoluteDirectoryPath path)
-      => AtomicAct<Arranges, ErrorAsserts<Asserts>>
+   public static IAct<Arranges, ResultAsserts<Message, Asserts>> Sets_the_current_directory(AbsoluteDirectoryPath path)
+      => AtomicAct<Arranges, ResultAsserts<Message, Asserts>>
         .Create(environment => environment.WHEN()
                                           .The_client_sets_the_current_directory(path)
                                           .THEN(),

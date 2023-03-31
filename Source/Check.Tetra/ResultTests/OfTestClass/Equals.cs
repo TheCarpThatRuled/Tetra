@@ -1,9 +1,5 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
-using Result = Tetra.Result;
 
 namespace Check.ResultTests.OfTestClass;
 
@@ -14,7 +10,7 @@ namespace Check.ResultTests.OfTestClass;
 public class Equals
 {
    /* ------------------------------------------------------------ */
-   // bool Equals(object? obj)
+   // bool Equals(object? obj);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -56,16 +52,19 @@ public class Equals
       // Methods
       /* ------------------------------------------------------------ */
 
+      // ReSharper disable once UnusedMember.Local
       public static Arbitrary<object?> Obj()
          => Gen
            .OneOf(Gen.Constant(default(object?)),
+                  Generators.TestStruct()
+                            .Select(x => (object?)x),
+                  Generators.UInt32()
+                            .Select(x => (object?)x),
                   Generators.String()
                             .Select(x => (object?)x),
                   Generators.Result(Generators.Int32())
                             .Select(x => (object?)x),
                   Generators.Result(Generators.TestStruct())
-                            .Select(x => (object?)x),
-                  Generators.Result(Generators.Option(Generators.TestClass()))
                             .Select(x => (object?)x))
            .ToArbitrary();
 
@@ -75,57 +74,52 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Result_of_TestClass_AND_this_is_a_Failure
+   //Result_of_TestClass_AND_this_is_a_success
    //WHEN
    //Equals_AND_obj_is_a_nullable_object
    //THEN
    //is_reflexive
 
    [TestMethod]
-   public void GIVEN_Result_of_TestClass_AND_this_is_a_Failure_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
+   public void GIVEN_Result_of_TestClass_AND_this_is_a_success_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
    {
-      static Property Property(Message content)
-      {
-         //Arrange
-         var original = Result<TestClass>.Failure(content);
-         var copy     = Result<TestClass>.Failure(content);
+      //Arrange
+      var original = Result<TestClass>.Success();
+      var copy     = Result<TestClass>.Success();
 
-         //Act
-         //Assert
-         return EqualsIsReflexive(original,
-                                  copy);
-      }
-
-      Arb.Register<Libraries.Message>();
-
-      Prop.ForAll<Message>(Property)
-          .QuickCheckThrowOnFailure();
+      //Act
+      //Assert
+      Assert.That
+            .EqualsIsReflexive(original,
+                               copy);
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Result_of_TestClass_AND_this_is_a_Success
+   //Result_of_TestClass_AND_this_is_a_failure
    //WHEN
    //Equals_AND_obj_is_a_nullable_object
    //THEN
    //is_reflexive
 
    [TestMethod]
-   public void GIVEN_Result_of_TestClass_AND_this_is_a_Success_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
+   public void GIVEN_Result_of_TestClass_AND_this_is_a_failure_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
    {
-      static Property Property(TestClass content)
+      static Property Property(TestClass value)
       {
          //Arrange
-         var original = Result.Success(content);
-         var copy     = Result.Success(content);
+         var original = Tetra.Result.Failure(value);
+         var copy     = Tetra.Result.Failure(value);
 
          //Act
          //Assert
          return EqualsIsReflexive(original,
                                   copy,
-                                  content);
+                                  value);
       }
+
+      Arb.Register<Libraries.TestClass>();
 
       Prop.ForAll<TestClass>(Property)
           .QuickCheckThrowOnFailure();
@@ -172,7 +166,7 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Result_of_TestClass_AND_obj_is_an_TestClass
+   //Result_of_TestClass_AND_obj_is_a_TestStruct
    //WHEN
    //Equals
    //AND
@@ -181,9 +175,9 @@ public class Equals
    //is_transitive
 
    [TestMethod]
-   public void GIVEN_Result_of_TestClass_AND_obj_is_an_TestClass_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
+   public void GIVEN_Result_of_TestClass_AND_obj_is_a_TestStruct_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_transitive()
    {
-      Arb.Register<Library_ResultOfTestClass_AND_ObjIsAnTestClass>();
+      Arb.Register<Library_ResultOfTestClass_AND_ObjIsATestClass>();
 
       Prop.ForAll<(IResult<TestClass>, TestClass, TestClass)>(EqualsIsTransitive)
           .QuickCheckThrowOnFailure();
@@ -193,15 +187,16 @@ public class Equals
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   private sealed class Library_ResultOfTestClass_AND_ObjIsAnTestClass
+   private sealed class Library_ResultOfTestClass_AND_ObjIsATestClass
    {
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
+      // ReSharper disable once UnusedMember.Local
       public static Arbitrary<(IResult<TestClass>, TestClass, TestClass)> Type()
          => Generators
-           .TransitiveResultAndT(Generators.TestClass(),
+           .TransitiveResultsAndT(Generators.TestClass(),
                                  Generators.TwoUniqueTestClasses())
            .ToArbitrary();
 

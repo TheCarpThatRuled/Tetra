@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Check.Messages;
 using static Tetra.Testing.Properties;
 
@@ -21,8 +18,8 @@ public class ParseComponents
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static IResult<ISequence<DirectoryComponent>> TestParseComponents(string potentialPath,
-                                                                               string pathType)
+      public static IResult<ISequence<DirectoryComponent>, Message> TestParseComponents(string potentialPath,
+                                                                                        string pathType)
          => ParseComponents(potentialPath,
                             pathType);
 
@@ -149,8 +146,6 @@ public class ParseComponents
       static Property Property(string path)
       {
          //Arrange
-         var exception = Option<Exception>.None();
-
          //Act
          var actual = TestPath.TestParseComponents(path,
                                                    nameof(TestPath));

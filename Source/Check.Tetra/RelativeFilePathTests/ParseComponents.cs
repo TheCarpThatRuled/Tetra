@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Check.Messages;
 using static Tetra.Testing.Properties;
 
@@ -14,14 +11,15 @@ public class ParseComponents
 {
    /* ------------------------------------------------------------ */
 
+   // ReSharper disable once ClassNeverInstantiated.Local
    private sealed class TestPath : RelativeFilePath
    {
       /* ------------------------------------------------------------ */
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static IResult<(ISequence<DirectoryComponent> directories, FileComponent file)> TestParseComponents(string potentialPath,
-                                                                                                                string pathType)
+      public static IResult<(ISequence<DirectoryComponent> directories, FileComponent file), Message> TestParseComponents(string potentialPath,
+         string                                                                                                                  pathType)
          => ParseComponents(potentialPath,
                             pathType);
 

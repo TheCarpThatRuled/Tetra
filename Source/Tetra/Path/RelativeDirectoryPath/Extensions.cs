@@ -9,21 +9,21 @@ public static class RelativeDirectoryPath_Extensions
 
    public static ISequence<RelativeDirectoryPath> Ancestry(this RelativeDirectoryPath path)
    {
-      var ancestry = new List<RelativeDirectoryPath> { path, };
+      var ancestry = new List<RelativeDirectoryPath> {path,};
 
       bool hadParent;
       do
       {
          hadParent = path
                     .Parent()
-                    .Reduce(Function.False,
-                            parent =>
+                    .Reduce(parent =>
                             {
                                ancestry.Add(parent);
                                path = parent;
 
                                return true;
-                            });
+                            },
+                            Function.False);
       } while (hadParent);
 
       ancestry.Reverse();

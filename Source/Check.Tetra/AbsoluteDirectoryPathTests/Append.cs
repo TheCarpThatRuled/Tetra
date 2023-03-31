@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.AbsoluteDirectoryPathTests;
@@ -12,7 +9,7 @@ namespace Check.AbsoluteDirectoryPathTests;
 public class Append
 {
    /* ------------------------------------------------------------ */
-   // public AbsoluteDirectoryPath Append(params DirectoryComponent[] child)
+   // AbsoluteDirectoryPath Append(params DirectoryComponent[] child);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -23,7 +20,8 @@ public class Append
    //an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_Array_of_DirectoryComponents_is_returned
 
    [TestMethod]
-   public void GIVEN_an_AbsoluteDirectoryPath_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_Array_of_DirectoryComponents_is_returned()
+   public void
+      GIVEN_an_AbsoluteDirectoryPath_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_Array_of_DirectoryComponents_is_returned()
    {
       static Property Property(TestAbsoluteDirectoryPath testParent,
                                DirectoryComponent[]      child)
@@ -50,7 +48,7 @@ public class Append
    }
 
    /* ------------------------------------------------------------ */
-   // public AbsoluteDirectoryPath Append(IEnumerable<DirectoryComponent> child)
+   // AbsoluteDirectoryPath Append(IEnumerable<DirectoryComponent> child);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -61,10 +59,11 @@ public class Append
    //an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_sequence_of_DirectoryComponents_is_returned
 
    [TestMethod]
-   public void GIVEN_an_AbsoluteDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_sequence_of_DirectoryComponents_is_returned()
+   public void
+      GIVEN_an_AbsoluteDirectoryPath_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_sequence_of_DirectoryComponents_is_returned()
    {
-      static Property Property(TestAbsoluteDirectoryPath testParent,
-                               ISequence<DirectoryComponent>  child)
+      static Property Property(TestAbsoluteDirectoryPath     testParent,
+                               ISequence<DirectoryComponent> child)
       {
          //Arrange
          var expected = testParent.Append(child);
@@ -99,7 +98,8 @@ public class Append
    //an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_RelativeDirectoryPath_is_returned
 
    [TestMethod]
-   public void GIVEN_an_AbsoluteDirectoryPath_and_a_RelativeDirectoryPath_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_RelativeDirectoryPath_is_returned()
+   public void
+      GIVEN_an_AbsoluteDirectoryPath_and_a_RelativeDirectoryPath_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_AbsoluteDirectoryPath_and_the_RelativeDirectoryPath_is_returned()
    {
       static Property Property(TestAbsoluteDirectoryPath testParent,
                                TestRelativeDirectoryPath testChild)
@@ -176,7 +176,8 @@ public class Append
    //an_AbsoluteFilePath_containing_the_AbsoluteDirectoryPath_and_the_RelativeFilePath_is_returned
 
    [TestMethod]
-   public void GIVEN_an_AbsoluteDirectoryPath_and_a_RelativeFilePath_WHEN_Append_THEN_an_AbsoluteFilePath_containing_the_AbsoluteDirectoryPath_and_the_RelativeFilePath_is_returned()
+   public void
+      GIVEN_an_AbsoluteDirectoryPath_and_a_RelativeFilePath_WHEN_Append_THEN_an_AbsoluteFilePath_containing_the_AbsoluteDirectoryPath_and_the_RelativeFilePath_is_returned()
    {
       static Property Property(TestAbsoluteDirectoryPath testParent,
                                TestRelativeFilePath      testChild)

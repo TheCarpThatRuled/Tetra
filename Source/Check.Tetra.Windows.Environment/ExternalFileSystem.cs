@@ -85,7 +85,9 @@ internal static class ExternalFileSystem
       if (!File.Exists(file))
       {
          // ReSharper disable once EmptyEmbeddedStatement
+#pragma warning disable CS0642 // Possible mistaken empty statement
          using (File.Create(file));
+#pragma warning restore CS0642 // Possible mistaken empty statement
       }
    }
 

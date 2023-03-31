@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.ResultTests.OfInt;
@@ -13,7 +10,7 @@ namespace Check.ResultTests.OfInt;
 public class Failure_IsAFailure
 {
    /* ------------------------------------------------------------ */
-   // bool IsAFailure()
+   // bool IsAFailure();
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -26,10 +23,10 @@ public class Failure_IsAFailure
    [TestMethod]
    public void GIVEN_Failure_of_int_WHEN_IsAFailure_THEN_true_is_returned()
    {
-      static Property Property(Message content)
+      static Property Property(int value)
       {
          //Arrange
-         var result = Result<int>.Failure(content);
+         var result = Tetra.Result.Failure(value);
 
          //Act
          var actual = result.IsAFailure();
@@ -39,9 +36,7 @@ public class Failure_IsAFailure
                        actual);
       }
 
-      Arb.Register<Libraries.Message>();
-
-      Prop.ForAll<Message>(Property)
+      Prop.ForAll<int>(Property)
           .QuickCheckThrowOnFailure();
    }
 

@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.OptionTests.OfTestClass;
@@ -19,7 +16,7 @@ public class None_MapToResult
    //GIVEN
    //None
    //WHEN
-   //MapToResult_AND_whenNone_is_an_Message
+   //MapToResult_AND_whenNone_is_a_Message
    //THEN
    //a_failure_containing_whenNone_is_returned
 

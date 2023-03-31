@@ -14,7 +14,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Either<Testing.TestStruct, Testing.TestClass>> Type()
+      public static Arbitrary<IEither<Testing.TestStruct, Testing.TestClass>> Type()
          => Generators
            .LeftEither<Testing.TestStruct, Testing.TestClass>(Generators.TestStruct())
            .ToArbitrary();
@@ -32,7 +32,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Either<Testing.TestStruct, Testing.TestClass>> Type()
+      public static Arbitrary<IEither<Testing.TestStruct, Testing.TestClass>> Type()
          => Generators
            .Either(Generators.TestStruct(),
                    Generators.TestClass())
@@ -51,7 +51,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Either<Testing.TestStruct, Testing.TestClass>> Type()
+      public static Arbitrary<IEither<Testing.TestStruct, Testing.TestClass>> Type()
          => Generators
            .RightEither<Testing.TestStruct, Testing.TestClass>(Generators.TestClass())
            .ToArbitrary();
@@ -69,7 +69,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Either<Testing.TestStruct, Testing.TestClass>, Either<Testing.TestStruct, Testing.TestClass>, Either<Testing.TestStruct, Testing.TestClass>)> Type()
+      public static Arbitrary<(IEither<Testing.TestStruct, Testing.TestClass>, IEither<Testing.TestStruct, Testing.TestClass>, IEither<Testing.TestStruct, Testing.TestClass>)> Type()
          => Generators
            .Transitive(Generators.TwoUniqueEithers(Generators.TestStruct(),
                                                    Generators.TestClass()))

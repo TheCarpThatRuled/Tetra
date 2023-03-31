@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.AbsoluteFilePathTests;
@@ -13,7 +10,7 @@ namespace Check.AbsoluteFilePathTests;
 public class CompareTo
 {
    /* ------------------------------------------------------------ */
-   // public int CompareTo(AbsoluteFilePath? other)
+   // int CompareTo(AbsoluteFilePath? other);
    /* ------------------------------------------------------------ */
 
    //GIVEN

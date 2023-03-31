@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.ResultTests.OfTestClass;
@@ -13,7 +10,7 @@ namespace Check.ResultTests.OfTestClass;
 public class FailureFactory
 {
    /* ------------------------------------------------------------ */
-   // Result<T> Failure()
+   // static Result<T> Failure(T content);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -21,26 +18,58 @@ public class FailureFactory
    //WHEN
    //Failure
    //THEN
-   //a_failure_containing_the_content_is_returned
+   //a_failure_containing_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Result_of_TestClass_WHEN_Failure_THEN_a_failure_containing_the_content_is_returned()
+   public void GIVEN_Result_of_TestClass_WHEN_Failure_THEN_a_failure_containing_content_is_returned()
    {
-      static Property Property(Message content)
+      static Property Property(TestClass value)
       {
          //Act
-         var actual = Result<TestClass>.Failure(content);
+         var actual = Result<TestClass>.Failure(value);
 
          //Assert
          return IsAFailure(AssertMessages.ReturnValue,
-                           content,
-                           actual);
+                        value,
+                        actual);
       }
 
-      Arb.Register<Libraries.Message>();
+      Arb.Register<Libraries.TestClass>();
 
-      Prop.ForAll<Message>(Property)
+      Prop.ForAll<TestClass>(Property)
           .QuickCheckThrowOnFailure();
    }
+
+   /* ------------------------------------------------------------ */
+   // public static Result<T> Failure<T>(T content)
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Result
+   //WHEN
+   //Failure_of_TestClass
+   //THEN
+   //a_failure_containing_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Result_WHEN_Failure_of_TestClass_THEN_a_failure_containing_content_is_returned()
+   {
+      static Property Property(TestClass value)
+      {
+         //Act
+         var actual = Tetra.Result.Failure(value);
+
+         //Assert
+         return IsAFailure(AssertMessages.ReturnValue,
+                        value,
+                        actual);
+      }
+
+      Arb.Register<Libraries.TestClass>();
+
+      Prop.ForAll<TestClass>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
    /* ------------------------------------------------------------ */
 }

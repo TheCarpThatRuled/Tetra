@@ -32,14 +32,14 @@ partial class Generators
         .TwoValueTuples()
         .Where(tuple => tuple
                        .first
-                       .Reduce(() => tuple
+                       .Reduce(i1 => tuple
                                     .second
-                                    .IsASome(),
-                               i1 => tuple
+                                    .Reduce(i2 => !Equals(i1,
+                                                          i2),
+                                            () => true),
+                               () => tuple
                                     .second
-                                    .Reduce(true,
-                                            i2 => !Equals(i1,
-                                                          i2))));
+                                    .IsASome()));
 
    /* ------------------------------------------------------------ */
 

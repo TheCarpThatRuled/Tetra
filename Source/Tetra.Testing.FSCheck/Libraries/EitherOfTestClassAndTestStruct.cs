@@ -14,7 +14,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Either<Testing.TestClass, Testing.TestStruct>> Type()
+      public static Arbitrary<IEither<Testing.TestClass, Testing.TestStruct>> Type()
          => Generators
            .LeftEither<Testing.TestClass, Testing.TestStruct>(Generators.TestClass())
            .ToArbitrary();
@@ -32,7 +32,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Either<Testing.TestClass, Testing.TestStruct>> Type()
+      public static Arbitrary<IEither<Testing.TestClass, Testing.TestStruct>> Type()
          => Generators
            .Either(Generators.TestClass(),
                    Generators.TestStruct())
@@ -51,7 +51,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<Either<Testing.TestClass, Testing.TestStruct>> Type()
+      public static Arbitrary<IEither<Testing.TestClass, Testing.TestStruct>> Type()
          => Generators
            .RightEither<Testing.TestClass, Testing.TestStruct>(Generators.TestStruct())
            .ToArbitrary();
@@ -69,7 +69,7 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(Either<Testing.TestClass, Testing.TestStruct>, Either<Testing.TestClass, Testing.TestStruct>, Either<Testing.TestClass, Testing.TestStruct>)> Type()
+      public static Arbitrary<(IEither<Testing.TestClass, Testing.TestStruct>, IEither<Testing.TestClass, Testing.TestStruct>, IEither<Testing.TestClass, Testing.TestStruct>)> Type()
          => Generators
            .Transitive(Generators.TwoUniqueEithers(Generators.TestClass(),
                                                    Generators.TestStruct()))

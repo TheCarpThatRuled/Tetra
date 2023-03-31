@@ -1,8 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
-
-namespace Check.OptionTests.OfInt;
+﻿namespace Check.OptionTests.OfInt;
 
 [TestClass]
 [TestCategory(GlobalCategories.Unit)]

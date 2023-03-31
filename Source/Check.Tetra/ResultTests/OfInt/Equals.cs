@@ -1,9 +1,5 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
-using Result = Tetra.Result;
 
 namespace Check.ResultTests.OfInt;
 
@@ -14,7 +10,7 @@ namespace Check.ResultTests.OfInt;
 public class Equals
 {
    /* ------------------------------------------------------------ */
-   // bool Equals(object? obj)
+   // bool Equals(object? obj);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -68,8 +64,6 @@ public class Equals
                   Generators.Result(Generators.TestClass())
                             .Select(x => (object?)x),
                   Generators.Result(Generators.TestStruct())
-                            .Select(x => (object?)x),
-                  Generators.Result(Generators.Option(Generators.Int32()))
                             .Select(x => (object?)x))
            .ToArbitrary();
 
@@ -79,56 +73,49 @@ public class Equals
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Result_of_int_AND_this_is_a_Failure
+   //Result_of_int_AND_this_is_a_success
    //WHEN
    //Equals_AND_obj_is_a_nullable_object
    //THEN
    //is_reflexive
 
    [TestMethod]
-   public void GIVEN_Result_of_int_AND_this_is_a_Failure_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
+   public void GIVEN_Result_of_int_AND_this_is_a_success_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
    {
-      static Property Property(Message content)
-      {
-         //Arrange
-         var original = Result<int>.Failure(content);
-         var copy     = Result<int>.Failure(content);
+      //Arrange
+      var original = Result<int>.Success();
+      var copy     = Result<int>.Success();
 
-         //Act
-         //Assert
-         return EqualsIsReflexive(original,
-                                  copy);
-      }
-
-      Arb.Register<Libraries.Message>();
-
-      Prop.ForAll<Message>(Property)
-          .QuickCheckThrowOnFailure();
+      //Act
+      //Assert
+      Assert.That
+            .EqualsIsReflexive(original,
+                               copy);
    }
 
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //Result_of_int_AND_this_is_a_Success
+   //Result_of_int_AND_this_is_a_failure
    //WHEN
    //Equals_AND_obj_is_a_nullable_object
    //THEN
    //is_reflexive
 
    [TestMethod]
-   public void GIVEN_Result_of_int_AND_this_is_a_Success_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
+   public void GIVEN_Result_of_int_AND_this_is_a_failure_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
    {
-      static Property Property(int content)
+      static Property Property(int value)
       {
          //Arrange
-         var original = Result.Success(content);
-         var copy     = Result.Success(content);
+         var original = Tetra.Result.Failure(value);
+         var copy     = Tetra.Result.Failure(value);
 
          //Act
          //Assert
          return EqualsIsReflexive(original,
                                   copy,
-                                  content);
+                                  value);
       }
 
       Prop.ForAll<int>(Property)
@@ -205,7 +192,7 @@ public class Equals
 
       public static Arbitrary<(IResult<int>, int, int)> Type()
          => Generators
-           .TransitiveResultAndT(Generators.Int32(),
+           .TransitiveResultsAndT(Generators.Int32(),
                                  Generators.TwoUniqueInt32s())
            .ToArbitrary();
 

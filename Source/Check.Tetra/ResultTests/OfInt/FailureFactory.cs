@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.ResultTests.OfInt;
@@ -13,7 +10,7 @@ namespace Check.ResultTests.OfInt;
 public class FailureFactory
 {
    /* ------------------------------------------------------------ */
-   // Result<T> Failure()
+   // static Result<T> Failure(T content);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -21,26 +18,54 @@ public class FailureFactory
    //WHEN
    //Failure
    //THEN
-   //a_failure_containing_the_content_is_returned
+   //a_failure_containing_content_is_returned
 
    [TestMethod]
-   public void GIVEN_Result_of_int_WHEN_Failure_THEN_a_failure_containing_the_content_is_returned()
+   public void GIVEN_Result_of_int_WHEN_Failure_THEN_a_failure_containing_content_is_returned()
    {
-      static Property Property(Message content)
+      static Property Property(int value)
       {
          //Act
-         var actual = Result<int>.Failure(content);
+         var actual = Result<int>.Failure(value);
 
          //Assert
          return IsAFailure(AssertMessages.ReturnValue,
-                           content,
-                           actual);
+                        value,
+                        actual);
       }
 
-      Arb.Register<Libraries.Message>();
-
-      Prop.ForAll<Message>(Property)
+      Prop.ForAll<int>(Property)
           .QuickCheckThrowOnFailure();
    }
+
+   /* ------------------------------------------------------------ */
+   // static Result<T> Failure<T>(T content);
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Result
+   //WHEN
+   //Failure_of_int
+   //THEN
+   //a_failure_containing_content_is_returned
+
+   [TestMethod]
+   public void GIVEN_Result_WHEN_Failure_of_int_THEN_a_failure_containing_content_is_returned()
+   {
+      static Property Property(int value)
+      {
+         //Act
+         var actual = Tetra.Result.Failure(value);
+
+         //Assert
+         return IsAFailure(AssertMessages.ReturnValue,
+                        value,
+                        actual);
+      }
+
+      Prop.ForAll<int>(Property)
+          .QuickCheckThrowOnFailure();
+   }
+
    /* ------------------------------------------------------------ */
 }

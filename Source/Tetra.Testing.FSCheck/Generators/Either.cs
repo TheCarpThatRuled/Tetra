@@ -8,7 +8,7 @@ partial class Generators
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Gen<Either<TLeft, TRight>> LeftEither<TLeft, TRight>(Gen<TLeft> content)
+   public static Gen<IEither<TLeft, TRight>> LeftEither<TLeft, TRight>(Gen<TLeft> content)
       => content
         .Select(Tetra
                .Either<TLeft, TRight>
@@ -16,7 +16,7 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<Either<TLeft, TRight>> Either<TLeft, TRight>(Gen<TLeft>  leftContent,
+   public static Gen<IEither<TLeft, TRight>> Either<TLeft, TRight>(Gen<TLeft>  leftContent,
                                                                   Gen<TRight> rightContent)
       => Gen
         .OneOf(LeftEither<TLeft, TRight>(leftContent),
@@ -24,7 +24,7 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<Either<TLeft, TRight>> RightEither<TLeft, TRight>(Gen<TRight> content)
+   public static Gen<IEither<TLeft, TRight>> RightEither<TLeft, TRight>(Gen<TRight> content)
       => content
         .Select(Tetra
                .Either<TLeft, TRight>
@@ -32,7 +32,7 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(Either<TLeft, TRight>, Either<TLeft, TRight>)> TwoUniqueEithers<TLeft, TRight>(Gen<TLeft>  leftContent,
+   public static Gen<(IEither<TLeft, TRight>, IEither<TLeft, TRight>)> TwoUniqueEithers<TLeft, TRight>(Gen<TLeft>  leftContent,
                                                                                                      Gen<TRight> rightContent)
       => Either(leftContent,
                 rightContent)

@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.ResultTests.OfTestClass;
@@ -13,7 +10,7 @@ namespace Check.ResultTests.OfTestClass;
 public class Failure_GetHashCode
 {
    /* ------------------------------------------------------------ */
-   // int GetHashCode()
+   // int GetHashCode();
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -26,24 +23,49 @@ public class Failure_GetHashCode
    [TestMethod]
    public void GIVEN_Failure_of_TestClass_WHEN_GetHashCode_THEN_the_hash_code_of_the_content_is_returned()
    {
-      static Property Property(Message content)
+      static Property Property(TestClass value)
       {
          //Arrange
-         var result = Result<TestClass>.Failure(content);
+         var result = Tetra.Result.Failure(value);
 
          //Act
          var actual = result.GetHashCode();
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
-                         content.GetHashCode(),
+                         value.GetHashCode(),
                          actual);
       }
 
-      Arb.Register<Libraries.Message>();
+      Arb.Register<Libraries.TestClass>();
 
-      Prop.ForAll<Message>(Property)
+      Prop.ForAll<TestClass>(Property)
           .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   //GIVEN
+   //Failure_of_null
+   //WHEN
+   //GetHashCode
+   //THEN
+   //zero_is_returned
+
+   [TestMethod]
+   public void GIVEN_Failure_of_null_WHEN_GetHashCode_THEN_zero_is_returned()
+   {
+      //Arrange
+      var result = Tetra.Result.Failure(default(TestClass));
+
+      //Act
+      var actual = result.GetHashCode();
+
+      //Assert
+      Assert.That
+            .AreEqual(AssertMessages.ReturnValue,
+                      0,
+                      actual);
    }
 
    /* ------------------------------------------------------------ */

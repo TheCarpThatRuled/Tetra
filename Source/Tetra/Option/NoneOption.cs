@@ -29,26 +29,7 @@ static partial class Option<T>
          => $"None of {typeof(T).Name}";
 
       /* ------------------------------------------------------------ */
-      // IEquatable<IOption<T>> Methods
-      /* ------------------------------------------------------------ */
-
-      public bool Equals(IOption<T>? other)
-         => ReferenceEquals(this,
-                            other)
-         || other switch
-            {
-               NoneOption => true,
-               _          => false,
-            };
-
-      /* ------------------------------------------------------------ */
-      // IOption Methods
-      /* ------------------------------------------------------------ */
-
-      public IOption<TNew> Cast<TNew>()
-         => new Option<TNew>
-            .NoneOption();
-
+      // IOption<T> Methods
       /* ------------------------------------------------------------ */
 
       public bool IsANone()
@@ -61,38 +42,38 @@ static partial class Option<T>
 
       /* ------------------------------------------------------------ */
 
+      public IOption<T> Do(Action<T> whenSome,
+                           Action    whenNone)
+      {
+         whenNone();
+
+         return this;
+      }
+
+      /* ------------------------------------------------------------ */
+
       public IOption<TNew> Map<TNew>(Func<T, TNew> whenSome)
-         => new Option<TNew>
-            .NoneOption();
+         => new Option<TNew>.NoneOption();
 
       /* ------------------------------------------------------------ */
 
       public IOption<TNew> Map<TNew>(Func<T, IOption<TNew>> whenSome)
-         => new Option<TNew>
-            .NoneOption();
+         => new Option<TNew>.NoneOption();
 
       /* ------------------------------------------------------------ */
 
-      public IResult<T> MapToResult(Message whenNone)
-         => Result<T>
-           .Failure(whenNone);
+      public IResult<T, TNew> MapToResult<TNew>(TNew whenNone)
+         => new Result<T, TNew>.FailureResult(whenNone);
 
       /* ------------------------------------------------------------ */
 
-      public IResult<T> MapToResult(Func<Message> whenNone)
-         => Result<T>
-           .Failure(whenNone());
+      public IResult<T, TNew> MapToResult<TNew>(Func<TNew> whenNone)
+         => new Result<T, TNew>.FailureResult(whenNone());
 
       /* ------------------------------------------------------------ */
 
-      public TNew Reduce<TNew>(TNew          whenNone,
-                               Func<T, TNew> _)
-         => whenNone;
-
-      /* ------------------------------------------------------------ */
-
-      public TNew Reduce<TNew>(Func<TNew>    whenNone,
-                               Func<T, TNew> _)
+      public TNew Reduce<TNew>(Func<T, TNew> whenSome,
+                               Func<TNew>    whenNone)
          => whenNone();
 
       /* ------------------------------------------------------------ */

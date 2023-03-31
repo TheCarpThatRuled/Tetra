@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.ConditionTests;
@@ -65,6 +62,9 @@ public class True_Equals
                   Generators.Option(Generators.Bool())
                             .Select(x => (object?) x),
                   Generators.Result(Generators.Bool())
+                            .Select(x => (object?)x),
+                  Generators.Result(Generators.Bool(),
+                                    Generators.Bool())
                             .Select(x => (object?) x))
            .ToArbitrary();
 

@@ -1,8 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
-
-namespace Check.SequenceTests.OfTestStruct;
+﻿namespace Check.SequenceTests.OfTestStruct;
 
 [TestClass]
 [TestCategory(GlobalCategories.Unit)]

@@ -16,14 +16,14 @@ public static class AbsoluteDirectoryPath_Extensions
       {
          hadParent = path
                     .Parent()
-                    .Reduce(Function.False,
-                            parent =>
+                    .Reduce(parent =>
                             {
                                ancestry.Add(parent);
                                path = parent;
 
                                return true;
-                            });
+                            },
+                            Function.False);
       } while (hadParent);
 
       ancestry.Reverse();

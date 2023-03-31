@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Check.Messages;
 using static Tetra.Testing.Properties;
 
@@ -21,7 +18,7 @@ public class ParseComponents
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static IResult<(VolumeComponent volume, ISequence<DirectoryComponent> directories)> TestParseComponents(string potentialPath,
+      public static IResult<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message> TestParseComponents(string potentialPath,
          string                                                                                                                      pathType)
          => ParseComponents(potentialPath,
                             pathType);
@@ -37,8 +34,8 @@ public class ParseComponents
    }
 
    /* ------------------------------------------------------------ */
-   // protected Result(VolumeComponent volume, ISequence<DirectoryComponent> directories) ParseComponents(string potentialPath,
-   //                                                                                                     string pathType)
+   // Result(VolumeComponent volume, ISequence<DirectoryComponent> directories) ParseComponents(string potentialPath,
+   //                                                                                           string pathType);
    /* ------------------------------------------------------------ */
 
    //GIVEN

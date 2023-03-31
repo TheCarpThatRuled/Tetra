@@ -1,10 +1,4 @@
-﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra.Testing;
-using static Tetra.Testing.Properties;
-using Result = Tetra.Result;
-
-namespace Check.ResultTests.OfTestStruct;
+﻿namespace Check.ResultTests.OfTestStruct;
 
 [TestClass]
 [TestCategory(GlobalCategories.Unit)]
@@ -13,36 +7,29 @@ namespace Check.ResultTests.OfTestStruct;
 public class Success_IsASuccess
 {
    /* ------------------------------------------------------------ */
-   // bool IsASuccess()
+   // bool IsASuccess();
    /* ------------------------------------------------------------ */
 
    //GIVEN
-   //TestStruct
+   //Success_of_TestStruct
    //WHEN
    //IsASuccess
    //THEN
    //true_is_returned
 
    [TestMethod]
-   public void GIVEN_TestStruct_WHEN_IsASuccess_THEN_true_is_returned()
+   public void GIVEN_Success_of_TestStruct_WHEN_IsASuccess_THEN_true_is_returned()
    {
-      static Property Property(TestStruct content)
-      {
-         //Arrange
-         var result = Result.Success(content);
+      //Arrange
+      var result = Result<TestStruct>.Success();
 
-         //Act
-         var actual = result.IsASuccess();
+      //Act
+      var actual = result.IsASuccess();
 
-         //Assert
-         return IsTrue(AssertMessages.ReturnValue,
-                       actual);
-      }
-
-      Arb.Register<Libraries.TestStruct>();
-
-      Prop.ForAll<TestStruct>(Property)
-          .QuickCheckThrowOnFailure();
+      //Assert
+      Assert.That
+            .IsTrue(AssertMessages.ReturnValue,
+                    actual);
    }
 
    /* ------------------------------------------------------------ */

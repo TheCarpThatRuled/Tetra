@@ -22,22 +22,11 @@ partial class Properties
 
    public static Property WasInvokedOnce(string              description,
                                          Message             expected,
-                                         FakeAction<Failure> action)
+                                         FakeAction<Message> action)
       => WasInvokedOnce(description,
                         actual => Equals(expected,
-                                         actual.Content()),
+                                         actual),
                         expected.ToString(),
-                        action);
-
-   /* ------------------------------------------------------------ */
-
-   public static Property WasInvokedOnce<T>(string              description,
-                                            T                   expected,
-                                            FakeAction<Left<T>> action)
-      => WasInvokedOnce(description,
-                        actual => Equals(expected,
-                                         actual.Content()),
-                        expected?.ToString() ?? string.Empty,
                         action);
 
    /* ------------------------------------------------------------ */
@@ -66,17 +55,6 @@ partial class Properties
                                && Equals(expectedMessage,
                                          actual.Message()),
                         $"(Path: {expectedPath}, Message: {expectedMessage})",
-                        action);
-
-   /* ------------------------------------------------------------ */
-
-   public static Property WasInvokedOnce<T>(string               description,
-                                            T                    expected,
-                                            FakeAction<Right<T>> action)
-      => WasInvokedOnce(description,
-                        actual => Equals(expected,
-                                         actual.Content()),
-                        expected?.ToString() ?? string.Empty,
                         action);
 
    /* ------------------------------------------------------------ */

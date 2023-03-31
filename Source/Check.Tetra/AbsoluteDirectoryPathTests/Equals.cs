@@ -1,7 +1,4 @@
 ﻿using FsCheck;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
-using Tetra.Testing;
 using static Tetra.Testing.Properties;
 
 namespace Check.AbsoluteDirectoryPathTests;
@@ -13,7 +10,7 @@ namespace Check.AbsoluteDirectoryPathTests;
 public class Equals
 {
    /* ------------------------------------------------------------ */
-   // public bool Equals(object? obj)
+   // bool Equals(object? obj);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -55,6 +52,7 @@ public class Equals
       // Methods
       /* ------------------------------------------------------------ */
 
+      // ReSharper disable once UnusedMember.Local
       public static Arbitrary<object?> Obj()
          => Gen
            .OneOf(Gen.Constant(default(object?)),
@@ -133,7 +131,7 @@ public class Equals
    }
 
    /* ------------------------------------------------------------ */
-   // public bool Equals(AbsoluteDirectoryPath? other)
+   // bool Equals(AbsoluteDirectoryPath? other);
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -205,7 +203,7 @@ public class Equals
    {
       Arb.Register<Libraries.AbsoluteDirectoryPath>();
 
-      Prop.ForAll<AbsoluteDirectoryPath, AbsoluteDirectoryPath>(IEquatableIsSymmetric<AbsoluteDirectoryPath>)
+      Prop.ForAll<AbsoluteDirectoryPath, AbsoluteDirectoryPath>(IEquatableIsSymmetric)
           .QuickCheckThrowOnFailure();
    }
 

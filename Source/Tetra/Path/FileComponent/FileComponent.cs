@@ -18,10 +18,10 @@ public class FileComponent : IComparable<FileComponent>,
 
    /* ------------------------------------------------------------ */
 
-   public static IResult<FileComponent> Parse(string potentialComponent)
+   public static IResult<FileComponent, Message> Parse(string potentialComponent)
       => Validate(potentialComponent,
                   ComponentType)
-        .MapToResult(new FileComponent(potentialComponent));
+        .MapSuccessToType(new FileComponent(potentialComponent));
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -83,12 +83,12 @@ public class FileComponent : IComparable<FileComponent>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static IError Validate(string potentialComponent,
+   protected static IResult<Message> Validate(string potentialComponent,
                                    string componentType)
       => potentialComponent.IsNotAValidPathComponent()
-            ? Error.Some(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(potentialComponent,
+            ? Result.Failure(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(potentialComponent,
                                                                                               componentType)))
-            : Error.None();
+            : Result<Message>.Success();
 
    /* ------------------------------------------------------------ */
    // Private Constants

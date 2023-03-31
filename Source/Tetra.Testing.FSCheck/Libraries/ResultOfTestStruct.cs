@@ -8,24 +8,6 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class FailureResultOfTestStruct
-   {
-      /* ------------------------------------------------------------ */
-      // Functions
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<IResult<Testing.TestStruct>> Type()
-         => Generators
-           .FailureResult<Testing.TestStruct>()
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
    public sealed class ResultOfTestStruct
    {
       /* ------------------------------------------------------------ */
@@ -44,7 +26,7 @@ public static partial class Libraries
 
    // ReSharper disable once ClassNeverInstantiated.Local
    // ReSharper disable once InconsistentNaming
-   public sealed class SuccessResultOfTestStruct
+   public sealed class FailureResultOfTestStruct
    {
       /* ------------------------------------------------------------ */
       // Functions
@@ -52,7 +34,7 @@ public static partial class Libraries
 
       public static Arbitrary<IResult<Testing.TestStruct>> Type()
          => Generators
-           .SuccessResult(Generators.TestStruct())
+           .FailureResult(Generators.TestStruct())
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
