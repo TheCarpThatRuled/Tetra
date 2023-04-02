@@ -7,7 +7,7 @@ namespace Check.Check_TextBox;
 
 public sealed partial class TheTextBoxHasBeenCreated
 {
-   public sealed class Asserts : IAsserts
+   public sealed class Asserts : AAA_test.IAsserts
    {
       /* ------------------------------------------------------------ */
       // Properties

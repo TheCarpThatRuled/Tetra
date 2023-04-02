@@ -2,8 +2,8 @@
 
 namespace Tetra.Testing;
 
-public sealed class ReturnAsserts<T, TNext> : IAsserts
-   where TNext : IAsserts
+public sealed class ReturnAsserts<T, TNext> : AAA_test.IAsserts
+   where TNext : AAA_test.IAsserts
 {
    /* ------------------------------------------------------------ */
    // Factory Functions

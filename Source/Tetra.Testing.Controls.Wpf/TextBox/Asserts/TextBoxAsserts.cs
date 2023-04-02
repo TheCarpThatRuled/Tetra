@@ -3,8 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tetra.Testing;
 
-public sealed class TextBoxAsserts<T> : IAsserts
-   where T : IAsserts
+public sealed class TextBoxAsserts<T> : AAA_test.IAsserts
+   where T : AAA_test.IAsserts
 {
    /* ------------------------------------------------------------ */
    // Constructors

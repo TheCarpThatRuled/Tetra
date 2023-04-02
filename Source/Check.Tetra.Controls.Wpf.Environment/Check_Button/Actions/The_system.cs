@@ -10,8 +10,9 @@ public static class The_system
    // ArrangeAct Functions
    /* ------------------------------------------------------------ */
 
-   public static IArrangeAct<TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Asserts> Updates_IsEnabled(bool enabled)
-      => AtomicArrangeAct<TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Asserts>
+   public static AAA_test.IArrangeAct<TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Asserts> Updates_IsEnabled(bool enabled)
+      => AAA_test
+        .AtomicArrangeAct<TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Asserts>
         .Create(environment => environment.The_system_updates_IsEnabled(enabled),
                 environment => environment
                               .WHEN()
@@ -21,8 +22,9 @@ public static class The_system
 
    /* ------------------------------------------------------------ */
 
-   public static IArrangeAct<TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Asserts> Updates_Visibility(Visibility visibility)
-      => AtomicArrangeAct<TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Asserts>
+   public static AAA_test.IArrangeAct<TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Asserts> Updates_Visibility(Visibility visibility)
+      => AAA_test
+        .AtomicArrangeAct<TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Asserts>
         .Create(environment => environment.The_system_updates_Visibility(visibility),
                 environment => environment
                               .WHEN()

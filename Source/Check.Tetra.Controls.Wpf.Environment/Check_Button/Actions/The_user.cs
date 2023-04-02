@@ -9,8 +9,9 @@ public static class The_user
    // ArrangeAct Functions
    /* ------------------------------------------------------------ */
 
-   public static IArrangeAct<TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Asserts> Clicks_the_button(uint numberOfClicks)
-      => AtomicArrangeAct<TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Asserts>
+   public static AAA_test.IArrangeAct<TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Asserts> Clicks_the_button(uint numberOfClicks)
+      => AAA_test
+        .AtomicArrangeAct<TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Asserts>
         .Create(environment => environment.The_user_clicks_the_button(numberOfClicks),
                 environment => environment
                               .WHEN()

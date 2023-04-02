@@ -3,7 +3,7 @@
 namespace Check;
 
 public sealed class Act<T>
-   where T : IAsserts
+   where T : AAA_test.IAsserts
 {
    /* ------------------------------------------------------------ */
    // Internal Constructors

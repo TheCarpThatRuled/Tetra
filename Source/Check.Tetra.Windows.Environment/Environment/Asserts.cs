@@ -4,7 +4,7 @@ using Tetra.Testing;
 
 namespace Check;
 
-public sealed class Asserts : IAsserts
+public sealed class Asserts : AAA_test.IAsserts
 {
    /* ------------------------------------------------------------ */
    // Methods

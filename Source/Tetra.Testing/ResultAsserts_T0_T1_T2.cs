@@ -2,8 +2,8 @@
 
 namespace Tetra.Testing;
 
-public sealed class ResultAsserts<TSuccess, TFailure, TAsserts> : IAsserts
-   where TAsserts : IAsserts
+public sealed class ResultAsserts<TSuccess, TFailure, TAsserts> : AAA_test.IAsserts
+   where TAsserts : AAA_test.IAsserts
 {
    /* ------------------------------------------------------------ */
    // Factory Functions

@@ -7,7 +7,7 @@ namespace Check.Check_Button;
 
 public sealed partial class TheButtonHasBeenCreated
 {
-   public sealed class Asserts : IAsserts
+   public sealed class Asserts : AAA_test.IAsserts
    {
       /* ------------------------------------------------------------ */
       // Properties

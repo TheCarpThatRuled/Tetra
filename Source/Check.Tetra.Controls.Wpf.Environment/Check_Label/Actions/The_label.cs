@@ -9,7 +9,7 @@ public static class The_label
    // Assert Functions
    /* ------------------------------------------------------------ */
 
-   public static IAssert<TheLabelHasBeenCreated.Asserts, TheLabelHasBeenCreated.Asserts> Matches(Expected_label expected)
+   public static AAA_test.IAssert<TheLabelHasBeenCreated.Asserts, TheLabelHasBeenCreated.Asserts> Matches(Expected_label expected)
       => A_label
         .Matches<TheLabelHasBeenCreated.Asserts>(expected,
                                                   $"{nameof(The_label)}")
