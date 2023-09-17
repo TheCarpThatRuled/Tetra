@@ -9,22 +9,22 @@ public sealed class Acts : IActs
    // Methods
    /* ------------------------------------------------------------ */
 
-   public Act<ReturnAsserts<bool, Asserts>> The_client_checks_that_a_directory_does_not_exist(AbsoluteDirectoryPath path)
+   public Act<ReturnsAsserts<bool, Asserts>> The_client_checks_that_a_directory_does_not_exist(AbsoluteDirectoryPath path)
       => new(() => Check_that_a_directory_does_not_exist(path));
 
    /* ------------------------------------------------------------ */
 
-   public Act<ReturnAsserts<bool, Asserts>> The_client_checks_that_a_directory_exists(AbsoluteDirectoryPath path)
+   public Act<ReturnsAsserts<bool, Asserts>> The_client_checks_that_a_directory_exists(AbsoluteDirectoryPath path)
       => new(() => Check_that_a_directory_exists(path));
 
    /* ------------------------------------------------------------ */
 
-   public Act<ReturnAsserts<bool, Asserts>> The_client_checks_that_a_file_does_not_exist(AbsoluteFilePath path)
+   public Act<ReturnsAsserts<bool, Asserts>> The_client_checks_that_a_file_does_not_exist(AbsoluteFilePath path)
       => new(() => Check_that_a_file_does_not_exist(path));
 
    /* ------------------------------------------------------------ */
 
-   public Act<ReturnAsserts<bool, Asserts>> The_client_checks_that_a_file_exists(AbsoluteFilePath path)
+   public Act<ReturnsAsserts<bool, Asserts>> The_client_checks_that_a_file_exists(AbsoluteFilePath path)
       => new(() => Check_that_a_file_exists(path));
 
    /* ------------------------------------------------------------ */
@@ -33,7 +33,7 @@ public sealed class Acts : IActs
       => new(() => Create_a_directory(path));
 
    /* ------------------------------------------------------------ */
-   public Act<ReturnAsserts<AbsoluteDirectoryPath, Asserts>> The_client_gets_the_current_directory()
+   public Act<ReturnsAsserts<AbsoluteDirectoryPath, Asserts>> The_client_gets_the_current_directory()
       => new(Get_the_current_directory);
 
    /* ------------------------------------------------------------ */
@@ -65,32 +65,32 @@ public sealed class Acts : IActs
    // Private Methods
    /* ------------------------------------------------------------ */
 
-   private ReturnAsserts<bool, Asserts> Check_that_a_directory_does_not_exist(AbsoluteDirectoryPath path)
-      => ReturnAsserts<bool, Asserts>
+   private ReturnsAsserts<bool, Asserts> Check_that_a_directory_does_not_exist(AbsoluteDirectoryPath path)
+      => ReturnsAsserts<bool, Asserts>
         .Create($"{nameof(IFileSystem)}.{nameof(IFileSystem.DoesNotExist)}({nameof(AbsoluteDirectoryPath)})",
                 _fileSystem.DoesNotExist(path),
                 () => Asserts.Create(_fileSystem));
 
    /* ------------------------------------------------------------ */
 
-   private ReturnAsserts<bool, Asserts> Check_that_a_directory_exists(AbsoluteDirectoryPath path)
-      => ReturnAsserts<bool, Asserts>
+   private ReturnsAsserts<bool, Asserts> Check_that_a_directory_exists(AbsoluteDirectoryPath path)
+      => ReturnsAsserts<bool, Asserts>
         .Create($"{nameof(IFileSystem)}.{nameof(IFileSystem.Exists)}({nameof(AbsoluteDirectoryPath)})",
                 _fileSystem.Exists(path),
                 () => Asserts.Create(_fileSystem));
 
    /* ------------------------------------------------------------ */
 
-   private ReturnAsserts<bool, Asserts> Check_that_a_file_does_not_exist(AbsoluteFilePath path)
-      => ReturnAsserts<bool, Asserts>
+   private ReturnsAsserts<bool, Asserts> Check_that_a_file_does_not_exist(AbsoluteFilePath path)
+      => ReturnsAsserts<bool, Asserts>
         .Create($"{nameof(IFileSystem)}.{nameof(IFileSystem.DoesNotExist)}({nameof(AbsoluteFilePath)})",
                 _fileSystem.DoesNotExist(path),
                 () => Asserts.Create(_fileSystem));
 
    /* ------------------------------------------------------------ */
 
-   private ReturnAsserts<bool, Asserts> Check_that_a_file_exists(AbsoluteFilePath path)
-      => ReturnAsserts<bool, Asserts>
+   private ReturnsAsserts<bool, Asserts> Check_that_a_file_exists(AbsoluteFilePath path)
+      => ReturnsAsserts<bool, Asserts>
         .Create($"{nameof(IFileSystem)}.{nameof(IFileSystem.Exists)}({nameof(AbsoluteFilePath)})",
                 _fileSystem.Exists(path),
                 () => Asserts.Create(_fileSystem));
@@ -105,8 +105,8 @@ public sealed class Acts : IActs
 
    /* ------------------------------------------------------------ */
 
-   private ReturnAsserts<AbsoluteDirectoryPath, Asserts> Get_the_current_directory()
-      => ReturnAsserts<AbsoluteDirectoryPath, Asserts>
+   private ReturnsAsserts<AbsoluteDirectoryPath, Asserts> Get_the_current_directory()
+      => ReturnsAsserts<AbsoluteDirectoryPath, Asserts>
         .Create($"{nameof(IFileSystem)}.{nameof(IFileSystem.CurrentDirectory)}",
                 _fileSystem.CurrentDirectory(),
                 () => Asserts.Create(_fileSystem));

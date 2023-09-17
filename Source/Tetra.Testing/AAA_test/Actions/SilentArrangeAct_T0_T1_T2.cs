@@ -19,19 +19,19 @@ partial class AAA_test
 
       public static SilentArrangeAct<TInitialArranges, TNextArranges, TNextAsserts> Create(Func<TInitialArranges, TNextArranges> arrange,
                                                                                            Func<TInitialArranges, TNextAsserts>  act)
-         => new(AtomicArrangeAct<TInitialArranges, TNextArranges, TNextAsserts>.Create(arrange,
-                                                                                       act,
-                                                                                       ""));
+         => new(AtomicArrangeAct<TInitialArranges, TNextArranges, TNextAsserts>.Create("",
+                                                                                       arrange,
+                                                                                       act));
 
       /* ------------------------------------------------------------ */
       // IArrange<TArranges, TAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.GivenCharacteriser characteriser) { }
+      public void AddBriefCharacterisation(GivenCharacteriser characteriser) { }
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.GivenCharacteriser characteriser) { }
+      public void AddFullCharacterisation(GivenCharacteriser characteriser) { }
 
       /* ------------------------------------------------------------ */
 
@@ -43,11 +43,11 @@ partial class AAA_test
       // IAct<TInitialArranges, TNextAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.WhenCharacteriser characteriser) { }
+      public void AddBriefCharacterisation(WhenCharacteriser characteriser) { }
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.WhenCharacteriser characteriser) { }
+      public void AddFullCharacterisation(WhenCharacteriser characteriser) { }
 
       /* ------------------------------------------------------------ */
 

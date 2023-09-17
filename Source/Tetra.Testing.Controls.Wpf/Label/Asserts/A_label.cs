@@ -11,7 +11,7 @@ public static class A_label
 
    public static AAA_test.IAssert<LabelAsserts<T>, T> Matches<T>(Expected_label expected,
                                                                  string         characterisationHeader)
-      where T : AAA_test.IAsserts
+      where T : IAsserts
       => Content_is<T>(expected.Content(),
                        characterisationHeader)
         .And(Visibility_is<T>(expected.Visibility(),
@@ -22,16 +22,16 @@ public static class A_label
 
    public static AAA_test.IAssert<LabelAsserts<T>, LabelAsserts<T>> Content_is<T>(object expected,
                                                                                   string characterisationHeader)
-      where T : AAA_test.IAsserts
+      where T : IAsserts
       => AAA_test
         .AtomicAssert<LabelAsserts<T>, LabelAsserts<T>>
-        .Create(asserts => asserts.Content_is(expected),
-                $"{characterisationHeader}.{nameof(Content_is)}: {expected}");
+        .Create($"{characterisationHeader}.{nameof(Content_is)}: {expected}",
+                asserts => asserts.Content_is(expected));
 
    /* ------------------------------------------------------------ */
 
    public static AAA_test.IAssert<LabelAsserts<T>, T> ReturnToParent<T>()
-      where T : AAA_test.IAsserts
+      where T : IAsserts
       => AAA_test
         .SilentAssert<LabelAsserts<T>, T>
         .Create(asserts => asserts.ReturnToParent());
@@ -40,11 +40,11 @@ public static class A_label
 
    public static AAA_test.IAssert<LabelAsserts<T>, LabelAsserts<T>> Visibility_is<T>(Visibility expected,
                                                                                      string     characterisationHeader)
-      where T : AAA_test.IAsserts
+      where T : IAsserts
       => AAA_test
         .AtomicAssert<LabelAsserts<T>, LabelAsserts<T>>
-        .Create(asserts => asserts.Visibility_is(expected),
-                $"{characterisationHeader}.{nameof(Visibility_is)}: {expected.ToHumanReadable()}");
+        .Create($"{characterisationHeader}.{nameof(Visibility_is)}: {expected.ToHumanReadable()}",
+                asserts => asserts.Visibility_is(expected));
 
    /* ------------------------------------------------------------ */
 }

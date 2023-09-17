@@ -3,7 +3,7 @@
 namespace Check.Check_Label;
 
 public sealed class Act<T>
-   where T : AAA_test.IAsserts
+   where T :IAsserts
 {
    /* ------------------------------------------------------------ */
    // Internal Constructors

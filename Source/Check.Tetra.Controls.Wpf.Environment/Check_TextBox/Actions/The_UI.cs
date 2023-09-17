@@ -12,8 +12,8 @@ public static class The_UI
    public static AAA_test.IArrange<TheTextBoxHasNotBeenCreated.Arranges> Has_not_created_the_text_box()
       => AAA_test
         .AtomicArrange<TheTextBoxHasNotBeenCreated.Arranges>
-        .Create(TheTextBoxHasNotBeenCreated.Arranges.Create,
-                $"{nameof(The_UI)}.{nameof(Has_not_created_the_text_box)}");
+        .Create($"{nameof(The_UI)}.{nameof(Has_not_created_the_text_box)}",
+                TheTextBoxHasNotBeenCreated.Arranges.Create);
 
    /* ------------------------------------------------------------ */
 
@@ -30,12 +30,12 @@ public static class The_UI
       The_UI_creates_a_text_box args)
       => AAA_test
         .AtomicArrangeAct<TheTextBoxHasNotBeenCreated.Arranges, TheTextBoxHasBeenCreated.Arranges, TheTextBoxHasBeenCreated.Asserts>
-        .Create(environment => environment.The_UI_creates_the_text_box(args),
+        .Create($"{nameof(The_UI)}.{nameof(Creates_the_text_box)}: {args.BriefCharacterisation()}",
+                environment => environment.The_UI_creates_the_text_box(args),
                 environment => environment
                               .WHEN()
                               .The_UI_creates_the_text_box(args)
-                              .THEN(),
-                $"{nameof(The_UI)}.{nameof(Creates_the_text_box)}: {args.BriefCharacterisation()}");
+                              .THEN());
 
    /* ------------------------------------------------------------ */
 }

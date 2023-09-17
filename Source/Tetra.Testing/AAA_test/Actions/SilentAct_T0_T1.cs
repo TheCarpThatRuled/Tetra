@@ -17,18 +17,18 @@ partial class AAA_test
       /* ------------------------------------------------------------ */
 
       public static SilentAct<TArranges, TAsserts> Create(Func<TArranges, TAsserts> act)
-         => new(AtomicAct<TArranges, TAsserts>.Create(act,
-                                                      ""));
+         => new(AtomicAct<TArranges, TAsserts>.Create("",
+                                                      act));
 
       /* ------------------------------------------------------------ */
       // IAct<TArranges, TAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.WhenCharacteriser characteriser) { }
+      public void AddBriefCharacterisation(WhenCharacteriser characteriser) { }
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.WhenCharacteriser characteriser) { }
+      public void AddFullCharacterisation(WhenCharacteriser characteriser) { }
 
       /* ------------------------------------------------------------ */
 

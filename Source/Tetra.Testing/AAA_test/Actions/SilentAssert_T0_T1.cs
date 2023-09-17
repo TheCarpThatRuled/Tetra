@@ -17,18 +17,18 @@ partial class AAA_test
       /* ------------------------------------------------------------ */
 
       public static SilentAssert<TInitialAsserts, TNextAsserts> Create(Func<TInitialAsserts, TNextAsserts> assert)
-         => new(AtomicAssert<TInitialAsserts, TNextAsserts>.Create(assert,
-                                                                   ""));
+         => new(AtomicAssert<TInitialAsserts, TNextAsserts>.Create("",
+                                                                   assert));
 
       /* ------------------------------------------------------------ */
       // IAssert<TInitialAsserts, TNextAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.ThenCharacteriser characteriser) { }
+      public void AddBriefCharacterisation(ThenCharacteriser characteriser) { }
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.ThenCharacteriser characteriser) { }
+      public void AddFullCharacterisation(ThenCharacteriser characteriser) { }
 
       /* ------------------------------------------------------------ */
 

@@ -2,30 +2,55 @@
 
 namespace Tetra.Testing;
 
-public sealed class ReturnAsserts<T, TNext> : AAA_test.IAsserts
-   where TNext : AAA_test.IAsserts
+public sealed class OptionAsserts<T, TNext> : IAsserts
+   where TNext : IAsserts
 {
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static ReturnAsserts<T, TNext> Create(string      description,
-                                                T           error,
+   public static OptionAsserts<T, TNext> Create(string      description,
+                                                IOption<T>  actual,
                                                 Func<TNext> next)
       => new(description,
-             error,
+             actual,
              next);
 
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
-   public TNext The_return_value_was(T expected)
+   public TNext IsANone()
+   {
+      Assert
+        .That
+        .IsANone("Return Value",
+                 _actual);
+
+      return _next();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public TNext IsASome(T expected)
+   {
+      Assert
+        .That
+        .IsASome("Return Value",
+                 expected,
+                 _actual);
+
+      return _next();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public TNext IsReferenceEqualTo(T expected)
    {
       Assert.That
-            .AreEqual(_description,
-                      expected,
-                      _actual);
+            .AreReferenceEqual(_description,
+                               expected,
+                               _actual);
 
       return _next();
    }
@@ -35,15 +60,15 @@ public sealed class ReturnAsserts<T, TNext> : AAA_test.IAsserts
    /* ------------------------------------------------------------ */
 
    private readonly string      _description;
-   private readonly T           _actual;
+   private readonly IOption<T>  _actual;
    private readonly Func<TNext> _next;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private ReturnAsserts(string      description,
-                         T           actual,
+   private OptionAsserts(string      description,
+                         IOption<T>  actual,
                          Func<TNext> next)
    {
       _description = description;

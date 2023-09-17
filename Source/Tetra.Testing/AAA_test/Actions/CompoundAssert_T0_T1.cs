@@ -21,7 +21,7 @@ partial class AAA_test
       // IAssertAction<TInitialAsserts, TNextAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.ThenCharacteriser characteriser)
+      public void AddBriefCharacterisation(ThenCharacteriser characteriser)
       {
          _first.AddBriefCharacterisation(characteriser);
          _second.AddBriefCharacterisation(characteriser);
@@ -29,7 +29,7 @@ partial class AAA_test
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.ThenCharacteriser characteriser)
+      public void AddFullCharacterisation(ThenCharacteriser characteriser)
       {
          _first.AddFullCharacterisation(characteriser);
          _second.AddFullCharacterisation(characteriser);

@@ -11,11 +11,11 @@ partial class AAA_test
       // Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.WhenCharacteriser characteriser);
+      public void AddBriefCharacterisation(WhenCharacteriser characteriser);
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.WhenCharacteriser characteriser);
+      public void AddFullCharacterisation(WhenCharacteriser characteriser);
 
       /* ------------------------------------------------------------ */
 

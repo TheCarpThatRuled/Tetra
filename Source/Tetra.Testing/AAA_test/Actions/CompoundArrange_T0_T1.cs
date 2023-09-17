@@ -20,7 +20,7 @@ partial class AAA_test
       // IArrangeAction<TArranges> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.GivenCharacteriser characteriser)
+      public void AddBriefCharacterisation(GivenCharacteriser characteriser)
       {
          _first.AddBriefCharacterisation(characteriser);
          _second.AddBriefCharacterisation(characteriser);
@@ -28,7 +28,7 @@ partial class AAA_test
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.GivenCharacteriser characteriser)
+      public void AddFullCharacterisation(GivenCharacteriser characteriser)
       {
          _first.AddFullCharacterisation(characteriser);
          _second.AddFullCharacterisation(characteriser);
@@ -36,7 +36,7 @@ partial class AAA_test
 
       /* ------------------------------------------------------------ */
 
-      public TNextArranges Arrange(AAA_test.Disposables disposables)
+      public TNextArranges Arrange(Disposables disposables)
          => _second
            .Arrange(_first.Arrange(disposables));
 

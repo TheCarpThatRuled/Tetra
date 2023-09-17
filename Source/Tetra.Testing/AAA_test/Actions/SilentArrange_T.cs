@@ -15,23 +15,23 @@ partial class AAA_test
 
       /* ------------------------------------------------------------ */
 
-      public static SilentArrange<TArrange> Create(Func<AAA_test.Disposables, TArrange> arrange)
-         => new(AtomicArrange<TArrange>.Create(arrange,
-                                               string.Empty));
+      public static SilentArrange<TArrange> Create(Func<Disposables, TArrange> arrange)
+         => new(AtomicArrange<TArrange>.Create(string.Empty,
+                                               arrange));
 
       /* ------------------------------------------------------------ */
       // IArrangeAction<T0, T1> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.GivenCharacteriser characteriser) { }
+      public void AddBriefCharacterisation(GivenCharacteriser characteriser) { }
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.GivenCharacteriser characteriser) { }
+      public void AddFullCharacterisation(GivenCharacteriser characteriser) { }
 
       /* ------------------------------------------------------------ */
 
-      public TArrange Arrange(AAA_test.Disposables disposables)
+      public TArrange Arrange(Disposables disposables)
          => _arrange
            .Arrange(disposables);
 

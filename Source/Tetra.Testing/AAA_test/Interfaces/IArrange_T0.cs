@@ -10,15 +10,15 @@ partial class AAA_test
       // Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.GivenCharacteriser characteriser);
+      public void AddBriefCharacterisation(GivenCharacteriser characteriser);
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.GivenCharacteriser characteriser);
+      public void AddFullCharacterisation(GivenCharacteriser characteriser);
 
       /* ------------------------------------------------------------ */
 
-      public TArranges Arrange(AAA_test.Disposables disposables);
+      public TArranges Arrange(Disposables disposables);
 
       /* ------------------------------------------------------------ */
    }

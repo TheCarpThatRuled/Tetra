@@ -13,24 +13,24 @@ public static class A_file
    public static AAA_test.IArrange<Arranges, Arranges> Does_not_exists(string path)
       => AAA_test
         .AtomicArrange<Arranges, Arranges>
-        .Create(environment => environment.A_file_does_not_exist(path),
-                $"{nameof(A_file)}.{nameof(Does_not_exists)}: <{path}>");
+        .Create($"{nameof(A_file)}.{nameof(Does_not_exists)}: <{path}>",
+                environment => environment.A_file_does_not_exist(path));
 
    /* ------------------------------------------------------------ */
 
    public static AAA_test.IArrange<Arranges, Arranges> Exists(string path)
       => AAA_test
         .AtomicArrange<Arranges, Arranges>
-        .Create(environment => environment.A_file_exists(path),
-                $"{nameof(A_file)}.{nameof(Exists)}: <{path}>");
+        .Create($"{nameof(A_file)}.{nameof(Exists)}: <{path}>",
+                environment => environment.A_file_exists(path));
 
    /* ------------------------------------------------------------ */
 
    public static AAA_test.IArrange<Arranges, Arranges> Is_locked(string path)
       => AAA_test
         .AtomicArrange<Arranges, Arranges>
-        .Create(environment => environment.A_file_is_locked(path),
-                $"{nameof(A_file)}.{nameof(Is_locked)}: <{path}>");
+        .Create($"{nameof(A_file)}.{nameof(Is_locked)}: <{path}>",
+                environment => environment.A_file_is_locked(path));
 
    /* ------------------------------------------------------------ */
 
@@ -44,8 +44,8 @@ public static class A_file
    public static AAA_test.IArrange<Arranges, Arranges> Is_unlocked(string path)
       => AAA_test
         .AtomicArrange<Arranges, Arranges>
-        .Create(environment => environment.A_file_is_unlocked(path),
-                $"{nameof(A_file)}.{nameof(Is_unlocked)}: <{path}>");
+        .Create($"{nameof(A_file)}.{nameof(Is_unlocked)}: <{path}>",
+                environment => environment.A_file_is_unlocked(path));
 
    /* ------------------------------------------------------------ */
 }

@@ -13,8 +13,8 @@ public static class The_initial_state
    public static AAA_test.IArrange<Arranges> Is_unmodified()
       => AAA_test
         .AtomicArrange<Arranges>
-        .Create(Arranges.Create,
-                $"{nameof(The_initial_state)}");
+        .Create($"{nameof(The_initial_state)}",
+                Arranges.Create);
 
    /* ------------------------------------------------------------ */
 

@@ -11,8 +11,8 @@ partial class AAA_test
       // Factory Functions
       /* ------------------------------------------------------------ */
 
-      public static RecharacterisedAssert<TInitialAsserts, TNextAsserts> Create(IAssert<TInitialAsserts, TNextAsserts> assert,
-                                                                                string                                 characterisation)
+      public static RecharacterisedAssert<TInitialAsserts, TNextAsserts> Create(string                                 characterisation,
+                                                                                IAssert<TInitialAsserts, TNextAsserts> assert)
          => new(assert,
                 characterisation);
 
@@ -20,13 +20,13 @@ partial class AAA_test
       // IAssert<TAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.ThenCharacteriser characteriser)
+      public void AddBriefCharacterisation(ThenCharacteriser characteriser)
          => characteriser
            .AddClauseToBriefCharacterisation(_characterisation);
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.ThenCharacteriser characteriser)
+      public void AddFullCharacterisation(ThenCharacteriser characteriser)
          => _assert
            .AddFullCharacterisation(characteriser);
 

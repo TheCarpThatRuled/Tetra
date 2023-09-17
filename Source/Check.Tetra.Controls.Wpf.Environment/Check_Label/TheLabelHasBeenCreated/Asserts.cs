@@ -6,7 +6,7 @@ namespace Check.Check_Label;
 
 public sealed partial class TheLabelHasBeenCreated
 {
-   public sealed class Asserts : AAA_test.IAsserts
+   public sealed class Asserts :IAsserts
    {
       /* ------------------------------------------------------------ */
       // Properties

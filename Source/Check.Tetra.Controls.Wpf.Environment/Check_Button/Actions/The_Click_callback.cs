@@ -12,8 +12,8 @@ public static class The_Click_callback
    public static AAA_test.IAssert<TheButtonHasBeenCreated.Asserts, TheButtonHasBeenCreated.Asserts> Was_invoked(uint numberOfClicks)
       => AAA_test
         .AtomicAssert<TheButtonHasBeenCreated.Asserts, TheButtonHasBeenCreated.Asserts>
-        .Create(environment => environment.The_Click_callback_was_invoked(numberOfClicks),
-                $"{nameof(The_Click_callback)}.{nameof(Was_invoked)}{(numberOfClicks != 1 ? $": {numberOfClicks} times" : string.Empty)}");
+        .Create($"{nameof(The_Click_callback)}.{nameof(Was_invoked)}{(numberOfClicks != 1 ? $": {numberOfClicks} times" : string.Empty)}",
+                environment => environment.The_Click_callback_was_invoked(numberOfClicks));
 
    /* ------------------------------------------------------------ */
 }

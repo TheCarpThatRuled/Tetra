@@ -10,14 +10,13 @@ public static class Option
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Creates a some.
+   /// Creates a <b>some</b>.
    /// </summary>
    /// <typeparam name="T">The type of the contained object</typeparam>
    /// <param name="content">The value the <c>IOption</c> shall contain.</param>
-   /// <returns>A some <c>IOption</c> that contains <c>content</c>.</returns>
+   /// <returns>A <b>some</b> <c>IOption</c> that contains <c>content</c>.</returns>
    public static IOption<T> Some<T>(T content)
-      => Option<T>
-        .Some(content);
+      => new Option<T>.SomeOption(content);
 
    /* ------------------------------------------------------------ */
    // Extensions

@@ -11,8 +11,8 @@ partial class AAA_test
       // Factory Functions
       /* ------------------------------------------------------------ */
 
-      public static RecharacterisedAct<TArranges, TAsserts> Create(IAct<TArranges, TAsserts> act,
-                                                                   string                    characterisation)
+      public static RecharacterisedAct<TArranges, TAsserts> Create(string                    characterisation,
+                                                                   IAct<TArranges, TAsserts> act)
          => new(act,
                 characterisation);
 
@@ -20,13 +20,13 @@ partial class AAA_test
       // IAct<TInitialArranges, TNextArranges> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.WhenCharacteriser characteriser)
+      public void AddBriefCharacterisation(WhenCharacteriser characteriser)
          => characteriser
            .AddClauseToBriefCharacterisation(_characterisation);
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.WhenCharacteriser characteriser)
+      public void AddFullCharacterisation(WhenCharacteriser characteriser)
          => _act
            .AddFullCharacterisation(characteriser);
 

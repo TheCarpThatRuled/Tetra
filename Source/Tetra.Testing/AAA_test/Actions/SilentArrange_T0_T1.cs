@@ -17,18 +17,18 @@ partial class AAA_test
       /* ------------------------------------------------------------ */
 
       public static SilentArrange<TInitialArranges, TNextArranges> Create(Func<TInitialArranges, TNextArranges> arrange)
-         => new(AtomicArrange<TInitialArranges, TNextArranges>.Create(arrange,
-                                                                      ""));
+         => new(AtomicArrange<TInitialArranges, TNextArranges>.Create("",
+                                                                      arrange));
 
       /* ------------------------------------------------------------ */
       // IArrange<TArranges, TAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.GivenCharacteriser characteriser) { }
+      public void AddBriefCharacterisation(GivenCharacteriser characteriser) { }
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.GivenCharacteriser characteriser) { }
+      public void AddFullCharacterisation(GivenCharacteriser characteriser) { }
 
       /* ------------------------------------------------------------ */
 

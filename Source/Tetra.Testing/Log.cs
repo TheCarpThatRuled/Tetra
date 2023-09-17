@@ -30,6 +30,17 @@ public static class Log
 
    /* ------------------------------------------------------------ */
 
+   public static void ToDebugOutput_AreReferenceEqual(string  message,
+                                             object? expected,
+                                             object? actual)
+   {
+      ToDebugOutput(message);
+      ToDebugOutput($"Test are reference equal; Expected: '{expected}', Actual: '{actual}'");
+      ToDebugOutput_NewLine();
+   }
+
+   /* ------------------------------------------------------------ */
+
    public static void ToDebugOutput_AreEqual(string   message,
                                              DateTime expected,
                                              DateTime actual)

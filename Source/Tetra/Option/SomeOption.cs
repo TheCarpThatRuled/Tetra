@@ -58,6 +58,18 @@ partial class Option<T>
                            Action    whenNone)
       {
          whenSome(Content);
+      
+         return this;
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public IOption<T> Do<TExternalState>(TExternalState            externalState,
+                                           Action<TExternalState, T> whenSome,
+                                           Action<TExternalState>    whenNone)
+      {
+         whenSome(externalState,
+                  Content);
 
          return this;
       }

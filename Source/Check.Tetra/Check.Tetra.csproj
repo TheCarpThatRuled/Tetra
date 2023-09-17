@@ -33,8 +33,4 @@
     <ProjectReference Include="..\Tetra.Testing.FSCheck\Tetra.Testing.FSCheck.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="EitherTests\" />
-  </ItemGroup>
-
 </Project>

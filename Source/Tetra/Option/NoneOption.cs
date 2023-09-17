@@ -52,6 +52,17 @@ static partial class Option<T>
 
       /* ------------------------------------------------------------ */
 
+      public IOption<T> Do<TExternalState>(TExternalState            externalState,
+                                           Action<TExternalState, T> whenSome,
+                                           Action<TExternalState>    whenNone)
+      {
+         whenNone(externalState);
+
+         return this;
+      }
+
+      /* ------------------------------------------------------------ */
+
       public IOption<TNew> Map<TNew>(Func<T, TNew> whenSome)
          => new Option<TNew>.NoneOption();
 

@@ -12,8 +12,8 @@ public static class The_UI
    public static AAA_test.IArrange<TheButtonHasNotBeenCreated.Arranges> Has_not_created_the_button()
       => AAA_test
         .AtomicArrange<TheButtonHasNotBeenCreated.Arranges>
-        .Create(TheButtonHasNotBeenCreated.Arranges.Create,
-                $"{nameof(The_UI)}.{nameof(Has_not_created_the_button)}");
+        .Create($"{nameof(The_UI)}.{nameof(Has_not_created_the_button)}",
+                TheButtonHasNotBeenCreated.Arranges.Create);
 
    /* ------------------------------------------------------------ */
 
@@ -30,12 +30,12 @@ public static class The_UI
       The_UI_creates_a_button args)
       => AAA_test
         .AtomicArrangeAct<TheButtonHasNotBeenCreated.Arranges, TheButtonHasBeenCreated.Arranges, TheButtonHasBeenCreated.Asserts>
-        .Create(environment => environment.The_UI_creates_the_button(args),
+        .Create($"{nameof(The_UI)}.{nameof(Creates_the_button)}: {args.BriefCharacterisation()}",
+                environment => environment.The_UI_creates_the_button(args),
                 environment => environment
                               .WHEN()
                               .The_UI_creates_the_button(args)
-                              .THEN(),
-                $"{nameof(The_UI)}.{nameof(Creates_the_button)}: {args.BriefCharacterisation()}");
+                              .THEN());
 
    /* ------------------------------------------------------------ */
 }

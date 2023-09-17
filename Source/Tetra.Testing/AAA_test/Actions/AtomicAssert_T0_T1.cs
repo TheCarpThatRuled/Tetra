@@ -11,22 +11,22 @@ partial class AAA_test
       // Factory Functions
       /* ------------------------------------------------------------ */
 
-      public static AtomicAssert<TInitialAsserts, TNextAsserts> Create(Func<TInitialAsserts, TNextAsserts> arrange,
-                                                                       string                              characterisation)
-         => new(arrange,
+      public static AtomicAssert<TInitialAsserts, TNextAsserts> Create(string                              characterisation,
+                                                                       Func<TInitialAsserts, TNextAsserts> assert)
+         => new(assert,
                 characterisation);
 
       /* ------------------------------------------------------------ */
       // IAssert<TInitialAsserts, TNextAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.ThenCharacteriser characteriser)
+      public void AddBriefCharacterisation(ThenCharacteriser characteriser)
          => characteriser
            .AddClauseToBriefCharacterisation(_characterisation);
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.ThenCharacteriser characteriser)
+      public void AddFullCharacterisation(ThenCharacteriser characteriser)
          => characteriser
            .AddClauseToFullCharacterisation(_characterisation);
 

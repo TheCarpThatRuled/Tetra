@@ -11,8 +11,8 @@ partial class AAA_test
       // Factory Functions
       /* ------------------------------------------------------------ */
 
-      public static AtomicAct<TArranges, TAsserts> Create(Func<TArranges, TAsserts> act,
-                                                          string                    characterisation)
+      public static AtomicAct<TArranges, TAsserts> Create(string                    characterisation,
+                                                          Func<TArranges, TAsserts> act)
          => new(act,
                 characterisation);
 
@@ -20,13 +20,13 @@ partial class AAA_test
       // IArrange<TArranges, TAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.WhenCharacteriser characteriser)
+      public void AddBriefCharacterisation(WhenCharacteriser characteriser)
          => characteriser
            .AddClauseToBriefCharacterisation(_characterisation);
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.WhenCharacteriser characteriser)
+      public void AddFullCharacterisation(WhenCharacteriser characteriser)
          => characteriser
            .AddClauseToFullCharacterisation(_characterisation);
 

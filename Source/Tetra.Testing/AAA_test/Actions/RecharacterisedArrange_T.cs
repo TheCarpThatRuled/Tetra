@@ -10,8 +10,8 @@ partial class AAA_test
       // Factory Functions
       /* ------------------------------------------------------------ */
 
-      public static RecharacterisedArrange<TArranges> Create(IArrange<TArranges> arrange,
-                                                             string              characterisation)
+      public static RecharacterisedArrange<TArranges> Create(string              characterisation,
+                                                             IArrange<TArranges> arrange)
          => new(arrange,
                 characterisation);
 
@@ -19,19 +19,19 @@ partial class AAA_test
       // IArrange<TArranges> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.GivenCharacteriser characteriser)
+      public void AddBriefCharacterisation(GivenCharacteriser characteriser)
          => characteriser
            .AddClauseToBriefCharacterisation(_characterisation);
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.GivenCharacteriser characteriser)
+      public void AddFullCharacterisation(GivenCharacteriser characteriser)
          => _arrange
            .AddFullCharacterisation(characteriser);
 
       /* ------------------------------------------------------------ */
 
-      public TArranges Arrange(AAA_test.Disposables disposables)
+      public TArranges Arrange(Disposables disposables)
          => _arrange
            .Arrange(disposables);
 

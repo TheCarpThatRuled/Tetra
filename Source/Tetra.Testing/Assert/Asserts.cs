@@ -30,6 +30,28 @@ public static partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
+   public static Assert AreReferenceEqual(this Assert assert,
+                                          string      description,
+                                          object?     expected,
+                                          object?     actual)
+   {
+      Log.ToDebugOutput_AreReferenceEqual(description,
+                                          expected,
+                                          actual);
+
+      if (!ReferenceEquals(expected,
+                           actual))
+      {
+         throw Failed.Assert($"{description}: the expected and actual are not reference equal",
+                             expected,
+                             actual);
+      }
+
+      return assert;
+   }
+
+   /* ------------------------------------------------------------ */
+
    public static Assert AreEqualOrdinalIgnoreCase(this Assert assert,
                                                   string      description,
                                                   string      expected,

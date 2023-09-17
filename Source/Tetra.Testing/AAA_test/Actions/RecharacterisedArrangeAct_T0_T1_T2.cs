@@ -12,8 +12,8 @@ partial class AAA_test
       // Factory Functions
       /* ------------------------------------------------------------ */
 
-      public static RecharacterisedArrangeAct<TInitialArranges, TNextArranges, TNextAsserts> Create(IArrangeAct<TInitialArranges, TNextArranges, TNextAsserts> arrange,
-                                                                                                    string                                                     characterisation)
+      public static RecharacterisedArrangeAct<TInitialArranges, TNextArranges, TNextAsserts> Create(string                                                     characterisation,
+                                                                                                    IArrangeAct<TInitialArranges, TNextArranges, TNextAsserts> arrange)
          => new(arrange,
                 characterisation);
 
@@ -21,13 +21,13 @@ partial class AAA_test
       // IArrange<TInitialArranges, TNextArranges> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.GivenCharacteriser characteriser)
+      public void AddBriefCharacterisation(GivenCharacteriser characteriser)
          => characteriser
            .AddClauseToBriefCharacterisation(_characterisation);
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.GivenCharacteriser characteriser)
+      public void AddFullCharacterisation(GivenCharacteriser characteriser)
          => _arrangeAct
            .AddFullCharacterisation(characteriser);
 
@@ -41,13 +41,13 @@ partial class AAA_test
       // IArrange<TInitialArranges, TNextArranges> Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(AAA_test.WhenCharacteriser characteriser)
+      public void AddBriefCharacterisation(WhenCharacteriser characteriser)
          => _arrangeAct
            .AddBriefCharacterisation(characteriser);
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(AAA_test.WhenCharacteriser characteriser)
+      public void AddFullCharacterisation(WhenCharacteriser characteriser)
          => characteriser
            .AddClauseToFullCharacterisation(_characterisation);
 

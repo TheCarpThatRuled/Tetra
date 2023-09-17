@@ -3,8 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tetra.Testing;
 
-public sealed class LabelAsserts<T> : AAA_test.IAsserts
-   where T : AAA_test.IAsserts
+public sealed class LabelAsserts<T> : IAsserts
+   where T : IAsserts
 {
    /* ------------------------------------------------------------ */
    // Constructors

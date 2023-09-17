@@ -10,19 +10,19 @@ public static partial class Option<T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Creates a none.
+   /// Creates a <b>none</b>.
    /// </summary>
-   /// <returns>A none <c>IOption</c>.</returns>
+   /// <returns>A <b>none</b> <c>IOption</c>.</returns>
    public static IOption<T> None()
       => new NoneOption();
 
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Creates a some.
+   /// Creates a <b>some</b>.
    /// </summary>
    /// <param name="content">The value the <c>IOption</c> shall contain.</param>
-   /// <returns>A some <c>IOption</c> that contains <c>content</c>.</returns>
+   /// <returns>A <b>some</b> <c>IOption</c> that contains <c>content</c>.</returns>
    public static IOption<T> Some(T content)
       => new SomeOption(content);
 
