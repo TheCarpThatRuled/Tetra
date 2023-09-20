@@ -37,6 +37,16 @@ partial class Steps
       public ForMapWithExternalState for_Map_with_externalState { get; } = new();
 
       /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
+      public ForReduce for_Reduce { get; } = new();
+
+      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
+      public ForReduceWithExternalState for_Reduce_with_externalState { get; } = new();
+
+      /* ------------------------------------------------------------ */
       // Private Properties
       /* ------------------------------------------------------------ */
 

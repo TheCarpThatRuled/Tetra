@@ -9,12 +9,12 @@ public sealed class ReturnsThisAsserts<TNext> : IAsserts
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static ReturnsThisAsserts<TNext> Create(object?     source,
-                                                  object?     returnValue,
+   public static ReturnsThisAsserts<TNext> Create(object?     expected,
+                                                  object?     actual,
                                                   Func<TNext> next)
-      => new(next,
-             returnValue,
-             source);
+      => new(actual,
+             expected,
+             next);
 
    /* ------------------------------------------------------------ */
    // Methods
@@ -24,8 +24,8 @@ public sealed class ReturnsThisAsserts<TNext> : IAsserts
    {
       Assert.That
             .AreEqual("Return Value",
-                      _source,
-                      _returnValue);
+                      _expected,
+                      _actual);
 
       return _next();
    }
@@ -36,8 +36,8 @@ public sealed class ReturnsThisAsserts<TNext> : IAsserts
    {
       Assert.That
             .AreReferenceEqual("Return Value",
-                               _source,
-                               _returnValue);
+                               _expected,
+                               _actual);
 
       return _next();
    }
@@ -46,21 +46,21 @@ public sealed class ReturnsThisAsserts<TNext> : IAsserts
    // Private Fields
    /* ------------------------------------------------------------ */
 
+   private readonly object?     _actual;
+   private readonly object?     _expected;
    private readonly Func<TNext> _next;
-   private readonly object?     _returnValue;
-   private readonly object?     _source;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private ReturnsThisAsserts(Func<TNext> next,
-                              object?     returnValue,
-                              object?     source)
+   private ReturnsThisAsserts(object?     actual,
+                              object?     expected,
+                              Func<TNext> next)
    {
-      _next        = next;
-      _returnValue = returnValue;
-      _source      = source;
+      _actual   = actual;
+      _expected = expected;
+      _next     = next;
    }
 
    /* ------------------------------------------------------------ */

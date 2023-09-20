@@ -100,5 +100,12 @@ static partial class Option<T>
          => whenNone();
 
       /* ------------------------------------------------------------ */
+
+      public TNew Reduce<TExternalState, TNew>(TExternalState                externalState,
+                                               Func<TExternalState, T, TNew> whenSome,
+                                               Func<TExternalState, TNew>    whenNone)
+         => whenNone(externalState);
+
+      /* ------------------------------------------------------------ */
    }
 }

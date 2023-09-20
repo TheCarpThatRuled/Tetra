@@ -10,6 +10,8 @@ partial class Steps
       private sealed class Action
       {
          /* ------------------------------------------------------------ */
+         // Asserts
+         /* ------------------------------------------------------------ */
 
          public IAssert<TAsserts, TAsserts> was_invoked_once_with<T, TAsserts>(T expected)
             where TAsserts : IAsserts, IWhenSomeActionAsserts<T, TAsserts>

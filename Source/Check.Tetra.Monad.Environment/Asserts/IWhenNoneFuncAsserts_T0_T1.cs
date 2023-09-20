@@ -1,13 +1,15 @@
-﻿namespace Tetra.Testing;
+﻿using Tetra.Testing;
 
-public interface IReturnsAsserts<T, TAsserts>
+namespace Check;
+
+public interface IWhenNoneFuncAsserts<TReturn, TAsserts>
    where TAsserts : IAsserts
 {
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
-   public ObjectAsserts<T, TAsserts> ReturnValue();
+   public FuncAsserts<TReturn, TAsserts> WhenNone();
 
    /* ------------------------------------------------------------ */
 }

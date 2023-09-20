@@ -20,46 +20,26 @@ partial class Steps
       public ForDoWithExternalState for_Do_with_externalState { get; } = new();
 
       /* ------------------------------------------------------------ */
-      // Private Assert
-      /* ------------------------------------------------------------ */
 
-      private IAssert<TAsserts, TAsserts> was_invoked_once<TAsserts>()
-         where TAsserts : IAsserts, IWhenNoneActionAsserts<TAsserts>
-         => AtomicAssert<TAsserts, TAsserts>
-           .Create($"{nameof(the_whenNone)}_{nameof(was_invoked_once)}",
-                   assert => assert
-                            .WhenNone()
-                            .WasInvokedOnce());
+      // ReSharper disable once InconsistentNaming
+      public ForReduce for_Reduce { get; } = new();
 
       /* ------------------------------------------------------------ */
 
-      private IAssert<TAsserts, TAsserts> was_invoked_once_with<T, TAsserts>(T expected)
-         where TAsserts : IAsserts, IWhenNoneActionAsserts<T, TAsserts>
-         => AtomicAssert<TAsserts, TAsserts>
-           .Create($@"{nameof(the_whenNone)}_{nameof(was_invoked_once_with)} ""{expected}""",
-                   assert => assert
-                            .WhenNone()
-                            .WasInvokedOnce(expected));
+      // ReSharper disable once InconsistentNaming
+      public ForReduceWithExternalState for_Reduce_with_externalState { get; } = new();
+
+      /* ------------------------------------------------------------ */
+      // Private Properties
+      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
+      private Action action { get; } = new();
 
       /* ------------------------------------------------------------ */
 
-      private IAssert<TAsserts, TAsserts> was_not_invoked<TAsserts>()
-         where TAsserts : IAsserts, IWhenNoneActionAsserts<TAsserts>
-         => AtomicAssert<TAsserts, TAsserts>
-           .Create($"{nameof(the_whenNone)}_{nameof(was_not_invoked)}",
-                   assert => assert
-                            .WhenNone()
-                            .WasNotInvoked());
-
-      /* ------------------------------------------------------------ */
-
-      private IAssert<TAsserts, TAsserts> was_not_invoked<T, TAsserts>()
-         where TAsserts : IAsserts, IWhenNoneActionAsserts<T, TAsserts>
-         => AtomicAssert<TAsserts, TAsserts>
-           .Create($"{nameof(the_whenNone)}_{nameof(was_not_invoked)}",
-                   assert => assert
-                            .WhenNone()
-                            .WasNotInvoked());
+      // ReSharper disable once InconsistentNaming
+      private Function function { get; } = new();
 
       /* ------------------------------------------------------------ */
    }

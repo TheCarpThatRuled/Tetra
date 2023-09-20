@@ -11,9 +11,9 @@ public static class The_client
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static AAA_test.IAct<Arranges, ReturnsAsserts<bool, Asserts>> Checks_that_a_directory_does_not_exist(AbsoluteDirectoryPath path)
+   public static AAA_test.IAct<Arranges, ObjectAsserts<bool, Asserts>> Checks_that_a_directory_does_not_exist(AbsoluteDirectoryPath path)
       => AAA_test
-        .AtomicAct<Arranges, ReturnsAsserts<bool, Asserts>>
+        .AtomicAct<Arranges, ObjectAsserts<bool, Asserts>>
         .Create($"{nameof(The_client)}.{nameof(Checks_that_a_directory_does_not_exist)}: {path}",
                 environment => environment.WHEN()
                                           .The_client_checks_that_a_directory_does_not_exist(path)
@@ -21,9 +21,9 @@ public static class The_client
 
    /* ------------------------------------------------------------ */
 
-   public static AAA_test.IAct<Arranges, ReturnsAsserts<bool, Asserts>> Checks_that_a_directory_exists(AbsoluteDirectoryPath path)
+   public static AAA_test.IAct<Arranges, ObjectAsserts<bool, Asserts>> Checks_that_a_directory_exists(AbsoluteDirectoryPath path)
       => AAA_test
-        .AtomicAct<Arranges, ReturnsAsserts<bool, Asserts>>
+        .AtomicAct<Arranges, ObjectAsserts<bool, Asserts>>
         .Create($"{nameof(The_client)}.{nameof(Checks_that_a_directory_exists)}: {path}",
                 environment => environment.WHEN()
                                           .The_client_checks_that_a_directory_exists(path)
@@ -31,9 +31,9 @@ public static class The_client
 
    /* ------------------------------------------------------------ */
 
-   public static AAA_test.IAct<Arranges, ReturnsAsserts<bool, Asserts>> Checks_that_a_file_does_not_exist(AbsoluteFilePath path)
+   public static AAA_test.IAct<Arranges, ObjectAsserts<bool, Asserts>> Checks_that_a_file_does_not_exist(AbsoluteFilePath path)
       => AAA_test
-        .AtomicAct<Arranges, ReturnsAsserts<bool, Asserts>>
+        .AtomicAct<Arranges, ObjectAsserts<bool, Asserts>>
         .Create($"{nameof(The_client)}.{nameof(Checks_that_a_file_does_not_exist)}: {path}",
                 environment => environment.WHEN()
                                           .The_client_checks_that_a_file_does_not_exist(path)
@@ -41,9 +41,9 @@ public static class The_client
 
    /* ------------------------------------------------------------ */
 
-   public static AAA_test.IAct<Arranges, ReturnsAsserts<bool, Asserts>> Checks_that_a_file_exists(AbsoluteFilePath path)
+   public static AAA_test.IAct<Arranges, ObjectAsserts<bool, Asserts>> Checks_that_a_file_exists(AbsoluteFilePath path)
       => AAA_test
-        .AtomicAct<Arranges, ReturnsAsserts<bool, Asserts>>
+        .AtomicAct<Arranges, ObjectAsserts<bool, Asserts>>
         .Create($"{nameof(The_client)}.{nameof(Checks_that_a_file_exists)}: {path}",
                 environment => environment.WHEN()
                                           .The_client_checks_that_a_file_exists(path)
@@ -61,9 +61,9 @@ public static class The_client
 
    /* ------------------------------------------------------------ */
 
-   public static AAA_test.IAct<Arranges, ReturnsAsserts<AbsoluteDirectoryPath, Asserts>> Gets_the_current_directory()
+   public static AAA_test.IAct<Arranges, ObjectAsserts<AbsoluteDirectoryPath, Asserts>> Gets_the_current_directory()
       => AAA_test
-        .AtomicAct<Arranges, ReturnsAsserts<AbsoluteDirectoryPath, Asserts>>
+        .AtomicAct<Arranges, ObjectAsserts<AbsoluteDirectoryPath, Asserts>>
         .Create($"{nameof(The_client)}.{nameof(Gets_the_current_directory)}",
                 environment => environment.WHEN()
                                           .The_client_gets_the_current_directory()

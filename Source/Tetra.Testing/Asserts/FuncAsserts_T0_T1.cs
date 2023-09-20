@@ -2,32 +2,29 @@
 
 namespace Tetra.Testing;
 
-public sealed class FuncAsserts<T0, T1, TReturn, TNext>
+public sealed class FuncAsserts<TReturn, TNext>
    where TNext : IAsserts
 {
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static FuncAsserts<T0, T1, TReturn, TNext> Create(string                        description,
-                                                            FakeFunction<T0, T1, TReturn> actual,
-                                                            Func<TNext>                   next)
-      => new(actual,
-             description,
-             next);
+   public static FuncAsserts<TReturn, TNext> Create(string                description,
+                                                    FakeFunction<TReturn> actual,
+                                                    Func<TNext>           next)
+      => new(description,
+             next,
+             actual);
 
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
-   public TNext WasInvokedOnce(T0 expectedArg0,
-                               T1 expectedArg1)
+   public TNext WasInvokedOnce()
    {
       Assert
         .That
         .WasInvokedOnce(_description,
-                        expectedArg0,
-                        expectedArg1,
                         _actual);
 
       return _next();
@@ -49,17 +46,17 @@ public sealed class FuncAsserts<T0, T1, TReturn, TNext>
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly FakeFunction<T0, T1, TReturn> _actual;
-   private readonly string                        _description;
-   private readonly Func<TNext>                   _next;
+   private readonly FakeFunction<TReturn> _actual;
+   private readonly string                _description;
+   private readonly Func<TNext>           _next;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private FuncAsserts(FakeFunction<T0, T1, TReturn> actual,
-                       string                        description,
-                       Func<TNext>                   next)
+   private FuncAsserts(string                description,
+                       Func<TNext>           next,
+                       FakeFunction<TReturn> actual)
    {
       _actual      = actual;
       _description = description;

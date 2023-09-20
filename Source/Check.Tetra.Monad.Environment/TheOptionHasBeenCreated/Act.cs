@@ -12,10 +12,27 @@ public static partial class TheOptionHasBeenCreated
 
       public DoWasCalled.Asserts Do()
       {
-         var whenSome = FakeAction<FakeType>.Create();
          var whenNone = FakeAction.Create();
+         var whenSome = FakeAction<FakeType>.Create();
 
          var returnValue = _option.Do(whenSome.Action,
+                                      whenNone.Action);
+
+         return new(_option,
+                    whenSome,
+                    whenNone,
+                    returnValue);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public DoWasCalledWithExternalState.Asserts Do(FakeExternalState externalState)
+      {
+         var whenNone = FakeAction<FakeExternalState>.Create();
+         var whenSome = FakeAction<FakeExternalState, FakeType>.Create();
+
+         var returnValue = _option.Do(externalState,
+                                      whenSome.Action,
                                       whenNone.Action);
 
          return new(_option,
@@ -100,17 +117,34 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public DoWasCalledWithExternalState.Asserts Do(FakeExternalState externalState)
+      public ReduceWasCalled.Asserts Reduce(FakeNewType whenSomeValue,
+                                            FakeNewType whenNoneValue)
       {
-         var whenSome = FakeAction<FakeExternalState,FakeType>.Create();
-         var whenNone = FakeAction<FakeExternalState>.Create();
+         var whenNone = FakeFunction <FakeNewType>.Create(whenNoneValue);
+         var whenSome = FakeFunction<FakeType, FakeNewType>.Create(whenSomeValue);
 
-         var returnValue = _option.Do(externalState,
-                                      whenSome.Action,
-                                      whenNone.Action);
+         var returnValue = _option.Reduce(whenSome.Func,
+                                      whenNone.Func);
 
-         return new(_option,
-                    whenSome,
+         return new(whenSome,
+                    whenNone,
+                    returnValue);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public ReduceWasCalledWithExternalState.Asserts Reduce(FakeExternalState externalState,
+                                                             FakeNewType       whenSomeValue,
+                                                             FakeNewType       whenNoneValue)
+      {
+         var whenNone = FakeFunction<FakeExternalState, FakeNewType>.Create(whenNoneValue);
+         var whenSome = FakeFunction<FakeExternalState, FakeType, FakeNewType>.Create(whenSomeValue);
+
+         var returnValue = _option.Reduce(externalState,
+                                      whenSome.Func,
+                                      whenNone.Func);
+
+         return new(whenSome,
                     whenNone,
                     returnValue);
       }

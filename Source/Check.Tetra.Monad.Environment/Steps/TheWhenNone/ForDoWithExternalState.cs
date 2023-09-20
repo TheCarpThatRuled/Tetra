@@ -13,12 +13,12 @@ partial class Steps
          /* ------------------------------------------------------------ */
 
          public IAssert<DoWasCalledWithExternalState.Asserts, DoWasCalledWithExternalState.Asserts> was_invoked_once_with(FakeExternalState externalState)
-            => the_whenNone.was_invoked_once_with<FakeExternalState, DoWasCalledWithExternalState.Asserts>(externalState);
+            => the_whenNone.action.was_invoked_once_with<FakeExternalState, DoWasCalledWithExternalState.Asserts>(externalState);
 
          /* ------------------------------------------------------------ */
 
          public IAssert<DoWasCalledWithExternalState.Asserts, DoWasCalledWithExternalState.Asserts> was_not_invoked()
-            => the_whenNone.was_not_invoked<FakeExternalState, DoWasCalledWithExternalState.Asserts>();
+            => the_whenNone.action.was_not_invoked<FakeExternalState, DoWasCalledWithExternalState.Asserts>();
 
          /* ------------------------------------------------------------ */
       }

@@ -115,6 +115,14 @@ partial class Option<T>
          => whenSome(Content);
 
       /* ------------------------------------------------------------ */
+
+      public TNew Reduce<TExternalState, TNew>(TExternalState                externalState,
+                                               Func<TExternalState, T, TNew> whenSome,
+                                               Func<TExternalState, TNew>    whenNone)
+         => whenSome(externalState,
+                     Content);
+
+      /* ------------------------------------------------------------ */
       // Internal Fields
       /* ------------------------------------------------------------ */
 

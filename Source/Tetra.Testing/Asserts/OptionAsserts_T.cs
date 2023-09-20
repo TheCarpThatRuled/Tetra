@@ -12,8 +12,8 @@ public sealed class OptionAsserts<T, TNext> : IAsserts
    public static OptionAsserts<T, TNext> Create(string      description,
                                                 IOption<T>  actual,
                                                 Func<TNext> next)
-      => new(description,
-             actual,
+      => new(actual,
+             description,
              next);
 
    /* ------------------------------------------------------------ */
@@ -59,20 +59,20 @@ public sealed class OptionAsserts<T, TNext> : IAsserts
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly string      _description;
    private readonly IOption<T>  _actual;
+   private readonly string      _description;
    private readonly Func<TNext> _next;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private OptionAsserts(string      description,
-                         IOption<T>  actual,
+   private OptionAsserts(IOption<T>  actual,
+                         string      description,
                          Func<TNext> next)
    {
-      _description = description;
       _actual      = actual;
+      _description = description;
       _next        = next;
    }
 

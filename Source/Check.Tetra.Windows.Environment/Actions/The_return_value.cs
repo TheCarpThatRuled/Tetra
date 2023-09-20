@@ -11,9 +11,9 @@ public static class The_return_value
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static AAA_test.IAssert<ReturnsAsserts<T, Asserts>, Asserts> Is<T>(T expected)
+   public static AAA_test.IAssert<ObjectAsserts<T, Asserts>, Asserts> Is<T>(T expected)
       => AAA_test
-        .AtomicAssert<ReturnsAsserts<T, Asserts>, Asserts>
+        .AtomicAssert<ObjectAsserts<T, Asserts>, Asserts>
         .Create($"{nameof(The_return_value)}.{nameof(Is)}: {expected}",
                 environment => environment.IsEqualTo(expected));
 

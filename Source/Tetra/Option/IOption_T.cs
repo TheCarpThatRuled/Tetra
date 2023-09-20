@@ -168,4 +168,22 @@ public interface IOption<out T>
                             Func<TNew>    whenNone);
 
    /* ------------------------------------------------------------ */
+
+   /// <summary>
+   /// Unifies both branches of the <c>IOption</c> via mapping functions.
+   /// </summary>
+   /// <typeparam name="TExternalState">The type of the external state.</typeparam>
+   /// <typeparam name="TNew">The type this <c>IOption</c> shall be unified as.</typeparam>
+   /// <param name="externalState">External state pertinent to the functions</param>
+   /// <param name="whenNone">The function that will return the value to use, if the <c>IOption</c> is a <b>none</b>.</param>
+   /// <param name="whenSome">The mapping function that shall be applied to the content of the <c>IOption</c>, if it is a <b>some</b>.</param>
+   /// <returns>
+   /// The content of this <c>IOption</c> mapped through <c>whenSome</c> if it is a <b>some</b>;
+   /// otherwise the return value of <c>whenNone</c>.
+   /// </returns>
+   public TNew Reduce<TExternalState, TNew>(TExternalState                externalState,
+                                            Func<TExternalState, T, TNew> whenSome,
+                                            Func<TExternalState, TNew>    whenNone);
+
+   /* ------------------------------------------------------------ */
 }

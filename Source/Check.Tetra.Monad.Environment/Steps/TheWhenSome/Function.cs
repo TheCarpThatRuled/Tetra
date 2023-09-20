@@ -10,6 +10,8 @@ partial class Steps
       private sealed class Function
       {
          /* ------------------------------------------------------------ */
+         // Asserts
+         /* ------------------------------------------------------------ */
 
          public IAssert<TAsserts, TAsserts> was_invoked_once_with<T, TReturn, TAsserts>(T expected)
             where TAsserts : IAsserts, IWhenSomeFuncAsserts<T, TReturn, TAsserts>

@@ -45,6 +45,16 @@ partial class Steps
       public ForMapWithExternalState for_Map_with_externalState { get; } = new();
 
       /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
+      public ForReduce for_Reduce { get; } = new();
+
+      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
+      public ForReduceWithExternalState for_Reduce_with_externalState { get; } = new();
+
+      /* ------------------------------------------------------------ */
       // Assert
       /* ------------------------------------------------------------ */
 
@@ -62,6 +72,16 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
       // Private Assert
+      /* ------------------------------------------------------------ */
+
+      public IAssert<TAsserts, TAsserts> is_equal_to<T, TAsserts>(T expected)
+         where TAsserts : IAsserts, IReturnsAsserts<T, TAsserts>
+         => AtomicAssert<TAsserts, TAsserts>
+           .Create($@"{nameof(the_return_value)}_{nameof(is_equal_to)} ""{expected}""",
+                   assert => assert
+                            .ReturnValue()
+                            .IsEqualTo(expected));
+
       /* ------------------------------------------------------------ */
 
       private IAssert<TAsserts, TAsserts> is_this<TAsserts>()

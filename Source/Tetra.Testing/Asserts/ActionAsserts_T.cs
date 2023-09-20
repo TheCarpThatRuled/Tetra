@@ -10,11 +10,11 @@ public sealed class ActionAsserts<TNext>
    /* ------------------------------------------------------------ */
 
    public static ActionAsserts<TNext> Create(string      description,
-                                             FakeAction  whenNone,
+                                             FakeAction  actual,
                                              Func<TNext> next)
-      => new(description,
-             next,
-             whenNone);
+      => new(actual,
+             description,
+             next);
 
    /* ------------------------------------------------------------ */
    // Methods
@@ -25,7 +25,7 @@ public sealed class ActionAsserts<TNext>
       Assert
         .That
         .WasInvokedOnce(_description,
-                        _whenNone);
+                        _actual);
 
       return _next();
    }
@@ -37,7 +37,7 @@ public sealed class ActionAsserts<TNext>
       Assert
         .That
         .WasNotInvoked(_description,
-                       _whenNone);
+                       _actual);
 
       return _next();
    }
@@ -46,21 +46,21 @@ public sealed class ActionAsserts<TNext>
    // Private Fields
    /* ------------------------------------------------------------ */
 
+   private readonly FakeAction  _actual;
    private readonly string      _description;
    private readonly Func<TNext> _next;
-   private readonly FakeAction  _whenNone;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private ActionAsserts(string      description,
-                         Func<TNext> next,
-                         FakeAction  whenNone)
+   private ActionAsserts(FakeAction  actual,
+                         string      description,
+                         Func<TNext> next)
    {
+      _actual      = actual;
       _description = description;
       _next        = next;
-      _whenNone    = whenNone;
    }
 
    /* ------------------------------------------------------------ */

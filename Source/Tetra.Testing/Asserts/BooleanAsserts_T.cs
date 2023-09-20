@@ -10,11 +10,11 @@ public sealed class BooleanAsserts<TNext> : IAsserts
    /* ------------------------------------------------------------ */
 
    public static BooleanAsserts<TNext> Create(string      description,
-                                              bool        returnValue,
+                                              bool        actual,
                                               Func<TNext> next)
-      => new(description,
-             next,
-             returnValue);
+      => new(actual,
+             description,
+             next);
 
    /* ------------------------------------------------------------ */
    // Methods
@@ -24,7 +24,7 @@ public sealed class BooleanAsserts<TNext> : IAsserts
    {
       Assert.That
             .IsFalse(_description,
-                     _returnValue);
+                     _actual);
 
       return _next();
    }
@@ -35,7 +35,7 @@ public sealed class BooleanAsserts<TNext> : IAsserts
    {
       Assert.That
             .IsTrue(_description,
-                    _returnValue);
+                    _actual);
 
       return _next();
    }
@@ -44,21 +44,21 @@ public sealed class BooleanAsserts<TNext> : IAsserts
    // Private Fields
    /* ------------------------------------------------------------ */
 
+   private readonly bool        _actual;
    private readonly string      _description;
    private readonly Func<TNext> _next;
-   private readonly bool        _returnValue;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private BooleanAsserts(string      description,
-                          Func<TNext> next,
-                          bool        returnValue)
+   private BooleanAsserts(bool        actual,
+                          string      description,
+                          Func<TNext> next)
    {
+      _actual      = actual;
       _description = description;
       _next        = next;
-      _returnValue = returnValue;
    }
 
    /* ------------------------------------------------------------ */

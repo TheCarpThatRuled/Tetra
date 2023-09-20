@@ -10,11 +10,11 @@ public sealed class ActionAsserts<T, TNext>
    /* ------------------------------------------------------------ */
 
    public static ActionAsserts<T, TNext> Create(string        description,
-                                                FakeAction<T> action,
+                                                FakeAction<T> actual,
                                                 Func<TNext>   next)
-      => new(description,
-             next,
-             action);
+      => new(actual,
+             description,
+             next);
 
    /* ------------------------------------------------------------ */
    // Methods
@@ -26,7 +26,7 @@ public sealed class ActionAsserts<T, TNext>
         .That
         .WasInvokedOnce(_description,
                         expected,
-                        _action);
+                        _actual);
 
       return _next();
    }
@@ -38,7 +38,7 @@ public sealed class ActionAsserts<T, TNext>
       Assert
         .That
         .WasNotInvoked(_description,
-                       _action);
+                       _actual);
 
       return _next();
    }
@@ -47,21 +47,21 @@ public sealed class ActionAsserts<T, TNext>
    // Private Fields
    /* ------------------------------------------------------------ */
 
+   private readonly FakeAction<T> _actual;
    private readonly string        _description;
    private readonly Func<TNext>   _next;
-   private readonly FakeAction<T> _action;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private ActionAsserts(string        description,
-                         Func<TNext>   next,
-                         FakeAction<T> action)
+   private ActionAsserts(FakeAction<T> actual,
+                         string        description,
+                         Func<TNext>   next)
    {
+      _actual      = actual;
       _description = description;
       _next        = next;
-      _action      = action;
    }
 
    /* ------------------------------------------------------------ */

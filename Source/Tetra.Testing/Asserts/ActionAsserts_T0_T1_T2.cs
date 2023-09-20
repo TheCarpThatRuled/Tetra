@@ -10,11 +10,11 @@ public sealed class ActionAsserts<T0, T1, TNext>
    /* ------------------------------------------------------------ */
 
    public static ActionAsserts<T0, T1, TNext> Create(string             description,
-                                                     FakeAction<T0, T1> whenSome,
+                                                     FakeAction<T0, T1> actual,
                                                      Func<TNext>        next)
-      => new(description,
-             next,
-             whenSome);
+      => new(actual,
+             description,
+             next);
 
    /* ------------------------------------------------------------ */
    // Methods
@@ -28,7 +28,7 @@ public sealed class ActionAsserts<T0, T1, TNext>
         .WasInvokedOnce(_description,
                         expectedArg0,
                         expectedArg1,
-                        _whenSome);
+                        _actual);
 
       return _next();
    }
@@ -40,7 +40,7 @@ public sealed class ActionAsserts<T0, T1, TNext>
       Assert
         .That
         .WasNotInvoked(_description,
-                       _whenSome);
+                       _actual);
 
       return _next();
    }
@@ -49,21 +49,21 @@ public sealed class ActionAsserts<T0, T1, TNext>
    // Private Fields
    /* ------------------------------------------------------------ */
 
+   private readonly FakeAction<T0, T1> _actual;
    private readonly string             _description;
    private readonly Func<TNext>        _next;
-   private readonly FakeAction<T0, T1> _whenSome;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private ActionAsserts(string             description,
-                         Func<TNext>        next,
-                         FakeAction<T0, T1> whenSome)
+   private ActionAsserts(FakeAction<T0, T1> actual,
+                         string             description,
+                         Func<TNext>        next)
    {
+      _actual      = actual;
       _description = description;
       _next        = next;
-      _whenSome    = whenSome;
    }
 
    /* ------------------------------------------------------------ */

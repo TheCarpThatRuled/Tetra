@@ -2,18 +2,18 @@
 
 namespace Tetra.Testing;
 
-public sealed class ReturnsAsserts<T, TNext> : IAsserts
+public sealed class ObjectAsserts<T, TNext> : IAsserts
    where TNext : IAsserts
 {
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static ReturnsAsserts<T, TNext> Create(string      description,
-                                                T           error,
+   public static ObjectAsserts<T, TNext> Create(string      description,
+                                                T           actual,
                                                 Func<TNext> next)
-      => new(description,
-             error,
+      => new(actual,
+             description,
              next);
 
    /* ------------------------------------------------------------ */
@@ -46,20 +46,20 @@ public sealed class ReturnsAsserts<T, TNext> : IAsserts
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly string      _description;
    private readonly T           _actual;
+   private readonly string      _description;
    private readonly Func<TNext> _next;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private ReturnsAsserts(string      description,
-                         T           actual,
-                         Func<TNext> next)
+   private ObjectAsserts(T           actual,
+                          string      description,
+                          Func<TNext> next)
    {
-      _description = description;
       _actual      = actual;
+      _description = description;
       _next        = next;
    }
 
