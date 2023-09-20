@@ -5,39 +5,39 @@ namespace Check;
 
 partial class Steps
 {
-   public sealed class TheWhenSomeAction
+   public sealed partial class WhenSome
    {
       /* ------------------------------------------------------------ */
-      // Given
+      // Properties
       /* ------------------------------------------------------------ */
 
-      /* ------------------------------------------------------------ */
-      // Arrange
-      /* ------------------------------------------------------------ */
+      // ReSharper disable once InconsistentNaming
+      public ForDo for_Do { get; } = new();
 
       /* ------------------------------------------------------------ */
-      // Arrange/Act
-      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
+      public ForDoWithExternalState for_Do_with_externalState { get; } = new();
 
       /* ------------------------------------------------------------ */
-      // Assert
+      // Private Assert
       /* ------------------------------------------------------------ */
 
-      public IAssert<TAsserts, TAsserts> was_invoked_once_with<T, TAsserts>(T expected)
+      private IAssert<TAsserts, TAsserts> was_invoked_once_with<T, TAsserts>(T expected)
          where TAsserts : IAsserts, IWhenSomeActionAsserts<T, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($@"{nameof(the_whenSome_Action)}_{nameof(was_invoked_once_with)} ""{expected}""",
+           .Create($@"{nameof(whenSome)}_{nameof(was_invoked_once_with)} ""{expected}""",
                    assert => assert
                             .WhenSome()
                             .WasInvokedOnce(expected));
 
       /* ------------------------------------------------------------ */
 
-      public IAssert<TAsserts, TAsserts> was_invoked_once_with<T0, T1, TAsserts>(T0 expectedArg0,
-                                                                            T1 expectedArg1)
+      private IAssert<TAsserts, TAsserts> was_invoked_once_with<T0, T1, TAsserts>(T0 expectedArg0,
+                                                                                  T1 expectedArg1)
          where TAsserts : IAsserts, IWhenSomeActionAsserts<T0, T1, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($@"{nameof(the_whenSome_Action)}_{nameof(was_invoked_once_with)} ""{expectedArg0}"", ""{expectedArg1}""",
+           .Create($@"{nameof(whenSome)}_{nameof(was_invoked_once_with)} ""{expectedArg0}"", ""{expectedArg1}""",
                    assert => assert
                             .WhenSome()
                             .WasInvokedOnce(expectedArg0,
@@ -45,20 +45,20 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IAssert<TAsserts, TAsserts> was_not_invoked<T, TAsserts>()
+      private IAssert<TAsserts, TAsserts> was_not_invoked<T, TAsserts>()
          where TAsserts : IAsserts, IWhenSomeActionAsserts<T, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($"{nameof(the_whenSome_Action)}_{nameof(was_not_invoked)}",
+           .Create($"{nameof(whenSome)}_{nameof(was_not_invoked)}",
                    assert => assert
                             .WhenSome()
                             .WasNotInvoked());
 
       /* ------------------------------------------------------------ */
 
-      public IAssert<TAsserts, TAsserts> was_not_invoked<T0, T1, TAsserts>()
+      private IAssert<TAsserts, TAsserts> was_not_invoked<T0, T1, TAsserts>()
          where TAsserts : IAsserts, IWhenSomeActionAsserts<T0, T1, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($"{nameof(the_whenSome_Action)}_{nameof(was_not_invoked)}",
+           .Create($"{nameof(whenSome)}_{nameof(was_not_invoked)}",
                    assert => assert
                             .WhenSome()
                             .WasNotInvoked());

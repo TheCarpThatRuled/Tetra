@@ -17,12 +17,12 @@ public static partial class Steps
    /* ------------------------------------------------------------ */
 
    // ReSharper disable once InconsistentNaming
-   public static TheWhenNoneAction the_whenNone_Action { get; } = new();
+   public static WhenNone whenNone { get; } = new();
 
    /* ------------------------------------------------------------ */
 
    // ReSharper disable once InconsistentNaming
-   public static TheWhenSomeAction the_whenSome_Action { get; } = new();
+   public static WhenSome whenSome { get; } = new();
 
    /* ------------------------------------------------------------ */
 

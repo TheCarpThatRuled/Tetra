@@ -5,25 +5,24 @@ namespace Check;
 
 partial class Steps
 {
-   public sealed class TheReturnValue
-   {
-      /* ------------------------------------------------------------ */
-      // Given
-      /* ------------------------------------------------------------ */
-
-      /* ------------------------------------------------------------ */
-      // Arrange
+   public sealed partial class TheReturnValue
+   { /* ------------------------------------------------------------ */
+      // Properties
       /* ------------------------------------------------------------ */
 
-      /* ------------------------------------------------------------ */
-      // Arrange/Act
-      /* ------------------------------------------------------------ */
+      // ReSharper disable once InconsistentNaming
+      public ForDo for_Do { get; } = new();
 
       /* ------------------------------------------------------------ */
-      // Assert
+
+      // ReSharper disable once InconsistentNaming
+      public ForDoWithExternalState for_Do_with_externalState { get; } = new();
+
+      /* ------------------------------------------------------------ */
+      // Private Assert
       /* ------------------------------------------------------------ */
 
-      public IAssert<TAsserts, TAsserts> is_this<TAsserts>()
+      private IAssert<TAsserts, TAsserts> is_this<TAsserts>()
          where TAsserts : IAsserts, IReturnsThisAsserts<TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
            .Create($"{nameof(the_return_value)}_{nameof(is_this)}",

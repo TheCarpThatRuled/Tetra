@@ -35,9 +35,9 @@ public class WHEN_the_client_calls_Do : AAATestDataSource
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
                   .WHEN(the_Client.calls_Do())
-                  .THEN(the_whenNone_Action.was_invoked_once<DoWasCalled.Asserts>())
-                  .And(the_whenSome_Action.was_not_invoked<FakeType, DoWasCalled.Asserts>())
-                  .And(the_return_value.is_this<DoWasCalled.Asserts>())
+                  .THEN(whenNone.for_Do.was_invoked_once())
+                  .And(whenSome.for_Do.was_not_invoked())
+                  .And(the_return_value.for_Do.is_this())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
@@ -47,9 +47,9 @@ public class WHEN_the_client_calls_Do : AAATestDataSource
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
                   .WHEN(the_Client.calls_Do_with(externalState))
-                  .THEN(the_whenNone_Action.was_invoked_once_with<FakeExternalState, DoWasCalledWithExternalState.Asserts>(externalState))
-                  .And(the_whenSome_Action.was_not_invoked<FakeExternalState, FakeType, DoWasCalledWithExternalState.Asserts>())
-                  .And(the_return_value.is_this<DoWasCalledWithExternalState.Asserts>())
+                  .THEN(whenNone.for_Do_with_externalState.was_invoked_once_with(externalState))
+                  .And(whenSome.for_Do_with_externalState.was_not_invoked())
+                  .And(the_return_value.for_Do_with_externalState.is_this())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */

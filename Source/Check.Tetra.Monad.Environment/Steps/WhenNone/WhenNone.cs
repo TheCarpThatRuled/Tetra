@@ -5,58 +5,58 @@ namespace Check;
 
 partial class Steps
 {
-   public sealed class TheWhenNoneAction
+   public sealed partial class WhenNone
    {
       /* ------------------------------------------------------------ */
-      // Given
+      // Properties
       /* ------------------------------------------------------------ */
 
-      /* ------------------------------------------------------------ */
-      // Arrange
-      /* ------------------------------------------------------------ */
+      // ReSharper disable once InconsistentNaming
+      public ForDo for_Do { get; } = new();
 
       /* ------------------------------------------------------------ */
-      // Arrange/Act
-      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
+      public ForDoWithExternalState for_Do_with_externalState { get; } = new();
 
       /* ------------------------------------------------------------ */
-      // Assert
+      // Private Assert
       /* ------------------------------------------------------------ */
 
-      public IAssert<TAsserts, TAsserts> was_invoked_once<TAsserts>()
+      private IAssert<TAsserts, TAsserts> was_invoked_once<TAsserts>()
          where TAsserts : IAsserts, IWhenNoneActionAsserts<TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($"{nameof(the_whenNone_Action)}_{nameof(was_invoked_once_with)}",
+           .Create($"{nameof(whenNone)}_{nameof(was_invoked_once)}",
                    assert => assert
                             .WhenNone()
                             .WasInvokedOnce());
 
       /* ------------------------------------------------------------ */
 
-      public IAssert<TAsserts, TAsserts> was_invoked_once_with<T, TAsserts>(T expected)
+      private IAssert<TAsserts, TAsserts> was_invoked_once_with<T, TAsserts>(T expected)
          where TAsserts : IAsserts, IWhenNoneActionAsserts<T, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($@"{nameof(the_whenNone_Action)}_{nameof(was_invoked_once_with)} ""{expected}""",
+           .Create($@"{nameof(whenNone)}_{nameof(was_invoked_once_with)} ""{expected}""",
                    assert => assert
                             .WhenNone()
                             .WasInvokedOnce(expected));
 
       /* ------------------------------------------------------------ */
 
-      public IAssert<TAsserts, TAsserts> was_not_invoked<TAsserts>()
+      private IAssert<TAsserts, TAsserts> was_not_invoked<TAsserts>()
          where TAsserts : IAsserts, IWhenNoneActionAsserts<TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($"{nameof(the_whenNone_Action)}_{nameof(was_not_invoked)}",
+           .Create($"{nameof(whenNone)}_{nameof(was_not_invoked)}",
                    assert => assert
                             .WhenNone()
                             .WasNotInvoked());
 
       /* ------------------------------------------------------------ */
 
-      public IAssert<TAsserts, TAsserts> was_not_invoked<T, TAsserts>()
+      private IAssert<TAsserts, TAsserts> was_not_invoked<T, TAsserts>()
          where TAsserts : IAsserts, IWhenNoneActionAsserts<T, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($"{nameof(the_whenNone_Action)}_{nameof(was_not_invoked)}",
+           .Create($"{nameof(whenNone)}_{nameof(was_not_invoked)}",
                    assert => assert
                             .WhenNone()
                             .WasNotInvoked());
