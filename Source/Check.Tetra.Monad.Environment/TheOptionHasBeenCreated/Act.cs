@@ -26,6 +26,28 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
+      public BooleanAsserts<TestTerminus> IsANone()
+      {
+         var returnValue = _option.IsANone();
+
+         return BooleanAsserts<TestTerminus>.Create(@"Return Value",
+                                                    returnValue,
+                                                    TestTerminus.Create);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public BooleanAsserts<TestTerminus> IsASome()
+      {
+         var returnValue = _option.IsASome();
+
+         return BooleanAsserts<TestTerminus>.Create(@"Return Value",
+                                                    returnValue,
+                                                    TestTerminus.Create);
+      }
+
+      /* ------------------------------------------------------------ */
+
       public MapWasCalled.Asserts Map(FakeNewType whenSomeValue)
       {
          var whenSome = FakeFunction<FakeType, FakeNewType>.Create(whenSomeValue);

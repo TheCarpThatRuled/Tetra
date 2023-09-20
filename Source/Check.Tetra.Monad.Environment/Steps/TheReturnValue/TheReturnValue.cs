@@ -6,7 +6,8 @@ namespace Check;
 partial class Steps
 {
    public sealed partial class TheReturnValue
-   { /* ------------------------------------------------------------ */
+   {
+      /* ------------------------------------------------------------ */
       // Properties
       /* ------------------------------------------------------------ */
 
@@ -42,6 +43,22 @@ partial class Steps
 
       // ReSharper disable once InconsistentNaming
       public ForMapWithExternalState for_Map_with_externalState { get; } = new();
+
+      /* ------------------------------------------------------------ */
+      // Assert
+      /* ------------------------------------------------------------ */
+
+      public IAssert<BooleanAsserts<TestTerminus>, TestTerminus> is_false()
+         => AtomicAssert<BooleanAsserts<TestTerminus>, TestTerminus>
+           .Create($"{nameof(the_return_value)}_{nameof(is_false)}",
+                   assert => assert.IsFalse());
+
+      /* ------------------------------------------------------------ */
+
+      public IAssert<BooleanAsserts<TestTerminus>, TestTerminus> is_true()
+         => AtomicAssert<BooleanAsserts<TestTerminus>, TestTerminus>
+           .Create($"{nameof(the_return_value)}_{nameof(is_true)}",
+                   assert => assert.IsTrue());
 
       /* ------------------------------------------------------------ */
       // Private Assert

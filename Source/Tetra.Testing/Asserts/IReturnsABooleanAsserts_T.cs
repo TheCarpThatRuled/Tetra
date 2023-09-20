@@ -1,13 +1,13 @@
 ﻿namespace Tetra.Testing;
 
-public interface IReturnsAsserts<T, TAsserts>
+public interface IReturnsABooleanAsserts< TAsserts>
    where TAsserts : IAsserts
 {
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
-   public ReturnsAsserts<T, TAsserts> ReturnValue();
+   public BooleanAsserts<TAsserts> ReturnValue();
 
    /* ------------------------------------------------------------ */
 }

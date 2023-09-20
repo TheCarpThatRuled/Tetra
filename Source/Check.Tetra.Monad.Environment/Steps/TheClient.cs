@@ -57,6 +57,24 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
+      public IAct<TheOptionHasBeenCreated.Arrange, BooleanAsserts<TestTerminus>> calls_IsANone()
+         => AtomicAct<TheOptionHasBeenCreated.Arrange, BooleanAsserts<TestTerminus>>
+           .Create($@"{nameof(the_Client)}_{nameof(calls_IsANone)}",
+                   arrange => arrange
+                             .ToActs()
+                             .IsANone());
+
+      /* ------------------------------------------------------------ */
+
+      public IAct<TheOptionHasBeenCreated.Arrange, BooleanAsserts<TestTerminus>> calls_IsASome()
+         => AtomicAct<TheOptionHasBeenCreated.Arrange, BooleanAsserts<TestTerminus>>
+           .Create($@"{nameof(the_Client)}_{nameof(calls_IsASome)}",
+                   arrange => arrange
+                             .ToActs()
+                             .IsASome());
+
+      /* ------------------------------------------------------------ */
+
       public IAct<TheOptionHasBeenCreated.Arrange, MapWasCalled.Asserts> calls_Map_with(FakeNewType whenSomeValue)
          => AtomicAct<TheOptionHasBeenCreated.Arrange, MapWasCalled.Asserts>
            .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{whenSomeValue.Characterisation}""",
