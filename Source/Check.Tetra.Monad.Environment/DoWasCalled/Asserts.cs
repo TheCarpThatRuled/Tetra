@@ -36,7 +36,7 @@ public static class DoWasCalled
 
       public ActionAsserts<FakeType, Asserts> WhenSome()
          => ActionAsserts<FakeType, Asserts>
-           .Create("whenNone",
+           .Create("whenSome",
                    _whenSome,
                    () => this);
 

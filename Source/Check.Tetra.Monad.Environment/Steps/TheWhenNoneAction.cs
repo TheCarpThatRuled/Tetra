@@ -5,7 +5,7 @@ namespace Check;
 
 partial class Steps
 {
-   public sealed class WhenNone
+   public sealed class TheWhenNoneAction
    {
       /* ------------------------------------------------------------ */
       // Given
@@ -26,7 +26,7 @@ partial class Steps
       public IAssert<TAsserts, TAsserts> was_invoked_once<TAsserts>()
          where TAsserts : IAsserts, IWhenNoneActionAsserts<TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($"{nameof(whenNone)}_{nameof(was_invoked_once_with)}",
+           .Create($"{nameof(the_whenNone_Action)}_{nameof(was_invoked_once_with)}",
                    assert => assert
                             .WhenNone()
                             .WasInvokedOnce());
@@ -36,7 +36,7 @@ partial class Steps
       public IAssert<TAsserts, TAsserts> was_invoked_once_with<T, TAsserts>(T expected)
          where TAsserts : IAsserts, IWhenNoneActionAsserts<T, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($@"{nameof(whenNone)}_{nameof(was_invoked_once_with)} ""{expected}""",
+           .Create($@"{nameof(the_whenNone_Action)}_{nameof(was_invoked_once_with)} ""{expected}""",
                    assert => assert
                             .WhenNone()
                             .WasInvokedOnce(expected));
@@ -46,7 +46,7 @@ partial class Steps
       public IAssert<TAsserts, TAsserts> was_not_invoked<TAsserts>()
          where TAsserts : IAsserts, IWhenNoneActionAsserts<TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($"{nameof(whenNone)}_{nameof(was_not_invoked)}",
+           .Create($"{nameof(the_whenNone_Action)}_{nameof(was_not_invoked)}",
                    assert => assert
                             .WhenNone()
                             .WasNotInvoked());
@@ -56,7 +56,7 @@ partial class Steps
       public IAssert<TAsserts, TAsserts> was_not_invoked<T, TAsserts>()
          where TAsserts : IAsserts, IWhenNoneActionAsserts<T, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($"{nameof(whenNone)}_{nameof(was_not_invoked)}",
+           .Create($"{nameof(the_whenNone_Action)}_{nameof(was_not_invoked)}",
                    assert => assert
                             .WhenNone()
                             .WasNotInvoked());

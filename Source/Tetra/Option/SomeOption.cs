@@ -76,30 +76,32 @@ partial class Option<T>
 
       /* ------------------------------------------------------------ */
 
-
       public IOption<TNew> Map<TNew>(Func<T, TNew> whenSome)
          => new Option<TNew>.SomeOption(whenSome(Content));
 
       /* ------------------------------------------------------------ */
 
+      public IOption<TNew> Map<TExternalState, TNew>(TExternalState                externalState,
+                                                     Func<TExternalState, T, TNew> whenSome)
+         => new Option<TNew>.SomeOption(whenSome(externalState,
+                                                 Content));
+
+      /* ------------------------------------------------------------ */
 
       public IOption<TNew> Map<TNew>(Func<T, IOption<TNew>> whenSome)
          => whenSome(Content);
 
       /* ------------------------------------------------------------ */
 
-
       public IResult<T, TNew> MapToResult<TNew>(TNew whenNone)
          => new Result<T, TNew>.SuccessResult(Content);
 
       /* ------------------------------------------------------------ */
 
-
       public IResult<T, TNew> MapToResult<TNew>(Func<TNew> whenNone)
          => new Result<T, TNew>.SuccessResult(Content);
 
       /* ------------------------------------------------------------ */
-
 
       public TNew Reduce<TNew>(Func<T, TNew> whenSome,
                                Func<TNew>    whenNone)

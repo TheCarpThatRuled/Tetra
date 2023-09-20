@@ -5,7 +5,7 @@ namespace Check;
 
 partial class Steps
 {
-   public sealed class WhenSome
+   public sealed class TheWhenSomeAction
    {
       /* ------------------------------------------------------------ */
       // Given
@@ -26,7 +26,7 @@ partial class Steps
       public IAssert<TAsserts, TAsserts> was_invoked_once_with<T, TAsserts>(T expected)
          where TAsserts : IAsserts, IWhenSomeActionAsserts<T, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($@"{nameof(whenSome)}_{nameof(was_invoked_once_with)} ""{expected}""",
+           .Create($@"{nameof(the_whenSome_Action)}_{nameof(was_invoked_once_with)} ""{expected}""",
                    assert => assert
                             .WhenSome()
                             .WasInvokedOnce(expected));
@@ -37,7 +37,7 @@ partial class Steps
                                                                             T1 expectedArg1)
          where TAsserts : IAsserts, IWhenSomeActionAsserts<T0, T1, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($@"{nameof(whenSome)}_{nameof(was_invoked_once_with)} ""{expectedArg0}"", ""{expectedArg1}""",
+           .Create($@"{nameof(the_whenSome_Action)}_{nameof(was_invoked_once_with)} ""{expectedArg0}"", ""{expectedArg1}""",
                    assert => assert
                             .WhenSome()
                             .WasInvokedOnce(expectedArg0,
@@ -48,7 +48,7 @@ partial class Steps
       public IAssert<TAsserts, TAsserts> was_not_invoked<T, TAsserts>()
          where TAsserts : IAsserts, IWhenSomeActionAsserts<T, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($"{nameof(whenSome)}_{nameof(was_not_invoked)}",
+           .Create($"{nameof(the_whenSome_Action)}_{nameof(was_not_invoked)}",
                    assert => assert
                             .WhenSome()
                             .WasNotInvoked());
@@ -58,7 +58,7 @@ partial class Steps
       public IAssert<TAsserts, TAsserts> was_not_invoked<T0, T1, TAsserts>()
          where TAsserts : IAsserts, IWhenSomeActionAsserts<T0, T1, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
-           .Create($"{nameof(whenSome)}_{nameof(was_not_invoked)}",
+           .Create($"{nameof(the_whenSome_Action)}_{nameof(was_not_invoked)}",
                    assert => assert
                             .WhenSome()
                             .WasNotInvoked());

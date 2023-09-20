@@ -2,20 +2,20 @@
 using Tetra.Testing;
 using static Check.Steps;
 
-namespace Check.GIVEN_the_client_has_created_a_some;
+namespace Check.GIVEN_the_client_has_created_a_none;
 
 [TestClass]
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_call_Do : AAATestDataSource
+public class WHEN_the_client_calls_Map : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
    // Test
    /* ------------------------------------------------------------ */
 
    [TestMethod]
-   [WHEN_the_client_call_Do]
+   [WHEN_the_client_calls_Map]
    public void Run(AAA_test test)
    {
       using var given = test.Create();
@@ -32,30 +32,21 @@ public class WHEN_the_client_call_Do : AAATestDataSource
    {
       /* ------------------------------------------------------------ */
 
-      var content = FakeType.Create("content");
-
-      /* ------------------------------------------------------------ */
-
       yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.calls_Do())
-                  .THEN(whenNone.was_not_invoked<DoWasCalled.Asserts>())
-                  .And(whenSome.was_invoked_once_with<FakeType, DoWasCalled.Asserts>(content))
-                  .And(the_return_value.is_this<DoWasCalled.Asserts>())
+                  .GIVEN(the_Client.has_created_a_none())
+                  .WHEN(the_Client.calls_Map_with(FakeNewType.Create("whenSome value")))
+                  .THEN(the_whenSome_Func.was_not_invoked<FakeType, FakeNewType, MapWasCalled.Asserts>())
+                  .And(the_return_value.is_a_none<FakeNewType, MapWasCalled.Asserts>())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
-      var externalState = FakeExternalState.Create();
-
       yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.calls_Do_with(externalState))
-                  .THEN(whenNone.was_not_invoked<FakeExternalState, DoWasCalledWithExternalState.Asserts>())
-                  .And(whenSome.was_invoked_once_with<FakeExternalState, FakeType, DoWasCalledWithExternalState.Asserts>(
-                          externalState,
-                          content))
-                  .And(the_return_value.is_this<DoWasCalledWithExternalState.Asserts>())
+                  .GIVEN(the_Client.has_created_a_none())
+                  .WHEN(the_Client.calls_Map_with(FakeExternalState.Create(),
+                                                  FakeNewType.Create("whenSome value")))
+                  .THEN(the_whenSome_Func.was_not_invoked<FakeExternalState, FakeType, FakeNewType, MapWasCalledWithExternalState.Asserts>())
+                  .And(the_return_value.is_a_none<FakeNewType, MapWasCalledWithExternalState.Asserts>())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */

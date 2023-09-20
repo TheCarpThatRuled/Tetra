@@ -57,6 +57,7 @@ public interface IOption<out T>
    /// <summary>
    /// Invokes an action on the contents of the <c>IOption</c> if it as <b>some</b>, else invokes an different action on the <c>IOption</c>  is a <b>none</b>.
    /// </summary>
+   /// <typeparam name="TExternalState">The type of the external state.</typeparam>
    /// <param name="externalState">External state pertinent to the actions</param>
    /// <param name="whenSome">The action that shall be invoked with the content of the <c>IOption</c>, if it is a <b>some</b>.</param>
    /// <param name="whenNone">The action that shall be invoked, if the <c>IOption</c> is a <b>none</b>.</param>
@@ -79,6 +80,22 @@ public interface IOption<out T>
    /// otherwise a <b>none</b>.
    /// </returns>
    public IOption<TNew> Map<TNew>(Func<T, TNew> whenSome);
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
+   /// Maps the contents of the <c>IOption</c> into a new form.
+   /// </summary>
+   /// <typeparam name="TExternalState">The type of the external state.</typeparam>
+   /// <typeparam name="TNew">The type the content of this <c>IOption</c> shall be transformed into, if it is a <b>some</b>.</typeparam>
+   /// <param name="externalState">External state pertinent to the functions</param>
+   /// <param name="whenSome">The mapping function that shall be applied to the content of the <c>IOption</c>, if it is a <b>some</b>.</param>
+   /// <returns>
+   /// A <b>some</b> containing the content of this <c>IOption</c> mapped through <c>whenSome</c> if it is a <b>some</b>;
+   /// otherwise a <b>none</b>.
+   /// </returns>
+   public IOption<TNew> Map<TExternalState, TNew>(TExternalState externalState,
+                                  Func<TExternalState, T, TNew>  whenSome);
 
    /* ------------------------------------------------------------ */
 

@@ -16,6 +16,11 @@ partial class AssertMessages
 
    /* ------------------------------------------------------------ */
 
+   public static string TheFakeFunctionWasInvokedMoreThanOnce<T0, T1, TReturn>(string description)
+      => $"{description}: {TheFakeFunction<T0, T1, TReturn>()} {WasInvokedMoreThanOnce}.";
+
+   /* ------------------------------------------------------------ */
+
    public static string TheFakeFunctionWasInvokedWhenWeExpectedItNotToBe<TReturn>(string description)
       => $"{description}: {TheFakeFunction<TReturn>()} {WasInvokedWhenWeExpectedItNotToHaveBeen}.";
 
@@ -26,13 +31,28 @@ partial class AssertMessages
 
    /* ------------------------------------------------------------ */
 
+   public static string TheFakeFunctionWasInvokedWhenWeExpectedItNotToBe<T0, T1, TReturn>(string description)
+      => $"{description}: {TheFakeFunction<T0, T1, TReturn>()} {WasInvokedWhenWeExpectedItNotToHaveBeen}.";
+
+   /* ------------------------------------------------------------ */
+
    public static string TheFakeFunctionWasInvokedWithAnUnexpectedArgument<T, TReturn>(string description)
       => $"{description}: {TheFakeFunction<T, TReturn>()} {WasInvokedWithAnUnexpectedArgument}.";
 
    /* ------------------------------------------------------------ */
 
+   public static string TheFakeFunctionWasInvokedWithAnUnexpectedArgument<T0, T1, TReturn>(string description)
+      => $"{description}: {TheFakeFunction<T0, T1, TReturn>()} {WasInvokedWithAnUnexpectedArgument}.";
+
+   /* ------------------------------------------------------------ */
+
    public static string TheFakeFunctionWasNotInvokedWheWeExpectedToBe<T, TReturn>(string description)
       => $"{description}: {TheFakeFunction<T, TReturn>()} {WasNotInvokedWhenWeExpectedItToHaveBeen}.";
+
+   /* ------------------------------------------------------------ */
+
+   public static string TheFakeFunctionWasNotInvokedWheWeExpectedToBe<T0, T1, TReturn>(string description)
+      => $"{description}: {TheFakeFunction<T0, T1, TReturn>()} {WasNotInvokedWhenWeExpectedItToHaveBeen}.";
 
    /* ------------------------------------------------------------ */
    // Private Functions
@@ -45,6 +65,11 @@ partial class AssertMessages
 
    private static string TheFakeFunction<T, TReturn>()
       => $"{The} FakeFunction <{typeof(T).Name},{typeof(TReturn).Name}>";
+
+   /* ------------------------------------------------------------ */
+
+   private static string TheFakeFunction<T0, T1, TReturn>()
+      => $"{The} FakeFunction <{typeof(T0).Name},{typeof(T1).Name},{typeof(TReturn).Name}>";
 
    /* ------------------------------------------------------------ */
 }

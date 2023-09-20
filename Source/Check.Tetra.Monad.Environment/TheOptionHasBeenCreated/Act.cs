@@ -26,6 +26,32 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
+      public MapWasCalled.Asserts Map(FakeNewType whenSomeValue)
+      {
+         var whenSome = FakeFunction<FakeType, FakeNewType>.Create(whenSomeValue);
+
+         var returnValue = _option.Map(whenSome.Func);
+
+         return new(whenSome,
+                    returnValue);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public MapWasCalledWithExternalState.Asserts Map(FakeExternalState externalState,
+                                                       FakeNewType       whenSomeValue)
+      {
+         var whenSome = FakeFunction<FakeExternalState, FakeType, FakeNewType>.Create(whenSomeValue);
+
+         var returnValue = _option.Map(externalState,
+                                       whenSome.Func);
+
+         return new(whenSome,
+                    returnValue);
+      }
+
+      /* ------------------------------------------------------------ */
+
       public DoWasCalledWithExternalState.Asserts Do(FakeExternalState externalState)
       {
          var whenSome = FakeAction<FakeExternalState,FakeType>.Create();

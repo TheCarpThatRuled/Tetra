@@ -55,6 +55,26 @@ partial class Steps
                              .Do(externalState));
 
       /* ------------------------------------------------------------ */
+
+      public IAct<TheOptionHasBeenCreated.Arrange, MapWasCalled.Asserts> calls_Map_with(FakeNewType whenSomeValue)
+         => AtomicAct<TheOptionHasBeenCreated.Arrange, MapWasCalled.Asserts>
+           .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{whenSomeValue.Characterisation}""",
+                   arrange => arrange
+                             .ToActs()
+                             .Map(whenSomeValue));
+
+      /* ------------------------------------------------------------ */
+
+      public IAct<TheOptionHasBeenCreated.Arrange, MapWasCalledWithExternalState.Asserts> calls_Map_with(FakeExternalState externalState,
+                                                                                                         FakeNewType       whenSomeValue)
+         => AtomicAct<TheOptionHasBeenCreated.Arrange, MapWasCalledWithExternalState.Asserts>
+           .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{externalState.Characterisation}"", ""{whenSomeValue.Characterisation}""",
+                   arrange => arrange
+                             .ToActs()
+                             .Map(externalState,
+                                  whenSomeValue));
+
+      /* ------------------------------------------------------------ */
       // Arrange/Act
       /* ------------------------------------------------------------ */
 
