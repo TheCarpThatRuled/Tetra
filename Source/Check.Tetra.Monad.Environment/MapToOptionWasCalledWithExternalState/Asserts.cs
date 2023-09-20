@@ -3,11 +3,11 @@ using Tetra.Testing;
 
 namespace Check;
 
-public static class MapWasCalledWithExternalState
+public static class MapToOptionWasCalledWithExternalState
 {
    public sealed class Asserts : IAsserts,
                                  IReturnsAnOptionAsserts<FakeNewType, Asserts>,
-                                 IWhenSomeFuncAsserts<FakeExternalState, FakeType, FakeNewType, Asserts>
+                                 IWhenSomeFuncAsserts<FakeExternalState, FakeType, IOption<FakeNewType>, Asserts>
    {
       /* ------------------------------------------------------------ */
       //  IReturnsAnOptionAsserts<FakeNewType, Asserts> Methods
@@ -20,11 +20,11 @@ public static class MapWasCalledWithExternalState
                    () => this);
 
       /* ------------------------------------------------------------ */
-      //  IWhenSomeFuncAsserts<FakeExternalState, FakeType, FakeNewType, Asserts> Methods
+      //  IWhenSomeFuncAsserts<FakeExternalState, FakeType, IOption<FakeNewType>, Asserts> Methods
       /* ------------------------------------------------------------ */
 
-      public FuncAsserts<FakeExternalState, FakeType, FakeNewType, Asserts> WhenSome()
-         => FuncAsserts<FakeExternalState, FakeType, FakeNewType, Asserts>
+      public FuncAsserts<FakeExternalState, FakeType, IOption<FakeNewType>, Asserts> WhenSome()
+         => FuncAsserts<FakeExternalState, FakeType, IOption<FakeNewType>, Asserts>
            .Create("whenSome",
                    _whenSome,
                    () => this);
@@ -33,8 +33,8 @@ public static class MapWasCalledWithExternalState
       //  Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal Asserts(FakeFunction<FakeExternalState, FakeType, FakeNewType> whenSome,
-                       IOption<FakeNewType>                                   returnValue)
+      internal Asserts(FakeFunction<FakeExternalState, FakeType, IOption<FakeNewType>> whenSome,
+                       IOption<FakeNewType>                                            returnValue)
       {
          _returnValue = returnValue;
          _whenSome    = whenSome;
@@ -44,8 +44,8 @@ public static class MapWasCalledWithExternalState
       //  Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly IOption<FakeNewType>                                   _returnValue;
-      private readonly FakeFunction<FakeExternalState, FakeType, FakeNewType> _whenSome;
+      private readonly IOption<FakeNewType>                                            _returnValue;
+      private readonly FakeFunction<FakeExternalState, FakeType, IOption<FakeNewType>> _whenSome;
 
       /* ------------------------------------------------------------ */
    }

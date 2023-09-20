@@ -1,4 +1,5 @@
-﻿using Tetra.Testing;
+﻿using Tetra;
+using Tetra.Testing;
 using static Tetra.Testing.AAA_test;
 
 namespace Check;
@@ -65,10 +66,30 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
+      public IAct<TheOptionHasBeenCreated.Arrange, MapToOptionWasCalled.Asserts> calls_Map_with(IOption<FakeNewType> whenSomeValue)
+         => AtomicAct<TheOptionHasBeenCreated.Arrange, MapToOptionWasCalled.Asserts>
+           .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{whenSomeValue}""",
+                   arrange => arrange
+                             .ToActs()
+                             .Map(whenSomeValue));
+
+      /* ------------------------------------------------------------ */
+
       public IAct<TheOptionHasBeenCreated.Arrange, MapWasCalledWithExternalState.Asserts> calls_Map_with(FakeExternalState externalState,
                                                                                                          FakeNewType       whenSomeValue)
          => AtomicAct<TheOptionHasBeenCreated.Arrange, MapWasCalledWithExternalState.Asserts>
            .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{externalState.Characterisation}"", ""{whenSomeValue.Characterisation}""",
+                   arrange => arrange
+                             .ToActs()
+                             .Map(externalState,
+                                  whenSomeValue));
+
+      /* ------------------------------------------------------------ */
+
+      public IAct<TheOptionHasBeenCreated.Arrange, MapToOptionWasCalledWithExternalState.Asserts> calls_Map_with(FakeExternalState   externalState,
+                                                                                                                 IOption<FakeNewType> whenSomeValue)
+         => AtomicAct<TheOptionHasBeenCreated.Arrange, MapToOptionWasCalledWithExternalState.Asserts>
+           .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{externalState.Characterisation}"", ""{whenSomeValue}""",
                    arrange => arrange
                              .ToActs()
                              .Map(externalState,

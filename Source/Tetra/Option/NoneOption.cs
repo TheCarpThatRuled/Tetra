@@ -79,6 +79,12 @@ static partial class Option<T>
 
       /* ------------------------------------------------------------ */
 
+      public IOption<TNew> Map<TExternalState, TNew>(TExternalState                         externalState,
+                                                     Func<TExternalState, T, IOption<TNew>> whenSome)
+         => new Option<TNew>.NoneOption();
+
+      /* ------------------------------------------------------------ */
+
       public IResult<T, TNew> MapToResult<TNew>(TNew whenNone)
          => new Result<T, TNew>.FailureResult(whenNone);
 

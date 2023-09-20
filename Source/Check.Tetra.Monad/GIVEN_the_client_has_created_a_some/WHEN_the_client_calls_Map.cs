@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Tetra;
 using Tetra.Testing;
 using static Check.Steps;
 
@@ -32,8 +33,9 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
    {
       /* ------------------------------------------------------------ */
 
-      var content  = FakeType.Create("content");
-      var whenSome = FakeNewType.Create("whenSome");
+      var content       = FakeType.Create("content");
+      var whenSome      = FakeNewType.Create("whenSome");
+      var externalState = FakeExternalState.Create();
 
       /* ------------------------------------------------------------ */
 
@@ -46,16 +48,58 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
 
       /* ------------------------------------------------------------ */
 
-      var externalState = FakeExternalState.Create();
-
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_some_from(content))
                   .WHEN(the_Client.calls_Map_with(externalState,
                                                   whenSome))
-                  .THEN(the_whenSome_Func.was_invoked_once_with<FakeExternalState, FakeType, FakeNewType, MapWasCalledWithExternalState.Asserts>(
-                           externalState,
+                  .THEN(the_whenSome_Func.was_invoked_once_with<FakeExternalState, FakeType, FakeNewType, MapWasCalledWithExternalState.Asserts>(externalState,
                            content))
                   .And(the_return_value.is_a_some_containing<FakeNewType, MapWasCalledWithExternalState.Asserts>(whenSome))
+                  .Crystallise();
+
+      /* ------------------------------------------------------------ */
+
+      var someWhenSome = Option.Some(whenSome);
+      var noneWhenSome = Option<FakeNewType>.None();
+
+      /* ------------------------------------------------------------ */
+
+      yield return AAA_test
+                  .GIVEN(the_Client.has_created_a_some_from(content))
+                  .WHEN(the_Client.calls_Map_with(someWhenSome))
+                  .THEN(the_whenSome_Func.was_invoked_once_with<FakeType, IOption<FakeNewType>, MapToOptionWasCalled.Asserts>(content))
+                  .And(the_return_value.is_a_some_containing<FakeNewType, MapToOptionWasCalled.Asserts>(whenSome))
+                  .Crystallise();
+
+      /* ------------------------------------------------------------ */
+
+      yield return AAA_test
+                  .GIVEN(the_Client.has_created_a_some_from(content))
+                  .WHEN(the_Client.calls_Map_with(noneWhenSome))
+                  .THEN(the_whenSome_Func.was_invoked_once_with<FakeType, IOption<FakeNewType>, MapToOptionWasCalled.Asserts>(content))
+                  .And(the_return_value.is_a_none<FakeNewType, MapToOptionWasCalled.Asserts>())
+                  .Crystallise();
+
+      /* ------------------------------------------------------------ */
+
+      yield return AAA_test
+                  .GIVEN(the_Client.has_created_a_some_from(content))
+                  .WHEN(the_Client.calls_Map_with(externalState,
+                                                  someWhenSome))
+                  .THEN(the_whenSome_Func.was_invoked_once_with<FakeExternalState, FakeType, IOption<FakeNewType>, MapToOptionWasCalledWithExternalState.Asserts>(externalState,
+                           content))
+                  .And(the_return_value.is_a_some_containing<FakeNewType, MapToOptionWasCalledWithExternalState.Asserts>(whenSome))
+                  .Crystallise();
+
+      /* ------------------------------------------------------------ */
+
+      yield return AAA_test
+                  .GIVEN(the_Client.has_created_a_some_from(content))
+                  .WHEN(the_Client.calls_Map_with(externalState,
+                                                  noneWhenSome))
+                  .THEN(the_whenSome_Func.was_invoked_once_with<FakeExternalState, FakeType, IOption<FakeNewType>, MapToOptionWasCalledWithExternalState.Asserts>(externalState,
+                           content))
+                  .And(the_return_value.is_a_none<FakeNewType, MapToOptionWasCalledWithExternalState.Asserts>())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */

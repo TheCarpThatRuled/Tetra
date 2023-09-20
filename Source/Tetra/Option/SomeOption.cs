@@ -58,7 +58,7 @@ partial class Option<T>
                            Action    whenNone)
       {
          whenSome(Content);
-      
+
          return this;
       }
 
@@ -90,6 +90,13 @@ partial class Option<T>
 
       public IOption<TNew> Map<TNew>(Func<T, IOption<TNew>> whenSome)
          => whenSome(Content);
+
+      /* ------------------------------------------------------------ */
+
+      public IOption<TNew> Map<TExternalState, TNew>(TExternalState                         externalState,
+                                                     Func<TExternalState, T, IOption<TNew>> whenSome)
+         => whenSome(externalState,
+                     Content);
 
       /* ------------------------------------------------------------ */
 
