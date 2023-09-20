@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
+﻿using Tetra;
 using Tetra.Testing;
 
 namespace Check;

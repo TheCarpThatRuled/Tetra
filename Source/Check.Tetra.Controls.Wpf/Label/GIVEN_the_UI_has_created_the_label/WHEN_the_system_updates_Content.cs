@@ -1,5 +1,4 @@
 ﻿using Check.Check_Label;
-using static Check.Data;
 using static Check.Label.Contents;
 // ReSharper disable InconsistentNaming
 

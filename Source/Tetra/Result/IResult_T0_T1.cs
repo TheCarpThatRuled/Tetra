@@ -1,6 +1,4 @@
-﻿using static System.Net.Mime.MediaTypeNames;
-
-namespace Tetra;
+﻿namespace Tetra;
 
 /// <summary>
 /// An implementation of the "either" monad specialised to represent the result of a fallible function.

@@ -1,11 +1,10 @@
-﻿using Tetra.Testing;
-using static Tetra.Testing.AAA_test;
+﻿using static Tetra.Testing.AAA_test;
 
 namespace Check;
 
 partial class Steps
 {
-   partial class WhenNone 
+   partial class TheWhenSome
    {
       public sealed class ForDo
       {
@@ -13,13 +12,13 @@ partial class Steps
          // Assert
          /* ------------------------------------------------------------ */
 
-         public IAssert<DoWasCalled.Asserts, DoWasCalled.Asserts> was_invoked_once()
-            => whenNone.was_invoked_once<DoWasCalled.Asserts>();
+         public IAssert<DoWasCalled.Asserts, DoWasCalled.Asserts> was_invoked_once_with(FakeType expected)
+            => the_whenSome.action.was_invoked_once_with<FakeType, DoWasCalled.Asserts>(expected);
 
          /* ------------------------------------------------------------ */
 
          public IAssert<DoWasCalled.Asserts, DoWasCalled.Asserts> was_not_invoked()
-            => whenNone.was_not_invoked<DoWasCalled.Asserts>();
+            => the_whenSome.action.was_not_invoked<FakeType, DoWasCalled.Asserts>();
 
          /* ------------------------------------------------------------ */
       }

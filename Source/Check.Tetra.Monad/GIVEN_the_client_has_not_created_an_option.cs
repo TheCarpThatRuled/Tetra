@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
 using Tetra.Testing;
 using static Check.Steps;
 
@@ -38,7 +37,7 @@ public class GIVEN_the_client_has_not_created_an_option : AAATestDataSource
       yield return AAA_test
                   .GIVEN(the_Client.has_not_created_an_option())
                   .WHEN(the_Client.calls_Option_T_None())
-                  .THEN(the_return_value.is_a_none<FakeType, TheOptionHasBeenCreated.Asserts>())
+                  .THEN(the_return_value.for_a_factory.is_a_none())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
@@ -58,7 +57,7 @@ public class GIVEN_the_client_has_not_created_an_option : AAATestDataSource
          yield return AAA_test
                      .GIVEN(the_Client.has_not_created_an_option())
                      .WHEN(act)
-                     .THEN(the_return_value.is_a_some_containing<FakeType, TheOptionHasBeenCreated.Asserts>(content))
+                     .THEN(the_return_value.for_a_factory.is_a_some_containing(content))
                      .Crystallise();
 
          /* ------------------------------------------------------------ */

@@ -4,7 +4,7 @@ namespace Check;
 
 partial class Steps
 {
-   partial class WhenSome
+   partial class TheWhenSome
    {
       public sealed class ForDoWithExternalState
       {
@@ -14,14 +14,14 @@ partial class Steps
 
          public IAssert<DoWasCalledWithExternalState.Asserts, DoWasCalledWithExternalState.Asserts> was_invoked_once_with(FakeExternalState externalState,
                                                                                                                           FakeType          expected)
-            => whenSome.was_invoked_once_with<FakeExternalState, FakeType, DoWasCalledWithExternalState.Asserts>(
+            => the_whenSome.action.was_invoked_once_with<FakeExternalState, FakeType, DoWasCalledWithExternalState.Asserts>(
                externalState,
                expected);
 
          /* ------------------------------------------------------------ */
 
          public IAssert<DoWasCalledWithExternalState.Asserts, DoWasCalledWithExternalState.Asserts> was_not_invoked()
-            => whenSome.was_not_invoked<FakeExternalState, FakeType, DoWasCalledWithExternalState.Asserts>();
+            => the_whenSome.action.was_not_invoked<FakeExternalState, FakeType, DoWasCalledWithExternalState.Asserts>();
 
          /* ------------------------------------------------------------ */
       }

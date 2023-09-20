@@ -4,7 +4,7 @@ namespace Check;
 
 partial class Steps
 {
-   partial class WhenSome
+   partial class TheWhenNone 
    {
       public sealed class ForDo
       {
@@ -12,13 +12,13 @@ partial class Steps
          // Assert
          /* ------------------------------------------------------------ */
 
-         public IAssert<DoWasCalled.Asserts, DoWasCalled.Asserts> was_invoked_once_with(FakeType expected)
-            => whenSome.was_invoked_once_with<FakeType, DoWasCalled.Asserts>(expected);
+         public IAssert<DoWasCalled.Asserts, DoWasCalled.Asserts> was_invoked_once()
+            => the_whenNone.was_invoked_once<DoWasCalled.Asserts>();
 
          /* ------------------------------------------------------------ */
 
          public IAssert<DoWasCalled.Asserts, DoWasCalled.Asserts> was_not_invoked()
-            => whenSome.was_not_invoked<FakeType, DoWasCalled.Asserts>();
+            => the_whenNone.was_not_invoked<DoWasCalled.Asserts>();
 
          /* ------------------------------------------------------------ */
       }

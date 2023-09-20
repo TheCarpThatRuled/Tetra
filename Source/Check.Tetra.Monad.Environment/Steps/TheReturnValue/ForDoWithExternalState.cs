@@ -1,5 +1,4 @@
-﻿using Tetra.Testing;
-using static Tetra.Testing.AAA_test;
+﻿using static Tetra.Testing.AAA_test;
 
 namespace Check;
 

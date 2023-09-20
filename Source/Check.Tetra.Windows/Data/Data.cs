@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace Check;
+﻿namespace Check;
 internal static class Data
 {
    /* ------------------------------------------------------------ */

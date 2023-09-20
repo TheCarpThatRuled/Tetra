@@ -32,12 +32,14 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
    protected override IEnumerable<AAA_test> GetTests()
    {
       /* ------------------------------------------------------------ */
+      // Map T => TNew
+      /* ------------------------------------------------------------ */
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
                   .WHEN(the_Client.calls_Map_with(FakeNewType.Create("whenSome value")))
-                  .THEN(the_whenSome_Func.was_not_invoked<FakeType, FakeNewType, MapWasCalled.Asserts>())
-                  .And(the_return_value.is_a_none<FakeNewType, MapWasCalled.Asserts>())
+                  .THEN(the_whenSome.for_Map.was_not_invoked())
+                  .And(the_return_value.for_Map.is_a_none())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
@@ -46,19 +48,19 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
                   .GIVEN(the_Client.has_created_a_none())
                   .WHEN(the_Client.calls_Map_with(FakeExternalState.Create(),
                                                   FakeNewType.Create("whenSome value")))
-                  .THEN(the_whenSome_Func.was_not_invoked<FakeExternalState, FakeType, FakeNewType, MapWasCalledWithExternalState.Asserts>())
-                  .And(the_return_value.is_a_none<FakeNewType, MapWasCalledWithExternalState.Asserts>())
+                  .THEN(the_whenSome.for_Map_with_externalState.was_not_invoked())
+                  .And(the_return_value.for_Map_with_externalState.is_a_none())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
-
+      // Map T => IOption<TNew>
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
                   .WHEN(the_Client.calls_Map_with(Option.Some(FakeNewType.Create("whenSome value"))))
-                  .THEN(the_whenSome_Func.was_not_invoked<FakeType, IOption<FakeNewType>, MapToOptionWasCalled.Asserts>())
-                  .And(the_return_value.is_a_none<FakeNewType, MapToOptionWasCalled.Asserts>())
+                  .THEN(the_whenSome.for_Map_to_IOption.was_not_invoked())
+                  .And(the_return_value.for_Map_to_IOption.is_a_none())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
@@ -66,8 +68,8 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
                   .WHEN(the_Client.calls_Map_with(Option<FakeNewType>.None()))
-                  .THEN(the_whenSome_Func.was_not_invoked<FakeType, IOption<FakeNewType>, MapToOptionWasCalled.Asserts>())
-                  .And(the_return_value.is_a_none<FakeNewType, MapToOptionWasCalled.Asserts>())
+                  .THEN(the_whenSome.for_Map_to_IOption.was_not_invoked())
+                  .And(the_return_value.for_Map_to_IOption.is_a_none())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
@@ -76,8 +78,8 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
                   .GIVEN(the_Client.has_created_a_none())
                   .WHEN(the_Client.calls_Map_with(FakeExternalState.Create(),
                                                   Option.Some(FakeNewType.Create("whenSome value"))))
-                  .THEN(the_whenSome_Func.was_not_invoked<FakeExternalState, FakeType, IOption<FakeNewType>, MapToOptionWasCalledWithExternalState.Asserts>())
-                  .And(the_return_value.is_a_none<FakeNewType, MapToOptionWasCalledWithExternalState.Asserts>())
+                  .THEN(the_whenSome.for_Map_to_IOption_with_externalState.was_not_invoked())
+                  .And(the_return_value.for_Map_to_IOption_with_externalState.is_a_none())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
@@ -86,8 +88,8 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
                   .GIVEN(the_Client.has_created_a_none())
                   .WHEN(the_Client.calls_Map_with(FakeExternalState.Create(),
                                                   Option<FakeNewType>.None()))
-                  .THEN(the_whenSome_Func.was_not_invoked<FakeExternalState, FakeType, IOption<FakeNewType>, MapToOptionWasCalledWithExternalState.Asserts>())
-                  .And(the_return_value.is_a_none<FakeNewType, MapToOptionWasCalledWithExternalState.Asserts>())
+                  .THEN(the_whenSome.for_Map_to_IOption_with_externalState.was_not_invoked())
+                  .And(the_return_value.for_Map_to_IOption_with_externalState.is_a_none())
                   .Crystallise();
 
       // ReSharper disable once RedundantJumpStatement

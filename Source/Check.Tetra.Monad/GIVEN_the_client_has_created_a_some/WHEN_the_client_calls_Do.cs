@@ -39,8 +39,8 @@ public class WHEN_the_client_calls_Do : AAATestDataSource
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_some_from(content))
                   .WHEN(the_Client.calls_Do())
-                  .THEN(whenNone.for_Do.was_not_invoked())
-                  .And(whenSome.for_Do.was_invoked_once_with(content))
+                  .THEN(the_whenNone.for_Do.was_not_invoked())
+                  .And(the_whenSome.for_Do.was_invoked_once_with(content))
                   .And(the_return_value.for_Do.is_this())
                   .Crystallise();
 
@@ -51,8 +51,8 @@ public class WHEN_the_client_calls_Do : AAATestDataSource
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_some_from(content))
                   .WHEN(the_Client.calls_Do_with(externalState))
-                  .THEN(whenNone.for_Do_with_externalState.was_not_invoked())
-                  .And(whenSome.for_Do_with_externalState.was_invoked_once_with(externalState,
+                  .THEN(the_whenNone.for_Do_with_externalState.was_not_invoked())
+                  .And(the_whenSome.for_Do_with_externalState.was_invoked_once_with(externalState,
                                                                                            content))
                   .And(the_return_value.for_Do_with_externalState.is_this())
                   .Crystallise();
