@@ -2,6 +2,7 @@
 using Tetra.Testing;
 
 namespace Check;
+
 public static partial class TheOptionHasBeenCreated
 {
    public sealed class Act : IActs
@@ -38,6 +39,58 @@ public static partial class TheOptionHasBeenCreated
          return new(_option,
                     whenSome,
                     whenNone,
+                    returnValue);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public ExpandSomeToLeftWasCalled.Asserts ExpandSomeToLeft(FakeRight whenNoneValue)
+      {
+         var whenNone = FakeFunction<FakeRight>.Create(whenNoneValue);
+
+         var returnValue = _option.ExpandSomeToLeft(whenNone.Func);
+
+         return new(whenNone,
+                    returnValue);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public ExpandSomeToLeftWasCalledWithExternalState.Asserts ExpandSomeToLeft(FakeExternalState externalState,
+                                                                                 FakeRight whenNoneValue)
+      {
+         var whenNone = FakeFunction<FakeExternalState, FakeRight>.Create(whenNoneValue);
+
+         var returnValue = _option.ExpandSomeToLeft(externalState,
+                                                    whenNone.Func);
+
+         return new(whenNone,
+                    returnValue);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public ExpandSomeToRightWasCalled.Asserts ExpandSomeToRight(FakeLeft whenNoneValue)
+      {
+         var whenNone = FakeFunction<FakeLeft>.Create(whenNoneValue);
+
+         var returnValue = _option.ExpandSomeToRight(whenNone.Func);
+
+         return new(whenNone,
+                    returnValue);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public ExpandSomeToRightWasCalledWithExternalState.Asserts ExpandSomeToRight(FakeExternalState externalState,
+                                                                                   FakeLeft whenNoneValue)
+      {
+         var whenNone = FakeFunction<FakeExternalState, FakeLeft>.Create(whenNoneValue);
+
+         var returnValue = _option.ExpandSomeToRight(externalState,
+                                                     whenNone.Func);
+
+         return new(whenNone,
                     returnValue);
       }
 
@@ -120,11 +173,11 @@ public static partial class TheOptionHasBeenCreated
       public ReduceWasCalled.Asserts Reduce(FakeNewType whenSomeValue,
                                             FakeNewType whenNoneValue)
       {
-         var whenNone = FakeFunction <FakeNewType>.Create(whenNoneValue);
+         var whenNone = FakeFunction<FakeNewType>.Create(whenNoneValue);
          var whenSome = FakeFunction<FakeType, FakeNewType>.Create(whenSomeValue);
 
          var returnValue = _option.Reduce(whenSome.Func,
-                                      whenNone.Func);
+                                          whenNone.Func);
 
          return new(whenSome,
                     whenNone,
@@ -141,8 +194,8 @@ public static partial class TheOptionHasBeenCreated
          var whenSome = FakeFunction<FakeExternalState, FakeType, FakeNewType>.Create(whenSomeValue);
 
          var returnValue = _option.Reduce(externalState,
-                                      whenSome.Func,
-                                      whenNone.Func);
+                                          whenSome.Func,
+                                          whenNone.Func);
 
          return new(whenSome,
                     whenNone,

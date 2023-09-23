@@ -32,16 +32,6 @@ static partial class Option<T>
       // IOption<T> Methods
       /* ------------------------------------------------------------ */
 
-      public bool IsANone()
-         => true;
-
-      /* ------------------------------------------------------------ */
-
-      public bool IsASome()
-         => false;
-
-      /* ------------------------------------------------------------ */
-
       public IOption<T> Do(Action<T> whenSome,
                            Action    whenNone)
       {
@@ -60,6 +50,38 @@ static partial class Option<T>
 
          return this;
       }
+
+      /* ------------------------------------------------------------ */
+
+      public IEither<T, TRight> ExpandSomeToLeft<TRight>(Func<TRight> whenNone)
+         => Either<T, TRight>.Right(whenNone());
+
+      /* ------------------------------------------------------------ */
+
+      public IEither<T, TRight> ExpandSomeToLeft<TExternalState, TRight>(TExternalState               externalState,
+                                                                         Func<TExternalState, TRight> whenNone)
+         => Either<T, TRight>.Right(whenNone(externalState));
+
+      /* ------------------------------------------------------------ */
+
+      public IEither<TLeft, T> ExpandSomeToRight<TLeft>(Func<TLeft> whenNone)
+         => Either<TLeft, T>.Left(whenNone());
+
+      /* ------------------------------------------------------------ */
+
+      public IEither<TLeft, T> ExpandSomeToRight<TExternalState, TLeft>(TExternalState              externalState,
+                                                                        Func<TExternalState, TLeft> whenNone)
+         => Either<TLeft, T>.Left(whenNone(externalState));
+
+      /* ------------------------------------------------------------ */
+
+      public bool IsANone()
+         => true;
+
+      /* ------------------------------------------------------------ */
+
+      public bool IsASome()
+         => false;
 
       /* ------------------------------------------------------------ */
 
@@ -82,16 +104,6 @@ static partial class Option<T>
       public IOption<TNew> Map<TExternalState, TNew>(TExternalState                         externalState,
                                                      Func<TExternalState, T, IOption<TNew>> whenSome)
          => new Option<TNew>.NoneOption();
-
-      /* ------------------------------------------------------------ */
-
-      public IResult<T, TNew> MapToResult<TNew>(TNew whenNone)
-         => new Result<T, TNew>.FailureResult(whenNone);
-
-      /* ------------------------------------------------------------ */
-
-      public IResult<T, TNew> MapToResult<TNew>(Func<TNew> whenNone)
-         => new Result<T, TNew>.FailureResult(whenNone());
 
       /* ------------------------------------------------------------ */
 

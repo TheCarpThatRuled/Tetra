@@ -2,16 +2,16 @@
 
 namespace Tetra.Testing;
 
-public sealed class OptionAsserts<T, TNext> : IAsserts
+public sealed class EitherAsserts<TLeft, TRight, TNext> : IAsserts
    where TNext : IAsserts
 {
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static OptionAsserts<T, TNext> Create(string      description,
-                                                IOption<T>  actual,
-                                                Func<TNext> next)
+   public static EitherAsserts<TLeft, TRight, TNext> Create(string                 description,
+                                                            IEither<TLeft, TRight> actual,
+                                                            Func<TNext>            next)
       => new(actual,
              description,
              next);
@@ -20,11 +20,12 @@ public sealed class OptionAsserts<T, TNext> : IAsserts
    // Methods
    /* ------------------------------------------------------------ */
 
-   public TNext IsANone()
+   public TNext IsALeft(TLeft expected)
    {
       Assert
         .That
-        .IsANone(_description,
+        .IsALeft(_description,
+                 expected,
                  _actual);
 
       return _next();
@@ -32,13 +33,13 @@ public sealed class OptionAsserts<T, TNext> : IAsserts
 
    /* ------------------------------------------------------------ */
 
-   public TNext IsASome(T expected)
+   public TNext IsARight(TRight expected)
    {
       Assert
         .That
-        .IsASome(_description,
-                 expected,
-                 _actual);
+        .IsARight(_description,
+                  expected,
+                  _actual);
 
       return _next();
    }
@@ -71,17 +72,17 @@ public sealed class OptionAsserts<T, TNext> : IAsserts
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly IOption<T>  _actual;
-   private readonly string      _description;
-   private readonly Func<TNext> _next;
+   private readonly IEither<TLeft, TRight> _actual;
+   private readonly string                 _description;
+   private readonly Func<TNext>            _next;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private OptionAsserts(IOption<T>  actual,
-                         string      description,
-                         Func<TNext> next)
+   private EitherAsserts(IEither<TLeft, TRight> actual,
+                         string                 description,
+                         Func<TNext>            next)
    {
       _actual      = actual;
       _description = description;

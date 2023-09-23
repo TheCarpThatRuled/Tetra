@@ -43,17 +43,6 @@ partial class Option<T>
       // IOption<T> Methods
       /* ------------------------------------------------------------ */
 
-      public bool IsANone()
-         => false;
-
-      /* ------------------------------------------------------------ */
-
-      public bool IsASome()
-         => true;
-
-      /* ------------------------------------------------------------ */
-
-
       public IOption<T> Do(Action<T> whenSome,
                            Action    whenNone)
       {
@@ -73,6 +62,38 @@ partial class Option<T>
 
          return this;
       }
+
+      /* ------------------------------------------------------------ */
+
+      public IEither<T, TRight> ExpandSomeToLeft<TRight>(Func<TRight> whenNone)
+         => Either<T, TRight>.Left(Content);
+
+      /* ------------------------------------------------------------ */
+
+      public IEither<T, TRight> ExpandSomeToLeft<TExternalState, TRight>(TExternalState               externalState,
+                                                                         Func<TExternalState, TRight> whenNone)
+         => Either<T, TRight>.Left(Content);
+
+      /* ------------------------------------------------------------ */
+
+      public IEither<TLeft, T> ExpandSomeToRight<TLeft>(Func<TLeft> whenNone)
+         => Either<TLeft, T>.Right(Content);
+
+      /* ------------------------------------------------------------ */
+
+      public IEither<TLeft, T> ExpandSomeToRight<TExternalState, TLeft>(TExternalState              externalState,
+                                                                        Func<TExternalState, TLeft> whenNone)
+         => Either<TLeft, T>.Right(Content);
+
+      /* ------------------------------------------------------------ */
+
+      public bool IsANone()
+         => false;
+
+      /* ------------------------------------------------------------ */
+
+      public bool IsASome()
+         => true;
 
       /* ------------------------------------------------------------ */
 
@@ -97,16 +118,6 @@ partial class Option<T>
                                                      Func<TExternalState, T, IOption<TNew>> whenSome)
          => whenSome(externalState,
                      Content);
-
-      /* ------------------------------------------------------------ */
-
-      public IResult<T, TNew> MapToResult<TNew>(TNew whenNone)
-         => new Result<T, TNew>.SuccessResult(Content);
-
-      /* ------------------------------------------------------------ */
-
-      public IResult<T, TNew> MapToResult<TNew>(Func<TNew> whenNone)
-         => new Result<T, TNew>.SuccessResult(Content);
 
       /* ------------------------------------------------------------ */
 

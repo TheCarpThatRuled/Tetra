@@ -27,6 +27,26 @@ partial class Steps
       /* ------------------------------------------------------------ */
 
       // ReSharper disable once InconsistentNaming
+      public ForExpandSomeToLeft for_ExpandSomeToLeft { get; } = new();
+
+      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
+      public ForExpandSomeToLeftWithExternalState for_ExpandSomeToLeft_with_externalState { get; } = new();
+
+      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
+      public ForExpandSomeToRight for_ExpandSomeToRight { get; } = new();
+
+      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
+      public ForExpandSomeToRightWithExternalState for_ExpandSomeToRight_with_externalState { get; } = new();
+
+      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
       public ForMap for_Map { get; } = new();
 
       /* ------------------------------------------------------------ */
@@ -94,6 +114,16 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
+      private IAssert<TAsserts, TAsserts> is_a_left_containing<TLeft, TRight, TAsserts>(TLeft expected)
+         where TAsserts : IAsserts, IReturnsAnEitherAsserts<TLeft, TRight, TAsserts>
+         => AtomicAssert<TAsserts, TAsserts>
+           .Create($@"{nameof(the_return_value)}_{nameof(is_a_left_containing)} ""{expected}""",
+                   assert => assert
+                            .ReturnValue()
+                            .IsALeft(expected));
+
+      /* ------------------------------------------------------------ */
+
       private IAssert<TAsserts, TAsserts> is_a_none<T, TAsserts>()
          where TAsserts : IAsserts, IReturnsAnOptionAsserts<T, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
@@ -101,6 +131,16 @@ partial class Steps
                    assert => assert
                             .ReturnValue()
                             .IsANone());
+
+      /* ------------------------------------------------------------ */
+
+      private IAssert<TAsserts, TAsserts> is_a_right_containing<TLeft, TRight, TAsserts>(TRight expected)
+         where TAsserts : IAsserts, IReturnsAnEitherAsserts<TLeft, TRight, TAsserts>
+         => AtomicAssert<TAsserts, TAsserts>
+           .Create($@"{nameof(the_return_value)}_{nameof(is_a_right_containing)} ""{expected}""",
+                   assert => assert
+                            .ReturnValue()
+                            .IsARight(expected));
 
       /* ------------------------------------------------------------ */
 

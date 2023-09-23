@@ -75,6 +75,46 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
+      public IAct<TheOptionHasBeenCreated.Arrange, ExpandSomeToLeftWasCalled.Asserts> calls_ExpandSomeToLeft_with(FakeRight whenNoneValue)
+         => AtomicAct<TheOptionHasBeenCreated.Arrange, ExpandSomeToLeftWasCalled.Asserts>
+           .Create($@"{nameof(the_Client)}_{nameof(calls_ExpandSomeToLeft_with)} ""{whenNoneValue.Characterisation}""",
+                   arrange => arrange
+                             .ToActs()
+                             .ExpandSomeToLeft(whenNoneValue));
+
+      /* ------------------------------------------------------------ */
+
+      public IAct<TheOptionHasBeenCreated.Arrange, ExpandSomeToLeftWasCalledWithExternalState.Asserts> calls_ExpandSomeToLeft_with(FakeExternalState externalState,
+         FakeRight                                                                                                                                   whenNoneValue)
+         => AtomicAct<TheOptionHasBeenCreated.Arrange, ExpandSomeToLeftWasCalledWithExternalState.Asserts>
+           .Create($@"{nameof(the_Client)}_{nameof(calls_ExpandSomeToLeft_with)} ""{externalState.Characterisation}"", ""{whenNoneValue.Characterisation}""",
+                   arrange => arrange
+                             .ToActs()
+                             .ExpandSomeToLeft(externalState,
+                                               whenNoneValue));
+
+      /* ------------------------------------------------------------ */
+
+      public IAct<TheOptionHasBeenCreated.Arrange, ExpandSomeToRightWasCalled.Asserts> calls_ExpandSomeToRight_with(FakeLeft whenNoneValue)
+         => AtomicAct<TheOptionHasBeenCreated.Arrange, ExpandSomeToRightWasCalled.Asserts>
+           .Create($@"{nameof(the_Client)}_{nameof(calls_ExpandSomeToRight_with)} ""{whenNoneValue.Characterisation}""",
+                   arrange => arrange
+                             .ToActs()
+                             .ExpandSomeToRight(whenNoneValue));
+
+      /* ------------------------------------------------------------ */
+
+      public IAct<TheOptionHasBeenCreated.Arrange, ExpandSomeToRightWasCalledWithExternalState.Asserts> calls_ExpandSomeToRight_with(FakeExternalState externalState,
+         FakeLeft                                                                                                                                      whenNoneValue)
+         => AtomicAct<TheOptionHasBeenCreated.Arrange, ExpandSomeToRightWasCalledWithExternalState.Asserts>
+           .Create($@"{nameof(the_Client)}_{nameof(calls_ExpandSomeToRight_with)} ""{externalState.Characterisation}"", ""{whenNoneValue.Characterisation}""",
+                   arrange => arrange
+                             .ToActs()
+                             .ExpandSomeToRight(externalState,
+                                               whenNoneValue));
+
+      /* ------------------------------------------------------------ */
+
       public IAct<TheOptionHasBeenCreated.Arrange, MapWasCalled.Asserts> calls_Map_with(FakeNewType whenSomeValue)
          => AtomicAct<TheOptionHasBeenCreated.Arrange, MapWasCalled.Asserts>
            .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{whenSomeValue.Characterisation}""",

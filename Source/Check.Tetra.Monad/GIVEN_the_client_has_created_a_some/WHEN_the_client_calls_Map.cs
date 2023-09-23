@@ -34,7 +34,7 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
       /* ------------------------------------------------------------ */
 
       var content       = FakeType.Create("content");
-      var whenSome      = FakeNewType.Create("whenSome");
+      var whenSome      = FakeNewType.Create("whenSome Value");
       var externalState = FakeExternalState.Create();
 
       /* ------------------------------------------------------------ */

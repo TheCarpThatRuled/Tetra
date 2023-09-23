@@ -22,6 +22,26 @@ partial class Steps
       /* ------------------------------------------------------------ */
 
       // ReSharper disable once InconsistentNaming
+      public ForExpandSomeToLeft for_ExpandSomeToLeft { get; } = new();
+
+      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
+      public ForExpandSomeToLeftWithExternalState for_ExpandSomeToLeft_with_externalState { get; } = new();
+
+      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
+      public ForExpandSomeToRight for_ExpandSomeToRight { get; } = new();
+
+      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
+      public ForExpandSomeToRightWithExternalState for_ExpandSomeToRight_with_externalState { get; } = new();
+
+      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once InconsistentNaming
       public ForReduce for_Reduce { get; } = new();
 
       /* ------------------------------------------------------------ */
