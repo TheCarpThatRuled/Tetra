@@ -29,7 +29,7 @@ partial class Steps
       public IArrange<TheOptionHasBeenCreated.Arrange> has_created_a_some_from(FakeType content)
          => has_not_created_an_option()
            .And(calls_Option_T_Some_with(content))
-           .Recharacterise($@"{nameof(the_Client)}_{nameof(has_created_a_some_from)} ""{content.Characterisation}""");
+           .Recharacterise($@"{nameof(the_Client)}_{nameof(has_created_a_some_from)} ""{content?.Characterisation}""");
 
       /* ------------------------------------------------------------ */
       // Arrange
@@ -54,6 +54,33 @@ partial class Steps
                    arrange => arrange
                              .ToActs()
                              .Do(externalState));
+
+      /* ------------------------------------------------------------ */
+
+      public IAct<TheOptionHasBeenCreated.Arrange, BooleanAsserts<TestTerminus>> calls_Equals_with(object? other)
+         => AtomicAct<TheOptionHasBeenCreated.Arrange, BooleanAsserts<TestTerminus>>
+           .Create($@"{nameof(the_Client)}_{nameof(calls_Equals_with)} ""{other}""",
+                   arrange => arrange
+                             .ToActs()
+                             .Equals(other));
+
+      /* ------------------------------------------------------------ */
+
+      public IAct<TheOptionHasBeenCreated.Arrange, BooleanAsserts<TestTerminus>> calls_Equals_with_self()
+         => AtomicAct<TheOptionHasBeenCreated.Arrange, BooleanAsserts<TestTerminus>>
+           .Create($"{nameof(the_Client)}_{nameof(calls_Equals_with_self)}",
+                   arrange => arrange
+                             .ToActs()
+                             .EqualsSelf());
+
+      /* ------------------------------------------------------------ */
+
+      public IAct<TheOptionHasBeenCreated.Arrange, ObjectAsserts<int, TestTerminus>> calls_GetHashCode()
+         => AtomicAct<TheOptionHasBeenCreated.Arrange, ObjectAsserts<int, TestTerminus>>
+           .Create($@"{nameof(the_Client)}_{nameof(calls_GetHashCode)}",
+                   arrange => arrange
+                             .ToActs()
+                             .GetHashCode());
 
       /* ------------------------------------------------------------ */
 
@@ -111,7 +138,7 @@ partial class Steps
                    arrange => arrange
                              .ToActs()
                              .ExpandSomeToRight(externalState,
-                                               whenNoneValue));
+                                                whenNoneValue));
 
       /* ------------------------------------------------------------ */
 
@@ -178,16 +205,25 @@ partial class Steps
                                      whenNoneValue));
 
       /* ------------------------------------------------------------ */
+
+      public IAct<TheOptionHasBeenCreated.Arrange, ObjectAsserts<string?, TestTerminus>> calls_ToString()
+         => AtomicAct<TheOptionHasBeenCreated.Arrange, ObjectAsserts<string?, TestTerminus>>
+           .Create($@"{nameof(the_Client)}_{nameof(calls_ToString)}",
+                   arrange => arrange
+                             .ToActs()
+                             .ToString());
+
+      /* ------------------------------------------------------------ */
       // Arrange/Act
       /* ------------------------------------------------------------ */
 
       public IArrangeAct<TheOptionHasNotBeenCreated.Arrange, TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.Asserts> calls_Option_Some_T_with(FakeType content)
          => AtomicArrangeAct<TheOptionHasNotBeenCreated.Arrange, TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.Asserts>
-           .Create($@"{nameof(the_Client)}_{nameof(calls_Option_Some_T_with)} ""{content.Characterisation}""",
-                   arrange => arrange.CallOptionSomeT(content),
+           .Create($@"{nameof(the_Client)}_{nameof(calls_Option_Some_T_with)} ""{content?.Characterisation}""",
+                   arrange => arrange.CallOptionSomeT(content!),
                    arrange => arrange
                              .ToActs()
-                             .CallOptionSomeT(content));
+                             .CallOptionSomeT(content!));
 
       /* ------------------------------------------------------------ */
 
@@ -203,11 +239,11 @@ partial class Steps
 
       public IArrangeAct<TheOptionHasNotBeenCreated.Arrange, TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.Asserts> calls_Option_T_Some_with(FakeType content)
          => AtomicArrangeAct<TheOptionHasNotBeenCreated.Arrange, TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.Asserts>
-           .Create($@"{nameof(the_Client)}_{nameof(calls_Option_T_Some_with)} ""{content.Characterisation}""",
-                   arrange => arrange.CallOptionTSome(content),
+           .Create($@"{nameof(the_Client)}_{nameof(calls_Option_T_Some_with)} ""{content?.Characterisation}""",
+                   arrange => arrange.CallOptionTSome(content!),
                    arrange => arrange
                              .ToActs()
-                             .CallOptionTSome(content));
+                             .CallOptionTSome(content!));
 
       /* ------------------------------------------------------------ */
       // Assert

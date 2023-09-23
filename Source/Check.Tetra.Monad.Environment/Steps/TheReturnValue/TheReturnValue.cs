@@ -94,6 +94,14 @@ partial class Steps
       // Private Assert
       /* ------------------------------------------------------------ */
 
+      public IAssert<ObjectAsserts<T, TestTerminus>, TestTerminus> is_equal_to<T>(T expected)
+         => AtomicAssert<ObjectAsserts<T, TestTerminus>, TestTerminus>
+           .Create($@"{nameof(the_return_value)}_{nameof(is_equal_to)} ""{expected}""",
+                   assert => assert
+                            .IsEqualTo(expected));
+
+      /* ------------------------------------------------------------ */
+
       public IAssert<TAsserts, TAsserts> is_equal_to<T, TAsserts>(T expected)
          where TAsserts : IAsserts, IReturnsAsserts<T, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>

@@ -57,7 +57,7 @@ public static partial class TheOptionHasBeenCreated
       /* ------------------------------------------------------------ */
 
       public ExpandSomeToLeftWasCalledWithExternalState.Asserts ExpandSomeToLeft(FakeExternalState externalState,
-                                                                                 FakeRight whenNoneValue)
+                                                                                 FakeRight         whenNoneValue)
       {
          var whenNone = FakeFunction<FakeExternalState, FakeRight>.Create(whenNoneValue);
 
@@ -83,7 +83,7 @@ public static partial class TheOptionHasBeenCreated
       /* ------------------------------------------------------------ */
 
       public ExpandSomeToRightWasCalledWithExternalState.Asserts ExpandSomeToRight(FakeExternalState externalState,
-                                                                                   FakeLeft whenNoneValue)
+                                                                                   FakeLeft          whenNoneValue)
       {
          var whenNone = FakeFunction<FakeExternalState, FakeLeft>.Create(whenNoneValue);
 
@@ -92,6 +92,33 @@ public static partial class TheOptionHasBeenCreated
 
          return new(whenNone,
                     returnValue);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public new BooleanAsserts<TestTerminus> Equals(object? other)
+      {
+         var actual = _option.Equals(other);
+
+         return BooleanAsserts<TestTerminus>.Create("Return Value",
+                                                    actual,
+                                                    TestTerminus.Create);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public BooleanAsserts<TestTerminus> EqualsSelf()
+         => Equals(_option);
+
+      /* ------------------------------------------------------------ */
+
+      public new ObjectAsserts<int, TestTerminus> GetHashCode()
+      {
+         var actual = _option.GetHashCode();
+
+         return ObjectAsserts<int, TestTerminus>.Create("Return Value",
+                                                        actual,
+                                                        TestTerminus.Create);
       }
 
       /* ------------------------------------------------------------ */
@@ -200,6 +227,17 @@ public static partial class TheOptionHasBeenCreated
          return new(whenSome,
                     whenNone,
                     returnValue);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public new ObjectAsserts<string?, TestTerminus> ToString()
+      {
+         var actual = _option.ToString();
+
+         return ObjectAsserts<string?, TestTerminus>.Create("Return Value",
+                                                            actual,
+                                                            TestTerminus.Create);
       }
 
       /* ------------------------------------------------------------ */
