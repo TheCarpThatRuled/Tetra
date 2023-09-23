@@ -5,10 +5,10 @@
 /// An <c>IOption</c> may be in one of two states:
 /// <list type="bullet">
 /// <item>
-/// <description>Some, representing an instance of the contained type;</description>
+/// <description><b>Some</b>, representing an instance of the contained type;</description>
 /// </item>
 /// <item>
-/// <description>None, representing the absence of an instance of the contained type;</description>
+/// <description><b>None</b>, representing the absence of an instance of the contained type;</description>
 /// </item>
 /// </list>
 /// </summary>

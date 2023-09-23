@@ -2,6 +2,7 @@
 using Tetra.Testing;
 
 namespace Check;
+
 public static partial class TheOptionHasNotBeenCreated
 {
    public sealed class Act : IActs
@@ -10,18 +11,36 @@ public static partial class TheOptionHasNotBeenCreated
       //  Methods
       /* ------------------------------------------------------------ */
 
-      public TheOptionHasBeenCreated.Asserts CallOptionSomeT(FakeType content)
-         => new(Option.Some(content));
+      public OptionAsserts<FakeType, TestTerminus> CallOptionSomeT(FakeType? content)
+      {
+         var actual = Option.Some(content!);
+
+         return OptionAsserts<FakeType, TestTerminus>.Create("Return value",
+                                                             actual,
+                                                             TestTerminus.Create);
+      }
 
       /* ------------------------------------------------------------ */
 
-      public TheOptionHasBeenCreated.Asserts CallOptionTNone()
-         => new(Option<FakeType>.None());
+      public OptionAsserts<FakeType, TestTerminus> CallOptionTNone()
+      {
+         var actual = Option<FakeType>.None();
+
+         return OptionAsserts<FakeType, TestTerminus>.Create("Return value",
+                                                             actual,
+                                                             TestTerminus.Create);
+      }
 
       /* ------------------------------------------------------------ */
 
-      public TheOptionHasBeenCreated.Asserts CallOptionTSome(FakeType content)
-         => new(Option<FakeType>.Some(content));
+      public OptionAsserts<FakeType, TestTerminus> CallOptionTSome(FakeType? content)
+      {
+         var actual = Option<FakeType>.Some(content!);
+
+         return OptionAsserts<FakeType, TestTerminus>.Create("Return value",
+                                                             actual,
+                                                             TestTerminus.Create);
+      }
 
       /* ------------------------------------------------------------ */
       //  Internal Constructors

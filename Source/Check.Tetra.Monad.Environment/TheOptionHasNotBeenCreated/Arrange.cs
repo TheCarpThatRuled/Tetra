@@ -11,8 +11,8 @@ public static partial class TheOptionHasNotBeenCreated
       //  Methods
       /* ------------------------------------------------------------ */
 
-      public TheOptionHasBeenCreated.Arrange CallOptionSomeT(FakeType content)
-         => new(Option.Some(content));
+      public TheOptionHasBeenCreated.Arrange CallOptionSomeT(FakeType? content)
+         => new(Option.Some(content!));
 
       /* ------------------------------------------------------------ */
 
@@ -21,8 +21,8 @@ public static partial class TheOptionHasNotBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public TheOptionHasBeenCreated.Arrange CallOptionTSome(FakeType content)
-         => new(Option<FakeType>.Some(content));
+      public TheOptionHasBeenCreated.Arrange CallOptionTSome(FakeType? content)
+         => new(Option<FakeType>.Some(content!));
 
       /* ------------------------------------------------------------ */
 

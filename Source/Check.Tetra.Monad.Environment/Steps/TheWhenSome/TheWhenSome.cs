@@ -9,42 +9,7 @@ partial class Steps
       /* ------------------------------------------------------------ */
 
       // ReSharper disable once InconsistentNaming
-      public ForDo for_Do { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForDoWithExternalState for_Do_with_externalState { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForMap for_Map { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForMapToOption for_Map_to_IOption { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForMapToOptionWithExternalState for_Map_to_IOption_with_externalState { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForMapWithExternalState for_Map_with_externalState { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForReduce for_Reduce { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForReduceWithExternalState for_Reduce_with_externalState { get; } = new();
+      public ForOption for_Option { get; } = new();
 
       /* ------------------------------------------------------------ */
       // Private Properties

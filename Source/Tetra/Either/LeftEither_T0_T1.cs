@@ -54,9 +54,23 @@ partial class Either<TLeft, TRight>
 
       /* ------------------------------------------------------------ */
 
+      public IEither<TLeft, TRight> Do<TExternalState>(TExternalState                 externalState,
+                                                       Action<TExternalState, TLeft>  whenLeft,
+                                                       Action<TExternalState, TRight> whenRight)
+         => throw new NotImplementedException();
+
+      /* ------------------------------------------------------------ */
+
       public IEither<TNewLeft, TNewRight> Map<TNewLeft, TNewRight>(Func<TLeft, TNewLeft>   whenLeft,
                                                                    Func<TRight, TNewRight> whenRight)
          => throw Exceptions.NotImplemented();
+
+      /* ------------------------------------------------------------ */
+
+      public IEither<TNewLeft, TNewRight> Map<TExternalState, TNewLeft, TNewRight>(TExternalState                          externalState,
+                                                                                   Func<TExternalState, TLeft, TNewLeft>   whenLeft,
+                                                                                   Func<TExternalState, TRight, TNewRight> whenRight)
+         => throw new NotImplementedException();
 
       /* ------------------------------------------------------------ */
 
@@ -66,12 +80,26 @@ partial class Either<TLeft, TRight>
 
       /* ------------------------------------------------------------ */
 
-      public IOption<TLeft> MapLeftToOption()
+      public IEither<TNewLeft, TNewRight> Map<TExternalState, TNewLeft, TNewRight>(TExternalState                                             externalState,
+                                                                                   Func<TExternalState, TLeft, IEither<TNewLeft, TNewRight>>  whenLeft,
+                                                                                   Func<TExternalState, TRight, IEither<TNewLeft, TNewRight>> whenRight)
+         => throw new NotImplementedException();
+
+      /* ------------------------------------------------------------ */
+
+      public TNew Reduce<TExternalState, TNew>(TExternalState                     externalState,
+                                               Func<TExternalState, TLeft, TNew>  whenLeft,
+                                               Func<TExternalState, TRight, TNew> whenRight)
+         => throw new NotImplementedException();
+
+      /* ------------------------------------------------------------ */
+
+      public IOption<TLeft> ReduceLeftToOption()
          => throw Exceptions.NotImplemented();
 
       /* ------------------------------------------------------------ */
 
-      public IOption<TRight> MapRightToOption()
+      public IOption<TRight> ReduceRightToOption()
          => throw Exceptions.NotImplemented();
 
       /* ------------------------------------------------------------ */

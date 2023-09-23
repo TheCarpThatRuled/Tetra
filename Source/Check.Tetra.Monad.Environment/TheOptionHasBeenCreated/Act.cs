@@ -11,7 +11,7 @@ public static partial class TheOptionHasBeenCreated
       //  Methods
       /* ------------------------------------------------------------ */
 
-      public DoWasCalled.Asserts Do()
+      public AndDoWasCalledAsserts Do()
       {
          var whenNone = FakeAction.Create();
          var whenSome = FakeAction<FakeType>.Create();
@@ -27,7 +27,7 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public DoWasCalledWithExternalState.Asserts Do(FakeExternalState externalState)
+      public AndDoWasCalledWithExternalStateAsserts Do(FakeExternalState externalState)
       {
          var whenNone = FakeAction<FakeExternalState>.Create();
          var whenSome = FakeAction<FakeExternalState, FakeType>.Create();
@@ -44,7 +44,7 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public ExpandSomeToLeftWasCalled.Asserts ExpandSomeToLeft(FakeRight whenNoneValue)
+      public AndExpandSomeToLeftWasCalledAsserts ExpandSomeToLeft(FakeRight whenNoneValue)
       {
          var whenNone = FakeFunction<FakeRight>.Create(whenNoneValue);
 
@@ -56,8 +56,8 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public ExpandSomeToLeftWasCalledWithExternalState.Asserts ExpandSomeToLeft(FakeExternalState externalState,
-                                                                                 FakeRight         whenNoneValue)
+      public AndExpandSomeToLeftWasCalledWithExternalStateAsserts ExpandSomeToLeft(FakeExternalState externalState,
+                                                                                   FakeRight         whenNoneValue)
       {
          var whenNone = FakeFunction<FakeExternalState, FakeRight>.Create(whenNoneValue);
 
@@ -70,7 +70,7 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public ExpandSomeToRightWasCalled.Asserts ExpandSomeToRight(FakeLeft whenNoneValue)
+      public AndExpandSomeToRightWasCalledAsserts ExpandSomeToRight(FakeLeft whenNoneValue)
       {
          var whenNone = FakeFunction<FakeLeft>.Create(whenNoneValue);
 
@@ -82,8 +82,8 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public ExpandSomeToRightWasCalledWithExternalState.Asserts ExpandSomeToRight(FakeExternalState externalState,
-                                                                                   FakeLeft          whenNoneValue)
+      public AndExpandSomeToRightWasCalledWithExternalStateAsserts ExpandSomeToRight(FakeExternalState externalState,
+                                                                                     FakeLeft          whenNoneValue)
       {
          var whenNone = FakeFunction<FakeExternalState, FakeLeft>.Create(whenNoneValue);
 
@@ -145,7 +145,7 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public MapWasCalled.Asserts Map(FakeNewType whenSomeValue)
+      public AndMapWasCalledAsserts Map(FakeNewType whenSomeValue)
       {
          var whenSome = FakeFunction<FakeType, FakeNewType>.Create(whenSomeValue);
 
@@ -157,7 +157,7 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public MapToOptionWasCalled.Asserts Map(IOption<FakeNewType> whenSomeValue)
+      public AndMapWasCalledWithFuncToOptionAsserts Map(IOption<FakeNewType> whenSomeValue)
       {
          var whenSome = FakeFunction<FakeType, IOption<FakeNewType>>.Create(whenSomeValue);
 
@@ -169,8 +169,8 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public MapWasCalledWithExternalState.Asserts Map(FakeExternalState externalState,
-                                                       FakeNewType       whenSomeValue)
+      public AndMapWasCalledWithExternalStateAsserts Map(FakeExternalState externalState,
+                                                         FakeNewType       whenSomeValue)
       {
          var whenSome = FakeFunction<FakeExternalState, FakeType, FakeNewType>.Create(whenSomeValue);
 
@@ -183,8 +183,8 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public MapToOptionWasCalledWithExternalState.Asserts Map(FakeExternalState    externalState,
-                                                               IOption<FakeNewType> whenSomeValue)
+      public AndMapWasCalledWithFuncToOptionAndExternalStateAsserts Map(FakeExternalState    externalState,
+                                                                        IOption<FakeNewType> whenSomeValue)
       {
          var whenSome = FakeFunction<FakeExternalState, FakeType, IOption<FakeNewType>>.Create(whenSomeValue);
 
@@ -197,8 +197,8 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public ReduceWasCalled.Asserts Reduce(FakeNewType whenSomeValue,
-                                            FakeNewType whenNoneValue)
+      public AndReduceWasCalledAsserts Reduce(FakeNewType whenSomeValue,
+                                              FakeNewType whenNoneValue)
       {
          var whenNone = FakeFunction<FakeNewType>.Create(whenNoneValue);
          var whenSome = FakeFunction<FakeType, FakeNewType>.Create(whenSomeValue);
@@ -213,9 +213,9 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public ReduceWasCalledWithExternalState.Asserts Reduce(FakeExternalState externalState,
-                                                             FakeNewType       whenSomeValue,
-                                                             FakeNewType       whenNoneValue)
+      public AndReduceWasCalledWithExternalStateAsserts Reduce(FakeExternalState externalState,
+                                                               FakeNewType       whenSomeValue,
+                                                               FakeNewType       whenNoneValue)
       {
          var whenNone = FakeFunction<FakeExternalState, FakeNewType>.Create(whenNoneValue);
          var whenSome = FakeFunction<FakeExternalState, FakeType, FakeNewType>.Create(whenSomeValue);

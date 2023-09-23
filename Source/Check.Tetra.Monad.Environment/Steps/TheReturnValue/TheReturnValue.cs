@@ -12,67 +12,7 @@ partial class Steps
       /* ------------------------------------------------------------ */
 
       // ReSharper disable once InconsistentNaming
-      public ForAFactory for_a_factory { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForDo for_Do { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForDoWithExternalState for_Do_with_externalState { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForExpandSomeToLeft for_ExpandSomeToLeft { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForExpandSomeToLeftWithExternalState for_ExpandSomeToLeft_with_externalState { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForExpandSomeToRight for_ExpandSomeToRight { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForExpandSomeToRightWithExternalState for_ExpandSomeToRight_with_externalState { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForMap for_Map { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForMapToOption for_Map_to_IOption { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForMapToOptionWithExternalState for_Map_to_IOption_with_externalState { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForMapWithExternalState for_Map_with_externalState { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForReduce for_Reduce { get; } = new();
-
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForReduceWithExternalState for_Reduce_with_externalState { get; } = new();
+      public ForOption for_Option { get; } = new();
 
       /* ------------------------------------------------------------ */
       // Assert
@@ -82,6 +22,34 @@ partial class Steps
          => AtomicAssert<BooleanAsserts<TestTerminus>, TestTerminus>
            .Create($"{nameof(the_return_value)}_{nameof(is_false)}",
                    assert => assert.IsFalse());
+
+      /* ------------------------------------------------------------ */
+
+      public IAssert<EitherAsserts<TLeft, TRight, TestTerminus>, TestTerminus> is_a_left_containing<TLeft, TRight>(TLeft expected)
+         => AtomicAssert<EitherAsserts<TLeft, TRight, TestTerminus>, TestTerminus>
+           .Create($@"{nameof(the_return_value)}_{nameof(is_a_left_containing)} ""{expected}""",
+                   assert => assert.IsALeft(expected));
+
+      /* ------------------------------------------------------------ */
+
+      public IAssert<OptionAsserts<T, TestTerminus>, TestTerminus> is_a_none<T>()
+         => AtomicAssert<OptionAsserts<T, TestTerminus>, TestTerminus>
+           .Create($"{nameof(the_return_value)}_{nameof(is_a_none)}",
+                   assert => assert.IsANone());
+
+      /* ------------------------------------------------------------ */
+
+      public IAssert<EitherAsserts<TLeft, TRight, TestTerminus>, TestTerminus> is_a_right_containing<TLeft, TRight>(TRight expected)
+         => AtomicAssert<EitherAsserts<TLeft, TRight, TestTerminus>, TestTerminus>
+           .Create($@"{nameof(the_return_value)}_{nameof(is_a_right_containing)} ""{expected}""",
+                   assert => assert.IsARight(expected));
+
+      /* ------------------------------------------------------------ */
+
+      public IAssert<OptionAsserts<T, TestTerminus>, TestTerminus> is_a_some_containing<T>(T expected)
+         => AtomicAssert<OptionAsserts<T, TestTerminus>, TestTerminus>
+           .Create($@"{nameof(the_return_value)}_{nameof(is_a_some_containing)} ""{expected}""",
+                   assert => assert.IsASome(expected));
 
       /* ------------------------------------------------------------ */
 
@@ -98,7 +66,7 @@ partial class Steps
          => AtomicAssert<ObjectAsserts<T, TestTerminus>, TestTerminus>
            .Create($@"{nameof(the_return_value)}_{nameof(is_equal_to)} ""{expected}""",
                    assert => assert
-                            .IsEqualTo(expected));
+                     .IsEqualTo(expected));
 
       /* ------------------------------------------------------------ */
 

@@ -40,9 +40,9 @@ public class WHEN_the_client_calls_Reduce : AAATestDataSource
                   .GIVEN(the_Client.has_created_a_none())
                   .WHEN(the_Client.calls_Reduce_with(FakeNewType.Create("whenSome value"),
                                                      whenNone))
-                  .THEN(the_whenNone.for_Reduce.was_invoked_once())
-                  .And(the_whenSome.for_Reduce.was_not_invoked())
-                  .And(the_return_value.for_Reduce.is_equal_to(whenNone))
+                  .THEN(the_whenNone.for_Option.Reduce.was_invoked_once())
+                  .And(the_whenSome.for_Option.Reduce.was_not_invoked())
+                  .And(the_return_value.for_Option.Reduce.is_equal_to(whenNone))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
@@ -54,9 +54,9 @@ public class WHEN_the_client_calls_Reduce : AAATestDataSource
                   .WHEN(the_Client.calls_Reduce_with(externalState,
                                                      FakeNewType.Create("whenSome value"),
                                                      whenNone))
-                  .THEN(the_whenNone.for_Reduce_with_externalState.was_invoked_once_with(externalState))
-                  .And(the_whenSome.for_Reduce_with_externalState.was_not_invoked())
-                  .And(the_return_value.for_Reduce_with_externalState.is_equal_to(whenNone))
+                  .THEN(the_whenNone.for_Option.Reduce_with_externalState.was_invoked_once_with(externalState))
+                  .And(the_whenSome.for_Option.Reduce_with_externalState.was_not_invoked())
+                  .And(the_return_value.for_Option.Reduce_with_externalState.is_equal_to(whenNone))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
