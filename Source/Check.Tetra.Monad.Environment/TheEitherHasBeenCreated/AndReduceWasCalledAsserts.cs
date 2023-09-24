@@ -10,7 +10,7 @@ public static partial class TheEitherHasBeenCreated
                                                    IWhenRightFuncAsserts<FakeRight, FakeNewType, AndReduceWasCalledAsserts>
    {
       /* ------------------------------------------------------------ */
-      //  IReturnsAnEitherAsserts<FakeNewType, AndReduceWasCalledAsserts> Methods
+      //  IReturnsAsserts<FakeNewType, AndReduceWasCalledAsserts> Methods
       /* ------------------------------------------------------------ */
 
       public ObjectAsserts<FakeNewType, AndReduceWasCalledAsserts> ReturnValue()

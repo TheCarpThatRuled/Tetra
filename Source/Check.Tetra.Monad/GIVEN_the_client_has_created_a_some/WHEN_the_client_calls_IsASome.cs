@@ -34,7 +34,7 @@ public class WHEN_the_client_calls_IsASome : AAATestDataSource
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_some_from(FakeType.Create("content")))
-                  .WHEN(the_Client.calls_IsASome())
+                  .WHEN(the_Client.on_the_option.calls_IsASome())
                   .THEN(the_return_value.is_true())
                   .Crystallise();
 

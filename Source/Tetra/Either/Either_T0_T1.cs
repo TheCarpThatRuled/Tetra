@@ -14,7 +14,7 @@ public static partial class Either<TLeft, TRight>
    /// <summary>
    /// Creates a left.
    /// </summary>
-   /// <param name="content">The value the right shall contain.</param>
+   /// <param name="content">The value the left shall contain.</param>
    /// <returns>An instance of a left containing <c>content</c>.</returns>
    public static IEither<TLeft, TRight> Left(TLeft content)
       => new LeftEither(content);

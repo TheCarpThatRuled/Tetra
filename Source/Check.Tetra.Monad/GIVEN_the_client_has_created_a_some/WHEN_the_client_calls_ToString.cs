@@ -44,7 +44,7 @@ public class WHEN_the_client_calls_ToString : AAATestDataSource
 
          yield return AAA_test
                      .GIVEN(the_Client.has_created_a_some_from(content))
-                     .WHEN(the_Client.calls_ToString())
+                     .WHEN(the_Client.on_the_option.calls_ToString())
                      .THEN(the_return_value.is_equal_to($"Some ({content})"))
                      .Crystallise();
 

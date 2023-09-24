@@ -37,19 +37,19 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Map_with(FakeNewType.Create("whenSome value")))
-                  .THEN(the_whenSome.for_Option.Map.was_not_invoked())
-                  .And(the_return_value.for_Option.Map.is_a_none())
+                  .WHEN(the_Client.on_the_option.calls_Map_with(FakeNewType.Create("whenSome value")))
+                  .THEN(the_whenSome.for_Map.was_not_invoked())
+                  .And(the_return_value.for_option.Map.is_a_none())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Map_with(FakeExternalState.Create(),
+                  .WHEN(the_Client.on_the_option.calls_Map_with(FakeExternalState.Create(),
                                                   FakeNewType.Create("whenSome value")))
-                  .THEN(the_whenSome.for_Option.Map_with_externalState.was_not_invoked())
-                  .And(the_return_value.for_Option.Map_with_externalState.is_a_none())
+                  .THEN(the_whenSome.for_Map_with_externalState.was_not_invoked())
+                  .And(the_return_value.for_option.Map_with_externalState.is_a_none())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
@@ -58,38 +58,38 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Map_with(Option.Some(FakeNewType.Create("whenSome value"))))
-                  .THEN(the_whenSome.for_Option.Map_with_func_to_IOption.was_not_invoked())
-                  .And(the_return_value.for_Option.Map_with_func_to_IOption.is_a_none())
+                  .WHEN(the_Client.on_the_option.calls_Map_with(Option.Some(FakeNewType.Create("whenSome value"))))
+                  .THEN(the_whenSome.for_Map_with_func_to_IOption.was_not_invoked())
+                  .And(the_return_value.for_option.Map_with_func_to_IOption.is_a_none())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Map_with(Option<FakeNewType>.None()))
-                  .THEN(the_whenSome.for_Option.Map_with_func_to_IOption.was_not_invoked())
-                  .And(the_return_value.for_Option.Map_with_func_to_IOption.is_a_none())
+                  .WHEN(the_Client.on_the_option.calls_Map_with(Option<FakeNewType>.None()))
+                  .THEN(the_whenSome.for_Map_with_func_to_IOption.was_not_invoked())
+                  .And(the_return_value.for_option.Map_with_func_to_IOption.is_a_none())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Map_with(FakeExternalState.Create(),
+                  .WHEN(the_Client.on_the_option.calls_Map_with(FakeExternalState.Create(),
                                                   Option.Some(FakeNewType.Create("whenSome value"))))
-                  .THEN(the_whenSome.for_Option.Map_with_func_to_IOption_and_externalState.was_not_invoked())
-                  .And(the_return_value.for_Option.Map_with_func_to_IOption_and_externalState.is_a_none())
+                  .THEN(the_whenSome.for_Map_with_func_to_IOption_and_externalState.was_not_invoked())
+                  .And(the_return_value.for_option.Map_with_func_to_IOption_and_externalState.is_a_none())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Map_with(FakeExternalState.Create(),
+                  .WHEN(the_Client.on_the_option.calls_Map_with(FakeExternalState.Create(),
                                                   Option<FakeNewType>.None()))
-                  .THEN(the_whenSome.for_Option.Map_with_func_to_IOption_and_externalState.was_not_invoked())
-                  .And(the_return_value.for_Option.Map_with_func_to_IOption_and_externalState.is_a_none())
+                  .THEN(the_whenSome.for_Map_with_func_to_IOption_and_externalState.was_not_invoked())
+                  .And(the_return_value.for_option.Map_with_func_to_IOption_and_externalState.is_a_none())
                   .Crystallise();
 
       // ReSharper disable once RedundantJumpStatement

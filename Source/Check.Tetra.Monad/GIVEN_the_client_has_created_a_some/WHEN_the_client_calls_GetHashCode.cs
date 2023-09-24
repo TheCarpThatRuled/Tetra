@@ -34,7 +34,7 @@ public class WHEN_the_client_calls_GetHashCode : AAATestDataSource
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_some_from(default!))
-                  .WHEN(the_Client.calls_GetHashCode())
+                  .WHEN(the_Client.on_the_option.calls_GetHashCode())
                   .THEN(the_return_value.is_equal_to(0))
                   .Crystallise();
 
@@ -53,7 +53,7 @@ public class WHEN_the_client_calls_GetHashCode : AAATestDataSource
 
          yield return AAA_test
                      .GIVEN(the_Client.has_created_a_some_from(content))
-                     .WHEN(the_Client.calls_GetHashCode())
+                     .WHEN(the_Client.on_the_option.calls_GetHashCode())
                      .THEN(the_return_value.is_equal_to(content.GetHashCode()))
                      .Crystallise();
 

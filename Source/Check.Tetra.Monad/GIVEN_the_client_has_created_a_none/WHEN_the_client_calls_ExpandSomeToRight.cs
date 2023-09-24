@@ -39,19 +39,19 @@ public class WHEN_the_client_calls_ExpandSomeToRight : AAATestDataSource
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_ExpandSomeToRight_with(whenNone))
-                  .THEN(the_whenNone.for_Option.ExpandSomeToRight.was_invoked_once())
-                  .And(the_return_value.for_Option.ExpandSomeToRight.is_a_left_containing(whenNone))
+                  .WHEN(the_Client.on_the_option.calls_ExpandSomeToRight_with(whenNone))
+                  .THEN(the_whenNone.for_ExpandSomeToRight.was_invoked_once())
+                  .And(the_return_value.for_option.ExpandSomeToRight.is_a_left_containing(whenNone))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_ExpandSomeToRight_with(externalState,
+                  .WHEN(the_Client.on_the_option.calls_ExpandSomeToRight_with(externalState,
                                                                 whenNone))
-                  .THEN(the_whenNone.for_Option.ExpandSomeToRight_with_externalState.was_invoked_once_with(externalState))
-                  .And(the_return_value.for_Option.ExpandSomeToRight_with_externalState.is_a_left_containing(whenNone))
+                  .THEN(the_whenNone.for_ExpandSomeToRight_with_externalState.was_invoked_once_with(externalState))
+                  .And(the_return_value.for_option.ExpandSomeToRight_with_externalState.is_a_left_containing(whenNone))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */

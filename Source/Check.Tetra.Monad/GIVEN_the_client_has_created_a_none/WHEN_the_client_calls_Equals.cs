@@ -35,7 +35,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Equals_with(null))
+                  .WHEN(the_Client.on_the_option.calls_Equals_with(null))
                   .THEN(the_return_value.is_false())
                   .Crystallise();
 
@@ -43,7 +43,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Equals_with(Option<FakeNewType>.None()))
+                  .WHEN(the_Client.on_the_option.calls_Equals_with(Option<FakeNewType>.None()))
                   .THEN(the_return_value.is_false())
                   .Crystallise();
 
@@ -51,7 +51,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Equals_with(FakeType.Create("Some")))
+                  .WHEN(the_Client.on_the_option.calls_Equals_with(FakeType.Create("Some")))
                   .THEN(the_return_value.is_false())
                   .Crystallise();
 
@@ -59,7 +59,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Equals_with(Option.Some(FakeType.Create("Some"))))
+                  .WHEN(the_Client.on_the_option.calls_Equals_with(Option.Some(FakeType.Create("Some"))))
                   .THEN(the_return_value.is_false())
                   .Crystallise();
 
@@ -67,7 +67,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Equals_with(Option<FakeType>.None()))
+                  .WHEN(the_Client.on_the_option.calls_Equals_with(Option<FakeType>.None()))
                   .THEN(the_return_value.is_true())
                   .Crystallise();
 
@@ -75,7 +75,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Equals_with_self())
+                  .WHEN(the_Client.on_the_option.calls_Equals_with_self())
                   .THEN(the_return_value.is_true())
                   .Crystallise();
 

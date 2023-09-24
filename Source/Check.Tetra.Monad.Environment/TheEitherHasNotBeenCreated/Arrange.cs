@@ -11,12 +11,12 @@ public static partial class TheEitherHasNotBeenCreated
       //  Methods
       /* ------------------------------------------------------------ */
 
-      public TheEitherHasBeenCreated.Arrange CallEitherTRight(FakeRight? content)
+      public TheEitherHasBeenCreated.Arrange CallEitherRight(FakeRight? content)
          => new(Either<FakeLeft, FakeRight>.Right(content!));
 
       /* ------------------------------------------------------------ */
 
-      public TheEitherHasBeenCreated.Arrange CallEitherTLeft(FakeLeft? content)
+      public TheEitherHasBeenCreated.Arrange CallEitherLeft(FakeLeft? content)
          => new(Either<FakeLeft, FakeRight>.Left(content!));
 
       /* ------------------------------------------------------------ */

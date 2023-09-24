@@ -11,7 +11,7 @@ public static partial class TheEitherHasNotBeenCreated
       //  Methods
       /* ------------------------------------------------------------ */
 
-      public EitherAsserts<FakeLeft, FakeRight, TestTerminus> CallEitherTRight(FakeRight? content)
+      public EitherAsserts<FakeLeft, FakeRight, TestTerminus> CallEitherRight(FakeRight? content)
       {
          var actual = Either<FakeLeft, FakeRight>.Right(content!);
 
@@ -22,7 +22,7 @@ public static partial class TheEitherHasNotBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public EitherAsserts<FakeLeft, FakeRight, TestTerminus> CallEitherTLeft(FakeLeft? content)
+      public EitherAsserts<FakeLeft, FakeRight, TestTerminus> CallEitherLeft(FakeLeft? content)
       {
          var actual = Either<FakeLeft, FakeRight>.Left(content!);
 
