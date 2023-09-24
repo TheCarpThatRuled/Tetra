@@ -29,12 +29,12 @@ public class Parse
          var actual = FileComponent.Parse(value);
 
          //Assert
-         return IsASuccessAnd(AssertMessages.ReturnValue,
-                              (description,
-                               actualFileComponent) => AreEqual(description,
-                                                                value,
-                                                                actualFileComponent.Value()),
-                              actual);
+         return IsALeftAnd(AssertMessages.ReturnValue,
+                           (description,
+                            actualFileComponent) => AreEqual(description,
+                                                             value,
+                                                             actualFileComponent.Value()),
+                           actual);
       }
 
       Arb.Register<Libraries.ValidPathComponent>();
@@ -61,10 +61,10 @@ public class Parse
          var actual = FileComponent.Parse(value);
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
-                                                                                                HumanReadableName.FileComponent)),
-                           actual);
+         return IsARight(AssertMessages.ReturnValue,
+                         Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
+                                                                                              HumanReadableName.FileComponent)),
+                         actual);
       }
 
       Arb.Register<Libraries.InvalidPathComponent>();

@@ -18,7 +18,7 @@ public class ParseComponents
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static IResult<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message> TestParseComponents(string potentialPath,
+      public static IEither<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message> TestParseComponents(string potentialPath,
          string                                                                                                                      pathType)
          => ParseComponents(potentialPath,
                             pathType);
@@ -57,7 +57,7 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd(AssertMessages.ReturnValue,
+         return IsALeftAnd(AssertMessages.ReturnValue,
                               (description,
                                actualComponents) => AreEqual(description,
                                                              testPath,
@@ -92,7 +92,7 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd(AssertMessages.ReturnValue,
+         return IsALeftAnd(AssertMessages.ReturnValue,
                               (description,
                                actualComponents) => AreEqual(description,
                                                              testPath,
@@ -125,7 +125,7 @@ public class ParseComponents
 
       //Assert
       Assert.That
-            .IsAFailure(AssertMessages.ReturnValue,
+            .IsARight(AssertMessages.ReturnValue,
                         Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
                                                                                     nameof(TestPath))),
                         actual);
@@ -151,7 +151,7 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
+         return IsARight(AssertMessages.ReturnValue,
                            Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
                                                                                                    nameof(TestPath))),
                            actual);
@@ -183,7 +183,7 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
+         return IsARight(AssertMessages.ReturnValue,
                            Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
                                                                                                    nameof(TestPath))),
                            actual);
@@ -215,7 +215,7 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
+         return IsARight(AssertMessages.ReturnValue,
                            Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
                                                                                                     nameof(TestPath))),
                            actual);

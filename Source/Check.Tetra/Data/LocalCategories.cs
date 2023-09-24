@@ -24,7 +24,6 @@ internal static class LocalCategories
    public const string OpenFileResult        = nameof(OpenFileResult);
    public const string RelativeDirectoryPath = nameof(Tetra.RelativeDirectoryPath);
    public const string RelativeFilePath      = nameof(Tetra.RelativeFilePath);
-   public const string Result                = nameof(Tetra.Result);
    public const string Sequence              = nameof(Tetra.Sequence);
    public const string String                = nameof(System.String);
    public const string Success               = nameof(Success);

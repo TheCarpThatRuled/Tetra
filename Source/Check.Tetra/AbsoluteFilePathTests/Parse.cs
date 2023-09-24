@@ -31,12 +31,12 @@ public class Parse
          var actual = AbsoluteFilePath.Parse(testPath.PathWithoutTrailingDirectorySeparator());
 
          //Assert
-         return IsASuccessAnd(AssertMessages.ReturnValue,
-                              (description,
-                               actualPath) => AreEqual(description,
-                                                       testPath,
-                                                       actualPath),
-                              actual);
+         return IsALeftAnd(AssertMessages.ReturnValue,
+                           (description,
+                            actualPath) => AreEqual(description,
+                                                    testPath,
+                                                    actualPath),
+                           actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteFilePath>();
@@ -65,10 +65,10 @@ public class Parse
          var actual = AbsoluteFilePath.Parse(testPath.PathWithTrailingDirectorySeparator());
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(testPath.PathWithTrailingDirectorySeparator(),
-                                                                                                              HumanReadableName.AbsoluteFilePath)),
-                           actual);
+         return IsARight(AssertMessages.ReturnValue,
+                         Message.Create(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(testPath.PathWithTrailingDirectorySeparator(),
+                                                                                                            HumanReadableName.AbsoluteFilePath)),
+                         actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteFilePath>();
@@ -93,10 +93,10 @@ public class Parse
 
       //Assert
       Assert.That
-            .IsAFailure(AssertMessages.ReturnValue,
-                        Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
-                                                                                    HumanReadableName.AbsoluteFilePath)),
-                        actual);
+            .IsARight(AssertMessages.ReturnValue,
+                      Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
+                                                                                  HumanReadableName.AbsoluteFilePath)),
+                      actual);
    }
 
    /* ------------------------------------------------------------ */
@@ -118,10 +118,10 @@ public class Parse
          var actual = AbsoluteFilePath.Parse(path);
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                   HumanReadableName.AbsoluteFilePath)),
-                           actual);
+         return IsARight(AssertMessages.ReturnValue,
+                         Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
+                                                                                                 HumanReadableName.AbsoluteFilePath)),
+                         actual);
       }
 
       Arb.Register<Libraries.ValidPathWithoutARoot>();
@@ -149,10 +149,10 @@ public class Parse
          var actual = AbsoluteFilePath.Parse(path);
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                   HumanReadableName.AbsoluteFilePath)),
-                           actual);
+         return IsARight(AssertMessages.ReturnValue,
+                         Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
+                                                                                                 HumanReadableName.AbsoluteFilePath)),
+                         actual);
       }
 
       Arb.Register<Libraries.PathWithAnInvalidVolumeRoot>();
@@ -179,10 +179,10 @@ public class Parse
          var actual = AbsoluteFilePath.Parse(path);
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
-                                                                                                    HumanReadableName.AbsoluteFilePath)),
-                           actual);
+         return IsARight(AssertMessages.ReturnValue,
+                         Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
+                                                                                                  HumanReadableName.AbsoluteFilePath)),
+                         actual);
       }
 
       Arb.Register<Libraries.PathWithAVolumeRootAndAnInvalidComponent>();

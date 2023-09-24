@@ -12,7 +12,7 @@ public interface IFileSystem
    // Methods
    /* ------------------------------------------------------------ */
 
-   public IResult<Message> Create(AbsoluteDirectoryPath path);
+   public IOption<Message> Create(AbsoluteDirectoryPath path);
 
    /* ------------------------------------------------------------ */
 
@@ -40,15 +40,15 @@ public interface IFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public IResult<Message> SetCurrentDirectory(AbsoluteDirectoryPath path);
+   public IOption<Message> SetCurrentDirectory(AbsoluteDirectoryPath path);
 
    /* ------------------------------------------------------------ */
 
-   public IResult<ISequence<AbsoluteFilePath>, Message> SubDirectoriesOf(AbsoluteDirectoryPath path);
+   public IEither<ISequence<AbsoluteFilePath>, Message> SubDirectoriesOf(AbsoluteDirectoryPath path);
 
    /* ------------------------------------------------------------ */
 
-   public IResult<ISequence<AbsoluteFilePath>, Message> SubFileOf(AbsoluteDirectoryPath path);
+   public IEither<ISequence<AbsoluteFilePath>, Message> SubFileOf(AbsoluteDirectoryPath path);
 
    /* ------------------------------------------------------------ */
 }

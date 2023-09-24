@@ -29,12 +29,12 @@ public class Parse
          var actual = DirectoryComponent.Parse(value);
 
          //Assert
-         return IsASuccessAnd(AssertMessages.ReturnValue,
-                              (description,
-                               actualDirectoryComponent) => AreEqual(description,
-                                                                     value,
-                                                                     actualDirectoryComponent.Value()),
-                              actual);
+         return IsALeftAnd(AssertMessages.ReturnValue,
+                           (description,
+                            actualDirectoryComponent) => AreEqual(description,
+                                                                  value,
+                                                                  actualDirectoryComponent.Value()),
+                           actual);
       }
 
       Arb.Register<Libraries.ValidPathComponent>();
@@ -61,10 +61,10 @@ public class Parse
          var actual = DirectoryComponent.Parse(value);
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
-                                                                                                HumanReadableName.DirectoryComponent)),
-                           actual);
+         return IsARight(AssertMessages.ReturnValue,
+                         Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
+                                                                                              HumanReadableName.DirectoryComponent)),
+                         actual);
       }
 
       Arb.Register<Libraries.InvalidPathComponent>();

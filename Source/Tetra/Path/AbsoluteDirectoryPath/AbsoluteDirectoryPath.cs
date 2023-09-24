@@ -17,7 +17,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteDirectoryPath Create(VolumeComponent               volume,
+   public static AbsoluteDirectoryPath Create(VolumeComponent             volume,
                                               params DirectoryComponent[] directories)
       => new(directories.Materialise(),
              volume);
@@ -31,7 +31,7 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
 
    /* ------------------------------------------------------------ */
 
-   public static IResult<AbsoluteDirectoryPath, Message> Parse(string potentialPath)
+   public static IEither<AbsoluteDirectoryPath, Message> Parse(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
         .Map(Create,
@@ -156,14 +156,14 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static IResult<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message> ParseComponents(string potentialPath,
-                                                                                                                string pathType)
+   protected static IEither<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message> ParseComponents(string potentialPath,
+      string                                                                                                                     pathType)
    {
       if (string.IsNullOrEmpty(potentialPath))
       {
-         return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message>
-           .Failure(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(potentialPath,
-                                                                                pathType)));
+         return Either<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message>
+           .Right(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(potentialPath,
+                                                                              pathType)));
       }
 
       var components = potentialPath
@@ -175,9 +175,9 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
 
       if (potentialVolume.IsNotAValidVolumeLabel())
       {
-         return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message>
-           .Failure(Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(potentialPath,
-                                                                                            pathType)));
+         return Either<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message>
+           .Right(Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(potentialPath,
+                                                                                          pathType)));
       }
 
       var directoryComponents = components
@@ -187,15 +187,15 @@ public class AbsoluteDirectoryPath : IComparable<AbsoluteDirectoryPath>,
 
       if (directoryComponents.Any(x => x.IsNotAValidPathComponent()))
       {
-         return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message>
-           .Failure(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(potentialPath,
-                                                                                             pathType)));
+         return Either<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message>
+           .Right(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(potentialPath,
+                                                                                           pathType)));
       }
 
-      return Result<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message>
-        .Success((VolumeComponent.Create(potentialVolume[0]),
-                  directoryComponents.Select(DirectoryComponent.Create)
-                                     .Materialise()));
+      return Either<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message>
+        .Left((VolumeComponent.Create(potentialVolume[0]),
+               directoryComponents.Select(DirectoryComponent.Create)
+                                  .Materialise()));
    }
 
    /* ------------------------------------------------------------ */

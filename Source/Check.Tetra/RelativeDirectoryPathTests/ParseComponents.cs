@@ -18,7 +18,7 @@ public class ParseComponents
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static IResult<ISequence<DirectoryComponent>, Message> TestParseComponents(string potentialPath,
+      public static IEither<ISequence<DirectoryComponent>, Message> TestParseComponents(string potentialPath,
                                                                                         string pathType)
          => ParseComponents(potentialPath,
                             pathType);
@@ -33,7 +33,7 @@ public class ParseComponents
    }
 
    /* ------------------------------------------------------------ */
-   // protected static Result<ISequence<DirectoryComponent>> ParseComponents(string potentialPath,
+   // protected static IEither<ISequence<DirectoryComponent>> ParseComponents(string potentialPath,
    //                                                                        string pathType)
    /* ------------------------------------------------------------ */
 
@@ -56,12 +56,12 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd(AssertMessages.ReturnValue,
-                              (description,
-                               actualComponents) => AreEqual(description,
-                                                             testPath,
-                                                             actualComponents),
-                              actual);
+         return IsALeftAnd(AssertMessages.ReturnValue,
+                           (description,
+                            actualComponents) => AreEqual(description,
+                                                          testPath,
+                                                          actualComponents),
+                           actual);
       }
 
       Arb.Register<Libraries.TestRelativeDirectoryPath>();
@@ -91,12 +91,12 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd(AssertMessages.ReturnValue,
-                              (description,
-                               actualComponents) => AreEqual(description,
-                                                             testPath,
-                                                             actualComponents),
-                              actual);
+         return IsALeftAnd(AssertMessages.ReturnValue,
+                           (description,
+                            actualComponents) => AreEqual(description,
+                                                          testPath,
+                                                          actualComponents),
+                           actual);
       }
 
 
@@ -125,10 +125,10 @@ public class ParseComponents
 
       //Assert
       Assert.That
-            .IsAFailure(AssertMessages.ReturnValue,
-                        Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(string.Empty,
-                                                                                   nameof(TestPath))),
-                        actual);
+            .IsARight(AssertMessages.ReturnValue,
+                      Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(string.Empty,
+                                                                                 nameof(TestPath))),
+                      actual);
    }
 
    /* ------------------------------------------------------------ */
@@ -151,10 +151,10 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(path,
-                                                                                                   nameof(TestPath))),
-                           actual);
+         return IsARight(AssertMessages.ReturnValue,
+                         Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(path,
+                                                                                                 nameof(TestPath))),
+                         actual);
       }
 
       Arb.Register<Libraries.PathWithoutARootButWithAnInvalidComponent>();

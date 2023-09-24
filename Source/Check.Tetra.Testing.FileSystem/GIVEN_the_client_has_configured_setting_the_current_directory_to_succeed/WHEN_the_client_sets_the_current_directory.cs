@@ -27,8 +27,8 @@ public class WHEN_the_client_sets_the_current_directory
          var actual = fileSystem.SetCurrentDirectory(args.updatedPath);
 
          //Assert
-         return IsASuccess(AssertMessages.ReturnValue,
-                           actual)
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
            .And(AreEqual("Current directory",
                          args.updatedPath,
                          fileSystem.CurrentDirectory()));

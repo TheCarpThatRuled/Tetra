@@ -29,12 +29,12 @@ public class Parse
          var actual = VolumeComponent.Parse(value);
 
          //Assert
-         return IsASuccessAnd(AssertMessages.ReturnValue,
-                              (description,
-                               actualVolume) => AreEqual(description,
-                                                         $"{value}:",
-                                                         actualVolume.Value()),
-                              actual);
+         return IsALeftAnd(AssertMessages.ReturnValue,
+                           (description,
+                            actualVolume) => AreEqual(description,
+                                                      $"{value}:",
+                                                      actualVolume.Value()),
+                           actual);
       }
 
       Arb.Register<Libraries.AsciiLetters>();
@@ -61,10 +61,10 @@ public class Parse
          var actual = VolumeComponent.Parse(value);
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
-                                                                                           HumanReadableName.VolumeComponent)),
-                           actual);
+         return IsARight(AssertMessages.ReturnValue,
+                         Message.Create(IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
+                                                                                         HumanReadableName.VolumeComponent)),
+                         actual);
       }
 
       Arb.Register<Libraries.NonAsciiLetters>();

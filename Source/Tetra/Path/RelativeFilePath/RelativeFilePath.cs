@@ -24,7 +24,7 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
 
    /* ------------------------------------------------------------ */
 
-   public static IResult<RelativeFilePath, Message> Parse(string potentialPath)
+   public static IEither<RelativeFilePath, Message> Parse(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
         .Map(Create,
@@ -147,13 +147,13 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static IResult<(ISequence<DirectoryComponent> directories, FileComponent file), Message> ParseComponents(string potentialPath,
+   protected static IEither<(ISequence<DirectoryComponent> directories, FileComponent file), Message> ParseComponents(string potentialPath,
                                                                                                                       string pathType)
    {
       if (string.IsNullOrEmpty(potentialPath))
       {
-         return Result<(ISequence<DirectoryComponent> directories, FileComponent file), Message>
-           .Failure(Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(potentialPath,
+         return Either<(ISequence<DirectoryComponent> directories, FileComponent file), Message>
+           .Right(Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(potentialPath,
                                                                                pathType)));
       }
 
@@ -168,20 +168,20 @@ public class RelativeFilePath : IComparable<RelativeFilePath>,
 
       if (potentialComponents.Any(x => x.IsNotAValidPathComponent()))
       {
-         return Result<(ISequence<DirectoryComponent> directories, FileComponent file), Message>
-           .Failure(Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(potentialPath,
+         return Either<(ISequence<DirectoryComponent> directories, FileComponent file), Message>
+           .Right(Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(potentialPath,
                                                                                             pathType)));
       }
 
       if (string.IsNullOrEmpty(components[^1]))
       {
-         return Result<(ISequence<DirectoryComponent> directories, FileComponent file), Message>
-           .Failure(Message.Create(IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(potentialPath,
+         return Either<(ISequence<DirectoryComponent> directories, FileComponent file), Message>
+           .Right(Message.Create(IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(potentialPath,
                                                                                                       pathType)));
       }
 
-      return Result<(ISequence<DirectoryComponent> directories, FileComponent file), Message>
-        .Success((potentialComponents.SkipLast(1)
+      return Either<(ISequence<DirectoryComponent> directories, FileComponent file), Message>
+        .Left((potentialComponents.SkipLast(1)
                                      .Select(DirectoryComponent.Create)
                                      .Materialise(),
                   FileComponent.Create(components[^1])));

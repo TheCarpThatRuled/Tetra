@@ -20,11 +20,11 @@ public sealed class FileSystem : IFileSystem
    // IFileSystem Methods
    /* ------------------------------------------------------------ */
 
-   public IResult<Message> Create(AbsoluteDirectoryPath path)
+   public IOption<Message> Create(AbsoluteDirectoryPath path)
    {
       _directories.AddRange(path.Ancestry());
 
-      return Result<Message>.Success();
+      return Option<Message>.None();
    }
 
    /* ------------------------------------------------------------ */
@@ -60,17 +60,17 @@ public sealed class FileSystem : IFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public IResult<Message> SetCurrentDirectory(AbsoluteDirectoryPath path)
+   public IOption<Message> SetCurrentDirectory(AbsoluteDirectoryPath path)
       => _setCurrentDirectory(path);
 
    /* ------------------------------------------------------------ */
 
-   public IResult<ISequence<AbsoluteFilePath>, Message> SubDirectoriesOf(AbsoluteDirectoryPath path)
+   public IEither<ISequence<AbsoluteFilePath>, Message> SubDirectoriesOf(AbsoluteDirectoryPath path)
       => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */
 
-   public IResult<ISequence<AbsoluteFilePath>, Message> SubFileOf(AbsoluteDirectoryPath path)
+   public IEither<ISequence<AbsoluteFilePath>, Message> SubFileOf(AbsoluteDirectoryPath path)
       => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */
@@ -78,7 +78,7 @@ public sealed class FileSystem : IFileSystem
    /* ------------------------------------------------------------ */
 
    public void SettingTheCurrentDirectoryShallFail(Message error)
-      => _setCurrentDirectory = _ => Result<Message>.Failure(error);
+      => _setCurrentDirectory = _ => Option<Message>.Some(error);
 
    /* ------------------------------------------------------------ */
 
@@ -92,7 +92,7 @@ public sealed class FileSystem : IFileSystem
    private readonly List<AbsoluteDirectoryPath> _directories = new();
 
    //Mutable
-   private Func<AbsoluteDirectoryPath, IResult<Message>> _setCurrentDirectory;
+   private Func<AbsoluteDirectoryPath, IOption<Message>> _setCurrentDirectory;
    private AbsoluteDirectoryPath                         _currentDirectory;
 
    /* ------------------------------------------------------------ */
@@ -112,11 +112,11 @@ public sealed class FileSystem : IFileSystem
    // Private Methods
    /* ------------------------------------------------------------ */
 
-   private IResult<Message> SuccessfullySetCurrentDirectory(AbsoluteDirectoryPath path)
+   private IOption<Message> SuccessfullySetCurrentDirectory(AbsoluteDirectoryPath path)
    {
       _currentDirectory = path;
 
-      return Result<Message>.Success();
+      return Option<Message>.None();
    }
 
    /* ------------------------------------------------------------ */

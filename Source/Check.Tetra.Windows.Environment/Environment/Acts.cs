@@ -29,7 +29,7 @@ public sealed class Acts : IActs
 
    /* ------------------------------------------------------------ */
 
-   public Act<ResultAsserts<Message, Asserts>> The_client_creates_a_directory(AbsoluteDirectoryPath path)
+   public Act<OptionAsserts<Message, Asserts>> The_client_creates_a_directory(AbsoluteDirectoryPath path)
       => new(() => Create_a_directory(path));
 
    /* ------------------------------------------------------------ */
@@ -38,7 +38,7 @@ public sealed class Acts : IActs
 
    /* ------------------------------------------------------------ */
 
-   public Act<ResultAsserts<Message, Asserts>> The_client_sets_the_current_directory(AbsoluteDirectoryPath path)
+   public Act<OptionAsserts<Message, Asserts>> The_client_sets_the_current_directory(AbsoluteDirectoryPath path)
       => new(() => Set_the_current_directory(path));
 
    /* ------------------------------------------------------------ */
@@ -97,8 +97,8 @@ public sealed class Acts : IActs
 
    /* ------------------------------------------------------------ */
 
-   private ResultAsserts<Message, Asserts> Create_a_directory(AbsoluteDirectoryPath path)
-      => ResultAsserts<Message, Asserts>
+   private OptionAsserts<Message, Asserts> Create_a_directory(AbsoluteDirectoryPath path)
+      => OptionAsserts<Message, Asserts>
         .Create($"{nameof(IFileSystem)}.{nameof(IFileSystem.Create)}({nameof(AbsoluteDirectoryPath)})",
                 _fileSystem.Create(path),
                 () => Asserts.Create(_fileSystem));
@@ -113,8 +113,8 @@ public sealed class Acts : IActs
 
    /* ------------------------------------------------------------ */
 
-   private ResultAsserts<Message, Asserts> Set_the_current_directory(AbsoluteDirectoryPath path)
-      => ResultAsserts<Message, Asserts>
+   private OptionAsserts<Message, Asserts> Set_the_current_directory(AbsoluteDirectoryPath path)
+      => OptionAsserts<Message, Asserts>
         .Create($"{nameof(IFileSystem)}.{nameof(IFileSystem.SetCurrentDirectory)}",
                 _fileSystem.SetCurrentDirectory(path),
                 () => Asserts.Create(_fileSystem));

@@ -19,17 +19,17 @@ public sealed class FileSystem : IFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public IResult<Message> Create(AbsoluteDirectoryPath path)
+   public IOption<Message> Create(AbsoluteDirectoryPath path)
    {
       try
       {
          Directory.CreateDirectory(path.Value());
 
-         return Result<Message>.Success();
+         return Option<Message>.None();
       }
       catch (Exception e)
       {
-         return Result.Failure(Message.Create(e.ToString()));
+         return Option.Some(Message.Create(e.ToString()));
       }
    }
 
@@ -67,28 +67,28 @@ public sealed class FileSystem : IFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public IResult<Message> SetCurrentDirectory(AbsoluteDirectoryPath path)
+   public IOption<Message> SetCurrentDirectory(AbsoluteDirectoryPath path)
    {
       try
       {
          Directory.SetCurrentDirectory(path.Value());
 
-         return Result<Message>.Success();
+         return Option<Message>.None();
       }
       catch (Exception e)
       {
-         return Result.Failure(Message.Create(e.ToString()));
+         return Option.Some(Message.Create(e.ToString()));
       }
    }
 
    /* ------------------------------------------------------------ */
 
-   public IResult<ISequence<AbsoluteFilePath>, Message> SubDirectoriesOf(AbsoluteDirectoryPath path)
+   public IEither<ISequence<AbsoluteFilePath>, Message> SubDirectoriesOf(AbsoluteDirectoryPath path)
       => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */
 
-   public IResult<ISequence<AbsoluteFilePath>, Message> SubFileOf(AbsoluteDirectoryPath path)
+   public IEither<ISequence<AbsoluteFilePath>, Message> SubFileOf(AbsoluteDirectoryPath path)
       => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */

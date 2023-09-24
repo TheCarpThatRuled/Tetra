@@ -18,7 +18,7 @@ public class ParseComponents
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static IResult<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message> TestParseComponents(string potentialPath,
+      public static IEither<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message> TestParseComponents(string potentialPath,
          string                                                                                                                                          pathType)
          => ParseComponents(potentialPath,
                             pathType);
@@ -36,7 +36,7 @@ public class ParseComponents
    }
 
    /* ------------------------------------------------------------ */
-   // IResult<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message> ParseComponents(string potentialPath,
+   // IEither<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message> ParseComponents(string potentialPath,
    //                                                                                                               string pathType)
    /* ------------------------------------------------------------ */
 
@@ -59,12 +59,12 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsASuccessAnd(AssertMessages.ReturnValue,
-                              (description,
-                               actualComponents) => AreEqual(description,
-                                                             testPath,
-                                                             actualComponents),
-                              actual);
+         return IsALeftAnd(AssertMessages.ReturnValue,
+                           (description,
+                            actualComponents) => AreEqual(description,
+                                                          testPath,
+                                                          actualComponents),
+                           actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteFilePath>();
@@ -94,10 +94,10 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(testPath.PathWithTrailingDirectorySeparator(),
-                                                                                                              nameof(TestPath))),
-                           actual);
+         return IsARight(AssertMessages.ReturnValue,
+                         Message.Create(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(testPath.PathWithTrailingDirectorySeparator(),
+                                                                                                            nameof(TestPath))),
+                         actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteFilePath>();
@@ -125,10 +125,10 @@ public class ParseComponents
 
       //Assert
       Assert.That
-            .IsAFailure(AssertMessages.ReturnValue,
-                        Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
-                                                                                    nameof(TestPath))),
-                        actual);
+            .IsARight(AssertMessages.ReturnValue,
+                      Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
+                                                                                  nameof(TestPath))),
+                      actual);
    }
 
    /* ------------------------------------------------------------ */
@@ -151,10 +151,10 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                   nameof(TestPath))),
-                           actual);
+         return IsARight(AssertMessages.ReturnValue,
+                         Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
+                                                                                                 nameof(TestPath))),
+                         actual);
       }
 
       Arb.Register<Libraries.ValidPathWithoutARoot>();
@@ -183,10 +183,10 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                   nameof(TestPath))),
-                           actual);
+         return IsARight(AssertMessages.ReturnValue,
+                         Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
+                                                                                                 nameof(TestPath))),
+                         actual);
       }
 
       Arb.Register<Libraries.PathWithAnInvalidVolumeRoot>();
@@ -215,10 +215,10 @@ public class ParseComponents
                                                    nameof(TestPath));
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
-                                                                                                    nameof(TestPath))),
-                           actual);
+         return IsARight(AssertMessages.ReturnValue,
+                         Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
+                                                                                                  nameof(TestPath))),
+                         actual);
       }
 
       Arb.Register<Libraries.PathWithAVolumeRootAndAnInvalidComponent>();

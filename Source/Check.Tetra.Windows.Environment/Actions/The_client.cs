@@ -51,9 +51,9 @@ public static class The_client
 
    /* ------------------------------------------------------------ */
 
-   public static AAA_test.IAct<Arranges, ResultAsserts<Message, Asserts>> Creates_a_directory(AbsoluteDirectoryPath path)
+   public static AAA_test.IAct<Arranges, OptionAsserts<Message, Asserts>> Creates_a_directory(AbsoluteDirectoryPath path)
       => AAA_test
-        .AtomicAct<Arranges, ResultAsserts<Message, Asserts>>
+        .AtomicAct<Arranges, OptionAsserts<Message, Asserts>>
         .Create($"{nameof(The_client)}.{nameof(Creates_a_directory)}: {path}",
                 environment => environment.WHEN()
                                           .The_client_creates_a_directory(path)
@@ -71,9 +71,9 @@ public static class The_client
 
    /* ------------------------------------------------------------ */
 
-   public static AAA_test.IAct<Arranges, ResultAsserts<Message, Asserts>> Sets_the_current_directory(AbsoluteDirectoryPath path)
+   public static AAA_test.IAct<Arranges, OptionAsserts<Message, Asserts>> Sets_the_current_directory(AbsoluteDirectoryPath path)
       => AAA_test
-        .AtomicAct<Arranges, ResultAsserts<Message, Asserts>>
+        .AtomicAct<Arranges, OptionAsserts<Message, Asserts>>
         .Create($"{nameof(The_client)}.{nameof(Sets_the_current_directory)}: {path}",
                 environment => environment.WHEN()
                                           .The_client_sets_the_current_directory(path)

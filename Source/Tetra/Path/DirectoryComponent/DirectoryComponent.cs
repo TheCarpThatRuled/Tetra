@@ -12,16 +12,16 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
    public static DirectoryComponent Create(string potentialComponent)
       => Validate(potentialComponent,
                   ComponentType)
-        .Reduce<DirectoryComponent>(() => new(potentialComponent),
-                                    message => throw new ArgumentException(message.Content(),
-                                                                           nameof(potentialComponent)));
+        .Reduce<DirectoryComponent>(message => throw new ArgumentException(message.Content(),
+                                                                           nameof(potentialComponent)),
+                                    () => new(potentialComponent));
 
    /* ------------------------------------------------------------ */
 
-   public static IResult<DirectoryComponent, Message> Parse(string potentialComponent)
+   public static IEither<DirectoryComponent, Message> Parse(string potentialComponent)
       => Validate(potentialComponent,
                   ComponentType)
-        .MapSuccessToType(new DirectoryComponent(potentialComponent));
+        .ExpandSomeToRight(() => new DirectoryComponent(potentialComponent));
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -83,12 +83,12 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static IResult<Message> Validate(string potentialComponent,
-                                   string componentType)
+   protected static IOption<Message> Validate(string potentialComponent,
+                                              string componentType)
       => potentialComponent.IsNotAValidPathComponent()
-            ? Result.Failure(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(potentialComponent,
-                                                                                              componentType)))
-            : Result<Message>.Success();
+            ? Option.Some(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(potentialComponent,
+                                                                                               componentType)))
+            : Option<Message>.None();
 
    /* ------------------------------------------------------------ */
    // Private Constants

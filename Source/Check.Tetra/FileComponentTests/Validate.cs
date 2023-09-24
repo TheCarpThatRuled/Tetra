@@ -17,7 +17,7 @@ public class Validate
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static IResult<Message> TestValidate(string potentialComponent,
+      public static IOption<Message> TestValidate(string potentialComponent,
                                                   string componentType)
          => Validate(potentialComponent,
                      componentType);
@@ -33,7 +33,7 @@ public class Validate
    }
 
    /* ------------------------------------------------------------ */
-   // protected static Result<FileComponent> Validate(string potentialComponent)
+   // protected static IOption<FileComponent> Validate(string potentialComponent)
    /* ------------------------------------------------------------ */
 
    //GIVEN
@@ -53,8 +53,8 @@ public class Validate
                                                  nameof(TestComponent));
 
          //Assert
-         return IsASuccess(AssertMessages.ReturnValue,
-                           actual);
+         return IsANone(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.ValidPathComponent>();
@@ -82,10 +82,10 @@ public class Validate
                                                  nameof(TestComponent));
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
-                           Message.Create(Messages.IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
-                                                                                                         nameof(TestComponent))),
-                           actual);
+         return IsASome(AssertMessages.ReturnValue,
+                        Message.Create(Messages.IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
+                                                                                                      nameof(TestComponent))),
+                        actual);
       }
 
       Arb.Register<Libraries.InvalidPathComponent>();

@@ -12,16 +12,16 @@ public class VolumeComponent : IComparable<VolumeComponent>,
    public static VolumeComponent Create(char potentialVolume)
       => Validate(potentialVolume,
                   VolumeType)
-        .Reduce<VolumeComponent>(() => new(potentialVolume),
-                                 message => throw new ArgumentException(message.Content(),
-                                                                        nameof(potentialVolume)));
+        .Reduce<VolumeComponent>(message => throw new ArgumentException(message.Content(),
+                                                                        nameof(potentialVolume)),
+                                 () => new(potentialVolume));
 
    /* ------------------------------------------------------------ */
 
-   public static IResult<VolumeComponent, Message> Parse(char potentialVolume)
+   public static IEither<VolumeComponent, Message> Parse(char potentialVolume)
       => Validate(potentialVolume,
                   VolumeType)
-        .MapSuccessToType(new VolumeComponent(potentialVolume));
+        .ExpandSomeToRight(() => new VolumeComponent(potentialVolume));
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -83,12 +83,12 @@ public class VolumeComponent : IComparable<VolumeComponent>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static IResult<Message> Validate(char   potentialVolume,
-                                             string volumeType)
+   protected static IOption<Message> Validate(char   potentialVolume,
+                                              string volumeType)
       => potentialVolume.IsNotAnAsciiLetter()
-            ? Result.Failure(Message.Create(IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(potentialVolume,
-                                                                                            volumeType)))
-            : Result<Message>.Success();
+            ? Option.Some(Message.Create(IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(potentialVolume,
+                                                                                          volumeType)))
+            : Option<Message>.None();
 
    /* ------------------------------------------------------------ */
    // Private Constants

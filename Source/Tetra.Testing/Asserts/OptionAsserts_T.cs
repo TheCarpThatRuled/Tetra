@@ -45,6 +45,19 @@ public sealed class OptionAsserts<T, TNext> : IAsserts
 
    /* ------------------------------------------------------------ */
 
+   public TNext IsASomeAnd(Func<T,bool> predicate)
+   {
+      Assert
+        .That
+        .IsASomeAnd(_description,
+                    predicate,
+                    _actual);
+
+      return _next();
+   }
+
+   /* ------------------------------------------------------------ */
+
    public TNext IsEqualTo(object? expected)
    {
       Assert.That

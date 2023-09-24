@@ -26,8 +26,8 @@ public class WHEN_the_client_creates_the_same_directory
          var actual = fileSystem.Create(args.otherDirectory);
 
          //Assert
-         return IsASuccess(AssertMessages.ReturnValue,
-                           actual)
+         return IsANone(AssertMessages.ReturnValue,
+                        actual)
            .And(IsTrue("Directories created",
                        args.otherDirectory
                            .Ancestry()

@@ -27,7 +27,7 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
 
    /* ------------------------------------------------------------ */
 
-   public static IResult<RelativeDirectoryPath, Message> Parse(string potentialPath)
+   public static IEither<RelativeDirectoryPath, Message> Parse(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
         .Map(CreateInternal,
@@ -174,13 +174,13 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static IResult<ISequence<DirectoryComponent>, Message> ParseComponents(string potentialPath,
+   protected static IEither<ISequence<DirectoryComponent>, Message> ParseComponents(string potentialPath,
                                                                                     string pathType)
    {
       if (string.IsNullOrEmpty(potentialPath))
       {
-         return Result<ISequence<DirectoryComponent>, Message>
-           .Failure(Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(potentialPath,
+         return Either<ISequence<DirectoryComponent>, Message>
+           .Right(Message.Create(IsNotValidBecauseARelativePathMayNotBeEmpty(potentialPath,
                                                                                pathType)));
       }
 
@@ -195,13 +195,13 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
 
       if (directoryComponents.Any(x => x.IsNotAValidPathComponent()))
       {
-         return Result<ISequence<DirectoryComponent>, Message>
-           .Failure(Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(potentialPath,
+         return Either<ISequence<DirectoryComponent>, Message>
+           .Right(Message.Create(IsNotValidBecauseARelativePathMayNotContainTheCharacters(potentialPath,
                                                                                             pathType)));
       }
 
-      return Result<ISequence<DirectoryComponent>, Message>
-        .Success(directoryComponents
+      return Either<ISequence<DirectoryComponent>, Message>
+        .Left(directoryComponents
                 .Select(DirectoryComponent.Create)
                 .Materialise());
    }

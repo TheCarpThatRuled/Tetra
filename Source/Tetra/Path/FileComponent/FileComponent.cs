@@ -12,16 +12,16 @@ public class FileComponent : IComparable<FileComponent>,
    public static FileComponent Create(string potentialComponent)
       => Validate(potentialComponent,
                   ComponentType)
-        .Reduce<FileComponent>(() => new(potentialComponent),
-                               message => throw new ArgumentException(message.Content(),
-                                                                      nameof(potentialComponent)));
+        .Reduce<FileComponent>(message => throw new ArgumentException(message.Content(),
+                                                                      nameof(potentialComponent)),
+                               () => new(potentialComponent));
 
    /* ------------------------------------------------------------ */
 
-   public static IResult<FileComponent, Message> Parse(string potentialComponent)
+   public static IEither<FileComponent, Message> Parse(string potentialComponent)
       => Validate(potentialComponent,
                   ComponentType)
-        .MapSuccessToType(new FileComponent(potentialComponent));
+        .ExpandSomeToRight(() => new FileComponent(potentialComponent));
 
    /* ------------------------------------------------------------ */
    // object Overridden Methods
@@ -83,12 +83,12 @@ public class FileComponent : IComparable<FileComponent>,
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static IResult<Message> Validate(string potentialComponent,
+   protected static IOption<Message> Validate(string potentialComponent,
                                    string componentType)
       => potentialComponent.IsNotAValidPathComponent()
-            ? Result.Failure(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(potentialComponent,
+            ? Option.Some(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(potentialComponent,
                                                                                               componentType)))
-            : Result<Message>.Success();
+            : Option<Message>.None();
 
    /* ------------------------------------------------------------ */
    // Private Constants

@@ -17,7 +17,7 @@ public class Validate
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static IResult<Message> TestValidate(char   potentialVolume,
+      public static IOption<Message> TestValidate(char   potentialVolume,
                                                   string volumeType)
          => Validate(potentialVolume,
                      volumeType);
@@ -53,8 +53,8 @@ public class Validate
                                                        nameof(TestVolumeComponent));
 
          //Assert
-         return IsASuccess(AssertMessages.ReturnValue,
-                           actual);
+         return IsANone(AssertMessages.ReturnValue,
+                        actual);
       }
 
       Arb.Register<Libraries.AsciiLetters>();
@@ -83,10 +83,10 @@ public class Validate
                                                        nameof(TestVolumeComponent));
 
          //Assert
-         return IsAFailure(AssertMessages.ReturnValue,
-                           Message.Create(Messages.IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
-                                                                                                    nameof(TestVolumeComponent))),
-                           actual);
+         return IsASome(AssertMessages.ReturnValue,
+                        Message.Create(Messages.IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
+                                                                                                 nameof(TestVolumeComponent))),
+                        actual);
       }
 
       Arb.Register<Libraries.NonAsciiLetters>();

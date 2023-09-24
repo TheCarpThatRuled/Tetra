@@ -60,12 +60,7 @@ public class False_Equals
                   Generators.String()
                             .Select(x => (object?) x),
                   Generators.Option(Generators.Bool())
-                            .Select(x => (object?) x),
-                  Generators.Result(Generators.Bool())
-                            .Select(x => (object?)x),
-                  Generators.Result(Generators.Bool(),
-                                    Generators.Bool())
-                            .Select(x => (object?)x))
+                            .Select(x => (object?) x))
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
