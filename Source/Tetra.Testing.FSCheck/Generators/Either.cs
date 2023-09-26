@@ -39,14 +39,14 @@ partial class Generators
         .TwoValueTuples()
         .Where(tuple => tuple
                        .first
-                       .Reduce(i1 => tuple
+                       .Unify(i1 => tuple
                                     .second
-                                    .Reduce(i2 => !Equals(i1,
+                                    .Unify(i2 => !Equals(i1,
                                                           i2),
                                             _ => true),
                                i1 => tuple
                                     .second
-                                    .Reduce(i2 => true,
+                                    .Unify(i2 => true,
                                             i2 => !Equals(i1,
                                                           i2))));
 

@@ -4,17 +4,17 @@ namespace Check;
 
 public static partial class TheOptionHasBeenCreated
 {
-   public sealed class AndReduceWasCalledWithExternalStateAsserts : IAsserts,
-                                 IReturnsAsserts<FakeNewType, AndReduceWasCalledWithExternalStateAsserts>,
-                                 IWhenNoneFuncAsserts<FakeExternalState, FakeNewType, AndReduceWasCalledWithExternalStateAsserts>,
-                                 IWhenSomeFuncAsserts<FakeExternalState, FakeType, FakeNewType, AndReduceWasCalledWithExternalStateAsserts>
+   public sealed class AndUnifyWasCalledWithExternalStateAsserts : IAsserts,
+                                 IReturnsAsserts<FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>,
+                                 IWhenNoneFuncAsserts<FakeExternalState, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>,
+                                 IWhenSomeFuncAsserts<FakeExternalState, FakeType, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>
    {
       /* ------------------------------------------------------------ */
       //  IReturnsAsserts<FakeNewType, Asserts> Methods
       /* ------------------------------------------------------------ */
 
-      public ObjectAsserts<FakeNewType, AndReduceWasCalledWithExternalStateAsserts> ReturnValue()
-         => ObjectAsserts<FakeNewType, AndReduceWasCalledWithExternalStateAsserts>
+      public ObjectAsserts<FakeNewType, AndUnifyWasCalledWithExternalStateAsserts> ReturnValue()
+         => ObjectAsserts<FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>
            .Create("Return Value",
                    _returnValue,
                    () => this);
@@ -23,8 +23,8 @@ public static partial class TheOptionHasBeenCreated
       //  IWhenNoneFunctionAsserts<FakeExternalState, FakeNewType, Asserts> Methods
       /* ------------------------------------------------------------ */
 
-      public FuncAsserts<FakeExternalState, FakeNewType, AndReduceWasCalledWithExternalStateAsserts> WhenNone()
-         => FuncAsserts<FakeExternalState, FakeNewType, AndReduceWasCalledWithExternalStateAsserts>
+      public FuncAsserts<FakeExternalState, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts> WhenNone()
+         => FuncAsserts<FakeExternalState, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>
            .Create("whenNone",
                    _whenNone,
                    () => this);
@@ -33,8 +33,8 @@ public static partial class TheOptionHasBeenCreated
       //  IWhenSomeFunctionAsserts<FakeExternalState, FakeType, FakeNewType, Asserts> Methods
       /* ------------------------------------------------------------ */
 
-      public FuncAsserts<FakeExternalState, FakeType, FakeNewType, AndReduceWasCalledWithExternalStateAsserts> WhenSome()
-         => FuncAsserts<FakeExternalState, FakeType, FakeNewType, AndReduceWasCalledWithExternalStateAsserts>
+      public FuncAsserts<FakeExternalState, FakeType, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts> WhenSome()
+         => FuncAsserts<FakeExternalState, FakeType, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>
            .Create("whenSome",
                    _whenSome,
                    () => this);
@@ -43,7 +43,7 @@ public static partial class TheOptionHasBeenCreated
       //  Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal AndReduceWasCalledWithExternalStateAsserts(FakeFunction<FakeExternalState, FakeType, FakeNewType> whenSome,
+      internal AndUnifyWasCalledWithExternalStateAsserts(FakeFunction<FakeExternalState, FakeType, FakeNewType> whenSome,
                        FakeFunction<FakeExternalState, FakeNewType>           whenNone,
                        FakeNewType                                            returnValue)
       {

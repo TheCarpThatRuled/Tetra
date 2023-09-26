@@ -12,7 +12,7 @@ public class FileComponent : IComparable<FileComponent>,
    public static FileComponent Create(string potentialComponent)
       => Validate(potentialComponent,
                   ComponentType)
-        .Reduce<FileComponent>(message => throw new ArgumentException(message.Content(),
+        .Unify<FileComponent>(message => throw new ArgumentException(message.Content(),
                                                                       nameof(potentialComponent)),
                                () => new(potentialComponent));
 

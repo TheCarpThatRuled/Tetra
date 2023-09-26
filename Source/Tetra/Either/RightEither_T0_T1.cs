@@ -77,7 +77,7 @@ partial class Either<TLeft, TRight>
 
       public IEither<TNewLeft, TNewRight> Map<TNewLeft, TNewRight>(Func<TLeft, TNewLeft>   whenLeft,
                                                                    Func<TRight, TNewRight> whenRight)
-         => new Either<TNewLeft,TNewRight>.RightEither(whenRight(Content));
+         => new Either<TNewLeft, TNewRight>.RightEither(whenRight(Content));
 
       /* ------------------------------------------------------------ */
 
@@ -88,29 +88,15 @@ partial class Either<TLeft, TRight>
                                                                   Content));
 
       /* ------------------------------------------------------------ */
-
-      public IEither<TNewLeft, TNewRight> Map<TNewLeft, TNewRight>(Func<TLeft, IEither<TNewLeft, TNewRight>>  whenLeft,
-                                                                   Func<TRight, IEither<TNewLeft, TNewRight>> whenRight)
+      public TNew Unify<TNew>(Func<TLeft, TNew>  whenLeft,
+                              Func<TRight, TNew> whenRight)
          => whenRight(Content);
 
       /* ------------------------------------------------------------ */
 
-      public IEither<TNewLeft, TNewRight> Map<TExternalState, TNewLeft, TNewRight>(TExternalState                                             externalState,
-                                                                                   Func<TExternalState, TLeft, IEither<TNewLeft, TNewRight>>  whenLeft,
-                                                                                   Func<TExternalState, TRight, IEither<TNewLeft, TNewRight>> whenRight)
-         => whenRight(externalState,
-                      Content);
-
-      /* ------------------------------------------------------------ */
-      public TNew Reduce<TNew>(Func<TLeft, TNew>  whenLeft,
-                               Func<TRight, TNew> whenRight)
-         => whenRight(Content);
-
-      /* ------------------------------------------------------------ */
-
-      public TNew Reduce<TExternalState, TNew>(TExternalState                     externalState,
-                                               Func<TExternalState, TLeft, TNew>  whenLeft,
-                                               Func<TExternalState, TRight, TNew> whenRight)
+      public TNew Unify<TExternalState, TNew>(TExternalState                     externalState,
+                                              Func<TExternalState, TLeft, TNew>  whenLeft,
+                                              Func<TExternalState, TRight, TNew> whenRight)
          => whenRight(externalState,
                       Content);
 

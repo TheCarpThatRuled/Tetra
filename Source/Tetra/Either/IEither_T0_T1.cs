@@ -72,7 +72,7 @@ public interface IEither<out TLeft, out TRight>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Maps the content of the <c>IEither</c> into a new form via mapping functions.
+   /// Maps the content of the <c>IEither</c> into a new form via mapping functions without altering which branch it is on.
    /// </summary>
    /// <typeparam name="TNewLeft">The type the <b>left</b> of this <c>IEither</c> shall be converted into.</typeparam>
    /// <typeparam name="TNewRight">The type the <b>right</b> of this <c>IEither</c> shall be converted into.</typeparam>
@@ -88,7 +88,7 @@ public interface IEither<out TLeft, out TRight>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Maps the content of the <c>IEither</c> into a new form via mapping functions.
+   /// Maps the content of the <c>IEither</c> into a new form via mapping functions without altering which branch it is on.
    /// </summary>
    /// <typeparam name="TExternalState">The type of the external state.</typeparam>
    /// <typeparam name="TNewLeft">The type the <b>left</b> of this <c>IEither</c> shall be converted into.</typeparam>
@@ -107,41 +107,6 @@ public interface IEither<out TLeft, out TRight>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Maps the content of the <c>IEither</c> into a new form via mapping functions.
-   /// </summary>
-   /// <typeparam name="TNewLeft">The type the <b>left</b> of this <c>IEither</c> shall be converted into.</typeparam>
-   /// <typeparam name="TNewRight">The type the <b>right</b> of this <c>IEither</c> shall be converted into.</typeparam>
-   /// <param name="whenLeft">The mapping function that shall be applied to the content of the <c>IEither</c>, if it is a <b>left</b>.</param>
-   /// <param name="whenRight">The mapping function that shall be applied to the content of the <c>IEither</c>, if it is a <b>right</b>.</param>
-   /// <returns>
-   /// The content of this <c>IEither</c> mapped through <c>whenLeft</c> if it is a <b>left</b>;
-   /// otherwise the content of this <c>IEither</c> mapped through <c>whenRight</c>.
-   /// </returns>
-   public IEither<TNewLeft, TNewRight> Map<TNewLeft, TNewRight>(Func<TLeft, IEither<TNewLeft, TNewRight>>  whenLeft,
-                                                                Func<TRight, IEither<TNewLeft, TNewRight>> whenRight);
-
-   /* ------------------------------------------------------------ */
-
-   /// <summary>
-   /// Maps the content of the <c>IEither</c> into a new form via mapping functions.
-   /// </summary>
-   /// <typeparam name="TExternalState">The type of the external state.</typeparam>
-   /// <typeparam name="TNewLeft">The type the <b>left</b> of this <c>IEither</c> shall be converted into.</typeparam>
-   /// <typeparam name="TNewRight">The type the <b>right</b> of this <c>IEither</c> shall be converted into.</typeparam>
-   /// <param name="externalState">External state pertinent to the functions</param>
-   /// <param name="whenLeft">The mapping function that shall be applied to the content of the <c>IEither</c>, if it is a <b>left</b>.</param>
-   /// <param name="whenRight">The mapping function that shall be applied to the content of the <c>IEither</c>, if it is a <b>right</b>.</param>
-   /// <returns>
-   /// The content of this <c>IEither</c> mapped through <c>whenLeft</c> if it is a <b>left</b>;
-   /// otherwise the content of this <c>IEither</c> mapped through <c>whenRight</c>.
-   /// </returns>
-   public IEither<TNewLeft, TNewRight> Map<TExternalState, TNewLeft, TNewRight>(TExternalState                                             externalState,
-                                                                                Func<TExternalState, TLeft, IEither<TNewLeft, TNewRight>>  whenLeft,
-                                                                                Func<TExternalState, TRight, IEither<TNewLeft, TNewRight>> whenRight);
-
-   /* ------------------------------------------------------------ */
-
-   /// <summary>
    /// Unifies both branches of the <c>IEither</c> via mapping functions.
    /// </summary>
    /// <typeparam name="TNew">The type this <c>IEither</c> shall be unified as.</typeparam>
@@ -151,8 +116,8 @@ public interface IEither<out TLeft, out TRight>
    /// The content of this <c>IEither</c> mapped through <c>whenLeft</c> if it is a <b>left</b>;
    /// otherwise the content of this <c>IEither</c> mapped through <c>whenRight</c>.
    /// </returns>
-   public TNew Reduce<TNew>(Func<TLeft, TNew>  whenLeft,
-                            Func<TRight, TNew> whenRight);
+   public TNew Unify<TNew>(Func<TLeft, TNew>  whenLeft,
+                           Func<TRight, TNew> whenRight);
 
    /* ------------------------------------------------------------ */
 
@@ -168,9 +133,9 @@ public interface IEither<out TLeft, out TRight>
    /// The content of this <c>IEither</c> mapped through <c>whenLeft</c> if it is a <b>left</b>;
    /// otherwise the content of this <c>IEither</c> mapped through <c>whenRight</c>.
    /// </returns>
-   public TNew Reduce<TExternalState, TNew>(TExternalState                     externalState,
-                                            Func<TExternalState, TLeft, TNew>  whenLeft,
-                                            Func<TExternalState, TRight, TNew> whenRight);
+   public TNew Unify<TExternalState, TNew>(TExternalState                     externalState,
+                                           Func<TExternalState, TLeft, TNew>  whenLeft,
+                                           Func<TExternalState, TRight, TNew> whenRight);
 
    /* ------------------------------------------------------------ */
 

@@ -12,7 +12,7 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
    public static DirectoryComponent Create(string potentialComponent)
       => Validate(potentialComponent,
                   ComponentType)
-        .Reduce<DirectoryComponent>(message => throw new ArgumentException(message.Content(),
+        .Unify<DirectoryComponent>(message => throw new ArgumentException(message.Content(),
                                                                            nameof(potentialComponent)),
                                     () => new(potentialComponent));
 

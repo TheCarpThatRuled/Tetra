@@ -8,14 +8,14 @@ partial class Steps
    {
       partial class ForOption
       {
-         public sealed class ForReduce
+         public sealed class ForUnify
          {
             /* ------------------------------------------------------------ */
             // Assert
             /* ------------------------------------------------------------ */
 
-            public IAssert<TheOptionHasBeenCreated.AndReduceWasCalledAsserts, TheOptionHasBeenCreated.AndReduceWasCalledAsserts> is_equal_to(FakeNewType expected)
-               => the_return_value.is_equal_to<FakeNewType, TheOptionHasBeenCreated.AndReduceWasCalledAsserts>(expected);
+            public IAssert<TheOptionHasBeenCreated.AndUnifyWasCalledAsserts, TheOptionHasBeenCreated.AndUnifyWasCalledAsserts> is_equal_to(FakeNewType expected)
+               => the_return_value.is_equal_to<FakeNewType, TheOptionHasBeenCreated.AndUnifyWasCalledAsserts>(expected);
 
             /* ------------------------------------------------------------ */
          }

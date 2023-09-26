@@ -6,17 +6,17 @@ partial class Steps
 {
    partial class TheReturnValue
    {
-      partial class ForOption
+      partial class ForEither
       {
-         public sealed class ForReduceWithExternalState
+         public sealed class ForUnifyWithExternalState
          {
             /* ------------------------------------------------------------ */
             // Assert
             /* ------------------------------------------------------------ */
 
-            public IAssert<TheOptionHasBeenCreated.AndReduceWasCalledWithExternalStateAsserts, TheOptionHasBeenCreated.AndReduceWasCalledWithExternalStateAsserts> is_equal_to(
+            public IAssert<TheEitherHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts, TheEitherHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts> is_equal_to(
                FakeNewType expected)
-               => the_return_value.is_equal_to<FakeNewType, TheOptionHasBeenCreated.AndReduceWasCalledWithExternalStateAsserts>(expected);
+               => the_return_value.is_equal_to<FakeNewType, TheEitherHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts>(expected);
 
             /* ------------------------------------------------------------ */
          }

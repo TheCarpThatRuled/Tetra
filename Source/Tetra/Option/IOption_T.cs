@@ -74,7 +74,7 @@ public interface IOption<out T>
    /// A <b>left</b> containing the content of this <c>IOption</c> if it is a <b>some</b>;
    /// otherwise a <b>right</b> containing the return value of <c>whenNone</c>.
    /// </returns>
-   public IEither<T, TRight> ExpandSomeToLeft<TExternalState, TRight>(TExternalState externalState,
+   public IEither<T, TRight> ExpandSomeToLeft<TExternalState, TRight>(TExternalState               externalState,
                                                                       Func<TExternalState, TRight> whenNone);
 
    /* ------------------------------------------------------------ */
@@ -104,7 +104,7 @@ public interface IOption<out T>
    /// A <b>right</b> containing the content of this <c>IOption</c> if it is a <b>some</b>;
    /// otherwise a <b>left</b> containing the return value of <c>whenNone</c>.
    /// </returns>
-   public IEither<TLeft, T> ExpandSomeToRight<TExternalState, TLeft>(TExternalState externalState,
+   public IEither<TLeft, T> ExpandSomeToRight<TExternalState, TLeft>(TExternalState              externalState,
                                                                      Func<TExternalState, TLeft> whenNone);
 
    /* ------------------------------------------------------------ */
@@ -132,7 +132,7 @@ public interface IOption<out T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Maps the contents of the <c>IOption</c> into a new form.
+   /// Maps the contents of the <c>IOption</c> into a new form without altering which branch it is on.
    /// </summary>
    /// <typeparam name="TNew">The type the content of this <c>IOption</c> shall be transformed into, if it is a <b>some</b>.</typeparam>
    /// <param name="whenSome">The mapping function that shall be applied to the content of the <c>IOption</c>, if it is a <b>some</b>.</param>
@@ -145,7 +145,7 @@ public interface IOption<out T>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   /// Maps the contents of the <c>IOption</c> into a new form.
+   /// Maps the contents of the <c>IOption</c> into a new form without altering which branch it is on.
    /// </summary>
    /// <typeparam name="TExternalState">The type of the external state.</typeparam>
    /// <typeparam name="TNew">The type the content of this <c>IOption</c> shall be transformed into, if it is a <b>some</b>.</typeparam>
@@ -160,35 +160,6 @@ public interface IOption<out T>
 
    /* ------------------------------------------------------------ */
 
-   /// <summary>
-   /// Maps the contents of the <c>IOption</c> into a new form.
-   /// </summary>
-   /// <typeparam name="TNew">The type the content of this <c>IOption</c> shall be transformed into, if it is a <b>some</b>.</typeparam>
-   /// <param name="whenSome">The mapping function that shall be applied to the content of the <c>IOption</c>, if it is a <b>some</b>.</param>
-   /// <returns>
-   /// The content of this <c>IOption</c> mapped through <c>whenSome</c> if it is a <b>some</b>;
-   /// otherwise a <b>none</b>.
-   /// </returns>
-   public IOption<TNew> Map<TNew>(Func<T, IOption<TNew>> whenSome);
-
-   /* ------------------------------------------------------------ */
-
-   /// <summary>
-   /// Maps the contents of the <c>IOption</c> into a new form.
-   /// </summary>
-   /// <typeparam name="TExternalState">The type of the external state.</typeparam>
-   /// <typeparam name="TNew">The type the content of this <c>IOption</c> shall be transformed into, if it is a <b>some</b>.</typeparam>
-   /// <param name="externalState">External state pertinent to the function</param>
-   /// <param name="whenSome">The mapping function that shall be applied to the content of the <c>IOption</c>, if it is a <b>some</b>.</param>
-   /// <returns>
-   /// The content of this <c>IOption</c> mapped through <c>whenSome</c> if it is a <b>some</b>;
-   /// otherwise a <b>none</b>.
-   /// </returns>
-   public IOption<TNew> Map<TExternalState, TNew>(TExternalState                         externalState,
-                                                  Func<TExternalState, T, IOption<TNew>> whenSome);
-
-   /* ------------------------------------------------------------ */
-
 
    /// <summary>
    /// Unifies both branches of the <c>IOption</c> via mapping functions.
@@ -200,8 +171,8 @@ public interface IOption<out T>
    /// The content of this <c>IOption</c> mapped through <c>whenSome</c> if it is a <b>some</b>;
    /// otherwise the return value of <c>whenNone</c>.
    /// </returns>
-   public TNew Reduce<TNew>(Func<T, TNew> whenSome,
-                            Func<TNew>    whenNone);
+   public TNew Unify<TNew>(Func<T, TNew> whenSome,
+                           Func<TNew>    whenNone);
 
    /* ------------------------------------------------------------ */
 
@@ -217,9 +188,9 @@ public interface IOption<out T>
    /// The content of this <c>IOption</c> mapped through <c>whenSome</c> if it is a <b>some</b>;
    /// otherwise the return value of <c>whenNone</c>.
    /// </returns>
-   public TNew Reduce<TExternalState, TNew>(TExternalState                externalState,
-                                            Func<TExternalState, T, TNew> whenSome,
-                                            Func<TExternalState, TNew>    whenNone);
+   public TNew Unify<TExternalState, TNew>(TExternalState                externalState,
+                                           Func<TExternalState, T, TNew> whenSome,
+                                           Func<TExternalState, TNew>    whenNone);
 
    /* ------------------------------------------------------------ */
 }

@@ -109,22 +109,6 @@ public static partial class TheEitherHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public AndMapWasCalledWithFuncsToEitherAsserts Map(IEither<FakeNewLeft, FakeNewRight> whenLeftValue,
-                                                        IEither<FakeNewLeft, FakeNewRight> whenRightValue)
-      {
-         var whenLeft  = FakeFunction<FakeLeft, IEither<FakeNewLeft, FakeNewRight>>.Create(whenLeftValue);
-         var whenRight = FakeFunction<FakeRight, IEither<FakeNewLeft, FakeNewRight>>.Create(whenRightValue);
-
-         var returnValue = _either.Map(whenLeft.Func,
-                                       whenRight.Func);
-
-         return new(whenLeft,
-                    whenRight,
-                    returnValue);
-      }
-
-      /* ------------------------------------------------------------ */
-
       public AndMapWasCalledWithExternalStateAsserts Map(FakeExternalState externalState,
                                                          FakeNewLeft       whenLeftValue,
                                                          FakeNewRight      whenRightValue)
@@ -135,58 +119,6 @@ public static partial class TheEitherHasBeenCreated
          var returnValue = _either.Map(externalState,
                                        whenLeft.Func,
                                        whenRight.Func);
-
-         return new(whenLeft,
-                    whenRight,
-                    returnValue);
-      }
-
-      /* ------------------------------------------------------------ */
-
-      public AndMapWasCalledWithFuncsToEitherAndExternalStateAsserts Map(FakeExternalState                  externalState,
-                                                                        IEither<FakeNewLeft, FakeNewRight> whenLeftValue,
-                                                                        IEither<FakeNewLeft, FakeNewRight> whenRightValue)
-      {
-         var whenLeft  = FakeFunction<FakeExternalState, FakeLeft, IEither<FakeNewLeft, FakeNewRight>>.Create(whenLeftValue);
-         var whenRight = FakeFunction<FakeExternalState, FakeRight, IEither<FakeNewLeft, FakeNewRight>>.Create(whenRightValue);
-
-         var returnValue = _either.Map(externalState,
-                                       whenLeft.Func,
-                                       whenRight.Func);
-
-         return new(whenLeft,
-                    whenRight,
-                    returnValue);
-      }
-
-      /* ------------------------------------------------------------ */
-
-      public AndReduceWasCalledAsserts Reduce(FakeNewType whenLeftValue,
-                                              FakeNewType whenRightValue)
-      {
-         var whenRight = FakeFunction<FakeRight, FakeNewType>.Create(whenRightValue);
-         var whenLeft  = FakeFunction<FakeLeft, FakeNewType>.Create(whenLeftValue);
-
-         var returnValue = _either.Reduce(whenLeft.Func,
-                                          whenRight.Func);
-
-         return new(whenLeft,
-                    whenRight,
-                    returnValue);
-      }
-
-      /* ------------------------------------------------------------ */
-
-      public AndReduceWasCalledWithExternalStateAsserts Reduce(FakeExternalState externalState,
-                                                               FakeNewType       whenLeftValue,
-                                                               FakeNewType       whenRightValue)
-      {
-         var whenRight = FakeFunction<FakeExternalState, FakeRight, FakeNewType>.Create(whenRightValue);
-         var whenLeft  = FakeFunction<FakeExternalState, FakeLeft, FakeNewType>.Create(whenLeftValue);
-
-         var returnValue = _either.Reduce(externalState,
-                                          whenLeft.Func,
-                                          whenRight.Func);
 
          return new(whenLeft,
                     whenRight,
@@ -224,6 +156,40 @@ public static partial class TheEitherHasBeenCreated
          return ObjectAsserts<string?, TestTerminus>.Create("Return Value",
                                                             actual,
                                                             TestTerminus.Create);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public AndUnifyWasCalledAsserts Unify(FakeNewType whenLeftValue,
+                                            FakeNewType whenRightValue)
+      {
+         var whenRight = FakeFunction<FakeRight, FakeNewType>.Create(whenRightValue);
+         var whenLeft  = FakeFunction<FakeLeft, FakeNewType>.Create(whenLeftValue);
+
+         var returnValue = _either.Unify(whenLeft.Func,
+                                          whenRight.Func);
+
+         return new(whenLeft,
+                    whenRight,
+                    returnValue);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public AndUnifyWasCalledWithExternalStateAsserts Unify(FakeExternalState externalState,
+                                                             FakeNewType       whenLeftValue,
+                                                             FakeNewType       whenRightValue)
+      {
+         var whenRight = FakeFunction<FakeExternalState, FakeRight, FakeNewType>.Create(whenRightValue);
+         var whenLeft  = FakeFunction<FakeExternalState, FakeLeft, FakeNewType>.Create(whenLeftValue);
+
+         var returnValue = _either.Unify(externalState,
+                                          whenLeft.Func,
+                                          whenRight.Func);
+
+         return new(whenLeft,
+                    whenRight,
+                    returnValue);
       }
 
       /* ------------------------------------------------------------ */

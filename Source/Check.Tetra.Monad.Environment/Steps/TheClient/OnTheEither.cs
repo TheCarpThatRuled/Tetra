@@ -102,51 +102,25 @@ partial class Steps
 
          /* ------------------------------------------------------------ */
 
-         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndMapWasCalledWithFuncsToEitherAsserts> calls_Map_with(
-            IEither<FakeNewLeft, FakeNewRight> whenLeftValue,
-            IEither<FakeNewLeft, FakeNewRight> whenRightValue)
-            => AtomicAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndMapWasCalledWithFuncsToEitherAsserts>
-              .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{whenLeftValue}"", ""{whenRightValue}""",
-                      arrange => arrange
-                                .ToActs()
-                                .Map(whenLeftValue,
-                                     whenRightValue));
-
-         /* ------------------------------------------------------------ */
-
-         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndMapWasCalledWithFuncsToEitherAndExternalStateAsserts> calls_Map_with(
-            FakeExternalState                  externalState,
-            IEither<FakeNewLeft, FakeNewRight> whenLeftValue,
-            IEither<FakeNewLeft, FakeNewRight> whenRightValue)
-            => AtomicAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndMapWasCalledWithFuncsToEitherAndExternalStateAsserts>
-              .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{externalState.Characterisation}"", ""{whenLeftValue}"", ""{whenRightValue}""",
-                      arrange => arrange
-                                .ToActs()
-                                .Map(externalState,
-                                     whenLeftValue,
-                                     whenRightValue));
-
-         /* ------------------------------------------------------------ */
-
-         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndReduceWasCalledAsserts> calls_Reduce_with(FakeNewType whenLeftValue,
+         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndUnifyWasCalledAsserts> calls_Unify_with(FakeNewType whenLeftValue,
             FakeNewType                                                                                                                whenRightValue)
-            => AtomicAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndReduceWasCalledAsserts>
-              .Create($@"{nameof(the_Client)}_{nameof(calls_Reduce_with)} ""{whenLeftValue.Characterisation}""",
+            => AtomicAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndUnifyWasCalledAsserts>
+              .Create($@"{nameof(the_Client)}_{nameof(calls_Unify_with)} ""{whenLeftValue.Characterisation}""",
                       arrange => arrange
                                 .ToActs()
-                                .Reduce(whenLeftValue,
+                                .Unify(whenLeftValue,
                                         whenRightValue));
 
          /* ------------------------------------------------------------ */
 
-         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndReduceWasCalledWithExternalStateAsserts> calls_Reduce_with(FakeExternalState externalState,
+         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts> calls_Unify_with(FakeExternalState externalState,
             FakeNewType                                                                                                                                       whenLeftValue,
             FakeNewType                                                                                                                                       whenRightValue)
-            => AtomicAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndReduceWasCalledWithExternalStateAsserts>
-              .Create($@"{nameof(the_Client)}_{nameof(calls_Reduce_with)} ""{externalState.Characterisation}"", ""{whenLeftValue.Characterisation}""",
+            => AtomicAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts>
+              .Create($@"{nameof(the_Client)}_{nameof(calls_Unify_with)} ""{externalState.Characterisation}"", ""{whenLeftValue.Characterisation}""",
                       arrange => arrange
                                 .ToActs()
-                                .Reduce(externalState,
+                                .Unify(externalState,
                                         whenLeftValue,
                                         whenRightValue));
 

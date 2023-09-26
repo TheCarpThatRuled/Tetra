@@ -31,7 +31,7 @@ partial class Either<TLeft, TRight>
 
       public override int GetHashCode()
          => Content
-          ?.GetHashCode()
+             ?.GetHashCode()
          ?? 0;
 
       /* ------------------------------------------------------------ */
@@ -51,7 +51,7 @@ partial class Either<TLeft, TRight>
       public bool IsALeft()
          => true;
 
-         /* ------------------------------------------------------------ */
+      /* ------------------------------------------------------------ */
 
       public IEither<TLeft, TRight> Do(Action<TLeft>  whenLeft,
                                        Action<TRight> whenRight)
@@ -89,29 +89,15 @@ partial class Either<TLeft, TRight>
 
       /* ------------------------------------------------------------ */
 
-      public IEither<TNewLeft, TNewRight> Map<TNewLeft, TNewRight>(Func<TLeft, IEither<TNewLeft, TNewRight>>  whenLeft,
-                                                                   Func<TRight, IEither<TNewLeft, TNewRight>> whenRight)
+      public TNew Unify<TNew>(Func<TLeft, TNew>  whenLeft,
+                              Func<TRight, TNew> whenRight)
          => whenLeft(Content);
 
       /* ------------------------------------------------------------ */
 
-      public IEither<TNewLeft, TNewRight> Map<TExternalState, TNewLeft, TNewRight>(TExternalState                                             externalState,
-                                                                                   Func<TExternalState, TLeft, IEither<TNewLeft, TNewRight>>  whenLeft,
-                                                                                   Func<TExternalState, TRight, IEither<TNewLeft, TNewRight>> whenRight)
-         => whenLeft(externalState,
-                     Content);
-
-      /* ------------------------------------------------------------ */
-
-      public TNew Reduce<TNew>(Func<TLeft, TNew>  whenLeft,
-                               Func<TRight, TNew> whenRight)
-         => whenLeft(Content);
-
-      /* ------------------------------------------------------------ */
-
-      public TNew Reduce<TExternalState, TNew>(TExternalState                     externalState,
-                                               Func<TExternalState, TLeft, TNew>  whenLeft,
-                                               Func<TExternalState, TRight, TNew> whenRight)
+      public TNew Unify<TExternalState, TNew>(TExternalState                     externalState,
+                                              Func<TExternalState, TLeft, TNew>  whenLeft,
+                                              Func<TExternalState, TRight, TNew> whenRight)
          => whenLeft(externalState,
                      Content);
 

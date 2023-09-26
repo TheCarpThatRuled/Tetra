@@ -2,20 +2,20 @@
 using Tetra.Testing;
 using static Check.Steps;
 
-namespace Check.GIVEN_the_client_has_created_a_some;
+namespace Check.GIVEN_the_client_has_created_a_right;
 
 [TestClass]
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_Reduce : AAATestDataSource
+public class WHEN_the_client_calls_Unify : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
    // Test
    /* ------------------------------------------------------------ */
 
    [TestMethod]
-   [WHEN_the_client_calls_Reduce]
+   [WHEN_the_client_calls_Unify]
    public void Run(AAA_test test)
    {
       using var given = test.Create();
@@ -32,18 +32,18 @@ public class WHEN_the_client_calls_Reduce : AAATestDataSource
    {
       /* ------------------------------------------------------------ */
 
-      var content  = FakeType.Create("content");
-      var whenSome = FakeNewType.Create("whenSome value");
+      var content   = FakeRight.Create("content");
+      var whenRight = FakeNewType.Create("whenRight value");
 
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Reduce_with(whenSome,
-                                                     FakeNewType.Create("whenNone value")))
-                  .THEN(the_whenNone.for_Reduce.was_not_invoked())
-                  .And(the_whenSome.for_Reduce.was_invoked_once_with(content))
-                  .And(the_return_value.for_option.Reduce.is_equal_to(whenSome))
+                  .GIVEN(the_Client.has_created_a_right_from(content))
+                  .WHEN(the_Client.on_the_either.calls_Unify_with(FakeNewType.Create("whenLeft value"),
+                                                                  whenRight))
+                  .THEN(the_whenLeft.for_Unify.was_not_invoked())
+                  .And(the_whenRight.for_Unify.was_invoked_once_with(content))
+                  .And(the_return_value.for_either.Unify.is_equal_to(whenRight))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
@@ -51,14 +51,14 @@ public class WHEN_the_client_calls_Reduce : AAATestDataSource
       var externalState = FakeExternalState.Create();
 
       yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Reduce_with(externalState,
-                                                     whenSome,
-                                                     FakeNewType.Create("whenNone value")))
-                  .THEN(the_whenNone.for_Reduce_with_externalState.was_not_invoked())
-                  .And(the_whenSome.for_Reduce_with_externalState.was_invoked_once_with(externalState,
-                                                                                               content))
-                  .And(the_return_value.for_option.Reduce_with_externalState.is_equal_to(whenSome))
+                  .GIVEN(the_Client.has_created_a_right_from(content))
+                  .WHEN(the_Client.on_the_either.calls_Unify_with(externalState,
+                                                                  FakeNewType.Create("whenLeft value"),
+                                                                  whenRight))
+                  .THEN(the_whenLeft.for_Unify_with_externalState.was_not_invoked())
+                  .And(the_whenRight.for_Unify_with_externalState.was_invoked_once_with(externalState,
+                                                                                        content))
+                  .And(the_return_value.for_either.Unify_with_externalState.is_equal_to(whenRight))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */

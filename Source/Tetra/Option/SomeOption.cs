@@ -109,27 +109,15 @@ partial class Option<T>
 
       /* ------------------------------------------------------------ */
 
-      public IOption<TNew> Map<TNew>(Func<T, IOption<TNew>> whenSome)
+      public TNew Unify<TNew>(Func<T, TNew> whenSome,
+                              Func<TNew>    whenNone)
          => whenSome(Content);
 
       /* ------------------------------------------------------------ */
 
-      public IOption<TNew> Map<TExternalState, TNew>(TExternalState                         externalState,
-                                                     Func<TExternalState, T, IOption<TNew>> whenSome)
-         => whenSome(externalState,
-                     Content);
-
-      /* ------------------------------------------------------------ */
-
-      public TNew Reduce<TNew>(Func<T, TNew> whenSome,
-                               Func<TNew>    whenNone)
-         => whenSome(Content);
-
-      /* ------------------------------------------------------------ */
-
-      public TNew Reduce<TExternalState, TNew>(TExternalState                externalState,
-                                               Func<TExternalState, T, TNew> whenSome,
-                                               Func<TExternalState, TNew>    whenNone)
+      public TNew Unify<TExternalState, TNew>(TExternalState                externalState,
+                                              Func<TExternalState, T, TNew> whenSome,
+                                              Func<TExternalState, TNew>    whenNone)
          => whenSome(externalState,
                      Content);
 

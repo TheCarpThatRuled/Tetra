@@ -12,7 +12,7 @@ public class RelativeDirectoryPath : IComparable<RelativeDirectoryPath>,
    public static RelativeDirectoryPath Create(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
-        .Reduce(CreateInternal,
+        .Unify(CreateInternal,
                 Exceptions.ThrowArgumentException<RelativeDirectoryPath>(nameof(potentialPath)));
 
    /* ------------------------------------------------------------ */

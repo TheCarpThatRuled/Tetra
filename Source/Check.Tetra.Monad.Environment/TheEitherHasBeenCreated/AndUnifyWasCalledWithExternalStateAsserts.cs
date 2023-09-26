@@ -4,17 +4,17 @@ namespace Check;
 
 public static partial class TheEitherHasBeenCreated
 {
-   public sealed class AndReduceWasCalledWithExternalStateAsserts : IAsserts,
-                                                                    IReturnsAsserts<FakeNewType, AndReduceWasCalledWithExternalStateAsserts>,
-                                                                    IWhenLeftFuncAsserts<FakeExternalState, FakeLeft, FakeNewType, AndReduceWasCalledWithExternalStateAsserts>,
-                                                                    IWhenRightFuncAsserts<FakeExternalState, FakeRight, FakeNewType, AndReduceWasCalledWithExternalStateAsserts>
+   public sealed class AndUnifyWasCalledWithExternalStateAsserts : IAsserts,
+                                                                    IReturnsAsserts<FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>,
+                                                                    IWhenLeftFuncAsserts<FakeExternalState, FakeLeft, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>,
+                                                                    IWhenRightFuncAsserts<FakeExternalState, FakeRight, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>
    {
       /* ------------------------------------------------------------ */
       //  IReturnsAsserts<FakeNewType, AndReduceWasCalledWithExternalStateAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public ObjectAsserts<FakeNewType, AndReduceWasCalledWithExternalStateAsserts> ReturnValue()
-         => ObjectAsserts<FakeNewType, AndReduceWasCalledWithExternalStateAsserts>
+      public ObjectAsserts<FakeNewType, AndUnifyWasCalledWithExternalStateAsserts> ReturnValue()
+         => ObjectAsserts<FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>
            .Create("Return Value",
                    _returnValue,
                    () => this);
@@ -23,8 +23,8 @@ public static partial class TheEitherHasBeenCreated
       //  IWhenLeftFunctionAsserts<FakeExternalState, FakeLeft, FakeNewType, AndReduceWasCalledWithExternalStateAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public FuncAsserts<FakeExternalState, FakeLeft, FakeNewType, AndReduceWasCalledWithExternalStateAsserts> WhenLeft()
-         => FuncAsserts<FakeExternalState, FakeLeft, FakeNewType, AndReduceWasCalledWithExternalStateAsserts>
+      public FuncAsserts<FakeExternalState, FakeLeft, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts> WhenLeft()
+         => FuncAsserts<FakeExternalState, FakeLeft, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>
            .Create("whenLeft",
                    _whenLeft,
                    () => this);
@@ -33,8 +33,8 @@ public static partial class TheEitherHasBeenCreated
       //  IWhenRightFunctionAsserts<FakeExternalState, FakeRight, FakeNewType, AndReduceWasCalledWithExternalStateAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public FuncAsserts<FakeExternalState, FakeRight, FakeNewType, AndReduceWasCalledWithExternalStateAsserts> WhenRight()
-         => FuncAsserts<FakeExternalState, FakeRight, FakeNewType, AndReduceWasCalledWithExternalStateAsserts>
+      public FuncAsserts<FakeExternalState, FakeRight, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts> WhenRight()
+         => FuncAsserts<FakeExternalState, FakeRight, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>
            .Create("whenRight",
                    _whenRight,
                    () => this);
@@ -43,7 +43,7 @@ public static partial class TheEitherHasBeenCreated
       //  Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal AndReduceWasCalledWithExternalStateAsserts(FakeFunction<FakeExternalState, FakeLeft, FakeNewType>  whenLeft,
+      internal AndUnifyWasCalledWithExternalStateAsserts(FakeFunction<FakeExternalState, FakeLeft, FakeNewType>  whenLeft,
                                                           FakeFunction<FakeExternalState, FakeRight, FakeNewType> whenRight,
                                                           FakeNewType                                             returnValue)
       {

@@ -12,7 +12,7 @@ public class VolumeComponent : IComparable<VolumeComponent>,
    public static VolumeComponent Create(char potentialVolume)
       => Validate(potentialVolume,
                   VolumeType)
-        .Reduce<VolumeComponent>(message => throw new ArgumentException(message.Content(),
+        .Unify<VolumeComponent>(message => throw new ArgumentException(message.Content(),
                                                                         nameof(potentialVolume)),
                                  () => new(potentialVolume));
 

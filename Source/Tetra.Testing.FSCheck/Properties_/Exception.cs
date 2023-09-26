@@ -38,7 +38,7 @@ partial class Properties
    public static Property AnArgumentExceptionWasThrown(string            expectedMessage,
                                                        IOption<Exception> actual)
       => actual
-        .Reduce(exception => AsProperty(() => exception is ArgumentException)
+        .Unify(exception => AsProperty(() => exception is ArgumentException)
                             .Label("The exception was not an ArgumentException")
                             .And(AsProperty(() => exception.InnerException is null)
                                    .Label("The exception contains an inner exception "))

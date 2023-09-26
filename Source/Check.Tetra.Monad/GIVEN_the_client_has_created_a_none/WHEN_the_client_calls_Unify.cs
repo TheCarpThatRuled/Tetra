@@ -8,14 +8,14 @@ namespace Check.GIVEN_the_client_has_created_a_none;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_Reduce : AAATestDataSource
+public class WHEN_the_client_calls_Unify : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
    // Test
    /* ------------------------------------------------------------ */
 
    [TestMethod]
-   [WHEN_the_client_calls_Reduce]
+   [WHEN_the_client_calls_Unify]
    public void Run(AAA_test test)
    {
       using var given = test.Create();
@@ -38,11 +38,11 @@ public class WHEN_the_client_calls_Reduce : AAATestDataSource
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.on_the_option.calls_Reduce_with(FakeNewType.Create("whenSome value"),
-                                                     whenNone))
-                  .THEN(the_whenNone.for_Reduce.was_invoked_once())
-                  .And(the_whenSome.for_Reduce.was_not_invoked())
-                  .And(the_return_value.for_option.Reduce.is_equal_to(whenNone))
+                  .WHEN(the_Client.on_the_option.calls_Unify_with(FakeNewType.Create("whenSome value"),
+                                                                  whenNone))
+                  .THEN(the_whenNone.for_Unify.was_invoked_once())
+                  .And(the_whenSome.for_Unify.was_not_invoked())
+                  .And(the_return_value.for_option.Unify.is_equal_to(whenNone))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
@@ -51,12 +51,12 @@ public class WHEN_the_client_calls_Reduce : AAATestDataSource
 
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.on_the_option.calls_Reduce_with(externalState,
-                                                     FakeNewType.Create("whenSome value"),
-                                                     whenNone))
-                  .THEN(the_whenNone.for_Reduce_with_externalState.was_invoked_once_with(externalState))
-                  .And(the_whenSome.for_Reduce_with_externalState.was_not_invoked())
-                  .And(the_return_value.for_option.Reduce_with_externalState.is_equal_to(whenNone))
+                  .WHEN(the_Client.on_the_option.calls_Unify_with(externalState,
+                                                                  FakeNewType.Create("whenSome value"),
+                                                                  whenNone))
+                  .THEN(the_whenNone.for_Unify_with_externalState.was_invoked_once_with(externalState))
+                  .And(the_whenSome.for_Unify_with_externalState.was_not_invoked())
+                  .And(the_return_value.for_option.Unify_with_externalState.is_equal_to(whenNone))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */

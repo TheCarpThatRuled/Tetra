@@ -51,22 +51,12 @@ partial class Steps
          /* ------------------------------------------------------------ */
 
          // ReSharper disable once InconsistentNaming
-         public ForMapToOption Map_with_func_to_IOption { get; } = new();
+         public ForUnify Unify { get; } = new();
 
          /* ------------------------------------------------------------ */
 
          // ReSharper disable once InconsistentNaming
-         public ForMapToOptionWithExternalState Map_with_func_to_IOption_and_externalState { get; } = new();
-
-         /* ------------------------------------------------------------ */
-
-         // ReSharper disable once InconsistentNaming
-         public ForReduce Reduce { get; } = new();
-
-         /* ------------------------------------------------------------ */
-
-         // ReSharper disable once InconsistentNaming
-         public ForReduceWithExternalState Reduce_with_externalState { get; } = new();
+         public ForUnifyWithExternalState Unify_with_externalState { get; } = new();
 
          /* ------------------------------------------------------------ */
       }

@@ -12,7 +12,7 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
    public static AbsoluteFilePath Create(string potentialPath)
       => ParseComponents(potentialPath,
                          PathType)
-        .Reduce(Create,
+        .Unify(Create,
                 Exceptions.ThrowArgumentException<AbsoluteFilePath>(nameof(potentialPath)));
 
    /* ------------------------------------------------------------ */

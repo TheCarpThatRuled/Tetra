@@ -31,22 +31,12 @@ partial class Steps
          /* ------------------------------------------------------------ */
 
          // ReSharper disable once InconsistentNaming
-         public ForMapToEither Map_with_funcs_to_IEither { get; } = new();
+         public ForUnify Unify { get; } = new();
 
          /* ------------------------------------------------------------ */
 
          // ReSharper disable once InconsistentNaming
-         public ForMapToEitherWithExternalState Map_with_funcs_to_IEither_and_externalState { get; } = new();
-
-         /* ------------------------------------------------------------ */
-
-         // ReSharper disable once InconsistentNaming
-         public ForReduce Reduce { get; } = new();
-
-         /* ------------------------------------------------------------ */
-
-         // ReSharper disable once InconsistentNaming
-         public ForReduceWithExternalState Reduce_with_externalState { get; } = new();
+         public ForUnifyWithExternalState Unify_with_externalState { get; } = new();
 
          /* ------------------------------------------------------------ */
       }

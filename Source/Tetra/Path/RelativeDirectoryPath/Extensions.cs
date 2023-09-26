@@ -16,7 +16,7 @@ public static class RelativeDirectoryPath_Extensions
       {
          hadParent = path
                     .Parent()
-                    .Reduce(parent =>
+                    .Unify(parent =>
                             {
                                ancestry.Add(parent);
                                path = parent;

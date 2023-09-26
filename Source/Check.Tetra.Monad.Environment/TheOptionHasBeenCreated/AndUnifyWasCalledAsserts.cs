@@ -4,17 +4,17 @@ namespace Check;
 
 public static partial class TheOptionHasBeenCreated
 {
-   public sealed class AndReduceWasCalledAsserts : IAsserts,
-                                 IReturnsAsserts<FakeNewType, AndReduceWasCalledAsserts>,
-                                 IWhenNoneFuncAsserts<FakeNewType, AndReduceWasCalledAsserts>,
-                                 IWhenSomeFuncAsserts<FakeType, FakeNewType, AndReduceWasCalledAsserts>
+   public sealed class AndUnifyWasCalledAsserts : IAsserts,
+                                 IReturnsAsserts<FakeNewType, AndUnifyWasCalledAsserts>,
+                                 IWhenNoneFuncAsserts<FakeNewType, AndUnifyWasCalledAsserts>,
+                                 IWhenSomeFuncAsserts<FakeType, FakeNewType, AndUnifyWasCalledAsserts>
    {
       /* ------------------------------------------------------------ */
       //  IReturnsAnOptionAsserts<FakeNewType, Asserts> Methods
       /* ------------------------------------------------------------ */
 
-      public ObjectAsserts<FakeNewType, AndReduceWasCalledAsserts> ReturnValue()
-         => ObjectAsserts<FakeNewType, AndReduceWasCalledAsserts>
+      public ObjectAsserts<FakeNewType, AndUnifyWasCalledAsserts> ReturnValue()
+         => ObjectAsserts<FakeNewType, AndUnifyWasCalledAsserts>
            .Create("Return Value",
                    _returnValue,
                    () => this);
@@ -23,8 +23,8 @@ public static partial class TheOptionHasBeenCreated
       //  IWhenNoneFunctionAsserts<FakeNewType, Asserts> Methods
       /* ------------------------------------------------------------ */
 
-      public FuncAsserts<FakeNewType, AndReduceWasCalledAsserts> WhenNone()
-         => FuncAsserts<FakeNewType, AndReduceWasCalledAsserts>
+      public FuncAsserts<FakeNewType, AndUnifyWasCalledAsserts> WhenNone()
+         => FuncAsserts<FakeNewType, AndUnifyWasCalledAsserts>
            .Create("whenNone",
                    _whenNone,
                    () => this);
@@ -33,8 +33,8 @@ public static partial class TheOptionHasBeenCreated
       //  IWhenSomeFunctionAsserts<FakeType, FakeNewType, Asserts> Methods
       /* ------------------------------------------------------------ */
 
-      public FuncAsserts<FakeType, FakeNewType, AndReduceWasCalledAsserts> WhenSome()
-         => FuncAsserts<FakeType, FakeNewType, AndReduceWasCalledAsserts>
+      public FuncAsserts<FakeType, FakeNewType, AndUnifyWasCalledAsserts> WhenSome()
+         => FuncAsserts<FakeType, FakeNewType, AndUnifyWasCalledAsserts>
            .Create("whenSome",
                    _whenSome,
                    () => this);
@@ -43,7 +43,7 @@ public static partial class TheOptionHasBeenCreated
       //  Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal AndReduceWasCalledAsserts(FakeFunction<FakeType, FakeNewType> whenSome,
+      internal AndUnifyWasCalledAsserts(FakeFunction<FakeType, FakeNewType> whenSome,
                        FakeFunction<FakeNewType>           whenNone,
                        FakeNewType                         returnValue)
       {

@@ -13,7 +13,7 @@ partial class Assert_Extensions
                                                      string             expectedMessage,
                                                      IOption<Exception> actual)
       => actual
-        .Reduce(exception =>
+        .Unify(exception =>
          {
             Assert.IsInstanceOfType(exception,
                                     typeof(ArgumentException));

@@ -128,15 +128,6 @@ partial class Steps
 
          /* ------------------------------------------------------------ */
 
-         public IAct<TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.AndMapWasCalledWithFuncToOptionAsserts> calls_Map_with(IOption<FakeNewType> whenSomeValue)
-            => AtomicAct<TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.AndMapWasCalledWithFuncToOptionAsserts>
-              .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{whenSomeValue}""",
-                      arrange => arrange
-                                .ToActs()
-                                .Map(whenSomeValue));
-
-         /* ------------------------------------------------------------ */
-
          public IAct<TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.AndMapWasCalledWithExternalStateAsserts> calls_Map_with(FakeExternalState externalState,
             FakeNewType                                                                                                                                 whenSomeValue)
             => AtomicAct<TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.AndMapWasCalledWithExternalStateAsserts>
@@ -148,37 +139,25 @@ partial class Steps
 
          /* ------------------------------------------------------------ */
 
-         public IAct<TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.AndMapWasCalledWithFuncToOptionAndExternalStateAsserts> calls_Map_with(
-            FakeExternalState    externalState,
-            IOption<FakeNewType> whenSomeValue)
-            => AtomicAct<TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.AndMapWasCalledWithFuncToOptionAndExternalStateAsserts>
-              .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{externalState.Characterisation}"", ""{whenSomeValue}""",
-                      arrange => arrange
-                                .ToActs()
-                                .Map(externalState,
-                                     whenSomeValue));
-
-         /* ------------------------------------------------------------ */
-
-         public IAct<TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.AndReduceWasCalledAsserts> calls_Reduce_with(FakeNewType whenSomeValue,
+         public IAct<TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.AndUnifyWasCalledAsserts> calls_Unify_with(FakeNewType whenSomeValue,
             FakeNewType                                                                                                                whenNoneValue)
-            => AtomicAct<TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.AndReduceWasCalledAsserts>
-              .Create($@"{nameof(the_Client)}_{nameof(calls_Reduce_with)} ""{whenSomeValue.Characterisation}""",
+            => AtomicAct<TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.AndUnifyWasCalledAsserts>
+              .Create($@"{nameof(the_Client)}_{nameof(calls_Unify_with)} ""{whenSomeValue.Characterisation}""",
                       arrange => arrange
                                 .ToActs()
-                                .Reduce(whenSomeValue,
+                                .Unify(whenSomeValue,
                                         whenNoneValue));
 
          /* ------------------------------------------------------------ */
 
-         public IAct<TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.AndReduceWasCalledWithExternalStateAsserts> calls_Reduce_with(FakeExternalState externalState,
+         public IAct<TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts> calls_Unify_with(FakeExternalState externalState,
             FakeNewType                                                                                                                                       whenSomeValue,
             FakeNewType                                                                                                                                       whenNoneValue)
-            => AtomicAct<TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.AndReduceWasCalledWithExternalStateAsserts>
-              .Create($@"{nameof(the_Client)}_{nameof(calls_Reduce_with)} ""{externalState.Characterisation}"", ""{whenSomeValue.Characterisation}""",
+            => AtomicAct<TheOptionHasBeenCreated.Arrange, TheOptionHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts>
+              .Create($@"{nameof(the_Client)}_{nameof(calls_Unify_with)} ""{externalState.Characterisation}"", ""{whenSomeValue.Characterisation}""",
                       arrange => arrange
                                 .ToActs()
-                                .Reduce(externalState,
+                                .Unify(externalState,
                                         whenSomeValue,
                                         whenNoneValue));
 

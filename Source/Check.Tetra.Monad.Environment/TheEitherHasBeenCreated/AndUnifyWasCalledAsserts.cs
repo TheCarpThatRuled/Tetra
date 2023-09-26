@@ -4,17 +4,17 @@ namespace Check;
 
 public static partial class TheEitherHasBeenCreated
 {
-   public sealed class AndReduceWasCalledAsserts : IAsserts,
-                                                   IReturnsAsserts<FakeNewType, AndReduceWasCalledAsserts>,
-                                                   IWhenLeftFuncAsserts<FakeLeft, FakeNewType, AndReduceWasCalledAsserts>,
-                                                   IWhenRightFuncAsserts<FakeRight, FakeNewType, AndReduceWasCalledAsserts>
+   public sealed class AndUnifyWasCalledAsserts : IAsserts,
+                                                   IReturnsAsserts<FakeNewType, AndUnifyWasCalledAsserts>,
+                                                   IWhenLeftFuncAsserts<FakeLeft, FakeNewType, AndUnifyWasCalledAsserts>,
+                                                   IWhenRightFuncAsserts<FakeRight, FakeNewType, AndUnifyWasCalledAsserts>
    {
       /* ------------------------------------------------------------ */
       //  IReturnsAsserts<FakeNewType, AndReduceWasCalledAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public ObjectAsserts<FakeNewType, AndReduceWasCalledAsserts> ReturnValue()
-         => ObjectAsserts<FakeNewType, AndReduceWasCalledAsserts>
+      public ObjectAsserts<FakeNewType, AndUnifyWasCalledAsserts> ReturnValue()
+         => ObjectAsserts<FakeNewType, AndUnifyWasCalledAsserts>
            .Create("Return Value",
                    _returnValue,
                    () => this);
@@ -23,8 +23,8 @@ public static partial class TheEitherHasBeenCreated
       //  IWhenLeftFunctionAsserts<FakeLeft, FakeNewType, AndReduceWasCalledAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public FuncAsserts<FakeLeft, FakeNewType, AndReduceWasCalledAsserts> WhenLeft()
-         => FuncAsserts<FakeLeft, FakeNewType, AndReduceWasCalledAsserts>
+      public FuncAsserts<FakeLeft, FakeNewType, AndUnifyWasCalledAsserts> WhenLeft()
+         => FuncAsserts<FakeLeft, FakeNewType, AndUnifyWasCalledAsserts>
            .Create("whenLeft",
                    _whenLeft,
                    () => this);
@@ -33,8 +33,8 @@ public static partial class TheEitherHasBeenCreated
       //  IWhenRightFunctionAsserts<FakeRight, FakeNewType, AndReduceWasCalledAsserts> Methods
       /* ------------------------------------------------------------ */
 
-      public FuncAsserts<FakeRight, FakeNewType, AndReduceWasCalledAsserts> WhenRight()
-         => FuncAsserts<FakeRight, FakeNewType, AndReduceWasCalledAsserts>
+      public FuncAsserts<FakeRight, FakeNewType, AndUnifyWasCalledAsserts> WhenRight()
+         => FuncAsserts<FakeRight, FakeNewType, AndUnifyWasCalledAsserts>
            .Create("whenRight",
                    _whenRight,
                    () => this);
@@ -43,7 +43,7 @@ public static partial class TheEitherHasBeenCreated
       //  Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal AndReduceWasCalledAsserts(FakeFunction<FakeLeft, FakeNewType>  whenLeft,
+      internal AndUnifyWasCalledAsserts(FakeFunction<FakeLeft, FakeNewType>  whenLeft,
                                          FakeFunction<FakeRight, FakeNewType> whenRight,
                                          FakeNewType                          returnValue)
       {

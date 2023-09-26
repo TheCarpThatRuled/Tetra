@@ -36,9 +36,7 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
       var content       = FakeType.Create("content");
       var whenSome      = FakeNewType.Create("whenSome Value");
       var externalState = FakeExternalState.Create();
-
-      /* ------------------------------------------------------------ */
-      // Map T => TNew
+      
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
@@ -57,53 +55,6 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
                   .THEN(the_whenSome.for_Map_with_externalState.was_invoked_once_with(externalState,
                                                                                              content))
                   .And(the_return_value.for_option.Map_with_externalState.is_a_some_containing(whenSome))
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      var someWhenSome = Option.Some(whenSome);
-      var noneWhenSome = Option<FakeNewType>.None();
-
-      /* ------------------------------------------------------------ */
-      // Map T => IOption<TNew>
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Map_with(someWhenSome))
-                  .THEN(the_whenSome.for_Map_with_func_to_IOption.was_invoked_once_with(content))
-                  .And(the_return_value.for_option.Map_with_func_to_IOption.is_a_some_containing(whenSome))
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Map_with(noneWhenSome))
-                  .THEN(the_whenSome.for_Map_with_func_to_IOption.was_invoked_once_with(content))
-                  .And(the_return_value.for_option.Map_with_func_to_IOption.is_a_none())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Map_with(externalState,
-                                                  someWhenSome))
-                  .THEN(the_whenSome.for_Map_with_func_to_IOption_and_externalState.was_invoked_once_with(externalState,
-                                                                                                                 content))
-                  .And(the_return_value.for_option.Map_with_func_to_IOption_and_externalState.is_a_some_containing(whenSome))
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Map_with(externalState,
-                                                  noneWhenSome))
-                  .THEN(the_whenSome.for_Map_with_func_to_IOption_and_externalState.was_invoked_once_with(externalState,
-                                                                                                                 content))
-                  .And(the_return_value.for_option.Map_with_func_to_IOption_and_externalState.is_a_none())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
