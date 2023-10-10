@@ -8,10 +8,18 @@ public static partial class TheOptionHasNotBeenCreated
    public sealed class Arrange : IArranges
    {
       /* ------------------------------------------------------------ */
+      //  Private Constructors
+      /* ------------------------------------------------------------ */
+
+      private Arrange() { }
+      /* ------------------------------------------------------------ */
       //  Methods
       /* ------------------------------------------------------------ */
 
-      public TheOptionHasBeenCreated.Arrange CallOptionSomeT(FakeType? content)
+      public TheOptionHasBeenCreated.Arrange CallOptionSomeT
+      (
+         FakeType? content
+      )
          => new(Option.Some(content!));
 
       /* ------------------------------------------------------------ */
@@ -21,7 +29,10 @@ public static partial class TheOptionHasNotBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public TheOptionHasBeenCreated.Arrange CallOptionTSome(FakeType? content)
+      public TheOptionHasBeenCreated.Arrange CallOptionTSome
+      (
+         FakeType? content
+      )
          => new(Option<FakeType>.Some(content!));
 
       /* ------------------------------------------------------------ */
@@ -33,14 +44,11 @@ public static partial class TheOptionHasNotBeenCreated
       //  Internal Factory Functions
       /* ------------------------------------------------------------ */
 
-      internal static Arrange Start(AAA_test.Disposables disposable)
+      internal static Arrange Start
+      (
+         AAA_test.Disposables disposable
+      )
          => new();
-
-      /* ------------------------------------------------------------ */
-      //  Private Constructors
-      /* ------------------------------------------------------------ */
-
-      private Arrange() { }
 
       /* ------------------------------------------------------------ */
    }

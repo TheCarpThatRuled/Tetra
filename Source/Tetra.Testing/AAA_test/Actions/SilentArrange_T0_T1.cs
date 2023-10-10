@@ -8,35 +8,6 @@ partial class AAA_test
       where TNextArranges : IArranges
    {
       /* ------------------------------------------------------------ */
-      // Factory Functions
-      /* ------------------------------------------------------------ */
-
-      public static SilentArrange<TInitialArranges, TNextArranges> Create(IArrange<TInitialArranges, TNextArranges> arrange)
-         => new(arrange);
-
-      /* ------------------------------------------------------------ */
-
-      public static SilentArrange<TInitialArranges, TNextArranges> Create(Func<TInitialArranges, TNextArranges> arrange)
-         => new(AtomicArrange<TInitialArranges, TNextArranges>.Create("",
-                                                                      arrange));
-
-      /* ------------------------------------------------------------ */
-      // IArrange<TArranges, TAsserts> Methods
-      /* ------------------------------------------------------------ */
-
-      public void AddBriefCharacterisation(GivenCharacteriser characteriser) { }
-
-      /* ------------------------------------------------------------ */
-
-      public void AddFullCharacterisation(GivenCharacteriser characteriser) { }
-
-      /* ------------------------------------------------------------ */
-
-      public TNextArranges Arrange(TInitialArranges environment)
-         => _arrange
-           .Arrange(environment);
-
-      /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
@@ -46,8 +17,54 @@ partial class AAA_test
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private SilentArrange(IArrange<TInitialArranges, TNextArranges> arrange)
+      private SilentArrange
+      (
+         IArrange<TInitialArranges, TNextArranges> arrange
+      )
          => _arrange = arrange;
+
+      /* ------------------------------------------------------------ */
+      // IArrange<TArranges, TAsserts> Methods
+      /* ------------------------------------------------------------ */
+
+      public void AddBriefCharacterisation
+      (
+         GivenCharacteriser characteriser
+      ) { }
+
+      /* ------------------------------------------------------------ */
+
+      public void AddFullCharacterisation
+      (
+         GivenCharacteriser characteriser
+      ) { }
+
+      /* ------------------------------------------------------------ */
+
+      public TNextArranges Arrange
+      (
+         TInitialArranges environment
+      )
+         => _arrange
+           .Arrange(environment);
+      /* ------------------------------------------------------------ */
+      // Factory Functions
+      /* ------------------------------------------------------------ */
+
+      public static SilentArrange<TInitialArranges, TNextArranges> Create
+      (
+         IArrange<TInitialArranges, TNextArranges> arrange
+      )
+         => new(arrange);
+
+      /* ------------------------------------------------------------ */
+
+      public static SilentArrange<TInitialArranges, TNextArranges> Create
+      (
+         Func<TInitialArranges, TNextArranges> arrange
+      )
+         => new(AtomicArrange<TInitialArranges, TNextArranges>.Create("",
+                                                                      arrange));
 
       /* ------------------------------------------------------------ */
    }

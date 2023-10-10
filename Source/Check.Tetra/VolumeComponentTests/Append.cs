@@ -23,8 +23,11 @@ public class Append
    public void
       GIVEN_a_VolumeComponent_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_VolumeComponent_and_the_Array_of_DirectoryComponents_is_returned()
    {
-      static Property Property(VolumeComponent      parent,
-                               DirectoryComponent[] child)
+      static Property Property
+      (
+         VolumeComponent      parent,
+         DirectoryComponent[] child
+      )
       {
          //Arrange
          var expected = TestAbsoluteDirectoryPath.Create(parent,
@@ -62,8 +65,11 @@ public class Append
    public void
       GIVEN_a_VolumeComponent_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_VolumeComponent_and_the_sequence_of_DirectoryComponents_is_returned()
    {
-      static Property Property(VolumeComponent               parent,
-                               ISequence<DirectoryComponent> child)
+      static Property Property
+      (
+         VolumeComponent               parent,
+         ISequence<DirectoryComponent> child
+      )
       {
          //Arrange
          var expected = TestAbsoluteDirectoryPath.Create(parent,
@@ -100,8 +106,11 @@ public class Append
    public void
       GIVEN_a_VolumeComponent_and_a_RelativeDirectoryPath_WHEN_Append_THEN_an_AbsoluteDirectoryPath_containing_the_VolumeComponent_and_the_RelativeDirectoryPath_is_returned()
    {
-      static Property Property(VolumeComponent           parent,
-                               TestRelativeDirectoryPath testChild)
+      static Property Property
+      (
+         VolumeComponent           parent,
+         TestRelativeDirectoryPath testChild
+      )
       {
          //Arrange
          var expected = TestAbsoluteDirectoryPath.Create(parent,
@@ -139,8 +148,11 @@ public class Append
    [TestMethod]
    public void GIVEN_a_VolumeComponent_and_a_FileComponent_WHEN_Append_THEN_an_AbsoluteFilePath_containing_the_VolumeComponent_and_the_FileComponent_is_returned()
    {
-      static Property Property(VolumeComponent parent,
-                               FileComponent   child)
+      static Property Property
+      (
+         VolumeComponent parent,
+         FileComponent   child
+      )
       {
          //Arrange
          var expected = TestAbsoluteFilePath.Create(parent,
@@ -177,8 +189,11 @@ public class Append
    [TestMethod]
    public void GIVEN_a_VolumeComponent_and_a_RelativeFilePath_WHEN_Append_THEN_an_AbsoluteFilePath_containing_the_VolumeComponent_and_the_RelativeFilePath_is_returned()
    {
-      static Property Property(VolumeComponent      parent,
-                               TestRelativeFilePath testChild)
+      static Property Property
+      (
+         VolumeComponent      parent,
+         TestRelativeFilePath testChild
+      )
       {
          //Arrange
          var expected = TestAbsoluteFilePath.Create(parent,

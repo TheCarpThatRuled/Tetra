@@ -10,9 +10,8 @@ partial class Generators
 
    public static Gen<FileComponent> FileComponent()
       => ValidPathComponent()
-        .Select(Tetra
-               .FileComponent
-               .Create);
+        .Select(Tetra.FileComponent
+                     .Create);
 
    /* ------------------------------------------------------------ */
 

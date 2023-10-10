@@ -23,8 +23,11 @@ public class Append
    public void
       GIVEN_a_DirectoryComponent_and_an_Array_of_DirectoryComponents_WHEN_Append_THEN_a_RelativeDirectoryPath_containing_the_DirectoryComponent_and_the_Array_of_DirectoryComponents_is_returned()
    {
-      static Property Property(DirectoryComponent   parent,
-                               DirectoryComponent[] child)
+      static Property Property
+      (
+         DirectoryComponent   parent,
+         DirectoryComponent[] child
+      )
       {
          //Arrange
          var expected = TestRelativeDirectoryPath.Create(child
@@ -61,8 +64,11 @@ public class Append
    public void
       GIVEN_a_DirectoryComponent_and_a_sequence_of_DirectoryComponents_WHEN_Append_THEN_a_RelativeDirectoryPath_containing_the_DirectoryComponent_and_the_sequence_of_DirectoryComponents_is_returned()
    {
-      static Property Property(DirectoryComponent            parent,
-                               ISequence<DirectoryComponent> child)
+      static Property Property
+      (
+         DirectoryComponent            parent,
+         ISequence<DirectoryComponent> child
+      )
       {
          //Arrange
          var expected = TestRelativeDirectoryPath.Create(child
@@ -100,8 +106,11 @@ public class Append
    public void
       GIVEN_a_DirectoryComponent_and_a_RelativeDirectoryPath_WHEN_Append_THEN_a_RelativeDirectoryPath_containing_the_DirectoryComponent_and_the_RelativeDirectoryPath_is_returned()
    {
-      static Property Property(DirectoryComponent        parent,
-                               TestRelativeDirectoryPath testChild)
+      static Property Property
+      (
+         DirectoryComponent        parent,
+         TestRelativeDirectoryPath testChild
+      )
       {
          //Arrange
          var expected = testChild.Prepend(parent);
@@ -138,8 +147,11 @@ public class Append
    [TestMethod]
    public void GIVEN_a_DirectoryComponent_AND_a_FileComponent_WHEN_Append_THEN_a_RelativeFilePath_containing_the_DirectoryComponent_and_the_FileComponent_is_returned()
    {
-      static Property Property(DirectoryComponent parent,
-                               FileComponent      child)
+      static Property Property
+      (
+         DirectoryComponent parent,
+         FileComponent      child
+      )
       {
          //Arrange
          var expected = TestRelativeFilePath.Create(Sequence.From(parent),
@@ -175,8 +187,11 @@ public class Append
    [TestMethod]
    public void GIVEN_a_DirectoryComponent_and_a_RelativeFilePath_WHEN_Append_THEN_a_RelativeFilePath_containing_the_DirectoryComponent_and_the_RelativeFilePath_is_returned()
    {
-      static Property Property(DirectoryComponent   parent,
-                               TestRelativeFilePath testChild)
+      static Property Property
+      (
+         DirectoryComponent   parent,
+         TestRelativeFilePath testChild
+      )
       {
          //Arrange
          var expected = testChild.Prepend(Sequence.From(parent));

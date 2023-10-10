@@ -10,9 +10,8 @@ partial class Generators
 
    public static Gen<VolumeComponent> VolumeComponent()
       => AsciiLetter()
-        .Select(Tetra
-               .VolumeComponent
-               .Create);
+        .Select(Tetra.VolumeComponent
+                     .Create);
 
    /* ------------------------------------------------------------ */
 

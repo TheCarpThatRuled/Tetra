@@ -11,7 +11,10 @@ public static partial class Function
 
    /* ------------------------------------------------------------ */
 
-   public static bool False<T>(T _)
+   public static bool False<T>
+   (
+      T _
+   )
       => false;
 
    /* ------------------------------------------------------------ */
@@ -21,7 +24,10 @@ public static partial class Function
 
    /* ------------------------------------------------------------ */
 
-   public static bool True<T>(T _)
+   public static bool True<T>
+   (
+      T _
+   )
       => true;
 
    /* ------------------------------------------------------------ */

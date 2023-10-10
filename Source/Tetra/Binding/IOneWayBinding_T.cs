@@ -2,12 +2,14 @@
 
 public interface IOneWayBinding<out T>
 {
-
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
-   public void OnUpdated(Action onUpdated);
+   public void OnUpdated
+   (
+      Action onUpdated
+   );
 
    /* ------------------------------------------------------------ */
 

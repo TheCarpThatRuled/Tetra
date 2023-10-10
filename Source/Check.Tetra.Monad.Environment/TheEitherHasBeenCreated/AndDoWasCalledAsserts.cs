@@ -11,6 +11,32 @@ public static partial class TheEitherHasBeenCreated
                                                IWhenRightActionAsserts<FakeRight, AndDoWasCalledAsserts>
    {
       /* ------------------------------------------------------------ */
+      //  Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly IEither<FakeLeft, FakeRight> _either;
+      private readonly IEither<FakeLeft, FakeRight> _returnValue;
+      private readonly FakeAction<FakeLeft>         _whenLeft;
+      private readonly FakeAction<FakeRight>        _whenRight;
+
+      /* ------------------------------------------------------------ */
+      //  Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal AndDoWasCalledAsserts
+      (
+         IEither<FakeLeft, FakeRight> option,
+         FakeAction<FakeLeft>         whenLeft,
+         FakeAction<FakeRight>        whenRight,
+         IEither<FakeLeft, FakeRight> returnValue
+      )
+      {
+         _either      = option;
+         _returnValue = returnValue;
+         _whenLeft    = whenLeft;
+         _whenRight   = whenRight;
+      }
+      /* ------------------------------------------------------------ */
       //  IReturnsThisAsserts<AndDoWasCalledAsserts> Methods
       /* ------------------------------------------------------------ */
 
@@ -39,30 +65,6 @@ public static partial class TheEitherHasBeenCreated
            .Create("whenRight",
                    _whenRight,
                    () => this);
-
-      /* ------------------------------------------------------------ */
-      //  Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal AndDoWasCalledAsserts(IEither<FakeLeft, FakeRight> option,
-                                     FakeAction<FakeLeft>         whenLeft,
-                                     FakeAction<FakeRight>        whenRight,
-                                     IEither<FakeLeft, FakeRight> returnValue)
-      {
-         _either      = option;
-         _returnValue = returnValue;
-         _whenLeft    = whenLeft;
-         _whenRight   = whenRight;
-      }
-
-      /* ------------------------------------------------------------ */
-      //  Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly IEither<FakeLeft, FakeRight> _either;
-      private readonly IEither<FakeLeft, FakeRight> _returnValue;
-      private readonly FakeAction<FakeLeft>         _whenLeft;
-      private readonly FakeAction<FakeRight>        _whenRight;
 
       /* ------------------------------------------------------------ */
    }

@@ -3,6 +3,26 @@
 public sealed partial class Label
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly IOneWayBinding<object>     _content;
+   private readonly IOneWayBinding<Visibility> _visibility;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private Label
+   (
+      IOneWayBinding<object>     content,
+      IOneWayBinding<Visibility> visibility
+   )
+   {
+      _content    = content;
+      _visibility = visibility;
+   }
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
@@ -20,24 +40,6 @@ public sealed partial class Label
 
    public IOneWayBinding<Visibility> Visibility()
       => _visibility;
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly IOneWayBinding<object>     _content;
-   private readonly IOneWayBinding<Visibility> _visibility;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private Label(IOneWayBinding<object>     content,
-                 IOneWayBinding<Visibility> visibility)
-   {
-      _content    = content;
-      _visibility = visibility;
-   }
 
    /* ------------------------------------------------------------ */
 }

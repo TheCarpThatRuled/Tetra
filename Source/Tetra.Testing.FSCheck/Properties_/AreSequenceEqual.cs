@@ -8,37 +8,48 @@ partial class Properties
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Property AreSequenceEqual<T>(string          description,
-                                              IEnumerable<T>? expected,
-                                              IEnumerable<T>? actual)
+   public static Property AreSequenceEqual<T>
+   (
+      string          description,
+      IEnumerable<T>? expected,
+      IEnumerable<T>? actual
+   )
       => AreSequenceEqual(description,
                           expected?.Materialise(),
                           actual?.Materialise());
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreSequenceEqual<T>(string                  description,
-                                              ISequence<T>? expected,
-                                              ISequence<T>? actual)
+   public static Property AreSequenceEqual<T>
+   (
+      string        description,
+      ISequence<T>? expected,
+      ISequence<T>? actual
+   )
       => AreSequenceEqual(description,
                           expected,
                           actual,
                           x => x?.ToString() ?? string.Empty,
                           x => x?.ToString() ?? string.Empty,
-                          (e,
-                           a,
-                           d) => AreEqual(d,
-                                          e,
-                                          a));
+                          (
+                             e,
+                             a,
+                             d
+                          ) => AreEqual(d,
+                                        e,
+                                        a));
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreSequenceEqual<T0, T1>(string                         description,
-                                                   ISequence<T0>?       expected,
-                                                   ISequence<T1>?       actual,
-                                                   Func<T0, string>               t0ToString,
-                                                   Func<T1, string>               t1ToString,
-                                                   Func<T0, T1, string, Property> compareItem)
+   public static Property AreSequenceEqual<T0, T1>
+   (
+      string                         description,
+      ISequence<T0>?                 expected,
+      ISequence<T1>?                 actual,
+      Func<T0, string>               t0ToString,
+      Func<T1, string>               t1ToString,
+      Func<T0, T1, string, Property> compareItem
+   )
    {
       if (expected is null)
       {
@@ -72,10 +83,12 @@ partial class Properties
             .Aggregate(True(Failed.Message(description,
                                            expectedAsString,
                                            actualAsString)),
-                       (total,
-                        next) => total.And(compareItem(next.item.First,
-                                                       next.item.Second,
-                                                       $"item at index {next.index}")));
+                       (
+                          total,
+                          next
+                       ) => total.And(compareItem(next.item.First,
+                                                  next.item.Second,
+                                                  $"item at index {next.index}")));
    }
 
    /* ------------------------------------------------------------ */

@@ -5,10 +5,33 @@ namespace Check.Check_Label;
 internal sealed class FakeSystem
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly ITwoWayBinding<object>     _content;
+   private readonly ITwoWayBinding<Visibility> _visibility;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private FakeSystem
+   (
+      ITwoWayBinding<object>     content,
+      ITwoWayBinding<Visibility> visibility
+   )
+   {
+      _content    = content;
+      _visibility = visibility;
+   }
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static FakeSystem Create(The_UI_creates_a_label args)
+   public static FakeSystem Create
+   (
+      The_UI_creates_a_label args
+   )
       => new(Bind.To(args.Content()),
              Bind.To(args.Visibility()));
 
@@ -23,24 +46,6 @@ internal sealed class FakeSystem
 
    public ITwoWayBinding<Visibility> Visibility()
       => _visibility;
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly ITwoWayBinding<object>     _content;
-   private readonly ITwoWayBinding<Visibility> _visibility;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private FakeSystem(ITwoWayBinding<object>     content,
-                      ITwoWayBinding<Visibility> visibility)
-   {
-      _content    = content;
-      _visibility = visibility;
-   }
 
    /* ------------------------------------------------------------ */
 }

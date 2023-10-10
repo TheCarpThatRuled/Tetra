@@ -6,13 +6,24 @@ namespace Tetra.Testing;
 public sealed class TextBoxAsserts<T> : IAsserts
    where T : IAsserts
 {
+   private readonly string _descriptionHeader;
+   private readonly T      _parent;
+
+   /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly FakeTextBox _textBox;
    /* ------------------------------------------------------------ */
    // Constructors
    /* ------------------------------------------------------------ */
 
-   public TextBoxAsserts(string      descriptionHeader,
-                         FakeTextBox textBox,
-                         T           parent)
+   public TextBoxAsserts
+   (
+      string      descriptionHeader,
+      FakeTextBox textBox,
+      T           parent
+   )
    {
       _textBox           = textBox;
       _descriptionHeader = descriptionHeader;
@@ -23,7 +34,10 @@ public sealed class TextBoxAsserts<T> : IAsserts
    // Methods
    /* ------------------------------------------------------------ */
 
-   public TextBoxAsserts<T> IsEnabled_is(bool expected)
+   public TextBoxAsserts<T> IsEnabled_is
+   (
+      bool expected
+   )
    {
       Assert.That
             .AreEqual($"{_descriptionHeader}: IsEnabled",
@@ -35,7 +49,10 @@ public sealed class TextBoxAsserts<T> : IAsserts
 
    /* ------------------------------------------------------------ */
 
-   public TextBoxAsserts<T> Text_is(object expected)
+   public TextBoxAsserts<T> Text_is
+   (
+      object expected
+   )
    {
       Assert.That
             .AreEqual($"{_descriptionHeader}: Text",
@@ -47,7 +64,10 @@ public sealed class TextBoxAsserts<T> : IAsserts
 
    /* ------------------------------------------------------------ */
 
-   public TextBoxAsserts<T> Visibility_is(Visibility expected)
+   public TextBoxAsserts<T> Visibility_is
+   (
+      Visibility expected
+   )
    {
       Assert.That
             .AreEqual($"{_descriptionHeader}: Visibility",
@@ -60,14 +80,6 @@ public sealed class TextBoxAsserts<T> : IAsserts
    /* ------------------------------------------------------------ */
    public T ReturnToParent()
       => _parent;
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly FakeTextBox _textBox;
-   private readonly string      _descriptionHeader;
-   private readonly T           _parent;
 
    /* ------------------------------------------------------------ */
 }

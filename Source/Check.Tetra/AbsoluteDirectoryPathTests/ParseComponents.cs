@@ -10,30 +10,6 @@ namespace Check.AbsoluteDirectoryPathTests;
 public class ParseComponents
 {
    /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   private sealed class TestPath : AbsoluteDirectoryPath
-   {
-      /* ------------------------------------------------------------ */
-      // Functions
-      /* ------------------------------------------------------------ */
-
-      public static IEither<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message> TestParseComponents(string potentialPath,
-         string                                                                                                                      pathType)
-         => ParseComponents(potentialPath,
-                            pathType);
-
-      /* ------------------------------------------------------------ */
-      // Constructor
-      /* ------------------------------------------------------------ */
-
-      private TestPath() : base(null!,
-                                null!) { }
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
    // Result(VolumeComponent volume, ISequence<DirectoryComponent> directories) ParseComponents(string potentialPath,
    //                                                                                           string pathType);
    /* ------------------------------------------------------------ */
@@ -49,7 +25,10 @@ public class ParseComponents
    public void
       GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_the_components_is_returned()
    {
-      static Property Property(TestAbsoluteDirectoryPath testPath)
+      static Property Property
+      (
+         TestAbsoluteDirectoryPath testPath
+      )
       {
          //Arrange
          //Act
@@ -58,11 +37,13 @@ public class ParseComponents
 
          //Assert
          return IsALeftAnd(AssertMessages.ReturnValue,
-                              (description,
-                               actualComponents) => AreEqual(description,
-                                                             testPath,
-                                                             actualComponents),
-                              actual);
+                           (
+                              description,
+                              actualComponents
+                           ) => AreEqual(description,
+                                         testPath,
+                                         actualComponents),
+                           actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
@@ -84,7 +65,10 @@ public class ParseComponents
    public void
       GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_the_components_is_returned()
    {
-      static Property Property(TestAbsoluteDirectoryPath testPath)
+      static Property Property
+      (
+         TestAbsoluteDirectoryPath testPath
+      )
       {
          //Arrange
          //Act
@@ -93,11 +77,13 @@ public class ParseComponents
 
          //Assert
          return IsALeftAnd(AssertMessages.ReturnValue,
-                              (description,
-                               actualComponents) => AreEqual(description,
-                                                             testPath,
-                                                             actualComponents),
-                              actual);
+                           (
+                              description,
+                              actualComponents
+                           ) => AreEqual(description,
+                                         testPath,
+                                         actualComponents),
+                           actual);
       }
 
       Arb.Register<Libraries.TestAbsoluteDirectoryPath>();
@@ -126,9 +112,9 @@ public class ParseComponents
       //Assert
       Assert.That
             .IsARight(AssertMessages.ReturnValue,
-                        Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
-                                                                                    nameof(TestPath))),
-                        actual);
+                      Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(string.Empty,
+                                                                                  nameof(TestPath))),
+                      actual);
    }
 
    /* ------------------------------------------------------------ */
@@ -143,7 +129,10 @@ public class ParseComponents
    [TestMethod]
    public void GIVEN_a_valid_path_without_a_volume_WHEN_Parse_THEN_a_failure_is_returned()
    {
-      static Property Property(string path)
+      static Property Property
+      (
+         string path
+      )
       {
          //Arrange
          //Act
@@ -152,9 +141,9 @@ public class ParseComponents
 
          //Assert
          return IsARight(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                   nameof(TestPath))),
-                           actual);
+                         Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
+                                                                                                 nameof(TestPath))),
+                         actual);
       }
 
       Arb.Register<Libraries.ValidPathWithoutARoot>();
@@ -175,7 +164,10 @@ public class ParseComponents
    [TestMethod]
    public void GIVEN_a_path_with_an_invalid_volume_root_WHEN_Parse_THEN_a_failure_is_returned()
    {
-      static Property Property(string path)
+      static Property Property
+      (
+         string path
+      )
       {
          //Arrange
          //Act
@@ -184,9 +176,9 @@ public class ParseComponents
 
          //Assert
          return IsARight(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
-                                                                                                   nameof(TestPath))),
-                           actual);
+                         Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
+                                                                                                 nameof(TestPath))),
+                         actual);
       }
 
       Arb.Register<Libraries.PathWithAnInvalidVolumeRoot>();
@@ -207,7 +199,10 @@ public class ParseComponents
    [TestMethod]
    public void GIVEN_a_path_with_a_volume_root_and_an_invalid_component_WHEN_Parse_THEN_a_failure_is_returned()
    {
-      static Property Property(string path)
+      static Property Property
+      (
+         string path
+      )
       {
          //Arrange
          //Act
@@ -216,15 +211,40 @@ public class ParseComponents
 
          //Assert
          return IsARight(AssertMessages.ReturnValue,
-                           Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
-                                                                                                    nameof(TestPath))),
-                           actual);
+                         Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
+                                                                                                  nameof(TestPath))),
+                         actual);
       }
 
       Arb.Register<Libraries.PathWithAVolumeRootAndAnInvalidComponent>();
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
+   }
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   private sealed class TestPath : AbsoluteDirectoryPath
+   {
+      /* ------------------------------------------------------------ */
+      // Constructor
+      /* ------------------------------------------------------------ */
+
+      private TestPath() : base(null!,
+                                null!) { }
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static IEither<(VolumeComponent volume, ISequence<DirectoryComponent> directories), Message> TestParseComponents
+      (
+         string potentialPath,
+         string pathType
+      )
+         => ParseComponents(potentialPath,
+                            pathType);
+
+      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */

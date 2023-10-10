@@ -1,14 +1,41 @@
 ﻿using Tetra;
 using Tetra.Testing;
+
 // ReSharper disable InconsistentNaming
 
 namespace Check;
 
 public sealed class Arranges : IArranges
 {
+   private readonly AAA_test.Disposables _disposables;
+
+   /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly IFileSystem _fileSystem = FileSystem.Create();
+   private readonly LockedFiles _lockedFiles;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private Arranges
+   (
+      AAA_test.Disposables disposables,
+      LockedFiles          lockedFiles
+   )
+   {
+      _disposables = disposables;
+      _lockedFiles = lockedFiles;
+   }
+
    /* ------------------------------------------------------------ */
    // Methods
-   public Arranges The_file_system_creates_a_sandbox(string directory)
+   public Arranges The_file_system_creates_a_sandbox
+   (
+      string directory
+   )
    {
       _disposables.Register(DeleteADirectory.Create(directory));
 
@@ -20,7 +47,10 @@ public sealed class Arranges : IArranges
 
    /* ------------------------------------------------------------ */
 
-   public Arranges A_directory_does_not_exist(string directory)
+   public Arranges A_directory_does_not_exist
+   (
+      string directory
+   )
    {
       ExternalFileSystem.EnsureADirectoryExists(directory);
 
@@ -29,7 +59,10 @@ public sealed class Arranges : IArranges
 
    /* ------------------------------------------------------------ */
 
-   public Arranges A_directory_exists(string directory)
+   public Arranges A_directory_exists
+   (
+      string directory
+   )
    {
       ExternalFileSystem.EnsureADirectoryExists(directory);
 
@@ -38,7 +71,10 @@ public sealed class Arranges : IArranges
 
    /* ------------------------------------------------------------ */
 
-   public Arranges A_file_does_not_exist(string file)
+   public Arranges A_file_does_not_exist
+   (
+      string file
+   )
    {
       ExternalFileSystem.EnsureAFileExists(file);
 
@@ -47,7 +83,10 @@ public sealed class Arranges : IArranges
 
    /* ------------------------------------------------------------ */
 
-   public Arranges A_file_exists(string file)
+   public Arranges A_file_exists
+   (
+      string file
+   )
    {
       ExternalFileSystem.EnsureAFileExists(file);
 
@@ -56,7 +95,10 @@ public sealed class Arranges : IArranges
 
    /* ------------------------------------------------------------ */
 
-   public Arranges A_file_is_locked(string file)
+   public Arranges A_file_is_locked
+   (
+      string file
+   )
    {
       _lockedFiles.LockFile(file);
 
@@ -65,7 +107,10 @@ public sealed class Arranges : IArranges
 
    /* ------------------------------------------------------------ */
 
-   public Arranges A_file_is_unlocked(string file)
+   public Arranges A_file_is_unlocked
+   (
+      string file
+   )
    {
       _lockedFiles.UnlockFile(file);
 
@@ -74,7 +119,10 @@ public sealed class Arranges : IArranges
 
    /* ------------------------------------------------------------ */
 
-   public Arranges The_current_directory_is(string directory)
+   public Arranges The_current_directory_is
+   (
+      string directory
+   )
    {
       ExternalFileSystem.SetCurrentDirectory(directory);
 
@@ -91,34 +139,17 @@ public sealed class Arranges : IArranges
    // Internal Factory Functions
    /* ------------------------------------------------------------ */
 
-   internal static Arranges Create(AAA_test.Disposables disposables)
+   internal static Arranges Create
+   (
+      AAA_test.Disposables disposables
+   )
    {
       var lockedFiles = LockedFiles.Create();
       disposables.Register(lockedFiles);
       disposables.Register(SetTheCurrentDirectory.Create(ExternalFileSystem.GetTheCurrentDirectory()));
- 
+
       return new(disposables,
                  lockedFiles);
-   }
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly IFileSystem _fileSystem = FileSystem.Create();
-
-   private readonly AAA_test.Disposables _disposables;
-   private readonly LockedFiles          _lockedFiles;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private Arranges(AAA_test.Disposables disposables,
-                    LockedFiles          lockedFiles)
-   {
-      _disposables = disposables;
-      _lockedFiles = lockedFiles;
    }
 
    /* ------------------------------------------------------------ */

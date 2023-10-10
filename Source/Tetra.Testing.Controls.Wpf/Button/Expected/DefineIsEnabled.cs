@@ -7,17 +7,19 @@ partial class Expected_button
    public sealed class DefineIsEnabled
    {
       /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public DefineVisibility IsEnabled_is(bool isEnabled)
-         => new(isEnabled);
-
-      /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
       internal DefineIsEnabled() { }
+      /* ------------------------------------------------------------ */
+      // Methods
+      /* ------------------------------------------------------------ */
+
+      public DefineVisibility IsEnabled_is
+      (
+         bool isEnabled
+      )
+         => new(isEnabled);
 
       /* ------------------------------------------------------------ */
    }

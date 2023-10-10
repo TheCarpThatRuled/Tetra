@@ -23,17 +23,22 @@ public class Parse
    [TestMethod]
    public void GIVEN_a_valid_string_WHEN_Parse_THEN_a_success_containing_a_FileComponent_with_the_string_is_returned()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
       {
          //Act
          var actual = FileComponent.Parse(value);
 
          //Assert
          return IsALeftAnd(AssertMessages.ReturnValue,
-                           (description,
-                            actualFileComponent) => AreEqual(description,
-                                                             value,
-                                                             actualFileComponent.Value()),
+                           (
+                              description,
+                              actualFileComponent
+                           ) => AreEqual(description,
+                                         value,
+                                         actualFileComponent.Value()),
                            actual);
       }
 
@@ -55,7 +60,10 @@ public class Parse
    [TestMethod]
    public void GIVEN_a_string_containing_an_invalid_character_WHEN_Parse_THEN_a_failure_is_returned()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
       {
          //Act
          var actual = FileComponent.Parse(value);

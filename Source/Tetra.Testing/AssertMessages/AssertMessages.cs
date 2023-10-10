@@ -2,7 +2,6 @@
 
 namespace Tetra.Testing;
 
-
 [ExcludeFromCodeCoverage]
 public static partial class AssertMessages
 {

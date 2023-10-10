@@ -9,9 +9,12 @@ partial class Properties
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static Property AreEqual(string                    description,
-                                   TestAbsoluteDirectoryPath expected,
-                                   AbsoluteDirectoryPath     actual)
+   public static Property AreEqual
+   (
+      string                    description,
+      TestAbsoluteDirectoryPath expected,
+      AbsoluteDirectoryPath     actual
+   )
       => AreEqual($"{description} - Value() returns an unexpected value",
                   expected.PathWithTrailingDirectorySeparator(),
                   actual.Value())
@@ -21,9 +24,12 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreEqual(string                                                              description,
-                                   TestAbsoluteDirectoryPath                                           expected,
-                                   (VolumeComponent volume, ISequence<DirectoryComponent> directories) actual)
+   public static Property AreEqual
+   (
+      string                                                              description,
+      TestAbsoluteDirectoryPath                                           expected,
+      (VolumeComponent volume, ISequence<DirectoryComponent> directories) actual
+   )
       => AreEqual($"{description} - the volumes do not match",
                   expected.Volume(),
                   actual.volume)
@@ -33,28 +39,36 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreSequenceEqual(string                                 description,
-                                           IEnumerable<TestAbsoluteDirectoryPath> expected,
-                                           IEnumerable<AbsoluteDirectoryPath>     actual)
+   public static Property AreSequenceEqual
+   (
+      string                                 description,
+      IEnumerable<TestAbsoluteDirectoryPath> expected,
+      IEnumerable<AbsoluteDirectoryPath>     actual
+   )
       => AreSequenceEqual(description,
                           expected.Materialise(),
                           actual.Materialise());
 
    /* ------------------------------------------------------------ */
 
-   public static Property AreSequenceEqual(string                               description,
-                                           ISequence<TestAbsoluteDirectoryPath> expected,
-                                           ISequence<AbsoluteDirectoryPath>     actual)
+   public static Property AreSequenceEqual
+   (
+      string                               description,
+      ISequence<TestAbsoluteDirectoryPath> expected,
+      ISequence<AbsoluteDirectoryPath>     actual
+   )
       => AreSequenceEqual(description,
                           expected,
                           actual,
                           x => x.PathWithTrailingDirectorySeparator(),
                           x => x.Value(),
-                          (expected1,
-                           actual1,
-                           description1) => AreEqual(description1,
-                                                     expected1,
-                                                     actual1));
+                          (
+                             expected1,
+                             actual1,
+                             description1
+                          ) => AreEqual(description1,
+                                        expected1,
+                                        actual1));
 
    /* ------------------------------------------------------------ */
 }

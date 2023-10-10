@@ -22,7 +22,10 @@ public class Materialise
    [TestMethod]
    public void GIVEN_an_List_of_TestStruct_WHEN_Materialise_THEN_a_sequence_containing_the_list_is_returned()
    {
-      static Property Property(List<TestStruct> source)
+      static Property Property
+      (
+         List<TestStruct> source
+      )
       {
          //Arrange
          //Act
@@ -52,7 +55,10 @@ public class Materialise
    [TestMethod]
    public void GIVEN_an_List_of_TestStruct_is_Materialised_WHEN_the_list_is_modified_THEN_the_sequence_matches_the_original_list()
    {
-      static Property Property(List<TestStruct> source)
+      static Property Property
+      (
+         List<TestStruct> source
+      )
       {
          //Arrange
          var expected = source.ToArray();

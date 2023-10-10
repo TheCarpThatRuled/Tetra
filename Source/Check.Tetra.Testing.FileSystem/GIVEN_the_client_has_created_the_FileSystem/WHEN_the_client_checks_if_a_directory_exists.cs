@@ -16,7 +16,10 @@ public class WHEN_the_client_checks_if_a_directory_exists
    [TestMethod]
    public void AND_the_directory_is_the_current_directory_THEN_true_is_returned()
    {
-      static Property Property(AbsoluteDirectoryPath currentDirectory)
+      static Property Property
+      (
+         AbsoluteDirectoryPath currentDirectory
+      )
       {
          //Arrange
          var fileSystem = FileSystem.From(currentDirectory);
@@ -40,7 +43,10 @@ public class WHEN_the_client_checks_if_a_directory_exists
    [TestMethod]
    public void AND_the_directory_is_not_the_current_directory_THEN_false_is_returned()
    {
-      static Property Property((AbsoluteDirectoryPath currentDirectory, AbsoluteDirectoryPath otherDirectory) args)
+      static Property Property
+      (
+         (AbsoluteDirectoryPath currentDirectory, AbsoluteDirectoryPath otherDirectory) args
+      )
       {
          //Arrange
          var fileSystem = FileSystem.From(args.currentDirectory);

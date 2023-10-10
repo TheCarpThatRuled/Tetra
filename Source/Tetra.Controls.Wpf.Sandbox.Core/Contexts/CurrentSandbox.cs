@@ -3,10 +3,28 @@
 internal sealed class CurrentSandbox
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly Action<ISandboxContext> _changeTo;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private CurrentSandbox
+   (
+      Action<ISandboxContext> changeTo
+   )
+      => _changeTo = changeTo;
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static CurrentSandbox Create(Action<ISandboxContext> changeTo)
+   public static CurrentSandbox Create
+   (
+      Action<ISandboxContext> changeTo
+   )
       => new(changeTo);
 
    /* ------------------------------------------------------------ */
@@ -20,19 +38,6 @@ internal sealed class CurrentSandbox
 
    public void ChangeToTheButtonSandbox()
       => _changeTo(ButtonSandboxContext.Create(ButtonSandbox.Create()));
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly Action<ISandboxContext> _changeTo;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private CurrentSandbox(Action<ISandboxContext> changeTo)
-      => _changeTo = changeTo;
 
    /* ------------------------------------------------------------ */
 }

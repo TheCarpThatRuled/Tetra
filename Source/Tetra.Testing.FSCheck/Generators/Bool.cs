@@ -9,10 +9,9 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<bool> Bool()
-      => Arb
-        .Default
-        .Bool()
-        .Generator;
+      => Arb.Default
+            .Bool()
+            .Generator;
 
    /* ------------------------------------------------------------ */
 }

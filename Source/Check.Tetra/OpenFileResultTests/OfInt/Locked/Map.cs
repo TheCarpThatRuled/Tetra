@@ -24,15 +24,18 @@ public class Locked_Map
    public void
       GIVEN_Locked_of_int_WHEN_Map_AND_whenOpen_is_a_Func_of_int_to_int_THEN_whenOpen_was_not_invoked_AND_a_Locked_containing_the_content_is_returned()
    {
-      static Property Property(AbsoluteFilePath path,
-                               Message          message,
-                               int              whenOpen)
+      static Property Property
+      (
+         AbsoluteFilePath path,
+         Message          message,
+         int              whenOpen
+      )
       {
          //Arrange
          var whenOpenFunc = FakeFunction<int, int>.Create(whenOpen);
 
          var result = LockedResult<int>.Create(message,
-                                                       path);
+                                               path);
 
          //Act
          var actual = result.Map(whenOpenFunc.Func);
@@ -66,15 +69,18 @@ public class Locked_Map
    public void
       GIVEN_Locked_of_int_WHEN_Map_AND_whenOpen_is_a_Func_of_int_to_TestClass_THEN_whenOpen_was_not_invoked_AND_a_Locked_containing_the_content_is_returned()
    {
-      static Property Property(AbsoluteFilePath path,
-                               Message          message,
-                               TestClass        whenOpen)
+      static Property Property
+      (
+         AbsoluteFilePath path,
+         Message          message,
+         TestClass        whenOpen
+      )
       {
          //Arrange
          var whenOpenFunc = FakeFunction<int, TestClass>.Create(whenOpen);
 
          var result = LockedResult<int>.Create(message,
-                                                       path);
+                                               path);
 
          //Act
          var actual = result.Map(whenOpenFunc.Func);
@@ -109,15 +115,18 @@ public class Locked_Map
    public void
       GIVEN_Locked_of_int_WHEN_Map_AND_whenOpen_is_a_Func_of_int_to_TestStruct_THEN_whenOpen_was_not_invoked_AND_a_Locked_containing_the_content_is_returned()
    {
-      static Property Property(AbsoluteFilePath path,
-                               Message          message,
-                               TestStruct       whenOpen)
+      static Property Property
+      (
+         AbsoluteFilePath path,
+         Message          message,
+         TestStruct       whenOpen
+      )
       {
          //Arrange
          var whenOpenFunc = FakeFunction<int, TestStruct>.Create(whenOpen);
 
          var result = LockedResult<int>.Create(message,
-                                                       path);
+                                               path);
 
          //Act
          var actual = result.Map(whenOpenFunc.Func);

@@ -23,7 +23,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_path_without_a_root_or_a_trailing_directory_separator_WHEN_Create_THEN_a_RelativeFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(TestRelativeFilePath testPath)
+      static Property Property
+      (
+         TestRelativeFilePath testPath
+      )
       {
          //Arrange
          //Act
@@ -53,7 +56,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_path_without_a_root_but_with_a_trailing_directory_separator_WHEN_Create_THEN_an_ArgumentException_is_thrown()
    {
-      static Property Property(TestRelativeFilePath testPath)
+      static Property Property
+      (
+         TestRelativeFilePath testPath
+      )
          => AnArgumentExceptionWasThrown(() => RelativeFilePath.Create(testPath.PathWithTrailingDirectorySeparator()),
                                          IsNotValidBecauseARelativeFilePathMayNotEndWithADirectorySeparator(testPath.PathWithTrailingDirectorySeparator(),
                                                                                                             HumanReadableName.RelativeFilePath),
@@ -110,7 +116,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_path_without_a_root_but_with_an_invalid_component_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
-      static Property Property(string path)
+      static Property Property
+      (
+         string path
+      )
          => AnArgumentExceptionWasThrown(() => RelativeFilePath.Create(path),
                                          IsNotValidBecauseARelativePathMayNotContainTheCharacters(path,
                                                                                                   HumanReadableName.RelativeFilePath),
@@ -137,7 +146,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_sequence_of_DirectoryComponents_and_a_FileComponent_WHEN_Create_THEN_a_RelativeFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(TestRelativeFilePath testPath)
+      static Property Property
+      (
+         TestRelativeFilePath testPath
+      )
       {
          //Arrange
          //Act

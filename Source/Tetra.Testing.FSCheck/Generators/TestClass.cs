@@ -13,7 +13,10 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(TestClass, TestClass, TestClass, TestClass)> FourUniqueTestClasses(Gen<TestClass> testClass)
+   public static Gen<(TestClass, TestClass, TestClass, TestClass)> FourUniqueTestClasses
+   (
+      Gen<TestClass> testClass
+   )
       => testClass
         .FourValueTuples()
         .Where(tuple => tuple.first  != tuple.second
@@ -31,20 +34,29 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<TestClass> TestClass(Gen<int> int32)
+   public static Gen<TestClass> TestClass
+   (
+      Gen<int> int32
+   )
       => TestClass(int32,
                    Float());
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<TestClass> TestClass(Gen<double> @float)
+   public static Gen<TestClass> TestClass
+   (
+      Gen<double> @float
+   )
       => TestClass(Int32(),
                    @float);
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<TestClass> TestClass(Gen<int> int32,
-                                          Gen<double> @float)
+   public static Gen<TestClass> TestClass
+   (
+      Gen<int>    int32,
+      Gen<double> @float
+   )
       => int32
         .Zip(@float,
              Testing.TestClass
@@ -57,7 +69,10 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(TestClass, TestClass, TestClass)> ThreeUniqueTestClasses(Gen<TestClass> testClass)
+   public static Gen<(TestClass, TestClass, TestClass)> ThreeUniqueTestClasses
+   (
+      Gen<TestClass> testClass
+   )
       => testClass
         .ThreeValueTuples()
         .Where(tuple => tuple.first  != tuple.second
@@ -71,7 +86,10 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(TestClass, TestClass)> TwoUniqueTestClasses(Gen<TestClass> testClass)
+   public static Gen<(TestClass, TestClass)> TwoUniqueTestClasses
+   (
+      Gen<TestClass> testClass
+   )
       => testClass
         .TwoValueTuples()
         .Where(tuple => tuple.first != tuple.second);

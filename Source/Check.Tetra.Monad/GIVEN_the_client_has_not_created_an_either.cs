@@ -16,7 +16,10 @@ public class GIVEN_the_client_has_not_created_an_either : AAATestDataSource
 
    [TestMethod]
    [GIVEN_the_client_has_not_created_an_either]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       using var given = test.Create();
       var       when  = given.Arrange();

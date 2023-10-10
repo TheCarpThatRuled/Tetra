@@ -17,12 +17,12 @@ public static partial class Libraries
       public static Arbitrary<Tetra.DirectoryComponent[]> Type()
          => Generators
            .ArrayOf(Generators.DirectoryComponent())
-           .Where(x=> x.Length > 1)
+           .Where(x => x.Length > 1)
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
    }
-   
+
    /* ------------------------------------------------------------ */
 
    // ReSharper disable once ClassNeverInstantiated.Local

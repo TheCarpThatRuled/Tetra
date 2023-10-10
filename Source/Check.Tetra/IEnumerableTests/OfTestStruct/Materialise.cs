@@ -22,7 +22,10 @@ public class Materialise
    [TestMethod]
    public void GIVEN_an_IEnumerable_of_TestStruct_WHEN_Materialise_THEN_a_sequence_containing_the_enumerable_is_returned()
    {
-      static Property Property(TestStruct[] source)
+      static Property Property
+      (
+         TestStruct[] source
+      )
       {
          //Arrange
          //Act
@@ -54,7 +57,10 @@ public class Materialise
    [TestMethod]
    public void GIVEN_an_IEnumerable_of_TestStruct_is_Materialised_WHEN_the_underlying_array_is_modified_THEN_the_sequence_matches_the_original_enumerable()
    {
-      static Property Property(TestStruct[] source)
+      static Property Property
+      (
+         TestStruct[] source
+      )
       {
          //Arrange
          var expected = (TestStruct[]) source.Clone();
@@ -63,7 +69,8 @@ public class Materialise
                        .Materialise();
 
          //Act
-         source[0] = new(90, 90);
+         source[0] = new(90,
+                         90);
 
          //Assert
          return AreSequenceEqual(AssertMessages.ReturnValue,

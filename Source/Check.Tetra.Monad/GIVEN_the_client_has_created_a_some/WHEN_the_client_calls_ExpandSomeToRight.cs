@@ -16,7 +16,10 @@ public class WHEN_the_client_calls_ExpandSomeToRight : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_client_calls_ExpandSomeToRight]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       using var given = test.Create();
       var       when  = given.Arrange();
@@ -49,7 +52,7 @@ public class WHEN_the_client_calls_ExpandSomeToRight : AAATestDataSource
       yield return AAA_test
                   .GIVEN(the_Client.has_created_a_some_from(content))
                   .WHEN(the_Client.on_the_option.calls_ExpandSomeToRight_with(externalState,
-                                                                FakeLeft.Create("whenNone Value")))
+                                                                              FakeLeft.Create("whenNone Value")))
                   .THEN(the_whenNone.for_ExpandSomeToRight_with_externalState.was_not_invoked())
                   .And(the_return_value.for_option.ExpandSomeToRight_with_externalState.is_a_right_containing(content))
                   .Crystallise();

@@ -26,7 +26,11 @@ public class Open_Reduce
    public void
       GIVEN_Open_of_TestStruct_WHEN_Reduce_AND_whenFuncs_are_a_Func_of_T_to_int_THEN_whenOpen_was_invoked_once_with_the_content_AND_whenLocked_was_not_invoked_AND_whenMissing_was_not_invoked_AND_the_return_value_of_whenOpen_is_returned()
    {
-      static Property Property(TestStruct content, (int whenLocked, int whenMissing, int whenOpen) args)
+      static Property Property
+      (
+         TestStruct                                      content,
+         (int whenLocked, int whenMissing, int whenOpen) args
+      )
       {
          //Arrange
          var whenLocked  = FakeFunction<Locked, int>.Create(args.whenLocked);
@@ -73,8 +77,11 @@ public class Open_Reduce
    public void
       GIVEN_Open_of_TestStruct_WHEN_Reduce_AND_whenFuncs_are_a_Func_of_T_to_TestClass_THEN_whenOpen_was_invoked_once_with_the_content_AND_whenLocked_was_not_invoked_AND_whenMissing_was_not_invoked_AND_the_return_value_of_whenOpen_is_returned()
    {
-      static Property Property(TestStruct                                                        content,
-                               (TestClass whenLocked, TestClass whenMissing, TestClass whenOpen) args)
+      static Property Property
+      (
+         TestStruct                                                        content,
+         (TestClass whenLocked, TestClass whenMissing, TestClass whenOpen) args
+      )
       {
          //Arrange
          var whenLocked  = FakeFunction<Locked, TestClass>.Create(args.whenLocked);
@@ -100,7 +107,7 @@ public class Open_Reduce
                .And(WasNotInvoked(nameof(whenMissing),
                                   whenMissing));
       }
-      
+
       Arb.Register<Libraries.TestStruct>();
       Arb.Register<Libraries.ThreeUniqueTestClasses>();
 
@@ -121,7 +128,10 @@ public class Open_Reduce
    public void
       GIVEN_Open_of_TestStruct_WHEN_Reduce_AND_whenFuncs_are_a_Func_of_T_to_TestStruct_THEN_whenOpen_was_invoked_once_with_the_content_AND_whenLocked_was_not_invoked_AND_whenMissing_was_not_invoked_AND_the_return_value_of_whenOpen_is_returned()
    {
-      static Property Property((TestStruct content, TestStruct whenLocked, TestStruct whenMissing, TestStruct whenOpen) args)
+      static Property Property
+      (
+         (TestStruct content, TestStruct whenLocked, TestStruct whenMissing, TestStruct whenOpen) args
+      )
       {
          //Arrange
          var whenLocked  = FakeFunction<Locked, TestStruct>.Create(args.whenLocked);
@@ -147,7 +157,7 @@ public class Open_Reduce
                .And(WasNotInvoked(nameof(whenMissing),
                                   whenMissing));
       }
-      
+
       Arb.Register<Libraries.FourUniqueTestStructs>();
 
       Prop.ForAll<(TestStruct, TestStruct, TestStruct, TestStruct)>(Property)

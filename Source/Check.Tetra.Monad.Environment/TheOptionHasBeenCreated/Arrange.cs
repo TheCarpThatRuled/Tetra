@@ -8,24 +8,26 @@ public static partial class TheOptionHasBeenCreated
    public sealed class Arrange : IArranges
    {
       /* ------------------------------------------------------------ */
-      //  Methods
+      //  Private Fields
       /* ------------------------------------------------------------ */
 
-      public Act ToActs()
-         => new(_option);
+      private readonly IOption<FakeType> _option;
 
       /* ------------------------------------------------------------ */
       //  Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal Arrange(IOption<FakeType> option)
+      internal Arrange
+      (
+         IOption<FakeType> option
+      )
          => _option = option;
-
       /* ------------------------------------------------------------ */
-      //  Private Fields
+      //  Methods
       /* ------------------------------------------------------------ */
 
-      private readonly IOption<FakeType> _option;
+      public Act ToActs()
+         => new(_option);
 
       /* ------------------------------------------------------------ */
    }

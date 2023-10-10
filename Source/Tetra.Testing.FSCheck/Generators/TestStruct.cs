@@ -13,7 +13,10 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(TestStruct, TestStruct, TestStruct, TestStruct)> FourUniqueTestStructs(Gen<TestStruct> testStruct)
+   public static Gen<(TestStruct, TestStruct, TestStruct, TestStruct)> FourUniqueTestStructs
+   (
+      Gen<TestStruct> testStruct
+   )
       => testStruct
         .FourValueTuples()
         .Where(tuple => tuple.first  != tuple.second
@@ -31,20 +34,29 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<TestStruct> TestStruct(Gen<int> int32)
+   public static Gen<TestStruct> TestStruct
+   (
+      Gen<int> int32
+   )
       => TestStruct(int32,
                     Float());
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<TestStruct> TestStruct(Gen<double> @float)
+   public static Gen<TestStruct> TestStruct
+   (
+      Gen<double> @float
+   )
       => TestStruct(Int32(),
                     @float);
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<TestStruct> TestStruct(Gen<int> int32,
-                                            Gen<double> @float)
+   public static Gen<TestStruct> TestStruct
+   (
+      Gen<int>    int32,
+      Gen<double> @float
+   )
       => int32
         .Zip(@float,
              Testing.TestStruct
@@ -57,7 +69,10 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(TestStruct, TestStruct, TestStruct)> ThreeUniqueTestStructs(Gen<TestStruct> testStruct)
+   public static Gen<(TestStruct, TestStruct, TestStruct)> ThreeUniqueTestStructs
+   (
+      Gen<TestStruct> testStruct
+   )
       => testStruct
         .ThreeValueTuples()
         .Where(tuple => tuple.first  != tuple.second
@@ -71,7 +86,10 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(TestStruct, TestStruct)> TwoUniqueTestStructs(Gen<TestStruct> testStruct)
+   public static Gen<(TestStruct, TestStruct)> TwoUniqueTestStructs
+   (
+      Gen<TestStruct> testStruct
+   )
       => testStruct
         .TwoValueTuples()
         .Where(tuple => tuple.first != tuple.second);

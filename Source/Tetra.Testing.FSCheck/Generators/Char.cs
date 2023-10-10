@@ -9,10 +9,9 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<char> Char()
-      => Arb
-        .Default
-        .Char()
-        .Generator;
+      => Arb.Default
+            .Char()
+            .Generator;
 
    /* ------------------------------------------------------------ */
 

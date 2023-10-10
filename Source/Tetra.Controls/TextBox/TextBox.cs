@@ -3,6 +3,29 @@
 public sealed partial class TextBox
 {
    /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private readonly IOneWayBinding<bool>       _isEnabled;
+   private readonly ITwoWayBinding<string>     _text;
+   private readonly IOneWayBinding<Visibility> _visibility;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private TextBox
+   (
+      IOneWayBinding<bool>       isEnabled,
+      ITwoWayBinding<string>     text,
+      IOneWayBinding<Visibility> visibility
+   )
+   {
+      _isEnabled  = isEnabled;
+      _text       = text;
+      _visibility = visibility;
+   }
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
@@ -25,27 +48,6 @@ public sealed partial class TextBox
 
    public IOneWayBinding<Visibility> Visibility()
       => _visibility;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private readonly IOneWayBinding<bool>       _isEnabled;
-   private readonly ITwoWayBinding<string>     _text;
-   private readonly IOneWayBinding<Visibility> _visibility;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private TextBox(IOneWayBinding<bool>       isEnabled,
-                   ITwoWayBinding<string>     text,
-                   IOneWayBinding<Visibility> visibility)
-   {
-      _isEnabled  = isEnabled;
-      _text       = text;
-      _visibility = visibility;
-   }
 
    /* ------------------------------------------------------------ */
 }

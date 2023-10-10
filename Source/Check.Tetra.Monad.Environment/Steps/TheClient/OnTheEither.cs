@@ -1,5 +1,4 @@
-﻿using Tetra;
-using Tetra.Testing;
+﻿using Tetra.Testing;
 using static Tetra.Testing.AAA_test;
 
 namespace Check;
@@ -23,7 +22,10 @@ partial class Steps
 
          /* ------------------------------------------------------------ */
 
-         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndDoWasCalledWithExternalStateAsserts> calls_Do_with(FakeExternalState externalState)
+         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndDoWasCalledWithExternalStateAsserts> calls_Do_with
+         (
+            FakeExternalState externalState
+         )
             => AtomicAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndDoWasCalledWithExternalStateAsserts>
               .Create($@"{nameof(the_Client)}_{nameof(calls_Do_with)} ""{externalState.Characterisation}""",
                       arrange => arrange
@@ -32,7 +34,10 @@ partial class Steps
 
          /* ------------------------------------------------------------ */
 
-         public IAct<TheEitherHasBeenCreated.Arrange, BooleanAsserts<TestTerminus>> calls_Equals_with(object? other)
+         public IAct<TheEitherHasBeenCreated.Arrange, BooleanAsserts<TestTerminus>> calls_Equals_with
+         (
+            object? other
+         )
             => AtomicAct<TheEitherHasBeenCreated.Arrange, BooleanAsserts<TestTerminus>>
               .Create($@"{nameof(the_Client)}_{nameof(calls_Equals_with)} ""{other}""",
                       arrange => arrange
@@ -77,8 +82,11 @@ partial class Steps
 
          /* ------------------------------------------------------------ */
 
-         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndMapWasCalledAsserts> calls_Map_with(FakeNewLeft  whenLeftValue,
-                                                                                                                     FakeNewRight whenRightValue)
+         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndMapWasCalledAsserts> calls_Map_with
+         (
+            FakeNewLeft  whenLeftValue,
+            FakeNewRight whenRightValue
+         )
             => AtomicAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndMapWasCalledAsserts>
               .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{whenLeftValue.Characterisation}"", ""{whenRightValue.Characterisation}""",
                       arrange => arrange
@@ -88,9 +96,12 @@ partial class Steps
 
          /* ------------------------------------------------------------ */
 
-         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts> calls_Map_with(FakeExternalState externalState,
-            FakeNewLeft                                                                                                                                 whenLeftValue,
-            FakeNewRight                                                                                                                                whenRightValue)
+         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts> calls_Map_with
+         (
+            FakeExternalState externalState,
+            FakeNewLeft       whenLeftValue,
+            FakeNewRight      whenRightValue
+         )
             => AtomicAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts>
               .Create(
                   $@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{externalState.Characterisation}"", ""{whenLeftValue.Characterisation}"", ""{whenRightValue.Characterisation}""",
@@ -102,27 +113,33 @@ partial class Steps
 
          /* ------------------------------------------------------------ */
 
-         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndUnifyWasCalledAsserts> calls_Unify_with(FakeNewType whenLeftValue,
-            FakeNewType                                                                                                                whenRightValue)
+         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndUnifyWasCalledAsserts> calls_Unify_with
+         (
+            FakeNewType whenLeftValue,
+            FakeNewType whenRightValue
+         )
             => AtomicAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndUnifyWasCalledAsserts>
               .Create($@"{nameof(the_Client)}_{nameof(calls_Unify_with)} ""{whenLeftValue.Characterisation}""",
                       arrange => arrange
                                 .ToActs()
                                 .Unify(whenLeftValue,
-                                        whenRightValue));
+                                       whenRightValue));
 
          /* ------------------------------------------------------------ */
 
-         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts> calls_Unify_with(FakeExternalState externalState,
-            FakeNewType                                                                                                                                       whenLeftValue,
-            FakeNewType                                                                                                                                       whenRightValue)
+         public IAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts> calls_Unify_with
+         (
+            FakeExternalState externalState,
+            FakeNewType       whenLeftValue,
+            FakeNewType       whenRightValue
+         )
             => AtomicAct<TheEitherHasBeenCreated.Arrange, TheEitherHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts>
               .Create($@"{nameof(the_Client)}_{nameof(calls_Unify_with)} ""{externalState.Characterisation}"", ""{whenLeftValue.Characterisation}""",
                       arrange => arrange
                                 .ToActs()
                                 .Unify(externalState,
-                                        whenLeftValue,
-                                        whenRightValue));
+                                       whenLeftValue,
+                                       whenRightValue));
 
          /* ------------------------------------------------------------ */
 

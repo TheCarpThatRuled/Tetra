@@ -2,46 +2,8 @@
 
 namespace Tetra;
 
-
 public sealed class BindingCommand : ICommand
 {
-   /* ------------------------------------------------------------ */
-   // Factory Functions
-   /* ------------------------------------------------------------ */
-
-   public static BindingCommand Create(Action               execute,
-                                       IOneWayBinding<bool> canExecute)
-      => new(canExecute,
-             execute);
-
-   /* ------------------------------------------------------------ */
-   // ICommand Events
-   /* ------------------------------------------------------------ */
-
-   public event EventHandler? CanExecuteChanged;
-
-   /* ------------------------------------------------------------ */
-   // ICommand Methods
-   /* ------------------------------------------------------------ */
-
-   public bool CanExecute(object? _)
-      => _canExecute
-        .Pull();
-
-   /* ------------------------------------------------------------ */
-
-   public void Execute(object? _)
-      => _execute();
-
-   /* ------------------------------------------------------------ */
-   // Event Handlers
-   /* ------------------------------------------------------------ */
-
-   private void InvokeCanExecuteChanged()
-      => CanExecuteChanged
-       ?.Invoke(this,
-                EventArgs.Empty);
-
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
@@ -53,14 +15,62 @@ public sealed class BindingCommand : ICommand
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private BindingCommand(IOneWayBinding<bool> canExecute,
-                          Action               execute)
+   private BindingCommand
+   (
+      IOneWayBinding<bool> canExecute,
+      Action               execute
+   )
    {
       _canExecute = canExecute;
       _execute    = execute;
 
       _canExecute.OnUpdated(InvokeCanExecuteChanged);
    }
+
+   /* ------------------------------------------------------------ */
+   // ICommand Events
+   /* ------------------------------------------------------------ */
+
+   public event EventHandler? CanExecuteChanged;
+
+   /* ------------------------------------------------------------ */
+   // ICommand Methods
+   /* ------------------------------------------------------------ */
+
+   public bool CanExecute
+   (
+      object? _
+   )
+      => _canExecute
+        .Pull();
+
+   /* ------------------------------------------------------------ */
+
+   public void Execute
+   (
+      object? _
+   )
+      => _execute();
+   /* ------------------------------------------------------------ */
+   // Factory Functions
+   /* ------------------------------------------------------------ */
+
+   public static BindingCommand Create
+   (
+      Action               execute,
+      IOneWayBinding<bool> canExecute
+   )
+      => new(canExecute,
+             execute);
+
+   /* ------------------------------------------------------------ */
+   // Event Handlers
+   /* ------------------------------------------------------------ */
+
+   private void InvokeCanExecuteChanged()
+      => CanExecuteChanged
+       ?.Invoke(this,
+                EventArgs.Empty);
 
    /* ------------------------------------------------------------ */
 }

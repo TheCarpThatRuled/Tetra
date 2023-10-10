@@ -3,13 +3,21 @@
 namespace Check.Check_Button;
 
 public sealed class Act<T>
-   where T :IAsserts
+   where T : IAsserts
 {
+   /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly Func<T> _act;
    /* ------------------------------------------------------------ */
    // Internal Constructors
    /* ------------------------------------------------------------ */
 
-   internal Act(Func<T> act)
+   internal Act
+   (
+      Func<T> act
+   )
       => _act = act;
 
    /* ------------------------------------------------------------ */
@@ -19,12 +27,6 @@ public sealed class Act<T>
    // ReSharper disable once InconsistentNaming
    public T THEN()
       => _act();
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly Func<T> _act;
 
    /* ------------------------------------------------------------ */
 }

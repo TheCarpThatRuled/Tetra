@@ -9,10 +9,9 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<NonEmptyString> NonEmptyString()
-      => Arb
-        .Default
-        .NonEmptyString()
-        .Generator;
+      => Arb.Default
+            .NonEmptyString()
+            .Generator;
 
    /* ------------------------------------------------------------ */
 
@@ -27,10 +26,9 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<string> String()
-      => Arb
-        .Default
-        .String()
-        .Generator;
+      => Arb.Default
+            .String()
+            .Generator;
 
    /* ------------------------------------------------------------ */
 

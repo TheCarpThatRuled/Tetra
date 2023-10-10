@@ -8,35 +8,6 @@ partial class AAA_test
       where TNextArranges : IArranges
    {
       /* ------------------------------------------------------------ */
-      // Factory Functions
-      /* ------------------------------------------------------------ */
-
-      public static RecharacterisedArrange<TInitialArranges, TNextArranges> Create(string                                    characterisation,
-                                                                                   IArrange<TInitialArranges, TNextArranges> arrange)
-         => new(arrange,
-                characterisation);
-
-      /* ------------------------------------------------------------ */
-      // IArrange<TInitialArranges, TNextArranges> Methods
-      /* ------------------------------------------------------------ */
-
-      public void AddBriefCharacterisation(GivenCharacteriser characteriser)
-         => characteriser
-           .AddClauseToBriefCharacterisation(_characterisation);
-
-      /* ------------------------------------------------------------ */
-
-      public void AddFullCharacterisation(GivenCharacteriser characteriser)
-         => _arrange
-           .AddFullCharacterisation(characteriser);
-
-      /* ------------------------------------------------------------ */
-
-      public TNextArranges Arrange(TInitialArranges environment)
-         => _arrange
-           .Arrange(environment);
-
-      /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
@@ -47,12 +18,55 @@ partial class AAA_test
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private RecharacterisedArrange(IArrange<TInitialArranges, TNextArranges> arrange,
-                                     string                                    characterisation)
+      private RecharacterisedArrange
+      (
+         IArrange<TInitialArranges, TNextArranges> arrange,
+         string                                    characterisation
+      )
       {
          _arrange          = arrange;
          _characterisation = characterisation;
       }
+
+      /* ------------------------------------------------------------ */
+      // IArrange<TInitialArranges, TNextArranges> Methods
+      /* ------------------------------------------------------------ */
+
+      public void AddBriefCharacterisation
+      (
+         GivenCharacteriser characteriser
+      )
+         => characteriser
+           .AddClauseToBriefCharacterisation(_characterisation);
+
+      /* ------------------------------------------------------------ */
+
+      public void AddFullCharacterisation
+      (
+         GivenCharacteriser characteriser
+      )
+         => _arrange
+           .AddFullCharacterisation(characteriser);
+
+      /* ------------------------------------------------------------ */
+
+      public TNextArranges Arrange
+      (
+         TInitialArranges environment
+      )
+         => _arrange
+           .Arrange(environment);
+      /* ------------------------------------------------------------ */
+      // Factory Functions
+      /* ------------------------------------------------------------ */
+
+      public static RecharacterisedArrange<TInitialArranges, TNextArranges> Create
+      (
+         string                                    characterisation,
+         IArrange<TInitialArranges, TNextArranges> arrange
+      )
+         => new(arrange,
+                characterisation);
 
       /* ------------------------------------------------------------ */
    }

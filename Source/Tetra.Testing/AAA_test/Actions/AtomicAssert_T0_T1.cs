@@ -8,34 +8,6 @@ partial class AAA_test
       where TNextAsserts : IAsserts
    {
       /* ------------------------------------------------------------ */
-      // Factory Functions
-      /* ------------------------------------------------------------ */
-
-      public static AtomicAssert<TInitialAsserts, TNextAsserts> Create(string                              characterisation,
-                                                                       Func<TInitialAsserts, TNextAsserts> assert)
-         => new(assert,
-                characterisation);
-
-      /* ------------------------------------------------------------ */
-      // IAssert<TInitialAsserts, TNextAsserts> Methods
-      /* ------------------------------------------------------------ */
-
-      public void AddBriefCharacterisation(ThenCharacteriser characteriser)
-         => characteriser
-           .AddClauseToBriefCharacterisation(_characterisation);
-
-      /* ------------------------------------------------------------ */
-
-      public void AddFullCharacterisation(ThenCharacteriser characteriser)
-         => characteriser
-           .AddClauseToFullCharacterisation(_characterisation);
-
-      /* ------------------------------------------------------------ */
-
-      public TNextAsserts Assert(TInitialAsserts environment)
-         => _assert(environment);
-
-      /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
@@ -46,12 +18,54 @@ partial class AAA_test
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private AtomicAssert(Func<TInitialAsserts, TNextAsserts> assert,
-                           string                              characterisation)
+      private AtomicAssert
+      (
+         Func<TInitialAsserts, TNextAsserts> assert,
+         string                              characterisation
+      )
       {
          _assert           = assert;
          _characterisation = characterisation;
       }
+
+      /* ------------------------------------------------------------ */
+      // IAssert<TInitialAsserts, TNextAsserts> Methods
+      /* ------------------------------------------------------------ */
+
+      public void AddBriefCharacterisation
+      (
+         ThenCharacteriser characteriser
+      )
+         => characteriser
+           .AddClauseToBriefCharacterisation(_characterisation);
+
+      /* ------------------------------------------------------------ */
+
+      public void AddFullCharacterisation
+      (
+         ThenCharacteriser characteriser
+      )
+         => characteriser
+           .AddClauseToFullCharacterisation(_characterisation);
+
+      /* ------------------------------------------------------------ */
+
+      public TNextAsserts Assert
+      (
+         TInitialAsserts environment
+      )
+         => _assert(environment);
+      /* ------------------------------------------------------------ */
+      // Factory Functions
+      /* ------------------------------------------------------------ */
+
+      public static AtomicAssert<TInitialAsserts, TNextAsserts> Create
+      (
+         string                              characterisation,
+         Func<TInitialAsserts, TNextAsserts> assert
+      )
+         => new(assert,
+                characterisation);
 
       /* ------------------------------------------------------------ */
    }

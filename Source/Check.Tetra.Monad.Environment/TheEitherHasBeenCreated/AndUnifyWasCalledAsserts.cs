@@ -5,10 +5,33 @@ namespace Check;
 public static partial class TheEitherHasBeenCreated
 {
    public sealed class AndUnifyWasCalledAsserts : IAsserts,
-                                                   IReturnsAsserts<FakeNewType, AndUnifyWasCalledAsserts>,
-                                                   IWhenLeftFuncAsserts<FakeLeft, FakeNewType, AndUnifyWasCalledAsserts>,
-                                                   IWhenRightFuncAsserts<FakeRight, FakeNewType, AndUnifyWasCalledAsserts>
+                                                  IReturnsAsserts<FakeNewType, AndUnifyWasCalledAsserts>,
+                                                  IWhenLeftFuncAsserts<FakeLeft, FakeNewType, AndUnifyWasCalledAsserts>,
+                                                  IWhenRightFuncAsserts<FakeRight, FakeNewType, AndUnifyWasCalledAsserts>
    {
+      /* ------------------------------------------------------------ */
+      //  Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly FakeNewType                          _returnValue;
+      private readonly FakeFunction<FakeLeft, FakeNewType>  _whenLeft;
+      private readonly FakeFunction<FakeRight, FakeNewType> _whenRight;
+
+      /* ------------------------------------------------------------ */
+      //  Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal AndUnifyWasCalledAsserts
+      (
+         FakeFunction<FakeLeft, FakeNewType>  whenLeft,
+         FakeFunction<FakeRight, FakeNewType> whenRight,
+         FakeNewType                          returnValue
+      )
+      {
+         _returnValue = returnValue;
+         _whenLeft    = whenLeft;
+         _whenRight   = whenRight;
+      }
       /* ------------------------------------------------------------ */
       //  IReturnsAsserts<FakeNewType, AndReduceWasCalledAsserts> Methods
       /* ------------------------------------------------------------ */
@@ -38,27 +61,6 @@ public static partial class TheEitherHasBeenCreated
            .Create("whenRight",
                    _whenRight,
                    () => this);
-
-      /* ------------------------------------------------------------ */
-      //  Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal AndUnifyWasCalledAsserts(FakeFunction<FakeLeft, FakeNewType>  whenLeft,
-                                         FakeFunction<FakeRight, FakeNewType> whenRight,
-                                         FakeNewType                          returnValue)
-      {
-         _returnValue = returnValue;
-         _whenLeft    = whenLeft;
-         _whenRight   = whenRight;
-      }
-
-      /* ------------------------------------------------------------ */
-      //  Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly FakeNewType                          _returnValue;
-      private readonly FakeFunction<FakeLeft, FakeNewType>  _whenLeft;
-      private readonly FakeFunction<FakeRight, FakeNewType> _whenRight;
 
       /* ------------------------------------------------------------ */
    }

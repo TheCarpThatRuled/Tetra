@@ -9,8 +9,11 @@ partial class Properties
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Property IsALocked<T>(string             description,
-                                       IOpenFileResult<T> actual)
+   public static Property IsALocked<T>
+   (
+      string             description,
+      IOpenFileResult<T> actual
+   )
       => actual switch
          {
             MissingResult<T> missing => False(Failed.Message(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
@@ -24,10 +27,13 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsALocked<T>(string             description,
-                                       AbsoluteFilePath   expectedPath,
-                                       Message            expectedMessage,
-                                       IOpenFileResult<T> actual)
+   public static Property IsALocked<T>
+   (
+      string             description,
+      AbsoluteFilePath   expectedPath,
+      Message            expectedMessage,
+      IOpenFileResult<T> actual
+   )
       => actual switch
          {
             MissingResult<T> missing => False(Failed.Message(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
@@ -45,9 +51,12 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsALockedAnd<T>(string                         description,
-                                          Func<string, Locked, Property> property,
-                                          IOpenFileResult<T>             actual)
+   public static Property IsALockedAnd<T>
+   (
+      string                         description,
+      Func<string, Locked, Property> property,
+      IOpenFileResult<T>             actual
+   )
       => actual switch
          {
             MissingResult<T> missing => False(Failed.Message(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
@@ -56,13 +65,16 @@ partial class Properties
                                                        open.ToTestOutput())),
             LockedResult<T> locked => property(TheOpenFileResultIsALockedButDoesNotContainTheExpectedContent<T>(description),
                                                locked.Content),
-            _ => False(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeALocked<T>(description))
+            _ => False(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeALocked<T>(description)),
          };
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsAMissing<T>(string             description,
-                                        IOpenFileResult<T> actual)
+   public static Property IsAMissing<T>
+   (
+      string             description,
+      IOpenFileResult<T> actual
+   )
       => actual switch
          {
             LockedResult<T> locked => False(Failed.Message(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
@@ -76,10 +88,13 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsAMissing<T>(string             description,
-                                        AbsoluteFilePath   expectedPath,
-                                        Message            expectedMessage,
-                                        IOpenFileResult<T> actual)
+   public static Property IsAMissing<T>
+   (
+      string             description,
+      AbsoluteFilePath   expectedPath,
+      Message            expectedMessage,
+      IOpenFileResult<T> actual
+   )
       => actual switch
          {
             LockedResult<T> locked => False(Failed.Message(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
@@ -97,9 +112,12 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsAMissingAnd<T>(string                          description,
-                                           Func<string, Missing, Property> property,
-                                           IOpenFileResult<T>              actual)
+   public static Property IsAMissingAnd<T>
+   (
+      string                          description,
+      Func<string, Missing, Property> property,
+      IOpenFileResult<T>              actual
+   )
       => actual switch
          {
             LockedResult<T> locked => False(Failed.Message(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
@@ -113,8 +131,11 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsAnOpen<T>(string             description,
-                                      IOpenFileResult<T> actual)
+   public static Property IsAnOpen<T>
+   (
+      string             description,
+      IOpenFileResult<T> actual
+   )
       => actual switch
          {
             LockedResult<T> locked => False(Failed.Message(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
@@ -128,9 +149,12 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsAnOpen<T>(string             description,
-                                      T                  expected,
-                                      IOpenFileResult<T> actual)
+   public static Property IsAnOpen<T>
+   (
+      string             description,
+      T                  expected,
+      IOpenFileResult<T> actual
+   )
       => actual switch
          {
             LockedResult<T> locked => False(Failed.Message(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
@@ -145,9 +169,12 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property IsAnOpenAnd<T>(string                    description,
-                                         Func<string, T, Property> property,
-                                         IOpenFileResult<T>        actual)
+   public static Property IsAnOpenAnd<T>
+   (
+      string                    description,
+      Func<string, T, Property> property,
+      IOpenFileResult<T>        actual
+   )
       => actual switch
          {
             LockedResult<T> locked => False(Failed.Message(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),

@@ -8,6 +8,21 @@ public static partial class TheOptionHasBeenCreated
    public sealed class Act : IActs
    {
       /* ------------------------------------------------------------ */
+      //  Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly IOption<FakeType> _option;
+
+      /* ------------------------------------------------------------ */
+      //  Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal Act
+      (
+         IOption<FakeType> option
+      )
+         => _option = option;
+      /* ------------------------------------------------------------ */
       //  Methods
       /* ------------------------------------------------------------ */
 
@@ -27,7 +42,10 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public AndDoWasCalledWithExternalStateAsserts Do(FakeExternalState externalState)
+      public AndDoWasCalledWithExternalStateAsserts Do
+      (
+         FakeExternalState externalState
+      )
       {
          var whenNone = FakeAction<FakeExternalState>.Create();
          var whenSome = FakeAction<FakeExternalState, FakeType>.Create();
@@ -44,7 +62,10 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public AndExpandSomeToLeftWasCalledAsserts ExpandSomeToLeft(FakeRight whenNoneValue)
+      public AndExpandSomeToLeftWasCalledAsserts ExpandSomeToLeft
+      (
+         FakeRight whenNoneValue
+      )
       {
          var whenNone = FakeFunction<FakeRight>.Create(whenNoneValue);
 
@@ -56,8 +77,11 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public AndExpandSomeToLeftWasCalledWithExternalStateAsserts ExpandSomeToLeft(FakeExternalState externalState,
-                                                                                   FakeRight         whenNoneValue)
+      public AndExpandSomeToLeftWasCalledWithExternalStateAsserts ExpandSomeToLeft
+      (
+         FakeExternalState externalState,
+         FakeRight         whenNoneValue
+      )
       {
          var whenNone = FakeFunction<FakeExternalState, FakeRight>.Create(whenNoneValue);
 
@@ -70,7 +94,10 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public AndExpandSomeToRightWasCalledAsserts ExpandSomeToRight(FakeLeft whenNoneValue)
+      public AndExpandSomeToRightWasCalledAsserts ExpandSomeToRight
+      (
+         FakeLeft whenNoneValue
+      )
       {
          var whenNone = FakeFunction<FakeLeft>.Create(whenNoneValue);
 
@@ -82,8 +109,11 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public AndExpandSomeToRightWasCalledWithExternalStateAsserts ExpandSomeToRight(FakeExternalState externalState,
-                                                                                     FakeLeft          whenNoneValue)
+      public AndExpandSomeToRightWasCalledWithExternalStateAsserts ExpandSomeToRight
+      (
+         FakeExternalState externalState,
+         FakeLeft          whenNoneValue
+      )
       {
          var whenNone = FakeFunction<FakeExternalState, FakeLeft>.Create(whenNoneValue);
 
@@ -96,7 +126,10 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public new BooleanAsserts<TestTerminus> Equals(object? other)
+      public new BooleanAsserts<TestTerminus> Equals
+      (
+         object? other
+      )
       {
          var actual = _option.Equals(other);
 
@@ -145,7 +178,10 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public AndMapWasCalledAsserts Map(FakeNewType whenSomeValue)
+      public AndMapWasCalledAsserts Map
+      (
+         FakeNewType whenSomeValue
+      )
       {
          var whenSome = FakeFunction<FakeType, FakeNewType>.Create(whenSomeValue);
 
@@ -157,8 +193,11 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public AndMapWasCalledWithExternalStateAsserts Map(FakeExternalState externalState,
-                                                         FakeNewType       whenSomeValue)
+      public AndMapWasCalledWithExternalStateAsserts Map
+      (
+         FakeExternalState externalState,
+         FakeNewType       whenSomeValue
+      )
       {
          var whenSome = FakeFunction<FakeExternalState, FakeType, FakeNewType>.Create(whenSomeValue);
 
@@ -182,14 +221,17 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public AndUnifyWasCalledAsserts Unify(FakeNewType whenSomeValue,
-                                            FakeNewType whenNoneValue)
+      public AndUnifyWasCalledAsserts Unify
+      (
+         FakeNewType whenSomeValue,
+         FakeNewType whenNoneValue
+      )
       {
          var whenNone = FakeFunction<FakeNewType>.Create(whenNoneValue);
          var whenSome = FakeFunction<FakeType, FakeNewType>.Create(whenSomeValue);
 
          var returnValue = _option.Unify(whenSome.Func,
-                                          whenNone.Func);
+                                         whenNone.Func);
 
          return new(whenSome,
                     whenNone,
@@ -198,34 +240,24 @@ public static partial class TheOptionHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public AndUnifyWasCalledWithExternalStateAsserts Unify(FakeExternalState externalState,
-                                                             FakeNewType       whenSomeValue,
-                                                             FakeNewType       whenNoneValue)
+      public AndUnifyWasCalledWithExternalStateAsserts Unify
+      (
+         FakeExternalState externalState,
+         FakeNewType       whenSomeValue,
+         FakeNewType       whenNoneValue
+      )
       {
          var whenNone = FakeFunction<FakeExternalState, FakeNewType>.Create(whenNoneValue);
          var whenSome = FakeFunction<FakeExternalState, FakeType, FakeNewType>.Create(whenSomeValue);
 
          var returnValue = _option.Unify(externalState,
-                                          whenSome.Func,
-                                          whenNone.Func);
+                                         whenSome.Func,
+                                         whenNone.Func);
 
          return new(whenSome,
                     whenNone,
                     returnValue);
       }
-
-      /* ------------------------------------------------------------ */
-      //  Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal Act(IOption<FakeType> option)
-         => _option = option;
-
-      /* ------------------------------------------------------------ */
-      //  Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly IOption<FakeType> _option;
 
       /* ------------------------------------------------------------ */
    }

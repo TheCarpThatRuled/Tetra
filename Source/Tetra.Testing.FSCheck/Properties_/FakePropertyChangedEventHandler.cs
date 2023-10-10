@@ -9,9 +9,12 @@ partial class Properties
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Property WasFiredOnce(string                          description,
-                                       FakePropertyChangedEventHandler fakeEventHandler,
-                                       string                          expected)
+   public static Property WasFiredOnce
+   (
+      string                          description,
+      FakePropertyChangedEventHandler fakeEventHandler,
+      string                          expected
+   )
       => fakeEventHandler
         .Arguments()
         .Length()
@@ -27,16 +30,19 @@ partial class Properties
                : AreEqual(TheFakePropertyChangedEventHandlerWasFiredWithAnUnexpectedArgument(description),
                           expected,
                           fakeEventHandler.Arguments()[0]
-                                                  .PropertyName!);
+                                          .PropertyName!);
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasNotFired(string                          description,
-                                      FakePropertyChangedEventHandler fakeEventHandler)
+   public static Property WasNotFired
+   (
+      string                          description,
+      FakePropertyChangedEventHandler fakeEventHandler
+   )
       => AreEqual(TheFakePropertyChangedEventHandlerWasFiredWhenWeExpectedItNotToBe(description),
                   0,
                   fakeEventHandler.Arguments()
-                                   .Length());
+                                  .Length());
 
    /* ------------------------------------------------------------ */
 }

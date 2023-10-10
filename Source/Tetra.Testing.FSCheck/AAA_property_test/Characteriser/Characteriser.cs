@@ -8,6 +8,38 @@ partial class AAA_property_test<TState>
    public sealed class Characteriser
    {
       /* ------------------------------------------------------------ */
+      // Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly ISequence<string> _givenBriefCharacterisation;
+      private readonly ISequence<string> _givenFullCharacterisation;
+      private readonly ISequence<string> _thenBriefCharacterisation;
+      private readonly ISequence<string> _thenFullCharacterisation;
+      private readonly ISequence<string> _whenBriefCharacterisation;
+      private readonly ISequence<string> _whenFullCharacterisation;
+
+      /* ------------------------------------------------------------ */
+      // Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal Characteriser
+      (
+         ISequence<string> givenBriefCharacterisation,
+         ISequence<string> whenBriefCharacterisation,
+         ISequence<string> thenBriefCharacterisation,
+         ISequence<string> givenFullCharacterisation,
+         ISequence<string> whenFullCharacterisation,
+         ISequence<string> thenFullCharacterisation
+      )
+      {
+         _givenBriefCharacterisation = givenBriefCharacterisation;
+         _givenFullCharacterisation  = givenFullCharacterisation;
+         _whenBriefCharacterisation  = whenBriefCharacterisation;
+         _whenFullCharacterisation   = whenFullCharacterisation;
+         _thenBriefCharacterisation  = thenBriefCharacterisation;
+         _thenFullCharacterisation   = thenFullCharacterisation;
+      }
+      /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
@@ -134,36 +166,6 @@ partial class AAA_property_test<TState>
 
       public ISequence<string> ThenFullCharacterisation()
          => _thenFullCharacterisation;
-
-      /* ------------------------------------------------------------ */
-      // Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal Characteriser(ISequence<string> givenBriefCharacterisation,
-                             ISequence<string> whenBriefCharacterisation,
-                             ISequence<string> thenBriefCharacterisation,
-                             ISequence<string> givenFullCharacterisation,
-                             ISequence<string> whenFullCharacterisation,
-                             ISequence<string> thenFullCharacterisation)
-      {
-         _givenBriefCharacterisation = givenBriefCharacterisation;
-         _givenFullCharacterisation  = givenFullCharacterisation;
-         _whenBriefCharacterisation  = whenBriefCharacterisation;
-         _whenFullCharacterisation   = whenFullCharacterisation;
-         _thenBriefCharacterisation  = thenBriefCharacterisation;
-         _thenFullCharacterisation   = thenFullCharacterisation;
-      }
-
-      /* ------------------------------------------------------------ */
-      // Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly ISequence<string> _givenBriefCharacterisation;
-      private readonly ISequence<string> _givenFullCharacterisation;
-      private readonly ISequence<string> _whenBriefCharacterisation;
-      private readonly ISequence<string> _whenFullCharacterisation;
-      private readonly ISequence<string> _thenBriefCharacterisation;
-      private readonly ISequence<string> _thenFullCharacterisation;
 
       /* ------------------------------------------------------------ */
    }

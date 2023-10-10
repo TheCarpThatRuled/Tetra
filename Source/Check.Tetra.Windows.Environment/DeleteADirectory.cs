@@ -3,21 +3,6 @@
 internal class DeleteADirectory : IDisposable
 {
    /* ------------------------------------------------------------ */
-   // Factory Functions
-   /* ------------------------------------------------------------ */
-
-   public static DeleteADirectory Create(string directory)
-      => new(directory);
-
-   /* ------------------------------------------------------------ */
-   // IDisposable Methods
-   /* ------------------------------------------------------------ */
-
-   public void Dispose()
-      => ExternalFileSystem
-        .EnsureADirectoryDoesNotExists(_directory);
-
-   /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
@@ -27,8 +12,28 @@ internal class DeleteADirectory : IDisposable
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private DeleteADirectory(string directory)
+   private DeleteADirectory
+   (
+      string directory
+   )
       => _directory = directory;
+
+   /* ------------------------------------------------------------ */
+   // IDisposable Methods
+   /* ------------------------------------------------------------ */
+
+   public void Dispose()
+      => ExternalFileSystem
+        .EnsureADirectoryDoesNotExists(_directory);
+   /* ------------------------------------------------------------ */
+   // Factory Functions
+   /* ------------------------------------------------------------ */
+
+   public static DeleteADirectory Create
+   (
+      string directory
+   )
+      => new(directory);
 
    /* ------------------------------------------------------------ */
 }

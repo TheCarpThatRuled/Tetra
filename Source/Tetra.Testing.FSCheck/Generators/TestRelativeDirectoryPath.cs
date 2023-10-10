@@ -10,9 +10,8 @@ partial class Generators
 
    public static Gen<TestRelativeDirectoryPath> TestRelativeDirectoryPath()
       => NonEmptySequenceOf(DirectoryComponent())
-        .Select(Testing
-               .TestRelativeDirectoryPath
-               .Create);
+        .Select(Testing.TestRelativeDirectoryPath
+                       .Create);
 
    /* ------------------------------------------------------------ */
 }

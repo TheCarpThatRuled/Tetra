@@ -6,27 +6,96 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
                                 IEquatable<AbsoluteFilePath>
 {
    /* ------------------------------------------------------------ */
+   // Private Constants
+   /* ------------------------------------------------------------ */
+
+   private const string PathType = "absolute file path";
+
+   /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly ISequence<DirectoryComponent> _directories;
+   private readonly FileComponent                 _file;
+   private readonly string                        _value;
+   private readonly VolumeComponent               _volume;
+
+   /* ------------------------------------------------------------ */
+   // Protected Constructors
+   /* ------------------------------------------------------------ */
+
+   protected AbsoluteFilePath
+   (
+      ISequence<DirectoryComponent> directories,
+      FileComponent                 file,
+      VolumeComponent               volume
+   )
+   {
+      _directories = directories;
+      _file        = file;
+      _volume      = volume;
+
+      _value = PathBuilder.Combine(volume,
+                                   directories,
+                                   file);
+   }
+
+   /* ------------------------------------------------------------ */
+   // IComparable<AbsoluteFilePath> Methods
+   /* ------------------------------------------------------------ */
+
+   public int CompareTo
+   (
+      AbsoluteFilePath? other
+   )
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Compare(_value,
+                 other?._value);
+
+   /* ------------------------------------------------------------ */
+   // IEquatable<AbsoluteFilePath> Methods
+   /* ------------------------------------------------------------ */
+
+   public bool Equals
+   (
+      AbsoluteFilePath? other
+   )
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Equals(_value,
+                other?._value);
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteFilePath Create(string potentialPath)
+   public static AbsoluteFilePath Create
+   (
+      string potentialPath
+   )
       => ParseComponents(potentialPath,
                          PathType)
         .Unify(Create,
-                Exceptions.ThrowArgumentException<AbsoluteFilePath>(nameof(potentialPath)));
+               Exceptions.ThrowArgumentException<AbsoluteFilePath>(nameof(potentialPath)));
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteFilePath Create(VolumeComponent               volume,
-                                         ISequence<DirectoryComponent> directories,
-                                         FileComponent                 file)
+   public static AbsoluteFilePath Create
+   (
+      VolumeComponent               volume,
+      ISequence<DirectoryComponent> directories,
+      FileComponent                 file
+   )
       => new(directories,
              file,
              volume);
 
    /* ------------------------------------------------------------ */
 
-   public static IEither<AbsoluteFilePath, Message> Parse(string potentialPath)
+   public static IEither<AbsoluteFilePath, Message> Parse
+   (
+      string potentialPath
+   )
       => ParseComponents(potentialPath,
                          PathType)
         .Map(Create,
@@ -36,7 +105,10 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
    // object Overridden Methods
    /* ------------------------------------------------------------ */
 
-   public override bool Equals(object? obj)
+   public override bool Equals
+   (
+      object? obj
+   )
       => ReferenceEquals(this,
                          obj)
       || obj is AbsoluteFilePath path
@@ -53,26 +125,6 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
 
    public override string ToString()
       => $"<{_value}>";
-
-   /* ------------------------------------------------------------ */
-   // IComparable<AbsoluteFilePath> Methods
-   /* ------------------------------------------------------------ */
-
-   public int CompareTo(AbsoluteFilePath? other)
-      => StringComparer
-        .OrdinalIgnoreCase
-        .Compare(_value,
-                 other?._value);
-
-   /* ------------------------------------------------------------ */
-   // IEquatable<AbsoluteFilePath> Methods
-   /* ------------------------------------------------------------ */
-
-   public bool Equals(AbsoluteFilePath? other)
-      => StringComparer
-        .OrdinalIgnoreCase
-        .Equals(_value,
-                other?._value);
 
    /* ------------------------------------------------------------ */
    // Properties
@@ -99,34 +151,20 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
       => _volume;
 
    /* ------------------------------------------------------------ */
-   // Protected Constructors
-   /* ------------------------------------------------------------ */
-
-   protected AbsoluteFilePath(ISequence<DirectoryComponent> directories,
-                              FileComponent                           file,
-                              VolumeComponent                         volume)
-   {
-      _directories = directories;
-      _file        = file;
-      _volume      = volume;
-
-      _value = PathBuilder.Combine(volume,
-                                   directories,
-                                   file);
-   }
-
-   /* ------------------------------------------------------------ */
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static IEither<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message> ParseComponents(string potentialPath,
-      string                                                                                                                                         pathType)
+   protected static IEither<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message> ParseComponents
+   (
+      string potentialPath,
+      string pathType
+   )
    {
       if (string.IsNullOrEmpty(potentialPath))
       {
          return Either<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message>
            .Right(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotBeEmpty(potentialPath,
-                                                                                pathType)));
+                                                                              pathType)));
       }
 
       var components = potentialPath
@@ -140,7 +178,7 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
       {
          return Either<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message>
            .Right(Message.Create(IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(potentialPath,
-                                                                                            pathType)));
+                                                                                          pathType)));
       }
 
       var potentialComponents = components
@@ -152,44 +190,32 @@ public class AbsoluteFilePath : IComparable<AbsoluteFilePath>,
       {
          return Either<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message>
            .Right(Message.Create(IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(potentialPath,
-                                                                                             pathType)));
+                                                                                           pathType)));
       }
 
       if (string.IsNullOrEmpty(components[^1]))
       {
          return Either<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message>
            .Right(Message.Create(IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(potentialPath,
-                                                                                                       pathType)));
+                                                                                                     pathType)));
       }
 
       return Either<(VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file), Message>
         .Left((VolumeComponent.Create(potentialVolume[0]),
-                  potentialComponents.SkipLast(1)
-                                     .Select(DirectoryComponent.Create)
-                                     .Materialise(),
-                  FileComponent.Create(components[^1])));
+               potentialComponents.SkipLast(1)
+                                  .Select(DirectoryComponent.Create)
+                                  .Materialise(),
+               FileComponent.Create(components[^1])));
    }
-
-   /* ------------------------------------------------------------ */
-   // Private Constants
-   /* ------------------------------------------------------------ */
-
-   private const string PathType = "absolute file path";
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly ISequence<DirectoryComponent> _directories;
-   private readonly FileComponent                 _file;
-   private readonly string                        _value;
-   private readonly VolumeComponent               _volume;
 
    /* ------------------------------------------------------------ */
    // Private Factory Functions
    /* ------------------------------------------------------------ */
 
-   private static AbsoluteFilePath Create((VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file) success)
+   private static AbsoluteFilePath Create
+   (
+      (VolumeComponent volume, ISequence<DirectoryComponent> directories, FileComponent file) success
+   )
       => new(success.directories,
              success.file,
              success.volume);

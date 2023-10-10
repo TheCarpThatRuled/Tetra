@@ -9,16 +9,6 @@ partial class The_UI_creates_a_button
    public sealed class DefineVisibility
    {
       /* ------------------------------------------------------------ */
-      // Factory Functions
-      /* ------------------------------------------------------------ */
-
-      public The_UI_creates_a_button Visibility_is(Visibility visibility)
-         => new($"({_isEnabled}, {visibility})",
-                $"{{{Environment.NewLine}IsEnabled: {_isEnabled}{Environment.NewLine}Visibility: {visibility}{Environment.NewLine}}}",
-                _isEnabled,
-                visibility);
-
-      /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
@@ -28,8 +18,23 @@ partial class The_UI_creates_a_button
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal DefineVisibility(bool isEnabled)
+      internal DefineVisibility
+      (
+         bool isEnabled
+      )
          => _isEnabled = isEnabled;
+      /* ------------------------------------------------------------ */
+      // Factory Functions
+      /* ------------------------------------------------------------ */
+
+      public The_UI_creates_a_button Visibility_is
+      (
+         Visibility visibility
+      )
+         => new($"({_isEnabled}, {visibility})",
+                $"{{{Environment.NewLine}IsEnabled: {_isEnabled}{Environment.NewLine}Visibility: {visibility}{Environment.NewLine}}}",
+                _isEnabled,
+                visibility);
 
       /* ------------------------------------------------------------ */
    }

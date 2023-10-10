@@ -7,19 +7,10 @@ public abstract class AAATestDataSource : Attribute,
                                           ITestDataSource
 {
    /* ------------------------------------------------------------ */
-   // ITestDataSource Methods
+   // Private Fields
    /* ------------------------------------------------------------ */
 
-   public IEnumerable<object?[]> GetData(MethodInfo _)
-      => _tests
-        .Value;
-
-   /* ------------------------------------------------------------ */
-
-   public string? GetDisplayName(MethodInfo _,
-                                 object?[]? data)
-      => (data!.First() as AAA_test)
-       ?.BriefCharacterisation();
+   private readonly Lazy<ISequence<object?[]>> _tests;
 
    /* ------------------------------------------------------------ */
    // Protected Constructors
@@ -29,18 +20,32 @@ public abstract class AAATestDataSource : Attribute,
       => _tests = new(() => GetTests()
                            .Select(test => new[] {test,})
                            .Materialise());
+   /* ------------------------------------------------------------ */
+   // ITestDataSource Methods
+   /* ------------------------------------------------------------ */
+
+   public IEnumerable<object?[]> GetData
+   (
+      MethodInfo _
+   )
+      => _tests
+        .Value;
+
+   /* ------------------------------------------------------------ */
+
+   public string? GetDisplayName
+   (
+      MethodInfo _,
+      object?[]? data
+   )
+      => (data!.First() as AAA_test)
+       ?.BriefCharacterisation();
 
    /* ------------------------------------------------------------ */
    // Protected Methods
    /* ------------------------------------------------------------ */
 
    protected abstract IEnumerable<AAA_test> GetTests();
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly Lazy<ISequence<object?[]>> _tests;
 
    /* ------------------------------------------------------------ */
 }

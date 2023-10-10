@@ -1,5 +1,6 @@
 ﻿using Check.Check_Button;
 using static Check.Data;
+
 // ReSharper disable InconsistentNaming
 
 namespace Check.Button.GIVEN_the_UI_has_created_the_button;
@@ -13,7 +14,10 @@ public class WHEN_the_system_updates_IsEnabled : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_system_updates_IsEnabled]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       Log.ToStandardOutput(test.FullCharacterisation());
 

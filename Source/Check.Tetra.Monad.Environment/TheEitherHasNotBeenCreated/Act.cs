@@ -8,10 +8,18 @@ public static partial class TheEitherHasNotBeenCreated
    public sealed class Act : IActs
    {
       /* ------------------------------------------------------------ */
+      //  Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal Act() { }
+      /* ------------------------------------------------------------ */
       //  Methods
       /* ------------------------------------------------------------ */
 
-      public EitherAsserts<FakeLeft, FakeRight, TestTerminus> CallEitherRight(FakeRight? content)
+      public EitherAsserts<FakeLeft, FakeRight, TestTerminus> CallEitherRight
+      (
+         FakeRight? content
+      )
       {
          var actual = Either<FakeLeft, FakeRight>.Right(content!);
 
@@ -22,7 +30,10 @@ public static partial class TheEitherHasNotBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public EitherAsserts<FakeLeft, FakeRight, TestTerminus> CallEitherLeft(FakeLeft? content)
+      public EitherAsserts<FakeLeft, FakeRight, TestTerminus> CallEitherLeft
+      (
+         FakeLeft? content
+      )
       {
          var actual = Either<FakeLeft, FakeRight>.Left(content!);
 
@@ -30,12 +41,6 @@ public static partial class TheEitherHasNotBeenCreated
                                                                         actual,
                                                                         TestTerminus.Create);
       }
-
-      /* ------------------------------------------------------------ */
-      //  Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal Act() { }
 
       /* ------------------------------------------------------------ */
    }

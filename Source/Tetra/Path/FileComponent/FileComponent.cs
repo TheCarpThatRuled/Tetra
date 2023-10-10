@@ -6,19 +6,72 @@ public class FileComponent : IComparable<FileComponent>,
                              IEquatable<FileComponent>
 {
    /* ------------------------------------------------------------ */
+   // Private Constants
+   /* ------------------------------------------------------------ */
+
+   private const string ComponentType = "file component";
+
+   /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly string _value;
+
+   /* ------------------------------------------------------------ */
+   // Protected Constructors
+   /* ------------------------------------------------------------ */
+
+   protected FileComponent
+   (
+      string value
+   )
+      => _value = value;
+
+   /* ------------------------------------------------------------ */
+   // IComparable<FileComponent> Methods
+   /* ------------------------------------------------------------ */
+
+   public int CompareTo
+   (
+      FileComponent? other
+   )
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Compare(_value,
+                 other?._value);
+
+   /* ------------------------------------------------------------ */
+   // IEquatable<FileComponent> Methods
+   /* ------------------------------------------------------------ */
+
+   public bool Equals
+   (
+      FileComponent? other
+   )
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Equals(_value,
+                other?._value);
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static FileComponent Create(string potentialComponent)
+   public static FileComponent Create
+   (
+      string potentialComponent
+   )
       => Validate(potentialComponent,
                   ComponentType)
         .Unify<FileComponent>(message => throw new ArgumentException(message.Content(),
-                                                                      nameof(potentialComponent)),
-                               () => new(potentialComponent));
+                                                                     nameof(potentialComponent)),
+                              () => new(potentialComponent));
 
    /* ------------------------------------------------------------ */
 
-   public static IEither<FileComponent, Message> Parse(string potentialComponent)
+   public static IEither<FileComponent, Message> Parse
+   (
+      string potentialComponent
+   )
       => Validate(potentialComponent,
                   ComponentType)
         .ExpandSomeToRight(() => new FileComponent(potentialComponent));
@@ -27,7 +80,10 @@ public class FileComponent : IComparable<FileComponent>,
    // object Overridden Methods
    /* ------------------------------------------------------------ */
 
-   public override bool Equals(object? obj)
+   public override bool Equals
+   (
+      object? obj
+   )
       => ReferenceEquals(this,
                          obj)
       || obj is FileComponent fileComponent
@@ -46,26 +102,6 @@ public class FileComponent : IComparable<FileComponent>,
       => $"<{_value}>";
 
    /* ------------------------------------------------------------ */
-   // IComparable<FileComponent> Methods
-   /* ------------------------------------------------------------ */
-
-   public int CompareTo(FileComponent? other)
-      => StringComparer
-        .OrdinalIgnoreCase
-        .Compare(_value,
-                 other?._value);
-
-   /* ------------------------------------------------------------ */
-   // IEquatable<FileComponent> Methods
-   /* ------------------------------------------------------------ */
-
-   public bool Equals(FileComponent? other)
-      => StringComparer
-        .OrdinalIgnoreCase
-        .Equals(_value,
-                other?._value);
-
-   /* ------------------------------------------------------------ */
    // Properties
    /* ------------------------------------------------------------ */
 
@@ -73,34 +109,18 @@ public class FileComponent : IComparable<FileComponent>,
       => _value;
 
    /* ------------------------------------------------------------ */
-   // Protected Constructors
-   /* ------------------------------------------------------------ */
-
-   protected FileComponent(string value)
-      => _value = value;
-
-   /* ------------------------------------------------------------ */
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static IOption<Message> Validate(string potentialComponent,
-                                   string componentType)
+   protected static IOption<Message> Validate
+   (
+      string potentialComponent,
+      string componentType
+   )
       => potentialComponent.IsNotAValidPathComponent()
             ? Option.Some(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(potentialComponent,
-                                                                                              componentType)))
+                                                                                               componentType)))
             : Option<Message>.None();
-
-   /* ------------------------------------------------------------ */
-   // Private Constants
-   /* ------------------------------------------------------------ */
-
-   private const string ComponentType = "file component";
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly string _value;
 
    /* ------------------------------------------------------------ */
 }

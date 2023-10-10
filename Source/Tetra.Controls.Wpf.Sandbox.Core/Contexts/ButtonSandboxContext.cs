@@ -4,6 +4,36 @@ public sealed class ButtonSandboxContext : DataContext,
                                            ISandboxContext
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly TwoWayBinding<bool>   _isEnabled;
+   private readonly OneWayBinding<string> _message;
+   private readonly TwoWayBinding<int>    _selectedVisibilities;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private ButtonSandboxContext
+   (
+      ButtonSandbox model
+   )
+   {
+      Visibilities = model.Visibilities();
+
+      Button = ButtonContext.Create(model.Button());
+
+      _isEnabled = Bind(nameof(IsEnabled),
+                        model.IsEnabled());
+
+      _message = Bind(nameof(Message),
+                      model.Message());
+
+      _selectedVisibilities = Bind(nameof(SelectedVisibility),
+                                   model.VisibilitiesSelectedIndex());
+   }
+   /* ------------------------------------------------------------ */
    // Bindings
    /* ------------------------------------------------------------ */
 
@@ -39,37 +69,11 @@ public sealed class ButtonSandboxContext : DataContext,
    // Internal Factory Functions
    /* ------------------------------------------------------------ */
 
-   internal static ButtonSandboxContext Create(ButtonSandbox model)
+   internal static ButtonSandboxContext Create
+   (
+      ButtonSandbox model
+   )
       => new(model);
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly TwoWayBinding<bool>   _isEnabled;
-   private readonly OneWayBinding<string> _message;
-   private readonly TwoWayBinding<int>    _selectedVisibilities;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private ButtonSandboxContext(ButtonSandbox model)
-   {
-      Visibilities = model.Visibilities();
-
-      Button = ButtonContext.Create(model.Button());
-
-      _isEnabled = Bind(nameof(IsEnabled),
-                        model.IsEnabled());
-
-      _message = Bind(nameof(Message),
-                      model.Message());
-
-      _selectedVisibilities = Bind(nameof(SelectedVisibility),
-                                   model.VisibilitiesSelectedIndex());
-
-   }
 
    /* ------------------------------------------------------------ */
 }

@@ -10,10 +10,13 @@ partial class Assert_Extensions
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Assert WasInvokedOnce<T, TReturn>(this Assert              assert,
-                                                   string                   description,
-                                                   T                        expected,
-                                                   FakeFunction<T, TReturn> function)
+   public static Assert WasInvokedOnce<T, TReturn>
+   (
+      this Assert              assert,
+      string                   description,
+      T                        expected,
+      FakeFunction<T, TReturn> function
+   )
    {
       if (function
          .Invocations()
@@ -51,9 +54,12 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert WasNotInvoked<T, TReturn>(this Assert              assert,
-                                                  string                   description,
-                                                  FakeFunction<T, TReturn> function)
+   public static Assert WasNotInvoked<T, TReturn>
+   (
+      this Assert              assert,
+      string                   description,
+      FakeFunction<T, TReturn> function
+   )
    {
       if (function
          .Invocations()

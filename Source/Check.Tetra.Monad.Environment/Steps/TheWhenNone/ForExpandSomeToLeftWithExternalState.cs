@@ -13,7 +13,10 @@ partial class Steps
          /* ------------------------------------------------------------ */
 
          public IAssert<TheOptionHasBeenCreated.AndExpandSomeToLeftWasCalledWithExternalStateAsserts,
-            TheOptionHasBeenCreated.AndExpandSomeToLeftWasCalledWithExternalStateAsserts> was_invoked_once_with(FakeExternalState externalState)
+               TheOptionHasBeenCreated.AndExpandSomeToLeftWasCalledWithExternalStateAsserts> was_invoked_once_with
+            (
+               FakeExternalState externalState
+            )
             => the_whenNone.function
                            .was_invoked_once_with<FakeExternalState, FakeRight, TheOptionHasBeenCreated.AndExpandSomeToLeftWasCalledWithExternalStateAsserts>(externalState);
 

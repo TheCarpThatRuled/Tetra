@@ -2,13 +2,32 @@
 
 namespace Tetra;
 
-internal sealed class Count<T> where T : INumber<T>
+internal sealed class Count<T>
+   where T : INumber<T>
 {
+   /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private T _value;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private Count
+   (
+      T initialCount
+   )
+      => _value = initialCount;
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static Count<T> Create(T initialCount)
+   public static Count<T> Create
+   (
+      T initialCount
+   )
       => new(initialCount);
 
    /* ------------------------------------------------------------ */
@@ -42,19 +61,6 @@ internal sealed class Count<T> where T : INumber<T>
 
       return this;
    }
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private T _value;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private Count(T initialCount)
-      => _value = initialCount;
 
    /* ------------------------------------------------------------ */
 }

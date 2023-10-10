@@ -26,8 +26,11 @@ public class Missing_Do
    public void
       GIVEN_Missing_of_TestStruct_WHEN_Do_THEN_whenMissing_was_invoked_once_with_the_content_AND_whenLocked_was_not_invoked_AND_whenOpen_was_not_invoked_AND_this_is_returned()
    {
-      static Property Property(AbsoluteFilePath path,
-                               Message          message)
+      static Property Property
+      (
+         AbsoluteFilePath path,
+         Message          message
+      )
       {
          //Arrange
          var whenLocked  = FakeAction<Locked>.Create();

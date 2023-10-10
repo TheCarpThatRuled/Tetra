@@ -9,6 +9,16 @@ public sealed class FakeNewRight
    public readonly string Characterisation;
 
    /* ------------------------------------------------------------ */
+   //  Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private FakeNewRight
+   (
+      string characterisation
+   )
+      => Characterisation = characterisation;
+
+   /* ------------------------------------------------------------ */
    //  object Overridden Methods
    /* ------------------------------------------------------------ */
 
@@ -19,15 +29,11 @@ public sealed class FakeNewRight
    //  Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static FakeNewRight Create(string characterisation)
+   public static FakeNewRight Create
+   (
+      string characterisation
+   )
       => new(characterisation);
-
-   /* ------------------------------------------------------------ */
-   //  Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private FakeNewRight(string characterisation)
-      => Characterisation = characterisation;
 
    /* ------------------------------------------------------------ */
 }

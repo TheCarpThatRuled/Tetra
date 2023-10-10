@@ -19,8 +19,10 @@ partial class Steps
 
             /* ------------------------------------------------------------ */
 
-            public IAssert<TheOptionHasBeenCreated.AndMapWasCalledWithExternalStateAsserts, TheOptionHasBeenCreated.AndMapWasCalledWithExternalStateAsserts> is_a_some_containing(
-               FakeNewType expected)
+            public IAssert<TheOptionHasBeenCreated.AndMapWasCalledWithExternalStateAsserts, TheOptionHasBeenCreated.AndMapWasCalledWithExternalStateAsserts> is_a_some_containing
+            (
+               FakeNewType expected
+            )
                => the_return_value.is_a_some_containing<FakeNewType, TheOptionHasBeenCreated.AndMapWasCalledWithExternalStateAsserts>(expected);
 
             /* ------------------------------------------------------------ */

@@ -24,7 +24,10 @@ public class CompareTo
    [TestMethod]
    public void GIVEN_Volume_AND_other_is_null_WHEN_CompareTo_THEN_one_is_returned()
    {
-      static Property Property(VolumeComponent volume)
+      static Property Property
+      (
+         VolumeComponent volume
+      )
       {
          //Arrange
          //Act
@@ -54,7 +57,10 @@ public class CompareTo
    [TestMethod]
    public void GIVEN_Volume_AND_other_contains_a_letter_that_is_equal_ignoring_case_WHEN_CompareTo_THEN_zero_is_returned()
    {
-      static Property Property((char first, char second) args)
+      static Property Property
+      (
+         (char first, char second) args
+      )
       {
          //Arrange
          var firstVolume  = VolumeComponent.Create(args.first);
@@ -87,7 +93,10 @@ public class CompareTo
    [TestMethod]
    public void GIVEN_Volume_AND_other_contains_a_letter_that_is_greater_than_ignoring_case_WHEN_CompareTo_THEN_the_difference_between_the_letters_ignoring_case_is_returned()
    {
-      static Property Property((char first, char second) args)
+      static Property Property
+      (
+         (char first, char second) args
+      )
       {
          //Arrange
          var firstVolume  = VolumeComponent.Create(args.first);
@@ -120,7 +129,10 @@ public class CompareTo
    [TestMethod]
    public void GIVEN_Volume_AND_other_contains_a_letter_that_is_less_than_ignoring_case_WHEN_CompareTo_THEN_the_difference_between_the_letters_ignoring_case_is_returned()
    {
-      static Property Property((char first, char second) args)
+      static Property Property
+      (
+         (char first, char second) args
+      )
       {
          //Arrange
          var firstVolume  = VolumeComponent.Create(args.first);

@@ -6,9 +6,30 @@ namespace Check;
 public static partial class TheOptionHasBeenCreated
 {
    public sealed class AndExpandSomeToRightWasCalledWithExternalStateAsserts : IAsserts,
-                                 IReturnsAnEitherAsserts<FakeLeft, FakeType, AndExpandSomeToRightWasCalledWithExternalStateAsserts>,
-                                 IWhenNoneFuncAsserts<FakeExternalState, FakeLeft, AndExpandSomeToRightWasCalledWithExternalStateAsserts>
+                                                                               IReturnsAnEitherAsserts<FakeLeft, FakeType, AndExpandSomeToRightWasCalledWithExternalStateAsserts>,
+                                                                               IWhenNoneFuncAsserts<FakeExternalState, FakeLeft,
+                                                                                  AndExpandSomeToRightWasCalledWithExternalStateAsserts>
    {
+      /* ------------------------------------------------------------ */
+      //  Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly IEither<FakeLeft, FakeType>               _returnValue;
+      private readonly FakeFunction<FakeExternalState, FakeLeft> _whenNone;
+
+      /* ------------------------------------------------------------ */
+      //  Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal AndExpandSomeToRightWasCalledWithExternalStateAsserts
+      (
+         FakeFunction<FakeExternalState, FakeLeft> whenNone,
+         IEither<FakeLeft, FakeType>               returnValue
+      )
+      {
+         _returnValue = returnValue;
+         _whenNone    = whenNone;
+      }
       /* ------------------------------------------------------------ */
       //  IReturnsAnEitherAsserts<FakeLeft, FakeType, Asserts> Methods
       /* ------------------------------------------------------------ */
@@ -28,24 +49,6 @@ public static partial class TheOptionHasBeenCreated
            .Create("whenNone",
                    _whenNone,
                    () => this);
-
-      /* ------------------------------------------------------------ */
-      //  Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal AndExpandSomeToRightWasCalledWithExternalStateAsserts(FakeFunction<FakeExternalState, FakeLeft> whenNone,
-                       IEither<FakeLeft, FakeType>               returnValue)
-      {
-         _returnValue = returnValue;
-         _whenNone    = whenNone;
-      }
-
-      /* ------------------------------------------------------------ */
-      //  Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly IEither<FakeLeft, FakeType>               _returnValue;
-      private readonly FakeFunction<FakeExternalState, FakeLeft> _whenNone;
 
       /* ------------------------------------------------------------ */
    }

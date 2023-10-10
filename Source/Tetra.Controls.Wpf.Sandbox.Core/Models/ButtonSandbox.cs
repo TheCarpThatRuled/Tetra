@@ -2,6 +2,55 @@
 
 internal sealed class ButtonSandbox
 {
+   private readonly Button                     _button;
+   private readonly ITwoWayBinding<Visibility> _buttonVisibility;
+
+   private readonly Count<int>             _count = Count<int>.FromZero();
+   private readonly ITwoWayBinding<bool>   _isEnabled;
+   private readonly ITwoWayBinding<string> _message;
+
+   /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly ISequence<string> _visibilities = Sequence.From(Visibility.Visible.ToHumanReadable(),
+                                                                    Visibility.Collapsed.ToHumanReadable(),
+                                                                    Visibility.Hidden.ToHumanReadable());
+
+   private readonly ITwoWayBinding<int> _visibilitiesSelectedIndex;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private ButtonSandbox()
+   {
+      var buttonIsEnabled = Bind.To(true);
+      _buttonVisibility = Bind.To(Visibility.Visible);
+
+      _button = Tetra.Button
+                     .Factory()
+                     .OnClick(OnClick)
+                     .IsEnabled(buttonIsEnabled)
+                     .Visibility(_buttonVisibility);
+
+      _isEnabled = Bind
+                  .To(buttonIsEnabled.Pull())
+                  .OnOuterPush(buttonIsEnabled.Push);
+
+      _visibilitiesSelectedIndex = Bind
+                                  .To(_visibilities
+                                     .WithIndices()
+                                     .First(x => x
+                                                .item
+                                                .Equals(_buttonVisibility
+                                                       .Pull()
+                                                       .ToHumanReadable()))
+                                     .index)
+                                  .OnOuterPush(UpdateVisibility);
+
+      _message = Bind.To(CreateMessage(_count));
+   }
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
@@ -37,56 +86,6 @@ internal sealed class ButtonSandbox
       => _visibilitiesSelectedIndex;
 
    /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly ISequence<string> _visibilities = Sequence.From(Visibility.Visible.ToHumanReadable(),
-                                                                    Visibility.Collapsed.ToHumanReadable(),
-                                                                    Visibility.Hidden.ToHumanReadable());
-
-   private readonly Count<int> _count = Count<int>.FromZero();
-
-   private readonly Button                     _button;
-   private readonly ITwoWayBinding<Visibility> _buttonVisibility;
-   private readonly ITwoWayBinding<bool>       _isEnabled;
-   private readonly ITwoWayBinding<string>     _message;
-   private readonly ITwoWayBinding<int>        _visibilitiesSelectedIndex;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private ButtonSandbox()
-   {
-      var buttonIsEnabled = Bind.To(true);
-      _buttonVisibility = Bind.To(Visibility.Visible);
-
-      _button = Tetra
-               .Button
-               .Factory()
-               .OnClick(OnClick)
-               .IsEnabled(buttonIsEnabled)
-               .Visibility(_buttonVisibility);
-
-      _isEnabled = Bind
-                  .To(buttonIsEnabled.Pull())
-                  .OnOuterPush(buttonIsEnabled.Push);
-
-      _visibilitiesSelectedIndex = Bind
-                                  .To(_visibilities
-                                     .WithIndices()
-                                     .First(x => x
-                                                .item
-                                                .Equals(_buttonVisibility
-                                                       .Pull()
-                                                       .ToHumanReadable()))
-                                     .index)
-                                  .OnOuterPush(UpdateVisibility);
-
-      _message = Bind.To(CreateMessage(_count));
-   }
-
-   /* ------------------------------------------------------------ */
    // Private Methods
    /* ------------------------------------------------------------ */
 
@@ -99,7 +98,10 @@ internal sealed class ButtonSandbox
 
    /* ------------------------------------------------------------ */
 
-   private void UpdateVisibility(int index)
+   private void UpdateVisibility
+   (
+      int index
+   )
    {
       _buttonVisibility.Push(_visibilities[index]
                                .HumanReadableToTetraVisibility());
@@ -109,7 +111,10 @@ internal sealed class ButtonSandbox
    // Private Functions
    /* ------------------------------------------------------------ */
 
-   private static string CreateMessage(Count<int> count)
+   private static string CreateMessage
+   (
+      Count<int> count
+   )
       => $@"The button has been clicked {count.Value()} time(s)";
 
    /* ------------------------------------------------------------ */

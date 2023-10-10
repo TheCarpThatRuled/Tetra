@@ -25,8 +25,11 @@ public class Pull
    [TestMethod]
    public void GIVEN_a_TwoWayBinding_of_int_has_been_created_WHEN_Pull_THEN_initialValue_is_returned()
    {
-      static Property Property(string propertyName,
-                               int    initialValue)
+      static Property Property
+      (
+         string propertyName,
+         int    initialValue
+      )
       {
          //Arrange
          var binding     = Bind.To(initialValue);
@@ -62,8 +65,11 @@ public class Pull
    [TestMethod]
    public void GIVEN_a_TwoWayBinding_of_TestClass_has_been_created_WHEN_Pull_THEN_initialValue_is_returned()
    {
-      static Property Property(string    propertyName,
-                               TestClass initialValue)
+      static Property Property
+      (
+         string    propertyName,
+         TestClass initialValue
+      )
       {
          //Arrange
          var binding     = Bind.To(initialValue);
@@ -100,8 +106,11 @@ public class Pull
    [TestMethod]
    public void GIVEN_a_TwoWayBinding_of_TestStruct_has_been_created_WHEN_Pull_THEN_initialValue_is_returned()
    {
-      static Property Property(string     propertyName,
-                               TestStruct initialValue)
+      static Property Property
+      (
+         string     propertyName,
+         TestStruct initialValue
+      )
       {
          //Arrange
          var binding     = Bind.To(initialValue);

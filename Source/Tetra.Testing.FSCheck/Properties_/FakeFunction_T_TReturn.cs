@@ -9,9 +9,12 @@ partial class Properties
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<T, TReturn>(string                   description,
-                                                     T                        expected,
-                                                     FakeFunction<T, TReturn> function)
+   public static Property WasInvokedOnce<T, TReturn>
+   (
+      string                   description,
+      T                        expected,
+      FakeFunction<T, TReturn> function
+   )
       => WasInvokedOnce(description,
                         actual => Equals(expected,
                                          actual),
@@ -20,9 +23,12 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<TReturn>(string                         description,
-                                                  Message                        expected,
-                                                  FakeFunction<Message, TReturn> function)
+   public static Property WasInvokedOnce<TReturn>
+   (
+      string                         description,
+      Message                        expected,
+      FakeFunction<Message, TReturn> function
+   )
       => WasInvokedOnce(description,
                         actual => Equals(expected,
                                          actual),
@@ -31,24 +37,13 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<TReturn>(string                        description,
-                                                  AbsoluteFilePath              expectedPath,
-                                                  Message                       expectedMessage,
-                                                  FakeFunction<Locked, TReturn> function)
-      => WasInvokedOnce(description,
-                        actual => Equals(expectedPath,
-                                           actual.Path())
-                          && Equals(    expectedMessage,
-                                        actual.Message()),
-                        $"(Path: {expectedPath}, Message: {expectedMessage})",
-                        function);
-
-   /* ------------------------------------------------------------ */
-
-   public static Property WasInvokedOnce<TReturn>(string                        description,
-                                                  AbsoluteFilePath              expectedPath,
-                                                  Message                       expectedMessage,
-                                                  FakeFunction<Missing, TReturn> function)
+   public static Property WasInvokedOnce<TReturn>
+   (
+      string                        description,
+      AbsoluteFilePath              expectedPath,
+      Message                       expectedMessage,
+      FakeFunction<Locked, TReturn> function
+   )
       => WasInvokedOnce(description,
                         actual => Equals(expectedPath,
                                          actual.Path())
@@ -59,10 +54,30 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<T, TReturn>(string                   description,
-                                                     Func<T, bool>            property,
-                                                     string                   expectedString,
-                                                     FakeFunction<T, TReturn> function)
+   public static Property WasInvokedOnce<TReturn>
+   (
+      string                         description,
+      AbsoluteFilePath               expectedPath,
+      Message                        expectedMessage,
+      FakeFunction<Missing, TReturn> function
+   )
+      => WasInvokedOnce(description,
+                        actual => Equals(expectedPath,
+                                         actual.Path())
+                               && Equals(expectedMessage,
+                                         actual.Message()),
+                        $"(Path: {expectedPath}, Message: {expectedMessage})",
+                        function);
+
+   /* ------------------------------------------------------------ */
+
+   public static Property WasInvokedOnce<T, TReturn>
+   (
+      string                   description,
+      Func<T, bool>            property,
+      string                   expectedString,
+      FakeFunction<T, TReturn> function
+   )
       => function.Invocations()
                  .Count
       == 0
@@ -84,8 +99,11 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasNotInvoked<T, TReturn>(string                   description,
-                                                    FakeFunction<T, TReturn> function)
+   public static Property WasNotInvoked<T, TReturn>
+   (
+      string                   description,
+      FakeFunction<T, TReturn> function
+   )
       => AsProperty(() => function
                          .Invocations()
                          .Count

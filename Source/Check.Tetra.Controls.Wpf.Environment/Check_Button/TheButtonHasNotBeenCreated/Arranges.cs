@@ -10,10 +10,18 @@ public sealed partial class TheButtonHasNotBeenCreated
    public sealed class Arranges : IArranges
    {
       /* ------------------------------------------------------------ */
+      // Private Constructors
+      /* ------------------------------------------------------------ */
+
+      private Arranges() { }
+      /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public TheButtonHasBeenCreated.Arranges The_UI_creates_the_button(The_UI_creates_a_button args)
+      public TheButtonHasBeenCreated.Arranges The_UI_creates_the_button
+      (
+         The_UI_creates_a_button args
+      )
       {
          var system = FakeSystem.Create(args);
          return new(FakeButton.Create(ButtonContext.Create(Button
@@ -35,14 +43,11 @@ public sealed partial class TheButtonHasNotBeenCreated
       // Internal Factory Functions
       /* ------------------------------------------------------------ */
 
-      internal static Arranges Create(AAA_test.Disposables _)
+      internal static Arranges Create
+      (
+         AAA_test.Disposables _
+      )
          => new();
-
-      /* ------------------------------------------------------------ */
-      // Private Constructors
-      /* ------------------------------------------------------------ */
-
-      private Arranges() { }
 
       /* ------------------------------------------------------------ */
    }

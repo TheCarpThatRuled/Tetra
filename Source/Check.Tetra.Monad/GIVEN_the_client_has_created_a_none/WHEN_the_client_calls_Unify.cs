@@ -16,7 +16,10 @@ public class WHEN_the_client_calls_Unify : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_client_calls_Unify]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       using var given = test.Create();
       var       when  = given.Arrange();

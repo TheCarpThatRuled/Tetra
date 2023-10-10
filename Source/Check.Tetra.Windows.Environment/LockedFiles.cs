@@ -5,11 +5,16 @@ namespace Check;
 internal class LockedFiles : IDisposable
 {
    /* ------------------------------------------------------------ */
-   // Factory Functions
+   // Private Fields
    /* ------------------------------------------------------------ */
 
-   public static LockedFiles Create()
-      => new();
+   private readonly Dictionary<CaseInsensitiveString, Stream> _lockedFiles = new();
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private LockedFiles() { }
 
    /* ------------------------------------------------------------ */
    // IDisposable Methods
@@ -22,12 +27,21 @@ internal class LockedFiles : IDisposable
          file.Dispose();
       }
    }
+   /* ------------------------------------------------------------ */
+   // Factory Functions
+   /* ------------------------------------------------------------ */
+
+   public static LockedFiles Create()
+      => new();
 
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
-   public void LockFile(string file)
+   public void LockFile
+   (
+      string file
+   )
    {
       var caseInsensitiveFile = CaseInsensitiveString.Create(file);
 
@@ -42,7 +56,10 @@ internal class LockedFiles : IDisposable
 
    /* ------------------------------------------------------------ */
 
-   public void UnlockFile(string file)
+   public void UnlockFile
+   (
+      string file
+   )
    {
       var caseInsensitiveFile = CaseInsensitiveString.Create(file);
 
@@ -51,21 +68,10 @@ internal class LockedFiles : IDisposable
          throw Failed.InTestSetup($"The file {file} is not locked");
       }
 
-      _lockedFiles[caseInsensitiveFile].Dispose();
+      _lockedFiles[caseInsensitiveFile]
+        .Dispose();
       _lockedFiles.Remove(caseInsensitiveFile);
    }
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly Dictionary<CaseInsensitiveString, Stream> _lockedFiles = new();
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private LockedFiles() { }
 
    /* ------------------------------------------------------------ */
    // Private Classes
@@ -73,28 +79,6 @@ internal class LockedFiles : IDisposable
 
    private class CaseInsensitiveString
    {
-      /* ------------------------------------------------------------ */
-      // Factory Functions
-      /* ------------------------------------------------------------ */
-
-      public static CaseInsensitiveString Create(string value)
-         => new(value);
-
-      /* ------------------------------------------------------------ */
-      // object Overridden Methods
-      /* ------------------------------------------------------------ */
-
-      public override bool Equals(object? obj)
-         => obj is string s
-         && _value.Equals(s,
-                          StringComparison.OrdinalIgnoreCase);
-
-      /* ------------------------------------------------------------ */
-
-      public override int GetHashCode()
-         => _value
-           .GetHashCode(StringComparison.OrdinalIgnoreCase);
-
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
@@ -105,8 +89,38 @@ internal class LockedFiles : IDisposable
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private CaseInsensitiveString(string value)
+      private CaseInsensitiveString
+      (
+         string value
+      )
          => _value = value;
+      /* ------------------------------------------------------------ */
+      // Factory Functions
+      /* ------------------------------------------------------------ */
+
+      public static CaseInsensitiveString Create
+      (
+         string value
+      )
+         => new(value);
+
+      /* ------------------------------------------------------------ */
+      // object Overridden Methods
+      /* ------------------------------------------------------------ */
+
+      public override bool Equals
+      (
+         object? obj
+      )
+         => obj is string s
+         && _value.Equals(s,
+                          StringComparison.OrdinalIgnoreCase);
+
+      /* ------------------------------------------------------------ */
+
+      public override int GetHashCode()
+         => _value
+           .GetHashCode(StringComparison.OrdinalIgnoreCase);
 
       /* ------------------------------------------------------------ */
    }

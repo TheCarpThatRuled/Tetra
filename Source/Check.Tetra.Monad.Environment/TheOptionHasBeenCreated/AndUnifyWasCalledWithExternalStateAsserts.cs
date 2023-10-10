@@ -5,10 +5,33 @@ namespace Check;
 public static partial class TheOptionHasBeenCreated
 {
    public sealed class AndUnifyWasCalledWithExternalStateAsserts : IAsserts,
-                                 IReturnsAsserts<FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>,
-                                 IWhenNoneFuncAsserts<FakeExternalState, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>,
-                                 IWhenSomeFuncAsserts<FakeExternalState, FakeType, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>
+                                                                   IReturnsAsserts<FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>,
+                                                                   IWhenNoneFuncAsserts<FakeExternalState, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>,
+                                                                   IWhenSomeFuncAsserts<FakeExternalState, FakeType, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>
    {
+      /* ------------------------------------------------------------ */
+      //  Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly FakeNewType                                            _returnValue;
+      private readonly FakeFunction<FakeExternalState, FakeNewType>           _whenNone;
+      private readonly FakeFunction<FakeExternalState, FakeType, FakeNewType> _whenSome;
+
+      /* ------------------------------------------------------------ */
+      //  Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal AndUnifyWasCalledWithExternalStateAsserts
+      (
+         FakeFunction<FakeExternalState, FakeType, FakeNewType> whenSome,
+         FakeFunction<FakeExternalState, FakeNewType>           whenNone,
+         FakeNewType                                            returnValue
+      )
+      {
+         _returnValue = returnValue;
+         _whenNone    = whenNone;
+         _whenSome    = whenSome;
+      }
       /* ------------------------------------------------------------ */
       //  IReturnsAsserts<FakeNewType, Asserts> Methods
       /* ------------------------------------------------------------ */
@@ -38,27 +61,6 @@ public static partial class TheOptionHasBeenCreated
            .Create("whenSome",
                    _whenSome,
                    () => this);
-
-      /* ------------------------------------------------------------ */
-      //  Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal AndUnifyWasCalledWithExternalStateAsserts(FakeFunction<FakeExternalState, FakeType, FakeNewType> whenSome,
-                       FakeFunction<FakeExternalState, FakeNewType>           whenNone,
-                       FakeNewType                                            returnValue)
-      {
-         _returnValue = returnValue;
-         _whenNone    = whenNone;
-         _whenSome    = whenSome;
-      }
-
-      /* ------------------------------------------------------------ */
-      //  Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly FakeNewType                                            _returnValue;
-      private readonly FakeFunction<FakeExternalState, FakeNewType>           _whenNone;
-      private readonly FakeFunction<FakeExternalState, FakeType, FakeNewType> _whenSome;
 
       /* ------------------------------------------------------------ */
    }

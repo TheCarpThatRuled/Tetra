@@ -1,6 +1,6 @@
 ﻿namespace Check;
 
-partial class Messages
+internal partial class Messages
 {
    public static class HumanReadableName
    {

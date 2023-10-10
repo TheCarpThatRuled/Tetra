@@ -3,11 +3,44 @@
 public sealed class TestRelativeFilePath
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly ISequence<DirectoryComponent> _directories;
+   private readonly FileComponent                 _file;
+   private readonly string                        _pathWithoutTrailingDirectorySeparator;
+   private readonly string                        _pathWithTrailingDirectorySeparator;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private TestRelativeFilePath
+   (
+      ISequence<DirectoryComponent> directories,
+      FileComponent                 file
+   )
+   {
+      _directories = directories;
+      _file        = file;
+
+      var path = directories
+                .Select(directory => directory.Value())
+                .Append(file.Value())
+                .ToArray();
+
+      _pathWithoutTrailingDirectorySeparator = path.ToDelimitedString(Path.DirectorySeparatorChar);
+      _pathWithTrailingDirectorySeparator    = path.ToDelimitedStringWithTrailingDelimiter(Path.DirectorySeparatorChar);
+   }
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static TestRelativeFilePath Create(ISequence<DirectoryComponent> directories,
-                                             FileComponent                 file)
+   public static TestRelativeFilePath Create
+   (
+      ISequence<DirectoryComponent> directories,
+      FileComponent                 file
+   )
       => new(directories,
              file);
 
@@ -39,34 +72,6 @@ public sealed class TestRelativeFilePath
 
    public string PathWithTrailingDirectorySeparator()
       => _pathWithTrailingDirectorySeparator;
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly ISequence<DirectoryComponent> _directories;
-   private readonly FileComponent                 _file;
-   private readonly string                        _pathWithoutTrailingDirectorySeparator;
-   private readonly string                        _pathWithTrailingDirectorySeparator;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private TestRelativeFilePath(ISequence<DirectoryComponent> directories,
-                                FileComponent                 file)
-   {
-      _directories = directories;
-      _file        = file;
-
-      var path = directories
-                .Select(directory => directory.Value())
-                .Append(file.Value())
-                .ToArray();
-
-      _pathWithoutTrailingDirectorySeparator = path.ToDelimitedString(Path.DirectorySeparatorChar);
-      _pathWithTrailingDirectorySeparator    = path.ToDelimitedStringWithTrailingDelimiter(Path.DirectorySeparatorChar);
-   }
 
    /* ------------------------------------------------------------ */
 }

@@ -5,22 +5,27 @@ namespace Tetra;
 public sealed class Sequence<T> : ISequence<T>
 {
    /* ------------------------------------------------------------ */
-   // Factory Functions
+   // Private Fields
    /* ------------------------------------------------------------ */
 
-   public static ISequence<T> Empty()
-      => new Sequence<T>(Array.Empty<T>());
+   private readonly T[] _array;
 
    /* ------------------------------------------------------------ */
-   public static ISequence<T> From(params T[] array)
-      => new Sequence<T>(array);
+   // Internal Constructors
+   /* ------------------------------------------------------------ */
+
+   internal Sequence
+   (
+      T[] array
+   )
+      => _array = array;
 
    /* ------------------------------------------------------------ */
    // IEnumerable<T> Properties
    /* ------------------------------------------------------------ */
 
    public IEnumerator<T> GetEnumerator()
-      => ((IEnumerable<T>)_array)
+      => ((IEnumerable<T>) _array)
         .GetEnumerator();
 
    /* ------------------------------------------------------------ */
@@ -43,31 +48,40 @@ public sealed class Sequence<T> : ISequence<T>
    // ISequence<T> Operators
    /* ------------------------------------------------------------ */
 
-   public T this[Index i]
+   public T this
+   [
+      Index i
+   ]
       => _array[i];
 
    /* ------------------------------------------------------------ */
 
-   public T this[int i]
+   public T this
+   [
+      int i
+   ]
       => _array[i];
 
    /* ------------------------------------------------------------ */
 
-   public T this[uint i]
+   public T this
+   [
+      uint i
+   ]
       => _array[i];
-
    /* ------------------------------------------------------------ */
-   // Internal Constructors
-   /* ------------------------------------------------------------ */
-
-   internal Sequence(T[] array)
-      => _array = array;
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
+   // Factory Functions
    /* ------------------------------------------------------------ */
 
-   private readonly T[] _array;
+   public static ISequence<T> Empty()
+      => new Sequence<T>(Array.Empty<T>());
+
+   /* ------------------------------------------------------------ */
+   public static ISequence<T> From
+   (
+      params T[] array
+   )
+      => new Sequence<T>(array);
 
    /* ------------------------------------------------------------ */
 }

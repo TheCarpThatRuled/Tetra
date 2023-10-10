@@ -1,10 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tetra.Testing;
 
 // ReSharper disable once InconsistentNaming
-
 [ExcludeFromCodeCoverage]
 public static partial class Assert_Extensions
 {
@@ -12,10 +11,13 @@ public static partial class Assert_Extensions
    // AreEqual Extensions
    /* ------------------------------------------------------------ */
 
-   public static Assert AreEqual(this Assert assert,
-                                 string      description,
-                                 object?     expected,
-                                 object?     actual)
+   public static Assert AreEqual
+   (
+      this Assert assert,
+      string      description,
+      object?     expected,
+      object?     actual
+   )
    {
       Log.ToDebugOutput_AreEqual(description,
                                  expected,
@@ -30,10 +32,13 @@ public static partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert AreReferenceEqual(this Assert assert,
-                                          string      description,
-                                          object?     expected,
-                                          object?     actual)
+   public static Assert AreReferenceEqual
+   (
+      this Assert assert,
+      string      description,
+      object?     expected,
+      object?     actual
+   )
    {
       Log.ToDebugOutput_AreReferenceEqual(description,
                                           expected,
@@ -52,10 +57,13 @@ public static partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert AreEqualOrdinalIgnoreCase(this Assert assert,
-                                                  string      description,
-                                                  string      expected,
-                                                  string      actual)
+   public static Assert AreEqualOrdinalIgnoreCase
+   (
+      this Assert assert,
+      string      description,
+      string      expected,
+      string      actual
+   )
    {
       Log.ToDebugOutput_AreEqual(description,
                                  expected,
@@ -76,9 +84,12 @@ public static partial class Assert_Extensions
    // IsBool Extensions
    /* ------------------------------------------------------------ */
 
-   public static Assert IsFalse(this Assert assert,
-                                string      description,
-                                bool        actual)
+   public static Assert IsFalse
+   (
+      this Assert assert,
+      string      description,
+      bool        actual
+   )
    {
       Log.ToDebugOutput_IsFalse(description,
                                 actual);
@@ -91,9 +102,12 @@ public static partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert IsTrue(this Assert assert,
-                               string      description,
-                               bool        actual)
+   public static Assert IsTrue
+   (
+      this Assert assert,
+      string      description,
+      bool        actual
+   )
    {
       Log.ToDebugOutput_IsTrue(description,
                                actual);

@@ -9,16 +9,22 @@ public static class IReadOnlyList_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static string ToDelimitedString<T>(this IReadOnlyList<T> sequence,
-                                             char                  delimiter)
+   public static string ToDelimitedString<T>
+   (
+      this IReadOnlyList<T> sequence,
+      char                  delimiter
+   )
       where T : notnull
       => sequence
         .ToDelimitedString(delimiter.ToString());
 
    /* ------------------------------------------------------------ */
 
-   public static string ToDelimitedString<T>(this IReadOnlyList<T> sequence,
-                                             string                delimiter)
+   public static string ToDelimitedString<T>
+   (
+      this IReadOnlyList<T> sequence,
+      string                delimiter
+   )
       where T : notnull
    {
       if (!sequence.Any())
@@ -46,16 +52,22 @@ public static class IReadOnlyList_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static string ToDelimitedStringWithTrailingDelimiter<T>(this IReadOnlyList<T> sequence,
-                                                                  char                  delimiter)
+   public static string ToDelimitedStringWithTrailingDelimiter<T>
+   (
+      this IReadOnlyList<T> sequence,
+      char                  delimiter
+   )
       where T : notnull
       => sequence
         .ToDelimitedStringWithTrailingDelimiter(delimiter.ToString());
 
    /* ------------------------------------------------------------ */
 
-   public static string ToDelimitedStringWithTrailingDelimiter<T>(this IReadOnlyList<T> sequence,
-                                                                  string                delimiter)
+   public static string ToDelimitedStringWithTrailingDelimiter<T>
+   (
+      this IReadOnlyList<T> sequence,
+      string                delimiter
+   )
       where T : notnull
    {
       var concatenation = new StringBuilder();

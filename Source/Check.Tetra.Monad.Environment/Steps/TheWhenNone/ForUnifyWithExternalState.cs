@@ -1,5 +1,4 @@
-﻿
-using static Tetra.Testing.AAA_test;
+﻿using static Tetra.Testing.AAA_test;
 
 namespace Check;
 
@@ -14,7 +13,10 @@ partial class Steps
          /* ------------------------------------------------------------ */
 
          public IAssert<TheOptionHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts, TheOptionHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts>
-            was_invoked_once_with(FakeExternalState externalState)
+            was_invoked_once_with
+            (
+               FakeExternalState externalState
+            )
             => the_whenNone.function.was_invoked_once_with<FakeExternalState, FakeNewType, TheOptionHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts>(externalState);
 
          /* ------------------------------------------------------------ */

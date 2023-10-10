@@ -1,4 +1,5 @@
 ﻿using Tetra;
+
 // ReSharper disable InconsistentNaming
 
 namespace Check;

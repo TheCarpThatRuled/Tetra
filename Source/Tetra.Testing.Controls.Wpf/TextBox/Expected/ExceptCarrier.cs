@@ -8,10 +8,33 @@ partial class Expected_text_box
    public sealed class ExceptCarrier<T>
    {
       /* ------------------------------------------------------------ */
+      // Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly Func<Expected_text_box, T> _createParent;
+      private readonly Expected_text_box          _source;
+
+      /* ------------------------------------------------------------ */
+      // Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal ExceptCarrier
+      (
+         Func<Expected_text_box, T> createParent,
+         Expected_text_box          source
+      )
+      {
+         _createParent = createParent;
+         _source       = source;
+      }
+      /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public T IsEnabled_is(bool isEnabled)
+      public T IsEnabled_is
+      (
+         bool isEnabled
+      )
          => _createParent(Factory()
                          .Text_is(_source._text)
                          .IsEnabled_is(isEnabled)
@@ -19,7 +42,10 @@ partial class Expected_text_box
 
       /* ------------------------------------------------------------ */
 
-      public T Text_is(string text)
+      public T Text_is
+      (
+         string text
+      )
          => _createParent(Factory()
                          .Text_is(text)
                          .IsEnabled_is(_source._isEnabled)
@@ -27,29 +53,14 @@ partial class Expected_text_box
 
       /* ------------------------------------------------------------ */
 
-      public T Visibility_is(Visibility visibility)
+      public T Visibility_is
+      (
+         Visibility visibility
+      )
          => _createParent(Factory()
                          .Text_is(_source._text)
                          .IsEnabled_is(_source._isEnabled)
                          .Visibility_is(visibility));
-
-      /* ------------------------------------------------------------ */
-      // Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal ExceptCarrier(Func<Expected_text_box, T> createParent,
-                             Expected_text_box          source)
-      {
-         _createParent = createParent;
-         _source       = source;
-      }
-
-      /* ------------------------------------------------------------ */
-      // Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly Func<Expected_text_box, T> _createParent;
-      private readonly Expected_text_box          _source;
 
       /* ------------------------------------------------------------ */
    }

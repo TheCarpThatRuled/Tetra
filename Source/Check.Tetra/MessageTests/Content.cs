@@ -23,7 +23,10 @@ public class Content
    [TestMethod]
    public void GIVEN_Message_WHEN_Content_THEN_the_content_is_returned()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
       {
          //Arrange
          var message = Message.Create(value);

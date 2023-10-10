@@ -6,13 +6,25 @@ namespace Tetra.Testing;
 public sealed class LabelAsserts<T> : IAsserts
    where T : IAsserts
 {
+   private readonly string _descriptionHeader;
+
+   /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly FakeLabel _label;
+
+   private readonly T _parent;
    /* ------------------------------------------------------------ */
    // Constructors
    /* ------------------------------------------------------------ */
 
-   public LabelAsserts(string    descriptionHeader,
-                       FakeLabel label,
-                       T         parent)
+   public LabelAsserts
+   (
+      string    descriptionHeader,
+      FakeLabel label,
+      T         parent
+   )
    {
       _label             = label;
       _descriptionHeader = descriptionHeader;
@@ -23,7 +35,10 @@ public sealed class LabelAsserts<T> : IAsserts
    // Methods
    /* ------------------------------------------------------------ */
 
-   public LabelAsserts<T> Content_is(object expected)
+   public LabelAsserts<T> Content_is
+   (
+      object expected
+   )
    {
       Assert.That
             .AreEqual($"{_descriptionHeader}: Content",
@@ -35,7 +50,10 @@ public sealed class LabelAsserts<T> : IAsserts
 
    /* ------------------------------------------------------------ */
 
-   public LabelAsserts<T> Visibility_is(Visibility expected)
+   public LabelAsserts<T> Visibility_is
+   (
+      Visibility expected
+   )
    {
       Assert.That
             .AreEqual($"{_descriptionHeader}: Visibility",
@@ -48,14 +66,6 @@ public sealed class LabelAsserts<T> : IAsserts
    /* ------------------------------------------------------------ */
    public T ReturnToParent()
       => _parent;
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly FakeLabel _label;
-   private readonly string    _descriptionHeader;
-   private readonly T         _parent;
 
    /* ------------------------------------------------------------ */
 }

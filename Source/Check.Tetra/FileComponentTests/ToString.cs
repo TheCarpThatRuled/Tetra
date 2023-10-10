@@ -23,7 +23,10 @@ public class ToString
    [TestMethod]
    public void GIVEN_FileComponent_WHEN_ToString_THEN_the_value_bounded_by_angle_brackets_is_returned()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
       {
          //Arrange
          var fileComponent = FileComponent.Create(value);

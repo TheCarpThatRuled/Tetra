@@ -10,9 +10,8 @@ partial class Generators
 
    public static Gen<RelativeDirectoryPath> RelativeDirectoryPath()
       => ValidPathWithoutARootButWithATrailingDirectorySeparator()
-        .Select(Tetra
-               .RelativeDirectoryPath
-               .Create);
+        .Select(Tetra.RelativeDirectoryPath
+                     .Create);
 
    /* ------------------------------------------------------------ */
 
@@ -31,9 +30,9 @@ partial class Generators
    public static Gen<(RelativeDirectoryPath, RelativeDirectoryPath)> TwoIdenticalRelativeDirectoryPaths()
       => ValidPathWithoutARootButWithATrailingDirectorySeparator()
         .Select(path => (Tetra.RelativeDirectoryPath
-                                       .Create(path),
-                                  Tetra.RelativeDirectoryPath
-                                       .Create(path)));
+                              .Create(path),
+                         Tetra.RelativeDirectoryPath
+                              .Create(path)));
 
    /* ------------------------------------------------------------ */
 

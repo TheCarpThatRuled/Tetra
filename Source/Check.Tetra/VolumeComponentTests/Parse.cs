@@ -23,17 +23,22 @@ public class Parse
    [TestMethod]
    public void GIVEN_an_ASCII_letter_WHEN_Parse_THEN_a_success_containing_a_volume_with_a_value_of_the_letter_colon_is_returned()
    {
-      static Property Property(char value)
+      static Property Property
+      (
+         char value
+      )
       {
          //Act
          var actual = VolumeComponent.Parse(value);
 
          //Assert
          return IsALeftAnd(AssertMessages.ReturnValue,
-                           (description,
-                            actualVolume) => AreEqual(description,
-                                                      $"{value}:",
-                                                      actualVolume.Value()),
+                           (
+                              description,
+                              actualVolume
+                           ) => AreEqual(description,
+                                         $"{value}:",
+                                         actualVolume.Value()),
                            actual);
       }
 
@@ -55,7 +60,10 @@ public class Parse
    [TestMethod]
    public void GIVEN_a_non_ASCII_letter_WHEN_Parse_THEN_a_failure_is_returned()
    {
-      static Property Property(char value)
+      static Property Property
+      (
+         char value
+      )
       {
          //Act
          var actual = VolumeComponent.Parse(value);

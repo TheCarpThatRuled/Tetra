@@ -6,9 +6,29 @@ namespace Check;
 public static partial class TheOptionHasBeenCreated
 {
    public sealed class AndExpandSomeToRightWasCalledAsserts : IAsserts,
-                                 IReturnsAnEitherAsserts<FakeLeft, FakeType, AndExpandSomeToRightWasCalledAsserts>,
-                                 IWhenNoneFuncAsserts<FakeLeft, AndExpandSomeToRightWasCalledAsserts>
+                                                              IReturnsAnEitherAsserts<FakeLeft, FakeType, AndExpandSomeToRightWasCalledAsserts>,
+                                                              IWhenNoneFuncAsserts<FakeLeft, AndExpandSomeToRightWasCalledAsserts>
    {
+      /* ------------------------------------------------------------ */
+      //  Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly IEither<FakeLeft, FakeType> _returnValue;
+      private readonly FakeFunction<FakeLeft>      _whenNone;
+
+      /* ------------------------------------------------------------ */
+      //  Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal AndExpandSomeToRightWasCalledAsserts
+      (
+         FakeFunction<FakeLeft>      whenNone,
+         IEither<FakeLeft, FakeType> returnValue
+      )
+      {
+         _returnValue = returnValue;
+         _whenNone    = whenNone;
+      }
       /* ------------------------------------------------------------ */
       //  IReturnsAnEitherAsserts<FakeLeft, FakeType, Asserts> Methods
       /* ------------------------------------------------------------ */
@@ -28,24 +48,6 @@ public static partial class TheOptionHasBeenCreated
            .Create("whenNone",
                    _whenNone,
                    () => this);
-
-      /* ------------------------------------------------------------ */
-      //  Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal AndExpandSomeToRightWasCalledAsserts(FakeFunction<FakeLeft>      whenNone,
-                       IEither<FakeLeft, FakeType> returnValue)
-      {
-         _returnValue = returnValue;
-         _whenNone    = whenNone;
-      }
-
-      /* ------------------------------------------------------------ */
-      //  Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly IEither<FakeLeft, FakeType> _returnValue;
-      private readonly FakeFunction<FakeLeft>      _whenNone;
 
       /* ------------------------------------------------------------ */
    }

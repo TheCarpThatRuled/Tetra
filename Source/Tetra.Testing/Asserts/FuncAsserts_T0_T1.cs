@@ -6,12 +6,38 @@ public sealed class FuncAsserts<TReturn, TNext>
    where TNext : IAsserts
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly FakeFunction<TReturn> _actual;
+   private readonly string                _description;
+   private readonly Func<TNext>           _next;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private FuncAsserts
+   (
+      string                description,
+      Func<TNext>           next,
+      FakeFunction<TReturn> actual
+   )
+   {
+      _actual      = actual;
+      _description = description;
+      _next        = next;
+   }
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static FuncAsserts<TReturn, TNext> Create(string                description,
-                                                    FakeFunction<TReturn> actual,
-                                                    Func<TNext>           next)
+   public static FuncAsserts<TReturn, TNext> Create
+   (
+      string                description,
+      FakeFunction<TReturn> actual,
+      Func<TNext>           next
+   )
       => new(description,
              next,
              actual);
@@ -40,27 +66,6 @@ public sealed class FuncAsserts<TReturn, TNext>
                        _actual);
 
       return _next();
-   }
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly FakeFunction<TReturn> _actual;
-   private readonly string                _description;
-   private readonly Func<TNext>           _next;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private FuncAsserts(string                description,
-                       Func<TNext>           next,
-                       FakeFunction<TReturn> actual)
-   {
-      _actual      = actual;
-      _description = description;
-      _next        = next;
    }
 
    /* ------------------------------------------------------------ */

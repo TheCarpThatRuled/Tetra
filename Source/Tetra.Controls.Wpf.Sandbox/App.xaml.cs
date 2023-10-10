@@ -9,12 +9,12 @@ public partial class App
    // Overridden Application Methods
    /* ------------------------------------------------------------ */
 
-   protected override void OnStartup(StartupEventArgs e)
+   protected override void OnStartup
+   (
+      StartupEventArgs e
+   )
    {
-      new ApplicationWindow
-      {
-         DataContext = ApplicationWindowContext.Start(),
-      }.Show();
+      new ApplicationWindow {DataContext = ApplicationWindowContext.Start(),}.Show();
 
       base.OnStartup(e);
    }

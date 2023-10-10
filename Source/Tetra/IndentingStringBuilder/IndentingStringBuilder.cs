@@ -5,6 +5,36 @@ namespace Tetra;
 public sealed class IndentingStringBuilder
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly StringBuilder _builder = new();
+
+   private readonly string _indent;
+   private readonly int    _maxDepthInclusive;
+   private readonly int    _minDepthInclusive;
+
+   //mutable
+   private int _indentDepth;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private IndentingStringBuilder
+   (
+      string indent,
+      int    minDepthInclusive,
+      int    maxDepthInclusive
+   )
+   {
+      _indent            = indent;
+      _minDepthInclusive = minDepthInclusive;
+      _maxDepthInclusive = maxDepthInclusive;
+
+      _indentDepth = minDepthInclusive;
+   }
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
@@ -25,7 +55,10 @@ public sealed class IndentingStringBuilder
    // Methods
    /* ------------------------------------------------------------ */
 
-   public IndentingStringBuilder AppendWithIndent(string value)
+   public IndentingStringBuilder AppendWithIndent
+   (
+      string value
+   )
    {
       AppendIndent();
 
@@ -36,7 +69,10 @@ public sealed class IndentingStringBuilder
 
    /* ------------------------------------------------------------ */
 
-   public IndentingStringBuilder AppendWithoutIndent(string value)
+   public IndentingStringBuilder AppendWithoutIndent
+   (
+      string value
+   )
    {
       _builder.Append(value);
 
@@ -45,7 +81,10 @@ public sealed class IndentingStringBuilder
 
    /* ------------------------------------------------------------ */
 
-   public IndentingStringBuilder AppendLine(string line)
+   public IndentingStringBuilder AppendLine
+   (
+      string line
+   )
    {
       AppendIndent();
 
@@ -72,34 +111,6 @@ public sealed class IndentingStringBuilder
       {
          ++_indentDepth;
       }
-   }
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly StringBuilder _builder = new();
-
-   private readonly string _indent;
-   private readonly int    _minDepthInclusive;
-   private readonly int    _maxDepthInclusive;
-
-   //mutable
-   private int _indentDepth;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private IndentingStringBuilder(string indent,
-                                  int    minDepthInclusive,
-                                  int    maxDepthInclusive)
-   {
-      _indent            = indent;
-      _minDepthInclusive = minDepthInclusive;
-      _maxDepthInclusive = maxDepthInclusive;
-
-      _indentDepth = minDepthInclusive;
    }
 
    /* ------------------------------------------------------------ */

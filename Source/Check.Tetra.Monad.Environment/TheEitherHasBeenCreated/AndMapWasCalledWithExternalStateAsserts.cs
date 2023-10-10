@@ -11,6 +11,29 @@ public static partial class TheEitherHasBeenCreated
                                                                  IWhenRightFuncAsserts<FakeExternalState, FakeRight, FakeNewRight, AndMapWasCalledWithExternalStateAsserts>
    {
       /* ------------------------------------------------------------ */
+      //  Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly IEither<FakeNewLeft, FakeNewRight>                       _returnValue;
+      private readonly FakeFunction<FakeExternalState, FakeLeft, FakeNewLeft>   _whenLeft;
+      private readonly FakeFunction<FakeExternalState, FakeRight, FakeNewRight> _whenRight;
+
+      /* ------------------------------------------------------------ */
+      //  Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal AndMapWasCalledWithExternalStateAsserts
+      (
+         FakeFunction<FakeExternalState, FakeLeft, FakeNewLeft>   whenLeft,
+         FakeFunction<FakeExternalState, FakeRight, FakeNewRight> whenRight,
+         IEither<FakeNewLeft, FakeNewRight>                       returnValue
+      )
+      {
+         _returnValue = returnValue;
+         _whenLeft    = whenLeft;
+         _whenRight   = whenRight;
+      }
+      /* ------------------------------------------------------------ */
       //  IReturnsAnEitherAsserts<FakeNewLeft, FakeNewRight, Asserts> Methods
       /* ------------------------------------------------------------ */
 
@@ -39,27 +62,6 @@ public static partial class TheEitherHasBeenCreated
            .Create("whenRight",
                    _whenRight,
                    () => this);
-
-      /* ------------------------------------------------------------ */
-      //  Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal AndMapWasCalledWithExternalStateAsserts(FakeFunction<FakeExternalState, FakeLeft, FakeNewLeft>   whenLeft,
-                                                       FakeFunction<FakeExternalState, FakeRight, FakeNewRight> whenRight,
-                                                       IEither<FakeNewLeft, FakeNewRight>                       returnValue)
-      {
-         _returnValue = returnValue;
-         _whenLeft    = whenLeft;
-         _whenRight   = whenRight;
-      }
-
-      /* ------------------------------------------------------------ */
-      //  Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly IEither<FakeNewLeft, FakeNewRight>                       _returnValue;
-      private readonly FakeFunction<FakeExternalState, FakeLeft, FakeNewLeft>   _whenLeft;
-      private readonly FakeFunction<FakeExternalState, FakeRight, FakeNewRight> _whenRight;
 
       /* ------------------------------------------------------------ */
    }

@@ -12,7 +12,10 @@ partial class Steps
          // Assert
          /* ------------------------------------------------------------ */
 
-         public IAssert<TheEitherHasBeenCreated.AndMapWasCalledAsserts, TheEitherHasBeenCreated.AndMapWasCalledAsserts> was_invoked_once_with(FakeLeft expected)
+         public IAssert<TheEitherHasBeenCreated.AndMapWasCalledAsserts, TheEitherHasBeenCreated.AndMapWasCalledAsserts> was_invoked_once_with
+         (
+            FakeLeft expected
+         )
             => the_whenLeft.function.was_invoked_once_with<FakeLeft, FakeNewLeft, TheEitherHasBeenCreated.AndMapWasCalledAsserts>(expected);
 
          /* ------------------------------------------------------------ */

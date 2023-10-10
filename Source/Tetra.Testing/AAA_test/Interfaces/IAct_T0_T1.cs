@@ -11,15 +11,24 @@ partial class AAA_test
       // Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(WhenCharacteriser characteriser);
+      public void AddBriefCharacterisation
+      (
+         WhenCharacteriser characteriser
+      );
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(WhenCharacteriser characteriser);
+      public void AddFullCharacterisation
+      (
+         WhenCharacteriser characteriser
+      );
 
       /* ------------------------------------------------------------ */
 
-      public TAsserts Act(TArranges environment);
+      public TAsserts Act
+      (
+         TArranges environment
+      );
 
       /* ------------------------------------------------------------ */
    }

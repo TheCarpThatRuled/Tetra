@@ -12,9 +12,11 @@ partial class Steps
          // Assert
          /* ------------------------------------------------------------ */
 
-         public IAssert<TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts, TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts> was_invoked_once_with(
+         public IAssert<TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts, TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts> was_invoked_once_with
+         (
             FakeExternalState expectedExternalState,
-            FakeRight          expectedContent)
+            FakeRight         expectedContent
+         )
             => the_whenRight.function.was_invoked_once_with<FakeExternalState, FakeRight, FakeNewRight, TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts>(
                expectedExternalState,
                expectedContent);

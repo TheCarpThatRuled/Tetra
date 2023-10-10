@@ -6,12 +6,38 @@ public sealed class BooleanAsserts<TNext> : IAsserts
    where TNext : IAsserts
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly bool        _actual;
+   private readonly string      _description;
+   private readonly Func<TNext> _next;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private BooleanAsserts
+   (
+      bool        actual,
+      string      description,
+      Func<TNext> next
+   )
+   {
+      _actual      = actual;
+      _description = description;
+      _next        = next;
+   }
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static BooleanAsserts<TNext> Create(string      description,
-                                              bool        actual,
-                                              Func<TNext> next)
+   public static BooleanAsserts<TNext> Create
+   (
+      string      description,
+      bool        actual,
+      Func<TNext> next
+   )
       => new(actual,
              description,
              next);
@@ -38,27 +64,6 @@ public sealed class BooleanAsserts<TNext> : IAsserts
                     _actual);
 
       return _next();
-   }
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly bool        _actual;
-   private readonly string      _description;
-   private readonly Func<TNext> _next;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private BooleanAsserts(bool        actual,
-                          string      description,
-                          Func<TNext> next)
-   {
-      _actual      = actual;
-      _description = description;
-      _next        = next;
    }
 
    /* ------------------------------------------------------------ */

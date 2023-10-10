@@ -23,7 +23,10 @@ public class GetHashCode
    [TestMethod]
    public void GIVEN_FileComponent_WHEN_GetHashCode_THEN_the_ordinal_ignore_case_hash_code_of_the_value_is_returned()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
       {
          //Arrange
          var fileComponent = FileComponent.Create(value);

@@ -1,5 +1,6 @@
 ﻿using Check.Check_TextBox;
 using static Check.TextBox.Text;
+
 // ReSharper disable InconsistentNaming
 
 namespace Check.TextBox.GIVEN_the_text_box_is_enabled_and_visible;
@@ -14,7 +15,10 @@ public class WHEN_the_user_enters_text : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_user_enters_text]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       Log.ToStandardOutput(test.FullCharacterisation());
 

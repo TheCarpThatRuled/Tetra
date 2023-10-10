@@ -10,6 +10,26 @@ public static partial class TheOptionHasBeenCreated
                                                              IWhenNoneFuncAsserts<FakeRight, AndExpandSomeToLeftWasCalledAsserts>
    {
       /* ------------------------------------------------------------ */
+      //  Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly IEither<FakeType, FakeRight> _returnValue;
+      private readonly FakeFunction<FakeRight>      _whenNone;
+
+      /* ------------------------------------------------------------ */
+      //  Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal AndExpandSomeToLeftWasCalledAsserts
+      (
+         FakeFunction<FakeRight>      whenNone,
+         IEither<FakeType, FakeRight> returnValue
+      )
+      {
+         _returnValue = returnValue;
+         _whenNone    = whenNone;
+      }
+      /* ------------------------------------------------------------ */
       //  IReturnsAnEitherAsserts<FakeRight, FakeType, Asserts> Methods
       /* ------------------------------------------------------------ */
 
@@ -28,24 +48,6 @@ public static partial class TheOptionHasBeenCreated
            .Create("whenNone",
                    _whenNone,
                    () => this);
-
-      /* ------------------------------------------------------------ */
-      //  Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal AndExpandSomeToLeftWasCalledAsserts(FakeFunction<FakeRight>      whenNone,
-                                                   IEither<FakeType, FakeRight> returnValue)
-      {
-         _returnValue = returnValue;
-         _whenNone    = whenNone;
-      }
-
-      /* ------------------------------------------------------------ */
-      //  Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly IEither<FakeType, FakeRight> _returnValue;
-      private readonly FakeFunction<FakeRight>      _whenNone;
 
       /* ------------------------------------------------------------ */
    }

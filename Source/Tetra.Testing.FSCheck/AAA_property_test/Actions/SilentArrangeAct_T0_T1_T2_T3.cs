@@ -9,57 +9,6 @@ partial class AAA_property_test<TState>
       where TNextAsserts : IAsserts
    {
       /* ------------------------------------------------------------ */
-      // Factory Functions
-      /* ------------------------------------------------------------ */
-
-      public static SilentArrangeAct<TInitialArranges, TNextArranges, TNextAsserts> Create(IArrangeAct<TInitialArranges, TNextArranges, TNextAsserts> arrangeAct)
-         => new(arrangeAct);
-
-      /* ------------------------------------------------------------ */
-
-      public static SilentArrangeAct<TInitialArranges, TNextArranges, TNextAsserts> Create(Func<TState, TInitialArranges, TNextArranges> arrange,
-                                                                                           Func<TState, TInitialArranges, TNextAsserts>    act)
-         => new(AtomicArrangeAct<TInitialArranges, TNextArranges, TNextAsserts>.Create(arrange,
-                                                                                       act,
-                                                                                       ""));
-
-      /* ------------------------------------------------------------ */
-      // IArrange<TState, TArranges, TAsserts> Methods
-      /* ------------------------------------------------------------ */
-
-      public void AddBriefCharacterisation(GivenCharacteriser characteriser) { }
-
-      /* ------------------------------------------------------------ */
-
-      public void AddFullCharacterisation(GivenCharacteriser characteriser) { }
-
-      /* ------------------------------------------------------------ */
-
-      public TNextArranges Arrange(TState           state,
-                                   TInitialArranges environment)
-         => _arrangeAct
-           .Arrange(state,
-                    environment);
-
-      /* ------------------------------------------------------------ */
-      // IAct<TInitialArranges, TNextAsserts, TState> Methods
-      /* ------------------------------------------------------------ */
-
-      public void AddBriefCharacterisation(WhenCharacteriser characteriser) { }
-
-      /* ------------------------------------------------------------ */
-
-      public void AddFullCharacterisation(WhenCharacteriser characteriser) { }
-
-      /* ------------------------------------------------------------ */
-
-      public TNextAsserts Act(TState           state,
-                              TInitialArranges environment)
-         => _arrangeAct
-           .Act(state,
-                environment);
-
-      /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
@@ -69,8 +18,85 @@ partial class AAA_property_test<TState>
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private SilentArrangeAct(IArrangeAct<TInitialArranges, TNextArranges, TNextAsserts> arrangeAct)
+      private SilentArrangeAct
+      (
+         IArrangeAct<TInitialArranges, TNextArranges, TNextAsserts> arrangeAct
+      )
          => _arrangeAct = arrangeAct;
+
+      /* ------------------------------------------------------------ */
+      // IArrange<TState, TArranges, TAsserts> Methods
+      /* ------------------------------------------------------------ */
+
+      public void AddBriefCharacterisation
+      (
+         GivenCharacteriser characteriser
+      ) { }
+
+      /* ------------------------------------------------------------ */
+
+      public void AddFullCharacterisation
+      (
+         GivenCharacteriser characteriser
+      ) { }
+
+      /* ------------------------------------------------------------ */
+
+      public TNextArranges Arrange
+      (
+         TState           state,
+         TInitialArranges environment
+      )
+         => _arrangeAct
+           .Arrange(state,
+                    environment);
+
+      /* ------------------------------------------------------------ */
+      // IAct<TInitialArranges, TNextAsserts, TState> Methods
+      /* ------------------------------------------------------------ */
+
+      public void AddBriefCharacterisation
+      (
+         WhenCharacteriser characteriser
+      ) { }
+
+      /* ------------------------------------------------------------ */
+
+      public void AddFullCharacterisation
+      (
+         WhenCharacteriser characteriser
+      ) { }
+
+      /* ------------------------------------------------------------ */
+
+      public TNextAsserts Act
+      (
+         TState           state,
+         TInitialArranges environment
+      )
+         => _arrangeAct
+           .Act(state,
+                environment);
+      /* ------------------------------------------------------------ */
+      // Factory Functions
+      /* ------------------------------------------------------------ */
+
+      public static SilentArrangeAct<TInitialArranges, TNextArranges, TNextAsserts> Create
+      (
+         IArrangeAct<TInitialArranges, TNextArranges, TNextAsserts> arrangeAct
+      )
+         => new(arrangeAct);
+
+      /* ------------------------------------------------------------ */
+
+      public static SilentArrangeAct<TInitialArranges, TNextArranges, TNextAsserts> Create
+      (
+         Func<TState, TInitialArranges, TNextArranges> arrange,
+         Func<TState, TInitialArranges, TNextAsserts>  act
+      )
+         => new(AtomicArrangeAct<TInitialArranges, TNextArranges, TNextAsserts>.Create(arrange,
+                                                                                       act,
+                                                                                       ""));
 
       /* ------------------------------------------------------------ */
    }

@@ -16,7 +16,10 @@ public class WHEN_the_client_calls_ReduceRightToOption : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_client_calls_ReduceRightToOption]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       using var given = test.Create();
       var       when  = given.Arrange();

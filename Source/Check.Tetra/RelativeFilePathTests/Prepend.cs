@@ -23,8 +23,11 @@ public class Prepend
    public void
       GIVEN_a_RelativeFilePath_and_an_Array_of_DirectoryComponents_WHEN_Prepend_THEN_a_RelativeFilePath_containing_the_RelativeFilePath_and_the_Array_of_DirectoryComponents_is_returned()
    {
-      static Property Property(TestRelativeFilePath testChild,
-                               DirectoryComponent[] parent)
+      static Property Property
+      (
+         TestRelativeFilePath testChild,
+         DirectoryComponent[] parent
+      )
       {
          //Arrange
          var expected = testChild.Prepend(parent);
@@ -62,8 +65,11 @@ public class Prepend
    public void
       GIVEN_a_RelativeFilePath_and_a_sequence_of_DirectoryComponents_WHEN_Prepend_THEN_a_RelativeFilePath_containing_the_RelativeFilePath_and_the_sequence_of_DirectoryComponents_is_returned()
    {
-      static Property Property(TestRelativeFilePath          testChild,
-                               ISequence<DirectoryComponent> parent)
+      static Property Property
+      (
+         TestRelativeFilePath          testChild,
+         ISequence<DirectoryComponent> parent
+      )
       {
          //Arrange
          var expected = testChild.Prepend(parent);
@@ -100,8 +106,11 @@ public class Prepend
    [TestMethod]
    public void GIVEN_a_RelativeFilePath_and_a_RelativeDirectoryPath_WHEN_Prepend_THEN_a_RelativeFilePath_containing_the_RelativeFilePath_and_the_RelativeDirectoryPath_is_returned()
    {
-      static Property Property(TestRelativeFilePath      testChild,
-                               TestRelativeDirectoryPath testParent)
+      static Property Property
+      (
+         TestRelativeFilePath      testChild,
+         TestRelativeDirectoryPath testParent
+      )
       {
          //Arrange
          var expected = testChild.Prepend(testParent);
@@ -139,8 +148,11 @@ public class Prepend
    [TestMethod]
    public void GIVEN_a_RelativeFilePath_and_a_VolumeComponent_WHEN_Prepend_THEN_an_AbsoluteFilePath_containing_the_RelativeFilePath_and_the_VolumeComponent_is_returned()
    {
-      static Property Property(TestRelativeFilePath testChild,
-                               VolumeComponent      parent)
+      static Property Property
+      (
+         TestRelativeFilePath testChild,
+         VolumeComponent      parent
+      )
       {
          //Arrange
          var expected = testChild.Prepend(parent);
@@ -178,8 +190,11 @@ public class Prepend
    public void
       GIVEN_a_RelativeFilePath_and_a_AbsoluteDirectoryPath_WHEN_Prepend_THEN_an_AbsoluteFilePath_containing_the_RelativeFilePath_and_the_AbsoluteDirectoryPath_is_returned()
    {
-      static Property Property(TestRelativeFilePath      testChild,
-                               TestAbsoluteDirectoryPath testParent)
+      static Property Property
+      (
+         TestRelativeFilePath      testChild,
+         TestAbsoluteDirectoryPath testParent
+      )
       {
          //Arrange
          var expected = testChild.Prepend(testParent);

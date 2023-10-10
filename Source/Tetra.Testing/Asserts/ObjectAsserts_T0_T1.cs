@@ -6,43 +6,6 @@ public sealed class ObjectAsserts<T, TNext> : IAsserts
    where TNext : IAsserts
 {
    /* ------------------------------------------------------------ */
-   // Factory Functions
-   /* ------------------------------------------------------------ */
-
-   public static ObjectAsserts<T, TNext> Create(string      description,
-                                                T           actual,
-                                                Func<TNext> next)
-      => new(actual,
-             description,
-             next);
-
-   /* ------------------------------------------------------------ */
-   // Methods
-   /* ------------------------------------------------------------ */
-
-   public TNext IsEqualTo(T expected)
-   {
-      Assert.That
-            .AreEqual(_description,
-                      expected,
-                      _actual);
-
-      return _next();
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public TNext IsReferenceEqualTo(T expected)
-   {
-      Assert.That
-            .AreReferenceEqual(_description,
-                               expected,
-                               _actual);
-
-      return _next();
-   }
-
-   /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
@@ -54,13 +17,61 @@ public sealed class ObjectAsserts<T, TNext> : IAsserts
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private ObjectAsserts(T           actual,
-                          string      description,
-                          Func<TNext> next)
+   private ObjectAsserts
+   (
+      T           actual,
+      string      description,
+      Func<TNext> next
+   )
    {
       _actual      = actual;
       _description = description;
       _next        = next;
+   }
+   /* ------------------------------------------------------------ */
+   // Factory Functions
+   /* ------------------------------------------------------------ */
+
+   public static ObjectAsserts<T, TNext> Create
+   (
+      string      description,
+      T           actual,
+      Func<TNext> next
+   )
+      => new(actual,
+             description,
+             next);
+
+   /* ------------------------------------------------------------ */
+   // Methods
+   /* ------------------------------------------------------------ */
+
+   public TNext IsEqualTo
+   (
+      T expected
+   )
+   {
+      Assert.That
+            .AreEqual(_description,
+                      expected,
+                      _actual);
+
+      return _next();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public TNext IsReferenceEqualTo
+   (
+      T expected
+   )
+   {
+      Assert.That
+            .AreReferenceEqual(_description,
+                               expected,
+                               _actual);
+
+      return _next();
    }
 
    /* ------------------------------------------------------------ */

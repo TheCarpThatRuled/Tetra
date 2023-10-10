@@ -8,24 +8,26 @@ public static partial class TheEitherHasBeenCreated
    public sealed class Arrange : IArranges
    {
       /* ------------------------------------------------------------ */
-      //  Methods
+      //  Private Fields
       /* ------------------------------------------------------------ */
 
-      public Act ToActs()
-         => new(_either);
+      private readonly IEither<FakeLeft, FakeRight> _either;
 
       /* ------------------------------------------------------------ */
       //  Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal Arrange(IEither<FakeLeft, FakeRight> option)
+      internal Arrange
+      (
+         IEither<FakeLeft, FakeRight> option
+      )
          => _either = option;
-
       /* ------------------------------------------------------------ */
-      //  Private Fields
+      //  Methods
       /* ------------------------------------------------------------ */
 
-      private readonly IEither<FakeLeft, FakeRight> _either;
+      public Act ToActs()
+         => new(_either);
 
       /* ------------------------------------------------------------ */
    }

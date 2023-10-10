@@ -24,7 +24,10 @@ public class Parse
    public void
       GIVEN_a_valid_volume_rooted_path_with_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(TestAbsoluteDirectoryPath testPath)
+      static Property Property
+      (
+         TestAbsoluteDirectoryPath testPath
+      )
       {
          //Arrange
          //Act
@@ -32,10 +35,12 @@ public class Parse
 
          //Assert
          return IsALeftAnd(AssertMessages.ReturnValue,
-                           (description,
-                            actualPath) => AreEqual(description,
-                                                    testPath,
-                                                    actualPath),
+                           (
+                              description,
+                              actualPath
+                           ) => AreEqual(description,
+                                         testPath,
+                                         actualPath),
                            actual);
       }
 
@@ -58,7 +63,10 @@ public class Parse
    public void
       GIVEN_a_valid_volume_rooted_path_without_a_trailing_directory_separator_WHEN_Parse_THEN_a_success_containing_AbsoluteDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(TestAbsoluteDirectoryPath testPath)
+      static Property Property
+      (
+         TestAbsoluteDirectoryPath testPath
+      )
       {
          //Arrange
          //Act
@@ -66,10 +74,12 @@ public class Parse
 
          //Assert
          return IsALeftAnd(AssertMessages.ReturnValue,
-                           (description,
-                            actualPath) => AreEqual(description,
-                                                    testPath,
-                                                    actualPath),
+                           (
+                              description,
+                              actualPath
+                           ) => AreEqual(description,
+                                         testPath,
+                                         actualPath),
                            actual);
       }
 
@@ -115,7 +125,10 @@ public class Parse
    [TestMethod]
    public void GIVEN_a_valid_path_without_a_volume_WHEN_Parse_THEN_a_failure_is_returned()
    {
-      static Property Property(string path)
+      static Property Property
+      (
+         string path
+      )
       {
          //Arrange
          //Act
@@ -146,7 +159,10 @@ public class Parse
    [TestMethod]
    public void GIVEN_a_path_with_an_invalid_volume_root_WHEN_Parse_THEN_a_failure_is_returned()
    {
-      static Property Property(string path)
+      static Property Property
+      (
+         string path
+      )
       {
          //Arrange
          //Act
@@ -177,7 +193,10 @@ public class Parse
    [TestMethod]
    public void GIVEN_a_path_with_a_volume_root_and_an_invalid_component_WHEN_Parse_THEN_a_failure_is_returned()
    {
-      static Property Property(string path)
+      static Property Property
+      (
+         string path
+      )
       {
          //Arrange
          //Act

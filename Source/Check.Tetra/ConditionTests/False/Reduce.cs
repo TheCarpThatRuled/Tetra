@@ -50,7 +50,10 @@ public class False_Reduce
    [TestMethod]
    public void GIVEN_False_WHEN_Reduce_AND_whenFalse_is_an_int_AND_whenTrue_is_an_int_THEN_whenFalse_is_returned()
    {
-      static Property Property((int whenFalse, int whenTrue) args)
+      static Property Property
+      (
+         (int whenFalse, int whenTrue) args
+      )
       {
          //Arrange
          var condition = Condition.False();
@@ -83,7 +86,10 @@ public class False_Reduce
    [TestMethod]
    public void GIVEN_False_WHEN_Reduce_AND_whenFalse_is_a_TestClass_AND_whenTrue_is_a_TestClass_THEN_whenFalse_is_returned()
    {
-      static Property Property((TestClass whenFalse, TestClass whenTrue) args)
+      static Property Property
+      (
+         (TestClass whenFalse, TestClass whenTrue) args
+      )
       {
          //Arrange
          var condition = Condition.False();
@@ -116,7 +122,10 @@ public class False_Reduce
    [TestMethod]
    public void GIVEN_False_WHEN_Reduce_AND_whenFalse_is_a_TestStruct_AND_whenTrue_is_a_TestStruct_THEN_whenFalse_is_returned()
    {
-      static Property Property((TestStruct whenFalse, TestStruct whenTrue) args)
+      static Property Property
+      (
+         (TestStruct whenFalse, TestStruct whenTrue) args
+      )
       {
          //Arrange
          var condition = Condition.False();
@@ -152,7 +161,10 @@ public class False_Reduce
    [TestMethod]
    public void GIVEN_False_WHEN_Reduce_AND_whenFalse_is_an_int_AND_whenTrue_is_a_Func_of_int_THEN_whenTrue_is_not_invoked_AND_whenFalse_is_returned()
    {
-      static Property Property((int whenFalse, int whenTrue) args)
+      static Property Property
+      (
+         (int whenFalse, int whenTrue) args
+      )
       {
          //Arrange
          var whenTrue = FakeFunction<int>.Create(args.whenTrue);
@@ -189,7 +201,10 @@ public class False_Reduce
    [TestMethod]
    public void GIVEN_False_WHEN_Reduce_AND_whenFalse_is_an_TestClass_AND_whenTrue_is_a_Func_of_TestClass_THEN_whenTrue_is_not_invoked_AND_whenFalse_is_returned()
    {
-      static Property Property((TestClass whenFalse, TestClass whenTrue) args)
+      static Property Property
+      (
+         (TestClass whenFalse, TestClass whenTrue) args
+      )
       {
          //Arrange
          var whenTrue = FakeFunction<TestClass>.Create(args.whenTrue);
@@ -226,7 +241,10 @@ public class False_Reduce
    [TestMethod]
    public void GIVEN_False_WHEN_Reduce_AND_whenFalse_is_an_TestStruct_AND_whenTrue_is_a_Func_of_TestStruct_THEN_whenTrue_is_not_invoked_AND_whenFalse_is_returned()
    {
-      static Property Property((TestStruct whenFalse, TestStruct whenTrue) args)
+      static Property Property
+      (
+         (TestStruct whenFalse, TestStruct whenTrue) args
+      )
       {
          //Arrange
          var whenTrue = FakeFunction<TestStruct>.Create(args.whenTrue);
@@ -267,7 +285,10 @@ public class False_Reduce
    public void
       GIVEN_False_WHEN_Reduce_AND_whenFalse_is_a_Func_of_int_AND_whenTrue_is_an_int_THEN_whenFalse_is_invoked_AND_whenTrue_is_not_invoked_AND_the_return_value_of_whenFalse_is_returned()
    {
-      static Property Property((int whenFalse, int whenTrue) args)
+      static Property Property
+      (
+         (int whenFalse, int whenTrue) args
+      )
       {
          //Arrange
          var whenFalse = FakeFunction<int>.Create(args.whenFalse);
@@ -305,7 +326,10 @@ public class False_Reduce
    public void
       GIVEN_False_WHEN_Reduce_AND_whenFalse_is_a_Func_of_TestClass_AND_whenTrue_is_a_TestClass_THEN_whenFalse_is_invoked_AND_the_return_value_of_whenFalse_is_returned()
    {
-      static Property Property((TestClass whenFalse, TestClass whenTrue) args)
+      static Property Property
+      (
+         (TestClass whenFalse, TestClass whenTrue) args
+      )
       {
          //Arrange
          var whenFalse = FakeFunction<TestClass>.Create(args.whenFalse);
@@ -343,7 +367,10 @@ public class False_Reduce
    public void
       GIVEN_False_WHEN_Reduce_AND_whenFalse_is_a_Func_of_TestStruct_AND_whenTrue_is_a_TestStruct_THEN_whenFalse_is_invoked_AND_the_return_value_of_whenFalse_is_returned()
    {
-      static Property Property((TestStruct whenFalse, TestStruct whenTrue) args)
+      static Property Property
+      (
+         (TestStruct whenFalse, TestStruct whenTrue) args
+      )
       {
          //Arrange
          var whenFalse = FakeFunction<TestStruct>.Create(args.whenFalse);
@@ -384,7 +411,10 @@ public class False_Reduce
    public void
       GIVEN_False_WHEN_Reduce_AND_whenFalse_is_a_Func_of_int_AND_whenTrue_is_a_Func_of_int_THEN_whenFalse_is_invoked_AND_whenTrue_is_not_invoked_AND_the_return_value_of_whenFalse_is_returned()
    {
-      static Property Property((int whenFalse, int whenTrue) args)
+      static Property Property
+      (
+         (int whenFalse, int whenTrue) args
+      )
       {
          //Arrange
          var whenFalse = FakeFunction<int>.Create(args.whenFalse);
@@ -425,7 +455,10 @@ public class False_Reduce
    public void
       GIVEN_False_WHEN_Reduce_AND_whenFalse_is_a_Func_of_TestClass_AND_whenTrue_is_a_Func_of_TestClass_THEN_whenFalse_is_invoked_AND_whenTrue_is_not_invoked_AND_the_return_value_of_whenFalse_is_returned()
    {
-      static Property Property((TestClass whenFalse, TestClass whenTrue) args)
+      static Property Property
+      (
+         (TestClass whenFalse, TestClass whenTrue) args
+      )
       {
          //Arrange
          var whenFalse = FakeFunction<TestClass>.Create(args.whenFalse);
@@ -466,7 +499,10 @@ public class False_Reduce
    public void
       GIVEN_False_WHEN_Reduce_AND_whenFalse_is_a_Func_of_TestStruct_AND_whenTrue_is_a_Func_of_TestStruct_THEN_whenFalse_is_invoked_AND_whenTrue_is_not_invoked_AND_the_return_value_of_whenFalse_is_returned()
    {
-      static Property Property((TestStruct whenFalse, TestStruct whenTrue) args)
+      static Property Property
+      (
+         (TestStruct whenFalse, TestStruct whenTrue) args
+      )
       {
          //Arrange
          var whenFalse = FakeFunction<TestStruct>.Create(args.whenFalse);

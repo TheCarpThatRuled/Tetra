@@ -23,7 +23,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_path_with_a_volume_root_but_without_a_trailing_directory_separator_WHEN_Create_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(TestAbsoluteFilePath testPath)
+      static Property Property
+      (
+         TestAbsoluteFilePath testPath
+      )
       {
          //Arrange
          //Act
@@ -53,7 +56,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_path_with_volume_root_and_a_trailing_directory_separator_WHEN_Create_THEN_an_ArgumentException_is_thrown()
    {
-      static Property Property(TestAbsoluteFilePath path)
+      static Property Property
+      (
+         TestAbsoluteFilePath path
+      )
          => AnArgumentExceptionWasThrown(() => AbsoluteFilePath.Create(path.PathWithTrailingDirectorySeparator()),
                                          IsNotValidBecauseAnAbsoluteFilePathMayNotEndWithADirectorySeparator(path.PathWithTrailingDirectorySeparator(),
                                                                                                              HumanReadableName.AbsoluteFilePath),
@@ -110,7 +116,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_path_without_a_volume_root_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
-      static Property Property(string path)
+      static Property Property
+      (
+         string path
+      )
          => AnArgumentExceptionWasThrown(() => AbsoluteFilePath.Create(path),
                                          IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
                                                                                                   HumanReadableName.AbsoluteFilePath),
@@ -134,7 +143,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_path_with_an_invalid_volume_root_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
-      static Property Property(string path)
+      static Property Property
+      (
+         string path
+      )
          => AnArgumentExceptionWasThrown(() => AbsoluteFilePath.Create(path),
                                          IsNotValidBecauseAnAbsolutePathMustStartWithAVolumeLabel(path,
                                                                                                   HumanReadableName.AbsoluteFilePath),
@@ -158,7 +170,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_path_with_a_volume_root_and_an_invalid_component_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
-      static Property Property(string path)
+      static Property Property
+      (
+         string path
+      )
          => AnArgumentExceptionWasThrown(() => AbsoluteFilePath.Create(path),
                                          IsNotValidBecauseAnAbsolutePathMayNotContainTheCharacters(path,
                                                                                                    HumanReadableName.AbsoluteFilePath),
@@ -186,7 +201,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_Volume_and_a_sequence_of_DirectoryComponents_and_a_FileComponent_WHEN_Create_THEN_an_AbsoluteFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(TestAbsoluteFilePath testPath)
+      static Property Property
+      (
+         TestAbsoluteFilePath testPath
+      )
       {
          //Arrange
          //Act

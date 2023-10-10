@@ -6,12 +6,38 @@ public sealed class EitherAsserts<TLeft, TRight, TNext> : IAsserts
    where TNext : IAsserts
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly IEither<TLeft, TRight> _actual;
+   private readonly string                 _description;
+   private readonly Func<TNext>            _next;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private EitherAsserts
+   (
+      IEither<TLeft, TRight> actual,
+      string                 description,
+      Func<TNext>            next
+   )
+   {
+      _actual      = actual;
+      _description = description;
+      _next        = next;
+   }
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static EitherAsserts<TLeft, TRight, TNext> Create(string                 description,
-                                                            IEither<TLeft, TRight> actual,
-                                                            Func<TNext>            next)
+   public static EitherAsserts<TLeft, TRight, TNext> Create
+   (
+      string                 description,
+      IEither<TLeft, TRight> actual,
+      Func<TNext>            next
+   )
       => new(actual,
              description,
              next);
@@ -20,7 +46,10 @@ public sealed class EitherAsserts<TLeft, TRight, TNext> : IAsserts
    // Methods
    /* ------------------------------------------------------------ */
 
-   public TNext IsALeft(TLeft expected)
+   public TNext IsALeft
+   (
+      TLeft expected
+   )
    {
       Assert
         .That
@@ -33,7 +62,10 @@ public sealed class EitherAsserts<TLeft, TRight, TNext> : IAsserts
 
    /* ------------------------------------------------------------ */
 
-   public TNext IsARight(TRight expected)
+   public TNext IsARight
+   (
+      TRight expected
+   )
    {
       Assert
         .That
@@ -46,7 +78,10 @@ public sealed class EitherAsserts<TLeft, TRight, TNext> : IAsserts
 
    /* ------------------------------------------------------------ */
 
-   public TNext IsEqualTo(object? expected)
+   public TNext IsEqualTo
+   (
+      object? expected
+   )
    {
       Assert.That
             .AreEqual(_description,
@@ -58,7 +93,10 @@ public sealed class EitherAsserts<TLeft, TRight, TNext> : IAsserts
 
    /* ------------------------------------------------------------ */
 
-   public TNext IsReferenceEqualTo(object? expected)
+   public TNext IsReferenceEqualTo
+   (
+      object? expected
+   )
    {
       Assert.That
             .AreReferenceEqual(_description,
@@ -66,27 +104,6 @@ public sealed class EitherAsserts<TLeft, TRight, TNext> : IAsserts
                                _actual);
 
       return _next();
-   }
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly IEither<TLeft, TRight> _actual;
-   private readonly string                 _description;
-   private readonly Func<TNext>            _next;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private EitherAsserts(IEither<TLeft, TRight> actual,
-                         string                 description,
-                         Func<TNext>            next)
-   {
-      _actual      = actual;
-      _description = description;
-      _next        = next;
    }
 
    /* ------------------------------------------------------------ */

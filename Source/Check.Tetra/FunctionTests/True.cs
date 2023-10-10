@@ -46,7 +46,10 @@ public class True
    [TestMethod]
    public void GIVEN_Function_WHEN_True_AND_discard_is_an_int_THEN_true_is_returned()
    {
-      static Property Property(int value)
+      static Property Property
+      (
+         int value
+      )
       {
          //Act
          var actual = Function.True(value);
@@ -72,7 +75,10 @@ public class True
    [TestMethod]
    public void GIVEN_Function_WHEN_True_AND_discard_is_a_TestClass_THEN_true_is_returned()
    {
-      static Property Property(TestClass value)
+      static Property Property
+      (
+         TestClass value
+      )
       {
          //Act
          var actual = Function.True(value);
@@ -100,7 +106,10 @@ public class True
    [TestMethod]
    public void GIVEN_Function_WHEN_True_AND_discard_is_a_TestStruct_THEN_true_is_returned()
    {
-      static Property Property(TestStruct value)
+      static Property Property
+      (
+         TestStruct value
+      )
       {
          //Act
          var actual = Function.True(value);

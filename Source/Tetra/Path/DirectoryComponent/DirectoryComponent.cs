@@ -6,19 +6,72 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
                                   IEquatable<DirectoryComponent>
 {
    /* ------------------------------------------------------------ */
+   // Private Constants
+   /* ------------------------------------------------------------ */
+
+   private const string ComponentType = "directory component";
+
+   /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly string _value;
+
+   /* ------------------------------------------------------------ */
+   // Protected Constructors
+   /* ------------------------------------------------------------ */
+
+   protected DirectoryComponent
+   (
+      string value
+   )
+      => _value = value;
+
+   /* ------------------------------------------------------------ */
+   // IComparable<DirectoryComponent> Methods
+   /* ------------------------------------------------------------ */
+
+   public int CompareTo
+   (
+      DirectoryComponent? other
+   )
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Compare(_value,
+                 other?._value);
+
+   /* ------------------------------------------------------------ */
+   // IEquatable<DirectoryComponent> Methods
+   /* ------------------------------------------------------------ */
+
+   public bool Equals
+   (
+      DirectoryComponent? other
+   )
+      => StringComparer
+        .OrdinalIgnoreCase
+        .Equals(_value,
+                other?._value);
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static DirectoryComponent Create(string potentialComponent)
+   public static DirectoryComponent Create
+   (
+      string potentialComponent
+   )
       => Validate(potentialComponent,
                   ComponentType)
         .Unify<DirectoryComponent>(message => throw new ArgumentException(message.Content(),
-                                                                           nameof(potentialComponent)),
-                                    () => new(potentialComponent));
+                                                                          nameof(potentialComponent)),
+                                   () => new(potentialComponent));
 
    /* ------------------------------------------------------------ */
 
-   public static IEither<DirectoryComponent, Message> Parse(string potentialComponent)
+   public static IEither<DirectoryComponent, Message> Parse
+   (
+      string potentialComponent
+   )
       => Validate(potentialComponent,
                   ComponentType)
         .ExpandSomeToRight(() => new DirectoryComponent(potentialComponent));
@@ -27,7 +80,10 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
    // object Overridden Methods
    /* ------------------------------------------------------------ */
 
-   public override bool Equals(object? obj)
+   public override bool Equals
+   (
+      object? obj
+   )
       => ReferenceEquals(this,
                          obj)
       || obj is DirectoryComponent directoryComponent
@@ -46,26 +102,6 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
       => $"<{_value}>";
 
    /* ------------------------------------------------------------ */
-   // IComparable<DirectoryComponent> Methods
-   /* ------------------------------------------------------------ */
-
-   public int CompareTo(DirectoryComponent? other)
-      => StringComparer
-        .OrdinalIgnoreCase
-        .Compare(_value,
-                 other?._value);
-
-   /* ------------------------------------------------------------ */
-   // IEquatable<DirectoryComponent> Methods
-   /* ------------------------------------------------------------ */
-
-   public bool Equals(DirectoryComponent? other)
-      => StringComparer
-        .OrdinalIgnoreCase
-        .Equals(_value,
-                other?._value);
-
-   /* ------------------------------------------------------------ */
    // Properties
    /* ------------------------------------------------------------ */
 
@@ -73,34 +109,18 @@ public class DirectoryComponent : IComparable<DirectoryComponent>,
       => _value;
 
    /* ------------------------------------------------------------ */
-   // Protected Constructors
-   /* ------------------------------------------------------------ */
-
-   protected DirectoryComponent(string value)
-      => _value = value;
-
-   /* ------------------------------------------------------------ */
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected static IOption<Message> Validate(string potentialComponent,
-                                              string componentType)
+   protected static IOption<Message> Validate
+   (
+      string potentialComponent,
+      string componentType
+   )
       => potentialComponent.IsNotAValidPathComponent()
             ? Option.Some(Message.Create(IsNotValidBecauseAComponentMayNotContainTheCharacters(potentialComponent,
                                                                                                componentType)))
             : Option<Message>.None();
-
-   /* ------------------------------------------------------------ */
-   // Private Constants
-   /* ------------------------------------------------------------ */
-
-   private const string ComponentType = "directory component";
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly string _value;
 
    /* ------------------------------------------------------------ */
 }

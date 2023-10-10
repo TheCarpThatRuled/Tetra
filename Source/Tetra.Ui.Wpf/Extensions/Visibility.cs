@@ -10,15 +10,21 @@ public static class Visibility_Extensions
    /* ------------------------------------------------------------ */
 
    [ExcludeFromCodeCoverage]
-   public static ArgumentOutOfRangeException OutOfRange(this System.Windows.Visibility visibility,
-                                                        string                         argumentName)
+   public static ArgumentOutOfRangeException OutOfRange
+   (
+      this System.Windows.Visibility visibility,
+      string                         argumentName
+   )
       => new(argumentName,
              visibility,
              $"Unrecognised {typeof(System.Windows.Visibility).FullName}");
 
    /* ------------------------------------------------------------ */
 
-   public static string ToHumanReadable(this System.Windows.Visibility visibility)
+   public static string ToHumanReadable
+   (
+      this System.Windows.Visibility visibility
+   )
       => visibility switch
          {
             System.Windows.Visibility.Collapsed => "Collapsed",
@@ -30,7 +36,10 @@ public static class Visibility_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Visibility ToTetra(this System.Windows.Visibility visibility)
+   public static Visibility ToTetra
+   (
+      this System.Windows.Visibility visibility
+   )
       => visibility switch
          {
             System.Windows.Visibility.Collapsed => Visibility.Collapsed,
@@ -42,7 +51,10 @@ public static class Visibility_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static System.Windows.Visibility ToWpf(this Visibility visibility)
+   public static System.Windows.Visibility ToWpf
+   (
+      this Visibility visibility
+   )
       => visibility switch
          {
             Visibility.Collapsed => System.Windows.Visibility.Collapsed,

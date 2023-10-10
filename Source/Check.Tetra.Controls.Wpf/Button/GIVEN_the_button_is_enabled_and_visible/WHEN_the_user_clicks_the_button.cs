@@ -13,7 +13,10 @@ public class WHEN_the_user_clicks_the_button : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_user_clicks_the_button]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       Log.ToStandardOutput(test.FullCharacterisation());
 
@@ -35,9 +38,9 @@ public class WHEN_the_user_clicks_the_button : AAATestDataSource
       /* ------------------------------------------------------------ */
 
       foreach (var number_of_clicks in Enumerable
-                                    .Range(1,
-                                           10)
-                                    .Select(x => (uint) x))
+                                      .Range(1,
+                                             10)
+                                      .Select(x => (uint) x))
       {
          yield return AAA_test
                      .GIVEN(The_UI.Has_created_the_button(Buttons.Create_enabled_and_visible))

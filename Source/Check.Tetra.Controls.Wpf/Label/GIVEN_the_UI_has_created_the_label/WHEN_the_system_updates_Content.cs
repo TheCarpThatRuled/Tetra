@@ -1,5 +1,6 @@
 ﻿using Check.Check_Label;
 using static Check.Label.Contents;
+
 // ReSharper disable InconsistentNaming
 
 namespace Check.Label.GIVEN_the_UI_has_created_the_label;
@@ -13,7 +14,10 @@ public class WHEN_the_system_updates_Content : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_system_updates_Content]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       Log.ToStandardOutput(test.FullCharacterisation());
 

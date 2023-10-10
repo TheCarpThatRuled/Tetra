@@ -8,23 +8,28 @@ public sealed partial class TheButtonHasNotBeenCreated
    public sealed class Act : IActs
    {
       /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public Act<TheButtonHasBeenCreated.Asserts> The_UI_creates_the_button(The_UI_creates_a_button args)
-         => new(() => Create_the_button(args));
-
-      /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
       internal Act() { }
+      /* ------------------------------------------------------------ */
+      // Methods
+      /* ------------------------------------------------------------ */
+
+      public Act<TheButtonHasBeenCreated.Asserts> The_UI_creates_the_button
+      (
+         The_UI_creates_a_button args
+      )
+         => new(() => Create_the_button(args));
 
       /* ------------------------------------------------------------ */
       // Private Methods
       /* ------------------------------------------------------------ */
 
-      private TheButtonHasBeenCreated.Asserts Create_the_button(The_UI_creates_a_button args)
+      private TheButtonHasBeenCreated.Asserts Create_the_button
+      (
+         The_UI_creates_a_button args
+      )
       {
          var system = FakeSystem.Create(args);
          return new(FakeButton.Create(ButtonContext.Create(Button

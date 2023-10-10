@@ -7,14 +7,20 @@ public static class TestRelativeFilePath_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static TestRelativeDirectoryPath Parent(this TestRelativeFilePath path)
+   public static TestRelativeDirectoryPath Parent
+   (
+      this TestRelativeFilePath path
+   )
       => TestRelativeDirectoryPath
         .Create(path.Directories());
 
    /* ------------------------------------------------------------ */
 
-   public static TestRelativeFilePath Prepend(this TestRelativeFilePath       child,
-                                              IEnumerable<DirectoryComponent> parent)
+   public static TestRelativeFilePath Prepend
+   (
+      this TestRelativeFilePath       child,
+      IEnumerable<DirectoryComponent> parent
+   )
       => TestRelativeFilePath
         .Create(parent.Concat(child.Directories())
                       .Materialise(),
@@ -22,8 +28,11 @@ public static class TestRelativeFilePath_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static TestAbsoluteFilePath Prepend(this TestRelativeFilePath child,
-                                              TestAbsoluteDirectoryPath parent)
+   public static TestAbsoluteFilePath Prepend
+   (
+      this TestRelativeFilePath child,
+      TestAbsoluteDirectoryPath parent
+   )
       => TestAbsoluteFilePath
         .Create(parent.Volume(),
                 parent.Directories()
@@ -33,8 +42,11 @@ public static class TestRelativeFilePath_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static TestRelativeFilePath Prepend(this TestRelativeFilePath child,
-                                              TestRelativeDirectoryPath parent)
+   public static TestRelativeFilePath Prepend
+   (
+      this TestRelativeFilePath child,
+      TestRelativeDirectoryPath parent
+   )
       => TestRelativeFilePath
         .Create(parent.Directories()
                       .Concat(child.Directories())
@@ -43,8 +55,11 @@ public static class TestRelativeFilePath_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static TestAbsoluteFilePath Prepend(this TestRelativeFilePath child,
-                                              VolumeComponent           parent)
+   public static TestAbsoluteFilePath Prepend
+   (
+      this TestRelativeFilePath child,
+      VolumeComponent           parent
+   )
       => TestAbsoluteFilePath
         .Create(parent,
                 child.Directories(),
@@ -52,14 +67,20 @@ public static class TestRelativeFilePath_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static ISequence<TestRelativeDirectoryPath> ToAncestry(this TestRelativeFilePath path)
+   public static ISequence<TestRelativeDirectoryPath> ToAncestry
+   (
+      this TestRelativeFilePath path
+   )
       => path
         .Parent()
         .ToAncestry();
 
    /* ------------------------------------------------------------ */
 
-   public static RelativeFilePath ToTetra(this TestRelativeFilePath path)
+   public static RelativeFilePath ToTetra
+   (
+      this TestRelativeFilePath path
+   )
       => RelativeFilePath
         .Create(path.Directories(),
                 path.File());

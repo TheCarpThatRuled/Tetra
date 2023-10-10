@@ -5,11 +5,36 @@ namespace Check.Check_Button;
 
 internal sealed class FakeSystem
 {
+   private readonly ITwoWayBinding<bool> _isEnabled;
+
+   /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly FakeAction                 _onClick = FakeAction.Create();
+   private readonly ITwoWayBinding<Visibility> _visibility;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private FakeSystem
+   (
+      ITwoWayBinding<bool>       isEnabled,
+      ITwoWayBinding<Visibility> visibility
+   )
+   {
+      _isEnabled  = isEnabled;
+      _visibility = visibility;
+   }
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static FakeSystem Create(The_UI_creates_a_button args)
+   public static FakeSystem Create
+   (
+      The_UI_creates_a_button args
+   )
       => new(Bind.To(args.IsEnabled()),
              Bind.To(args.Visibility()));
 
@@ -29,26 +54,6 @@ internal sealed class FakeSystem
 
    public ITwoWayBinding<Visibility> Visibility()
       => _visibility;
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly FakeAction _onClick = FakeAction.Create();
-
-   private readonly ITwoWayBinding<bool>       _isEnabled;
-   private readonly ITwoWayBinding<Visibility> _visibility;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private FakeSystem(ITwoWayBinding<bool>       isEnabled,
-                      ITwoWayBinding<Visibility> visibility)
-   {
-      _isEnabled  = isEnabled;
-      _visibility = visibility;
-   }
 
    /* ------------------------------------------------------------ */
 }

@@ -22,7 +22,10 @@ public class ToPath
    [TestMethod]
    public void GIVEN_a_DirectoryComponent_WHEN_ToPath_THEN_a_RelativeDirectoryPath_containing_the_DirectoryComponent_is_returned()
    {
-      static Property Property(DirectoryComponent directory)
+      static Property Property
+      (
+         DirectoryComponent directory
+      )
       {
          //Arrange
          var expected = TestRelativeDirectoryPath.Create(directory);

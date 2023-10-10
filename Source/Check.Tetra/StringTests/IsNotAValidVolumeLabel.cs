@@ -22,7 +22,10 @@ public class IsNotAValidVolumeLabel
    [TestMethod]
    public void GIVEN_a_valid_string_WHEN_IsNotAValidVolumeLabel_THEN_false_is_returned()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
       {
          //Arrange
          //Act
@@ -51,7 +54,10 @@ public class IsNotAValidVolumeLabel
    [TestMethod]
    public void GIVEN_a_string_containing_the_wrong_number_of_characters_WHEN_IsNotAValidVolumeLabel_THEN_true_is_returned()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
       {
          //Act
          var actual = value.IsNotAValidVolumeLabel();
@@ -79,11 +85,14 @@ public class IsNotAValidVolumeLabel
    [TestMethod]
    public void GIVEN_a_string_containing_an_invalid_first_character_WHEN_IsNotAValidVolumeLabel_THEN_true_is_returned()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
       {
          //Act
          var actual = value.IsNotAValidVolumeLabel();
-         
+
          //Assert
          return IsTrue(AssertMessages.ReturnValue,
                        actual);
@@ -107,7 +116,10 @@ public class IsNotAValidVolumeLabel
    [TestMethod]
    public void GIVEN_a_string_containing_an_invalid_second_character_WHEN_IsNotAValidVolumeLabel_THEN_true_is_returned()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
       {
          //Act
          var actual = value.IsNotAValidVolumeLabel();

@@ -16,7 +16,10 @@ public class WHEN_the_client_calls_IsALeft : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_client_calls_IsALeft]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       using var given = test.Create();
       var       when  = given.Arrange();

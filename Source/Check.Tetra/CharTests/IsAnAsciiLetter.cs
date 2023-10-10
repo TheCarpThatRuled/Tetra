@@ -22,7 +22,10 @@ public class IsAnAsciiLetter
    [TestMethod]
    public void GIVEN_an_ASCII_letter_WHEN_IsAnAsciiLetter_THEN_true_is_returned()
    {
-      static Property Property(char value)
+      static Property Property
+      (
+         char value
+      )
       {
          //Act
          var actual = value.IsAnAsciiLetter();
@@ -50,7 +53,10 @@ public class IsAnAsciiLetter
    [TestMethod]
    public void GIVEN_a_non_ASCII_letter_WHEN_IsAnAsciiLetter_THEN_false_is_returned()
    {
-      static Property Property(char value)
+      static Property Property
+      (
+         char value
+      )
       {
          //Act
          var actual = value.IsAnAsciiLetter();

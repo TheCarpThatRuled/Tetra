@@ -12,43 +12,73 @@ public interface IFileSystem
    // Methods
    /* ------------------------------------------------------------ */
 
-   public IOption<Message> Create(AbsoluteDirectoryPath path);
+   public IOption<Message> Create
+   (
+      AbsoluteDirectoryPath path
+   );
 
    /* ------------------------------------------------------------ */
 
-   public bool DoesNotExist(AbsoluteDirectoryPath path);
+   public bool DoesNotExist
+   (
+      AbsoluteDirectoryPath path
+   );
 
    /* ------------------------------------------------------------ */
 
-   public bool DoesNotExist(AbsoluteFilePath path);
+   public bool DoesNotExist
+   (
+      AbsoluteFilePath path
+   );
 
    /* ------------------------------------------------------------ */
 
-   public bool Exists(AbsoluteDirectoryPath path);
+   public bool Exists
+   (
+      AbsoluteDirectoryPath path
+   );
 
    /* ------------------------------------------------------------ */
 
-   public bool Exists(AbsoluteFilePath path);
+   public bool Exists
+   (
+      AbsoluteFilePath path
+   );
 
    /* ------------------------------------------------------------ */
 
-   public IOpenFileResult<Stream> Open(AbsoluteFilePath path);
+   public IOpenFileResult<Stream> Open
+   (
+      AbsoluteFilePath path
+   );
 
    /* ------------------------------------------------------------ */
 
-   public IOpenFileResult<string> Read(AbsoluteFilePath path);
+   public IOpenFileResult<string> Read
+   (
+      AbsoluteFilePath path
+   );
 
    /* ------------------------------------------------------------ */
 
-   public IOption<Message> SetCurrentDirectory(AbsoluteDirectoryPath path);
+   public IOption<Message> SetCurrentDirectory
+   (
+      AbsoluteDirectoryPath path
+   );
 
    /* ------------------------------------------------------------ */
 
-   public IEither<ISequence<AbsoluteFilePath>, Message> SubDirectoriesOf(AbsoluteDirectoryPath path);
+   public IEither<ISequence<AbsoluteFilePath>, Message> SubDirectoriesOf
+   (
+      AbsoluteDirectoryPath path
+   );
 
    /* ------------------------------------------------------------ */
 
-   public IEither<ISequence<AbsoluteFilePath>, Message> SubFileOf(AbsoluteDirectoryPath path);
+   public IEither<ISequence<AbsoluteFilePath>, Message> SubFileOf
+   (
+      AbsoluteDirectoryPath path
+   );
 
    /* ------------------------------------------------------------ */
 }

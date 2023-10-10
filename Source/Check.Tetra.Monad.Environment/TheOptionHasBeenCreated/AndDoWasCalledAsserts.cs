@@ -11,6 +11,32 @@ public static partial class TheOptionHasBeenCreated
                                                IWhenSomeActionAsserts<FakeType, AndDoWasCalledAsserts>
    {
       /* ------------------------------------------------------------ */
+      //  Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly IOption<FakeType>    _option;
+      private readonly IOption<FakeType>    _returnValue;
+      private readonly FakeAction           _whenNone;
+      private readonly FakeAction<FakeType> _whenSome;
+
+      /* ------------------------------------------------------------ */
+      //  Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal AndDoWasCalledAsserts
+      (
+         IOption<FakeType>    option,
+         FakeAction<FakeType> whenSome,
+         FakeAction           whenNone,
+         IOption<FakeType>    returnValue
+      )
+      {
+         _option      = option;
+         _returnValue = returnValue;
+         _whenNone    = whenNone;
+         _whenSome    = whenSome;
+      }
+      /* ------------------------------------------------------------ */
       //  IReturnsThisAsserts<Asserts> Methods
       /* ------------------------------------------------------------ */
 
@@ -39,30 +65,6 @@ public static partial class TheOptionHasBeenCreated
            .Create("whenSome",
                    _whenSome,
                    () => this);
-
-      /* ------------------------------------------------------------ */
-      //  Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal AndDoWasCalledAsserts(IOption<FakeType>    option,
-                                     FakeAction<FakeType> whenSome,
-                                     FakeAction           whenNone,
-                                     IOption<FakeType>    returnValue)
-      {
-         _option      = option;
-         _returnValue = returnValue;
-         _whenNone    = whenNone;
-         _whenSome    = whenSome;
-      }
-
-      /* ------------------------------------------------------------ */
-      //  Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly IOption<FakeType>    _option;
-      private readonly IOption<FakeType>    _returnValue;
-      private readonly FakeAction           _whenNone;
-      private readonly FakeAction<FakeType> _whenSome;
 
       /* ------------------------------------------------------------ */
    }

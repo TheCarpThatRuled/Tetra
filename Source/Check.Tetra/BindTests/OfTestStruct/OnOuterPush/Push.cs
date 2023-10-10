@@ -22,11 +22,14 @@ public class Push
    [TestMethod]
    public void GIVEN_OnOuterPush_WHEN_Push_THEN_onOuterPush_was_invoked_once_with_pushedValue_AND_updated_was_not_invoked_AND_Pull_returns_pushedValue()
    {
-      static Property Property((TestStruct initalValue, TestStruct pushedValue) args)
+      static Property Property
+      (
+         (TestStruct initalValue, TestStruct pushedValue) args
+      )
       {
          //Arrange
          var onOuterPush = FakeAction<TestStruct>.Create();
-         var updated = FakeAction.Create();
+         var updated     = FakeAction.Create();
 
          var binding = Bind
                       .To(args.initalValue)

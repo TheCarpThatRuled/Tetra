@@ -6,14 +6,16 @@ partial class Steps
 {
    partial class TheWhenRight
    {
-
       public sealed class ForUnify
       {
          /* ------------------------------------------------------------ */
          // Assert
          /* ------------------------------------------------------------ */
 
-         public IAssert<TheEitherHasBeenCreated.AndUnifyWasCalledAsserts, TheEitherHasBeenCreated.AndUnifyWasCalledAsserts> was_invoked_once_with(FakeRight expected)
+         public IAssert<TheEitherHasBeenCreated.AndUnifyWasCalledAsserts, TheEitherHasBeenCreated.AndUnifyWasCalledAsserts> was_invoked_once_with
+         (
+            FakeRight expected
+         )
             => the_whenRight.function.was_invoked_once_with<FakeRight, FakeNewType, TheEitherHasBeenCreated.AndUnifyWasCalledAsserts>(expected);
 
          /* ------------------------------------------------------------ */

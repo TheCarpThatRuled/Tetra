@@ -1,5 +1,4 @@
-﻿
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tetra.Testing;
 
@@ -10,10 +9,13 @@ partial class Assert_Extensions
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Assert AreSequenceEqual<T>(this Assert     assert,
-                                            string          description,
-                                            IEnumerable<T>? expected,
-                                            IEnumerable<T>? actual)
+   public static Assert AreSequenceEqual<T>
+   (
+      this Assert     assert,
+      string          description,
+      IEnumerable<T>? expected,
+      IEnumerable<T>? actual
+   )
       => assert
         .AreSequenceEqual(description,
                           expected?.Materialise(),
@@ -21,31 +23,39 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert AreSequenceEqual<T>(this Assert   assert,
-                                            string        description,
-                                            ISequence<T>? expected,
-                                            ISequence<T>? actual)
+   public static Assert AreSequenceEqual<T>
+   (
+      this Assert   assert,
+      string        description,
+      ISequence<T>? expected,
+      ISequence<T>? actual
+   )
       => assert
         .AreSequenceEqual(description,
                           expected,
                           actual,
                           x => x?.ToString() ?? string.Empty,
                           x => x?.ToString() ?? string.Empty,
-                          (e,
-                           a,
-                           d) => assert.AreEqual(d,
-                                                 e,
-                                                 a));
+                          (
+                             e,
+                             a,
+                             d
+                          ) => assert.AreEqual(d,
+                                               e,
+                                               a));
 
    /* ------------------------------------------------------------ */
 
-   public static Assert AreSequenceEqual<T0, T1>(this Assert            assert,
-                                                 string                 description,
-                                                 ISequence<T0>?         expected,
-                                                 ISequence<T1>?         actual,
-                                                 Func<T0, string>       t0ToString,
-                                                 Func<T1, string>       t1ToString,
-                                                 Action<T0, T1, string> compareItem)
+   public static Assert AreSequenceEqual<T0, T1>
+   (
+      this Assert            assert,
+      string                 description,
+      ISequence<T0>?         expected,
+      ISequence<T1>?         actual,
+      Func<T0, string>       t0ToString,
+      Func<T1, string>       t1ToString,
+      Action<T0, T1, string> compareItem
+   )
    {
       if (expected is null
        && actual is not null)

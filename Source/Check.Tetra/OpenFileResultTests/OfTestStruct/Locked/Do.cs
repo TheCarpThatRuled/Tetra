@@ -26,8 +26,11 @@ public class Locked_Do
    public void
       GIVEN_Locked_of_TestStruct_WHEN_Do_THEN_whenLocked_was_invoked_once_with_the_content_AND_whenMissing_was_not_invoked_AND_whenOpen_was_not_invoked_AND_this_is_returned()
    {
-      static Property Property(AbsoluteFilePath path,
-                               Message          message)
+      static Property Property
+      (
+         AbsoluteFilePath path,
+         Message          message
+      )
       {
          //Arrange
          var whenLocked  = FakeAction<Locked>.Create();

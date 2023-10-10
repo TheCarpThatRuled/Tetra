@@ -9,11 +9,35 @@ public sealed partial class TheTextBoxHasBeenCreated
 {
    public sealed class Arranges : IArranges
    {
+      private readonly FakeSystem _system;
+
+      /* ------------------------------------------------------------ */
+      // Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly FakeTextBox _textBox;
+
+      /* ------------------------------------------------------------ */
+      // Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal Arranges
+      (
+         FakeTextBox textBox,
+         FakeSystem  system
+      )
+      {
+         _textBox = textBox;
+         _system  = system;
+      }
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public Arranges The_system_updates_IsEnabled(bool isEnabled)
+      public Arranges The_system_updates_IsEnabled
+      (
+         bool isEnabled
+      )
       {
          _system.IsEnabled()
                 .Push(isEnabled);
@@ -23,7 +47,10 @@ public sealed partial class TheTextBoxHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public Arranges The_system_updates_Text(string text)
+      public Arranges The_system_updates_Text
+      (
+         string text
+      )
       {
          _system.Text()
                 .Push(text);
@@ -33,7 +60,10 @@ public sealed partial class TheTextBoxHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public Arranges The_system_updates_Visibility(Visibility visibility)
+      public Arranges The_system_updates_Visibility
+      (
+         Visibility visibility
+      )
       {
          _system.Visibility()
                 .Push(visibility);
@@ -43,7 +73,10 @@ public sealed partial class TheTextBoxHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public Arranges The_user_enters_text(string text)
+      public Arranges The_user_enters_text
+      (
+         string text
+      )
       {
          _textBox.EnterText(text);
 
@@ -55,24 +88,6 @@ public sealed partial class TheTextBoxHasBeenCreated
       public Acts WHEN()
          => new(_textBox,
                 _system);
-
-      /* ------------------------------------------------------------ */
-      // Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal Arranges(FakeTextBox textBox,
-                        FakeSystem  system)
-      {
-         _textBox = textBox;
-         _system  = system;
-      }
-
-      /* ------------------------------------------------------------ */
-      // Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly FakeTextBox _textBox;
-      private readonly FakeSystem  _system;
 
       /* ------------------------------------------------------------ */
    }

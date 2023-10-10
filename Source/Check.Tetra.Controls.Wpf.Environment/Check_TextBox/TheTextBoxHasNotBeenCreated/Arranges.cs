@@ -10,10 +10,18 @@ public sealed partial class TheTextBoxHasNotBeenCreated
    public sealed class Arranges : IArranges
    {
       /* ------------------------------------------------------------ */
+      // Private Constructors
+      /* ------------------------------------------------------------ */
+
+      private Arranges() { }
+      /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public TheTextBoxHasBeenCreated.Arranges The_UI_creates_the_text_box(The_UI_creates_a_text_box args)
+      public TheTextBoxHasBeenCreated.Arranges The_UI_creates_the_text_box
+      (
+         The_UI_creates_a_text_box args
+      )
       {
          var system = FakeSystem.Create(args);
          return new(FakeTextBox.Create(TextBoxContext.Create(TextBox
@@ -33,14 +41,11 @@ public sealed partial class TheTextBoxHasNotBeenCreated
       // Internal Factory Functions
       /* ------------------------------------------------------------ */
 
-      internal static Arranges Create(AAA_test.Disposables _)
+      internal static Arranges Create
+      (
+         AAA_test.Disposables _
+      )
          => new();
-
-      /* ------------------------------------------------------------ */
-      // Private Constructors
-      /* ------------------------------------------------------------ */
-
-      private Arranges() { }
 
       /* ------------------------------------------------------------ */
    }

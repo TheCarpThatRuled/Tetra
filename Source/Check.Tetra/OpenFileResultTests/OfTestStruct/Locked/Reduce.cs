@@ -26,9 +26,12 @@ public class Locked_Reduce
    public void
       GIVEN_Locked_of_TestStruct_WHEN_Reduce_AND_whenFuncs_are_a_Func_of_T_to_int_THEN_whenLocked_was_invoked_once_with_the_content_AND_whenMissing_was_not_invoked_AND_whenOpen_was_not_invoked_AND_the_return_value_of_whenLocked_is_returned()
    {
-      static Property Property(AbsoluteFilePath                                path,
-                               Message                                         message,
-                               (int whenLocked, int whenMissing, int whenOpen) args)
+      static Property Property
+      (
+         AbsoluteFilePath                                path,
+         Message                                         message,
+         (int whenLocked, int whenMissing, int whenOpen) args
+      )
       {
          //Arrange
          var whenLocked  = FakeFunction<Locked, int>.Create(args.whenLocked);
@@ -36,7 +39,7 @@ public class Locked_Reduce
          var whenOpen    = FakeFunction<TestStruct, int>.Create(args.whenOpen);
 
          var result = LockedResult<TestStruct>.Create(message,
-                                               path);
+                                                      path);
 
          //Act
          var actual = result.Reduce(whenLocked.Func,
@@ -78,9 +81,12 @@ public class Locked_Reduce
    public void
       GIVEN_Locked_of_TestStruct_WHEN_Reduce_AND_whenFuncs_are_a_Func_of_T_to_TestClass_THEN_whenLocked_was_invoked_once_with_the_content_AND_whenMissing_was_not_invoked_AND_whenOpen_was_not_invoked_AND_the_return_value_of_whenLocked_is_returned()
    {
-      static Property Property(AbsoluteFilePath                                                  path,
-                               Message                                                           message,
-                               (TestClass whenLocked, TestClass whenMissing, TestClass whenOpen) args)
+      static Property Property
+      (
+         AbsoluteFilePath                                                  path,
+         Message                                                           message,
+         (TestClass whenLocked, TestClass whenMissing, TestClass whenOpen) args
+      )
       {
          //Arrange
          var whenLocked  = FakeFunction<Locked, TestClass>.Create(args.whenLocked);
@@ -88,7 +94,7 @@ public class Locked_Reduce
          var whenOpen    = FakeFunction<TestStruct, TestClass>.Create(args.whenOpen);
 
          var result = LockedResult<TestStruct>.Create(message,
-                                               path);
+                                                      path);
 
          //Act
          var actual = result.Reduce(whenLocked.Func,
@@ -130,9 +136,12 @@ public class Locked_Reduce
    public void
       GIVEN_Locked_of_TestStruct_WHEN_Reduce_AND_whenFuncs_are_a_Func_of_T_to_TestStruct_THEN_whenLocked_was_invoked_once_with_the_content_AND_whenMissing_was_not_invoked_AND_whenOpen_was_not_invoked_AND_the_return_value_of_whenLocked_is_returned()
    {
-      static Property Property(AbsoluteFilePath                                                  path,
-                               Message                                                           message,
-                               (TestStruct whenLocked, TestStruct whenMissing, TestStruct whenOpen) args)
+      static Property Property
+      (
+         AbsoluteFilePath                                                     path,
+         Message                                                              message,
+         (TestStruct whenLocked, TestStruct whenMissing, TestStruct whenOpen) args
+      )
       {
          //Arrange
          var whenLocked  = FakeFunction<Locked, TestStruct>.Create(args.whenLocked);
@@ -140,7 +149,7 @@ public class Locked_Reduce
          var whenOpen    = FakeFunction<TestStruct, TestStruct>.Create(args.whenOpen);
 
          var result = LockedResult<TestStruct>.Create(message,
-                                               path);
+                                                      path);
 
          //Act
          var actual = result.Reduce(whenLocked.Func,

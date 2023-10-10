@@ -22,7 +22,10 @@ public class Ancestry
    [TestMethod]
    public void GIVEN_a_RelativeDirectoryPath_WHEN_Ancestry_THEN_a_sequence_of_RelativeDirectoryPaths_representing_each_node_from_the_root_to_the_leaf_is_returned()
    {
-      static Property Property(TestRelativeDirectoryPath testPath)
+      static Property Property
+      (
+         TestRelativeDirectoryPath testPath
+      )
       {
          //Arrange
          var expected = testPath.ToAncestry();

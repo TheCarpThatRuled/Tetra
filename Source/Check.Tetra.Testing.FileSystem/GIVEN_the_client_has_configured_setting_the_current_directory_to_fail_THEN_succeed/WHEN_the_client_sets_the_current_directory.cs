@@ -16,8 +16,11 @@ public class WHEN_the_client_sets_the_current_directory
    [TestMethod]
    public void THEN_the_current_directory_is_the_value_passed_to_SetCurrentDirectory_AND_a_none_is_returned()
    {
-      static Property Property((AbsoluteDirectoryPath initialPath, AbsoluteDirectoryPath updatedPath) args,
-                               Message                                                                message)
+      static Property Property
+      (
+         (AbsoluteDirectoryPath initialPath, AbsoluteDirectoryPath updatedPath) args,
+         Message                                                                message
+      )
       {
          //Arrange
          var fileSystem = FileSystem.From(args.initialPath);

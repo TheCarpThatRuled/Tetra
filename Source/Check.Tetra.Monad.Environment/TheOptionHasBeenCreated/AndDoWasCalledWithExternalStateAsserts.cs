@@ -11,6 +11,32 @@ public static partial class TheOptionHasBeenCreated
                                                                 IWhenSomeActionAsserts<FakeExternalState, FakeType, AndDoWasCalledWithExternalStateAsserts>
    {
       /* ------------------------------------------------------------ */
+      //  Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly IOption<FakeType>                       _option;
+      private readonly IOption<FakeType>                       _returnValue;
+      private readonly FakeAction<FakeExternalState>           _whenNone;
+      private readonly FakeAction<FakeExternalState, FakeType> _whenSome;
+
+      /* ------------------------------------------------------------ */
+      //  Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal AndDoWasCalledWithExternalStateAsserts
+      (
+         IOption<FakeType>                       option,
+         FakeAction<FakeExternalState, FakeType> whenSome,
+         FakeAction<FakeExternalState>           whenNone,
+         IOption<FakeType>                       returnValue
+      )
+      {
+         _option      = option;
+         _returnValue = returnValue;
+         _whenNone    = whenNone;
+         _whenSome    = whenSome;
+      }
+      /* ------------------------------------------------------------ */
       //  IReturnsThisAsserts<Asserts> Methods
       /* ------------------------------------------------------------ */
 
@@ -39,30 +65,6 @@ public static partial class TheOptionHasBeenCreated
            .Create("whenSome",
                    _whenSome,
                    () => this);
-
-      /* ------------------------------------------------------------ */
-      //  Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal AndDoWasCalledWithExternalStateAsserts(IOption<FakeType>                       option,
-                                                      FakeAction<FakeExternalState, FakeType> whenSome,
-                                                      FakeAction<FakeExternalState>           whenNone,
-                                                      IOption<FakeType>                       returnValue)
-      {
-         _option      = option;
-         _returnValue = returnValue;
-         _whenNone    = whenNone;
-         _whenSome    = whenSome;
-      }
-
-      /* ------------------------------------------------------------ */
-      //  Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly IOption<FakeType>                       _option;
-      private readonly IOption<FakeType>                       _returnValue;
-      private readonly FakeAction<FakeExternalState>           _whenNone;
-      private readonly FakeAction<FakeExternalState, FakeType> _whenSome;
 
       /* ------------------------------------------------------------ */
    }

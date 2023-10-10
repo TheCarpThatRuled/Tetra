@@ -8,37 +8,6 @@ partial class AAA_property_test<TState>
       where TAsserts : IAsserts
    {
       /* ------------------------------------------------------------ */
-      // Factory Functions
-      /* ------------------------------------------------------------ */
-
-      public static SilentAct<TArranges, TAsserts> Create(IAct<TArranges, TAsserts> act)
-         => new(act);
-
-      /* ------------------------------------------------------------ */
-
-      public static SilentAct<TArranges, TAsserts> Create(Func<TState, TArranges, TAsserts> act)
-         => new(AtomicAct<TArranges, TAsserts>.Create(act,
-                                                      ""));
-
-      /* ------------------------------------------------------------ */
-      // IAct<TState, TArranges, TAsserts> Methods
-      /* ------------------------------------------------------------ */
-
-      public void AddBriefCharacterisation(WhenCharacteriser characteriser) { }
-
-      /* ------------------------------------------------------------ */
-
-      public void AddFullCharacterisation(WhenCharacteriser characteriser) { }
-
-      /* ------------------------------------------------------------ */
-
-      public TAsserts Act(TState    state,
-                          TArranges environment)
-         => _act
-           .Act(state,
-                environment);
-
-      /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
@@ -48,8 +17,56 @@ partial class AAA_property_test<TState>
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private SilentAct(IAct<TArranges, TAsserts> act)
+      private SilentAct
+      (
+         IAct<TArranges, TAsserts> act
+      )
          => _act = act;
+
+      /* ------------------------------------------------------------ */
+      // IAct<TState, TArranges, TAsserts> Methods
+      /* ------------------------------------------------------------ */
+
+      public void AddBriefCharacterisation
+      (
+         WhenCharacteriser characteriser
+      ) { }
+
+      /* ------------------------------------------------------------ */
+
+      public void AddFullCharacterisation
+      (
+         WhenCharacteriser characteriser
+      ) { }
+
+      /* ------------------------------------------------------------ */
+
+      public TAsserts Act
+      (
+         TState    state,
+         TArranges environment
+      )
+         => _act
+           .Act(state,
+                environment);
+      /* ------------------------------------------------------------ */
+      // Factory Functions
+      /* ------------------------------------------------------------ */
+
+      public static SilentAct<TArranges, TAsserts> Create
+      (
+         IAct<TArranges, TAsserts> act
+      )
+         => new(act);
+
+      /* ------------------------------------------------------------ */
+
+      public static SilentAct<TArranges, TAsserts> Create
+      (
+         Func<TState, TArranges, TAsserts> act
+      )
+         => new(AtomicAct<TArranges, TAsserts>.Create(act,
+                                                      ""));
 
       /* ------------------------------------------------------------ */
    }

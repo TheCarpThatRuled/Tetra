@@ -24,13 +24,16 @@ public class InnerBinding_Push
    public void
       GIVEN_a_Binding_of_TestClass_mapped_with_a_Func_of_TestClass_to_int_AND_the_inner_binding_has_Push_called_WHEN_Pull_THEN_updated_was_invoked_once_AND_mapFrom_was_invoked_once_with_inner_value_AND_outerValue_is_returned()
    {
-      static Property Property((TestClass firstInnerValue, TestClass secondInnerValue) args,
-                               int outerValue)
+      static Property Property
+      (
+         (TestClass firstInnerValue, TestClass secondInnerValue) args,
+         int                                                     outerValue
+      )
       {
          //Arrange
          var innerBinding = Bind.To(args.firstInnerValue);
-         var mapFrom = FakeFunction<TestClass, int>.Create(outerValue);
-         var updated = FakeAction.Create();
+         var mapFrom      = FakeFunction<TestClass, int>.Create(outerValue);
+         var updated      = FakeAction.Create();
 
          var outerBinding = innerBinding.Map(mapFrom.Func);
          outerBinding.OnUpdated(updated.Action);
@@ -70,12 +73,15 @@ public class InnerBinding_Push
    public void
       GIVEN_a_Binding_of_TestClass_mapped_with_a_Func_of_TestClass_to_TestClass_AND_the_inner_binding_has_Push_called_WHEN_Pull_THEN_updated_was_invoked_once_AND_mapFrom_was_invoked_once_with_inner_value_AND_outerValue_is_returned()
    {
-      static Property Property((TestClass firstInnerValue, TestClass secondInnerValue, TestClass outerValue) args)
+      static Property Property
+      (
+         (TestClass firstInnerValue, TestClass secondInnerValue, TestClass outerValue) args
+      )
       {
          //Arrange
          var innerBinding = Bind.To(args.firstInnerValue);
-         var mapFrom = FakeFunction<TestClass, TestClass>.Create(args.outerValue);
-         var updated = FakeAction.Create();
+         var mapFrom      = FakeFunction<TestClass, TestClass>.Create(args.outerValue);
+         var updated      = FakeAction.Create();
 
          var outerBinding = innerBinding.Map(mapFrom.Func);
          outerBinding.OnUpdated(updated.Action);
@@ -115,13 +121,16 @@ public class InnerBinding_Push
    public void
       GIVEN_a_Binding_of_TestClass_mapped_with_a_Func_of_TestClass_to_TestStruct_AND_the_inner_binding_has_Push_called_WHEN_Pull_THEN_updated_was_invoked_once_AND_mapFrom_was_invoked_once_with_inner_value_AND_outerValue_is_returned()
    {
-      static Property Property((TestClass firstInnerValue, TestClass secondInnerValue) args,
-                               TestStruct outerValue)
+      static Property Property
+      (
+         (TestClass firstInnerValue, TestClass secondInnerValue) args,
+         TestStruct                                              outerValue
+      )
       {
          //Arrange
          var innerBinding = Bind.To(args.firstInnerValue);
-         var mapFrom = FakeFunction<TestClass, TestStruct>.Create(outerValue);
-         var updated = FakeAction.Create();
+         var mapFrom      = FakeFunction<TestClass, TestStruct>.Create(outerValue);
+         var updated      = FakeAction.Create();
 
          var outerBinding = innerBinding.Map(mapFrom.Func);
          outerBinding.OnUpdated(updated.Action);

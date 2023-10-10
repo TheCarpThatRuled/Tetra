@@ -22,7 +22,10 @@ public class Parent
    [TestMethod]
    public void GIVEN_an_AbsoluteFilePath_WHEN_Parent_THEN_an_AbsoluteDirectoryPath_containing_the_parent_directory_is_returned()
    {
-      static Property Property(TestAbsoluteFilePath testPath)
+      static Property Property
+      (
+         TestAbsoluteFilePath testPath
+      )
       {
          //Arrange
          var expected = testPath.Parent();

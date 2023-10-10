@@ -15,7 +15,10 @@ public class WHEN_the_client_creates_a_directory : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_client_creates_a_directory]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       Log.ToStandardOutput(test.FullCharacterisation());
 

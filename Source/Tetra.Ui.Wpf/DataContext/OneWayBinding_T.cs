@@ -5,6 +5,25 @@ partial class DataContext
    protected sealed class OneWayBinding<T>
    {
       /* ------------------------------------------------------------ */
+      // Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly IOneWayBinding<T> _binding;
+
+      /* ------------------------------------------------------------ */
+      // Private Constructors
+      /* ------------------------------------------------------------ */
+
+      private OneWayBinding
+      (
+         IOneWayBinding<T> binding,
+         Action            onBindingUpdated
+      )
+      {
+         _binding = binding;
+         _binding.OnUpdated(onBindingUpdated);
+      }
+      /* ------------------------------------------------------------ */
       // Properties
       /* ------------------------------------------------------------ */
 
@@ -16,27 +35,13 @@ partial class DataContext
       // Internal Factory Functions
       /* ------------------------------------------------------------ */
 
-      internal static OneWayBinding<T> Create(IOneWayBinding<T> binding,
-                                              Action            onBindingUpdated)
+      internal static OneWayBinding<T> Create
+      (
+         IOneWayBinding<T> binding,
+         Action            onBindingUpdated
+      )
          => new(binding,
                 onBindingUpdated);
-
-      /* ------------------------------------------------------------ */
-      // Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly IOneWayBinding<T> _binding;
-
-      /* ------------------------------------------------------------ */
-      // Private Constructors
-      /* ------------------------------------------------------------ */
-
-      private OneWayBinding(IOneWayBinding<T> binding,
-                            Action            onBindingUpdated)
-      {
-         _binding = binding;
-         _binding.OnUpdated(onBindingUpdated);
-      }
 
       /* ------------------------------------------------------------ */
    }

@@ -16,7 +16,10 @@ public class WHEN_the_client_creates_a_different_directory
    [TestMethod]
    public void THEN_a_none_is_returned_AND_the_directory_and_all_its_parents_exist()
    {
-      static Property Property((AbsoluteDirectoryPath currentDirectory, AbsoluteDirectoryPath secondDirectory, AbsoluteDirectoryPath thirdDirectory) args)
+      static Property Property
+      (
+         (AbsoluteDirectoryPath currentDirectory, AbsoluteDirectoryPath secondDirectory, AbsoluteDirectoryPath thirdDirectory) args
+      )
       {
          //Arrange
          var fileSystem = FileSystem.From(args.currentDirectory);

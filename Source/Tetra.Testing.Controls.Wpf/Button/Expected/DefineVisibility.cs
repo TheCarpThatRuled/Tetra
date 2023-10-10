@@ -9,27 +9,32 @@ partial class Expected_button
    public sealed class DefineVisibility
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Private Fields
       /* ------------------------------------------------------------ */
 
-      public Expected_button Visibility_is(Visibility visibility)
-         => new($"({_isEnabled}, {visibility})",
-                $"{{{Environment.NewLine}IsEnabled: {_isEnabled}{Environment.NewLine}Visibility: {visibility}{Environment.NewLine}}}",
-                _isEnabled,
-                visibility);
+      private readonly bool _isEnabled;
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal DefineVisibility(bool isEnabled)
+      internal DefineVisibility
+      (
+         bool isEnabled
+      )
          => _isEnabled = isEnabled;
-
       /* ------------------------------------------------------------ */
-      // Private Fields
+      // Methods
       /* ------------------------------------------------------------ */
 
-      private readonly bool _isEnabled;
+      public Expected_button Visibility_is
+      (
+         Visibility visibility
+      )
+         => new($"({_isEnabled}, {visibility})",
+                $"{{{Environment.NewLine}IsEnabled: {_isEnabled}{Environment.NewLine}Visibility: {visibility}{Environment.NewLine}}}",
+                _isEnabled,
+                visibility);
 
       /* ------------------------------------------------------------ */
    }

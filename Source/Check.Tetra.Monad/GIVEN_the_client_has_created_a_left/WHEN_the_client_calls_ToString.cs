@@ -16,7 +16,10 @@ public class WHEN_the_client_calls_ToString : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_client_calls_ToString]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       using var given = test.Create();
       var       when  = given.Arrange();
@@ -31,14 +34,7 @@ public class WHEN_the_client_calls_ToString : AAATestDataSource
    protected override IEnumerable<AAA_test> GetTests()
    {
       /* ------------------------------------------------------------ */
-      foreach (var content in new[]
-               {
-                  FakeLeft.Create(""),
-                  FakeLeft.Create("1"),
-                  FakeLeft.Create("2"),
-                  FakeLeft.Create("3"),
-                  FakeLeft.Create("Content"),
-               })
+      foreach (var content in new[] {FakeLeft.Create(""), FakeLeft.Create("1"), FakeLeft.Create("2"), FakeLeft.Create("3"), FakeLeft.Create("Content"),})
       {
          /* ------------------------------------------------------------ */
 

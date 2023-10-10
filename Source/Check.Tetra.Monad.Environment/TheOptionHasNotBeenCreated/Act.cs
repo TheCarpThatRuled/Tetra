@@ -8,10 +8,18 @@ public static partial class TheOptionHasNotBeenCreated
    public sealed class Act : IActs
    {
       /* ------------------------------------------------------------ */
+      //  Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal Act() { }
+      /* ------------------------------------------------------------ */
       //  Methods
       /* ------------------------------------------------------------ */
 
-      public OptionAsserts<FakeType, TestTerminus> CallOptionSomeT(FakeType? content)
+      public OptionAsserts<FakeType, TestTerminus> CallOptionSomeT
+      (
+         FakeType? content
+      )
       {
          var actual = Option.Some(content!);
 
@@ -33,7 +41,10 @@ public static partial class TheOptionHasNotBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public OptionAsserts<FakeType, TestTerminus> CallOptionTSome(FakeType? content)
+      public OptionAsserts<FakeType, TestTerminus> CallOptionTSome
+      (
+         FakeType? content
+      )
       {
          var actual = Option<FakeType>.Some(content!);
 
@@ -41,12 +52,6 @@ public static partial class TheOptionHasNotBeenCreated
                                                              actual,
                                                              TestTerminus.Create);
       }
-
-      /* ------------------------------------------------------------ */
-      //  Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal Act() { }
 
       /* ------------------------------------------------------------ */
    }

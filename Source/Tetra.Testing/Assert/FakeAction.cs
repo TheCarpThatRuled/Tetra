@@ -10,10 +10,13 @@ partial class Assert_Extensions
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Assert WasInvoked(this Assert assert,
-                                   string      description,
-                                   FakeAction  function,
-                                   int         numberOfInvocations)
+   public static Assert WasInvoked
+   (
+      this Assert assert,
+      string      description,
+      FakeAction  function,
+      int         numberOfInvocations
+   )
    {
       if (function.Invocations() != numberOfInvocations)
       {
@@ -27,9 +30,12 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert WasInvokedOnce(this Assert assert,
-                                       string      description,
-                                       FakeAction  function)
+   public static Assert WasInvokedOnce
+   (
+      this Assert assert,
+      string      description,
+      FakeAction  function
+   )
       => assert
         .WasInvoked(description,
                     function,
@@ -37,9 +43,12 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert WasNotInvoked(this Assert assert,
-                                      string      description,
-                                      FakeAction  function)
+   public static Assert WasNotInvoked
+   (
+      this Assert assert,
+      string      description,
+      FakeAction  function
+   )
    {
       if (function
             .Invocations()

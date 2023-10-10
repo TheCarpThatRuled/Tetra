@@ -23,8 +23,11 @@ public class Push
    [TestMethod]
    public void GIVEN_a_Binding_of_int_has_been_created_WHEN_Push_THEN_OnPropertyChanged_was_fired_once_with_propertyName_AND_Pull_returns_newValue()
    {
-      static Property Property(string                           propertyName,
-                               (int initialValue, int newValue) args)
+      static Property Property
+      (
+         string                           propertyName,
+         (int initialValue, int newValue) args
+      )
       {
          //Arrange
 
@@ -66,8 +69,11 @@ public class Push
    [TestMethod]
    public void GIVEN_a_Binding_of_TestClass_has_been_created_WHEN_Push_THENOnPropertyChanged_was_fired_once_with_propertyName_AND__Pull_returns_newValue()
    {
-      static Property Property(string                                       propertyName,
-                               (TestClass initialValue, TestClass newValue) args)
+      static Property Property
+      (
+         string                                       propertyName,
+         (TestClass initialValue, TestClass newValue) args
+      )
       {
          //Arrange
          var dataContext       = TestableDataContext.Create();
@@ -108,8 +114,11 @@ public class Push
    [TestMethod]
    public void GIVEN_a_Binding_of_TestStruct_has_been_created_WHEN_Push_THENOnPropertyChanged_was_fired_once_with_propertyName_AND__Pull_returns_newValue()
    {
-      static Property Property(string                                         propertyName,
-                               (TestStruct initialValue, TestStruct newValue) args)
+      static Property Property
+      (
+         string                                         propertyName,
+         (TestStruct initialValue, TestStruct newValue) args
+      )
       {
          //Arrange
          var dataContext       = TestableDataContext.Create();

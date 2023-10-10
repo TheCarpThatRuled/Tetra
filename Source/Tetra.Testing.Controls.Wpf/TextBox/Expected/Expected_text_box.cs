@@ -5,6 +5,35 @@ namespace Tetra.Testing;
 public sealed partial class Expected_text_box
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly string     _briefCharacterisation;
+   private readonly string     _fullCharacterisation;
+   private readonly bool       _isEnabled;
+   private readonly string     _text;
+   private readonly Visibility _visibility;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private Expected_text_box
+   (
+      string     briefCharacterisation,
+      string     fullCharacterisation,
+      bool       isEnabled,
+      string     text,
+      Visibility visibility
+   )
+   {
+      _briefCharacterisation = briefCharacterisation;
+      _isEnabled             = isEnabled;
+      _fullCharacterisation  = fullCharacterisation;
+      _text                  = text;
+      _visibility            = visibility;
+   }
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
@@ -50,36 +79,12 @@ public sealed partial class Expected_text_box
 
    /* ------------------------------------------------------------ */
 
-   public ExceptCarrier<T> Except<T>(Func<Expected_text_box, T> createParent)
+   public ExceptCarrier<T> Except<T>
+   (
+      Func<Expected_text_box, T> createParent
+   )
       => new(createParent,
              this);
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly string     _briefCharacterisation;
-   private readonly string     _fullCharacterisation;
-   private readonly bool       _isEnabled;
-   private readonly string     _text;
-   private readonly Visibility _visibility;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private Expected_text_box(string     briefCharacterisation,
-                           string     fullCharacterisation,
-                           bool       isEnabled,
-                           string     text,
-                           Visibility visibility)
-   {
-      _briefCharacterisation = briefCharacterisation;
-      _isEnabled             = isEnabled;
-      _fullCharacterisation  = fullCharacterisation;
-      _text                  = text;
-      _visibility            = visibility;
-   }
 
    /* ------------------------------------------------------------ */
 }

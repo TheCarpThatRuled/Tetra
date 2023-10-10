@@ -22,7 +22,10 @@ public class Materialise
    [TestMethod]
    public void GIVEN_an_Array_of_int_WHEN_Materialise_THEN_a_sequence_containing_the_array_is_returned()
    {
-      static Property Property(int[] source)
+      static Property Property
+      (
+         int[] source
+      )
       {
          //Arrange
          //Act
@@ -50,7 +53,10 @@ public class Materialise
    [TestMethod]
    public void GIVEN_an_Array_of_int_is_Materialised_WHEN_the_array_is_modified_THEN_the_sequence_matches_the_original_array()
    {
-      static Property Property(int[] source)
+      static Property Property
+      (
+         int[] source
+      )
       {
          //Arrange
          var expected = (int[]) source.Clone();

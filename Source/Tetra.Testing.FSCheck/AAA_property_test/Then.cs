@@ -8,24 +8,26 @@ partial class AAA_property_test<TState>
    public sealed class Then
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Private Fields
       /* ------------------------------------------------------------ */
 
-      public Property Assert()
-         => _assert();
+      private readonly Func<Property> _assert;
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      public Then(Func<Property> assert)
+      public Then
+      (
+         Func<Property> assert
+      )
          => _assert = assert;
-
       /* ------------------------------------------------------------ */
-      // Private Fields
+      // Methods
       /* ------------------------------------------------------------ */
 
-      private readonly Func<Property> _assert;
+      public Property Assert()
+         => _assert();
 
       /* ------------------------------------------------------------ */
    }

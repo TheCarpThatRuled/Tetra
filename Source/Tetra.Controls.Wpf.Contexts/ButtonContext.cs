@@ -5,11 +5,26 @@ namespace Tetra;
 public sealed class ButtonContext : DataContext
 {
    /* ------------------------------------------------------------ */
-   // Factory Functions
+   // Private Fields
    /* ------------------------------------------------------------ */
 
-   public static ButtonContext Create(Button model)
-      => new(model);
+   private readonly OneWayBinding<System.Windows.Visibility> _visibility;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   public ButtonContext
+   (
+      Button model
+   )
+   {
+      Command = BindingCommand.Create(model.Click,
+                                      model.IsEnabled());
+      _visibility = Bind(nameof(Visibility),
+                         model.Visibility()
+                              .Map(x => x.ToWpf()));
+   }
 
    /* ------------------------------------------------------------ */
    // Bindings
@@ -22,25 +37,15 @@ public sealed class ButtonContext : DataContext
    public System.Windows.Visibility Visibility
       => _visibility
         .Pull();
-
    /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly OneWayBinding<System.Windows.Visibility> _visibility;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
+   // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public ButtonContext(Button model)
-   {
-      Command = BindingCommand.Create(model.Click,
-                                      model.IsEnabled());
-      _visibility = Bind(nameof(Visibility),
-                         model.Visibility()
-                              .Map(x => x.ToWpf()));
-   }
+   public static ButtonContext Create
+   (
+      Button model
+   )
+      => new(model);
 
    /* ------------------------------------------------------------ */
 }

@@ -25,8 +25,11 @@ public class Push
    [TestMethod]
    public void GIVEN_a_TwoWayBinding_of_int_has_been_created_WHEN_Push_THEN_OnPropertyChanged_was_not_fired_AND_Pull_returns_newValue()
    {
-      static Property Property(string                           propertyName,
-                               (int initialValue, int newValue) args)
+      static Property Property
+      (
+         string                           propertyName,
+         (int initialValue, int newValue) args
+      )
       {
          //Arrange
          var binding           = Bind.To(args.initialValue);
@@ -67,8 +70,11 @@ public class Push
    [TestMethod]
    public void GIVEN_a_TwoWayBinding_of_TestClass_has_been_created_WHEN_Push_THEN_OnPropertyChanged_was_not_fired_AND_Pull_returns_newValue()
    {
-      static Property Property(string                                       propertyName,
-                               (TestClass initialValue, TestClass newValue) args)
+      static Property Property
+      (
+         string                                       propertyName,
+         (TestClass initialValue, TestClass newValue) args
+      )
       {
          //Arrange
          var binding           = Bind.To(args.initialValue);
@@ -109,8 +115,11 @@ public class Push
    [TestMethod]
    public void GIVEN_a_TwoWayBinding_of_TestStruct_has_been_created_WHEN_Push_THEN_OnPropertyChanged_was_not_fired_AND_Pull_returns_newValue()
    {
-      static Property Property(string                                         propertyName,
-                               (TestStruct initialValue, TestStruct newValue) args)
+      static Property Property
+      (
+         string                                         propertyName,
+         (TestStruct initialValue, TestStruct newValue) args
+      )
       {
          //Arrange
          var binding           = Bind.To(args.initialValue);

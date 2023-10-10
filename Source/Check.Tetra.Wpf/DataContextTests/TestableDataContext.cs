@@ -6,6 +6,17 @@ namespace Check.DataContextTests;
 internal sealed class TestableDataContext : DataContext
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly Dictionary<string, object> _bindings = new();
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private TestableDataContext() { }
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
@@ -16,8 +27,11 @@ internal sealed class TestableDataContext : DataContext
    // Methods
    /* ------------------------------------------------------------ */
 
-   public void CreateBinding<T>(string propertyName,
-                                T      initialValue)
+   public void CreateBinding<T>
+   (
+      string propertyName,
+      T      initialValue
+   )
       => _bindings
         .Add(propertyName,
              Bind(propertyName,
@@ -25,8 +39,11 @@ internal sealed class TestableDataContext : DataContext
 
    /* ------------------------------------------------------------ */
 
-   public void CreateBinding<T>(string            propertyName,
-                                IOneWayBinding<T> binding)
+   public void CreateBinding<T>
+   (
+      string            propertyName,
+      IOneWayBinding<T> binding
+   )
       => _bindings
         .Add(propertyName,
              Bind(propertyName,
@@ -34,8 +51,11 @@ internal sealed class TestableDataContext : DataContext
 
    /* ------------------------------------------------------------ */
 
-   public void CreateBinding<T>(string            propertyName,
-                                ITwoWayBinding<T> binding)
+   public void CreateBinding<T>
+   (
+      string            propertyName,
+      ITwoWayBinding<T> binding
+   )
       => _bindings
         .Add(propertyName,
              Bind(propertyName,
@@ -43,7 +63,10 @@ internal sealed class TestableDataContext : DataContext
 
    /* ------------------------------------------------------------ */
 
-   public T Pull<T>(string propertyName)
+   public T Pull<T>
+   (
+      string propertyName
+   )
    {
       var hasBinding = _bindings.TryGetValue(propertyName,
                                              out var binding);
@@ -58,14 +81,17 @@ internal sealed class TestableDataContext : DataContext
                 Binding<T> direct              => direct.Pull(),
                 OneWayBinding<T> oneWayBinding => oneWayBinding.Pull(),
                 TwoWayBinding<T> twoWayBinding => twoWayBinding.Pull(),
-                _                              => throw Failed.InTestSetup($@"By some madness ""{propertyName}"" is not a supported type of DataContext binding...")
+                _                              => throw Failed.InTestSetup($@"By some madness ""{propertyName}"" is not a supported type of DataContext binding..."),
              };
    }
 
    /* ------------------------------------------------------------ */
 
-   public void Push<T>(string propertyName,
-                      T      value)
+   public void Push<T>
+   (
+      string propertyName,
+      T      value
+   )
    {
       var hasBinding = _bindings.TryGetValue(propertyName,
                                              out var binding);
@@ -94,8 +120,11 @@ internal sealed class TestableDataContext : DataContext
    }
 
    /* ------------------------------------------------------------ */
-   public void Set<T>(string propertyName,
-                      T      value)
+   public void Set<T>
+   (
+      string propertyName,
+      T      value
+   )
    {
       var hasBinding = _bindings.TryGetValue(propertyName,
                                              out var binding);
@@ -121,18 +150,6 @@ internal sealed class TestableDataContext : DataContext
             throw Failed.InTestSetup($@"By some madness ""{propertyName}"" is not a supported type of DataContext binding...");
       }
    }
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly Dictionary<string, object> _bindings = new();
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private TestableDataContext() { }
 
    /* ------------------------------------------------------------ */
 }

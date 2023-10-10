@@ -2,7 +2,7 @@
 
 namespace Check;
 
-partial class LocalLibraries
+internal partial class LocalLibraries
 {
    /* ------------------------------------------------------------ */
 

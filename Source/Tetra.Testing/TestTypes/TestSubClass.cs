@@ -16,28 +16,50 @@ public sealed class TestSubClass : TestClass,
    // Constructors
    /* -------------------------------------------------- */
 
-   public TestSubClass(int value1,
-                       double value2,
-                       bool value3)
+   public TestSubClass
+   (
+      int    value1,
+      double value2,
+      bool   value3
+   )
       : base(value1,
              value2)
       => Value3 = value3;
 
    /* -------------------------------------------------- */
+   // IEquatable<TestSubClass> Methods
+   /* -------------------------------------------------- */
+
+   public bool Equals
+   (
+      TestSubClass? other
+   )
+      => other is not null
+      && (ReferenceEquals(this,
+                          other)
+       || Equivalent(other));
+
+   /* -------------------------------------------------- */
    // Factory Functions
    /* -------------------------------------------------- */
 
-   public static TestSubClass Create(int value1,
-                                     double value2,
-                                     bool value3)
+   public static TestSubClass Create
+   (
+      int    value1,
+      double value2,
+      bool   value3
+   )
       => new(value1,
              value2,
              value3);
 
    /* -------------------------------------------------- */
 
-   public static TestSubClass Create(TestClass other,
-                                     bool value3)
+   public static TestSubClass Create
+   (
+      TestClass other,
+      bool      value3
+   )
       => new(other.Value1,
              other.Value2,
              value3);
@@ -46,14 +68,17 @@ public sealed class TestSubClass : TestClass,
    // object Overridden Methods
    /* -------------------------------------------------- */
 
-   public override bool Equals(object? obj)
+   public override bool Equals
+   (
+      object? obj
+   )
       => ReferenceEquals(this,
                          obj)
       || obj switch
          {
             TestSubClass other => Equivalent(other),
             TestClass other    => Equivalent(other),
-            _                  => false
+            _                  => false,
          };
 
    /* -------------------------------------------------- */
@@ -69,28 +94,24 @@ public sealed class TestSubClass : TestClass,
       => $"subclass({Value1}, {Value2}, {Value3})";
 
    /* -------------------------------------------------- */
-   // IEquatable<TestSubClass> Methods
-   /* -------------------------------------------------- */
-
-   public bool Equals(TestSubClass? other)
-      => other is not null
-      && (ReferenceEquals(this,
-                          other)
-       || Equivalent(other));
-
-   /* -------------------------------------------------- */
    // IEquatable<TestClass> Operators
    /* -------------------------------------------------- */
 
-   public static bool operator ==(TestSubClass? left,
-                                  TestSubClass? right)
+   public static bool operator ==
+   (
+      TestSubClass? left,
+      TestSubClass? right
+   )
       => Equals(left,
                 right);
 
    /* -------------------------------------------------- */
 
-   public static bool operator !=(TestSubClass? left,
-                                  TestSubClass? right)
+   public static bool operator !=
+   (
+      TestSubClass? left,
+      TestSubClass? right
+   )
       => !Equals(left,
                  right);
 
@@ -98,7 +119,10 @@ public sealed class TestSubClass : TestClass,
    // Methods
    /* -------------------------------------------------- */
 
-   public bool Equivalent(TestSubClass other)
+   public bool Equivalent
+   (
+      TestSubClass other
+   )
       => Equivalent(other as TestClass)
       && Value3 == other.Value3;
 

@@ -3,23 +3,22 @@
 public sealed class ApplicationWindowContext : DataContext
 {
    /* ------------------------------------------------------------ */
-   // Factory Functions
+   // Private Constructors
    /* ------------------------------------------------------------ */
 
-   public static ApplicationWindowContext Start()
-      => new();
+   private ApplicationWindowContext() { }
 
    /* ------------------------------------------------------------ */
    // Bindings
    /* ------------------------------------------------------------ */
 
    public SelectSandboxScreenContext CurrentScreen { get; } = SelectSandboxScreenContext.Create();
-
    /* ------------------------------------------------------------ */
-   // Private Constructors
+   // Factory Functions
    /* ------------------------------------------------------------ */
 
-   private ApplicationWindowContext() { }
+   public static ApplicationWindowContext Start()
+      => new();
 
    /* ------------------------------------------------------------ */
 }

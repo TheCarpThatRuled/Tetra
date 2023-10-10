@@ -23,7 +23,10 @@ public class PassThrough
    [TestMethod]
    public void GIVEN_Function_WHEN_PassThrough_AND_value_is_an_int_THEN_value_is_returned()
    {
-      static Property Property(int value)
+      static Property Property
+      (
+         int value
+      )
       {
          //Act
          var actual = Function.PassThrough(value);
@@ -50,7 +53,10 @@ public class PassThrough
    [TestMethod]
    public void GIVEN_Function_WHEN_PassThrough_AND_value_is_a_TestClass_THEN_value_is_returned()
    {
-      static Property Property(TestClass value)
+      static Property Property
+      (
+         TestClass value
+      )
       {
          //Act
          var actual = Function.PassThrough(value);
@@ -79,7 +85,10 @@ public class PassThrough
    [TestMethod]
    public void GIVEN_Function_WHEN_PassThrough_AND_value_is_a_TestStruct_THEN_value_is_returned()
    {
-      static Property Property(TestStruct value)
+      static Property Property
+      (
+         TestStruct value
+      )
       {
          //Act
          var actual = Function.PassThrough(value);

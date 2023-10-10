@@ -3,11 +3,30 @@
 public sealed class FileSystem : IFileSystem
 {
    /* ------------------------------------------------------------ */
-   // Factory Functions
+   // Private Fields
    /* ------------------------------------------------------------ */
 
-   public static FileSystem From(AbsoluteDirectoryPath currentDirectory)
-      => new(currentDirectory);
+   private readonly List<AbsoluteDirectoryPath> _directories = new();
+   private          AbsoluteDirectoryPath       _currentDirectory;
+
+   //Mutable
+   private Func<AbsoluteDirectoryPath, IOption<Message>> _setCurrentDirectory;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private FileSystem
+   (
+      AbsoluteDirectoryPath currentDirectory
+   )
+   {
+      _setCurrentDirectory = SuccessfullySetCurrentDirectory;
+
+      _currentDirectory = currentDirectory;
+
+      _directories.Add(currentDirectory);
+   }
 
    /* ------------------------------------------------------------ */
    // IFileSystem Properties
@@ -20,7 +39,10 @@ public sealed class FileSystem : IFileSystem
    // IFileSystem Methods
    /* ------------------------------------------------------------ */
 
-   public IOption<Message> Create(AbsoluteDirectoryPath path)
+   public IOption<Message> Create
+   (
+      AbsoluteDirectoryPath path
+   )
    {
       _directories.AddRange(path.Ancestry());
 
@@ -29,55 +51,94 @@ public sealed class FileSystem : IFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public bool DoesNotExist(AbsoluteDirectoryPath path)
+   public bool DoesNotExist
+   (
+      AbsoluteDirectoryPath path
+   )
       => !Exists(path);
 
    /* ------------------------------------------------------------ */
 
-   public bool DoesNotExist(AbsoluteFilePath path)
+   public bool DoesNotExist
+   (
+      AbsoluteFilePath path
+   )
       => !Exists(path);
 
    /* ------------------------------------------------------------ */
 
-   public bool Exists(AbsoluteDirectoryPath path)
+   public bool Exists
+   (
+      AbsoluteDirectoryPath path
+   )
       => _directories
         .Contains(path);
 
    /* ------------------------------------------------------------ */
 
-   public bool Exists(AbsoluteFilePath path)
+   public bool Exists
+   (
+      AbsoluteFilePath path
+   )
       => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */
 
-   public IOpenFileResult<Stream> Open(AbsoluteFilePath path)
+   public IOpenFileResult<Stream> Open
+   (
+      AbsoluteFilePath path
+   )
       => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */
 
-   public IOpenFileResult<string> Read(AbsoluteFilePath path)
+   public IOpenFileResult<string> Read
+   (
+      AbsoluteFilePath path
+   )
       => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */
 
-   public IOption<Message> SetCurrentDirectory(AbsoluteDirectoryPath path)
+   public IOption<Message> SetCurrentDirectory
+   (
+      AbsoluteDirectoryPath path
+   )
       => _setCurrentDirectory(path);
 
    /* ------------------------------------------------------------ */
 
-   public IEither<ISequence<AbsoluteFilePath>, Message> SubDirectoriesOf(AbsoluteDirectoryPath path)
+   public IEither<ISequence<AbsoluteFilePath>, Message> SubDirectoriesOf
+   (
+      AbsoluteDirectoryPath path
+   )
       => throw new NotImplementedException();
 
    /* ------------------------------------------------------------ */
 
-   public IEither<ISequence<AbsoluteFilePath>, Message> SubFileOf(AbsoluteDirectoryPath path)
+   public IEither<ISequence<AbsoluteFilePath>, Message> SubFileOf
+   (
+      AbsoluteDirectoryPath path
+   )
       => throw new NotImplementedException();
+   /* ------------------------------------------------------------ */
+   // Factory Functions
+   /* ------------------------------------------------------------ */
+
+   public static FileSystem From
+   (
+      AbsoluteDirectoryPath currentDirectory
+   )
+      => new(currentDirectory);
 
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
-   public void SettingTheCurrentDirectoryShallFail(Message error)
+   public void SettingTheCurrentDirectoryShallFail
+   (
+      Message error
+   )
       => _setCurrentDirectory = _ => Option<Message>.Some(error);
 
    /* ------------------------------------------------------------ */
@@ -86,33 +147,13 @@ public sealed class FileSystem : IFileSystem
       => _setCurrentDirectory = SuccessfullySetCurrentDirectory;
 
    /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly List<AbsoluteDirectoryPath> _directories = new();
-
-   //Mutable
-   private Func<AbsoluteDirectoryPath, IOption<Message>> _setCurrentDirectory;
-   private AbsoluteDirectoryPath                         _currentDirectory;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private FileSystem(AbsoluteDirectoryPath currentDirectory)
-   {
-      _setCurrentDirectory = SuccessfullySetCurrentDirectory;
-
-      _currentDirectory = currentDirectory;
-
-      _directories.Add(currentDirectory);
-   }
-
-   /* ------------------------------------------------------------ */
    // Private Methods
    /* ------------------------------------------------------------ */
 
-   private IOption<Message> SuccessfullySetCurrentDirectory(AbsoluteDirectoryPath path)
+   private IOption<Message> SuccessfullySetCurrentDirectory
+   (
+      AbsoluteDirectoryPath path
+   )
    {
       _currentDirectory = path;
 

@@ -3,10 +3,28 @@
 public sealed class FakeEventHandler
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private int _numberOfTimesFired;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private FakeEventHandler
+   (
+      Action<Action> subscribe
+   )
+      => subscribe(OnFired);
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static FakeEventHandler Create(Action<Action> subscribe)
+   public static FakeEventHandler Create
+   (
+      Action<Action> subscribe
+   )
       => new(subscribe);
 
    /* ------------------------------------------------------------ */
@@ -15,19 +33,6 @@ public sealed class FakeEventHandler
 
    public int NumberOfTimesFired()
       => _numberOfTimesFired;
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private int _numberOfTimesFired = 0;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private FakeEventHandler(Action<Action> subscribe)
-      => subscribe(OnFired);
 
    /* ------------------------------------------------------------ */
    // Private Methods

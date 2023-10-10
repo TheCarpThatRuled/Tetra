@@ -9,18 +9,27 @@ public static class Char_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static bool IsAnAsciiLetter(this char character)
+   public static bool IsAnAsciiLetter
+   (
+      this char character
+   )
       => char.IsAscii(character)
       && char.IsLetter(character);
 
    /* ------------------------------------------------------------ */
 
-   public static bool IsNotAnAsciiLetter(this char character)
+   public static bool IsNotAnAsciiLetter
+   (
+      this char character
+   )
       => !character.IsAnAsciiLetter();
 
    /* ------------------------------------------------------------ */
 
-   public static string ToLiteral(this char character)
+   public static string ToLiteral
+   (
+      this char character
+   )
       => character switch
          {
             '\"' => @"\""",
@@ -38,7 +47,10 @@ public static class Char_Extensions
 
 /* ------------------------------------------------------------ */
 
-   public static string ToLiteralControlCharacters(this char character)
+   public static string ToLiteralControlCharacters
+   (
+      this char character
+   )
       => char.GetUnicodeCategory(character) == UnicodeCategory.Control
             ? $@"\u{(int) character:x4}"
             : character.ToString();

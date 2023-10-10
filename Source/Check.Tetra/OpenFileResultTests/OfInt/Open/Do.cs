@@ -26,7 +26,10 @@ public class Open_Do
    public void
       GIVEN_Open_of_int_WHEN_Do_THEN_whenOpen_was_invoked_once_with_the_content_AND_whenLocked_was_not_invoked_AND_whenMissing_was_not_invoked_AND_this_is_returned()
    {
-      static Property Property(int content)
+      static Property Property
+      (
+         int content
+      )
       {
          //Arrange
          var whenLocked  = FakeAction<Locked>.Create();

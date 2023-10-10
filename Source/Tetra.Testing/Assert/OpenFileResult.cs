@@ -10,9 +10,12 @@ partial class Assert_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static Assert IsALocked<T>(this Assert        assert,
-                                     string             description,
-                                     IOpenFileResult<T> actual)
+   public static Assert IsALocked<T>
+   (
+      this Assert        assert,
+      string             description,
+      IOpenFileResult<T> actual
+   )
       => actual switch
          {
             MissingResult<T> missing => throw Failed.Assert(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
@@ -26,11 +29,14 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert IsALocked<T>(this Assert        assert,
-                                     string             description,
-                                     AbsoluteFilePath   expectedPath,
-                                     Message            expectedMessage,
-                                     IOpenFileResult<T> actual)
+   public static Assert IsALocked<T>
+   (
+      this Assert        assert,
+      string             description,
+      AbsoluteFilePath   expectedPath,
+      Message            expectedMessage,
+      IOpenFileResult<T> actual
+   )
       => actual switch
          {
             MissingResult<T> missing => throw Failed.Assert(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
@@ -46,10 +52,13 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert IsALockedAnd<T>(this Assert        assert,
-                                        string             description,
-                                        Func<Locked, bool> property,
-                                        IOpenFileResult<T> actual)
+   public static Assert IsALockedAnd<T>
+   (
+      this Assert        assert,
+      string             description,
+      Func<Locked, bool> property,
+      IOpenFileResult<T> actual
+   )
       => actual switch
          {
             MissingResult<T> missing => throw Failed.Assert(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
@@ -64,9 +73,12 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert IsAMissing<T>(this Assert        assert,
-                                      string             description,
-                                      IOpenFileResult<T> actual)
+   public static Assert IsAMissing<T>
+   (
+      this Assert        assert,
+      string             description,
+      IOpenFileResult<T> actual
+   )
       => actual switch
          {
             LockedResult<T> locked => throw Failed.Assert(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
@@ -80,11 +92,14 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert IsAMissing<T>(this Assert        assert,
-                                      string             description,
-                                      AbsoluteFilePath   expectedPath,
-                                      Message            expectedMessage,
-                                      IOpenFileResult<T> actual)
+   public static Assert IsAMissing<T>
+   (
+      this Assert        assert,
+      string             description,
+      AbsoluteFilePath   expectedPath,
+      Message            expectedMessage,
+      IOpenFileResult<T> actual
+   )
       => actual switch
          {
             LockedResult<T> locked => throw Failed.Assert(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
@@ -100,10 +115,13 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert IsAMissingAnd<T>(this Assert         assert,
-                                         string              description,
-                                         Func<Missing, bool> property,
-                                         IOpenFileResult<T>  actual)
+   public static Assert IsAMissingAnd<T>
+   (
+      this Assert         assert,
+      string              description,
+      Func<Missing, bool> property,
+      IOpenFileResult<T>  actual
+   )
       => actual switch
          {
             LockedResult<T> locked => throw Failed.Assert(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
@@ -118,9 +136,12 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert IsAnOpen<T>(this Assert        assert,
-                                    string             description,
-                                    IOpenFileResult<T> actual)
+   public static Assert IsAnOpen<T>
+   (
+      this Assert        assert,
+      string             description,
+      IOpenFileResult<T> actual
+   )
       => actual switch
          {
             LockedResult<T> locked => throw Failed.Assert(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
@@ -134,10 +155,13 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert IsAnOpen<T>(this Assert        assert,
-                                    string             description,
-                                    T                  expected,
-                                    IOpenFileResult<T> actual)
+   public static Assert IsAnOpen<T>
+   (
+      this Assert        assert,
+      string             description,
+      T                  expected,
+      IOpenFileResult<T> actual
+   )
       => actual switch
          {
             LockedResult<T> locked => throw Failed.Assert(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
@@ -152,10 +176,13 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert IsAnOpenAnd<T>(this Assert        assert,
-                                       string             description,
-                                       Func<T, bool>      property,
-                                       IOpenFileResult<T> actual)
+   public static Assert IsAnOpenAnd<T>
+   (
+      this Assert        assert,
+      string             description,
+      Func<T, bool>      property,
+      IOpenFileResult<T> actual
+   )
       => actual switch
          {
             LockedResult<T> locked => throw Failed.Assert(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
@@ -172,11 +199,14 @@ partial class Assert_Extensions
    // Internal Extensions
    /* ------------------------------------------------------------ */
 
-   internal static Assert AreEqual<T>(this Assert      assert,
-                                      string           description,
-                                      AbsoluteFilePath expectedPath,
-                                      Message          expectedMessage,
-                                      LockedResult<T>  actual)
+   internal static Assert AreEqual<T>
+   (
+      this Assert      assert,
+      string           description,
+      AbsoluteFilePath expectedPath,
+      Message          expectedMessage,
+      LockedResult<T>  actual
+   )
    {
       assert.AreEqual(TheOpenFileResultIsALockedButDoesNotContainTheExpectedMessage<T>(description),
                       expectedMessage,
@@ -193,11 +223,14 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   internal static Assert AreEqual<T>(this Assert      assert,
-                                      string           description,
-                                      AbsoluteFilePath expectedPath,
-                                      Message          expectedMessage,
-                                      MissingResult<T> actual)
+   internal static Assert AreEqual<T>
+   (
+      this Assert      assert,
+      string           description,
+      AbsoluteFilePath expectedPath,
+      Message          expectedMessage,
+      MissingResult<T> actual
+   )
    {
       assert.AreEqual(TheOpenFileResultIsAMissingButDoesNotContainTheExpectedMessage<T>(description),
                       expectedMessage,

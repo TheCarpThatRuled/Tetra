@@ -9,10 +9,9 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<uint> UInt32()
-      => Arb
-        .Default
-        .UInt32()
-        .Generator;
+      => Arb.Default
+            .UInt32()
+            .Generator;
 
    /* ------------------------------------------------------------ */
 }

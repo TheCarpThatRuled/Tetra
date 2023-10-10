@@ -6,7 +6,6 @@ partial class Steps
 {
    partial class TheWhenRight
    {
-
       public sealed class ForUnifyWithExternalState
       {
          /* ------------------------------------------------------------ */
@@ -14,8 +13,11 @@ partial class Steps
          /* ------------------------------------------------------------ */
 
          public IAssert<TheEitherHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts, TheEitherHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts>
-            was_invoked_once_with(FakeExternalState expectedExternalState,
-                                  FakeRight          expectedContent)
+            was_invoked_once_with
+            (
+               FakeExternalState expectedExternalState,
+               FakeRight         expectedContent
+            )
             => the_whenRight.function.was_invoked_once_with<FakeExternalState, FakeRight, FakeNewType, TheEitherHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts>(
                expectedExternalState,
                expectedContent);

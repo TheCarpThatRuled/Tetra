@@ -8,35 +8,6 @@ partial class AAA_test
       where TAsserts : IAsserts
    {
       /* ------------------------------------------------------------ */
-      // Factory Functions
-      /* ------------------------------------------------------------ */
-
-      public static RecharacterisedAct<TArranges, TAsserts> Create(string                    characterisation,
-                                                                   IAct<TArranges, TAsserts> act)
-         => new(act,
-                characterisation);
-
-      /* ------------------------------------------------------------ */
-      // IAct<TInitialArranges, TNextArranges> Methods
-      /* ------------------------------------------------------------ */
-
-      public void AddBriefCharacterisation(WhenCharacteriser characteriser)
-         => characteriser
-           .AddClauseToBriefCharacterisation(_characterisation);
-
-      /* ------------------------------------------------------------ */
-
-      public void AddFullCharacterisation(WhenCharacteriser characteriser)
-         => _act
-           .AddFullCharacterisation(characteriser);
-
-      /* ------------------------------------------------------------ */
-
-      public TAsserts Act(TArranges environment)
-         => _act
-           .Act(environment);
-
-      /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
@@ -47,12 +18,55 @@ partial class AAA_test
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private RecharacterisedAct(IAct<TArranges, TAsserts> act,
-                                 string                    characterisation)
+      private RecharacterisedAct
+      (
+         IAct<TArranges, TAsserts> act,
+         string                    characterisation
+      )
       {
          _act              = act;
          _characterisation = characterisation;
       }
+
+      /* ------------------------------------------------------------ */
+      // IAct<TInitialArranges, TNextArranges> Methods
+      /* ------------------------------------------------------------ */
+
+      public void AddBriefCharacterisation
+      (
+         WhenCharacteriser characteriser
+      )
+         => characteriser
+           .AddClauseToBriefCharacterisation(_characterisation);
+
+      /* ------------------------------------------------------------ */
+
+      public void AddFullCharacterisation
+      (
+         WhenCharacteriser characteriser
+      )
+         => _act
+           .AddFullCharacterisation(characteriser);
+
+      /* ------------------------------------------------------------ */
+
+      public TAsserts Act
+      (
+         TArranges environment
+      )
+         => _act
+           .Act(environment);
+      /* ------------------------------------------------------------ */
+      // Factory Functions
+      /* ------------------------------------------------------------ */
+
+      public static RecharacterisedAct<TArranges, TAsserts> Create
+      (
+         string                    characterisation,
+         IAct<TArranges, TAsserts> act
+      )
+         => new(act,
+                characterisation);
 
       /* ------------------------------------------------------------ */
    }

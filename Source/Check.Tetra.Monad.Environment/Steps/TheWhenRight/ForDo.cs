@@ -12,7 +12,10 @@ partial class Steps
          // Assert
          /* ------------------------------------------------------------ */
 
-         public IAssert<TheEitherHasBeenCreated.AndDoWasCalledAsserts, TheEitherHasBeenCreated.AndDoWasCalledAsserts> was_invoked_once_with(FakeRight expected)
+         public IAssert<TheEitherHasBeenCreated.AndDoWasCalledAsserts, TheEitherHasBeenCreated.AndDoWasCalledAsserts> was_invoked_once_with
+         (
+            FakeRight expected
+         )
             => the_whenRight.action.was_invoked_once_with<FakeRight, TheEitherHasBeenCreated.AndDoWasCalledAsserts>(expected);
 
          /* ------------------------------------------------------------ */

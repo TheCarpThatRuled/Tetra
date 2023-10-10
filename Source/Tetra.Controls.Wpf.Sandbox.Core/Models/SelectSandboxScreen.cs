@@ -3,10 +3,37 @@
 internal sealed class SelectSandboxScreen
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly CurrentSandbox                    _currentSandbox;
+   private readonly IOneWayBinding<ISequence<string>> _sandboxes;
+   private readonly ITwoWayBinding<int>               _selectedSandbox;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private SelectSandboxScreen
+   (
+      CurrentSandbox currentSandbox
+   )
+   {
+      _currentSandbox = currentSandbox;
+
+      _sandboxes = Bind.Invariant(Sequence.From("Button"));
+      _selectedSandbox = Bind
+                        .To(-1)
+                        .OnOuterPush(ChangeSandbox);
+   }
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static SelectSandboxScreen Create(CurrentSandbox currentSandbox)
+   public static SelectSandboxScreen Create
+   (
+      CurrentSandbox currentSandbox
+   )
       => new(currentSandbox);
 
    /* ------------------------------------------------------------ */
@@ -22,32 +49,13 @@ internal sealed class SelectSandboxScreen
       => _selectedSandbox;
 
    /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly CurrentSandbox                    _currentSandbox;
-   private readonly IOneWayBinding<ISequence<string>> _sandboxes;
-   private readonly ITwoWayBinding<int>               _selectedSandbox;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private SelectSandboxScreen(CurrentSandbox currentSandbox)
-   {
-      _currentSandbox = currentSandbox;
-
-      _sandboxes = Bind.Invariant(Sequence.From("Button"));
-      _selectedSandbox = Bind
-                        .To(-1)
-                        .OnOuterPush(ChangeSandbox);
-   }
-
-   /* ------------------------------------------------------------ */
    // Private Methods
    /* ------------------------------------------------------------ */
 
-   private void ChangeSandbox(int index)
+   private void ChangeSandbox
+   (
+      int index
+   )
    {
       var sandboxes = _sandboxes.Pull();
 

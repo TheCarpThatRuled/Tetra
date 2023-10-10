@@ -9,30 +9,6 @@ namespace Check.VolumeComponentTests;
 public class Validate
 {
    /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   private sealed class TestVolumeComponent : VolumeComponent
-   {
-      /* ------------------------------------------------------------ */
-      // Functions
-      /* ------------------------------------------------------------ */
-
-      public static IOption<Message> TestValidate(char   potentialVolume,
-                                                  string volumeType)
-         => Validate(potentialVolume,
-                     volumeType);
-
-      /* ------------------------------------------------------------ */
-      // Constructor
-      /* ------------------------------------------------------------ */
-
-      private TestVolumeComponent()
-         : base('\0') { }
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
    // protected static VolumeComponent Validate(char potentialVolume)
    /* ------------------------------------------------------------ */
 
@@ -46,7 +22,10 @@ public class Validate
    [TestMethod]
    public void GIVEN_an_ASCII_letter_WHEN_Validate_THEN_a_success_is_returned()
    {
-      static Property Property(char value)
+      static Property Property
+      (
+         char value
+      )
       {
          //Act
          var actual = TestVolumeComponent.TestValidate(value,
@@ -75,7 +54,10 @@ public class Validate
    [TestMethod]
    public void GIVEN_a_non_ASCII_letter_WHEN_Validate_THEN_a_failure_is_returned()
    {
-      static Property Property(char value)
+      static Property Property
+      (
+         char value
+      )
       {
          //Arrange
          //Act
@@ -93,6 +75,31 @@ public class Validate
 
       Prop.ForAll<char>(Property)
           .QuickCheckThrowOnFailure();
+   }
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   private sealed class TestVolumeComponent : VolumeComponent
+   {
+      /* ------------------------------------------------------------ */
+      // Constructor
+      /* ------------------------------------------------------------ */
+
+      private TestVolumeComponent()
+         : base('\0') { }
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static IOption<Message> TestValidate
+      (
+         char   potentialVolume,
+         string volumeType
+      )
+         => Validate(potentialVolume,
+                     volumeType);
+
+      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */

@@ -1,5 +1,6 @@
 ﻿using Check.Check_TextBox;
 using static Check.TextBox.Text;
+
 // ReSharper disable InconsistentNaming
 
 namespace Check.TextBox.GIVEN_the_UI_has_created_the_text_box;
@@ -13,7 +14,10 @@ public class WHEN_the_system_updates_Text : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_system_updates_Text]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       Log.ToStandardOutput(test.FullCharacterisation());
 

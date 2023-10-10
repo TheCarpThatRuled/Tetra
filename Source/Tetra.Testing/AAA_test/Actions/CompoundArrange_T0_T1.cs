@@ -8,39 +8,6 @@ partial class AAA_test
       where TNextArranges : IArranges
    {
       /* ------------------------------------------------------------ */
-      // Factory Functions
-      /* ------------------------------------------------------------ */
-
-      public static CompoundArrange<TInitialArranges, TNextArranges> Create(IArrange<TInitialArranges>                first,
-                                                                            IArrange<TInitialArranges, TNextArranges> second)
-         => new(first,
-                second);
-
-      /* ------------------------------------------------------------ */
-      // IArrangeAction<TArranges> Methods
-      /* ------------------------------------------------------------ */
-
-      public void AddBriefCharacterisation(GivenCharacteriser characteriser)
-      {
-         _first.AddBriefCharacterisation(characteriser);
-         _second.AddBriefCharacterisation(characteriser);
-      }
-
-      /* ------------------------------------------------------------ */
-
-      public void AddFullCharacterisation(GivenCharacteriser characteriser)
-      {
-         _first.AddFullCharacterisation(characteriser);
-         _second.AddFullCharacterisation(characteriser);
-      }
-
-      /* ------------------------------------------------------------ */
-
-      public TNextArranges Arrange(Disposables disposables)
-         => _second
-           .Arrange(_first.Arrange(disposables));
-
-      /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
@@ -51,12 +18,59 @@ partial class AAA_test
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private CompoundArrange(IArrange<TInitialArranges>                first,
-                              IArrange<TInitialArranges, TNextArranges> second)
+      private CompoundArrange
+      (
+         IArrange<TInitialArranges>                first,
+         IArrange<TInitialArranges, TNextArranges> second
+      )
       {
          _first  = first;
          _second = second;
       }
+
+      /* ------------------------------------------------------------ */
+      // IArrangeAction<TArranges> Methods
+      /* ------------------------------------------------------------ */
+
+      public void AddBriefCharacterisation
+      (
+         GivenCharacteriser characteriser
+      )
+      {
+         _first.AddBriefCharacterisation(characteriser);
+         _second.AddBriefCharacterisation(characteriser);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public void AddFullCharacterisation
+      (
+         GivenCharacteriser characteriser
+      )
+      {
+         _first.AddFullCharacterisation(characteriser);
+         _second.AddFullCharacterisation(characteriser);
+      }
+
+      /* ------------------------------------------------------------ */
+
+      public TNextArranges Arrange
+      (
+         Disposables disposables
+      )
+         => _second
+           .Arrange(_first.Arrange(disposables));
+      /* ------------------------------------------------------------ */
+      // Factory Functions
+      /* ------------------------------------------------------------ */
+
+      public static CompoundArrange<TInitialArranges, TNextArranges> Create
+      (
+         IArrange<TInitialArranges>                first,
+         IArrange<TInitialArranges, TNextArranges> second
+      )
+         => new(first,
+                second);
 
       /* ------------------------------------------------------------ */
    }

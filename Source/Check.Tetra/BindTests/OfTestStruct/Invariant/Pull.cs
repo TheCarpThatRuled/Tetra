@@ -22,7 +22,10 @@ public class Pull
    [TestMethod]
    public void GIVEN_Invariant_WHEN_Pull_THEN_initialValue_is_returned()
    {
-      static Property Property(TestStruct value)
+      static Property Property
+      (
+         TestStruct value
+      )
       {
          //Arrange
          var binding = Bind.Invariant(value);

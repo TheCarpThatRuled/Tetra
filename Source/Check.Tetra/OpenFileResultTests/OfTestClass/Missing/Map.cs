@@ -24,15 +24,18 @@ public class Missing_Map
    public void
       GIVEN_Missing_of_TestClass_WHEN_Map_AND_whenOpen_is_a_Func_of_TestClass_to_int_THEN_whenOpen_was_not_invoked_AND_a_Missing_containing_the_content_is_returned()
    {
-      static Property Property(AbsoluteFilePath path,
-                               Message          message,
-                               int              whenOpen)
+      static Property Property
+      (
+         AbsoluteFilePath path,
+         Message          message,
+         int              whenOpen
+      )
       {
          //Arrange
          var whenOpenFunc = FakeFunction<TestClass, int>.Create(whenOpen);
 
          var result = MissingResult<TestClass>.Create(message,
-                                                              path);
+                                                      path);
 
          //Act
          var actual = result.Map(whenOpenFunc.Func);
@@ -66,15 +69,18 @@ public class Missing_Map
    public void
       GIVEN_Missing_of_TestClass_WHEN_Map_AND_whenOpen_is_a_Func_of_TestClass_to_TestClass_THEN_whenOpen_was_not_invoked_AND_a_Missing_containing_the_content_is_returned()
    {
-      static Property Property(AbsoluteFilePath path,
-                               Message          message,
-                               TestClass        whenOpen)
+      static Property Property
+      (
+         AbsoluteFilePath path,
+         Message          message,
+         TestClass        whenOpen
+      )
       {
          //Arrange
          var whenOpenFunc = FakeFunction<TestClass, TestClass>.Create(whenOpen);
 
          var result = MissingResult<TestClass>.Create(message,
-                                                              path);
+                                                      path);
 
          //Act
          var actual = result.Map(whenOpenFunc.Func);
@@ -109,15 +115,18 @@ public class Missing_Map
    public void
       GIVEN_Missing_of_TestClass_WHEN_Map_AND_whenOpen_is_a_Func_of_TestClass_to_TestStruct_THEN_whenOpen_was_not_invoked_AND_a_Missing_containing_the_content_is_returned()
    {
-      static Property Property(AbsoluteFilePath path,
-                               Message          message,
-                               TestStruct       whenOpen)
+      static Property Property
+      (
+         AbsoluteFilePath path,
+         Message          message,
+         TestStruct       whenOpen
+      )
       {
          //Arrange
          var whenOpenFunc = FakeFunction<TestClass, TestStruct>.Create(whenOpen);
 
          var result = MissingResult<TestClass>.Create(message,
-                                                              path);
+                                                      path);
 
          //Act
          var actual = result.Map(whenOpenFunc.Func);

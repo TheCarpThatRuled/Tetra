@@ -10,16 +10,25 @@ partial class AAA_property_test<TState>
       // Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(GivenCharacteriser characteriser);
+      public void AddBriefCharacterisation
+      (
+         GivenCharacteriser characteriser
+      );
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(GivenCharacteriser characteriser);
+      public void AddFullCharacterisation
+      (
+         GivenCharacteriser characteriser
+      );
 
       /* ------------------------------------------------------------ */
 
-      public TArranges Arrange(Disposables disposables,
-                               TState      state);
+      public TArranges Arrange
+      (
+         Disposables disposables,
+         TState      state
+      );
 
       /* ------------------------------------------------------------ */
    }

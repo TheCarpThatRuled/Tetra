@@ -23,7 +23,10 @@ public class Ancestry
    public void
       GIVEN_a_RelativeFilePath_WHEN_Ancestry_THEN_a_sequence_of_RelativeDirectoryPaths_representing_each_node_from_the_root_to_the_parent_and_an_RelativeFilePath_representing_the_leaf_is_returned()
    {
-      static Property Property(TestRelativeFilePath testPath)
+      static Property Property
+      (
+         TestRelativeFilePath testPath
+      )
       {
          //Arrange
          var expected = testPath.ToAncestry();

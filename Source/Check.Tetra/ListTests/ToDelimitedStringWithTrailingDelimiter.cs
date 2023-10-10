@@ -23,7 +23,10 @@ public class ToDelimitedStringWithTrailingDelimiter
    [TestMethod]
    public void GIVEN_an_empty_List_of_string_AND_delimiter_is_a_char_WHEN_ToDelimitedStringWithTrailingDelimiter_THEN_the_empty_string_is_returned()
    {
-      static Property Property(char delimiter)
+      static Property Property
+      (
+         char delimiter
+      )
       {
          //Arrange
          var list = new List<string>();
@@ -53,11 +56,14 @@ public class ToDelimitedStringWithTrailingDelimiter
    [TestMethod]
    public void GIVEN_an_List_with_one_string_AND_delimiter_is_a_char_WHEN_ToDelimitedStringWithTrailingDelimiter_THEN_the_item_plus_delimiter_is_returned()
    {
-      static Property Property(string value,
-                               char delimiter)
+      static Property Property
+      (
+         string value,
+         char   delimiter
+      )
       {
          //Arrange
-         var list = new List<string> { value, };
+         var list = new List<string> {value,};
 
          //Act
          var actual = list.ToDelimitedStringWithTrailingDelimiter(delimiter);
@@ -84,10 +90,14 @@ public class ToDelimitedStringWithTrailingDelimiter
    //the_items_concatenated_by_the_delimiter_is_returned
 
    [TestMethod]
-   public void GIVEN_an_List_with_more_than_one_string_AND_delimiter_is_a_char_WHEN_ToDelimitedStringWithTrailingDelimiter_THEN_the_items_concatenated_by_the_delimiter_is_returned()
+   public void
+      GIVEN_an_List_with_more_than_one_string_AND_delimiter_is_a_char_WHEN_ToDelimitedStringWithTrailingDelimiter_THEN_the_items_concatenated_by_the_delimiter_is_returned()
    {
-      static Property Property(List<string> list,
-                               char delimiter)
+      static Property Property
+      (
+         List<string> list,
+         char         delimiter
+      )
       {
          //Arrange
          var expected = new StringBuilder();
@@ -126,7 +136,10 @@ public class ToDelimitedStringWithTrailingDelimiter
    [TestMethod]
    public void GIVEN_an_empty_List_of_string_AND_delimiter_is_a_string_WHEN_ToDelimitedStringWithTrailingDelimiter_THEN_the_empty_string_is_returned()
    {
-      static Property Property(string delimiter)
+      static Property Property
+      (
+         string delimiter
+      )
       {
          //Arrange
          var list = new List<string>();
@@ -158,15 +171,18 @@ public class ToDelimitedStringWithTrailingDelimiter
    [TestMethod]
    public void GIVEN_an_List_with_one_string_AND_delimiter_is_a_string_WHEN_ToDelimitedStringWithTrailingDelimiter_THEN_the_item_plus_delimiter_is_returned()
    {
-      static Property Property(string value,
-                               string delimiter)
+      static Property Property
+      (
+         string value,
+         string delimiter
+      )
       {
          //Arrange
-         var list = new List<string> { value,};
+         var list = new List<string> {value,};
 
          //Act
          var actual = list.ToDelimitedStringWithTrailingDelimiter(delimiter);
-         
+
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
                          $"{value}{delimiter}",
@@ -175,7 +191,7 @@ public class ToDelimitedStringWithTrailingDelimiter
 
       Arb.Register<Libraries.NonNullString>();
 
-      Prop.ForAll<string,string>(Property)
+      Prop.ForAll<string, string>(Property)
           .QuickCheckThrowOnFailure();
    }
 
@@ -189,10 +205,14 @@ public class ToDelimitedStringWithTrailingDelimiter
    //the_items_concatenated_by_the_delimiter_is_returned
 
    [TestMethod]
-   public void GIVEN_an_List_with_more_than_one_string_AND_delimiter_is_a_string_WHEN_ToDelimitedStringWithTrailingDelimiter_THEN_the_items_concatenated_by_the_delimiter_is_returned()
+   public void
+      GIVEN_an_List_with_more_than_one_string_AND_delimiter_is_a_string_WHEN_ToDelimitedStringWithTrailingDelimiter_THEN_the_items_concatenated_by_the_delimiter_is_returned()
    {
-      static Property Property(List<string> list,
-                               string       delimiter)
+      static Property Property
+      (
+         List<string> list,
+         string       delimiter
+      )
       {
          //Arrange
          var expected = new StringBuilder();

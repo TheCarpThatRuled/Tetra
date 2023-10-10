@@ -22,7 +22,10 @@ public class ToPath
    [TestMethod]
    public void GIVEN_a_Volume_WHEN_ToPath_THEN_an_AbsoluteDirectoryPath_with_the_value_plus_the_directory_separator_is_returned()
    {
-      static Property Property(VolumeComponent volume)
+      static Property Property
+      (
+         VolumeComponent volume
+      )
       {
          //Arrange
          var expected = TestAbsoluteDirectoryPath.Create(volume,

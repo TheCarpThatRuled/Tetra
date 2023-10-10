@@ -6,24 +6,26 @@ partial class AAA_test
    public sealed class When
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Private Fields
       /* ------------------------------------------------------------ */
 
-      public Then Act()
-         => new(_act());
+      private readonly Func<Action> _act;
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal When(Func<Action> act)
+      internal When
+      (
+         Func<Action> act
+      )
          => _act = act;
-
       /* ------------------------------------------------------------ */
-      // Private Fields
+      // Methods
       /* ------------------------------------------------------------ */
 
-      private readonly Func<Action> _act;
+      public Then Act()
+         => new(_act());
 
       /* ------------------------------------------------------------ */
    }

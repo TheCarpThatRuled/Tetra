@@ -5,25 +5,30 @@ partial class TextBox
    public sealed class DefineIsEnabled
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Private Fields
       /* ------------------------------------------------------------ */
 
-      public DefineVisibility IsEnabled(IOneWayBinding<bool> isEnabled)
-         => new(isEnabled,
-                _text);
+      private readonly ITwoWayBinding<string> _text;
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal DefineIsEnabled(ITwoWayBinding<string> text)
+      internal DefineIsEnabled
+      (
+         ITwoWayBinding<string> text
+      )
          => _text = text;
-
       /* ------------------------------------------------------------ */
-      // Private Fields
+      // Methods
       /* ------------------------------------------------------------ */
 
-      private readonly ITwoWayBinding<string> _text;
+      public DefineVisibility IsEnabled
+      (
+         IOneWayBinding<bool> isEnabled
+      )
+         => new(isEnabled,
+                _text);
 
       /* ------------------------------------------------------------ */
    }

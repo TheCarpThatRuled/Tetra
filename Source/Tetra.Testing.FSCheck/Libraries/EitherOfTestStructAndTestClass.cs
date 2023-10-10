@@ -69,7 +69,8 @@ public static partial class Libraries
       // Functions
       /* ------------------------------------------------------------ */
 
-      public static Arbitrary<(IEither<Testing.TestStruct, Testing.TestClass>, IEither<Testing.TestStruct, Testing.TestClass>, IEither<Testing.TestStruct, Testing.TestClass>)> Type()
+      public static Arbitrary<(IEither<Testing.TestStruct, Testing.TestClass>, IEither<Testing.TestStruct, Testing.TestClass>, IEither<Testing.TestStruct, Testing.TestClass>)>
+         Type()
          => Generators
            .Transitive(Generators.TwoUniqueEithers(Generators.TestStruct(),
                                                    Generators.TestClass()))

@@ -1,16 +1,48 @@
-﻿using System.Windows.Input;
+﻿using System.ComponentModel;
+using System.Windows.Input;
 
 namespace Tetra.Testing;
 
 public sealed class FakeCommandBinding
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly Func<ICommand> _get;
+   private readonly string         _propertyName;
+
+   private bool      _canExecute;
+   private ICommand? _command;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private FakeCommandBinding
+   (
+      DataContext    context,
+      Func<ICommand> get,
+      string         propertyName
+   )
+   {
+      _get          = get;
+      _propertyName = propertyName;
+
+      context.PropertyChanged += ContextOnPropertyChanged;
+
+      SetCommand(get());
+   }
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static FakeCommandBinding Create(DataContext    context,
-                                           string         propertyName,
-                                           Func<ICommand> get)
+   public static FakeCommandBinding Create
+   (
+      DataContext    context,
+      string         propertyName,
+      Func<ICommand> get
+   )
       => new(context,
              get,
              propertyName);
@@ -30,36 +62,13 @@ public sealed class FakeCommandBinding
       => _command!.Execute(null);
 
    /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly Func<ICommand> _get;
-   private readonly string         _propertyName;
-
-   private bool      _canExecute;
-   private ICommand? _command;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private FakeCommandBinding(DataContext    context,
-                              Func<ICommand> get,
-                              string         propertyName)
-   {
-      _get          = get;
-      _propertyName = propertyName;
-
-      context.PropertyChanged += ContextOnPropertyChanged;
-
-      SetCommand(get());
-   }
-
-   /* ------------------------------------------------------------ */
    // Private Methods
    /* ------------------------------------------------------------ */
 
-   private void SetCommand(ICommand command)
+   private void SetCommand
+   (
+      ICommand command
+   )
    {
       if (_command is not null)
       {
@@ -74,8 +83,11 @@ public sealed class FakeCommandBinding
 
    /* ------------------------------------------------------------ */
 
-   private void ContextOnPropertyChanged(object?                                        sender,
-                                         System.ComponentModel.PropertyChangedEventArgs e)
+   private void ContextOnPropertyChanged
+   (
+      object?                  sender,
+      PropertyChangedEventArgs e
+   )
    {
       if (e.PropertyName == _propertyName)
       {
@@ -85,8 +97,11 @@ public sealed class FakeCommandBinding
 
    /* ------------------------------------------------------------ */
 
-   private void CommandOnCanExecuteChanged(object?   sender,
-                                           EventArgs e)
+   private void CommandOnCanExecuteChanged
+   (
+      object?   sender,
+      EventArgs e
+   )
       => _canExecute = _command!.CanExecute(null);
 
    /* ------------------------------------------------------------ */

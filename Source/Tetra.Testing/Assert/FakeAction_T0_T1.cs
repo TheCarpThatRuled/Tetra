@@ -10,11 +10,14 @@ partial class Assert_Extensions
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Assert WasInvokedOnce<T0, T1>(this Assert        assert,
-                                               string             description,
-                                               T0                 expectedArg0,
-                                               T1                 expectedArg1,
-                                               FakeAction<T0, T1> action)
+   public static Assert WasInvokedOnce<T0, T1>
+   (
+      this Assert        assert,
+      string             description,
+      T0                 expectedArg0,
+      T1                 expectedArg1,
+      FakeAction<T0, T1> action
+   )
    {
       if (action
          .Invocations()
@@ -60,9 +63,12 @@ partial class Assert_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Assert WasNotInvoked<T0, T1>(this Assert        assert,
-                                              string             description,
-                                              FakeAction<T0, T1> action)
+   public static Assert WasNotInvoked<T0, T1>
+   (
+      this Assert        assert,
+      string             description,
+      FakeAction<T0, T1> action
+   )
    {
       if (action
          .Invocations()

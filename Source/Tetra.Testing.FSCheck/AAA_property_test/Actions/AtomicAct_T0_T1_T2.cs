@@ -8,36 +8,6 @@ partial class AAA_property_test<TState>
       where TAsserts : IAsserts
    {
       /* ------------------------------------------------------------ */
-      // Factory Functions
-      /* ------------------------------------------------------------ */
-
-      public static AtomicAct<TArranges, TAsserts> Create(Func<TState, TArranges, TAsserts> act,
-                                                          string                            characterisation)
-         => new(act,
-                characterisation);
-
-      /* ------------------------------------------------------------ */
-      // IArrange<TState, TArranges, TAsserts> Methods
-      /* ------------------------------------------------------------ */
-
-      public void AddBriefCharacterisation(WhenCharacteriser characteriser)
-         => characteriser
-           .AddClauseToBriefCharacterisation(_characterisation);
-
-      /* ------------------------------------------------------------ */
-
-      public void AddFullCharacterisation(WhenCharacteriser characteriser)
-         => characteriser
-           .AddClauseToFullCharacterisation(_characterisation);
-
-      /* ------------------------------------------------------------ */
-
-      public TAsserts Act(TState    state,
-                          TArranges environment)
-         => _act(state,
-                 environment);
-
-      /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
@@ -48,12 +18,56 @@ partial class AAA_property_test<TState>
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private AtomicAct(Func<TState, TArranges, TAsserts> act,
-                        string                            characterisation)
+      private AtomicAct
+      (
+         Func<TState, TArranges, TAsserts> act,
+         string                            characterisation
+      )
       {
          _act              = act;
          _characterisation = characterisation;
       }
+
+      /* ------------------------------------------------------------ */
+      // IArrange<TState, TArranges, TAsserts> Methods
+      /* ------------------------------------------------------------ */
+
+      public void AddBriefCharacterisation
+      (
+         WhenCharacteriser characteriser
+      )
+         => characteriser
+           .AddClauseToBriefCharacterisation(_characterisation);
+
+      /* ------------------------------------------------------------ */
+
+      public void AddFullCharacterisation
+      (
+         WhenCharacteriser characteriser
+      )
+         => characteriser
+           .AddClauseToFullCharacterisation(_characterisation);
+
+      /* ------------------------------------------------------------ */
+
+      public TAsserts Act
+      (
+         TState    state,
+         TArranges environment
+      )
+         => _act(state,
+                 environment);
+      /* ------------------------------------------------------------ */
+      // Factory Functions
+      /* ------------------------------------------------------------ */
+
+      public static AtomicAct<TArranges, TAsserts> Create
+      (
+         Func<TState, TArranges, TAsserts> act,
+         string                            characterisation
+      )
+         => new(act,
+                characterisation);
 
       /* ------------------------------------------------------------ */
    }

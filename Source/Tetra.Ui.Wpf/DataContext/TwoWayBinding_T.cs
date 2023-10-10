@@ -5,6 +5,28 @@ partial class DataContext
    protected sealed class TwoWayBinding<T>
    {
       /* ------------------------------------------------------------ */
+      // Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly ITwoWayBinding<T> _binding;
+      private readonly Action            _onBindingUpdated;
+
+      /* ------------------------------------------------------------ */
+      // Private Constructors
+      /* ------------------------------------------------------------ */
+
+      private TwoWayBinding
+      (
+         ITwoWayBinding<T> binding,
+         Action            onBindingUpdated
+      )
+      {
+         _binding          = binding;
+         _onBindingUpdated = onBindingUpdated;
+
+         _binding.OnUpdated(onBindingUpdated);
+      }
+      /* ------------------------------------------------------------ */
       // Properties
       /* ------------------------------------------------------------ */
 
@@ -16,7 +38,10 @@ partial class DataContext
       // Methods
       /* ------------------------------------------------------------ */
 
-      public void Push(T value)
+      public void Push
+      (
+         T value
+      )
          => _binding
            .PushWithoutUpdate(value,
                               _onBindingUpdated);
@@ -25,30 +50,13 @@ partial class DataContext
       // Internal Factory Functions
       /* ------------------------------------------------------------ */
 
-      internal static TwoWayBinding<T> Create(ITwoWayBinding<T> binding,
-                                              Action            onBindingUpdated)
+      internal static TwoWayBinding<T> Create
+      (
+         ITwoWayBinding<T> binding,
+         Action            onBindingUpdated
+      )
          => new(binding,
                 onBindingUpdated);
-
-      /* ------------------------------------------------------------ */
-      // Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly ITwoWayBinding<T> _binding;
-      private readonly Action            _onBindingUpdated;
-
-      /* ------------------------------------------------------------ */
-      // Private Constructors
-      /* ------------------------------------------------------------ */
-
-      private TwoWayBinding(ITwoWayBinding<T> binding,
-                            Action            onBindingUpdated)
-      {
-         _binding          = binding;
-         _onBindingUpdated = onBindingUpdated;
-
-         _binding.OnUpdated(onBindingUpdated);
-      }
 
       /* ------------------------------------------------------------ */
    }

@@ -14,7 +14,10 @@ public class WHEN_the_client_checks_that_a_file_does_not_exist : AAATestDataSour
 
    [TestMethod]
    [WHEN_the_client_checks_that_a_file_does_not_exist]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       Log.ToStandardOutput(test.FullCharacterisation());
 

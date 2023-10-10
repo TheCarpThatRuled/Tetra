@@ -7,7 +7,10 @@ public static class RelativeDirectoryPath_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static ISequence<RelativeDirectoryPath> Ancestry(this RelativeDirectoryPath path)
+   public static ISequence<RelativeDirectoryPath> Ancestry
+   (
+      this RelativeDirectoryPath path
+   )
    {
       var ancestry = new List<RelativeDirectoryPath> {path,};
 
@@ -17,13 +20,13 @@ public static class RelativeDirectoryPath_Extensions
          hadParent = path
                     .Parent()
                     .Unify(parent =>
-                            {
-                               ancestry.Add(parent);
-                               path = parent;
+                           {
+                              ancestry.Add(parent);
+                              path = parent;
 
-                               return true;
-                            },
-                            Function.False);
+                              return true;
+                           },
+                           Function.False);
       } while (hadParent);
 
       ancestry.Reverse();

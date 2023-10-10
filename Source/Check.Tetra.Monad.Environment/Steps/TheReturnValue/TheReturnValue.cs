@@ -30,7 +30,10 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IAssert<EitherAsserts<TLeft, TRight, TestTerminus>, TestTerminus> is_a_left_containing<TLeft, TRight>(TLeft expected)
+      public IAssert<EitherAsserts<TLeft, TRight, TestTerminus>, TestTerminus> is_a_left_containing<TLeft, TRight>
+      (
+         TLeft expected
+      )
          => AtomicAssert<EitherAsserts<TLeft, TRight, TestTerminus>, TestTerminus>
            .Create($@"{nameof(the_return_value)}_{nameof(is_a_left_containing)} ""{expected}""",
                    assert => assert.IsALeft(expected));
@@ -44,14 +47,20 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IAssert<EitherAsserts<TLeft, TRight, TestTerminus>, TestTerminus> is_a_right_containing<TLeft, TRight>(TRight expected)
+      public IAssert<EitherAsserts<TLeft, TRight, TestTerminus>, TestTerminus> is_a_right_containing<TLeft, TRight>
+      (
+         TRight expected
+      )
          => AtomicAssert<EitherAsserts<TLeft, TRight, TestTerminus>, TestTerminus>
            .Create($@"{nameof(the_return_value)}_{nameof(is_a_right_containing)} ""{expected}""",
                    assert => assert.IsARight(expected));
 
       /* ------------------------------------------------------------ */
 
-      public IAssert<OptionAsserts<T, TestTerminus>, TestTerminus> is_a_some_containing<T>(T expected)
+      public IAssert<OptionAsserts<T, TestTerminus>, TestTerminus> is_a_some_containing<T>
+      (
+         T expected
+      )
          => AtomicAssert<OptionAsserts<T, TestTerminus>, TestTerminus>
            .Create($@"{nameof(the_return_value)}_{nameof(is_a_some_containing)} ""{expected}""",
                    assert => assert.IsASome(expected));
@@ -67,7 +76,10 @@ partial class Steps
       // Private Assert
       /* ------------------------------------------------------------ */
 
-      public IAssert<ObjectAsserts<T, TestTerminus>, TestTerminus> is_equal_to<T>(T expected)
+      public IAssert<ObjectAsserts<T, TestTerminus>, TestTerminus> is_equal_to<T>
+      (
+         T expected
+      )
          => AtomicAssert<ObjectAsserts<T, TestTerminus>, TestTerminus>
            .Create($@"{nameof(the_return_value)}_{nameof(is_equal_to)} ""{expected}""",
                    assert => assert
@@ -75,7 +87,10 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IAssert<TAsserts, TAsserts> is_equal_to<T, TAsserts>(T expected)
+      public IAssert<TAsserts, TAsserts> is_equal_to<T, TAsserts>
+      (
+         T expected
+      )
          where TAsserts : IAsserts, IReturnsAsserts<T, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
            .Create($@"{nameof(the_return_value)}_{nameof(is_equal_to)} ""{expected}""",
@@ -95,7 +110,10 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      private IAssert<TAsserts, TAsserts> is_a_left_containing<TLeft, TRight, TAsserts>(TLeft expected)
+      private IAssert<TAsserts, TAsserts> is_a_left_containing<TLeft, TRight, TAsserts>
+      (
+         TLeft expected
+      )
          where TAsserts : IAsserts, IReturnsAnEitherAsserts<TLeft, TRight, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
            .Create($@"{nameof(the_return_value)}_{nameof(is_a_left_containing)} ""{expected}""",
@@ -115,7 +133,10 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      private IAssert<TAsserts, TAsserts> is_a_right_containing<TLeft, TRight, TAsserts>(TRight expected)
+      private IAssert<TAsserts, TAsserts> is_a_right_containing<TLeft, TRight, TAsserts>
+      (
+         TRight expected
+      )
          where TAsserts : IAsserts, IReturnsAnEitherAsserts<TLeft, TRight, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
            .Create($@"{nameof(the_return_value)}_{nameof(is_a_right_containing)} ""{expected}""",
@@ -125,7 +146,10 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      private IAssert<TAsserts, TAsserts> is_a_some_containing<T, TAsserts>(T expected)
+      private IAssert<TAsserts, TAsserts> is_a_some_containing<T, TAsserts>
+      (
+         T expected
+      )
          where TAsserts : IAsserts, IReturnsAnOptionAsserts<T, TAsserts>
          => AtomicAssert<TAsserts, TAsserts>
            .Create($@"{nameof(the_return_value)}_{nameof(is_a_some_containing)} ""{expected}""",

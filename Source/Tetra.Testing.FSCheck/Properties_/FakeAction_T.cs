@@ -9,9 +9,12 @@ partial class Properties
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<T>(string        description,
-                                            T             expected,
-                                            FakeAction<T> action)
+   public static Property WasInvokedOnce<T>
+   (
+      string        description,
+      T             expected,
+      FakeAction<T> action
+   )
       => WasInvokedOnce(description,
                         actual => Equals(expected,
                                          actual),
@@ -20,9 +23,12 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce(string              description,
-                                         Message             expected,
-                                         FakeAction<Message> action)
+   public static Property WasInvokedOnce
+   (
+      string              description,
+      Message             expected,
+      FakeAction<Message> action
+   )
       => WasInvokedOnce(description,
                         actual => Equals(expected,
                                          actual),
@@ -31,10 +37,13 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce(string             description,
-                                         AbsoluteFilePath   expectedPath,
-                                         Message            expectedMessage,
-                                         FakeAction<Locked> action)
+   public static Property WasInvokedOnce
+   (
+      string             description,
+      AbsoluteFilePath   expectedPath,
+      Message            expectedMessage,
+      FakeAction<Locked> action
+   )
       => WasInvokedOnce(description,
                         actual => Equals(expectedPath,
                                          actual.Path())
@@ -45,10 +54,13 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce(string              description,
-                                         AbsoluteFilePath    expectedPath,
-                                         Message             expectedMessage,
-                                         FakeAction<Missing> action)
+   public static Property WasInvokedOnce
+   (
+      string              description,
+      AbsoluteFilePath    expectedPath,
+      Message             expectedMessage,
+      FakeAction<Missing> action
+   )
       => WasInvokedOnce(description,
                         actual => Equals(expectedPath,
                                          actual.Path())
@@ -59,10 +71,13 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasInvokedOnce<T>(string        description,
-                                            Func<T, bool> property,
-                                            string        expectedString,
-                                            FakeAction<T> action)
+   public static Property WasInvokedOnce<T>
+   (
+      string        description,
+      Func<T, bool> property,
+      string        expectedString,
+      FakeAction<T> action
+   )
       => action.Invocations()
                .Count
       == 0
@@ -84,8 +99,11 @@ partial class Properties
 
    /* ------------------------------------------------------------ */
 
-   public static Property WasNotInvoked<T>(string        description,
-                                           FakeAction<T> action)
+   public static Property WasNotInvoked<T>
+   (
+      string        description,
+      FakeAction<T> action
+   )
       => AsProperty(() => action
                          .Invocations()
                          .Count

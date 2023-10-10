@@ -24,7 +24,10 @@ public class CompareTo
    [TestMethod]
    public void GIVEN_FileComponent_AND_other_is_null_WHEN_CompareTo_THEN_one_is_returned()
    {
-      static Property Property(FileComponent file)
+      static Property Property
+      (
+         FileComponent file
+      )
       {
          //Arrange
          //Act
@@ -54,7 +57,10 @@ public class CompareTo
    [TestMethod]
    public void GIVEN_FileComponent_AND_other_contains_a_value_that_is_equal_ignoring_case_WHEN_CompareTo_THEN_zero_is_returned()
    {
-      static Property Property((string first, string second) args)
+      static Property Property
+      (
+         (string first, string second) args
+      )
       {
          //Arrange
          var firstFileComponent  = FileComponent.Create(args.first);
@@ -85,9 +91,13 @@ public class CompareTo
    //the_comparison_between_the_values_ordinal_ignoring_case_is_returned
 
    [TestMethod]
-   public void GIVEN_FileComponent_AND_other_contains_a_value_that_is_greater_than_ignoring_case_WHEN_CompareTo_THEN_the_comparison_between_the_values_ordinal_ignoring_case_is_returned()
+   public void
+      GIVEN_FileComponent_AND_other_contains_a_value_that_is_greater_than_ignoring_case_WHEN_CompareTo_THEN_the_comparison_between_the_values_ordinal_ignoring_case_is_returned()
    {
-      static Property Property((string first, string second) args)
+      static Property Property
+      (
+         (string first, string second) args
+      )
       {
          //Arrange
          var firstFileComponent  = FileComponent.Create(args.first);
@@ -120,9 +130,13 @@ public class CompareTo
    //the_difference_between_the_values_ignoring_case_is_returned
 
    [TestMethod]
-   public void GIVEN_FileComponent_AND_other_contains_a_value_that_is_less_than_ignoring_case_WHEN_CompareTo_THEN_the_comparison_between_the_values_ordinal_ignoring_case_is_returned()
+   public void
+      GIVEN_FileComponent_AND_other_contains_a_value_that_is_less_than_ignoring_case_WHEN_CompareTo_THEN_the_comparison_between_the_values_ordinal_ignoring_case_is_returned()
    {
-      static Property Property((string first, string second) args)
+      static Property Property
+      (
+         (string first, string second) args
+      )
       {
          //Arrange
          var firstFileComponent  = FileComponent.Create(args.first);

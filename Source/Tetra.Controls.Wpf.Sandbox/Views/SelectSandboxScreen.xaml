@@ -33,7 +33,7 @@
          <Label Content="Sandboxes" />
 
          <ListBox ItemsSource="{Binding Sandboxes}"
-                  SelectedIndex="{Binding SelectedSandbox}"/>
+                  SelectedIndex="{Binding SelectedSandbox}" />
 
       </StackPanel>
 

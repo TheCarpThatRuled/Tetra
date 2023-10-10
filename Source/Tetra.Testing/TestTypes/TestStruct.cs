@@ -16,8 +16,11 @@ public readonly struct TestStruct : IEquatable<TestStruct>
    // Constructors
    /* ------------------------------------------------------------ */
 
-   public TestStruct(int value1,
-                     double value2)
+   public TestStruct
+   (
+      int    value1,
+      double value2
+   )
    {
       Value1 = value1;
       Value2 = value2;
@@ -27,8 +30,11 @@ public readonly struct TestStruct : IEquatable<TestStruct>
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static TestStruct Create(int value1,
-                                   double value2)
+   public static TestStruct Create
+   (
+      int    value1,
+      double value2
+   )
       => new(value1,
              value2);
 
@@ -36,7 +42,10 @@ public readonly struct TestStruct : IEquatable<TestStruct>
    // object Overridden Methods
    /* ------------------------------------------------------------ */
 
-   public override bool Equals(object? obj)
+   public override bool Equals
+   (
+      object? obj
+   )
       => obj is TestStruct other
       && Equals(other);
 
@@ -56,7 +65,10 @@ public readonly struct TestStruct : IEquatable<TestStruct>
    // IEquatable<TestStruct> Methods
    /* ------------------------------------------------------------ */
 
-   public bool Equals(TestStruct other)
+   public bool Equals
+   (
+      TestStruct other
+   )
       => Value1.Equals(other.Value1)
       && Value2.Equals(other.Value2);
 
@@ -64,15 +76,21 @@ public readonly struct TestStruct : IEquatable<TestStruct>
    // IEquatable<TestStruct> Operators
    /* ------------------------------------------------------------ */
 
-   public static bool operator ==(TestStruct left,
-                                  TestStruct right)
+   public static bool operator ==
+   (
+      TestStruct left,
+      TestStruct right
+   )
       => Equals(left,
                 right);
 
    /* ------------------------------------------------------------ */
 
-   public static bool operator !=(TestStruct left,
-                                  TestStruct right)
+   public static bool operator !=
+   (
+      TestStruct left,
+      TestStruct right
+   )
       => !Equals(left,
                  right);
 

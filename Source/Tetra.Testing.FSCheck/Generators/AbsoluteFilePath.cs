@@ -10,9 +10,8 @@ partial class Generators
 
    public static Gen<AbsoluteFilePath> AbsoluteFilePath()
       => ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator()
-        .Select(Tetra
-               .AbsoluteFilePath
-               .Create);
+        .Select(Tetra.AbsoluteFilePath
+                     .Create);
 
    /* ------------------------------------------------------------ */
 
@@ -31,9 +30,9 @@ partial class Generators
    public static Gen<(AbsoluteFilePath, AbsoluteFilePath)> TwoIdenticalAbsoluteFilePaths()
       => ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator()
         .Select(path => (Tetra.AbsoluteFilePath
-                                       .Create(path),
-                                  Tetra.AbsoluteFilePath
-                                       .Create(path)));
+                              .Create(path),
+                         Tetra.AbsoluteFilePath
+                              .Create(path)));
 
    /* ------------------------------------------------------------ */
 

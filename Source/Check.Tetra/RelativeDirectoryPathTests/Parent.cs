@@ -22,7 +22,10 @@ public class Parent
    [TestMethod]
    public void GIVEN_a_RelativeDirectoryPath_containing_just_one_directory_WHEN_Parent_THEN_a_none_is_returned()
    {
-      static Property Property(DirectoryComponent directory)
+      static Property Property
+      (
+         DirectoryComponent directory
+      )
       {
          //Arrange
          var path = RelativeDirectoryPath.Create(directory);
@@ -54,7 +57,10 @@ public class Parent
    public void
       GIVEN_a_RelativeDirectoryPath_containing_a_volume_and_at_least_one_directory_WHEN_Parent_THEN_a_some_containing_a_RelativeDirectoryPath_containing_the_parent_directory_is_returned()
    {
-      static Property Property(DirectoryComponent[] directories)
+      static Property Property
+      (
+         DirectoryComponent[] directories
+      )
       {
          //Arrange
          var expected = TestRelativeDirectoryPath.Create(directories
@@ -68,10 +74,12 @@ public class Parent
 
          //Assert
          return IsASomeAnd(AssertMessages.ReturnValue,
-                           (description,
-                            actualParent) => AreEqual(description,
-                                                      expected,
-                                                      actualParent),
+                           (
+                              description,
+                              actualParent
+                           ) => AreEqual(description,
+                                         expected,
+                                         actualParent),
                            actual);
       }
 

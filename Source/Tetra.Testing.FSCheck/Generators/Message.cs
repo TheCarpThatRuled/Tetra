@@ -13,11 +13,13 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<Message> Message(Gen<string> @string)
+   public static Gen<Message> Message
+   (
+      Gen<string> @string
+   )
       => @string
-        .Select(Tetra
-               .Message
-               .Create);
+        .Select(Tetra.Message
+                     .Create);
 
    /* ------------------------------------------------------------ */
 
@@ -26,7 +28,10 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(Message, Message, Message)> ThreeUniqueMessages(Gen<string> @string)
+   public static Gen<(Message, Message, Message)> ThreeUniqueMessages
+   (
+      Gen<string> @string
+   )
       => Message(@string)
         .ThreeValueTuples()
         .Where(tuple => tuple.first.Content()  != tuple.second.Content()
@@ -40,7 +45,10 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(Message, Message)> TwoUniqueMessages(Gen<string> @string)
+   public static Gen<(Message, Message)> TwoUniqueMessages
+   (
+      Gen<string> @string
+   )
       => Message(@string)
         .TwoValueTuples()
         .Where(tuple => tuple.first.Content() != tuple.second.Content());

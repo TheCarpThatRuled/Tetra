@@ -8,29 +8,6 @@ public sealed partial class TheLabelHasBeenCreated
    public sealed class Acts : IActs
    {
       /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public Act<Asserts> The_system_updates_Content(object content)
-         => new(() => Update_Content(content));
-
-      /* ------------------------------------------------------------ */
-
-      public Act<Asserts> The_system_updates_Visibility(Visibility visibility)
-         => new(() => Update_Visibility(visibility));
-
-      /* ------------------------------------------------------------ */
-      // Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal Acts(FakeLabel  label,
-                    FakeSystem system)
-      {
-         _label  = label;
-         _system = system;
-      }
-
-      /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
@@ -38,10 +15,44 @@ public sealed partial class TheLabelHasBeenCreated
       private readonly FakeSystem _system;
 
       /* ------------------------------------------------------------ */
+      // Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal Acts
+      (
+         FakeLabel  label,
+         FakeSystem system
+      )
+      {
+         _label  = label;
+         _system = system;
+      }
+      /* ------------------------------------------------------------ */
+      // Methods
+      /* ------------------------------------------------------------ */
+
+      public Act<Asserts> The_system_updates_Content
+      (
+         object content
+      )
+         => new(() => Update_Content(content));
+
+      /* ------------------------------------------------------------ */
+
+      public Act<Asserts> The_system_updates_Visibility
+      (
+         Visibility visibility
+      )
+         => new(() => Update_Visibility(visibility));
+
+      /* ------------------------------------------------------------ */
       // Private Methods
       /* ------------------------------------------------------------ */
 
-      private Asserts Update_Content(object content)
+      private Asserts Update_Content
+      (
+         object content
+      )
       {
          _system.Content()
                 .Push(content);
@@ -52,7 +63,10 @@ public sealed partial class TheLabelHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      private Asserts Update_Visibility(Visibility visibility)
+      private Asserts Update_Visibility
+      (
+         Visibility visibility
+      )
       {
          _system.Visibility()
                 .Push(visibility);

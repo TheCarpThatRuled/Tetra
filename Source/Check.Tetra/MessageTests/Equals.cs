@@ -24,8 +24,11 @@ public class Equals
    public void
       GIVEN_Message_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(Message message,
-                               object? obj)
+      static Property Property
+      (
+         Message message,
+         object? obj
+      )
       {
          //Act
          var actual = message.Equals(obj);
@@ -44,28 +47,6 @@ public class Equals
 
    /* ------------------------------------------------------------ */
 
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
-   private sealed class ObjIsNullOrANonEquatableType
-   {
-      /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<object?> Obj()
-         => Gen
-           .OneOf(Gen.Constant(default(object?)),
-                  Generators.Int32()
-                            .Select(x => (object?)x),
-                  Generators.String()
-                            .Select(x => (object?)x))
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
-
    //GIVEN
    //Message
    //WHEN
@@ -76,7 +57,10 @@ public class Equals
    [TestMethod]
    public void GIVEN_Message_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
    {
-      static Property Property(Message original)
+      static Property Property
+      (
+         Message original
+      )
       {
          //Arrange
          var copy = Message.Create(original.Content());
@@ -146,7 +130,10 @@ public class Equals
    public void
       GIVEN_Message_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_Message_THEN_false_is_returned()
    {
-      static Property Property(Message value)
+      static Property Property
+      (
+         Message value
+      )
       {
          //act
          var actual = value.Equals(null);
@@ -175,10 +162,13 @@ public class Equals
    public void
       GIVEN_Message_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_nullable_Message_THEN_is_reflexive()
    {
-      static Property Property(Message original)
+      static Property Property
+      (
+         Message original
+      )
       {
          //Arrange
-         var copy     = Message.Create(original.Content());
+         var copy = Message.Create(original.Content());
 
          //Act
          //Assert
@@ -226,6 +216,28 @@ public class Equals
 
       Prop.ForAll<(Message, Message, Message)>(IEquatableIsTransitive<Message>)
           .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   private sealed class ObjIsNullOrANonEquatableType
+   {
+      /* ------------------------------------------------------------ */
+      // Methods
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<object?> Obj()
+         => Gen
+           .OneOf(Gen.Constant(default(object?)),
+                  Generators.Int32()
+                            .Select(x => (object?) x),
+                  Generators.String()
+                            .Select(x => (object?) x))
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */

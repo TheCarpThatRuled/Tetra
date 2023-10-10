@@ -23,7 +23,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_path_without_a_root_but_with_a_trailing_directory_separator_WHEN_Create_THEN_a_RelativeDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(TestRelativeDirectoryPath testPath)
+      static Property Property
+      (
+         TestRelativeDirectoryPath testPath
+      )
       {
          //Arrange
          //Act
@@ -53,7 +56,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_valid_path_without_a_root_or_a_trailing_directory_separator_WHEN_Create_THEN_a_RelativeDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(TestRelativeDirectoryPath testPath)
+      static Property Property
+      (
+         TestRelativeDirectoryPath testPath
+      )
       {
          //Arrange
          //Act
@@ -116,7 +122,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_path_without_a_root_but_with_an_invalid_component_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
-      static Property Property(string path)
+      static Property Property
+      (
+         string path
+      )
          => AnArgumentExceptionWasThrown(() => RelativeDirectoryPath.Create(path),
                                          IsNotValidBecauseARelativePathMayNotContainTheCharacters(path,
                                                                                                   HumanReadableName.RelativeDirectoryPath),
@@ -142,7 +151,10 @@ public class Create
    [TestMethod]
    public void GIVEN_an_Array_of_DirectoryComponents_WHEN_Create_THEN_a_RelativeDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(DirectoryComponent[] directories)
+      static Property Property
+      (
+         DirectoryComponent[] directories
+      )
       {
          //Arrange
          var expected = TestRelativeDirectoryPath.Create(directories);
@@ -176,7 +188,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_sequence_of_DirectoryComponents_WHEN_Create_THEN_a_RelativeDirectoryPath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(ISequence<DirectoryComponent> directories)
+      static Property Property
+      (
+         ISequence<DirectoryComponent> directories
+      )
       {
          //Arrange
          var expected = TestRelativeDirectoryPath.Create(directories);

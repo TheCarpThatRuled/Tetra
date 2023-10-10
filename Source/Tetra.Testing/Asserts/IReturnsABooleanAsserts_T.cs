@@ -1,6 +1,6 @@
 ﻿namespace Tetra.Testing;
 
-public interface IReturnsABooleanAsserts< TAsserts>
+public interface IReturnsABooleanAsserts<TAsserts>
    where TAsserts : IAsserts
 {
    /* ------------------------------------------------------------ */

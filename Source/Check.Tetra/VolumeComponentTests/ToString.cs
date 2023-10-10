@@ -23,7 +23,10 @@ public class ToString
    [TestMethod]
    public void GIVEN_Volume_WHEN_ToString_THEN_the_value_bounded_by_angle_brackets_is_returned()
    {
-      static Property Property(char asciiLetter)
+      static Property Property
+      (
+         char asciiLetter
+      )
       {
          //Arrange
          var volume = VolumeComponent.Create(asciiLetter);

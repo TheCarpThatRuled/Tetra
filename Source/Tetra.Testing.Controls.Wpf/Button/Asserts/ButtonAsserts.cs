@@ -7,12 +7,23 @@ public sealed class ButtonAsserts<T> : IAsserts
    where T : IAsserts
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly FakeButton _button;
+   private readonly string     _descriptionHeader;
+
+   private readonly T _parent;
+   /* ------------------------------------------------------------ */
    // Constructors
    /* ------------------------------------------------------------ */
 
-   public ButtonAsserts(string     descriptionHeader,
-                        FakeButton button,
-                        T          parent)
+   public ButtonAsserts
+   (
+      string     descriptionHeader,
+      FakeButton button,
+      T          parent
+   )
    {
       _button            = button;
       _descriptionHeader = descriptionHeader;
@@ -23,7 +34,10 @@ public sealed class ButtonAsserts<T> : IAsserts
    // Methods
    /* ------------------------------------------------------------ */
 
-   public ButtonAsserts<T> IsEnabled_is(bool expected)
+   public ButtonAsserts<T> IsEnabled_is
+   (
+      bool expected
+   )
    {
       Assert.That
             .AreEqual($"{_descriptionHeader}: IsEnabled",
@@ -35,7 +49,10 @@ public sealed class ButtonAsserts<T> : IAsserts
 
    /* ------------------------------------------------------------ */
 
-   public ButtonAsserts<T> Visibility_is(Visibility expected)
+   public ButtonAsserts<T> Visibility_is
+   (
+      Visibility expected
+   )
    {
       Assert.That
             .AreEqual($"{_descriptionHeader}: Visibility",
@@ -49,14 +66,6 @@ public sealed class ButtonAsserts<T> : IAsserts
 
    public T ReturnToParent()
       => _parent;
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly FakeButton _button;
-   private readonly string     _descriptionHeader;
-   private readonly T          _parent;
 
    /* ------------------------------------------------------------ */
 }

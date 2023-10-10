@@ -1,5 +1,4 @@
-﻿using Tetra;
-using Tetra.Testing;
+﻿using Tetra.Testing;
 using static Tetra.Testing.AAA_test;
 
 namespace Check;
@@ -38,7 +37,10 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IArrange<TheEitherHasBeenCreated.Arrange> has_created_a_left_from(FakeLeft? content)
+      public IArrange<TheEitherHasBeenCreated.Arrange> has_created_a_left_from
+      (
+         FakeLeft? content
+      )
          => has_not_created_an_either()
            .And(calls_Either_Left_with(content))
            .Recharacterise($@"{nameof(the_Client)}_{nameof(has_created_a_left_from)} ""{content?.Characterisation}""");
@@ -52,14 +54,20 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IArrange<TheEitherHasBeenCreated.Arrange> has_created_a_right_from(FakeRight? content)
+      public IArrange<TheEitherHasBeenCreated.Arrange> has_created_a_right_from
+      (
+         FakeRight? content
+      )
          => has_not_created_an_either()
            .And(calls_Either_Right_with(content))
            .Recharacterise($@"{nameof(the_Client)}_{nameof(has_created_a_right_from)} ""{content?.Characterisation}""");
 
       /* ------------------------------------------------------------ */
 
-      public IArrange<TheOptionHasBeenCreated.Arrange> has_created_a_some_from(FakeType? content)
+      public IArrange<TheOptionHasBeenCreated.Arrange> has_created_a_some_from
+      (
+         FakeType? content
+      )
          => has_not_created_an_option()
            .And(calls_Option_T_Some_with(content))
            .Recharacterise($@"{nameof(the_Client)}_{nameof(has_created_a_some_from)} ""{content?.Characterisation}""");
@@ -73,7 +81,10 @@ partial class Steps
       // Arrange/Act
       /* ------------------------------------------------------------ */
 
-      public IArrangeAct<TheOptionHasNotBeenCreated.Arrange, TheOptionHasBeenCreated.Arrange, OptionAsserts<FakeType, TestTerminus>> calls_Option_Some_T_with(FakeType? content)
+      public IArrangeAct<TheOptionHasNotBeenCreated.Arrange, TheOptionHasBeenCreated.Arrange, OptionAsserts<FakeType, TestTerminus>> calls_Option_Some_T_with
+      (
+         FakeType? content
+      )
          => AtomicArrangeAct<TheOptionHasNotBeenCreated.Arrange, TheOptionHasBeenCreated.Arrange, OptionAsserts<FakeType, TestTerminus>>
            .Create($@"{nameof(the_Client)}_{nameof(calls_Option_Some_T_with)} ""{content?.Characterisation}""",
                    arrange => arrange.CallOptionSomeT(content!),
@@ -93,7 +104,10 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IArrangeAct<TheOptionHasNotBeenCreated.Arrange, TheOptionHasBeenCreated.Arrange, OptionAsserts<FakeType, TestTerminus>> calls_Option_T_Some_with(FakeType? content)
+      public IArrangeAct<TheOptionHasNotBeenCreated.Arrange, TheOptionHasBeenCreated.Arrange, OptionAsserts<FakeType, TestTerminus>> calls_Option_T_Some_with
+      (
+         FakeType? content
+      )
          => AtomicArrangeAct<TheOptionHasNotBeenCreated.Arrange, TheOptionHasBeenCreated.Arrange, OptionAsserts<FakeType, TestTerminus>>
            .Create($@"{nameof(the_Client)}_{nameof(calls_Option_T_Some_with)} ""{content?.Characterisation}""",
                    arrange => arrange.CallOptionTSome(content),
@@ -104,7 +118,10 @@ partial class Steps
       /* ------------------------------------------------------------ */
 
       public IArrangeAct<TheEitherHasNotBeenCreated.Arrange, TheEitherHasBeenCreated.Arrange, EitherAsserts<FakeLeft, FakeRight, TestTerminus>>
-         calls_Either_Left_with(FakeLeft? content)
+         calls_Either_Left_with
+         (
+            FakeLeft? content
+         )
          => AtomicArrangeAct<TheEitherHasNotBeenCreated.Arrange, TheEitherHasBeenCreated.Arrange, EitherAsserts<FakeLeft, FakeRight, TestTerminus>>
            .Create($@"{nameof(the_Client)}_{nameof(calls_Either_Left_with)} ""{content?.Characterisation}""",
                    arrange => arrange.CallEitherLeft(content),
@@ -115,7 +132,10 @@ partial class Steps
       /* ------------------------------------------------------------ */
 
       public IArrangeAct<TheEitherHasNotBeenCreated.Arrange, TheEitherHasBeenCreated.Arrange, EitherAsserts<FakeLeft, FakeRight, TestTerminus>>
-         calls_Either_Right_with(FakeRight? content)
+         calls_Either_Right_with
+         (
+            FakeRight? content
+         )
          => AtomicArrangeAct<TheEitherHasNotBeenCreated.Arrange, TheEitherHasBeenCreated.Arrange, EitherAsserts<FakeLeft, FakeRight, TestTerminus>>
            .Create($@"{nameof(the_Client)}_{nameof(calls_Either_Right_with)} ""{content?.Characterisation}""",
                    arrange => arrange.CallEitherRight(content),

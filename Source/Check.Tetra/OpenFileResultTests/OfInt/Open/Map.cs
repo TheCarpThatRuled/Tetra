@@ -24,7 +24,10 @@ public class Open_Map
    public void
       GIVEN_Open_of_int_WHEN_Map_AND_whenOpen_is_a_Func_of_int_to_int_THEN_whenOpen_was_invoked_with_the_content_AND_an_Open_containing_the_return_value_of_whenOpen_is_returned()
    {
-      static Property Property((int content, int whenOpen) args)
+      static Property Property
+      (
+         (int content, int whenOpen) args
+      )
       {
          //Arrange
          var whenOpen = FakeFunction<int, int>.Create(args.whenOpen);
@@ -62,8 +65,11 @@ public class Open_Map
    public void
       GIVEN_Open_of_int_WHEN_Map_AND_whenOpen_is_a_Func_of_int_to_TestClass_THEN_whenOpen_was_invoked_with_the_content_AND_an_Open_containing_the_return_value_of_whenOpen_is_returned()
    {
-      static Property Property(int       content,
-                               TestClass whenOpen)
+      static Property Property
+      (
+         int       content,
+         TestClass whenOpen
+      )
       {
          //Arrange
          var whenOpenFunc = FakeFunction<int, TestClass>.Create(whenOpen);
@@ -101,8 +107,11 @@ public class Open_Map
    public void
       GIVEN_Open_of_int_WHEN_Map_AND_whenOpen_is_a_Func_of_int_to_TestStruct_THEN_whenOpen_was_invoked_with_the_content_AND_an_Open_containing_the_return_value_of_whenOpen_is_returned()
    {
-      static Property Property(int        content,
-                               TestStruct whenOpen)
+      static Property Property
+      (
+         int        content,
+         TestStruct whenOpen
+      )
       {
          //Arrange
          var whenOpenFunc = FakeFunction<int, TestStruct>.Create(whenOpen);

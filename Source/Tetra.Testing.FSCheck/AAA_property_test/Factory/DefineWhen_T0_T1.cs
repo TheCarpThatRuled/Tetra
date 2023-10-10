@@ -9,26 +9,6 @@ partial class AAA_property_test<TState>
       where TWhen : IAsserts
    {
       /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public DefineThen<TGiven, TWhen, TThen> THEN<TThen>(IAssert<TWhen, TThen> then)
-         where TThen : IAsserts
-         => DefineThen<TGiven, TWhen, TThen>
-           .Create(_given,
-                   _when,
-                   then);
-
-      /* ------------------------------------------------------------ */
-      // Internal Factory Functions
-      /* ------------------------------------------------------------ */
-
-      internal static DefineWhen<TGiven, TWhen> Create(IArrange<TGiven>    given,
-                                                       IAct<TGiven, TWhen> when)
-         => new(given,
-                when);
-
-      /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
@@ -39,12 +19,40 @@ partial class AAA_property_test<TState>
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private DefineWhen(IArrange<TGiven>    given,
-                         IAct<TGiven, TWhen> when)
+      private DefineWhen
+      (
+         IArrange<TGiven>    given,
+         IAct<TGiven, TWhen> when
+      )
       {
          _given = given;
          _when  = when;
       }
+      /* ------------------------------------------------------------ */
+      // Methods
+      /* ------------------------------------------------------------ */
+
+      public DefineThen<TGiven, TWhen, TThen> THEN<TThen>
+      (
+         IAssert<TWhen, TThen> then
+      )
+         where TThen : IAsserts
+         => DefineThen<TGiven, TWhen, TThen>
+           .Create(_given,
+                   _when,
+                   then);
+
+      /* ------------------------------------------------------------ */
+      // Internal Factory Functions
+      /* ------------------------------------------------------------ */
+
+      internal static DefineWhen<TGiven, TWhen> Create
+      (
+         IArrange<TGiven>    given,
+         IAct<TGiven, TWhen> when
+      )
+         => new(given,
+                when);
 
       /* ------------------------------------------------------------ */
    }

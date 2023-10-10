@@ -10,15 +10,21 @@ public static class Visibility_Extensions
    /* ------------------------------------------------------------ */
 
    [ExcludeFromCodeCoverage]
-   public static ArgumentOutOfRangeException OutOfRange(this Visibility visibility,
-                                                        string          argumentName)
+   public static ArgumentOutOfRangeException OutOfRange
+   (
+      this Visibility visibility,
+      string          argumentName
+   )
       => new(argumentName,
              visibility,
              $"Unrecognised {typeof(Visibility).FullName}");
 
    /* ------------------------------------------------------------ */
 
-   public static string ToHumanReadable(this Visibility value)
+   public static string ToHumanReadable
+   (
+      this Visibility value
+   )
       => value switch
          {
             Visibility.Visible   => "Visible",
@@ -32,7 +38,10 @@ public static class Visibility_Extensions
    // String Extensions
    /* ------------------------------------------------------------ */
 
-   public static Visibility HumanReadableToTetraVisibility(this string value)
+   public static Visibility HumanReadableToTetraVisibility
+   (
+      this string value
+   )
       => value switch
          {
             "Visible"  => Visibility.Visible,

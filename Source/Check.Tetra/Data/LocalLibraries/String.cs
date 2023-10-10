@@ -15,7 +15,7 @@ internal static partial class LocalLibraries
       public static Arbitrary<string[]> Type()
          => Generators
            .NonEmptyArrayOf(Generators.String())
-           .Where(x=> x.Length > 1)
+           .Where(x => x.Length > 1)
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

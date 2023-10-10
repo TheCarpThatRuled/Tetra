@@ -16,19 +16,38 @@ public class TestClass : IEquatable<TestClass>
    // Constructors
    /* -------------------------------------------------- */
 
-   public TestClass(int value1,
-                    double value2)
+   public TestClass
+   (
+      int    value1,
+      double value2
+   )
    {
       Value1 = value1;
       Value2 = value2;
    }
 
    /* -------------------------------------------------- */
+   // IEquatable<TestClass> Methods
+   /* -------------------------------------------------- */
+
+   public bool Equals
+   (
+      TestClass? other
+   )
+      => other is not null
+      && (ReferenceEquals(this,
+                          other)
+       || Equivalent(other));
+
+   /* -------------------------------------------------- */
    // Factory Functions
    /* -------------------------------------------------- */
 
-   public static TestClass Create(int value1,
-                                  double value2)
+   public static TestClass Create
+   (
+      int    value1,
+      double value2
+   )
       => new(value1,
              value2);
 
@@ -36,7 +55,10 @@ public class TestClass : IEquatable<TestClass>
    // object Overridden Methods
    /* -------------------------------------------------- */
 
-   public override bool Equals(object? obj)
+   public override bool Equals
+   (
+      object? obj
+   )
       => ReferenceEquals(this,
                          obj)
       || obj is TestClass other
@@ -55,28 +77,24 @@ public class TestClass : IEquatable<TestClass>
       => $"class({Value1}, {Value2})";
 
    /* -------------------------------------------------- */
-   // IEquatable<TestClass> Methods
-   /* -------------------------------------------------- */
-
-   public bool Equals(TestClass? other)
-      => other is not null
-      && (ReferenceEquals(this,
-                          other)
-       || Equivalent(other));
-
-   /* -------------------------------------------------- */
    // IEquatable<TestClass> Operators
    /* -------------------------------------------------- */
 
-   public static bool operator ==(TestClass? left,
-                                  TestClass? right)
+   public static bool operator ==
+   (
+      TestClass? left,
+      TestClass? right
+   )
       => Equals(left,
                 right);
 
    /* -------------------------------------------------- */
 
-   public static bool operator !=(TestClass? left,
-                                  TestClass? right)
+   public static bool operator !=
+   (
+      TestClass? left,
+      TestClass? right
+   )
       => !Equals(left,
                  right);
 
@@ -84,7 +102,10 @@ public class TestClass : IEquatable<TestClass>
    // Methods
    /* -------------------------------------------------- */
 
-   public bool Equivalent(TestClass other)
+   public bool Equivalent
+   (
+      TestClass other
+   )
       => Value1.Equals(other.Value1)
       && Value2.Equals(other.Value2);
 

@@ -2,12 +2,12 @@
 
 public static partial class Steps
 {
-    /* ------------------------------------------------------------ */
-    // Properties
-    /* ------------------------------------------------------------ */
+   /* ------------------------------------------------------------ */
+   // Properties
+   /* ------------------------------------------------------------ */
 
-    // ReSharper disable once InconsistentNaming
-    public static TheClient the_Client { get; } = new();
+   // ReSharper disable once InconsistentNaming
+   public static TheClient the_Client { get; } = new();
 
    /* ------------------------------------------------------------ */
 

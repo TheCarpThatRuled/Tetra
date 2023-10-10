@@ -8,15 +8,21 @@ internal static class PathBuilder
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static void Add(StringBuilder path,
-                          FileComponent file)
+   public static void Add
+   (
+      StringBuilder path,
+      FileComponent file
+   )
       => path
         .Append(file.Value());
 
    /* ------------------------------------------------------------ */
 
-   public static void Add(StringBuilder   path,
-                          VolumeComponent volume)
+   public static void Add
+   (
+      StringBuilder   path,
+      VolumeComponent volume
+   )
    {
       path.Append(volume.Value());
       path.Append(Path.DirectorySeparatorChar);
@@ -24,8 +30,11 @@ internal static class PathBuilder
 
    /* ------------------------------------------------------------ */
 
-   public static void Combine(StringBuilder                   path,
-                              IEnumerable<DirectoryComponent> directories)
+   public static void Combine
+   (
+      StringBuilder                   path,
+      IEnumerable<DirectoryComponent> directories
+   )
    {
       foreach (var directory in directories)
       {
@@ -36,7 +45,10 @@ internal static class PathBuilder
 
    /* ------------------------------------------------------------ */
 
-   public static string Combine(IEnumerable<DirectoryComponent> directories)
+   public static string Combine
+   (
+      IEnumerable<DirectoryComponent> directories
+   )
    {
       var path = new StringBuilder();
 
@@ -48,9 +60,12 @@ internal static class PathBuilder
 
    /* ------------------------------------------------------------ */
 
-   public static void Combine(StringBuilder                   path,
-                              VolumeComponent                 volume,
-                              IEnumerable<DirectoryComponent> directories)
+   public static void Combine
+   (
+      StringBuilder                   path,
+      VolumeComponent                 volume,
+      IEnumerable<DirectoryComponent> directories
+   )
    {
       Add(path,
           volume);
@@ -61,8 +76,11 @@ internal static class PathBuilder
 
    /* ------------------------------------------------------------ */
 
-   public static string Combine(VolumeComponent                 volume,
-                                IEnumerable<DirectoryComponent> directories)
+   public static string Combine
+   (
+      VolumeComponent                 volume,
+      IEnumerable<DirectoryComponent> directories
+   )
    {
       var path = new StringBuilder();
 
@@ -75,10 +93,13 @@ internal static class PathBuilder
 
    /* ------------------------------------------------------------ */
 
-   public static void Combine(StringBuilder                   path,
-                              VolumeComponent                 volume,
-                              IEnumerable<DirectoryComponent> directories,
-                              FileComponent                   file)
+   public static void Combine
+   (
+      StringBuilder                   path,
+      VolumeComponent                 volume,
+      IEnumerable<DirectoryComponent> directories,
+      FileComponent                   file
+   )
    {
       Combine(path,
               volume,
@@ -90,9 +111,12 @@ internal static class PathBuilder
 
    /* ------------------------------------------------------------ */
 
-   public static string Combine(VolumeComponent                 volume,
-                                IEnumerable<DirectoryComponent> directories,
-                                FileComponent                   file)
+   public static string Combine
+   (
+      VolumeComponent                 volume,
+      IEnumerable<DirectoryComponent> directories,
+      FileComponent                   file
+   )
    {
       var path = new StringBuilder();
 
@@ -106,9 +130,12 @@ internal static class PathBuilder
 
    /* ------------------------------------------------------------ */
 
-   public static void Combine(StringBuilder                   path,
-                              IEnumerable<DirectoryComponent> directories,
-                              FileComponent                   file)
+   public static void Combine
+   (
+      StringBuilder                   path,
+      IEnumerable<DirectoryComponent> directories,
+      FileComponent                   file
+   )
    {
       Combine(path,
               directories);
@@ -119,8 +146,11 @@ internal static class PathBuilder
 
    /* ------------------------------------------------------------ */
 
-   public static string Combine(IEnumerable<DirectoryComponent> directories,
-                                FileComponent                   file)
+   public static string Combine
+   (
+      IEnumerable<DirectoryComponent> directories,
+      FileComponent                   file
+   )
    {
       var path = new StringBuilder();
 

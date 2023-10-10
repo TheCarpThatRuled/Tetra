@@ -6,10 +6,24 @@ partial class AAA_property_test<TState>
    public sealed class Disposables
    {
       /* ------------------------------------------------------------ */
+      // Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly List<IDisposable> _disposables = new();
+
+      /* ------------------------------------------------------------ */
+      // Private Constructors
+      /* ------------------------------------------------------------ */
+
+      private Disposables() { }
+      /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public void Register(IDisposable disposable)
+      public void Register
+      (
+         IDisposable disposable
+      )
          => _disposables
            .Add(disposable);
 
@@ -31,18 +45,6 @@ partial class AAA_property_test<TState>
             disposable.Dispose();
          }
       }
-
-      /* ------------------------------------------------------------ */
-      // Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly List<IDisposable> _disposables = new();
-
-      /* ------------------------------------------------------------ */
-      // Private Constructors
-      /* ------------------------------------------------------------ */
-
-      private Disposables() { }
 
       /* ------------------------------------------------------------ */
    }

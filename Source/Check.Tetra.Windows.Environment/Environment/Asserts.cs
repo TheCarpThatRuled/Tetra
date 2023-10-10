@@ -7,10 +7,28 @@ namespace Check;
 public sealed class Asserts : IAsserts
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly IFileSystem _fileSystem;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private Asserts
+   (
+      IFileSystem fileSystem
+   )
+      => _fileSystem = fileSystem;
+   /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
-   public Asserts The_file_system_contains_a_directory(string expected)
+   public Asserts The_file_system_contains_a_directory
+   (
+      string expected
+   )
    {
       Assert.That
             .IsTrue($"The file system should contain <{expected}>",
@@ -21,7 +39,10 @@ public sealed class Asserts : IAsserts
 
    /* ------------------------------------------------------------ */
 
-   public Asserts The_file_system_contains_a_file(string expected)
+   public Asserts The_file_system_contains_a_file
+   (
+      string expected
+   )
    {
       Assert.That
             .IsTrue($"The file system should contain <{expected}>",
@@ -32,7 +53,10 @@ public sealed class Asserts : IAsserts
 
    /* ------------------------------------------------------------ */
 
-   public Asserts The_file_system_does_not_contain_a_directory(string expected)
+   public Asserts The_file_system_does_not_contain_a_directory
+   (
+      string expected
+   )
    {
       Assert.That
             .IsFalse($"The file system should not contain <{expected}>",
@@ -43,7 +67,10 @@ public sealed class Asserts : IAsserts
 
    /* ------------------------------------------------------------ */
 
-   public Asserts The_file_system_does_not_contain_a_file(string expected)
+   public Asserts The_file_system_does_not_contain_a_file
+   (
+      string expected
+   )
    {
       Assert.That
             .IsFalse($"The file system should not contain <{expected}>",
@@ -54,7 +81,10 @@ public sealed class Asserts : IAsserts
 
    /* ------------------------------------------------------------ */
 
-   public Asserts The_file_system_has_a_current_directory_of(string expected)
+   public Asserts The_file_system_has_a_current_directory_of
+   (
+      string expected
+   )
    {
       Assert.That
             .AreEqualOrdinalIgnoreCase($"The file system should have a current directory of <{expected}>",
@@ -68,21 +98,11 @@ public sealed class Asserts : IAsserts
    // Internal Factory Functions
    /* ------------------------------------------------------------ */
 
-   internal static Asserts Create(IFileSystem fileSystem)
+   internal static Asserts Create
+   (
+      IFileSystem fileSystem
+   )
       => new(fileSystem);
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly IFileSystem _fileSystem;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private Asserts(IFileSystem fileSystem)
-      => _fileSystem = fileSystem;
 
    /* ------------------------------------------------------------ */
 }

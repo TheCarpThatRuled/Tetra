@@ -14,14 +14,18 @@ partial class Steps
             // Assert
             /* ------------------------------------------------------------ */
 
-            public IAssert<TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts, TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts> is_a_left_containing(
-               FakeNewLeft expected)
+            public IAssert<TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts, TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts> is_a_left_containing
+            (
+               FakeNewLeft expected
+            )
                => the_return_value.is_a_left_containing<FakeNewLeft, FakeNewRight, TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts>(expected);
 
             /* ------------------------------------------------------------ */
 
-            public IAssert<TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts, TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts> is_a_right_containing(
-               FakeNewRight expected)
+            public IAssert<TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts, TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts> is_a_right_containing
+            (
+               FakeNewRight expected
+            )
                => the_return_value.is_a_right_containing<FakeNewLeft, FakeNewRight, TheEitherHasBeenCreated.AndMapWasCalledWithExternalStateAsserts>(expected);
 
             /* ------------------------------------------------------------ */

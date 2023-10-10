@@ -7,35 +7,6 @@ partial class AAA_test
       where TArranges : IArranges
    {
       /* ------------------------------------------------------------ */
-      // Factory Functions
-      /* ------------------------------------------------------------ */
-
-      public static RecharacterisedArrange<TArranges> Create(string              characterisation,
-                                                             IArrange<TArranges> arrange)
-         => new(arrange,
-                characterisation);
-
-      /* ------------------------------------------------------------ */
-      // IArrange<TArranges> Methods
-      /* ------------------------------------------------------------ */
-
-      public void AddBriefCharacterisation(GivenCharacteriser characteriser)
-         => characteriser
-           .AddClauseToBriefCharacterisation(_characterisation);
-
-      /* ------------------------------------------------------------ */
-
-      public void AddFullCharacterisation(GivenCharacteriser characteriser)
-         => _arrange
-           .AddFullCharacterisation(characteriser);
-
-      /* ------------------------------------------------------------ */
-
-      public TArranges Arrange(Disposables disposables)
-         => _arrange
-           .Arrange(disposables);
-
-      /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
@@ -46,12 +17,55 @@ partial class AAA_test
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private RecharacterisedArrange(IArrange<TArranges> arrange,
-                                     string              characterisation)
+      private RecharacterisedArrange
+      (
+         IArrange<TArranges> arrange,
+         string              characterisation
+      )
       {
          _arrange          = arrange;
          _characterisation = characterisation;
       }
+
+      /* ------------------------------------------------------------ */
+      // IArrange<TArranges> Methods
+      /* ------------------------------------------------------------ */
+
+      public void AddBriefCharacterisation
+      (
+         GivenCharacteriser characteriser
+      )
+         => characteriser
+           .AddClauseToBriefCharacterisation(_characterisation);
+
+      /* ------------------------------------------------------------ */
+
+      public void AddFullCharacterisation
+      (
+         GivenCharacteriser characteriser
+      )
+         => _arrange
+           .AddFullCharacterisation(characteriser);
+
+      /* ------------------------------------------------------------ */
+
+      public TArranges Arrange
+      (
+         Disposables disposables
+      )
+         => _arrange
+           .Arrange(disposables);
+      /* ------------------------------------------------------------ */
+      // Factory Functions
+      /* ------------------------------------------------------------ */
+
+      public static RecharacterisedArrange<TArranges> Create
+      (
+         string              characterisation,
+         IArrange<TArranges> arrange
+      )
+         => new(arrange,
+                characterisation);
 
       /* ------------------------------------------------------------ */
    }

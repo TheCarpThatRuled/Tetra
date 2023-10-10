@@ -6,7 +6,10 @@ internal static class ExternalFileSystem
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static void EnsureADirectoryDoesNotExists(string directory)
+   public static void EnsureADirectoryDoesNotExists
+   (
+      string directory
+   )
    {
       if (!Directory.Exists(directory))
       {
@@ -20,7 +23,10 @@ internal static class ExternalFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public static void EnsureADirectoryExists(string directory)
+   public static void EnsureADirectoryExists
+   (
+      string directory
+   )
    {
       if (Directory.Exists(directory))
       {
@@ -41,7 +47,10 @@ internal static class ExternalFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public static void EnsureAnEmptyDirectoryExists(string directory)
+   public static void EnsureAnEmptyDirectoryExists
+   (
+      string directory
+   )
    {
       EnsureADirectoryExists(directory);
       EnsureADirectoryIsEmpty(directory);
@@ -49,7 +58,10 @@ internal static class ExternalFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public static void EnsureADirectoryIsEmpty(string directory)
+   public static void EnsureADirectoryIsEmpty
+   (
+      string directory
+   )
    {
       if (!Directory.Exists(directory))
       {
@@ -69,7 +81,10 @@ internal static class ExternalFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public static void EnsureAFileDoesNotExists(string file)
+   public static void EnsureAFileDoesNotExists
+   (
+      string file
+   )
    {
       if (File.Exists(file))
       {
@@ -79,14 +94,20 @@ internal static class ExternalFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public static void EnsureAFileExists(string file)
+   public static void EnsureAFileExists
+   (
+      string file
+   )
    {
       // ReSharper disable once InvertIf
       if (!File.Exists(file))
       {
          // ReSharper disable once EmptyEmbeddedStatement
 #pragma warning disable CS0642 // Possible mistaken empty statement
-         using (File.Create(file));
+         using (File.Create(file))
+         {
+            ;
+         }
 #pragma warning restore CS0642 // Possible mistaken empty statement
       }
    }
@@ -99,7 +120,10 @@ internal static class ExternalFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public static Stream OpenAFile(string file)
+   public static Stream OpenAFile
+   (
+      string file
+   )
       => File
         .Open(file,
               FileMode.OpenOrCreate,
@@ -108,7 +132,10 @@ internal static class ExternalFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public static void SetCurrentDirectory(string directory)
+   public static void SetCurrentDirectory
+   (
+      string directory
+   )
       => Directory
         .SetCurrentDirectory(directory);
 

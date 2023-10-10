@@ -5,10 +5,28 @@ namespace Tetra.Testing;
 public sealed class FakePropertyChangedEventHandler
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly List<PropertyChangedEventArgs> _arguments = new();
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private FakePropertyChangedEventHandler
+   (
+      Action<PropertyChangedEventHandler> subscribe
+   )
+      => subscribe(OnFired);
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static FakePropertyChangedEventHandler Create(Action<PropertyChangedEventHandler> subscribe)
+   public static FakePropertyChangedEventHandler Create
+   (
+      Action<PropertyChangedEventHandler> subscribe
+   )
       => new(subscribe);
 
    /* ------------------------------------------------------------ */
@@ -20,24 +38,14 @@ public sealed class FakePropertyChangedEventHandler
         .Materialise();
 
    /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly List<PropertyChangedEventArgs> _arguments = new();
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private FakePropertyChangedEventHandler(Action<PropertyChangedEventHandler> subscribe)
-      => subscribe(OnFired);
-
-   /* ------------------------------------------------------------ */
    // Private Methods
    /* ------------------------------------------------------------ */
 
-   public void OnFired(object?                  sender,
-                       PropertyChangedEventArgs args)
+   public void OnFired
+   (
+      object?                  sender,
+      PropertyChangedEventArgs args
+   )
       => _arguments
         .Add(args);
 

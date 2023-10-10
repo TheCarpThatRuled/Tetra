@@ -3,19 +3,37 @@
 internal sealed class OuterPushBinding<T> : ITwoWayBinding<T>
 {
    /* ------------------------------------------------------------ */
-   // Factory Functions
+   // Private Fields
    /* ------------------------------------------------------------ */
 
-   public static OuterPushBinding<T> Create(ITwoWayBinding<T> source,
-                                            Action<T>         onOuterPush)
-      => new(onOuterPush,
-             source);
+   private readonly Action<T>         _onOuterPush;
+   private readonly ITwoWayBinding<T> _source;
+
+   //Mutable
+   private Action _onUpdated = Function.NoOp;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private OuterPushBinding
+   (
+      Action<T>         onOuterPush,
+      ITwoWayBinding<T> source
+   )
+   {
+      _onOuterPush = onOuterPush;
+      _source      = source;
+   }
 
    /* ------------------------------------------------------------ */
    // IOneWayBinding<T> Methods
    /* ------------------------------------------------------------ */
 
-   public void OnUpdated(Action onUpdated)
+   public void OnUpdated
+   (
+      Action onUpdated
+   )
    {
       _onUpdated = onUpdated;
       _source.OnUpdated(onUpdated);
@@ -31,33 +49,26 @@ internal sealed class OuterPushBinding<T> : ITwoWayBinding<T>
    // ITwoWayBinding<T> Methods
    /* ------------------------------------------------------------ */
 
-   public void Push(T value)
+   public void Push
+   (
+      T value
+   )
    {
       _source.PushWithoutUpdate(value,
                                 _onUpdated);
       _onOuterPush(value);
    }
-
    /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly Action<T>         _onOuterPush;
-   private readonly ITwoWayBinding<T> _source;
-
-   //Mutable
-   private Action _onUpdated = Function.NoOp;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
+   // Factory Functions
    /* ------------------------------------------------------------ */
 
-   private OuterPushBinding(Action<T>         onOuterPush,
-                            ITwoWayBinding<T> source)
-   {
-      _onOuterPush = onOuterPush;
-      _source      = source;
-   }
+   public static OuterPushBinding<T> Create
+   (
+      ITwoWayBinding<T> source,
+      Action<T>         onOuterPush
+   )
+      => new(onOuterPush,
+             source);
 
    /* ------------------------------------------------------------ */
 }

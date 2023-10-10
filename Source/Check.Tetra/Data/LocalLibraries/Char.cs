@@ -22,7 +22,7 @@ internal static partial class LocalLibraries
                                         .ToString(),
                                    tuple.second
                                         .ToString())
-                         == 0)
+                        == 0)
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -46,7 +46,7 @@ internal static partial class LocalLibraries
                                         .ToString(),
                                    tuple.second
                                         .ToString())
-                        > 0)
+                         > 0)
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */
@@ -70,7 +70,7 @@ internal static partial class LocalLibraries
                                         .ToString(),
                                    tuple.second
                                         .ToString())
-                        < 0)
+                         < 0)
            .ToArbitrary();
 
       /* ------------------------------------------------------------ */

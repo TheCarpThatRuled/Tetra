@@ -23,7 +23,10 @@ public class InnerBinding_Push
    [TestMethod]
    public void GIVEN_OnOuterPush_WHEN_innerBinding_is_Pushed_THEN_onOuterPush_was_not_invoked_AND_updated_was_invoked_once_AND_Pull_returns_pushedValue()
    {
-      static Property Property((TestClass initalValue, TestClass pushedValue) args)
+      static Property Property
+      (
+         (TestClass initalValue, TestClass pushedValue) args
+      )
       {
          //Arrange
          var innerBinding = Bind.To(args.initalValue);

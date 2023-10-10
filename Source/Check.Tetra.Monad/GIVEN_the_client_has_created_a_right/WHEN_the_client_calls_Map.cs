@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Tetra;
 using Tetra.Testing;
 using static Check.Steps;
 
@@ -17,7 +16,10 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_client_calls_Map]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       using var given = test.Create();
       var       when  = given.Arrange();

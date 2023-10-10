@@ -7,7 +7,10 @@ public static class Characterisation_Extension
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static string Brief(this Characterisation characterisation)
+   public static string Brief
+   (
+      this Characterisation characterisation
+   )
       => IndentingStringBuilder
         .Create()
         .AppendBrief(characterisation)
@@ -15,7 +18,10 @@ public static class Characterisation_Extension
 
    /* ------------------------------------------------------------ */
 
-   public static string Full(this Characterisation characterisation)
+   public static string Full
+   (
+      this Characterisation characterisation
+   )
       => IndentingStringBuilder
         .Create()
         .AppendFull(characterisation)

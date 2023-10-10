@@ -14,7 +14,10 @@ partial class Steps
             // Assert
             /* ------------------------------------------------------------ */
 
-            public IAssert<TheOptionHasBeenCreated.AndUnifyWasCalledAsserts, TheOptionHasBeenCreated.AndUnifyWasCalledAsserts> is_equal_to(FakeNewType expected)
+            public IAssert<TheOptionHasBeenCreated.AndUnifyWasCalledAsserts, TheOptionHasBeenCreated.AndUnifyWasCalledAsserts> is_equal_to
+            (
+               FakeNewType expected
+            )
                => the_return_value.is_equal_to<FakeNewType, TheOptionHasBeenCreated.AndUnifyWasCalledAsserts>(expected);
 
             /* ------------------------------------------------------------ */

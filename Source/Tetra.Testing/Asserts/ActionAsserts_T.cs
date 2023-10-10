@@ -6,12 +6,38 @@ public sealed class ActionAsserts<TNext>
    where TNext : IAsserts
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly FakeAction  _actual;
+   private readonly string      _description;
+   private readonly Func<TNext> _next;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private ActionAsserts
+   (
+      FakeAction  actual,
+      string      description,
+      Func<TNext> next
+   )
+   {
+      _actual      = actual;
+      _description = description;
+      _next        = next;
+   }
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static ActionAsserts<TNext> Create(string      description,
-                                             FakeAction  actual,
-                                             Func<TNext> next)
+   public static ActionAsserts<TNext> Create
+   (
+      string      description,
+      FakeAction  actual,
+      Func<TNext> next
+   )
       => new(actual,
              description,
              next);
@@ -40,27 +66,6 @@ public sealed class ActionAsserts<TNext>
                        _actual);
 
       return _next();
-   }
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly FakeAction  _actual;
-   private readonly string      _description;
-   private readonly Func<TNext> _next;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private ActionAsserts(FakeAction  actual,
-                         string      description,
-                         Func<TNext> next)
-   {
-      _actual      = actual;
-      _description = description;
-      _next        = next;
    }
 
    /* ------------------------------------------------------------ */

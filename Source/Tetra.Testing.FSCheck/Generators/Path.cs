@@ -50,21 +50,27 @@ partial class Generators
 
    public static Gen<string> PathWithAnInvalidVolumeRootAndATrailingDirectorySeparator()
       => Gen
-        .OneOf(NonAsciiLetter().Select(x => x.ToString()),
+        .OneOf(NonAsciiLetter()
+                 .Select(x => x.ToString()),
                TwoOrMoreAsciiLetters())
         .Combine(ListOf(ValidPathComponent()),
-                 (volume,
-                  directories) => $"{volume}:{Path.DirectorySeparatorChar}{directories.ToDelimitedStringWithTrailingDelimiter(Path.DirectorySeparatorChar)}");
+                 (
+                    volume,
+                    directories
+                 ) => $"{volume}:{Path.DirectorySeparatorChar}{directories.ToDelimitedStringWithTrailingDelimiter(Path.DirectorySeparatorChar)}");
 
    /* ------------------------------------------------------------ */
 
    public static Gen<string> PathWithAnInvalidVolumeRootButWithoutATrailingDirectorySeparator()
       => Gen
-        .OneOf(NonAsciiLetter().Select(x=> x.ToString()),
-            TwoOrMoreAsciiLetters())
+        .OneOf(NonAsciiLetter()
+                 .Select(x => x.ToString()),
+               TwoOrMoreAsciiLetters())
         .Combine(ValidPathWithoutARootOrATrailingDirectorySeparator(),
-                 (volume,
-                  directories) => $"{volume}:{Path.DirectorySeparatorChar}{directories}");
+                 (
+                    volume,
+                    directories
+                 ) => $"{volume}:{Path.DirectorySeparatorChar}{directories}");
 
    /* ------------------------------------------------------------ */
 
@@ -80,10 +86,12 @@ partial class Generators
         .Combine(ListOf(ValidPathComponent()),
                  InvalidPathComponentExcludingDirectorySeparators(),
                  ListOf(ValidPathComponent()),
-                 (volume,
-                  prependedComponents,
-                  invalidComponent,
-                  appendedComponents) =>
+                 (
+                    volume,
+                    prependedComponents,
+                    invalidComponent,
+                    appendedComponents
+                 ) =>
                  {
                     var components = prependedComponents
                                     .Append(invalidComponent)
@@ -101,10 +109,12 @@ partial class Generators
         .Combine(SequenceOf(ValidPathComponent()),
                  InvalidPathComponentExcludingDirectorySeparators(),
                  SequenceOf(ValidPathComponent()),
-                 (volume,
-                  prependedComponents,
-                  invalidComponent,
-                  appendedComponents) =>
+                 (
+                    volume,
+                    prependedComponents,
+                    invalidComponent,
+                    appendedComponents
+                 ) =>
                  {
                     var components = prependedComponents
                                     .Append(invalidComponent)
@@ -128,13 +138,15 @@ partial class Generators
       => ListOf(ValidPathComponent())
         .Combine(InvalidPathComponentExcludingDirectorySeparators(),
                  ListOf(ValidPathComponent()),
-                 (prependedComponents,
-                  invalidComponent,
-                  appendedComponents) => prependedComponents
-                                        .Append(invalidComponent)
-                                        .Concat(appendedComponents)
-                                        .ToArray()
-                                        .ToDelimitedString(Path.DirectorySeparatorChar));
+                 (
+                    prependedComponents,
+                    invalidComponent,
+                    appendedComponents
+                 ) => prependedComponents
+                     .Append(invalidComponent)
+                     .Concat(appendedComponents)
+                     .ToArray()
+                     .ToDelimitedString(Path.DirectorySeparatorChar));
 
    /* ------------------------------------------------------------ */
 
@@ -142,13 +154,15 @@ partial class Generators
       => ListOf(ValidPathComponent())
         .Combine(InvalidPathComponentExcludingDirectorySeparators(),
                  ListOf(ValidPathComponent()),
-                 (prependedComponents,
-                  invalidComponent,
-                  appendedComponents) => prependedComponents
-                                        .Append(invalidComponent)
-                                        .Concat(appendedComponents)
-                                        .ToArray()
-                                        .ToDelimitedStringWithTrailingDelimiter(Path.DirectorySeparatorChar));
+                 (
+                    prependedComponents,
+                    invalidComponent,
+                    appendedComponents
+                 ) => prependedComponents
+                     .Append(invalidComponent)
+                     .Concat(appendedComponents)
+                     .ToArray()
+                     .ToDelimitedStringWithTrailingDelimiter(Path.DirectorySeparatorChar));
 
    /* ------------------------------------------------------------ */
 
@@ -195,7 +209,7 @@ partial class Generators
 
    public static Gen<string> ValidPathWithoutARootOrATrailingDirectorySeparator()
       => NonEmptyListOf(ValidPathComponent())
-        .Select(directories => 
+        .Select(directories =>
                    directories.ToDelimitedString(Path.DirectorySeparatorChar.ToString()));
 
    /* ------------------------------------------------------------ */
@@ -216,16 +230,20 @@ partial class Generators
    public static Gen<string> ValidPathWithAVolumeRootAndATrailingDirectorySeparator()
       => AsciiLetter()
         .Combine(ValidPathWithoutARootButWithATrailingDirectorySeparator(),
-                 (volume,
-                  directories) => $"{volume}:{Path.DirectorySeparatorChar}{directories}");
+                 (
+                    volume,
+                    directories
+                 ) => $"{volume}:{Path.DirectorySeparatorChar}{directories}");
 
    /* ------------------------------------------------------------ */
 
    public static Gen<string> ValidPathWithAVolumeRootButWithoutATrailingDirectorySeparator()
       => AsciiLetter()
         .Combine(ValidPathWithoutARootOrATrailingDirectorySeparator(),
-                 (volume,
-                  directories) => $"{volume}:{Path.DirectorySeparatorChar}{directories}");
+                 (
+                    volume,
+                    directories
+                 ) => $"{volume}:{Path.DirectorySeparatorChar}{directories}");
 
    /* ------------------------------------------------------------ */
 
@@ -243,8 +261,12 @@ partial class Generators
 
    public static Gen<string> VolumeComponentWithInvalidSecondCharacter()
       => AsciiLetter()
-        .Combine(Char().Where(x => x != ':'),
-                 (x, y) => $"{x}{y}");
+        .Combine(Char()
+                   .Where(x => x != ':'),
+                 (
+                    x,
+                    y
+                 ) => $"{x}{y}");
 
    /* ------------------------------------------------------------ */
 

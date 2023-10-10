@@ -7,10 +7,13 @@ public static class RelativeFilePath_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static (ISequence<RelativeDirectoryPath> ancestors, RelativeFilePath file) Ancestry(this RelativeFilePath path)
+   public static (ISequence<RelativeDirectoryPath> ancestors, RelativeFilePath file) Ancestry
+   (
+      this RelativeFilePath path
+   )
       => (path.Parent()
               .Unify(x => x.Ancestry(),
-                      Sequence<RelativeDirectoryPath>.Empty),
+                     Sequence<RelativeDirectoryPath>.Empty),
           path);
 
    /* ------------------------------------------------------------ */

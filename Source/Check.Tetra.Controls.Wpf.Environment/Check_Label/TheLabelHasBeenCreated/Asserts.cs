@@ -6,8 +6,28 @@ namespace Check.Check_Label;
 
 public sealed partial class TheLabelHasBeenCreated
 {
-   public sealed class Asserts :IAsserts
+   public sealed class Asserts : IAsserts
    {
+      /* ------------------------------------------------------------ */
+      // Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly FakeLabel  _label;
+      private readonly FakeSystem _system;
+
+      /* ------------------------------------------------------------ */
+      // Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal Asserts
+      (
+         FakeLabel  label,
+         FakeSystem system
+      )
+      {
+         _label  = label;
+         _system = system;
+      }
       /* ------------------------------------------------------------ */
       // Properties
       /* ------------------------------------------------------------ */
@@ -16,24 +36,6 @@ public sealed partial class TheLabelHasBeenCreated
          => new("System under test",
                 _label,
                 this);
-
-      /* ------------------------------------------------------------ */
-      // Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal Asserts(FakeLabel  label,
-                       FakeSystem system)
-      {
-         _label  = label;
-         _system = system;
-      }
-
-      /* ------------------------------------------------------------ */
-      // Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly FakeLabel  _label;
-      private readonly FakeSystem _system;
 
       /* ------------------------------------------------------------ */
    }

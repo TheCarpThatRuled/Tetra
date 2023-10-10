@@ -22,7 +22,10 @@ public class Push
    [TestMethod]
    public void GIVEN_To_WHEN_Push_THEN_updated_was_invoked_once_AND_Pull_returns_pushedValue()
    {
-      static Property Property((int initalValue, int pushedValue) args)
+      static Property Property
+      (
+         (int initalValue, int pushedValue) args
+      )
       {
          //Arrange
          var binding = Bind.To(args.initalValue);

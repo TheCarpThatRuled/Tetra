@@ -6,24 +6,26 @@ partial class AAA_test
    public sealed class Then
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Private Fields
       /* ------------------------------------------------------------ */
 
-      public void Assert()
-         => _assert();
+      private readonly Action _assert;
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      public Then(Action assert)
+      public Then
+      (
+         Action assert
+      )
          => _assert = assert;
-
       /* ------------------------------------------------------------ */
-      // Private Fields
+      // Methods
       /* ------------------------------------------------------------ */
 
-      private readonly Action _assert;
+      public void Assert()
+         => _assert();
 
       /* ------------------------------------------------------------ */
    }

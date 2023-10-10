@@ -8,24 +8,26 @@ partial class AAA_property_test<TState>
    public sealed class When
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Private Fields
       /* ------------------------------------------------------------ */
 
-      public Then Act()
-         => new(_act());
+      private readonly Func<Func<Property>> _act;
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal When(Func<Func<Property>> act)
+      internal When
+      (
+         Func<Func<Property>> act
+      )
          => _act = act;
-
       /* ------------------------------------------------------------ */
-      // Private Fields
+      // Methods
       /* ------------------------------------------------------------ */
 
-      private readonly Func<Func<Property>> _act;
+      public Then Act()
+         => new(_act());
 
       /* ------------------------------------------------------------ */
    }

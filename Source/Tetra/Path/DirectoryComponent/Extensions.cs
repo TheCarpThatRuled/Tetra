@@ -7,8 +7,11 @@ public static class DirectoryComponent_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static RelativeDirectoryPath Append(this   DirectoryComponent   parent,
-                                              params DirectoryComponent[] child)
+   public static RelativeDirectoryPath Append
+   (
+      this   DirectoryComponent   parent,
+      params DirectoryComponent[] child
+   )
       => RelativeDirectoryPath
         .Create(child
                .Prepend(parent)
@@ -16,8 +19,11 @@ public static class DirectoryComponent_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static RelativeDirectoryPath Append(this DirectoryComponent         parent,
-                                              IEnumerable<DirectoryComponent> child)
+   public static RelativeDirectoryPath Append
+   (
+      this DirectoryComponent         parent,
+      IEnumerable<DirectoryComponent> child
+   )
       => RelativeDirectoryPath
         .Create(child
                .Prepend(parent)
@@ -25,37 +31,52 @@ public static class DirectoryComponent_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static RelativeDirectoryPath Append(this DirectoryComponent parent,
-                                              RelativeDirectoryPath   child)
+   public static RelativeDirectoryPath Append
+   (
+      this DirectoryComponent parent,
+      RelativeDirectoryPath   child
+   )
       => child
         .Prepend(parent);
 
    /* ------------------------------------------------------------ */
 
-   public static RelativeFilePath Append(this DirectoryComponent parent,
-                                         FileComponent           child)
+   public static RelativeFilePath Append
+   (
+      this DirectoryComponent parent,
+      FileComponent           child
+   )
       => RelativeFilePath
         .Create(Sequence.From(parent),
                 child);
 
    /* ------------------------------------------------------------ */
 
-   public static RelativeFilePath Append(this DirectoryComponent parent,
-                                         RelativeFilePath        child)
+   public static RelativeFilePath Append
+   (
+      this DirectoryComponent parent,
+      RelativeFilePath        child
+   )
       => child
         .Prepend(parent);
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteDirectoryPath Prepend(this DirectoryComponent child,
-                                               AbsoluteDirectoryPath   parent)
+   public static AbsoluteDirectoryPath Prepend
+   (
+      this DirectoryComponent child,
+      AbsoluteDirectoryPath   parent
+   )
       => parent
         .Append(child);
 
    /* ------------------------------------------------------------ */
 
-   public static RelativeDirectoryPath Prepend(this   DirectoryComponent   child,
-                                               params DirectoryComponent[] parent)
+   public static RelativeDirectoryPath Prepend
+   (
+      this   DirectoryComponent   child,
+      params DirectoryComponent[] parent
+   )
       => RelativeDirectoryPath
         .Create(parent
                .Append(child)
@@ -63,8 +84,11 @@ public static class DirectoryComponent_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static RelativeDirectoryPath Prepend(this DirectoryComponent         child,
-                                               IEnumerable<DirectoryComponent> parent)
+   public static RelativeDirectoryPath Prepend
+   (
+      this DirectoryComponent         child,
+      IEnumerable<DirectoryComponent> parent
+   )
       => RelativeDirectoryPath
         .Create(parent
                .Append(child)
@@ -72,22 +96,31 @@ public static class DirectoryComponent_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static RelativeDirectoryPath Prepend(this DirectoryComponent child,
-                                               RelativeDirectoryPath   parent)
+   public static RelativeDirectoryPath Prepend
+   (
+      this DirectoryComponent child,
+      RelativeDirectoryPath   parent
+   )
       => parent
         .Append(child);
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteDirectoryPath Prepend(this DirectoryComponent child,
-                                               VolumeComponent         parent)
+   public static AbsoluteDirectoryPath Prepend
+   (
+      this DirectoryComponent child,
+      VolumeComponent         parent
+   )
       => AbsoluteDirectoryPath
         .Create(parent,
                 Sequence.From(child));
 
    /* ------------------------------------------------------------ */
 
-   public static RelativeDirectoryPath ToPath(this DirectoryComponent directory)
+   public static RelativeDirectoryPath ToPath
+   (
+      this DirectoryComponent directory
+   )
       => RelativeDirectoryPath
         .Create(directory);
 

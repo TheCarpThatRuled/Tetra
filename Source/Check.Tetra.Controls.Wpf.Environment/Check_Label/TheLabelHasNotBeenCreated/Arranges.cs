@@ -10,10 +10,18 @@ public sealed partial class TheLabelHasNotBeenCreated
    public sealed class Arranges : IArranges
    {
       /* ------------------------------------------------------------ */
+      // Private Constructors
+      /* ------------------------------------------------------------ */
+
+      private Arranges() { }
+      /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public TheLabelHasBeenCreated.Arranges The_UI_creates_the_label(The_UI_creates_a_label args)
+      public TheLabelHasBeenCreated.Arranges The_UI_creates_the_label
+      (
+         The_UI_creates_a_label args
+      )
       {
          var system = FakeSystem.Create(args);
          return new(FakeLabel.Create(LabelContext.Create(Label
@@ -32,14 +40,11 @@ public sealed partial class TheLabelHasNotBeenCreated
       // Internal Factory Functions
       /* ------------------------------------------------------------ */
 
-      public static Arranges Create(AAA_test.Disposables _)
+      public static Arranges Create
+      (
+         AAA_test.Disposables _
+      )
          => new();
-
-      /* ------------------------------------------------------------ */
-      // Private Constructors
-      /* ------------------------------------------------------------ */
-
-      private Arranges() { }
 
       /* ------------------------------------------------------------ */
    }

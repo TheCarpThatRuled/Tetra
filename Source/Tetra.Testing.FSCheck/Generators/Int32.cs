@@ -1,4 +1,5 @@
 ﻿using FsCheck;
+
 // ReSharper disable InconsistentNaming
 
 namespace Tetra.Testing;
@@ -14,7 +15,10 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(int, int, int, int)> FourUniqueInt32s(Gen<int> int32)
+   public static Gen<(int, int, int, int)> FourUniqueInt32s
+   (
+      Gen<int> int32
+   )
       => int32
         .FourValueTuples()
         .Where(tuple => tuple.first  != tuple.second
@@ -27,10 +31,9 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<int> Int32()
-      => Arb
-        .Default
-        .Int32()
-        .Generator;
+      => Arb.Default
+            .Int32()
+            .Generator;
 
    /* ------------------------------------------------------------ */
 
@@ -39,7 +42,10 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(int, int, int)> ThreeUniqueInt32s(Gen<int> int32)
+   public static Gen<(int, int, int)> ThreeUniqueInt32s
+   (
+      Gen<int> int32
+   )
       => int32
         .ThreeValueTuples()
         .Where(tuple => tuple.first  != tuple.second
@@ -53,7 +59,10 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
-   public static Gen<(int, int)> TwoUniqueInt32s(Gen<int> int32)
+   public static Gen<(int, int)> TwoUniqueInt32s
+   (
+      Gen<int> int32
+   )
       => int32
         .TwoValueTuples()
         .Where(tuple => tuple.first != tuple.second);

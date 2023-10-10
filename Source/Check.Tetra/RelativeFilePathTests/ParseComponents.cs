@@ -10,30 +10,6 @@ namespace Check.RelativeFilePathTests;
 public class ParseComponents
 {
    /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   private sealed class TestPath : RelativeFilePath
-   {
-      /* ------------------------------------------------------------ */
-      // Functions
-      /* ------------------------------------------------------------ */
-
-      public static IEither<(ISequence<DirectoryComponent> directories, FileComponent file), Message> TestParseComponents(string potentialPath,
-         string                                                                                                                  pathType)
-         => ParseComponents(potentialPath,
-                            pathType);
-
-      /* ------------------------------------------------------------ */
-      // Constructors
-      /* ------------------------------------------------------------ */
-
-      public TestPath() : base(null!,
-                               null!) { }
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
    // protected static IEither(ISequence<DirectoryComponent> directories, FileComponent file) ParseComponents(string potentialPath,
    //                                                                                                        string pathType)
    /* ------------------------------------------------------------ */
@@ -49,7 +25,10 @@ public class ParseComponents
    public void
       GIVEN_a_valid_path_without_a_root_or_a_trailing_directory_separator_WHEN_ParseComponents_THEN_a_success_containing_RelativeFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(TestRelativeFilePath testPath)
+      static Property Property
+      (
+         TestRelativeFilePath testPath
+      )
       {
          //Arrange
          //Act
@@ -58,10 +37,12 @@ public class ParseComponents
 
          //Assert
          return IsALeftAnd(AssertMessages.ReturnValue,
-                           (description,
-                            actualComponents) => AreEqual(description,
-                                                          testPath,
-                                                          actualComponents),
+                           (
+                              description,
+                              actualComponents
+                           ) => AreEqual(description,
+                                         testPath,
+                                         actualComponents),
                            actual);
       }
 
@@ -84,7 +65,10 @@ public class ParseComponents
    public void
       GIVEN_a_valid_path_without_a_root_but_with_a_trailing_directory_separator_WHEN_ParseComponents_THEN_a_success_containing_RelativeFilePath_with_a_value_of_the_combine_path_is_returned()
    {
-      static Property Property(string path)
+      static Property Property
+      (
+         string path
+      )
       {
          //Arrange
          //Act
@@ -141,7 +125,10 @@ public class ParseComponents
    [TestMethod]
    public void GIVEN_a_path_without_a_root_but_with_an_invalid_component_WHEN_ParseComponents_THEN_a_failure_is_returned()
    {
-      static Property Property(string path)
+      static Property Property
+      (
+         string path
+      )
       {
          //Arrange
          //Act
@@ -159,6 +146,31 @@ public class ParseComponents
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
+   }
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   private sealed class TestPath : RelativeFilePath
+   {
+      /* ------------------------------------------------------------ */
+      // Constructors
+      /* ------------------------------------------------------------ */
+
+      public TestPath() : base(null!,
+                               null!) { }
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static IEither<(ISequence<DirectoryComponent> directories, FileComponent file), Message> TestParseComponents
+      (
+         string potentialPath,
+         string pathType
+      )
+         => ParseComponents(potentialPath,
+                            pathType);
+
+      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */

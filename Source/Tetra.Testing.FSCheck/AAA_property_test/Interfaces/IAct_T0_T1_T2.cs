@@ -11,16 +11,25 @@ partial class AAA_property_test<TState>
       // Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(WhenCharacteriser characteriser);
+      public void AddBriefCharacterisation
+      (
+         WhenCharacteriser characteriser
+      );
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(WhenCharacteriser characteriser);
+      public void AddFullCharacterisation
+      (
+         WhenCharacteriser characteriser
+      );
 
       /* ------------------------------------------------------------ */
 
-      public TAsserts Act(TState    state,
-                          TArranges environment);
+      public TAsserts Act
+      (
+         TState    state,
+         TArranges environment
+      );
 
       /* ------------------------------------------------------------ */
    }

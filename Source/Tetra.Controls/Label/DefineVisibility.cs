@@ -5,25 +5,30 @@ partial class Label
    public sealed class DefineVisibility
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Private Fields
       /* ------------------------------------------------------------ */
 
-      public Label Visibility(IOneWayBinding<Visibility> visibility)
-         => new(_content,
-                visibility);
+      private readonly IOneWayBinding<object> _content;
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal DefineVisibility(IOneWayBinding<object> content)
+      internal DefineVisibility
+      (
+         IOneWayBinding<object> content
+      )
          => _content = content;
-
       /* ------------------------------------------------------------ */
-      // Private Fields
+      // Methods
       /* ------------------------------------------------------------ */
 
-      private readonly IOneWayBinding<object> _content;
+      public Label Visibility
+      (
+         IOneWayBinding<Visibility> visibility
+      )
+         => new(_content,
+                visibility);
 
       /* ------------------------------------------------------------ */
    }

@@ -11,15 +11,24 @@ partial class AAA_test
       // Methods
       /* ------------------------------------------------------------ */
 
-      public void AddBriefCharacterisation(ThenCharacteriser characteriser);
+      public void AddBriefCharacterisation
+      (
+         ThenCharacteriser characteriser
+      );
 
       /* ------------------------------------------------------------ */
 
-      public void AddFullCharacterisation(ThenCharacteriser characteriser);
+      public void AddFullCharacterisation
+      (
+         ThenCharacteriser characteriser
+      );
 
       /* ------------------------------------------------------------ */
 
-      public TNextAsserts Assert(TInitialAsserts environment);
+      public TNextAsserts Assert
+      (
+         TInitialAsserts environment
+      );
 
       /* ------------------------------------------------------------ */
    }

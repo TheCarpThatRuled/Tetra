@@ -7,8 +7,11 @@ public static class Action_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static Action Then(this Action first,
-                             Action      second)
+   public static Action Then
+   (
+      this Action first,
+      Action      second
+   )
       => () =>
       {
          first();
@@ -17,8 +20,11 @@ public static class Action_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Action<T> Then<T>(this Action first,
-                                   Action<T>   second)
+   public static Action<T> Then<T>
+   (
+      this Action first,
+      Action<T>   second
+   )
       => @in =>
       {
          first();
@@ -27,8 +33,11 @@ public static class Action_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Action<T> Then<T>(this Action<T> first,
-                                   Action         second)
+   public static Action<T> Then<T>
+   (
+      this Action<T> first,
+      Action         second
+   )
       => @in =>
       {
          first(@in);
@@ -37,8 +46,11 @@ public static class Action_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static Action<T> Then<T>(this Action<T> first,
-                                   Action<T>      second)
+   public static Action<T> Then<T>
+   (
+      this Action<T> first,
+      Action<T>      second
+   )
       => @in =>
       {
          first(@in);

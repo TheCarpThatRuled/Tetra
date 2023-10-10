@@ -7,8 +7,11 @@ public static class TestAbsoluteDirectoryPath_Extensions
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static TestAbsoluteDirectoryPath Append(this TestAbsoluteDirectoryPath  path,
-                                                  params DirectoryComponent[] directories)
+   public static TestAbsoluteDirectoryPath Append
+   (
+      this   TestAbsoluteDirectoryPath path,
+      params DirectoryComponent[]      directories
+   )
       => TestAbsoluteDirectoryPath
         .Create(path.Volume(),
                 path.Directories()
@@ -17,8 +20,11 @@ public static class TestAbsoluteDirectoryPath_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static TestAbsoluteDirectoryPath Append(this TestAbsoluteDirectoryPath  path,
-                                                  IEnumerable<DirectoryComponent> directories)
+   public static TestAbsoluteDirectoryPath Append
+   (
+      this TestAbsoluteDirectoryPath  path,
+      IEnumerable<DirectoryComponent> directories
+   )
       => TestAbsoluteDirectoryPath
         .Create(path.Volume(),
                 path.Directories()
@@ -27,8 +33,11 @@ public static class TestAbsoluteDirectoryPath_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static TestAbsoluteDirectoryPath Append(this TestAbsoluteDirectoryPath parent,
-                                                  TestRelativeDirectoryPath      child)
+   public static TestAbsoluteDirectoryPath Append
+   (
+      this TestAbsoluteDirectoryPath parent,
+      TestRelativeDirectoryPath      child
+   )
       => TestAbsoluteDirectoryPath
         .Create(parent.Volume(),
                 parent.Directories()
@@ -37,16 +46,22 @@ public static class TestAbsoluteDirectoryPath_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static TestAbsoluteFilePath Append(this TestAbsoluteDirectoryPath parent,
-                                             TestRelativeFilePath           child)
+   public static TestAbsoluteFilePath Append
+   (
+      this TestAbsoluteDirectoryPath parent,
+      TestRelativeFilePath           child
+   )
       => parent
         .Append(child.Directories())
         .Append(child.File());
 
    /* ------------------------------------------------------------ */
 
-   public static TestAbsoluteFilePath Append(this TestAbsoluteDirectoryPath path,
-                                             FileComponent                  file)
+   public static TestAbsoluteFilePath Append
+   (
+      this TestAbsoluteDirectoryPath path,
+      FileComponent                  file
+   )
       => TestAbsoluteFilePath
         .Create(path.Volume(),
                 path.Directories(),
@@ -54,7 +69,10 @@ public static class TestAbsoluteDirectoryPath_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static ISequence<TestAbsoluteDirectoryPath> ToAncestry(this TestAbsoluteDirectoryPath path)
+   public static ISequence<TestAbsoluteDirectoryPath> ToAncestry
+   (
+      this TestAbsoluteDirectoryPath path
+   )
    {
       var directoryChains = new List<IEnumerable<DirectoryComponent>> {Array.Empty<DirectoryComponent>(),};
 
@@ -72,7 +90,10 @@ public static class TestAbsoluteDirectoryPath_Extensions
 
    /* ------------------------------------------------------------ */
 
-   public static AbsoluteDirectoryPath ToTetra(this TestAbsoluteDirectoryPath path)
+   public static AbsoluteDirectoryPath ToTetra
+   (
+      this TestAbsoluteDirectoryPath path
+   )
       => AbsoluteDirectoryPath
         .Create(path.Volume(),
                 path.Directories());

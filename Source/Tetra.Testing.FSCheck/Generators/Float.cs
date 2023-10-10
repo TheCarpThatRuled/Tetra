@@ -9,10 +9,9 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<double> Float()
-      => Arb
-        .Default
-        .Float()
-        .Generator;
+      => Arb.Default
+            .Float()
+            .Generator;
 
    /* ------------------------------------------------------------ */
 }

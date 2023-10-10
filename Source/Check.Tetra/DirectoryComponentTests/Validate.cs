@@ -9,30 +9,6 @@ namespace Check.DirectoryComponentTests;
 public class Validate
 {
    /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   private sealed class TestComponent : DirectoryComponent
-   {
-      /* ------------------------------------------------------------ */
-      // Functions
-      /* ------------------------------------------------------------ */
-
-      public static IOption<Message> TestValidate(string potentialComponent,
-                                                  string componentType)
-         => Validate(potentialComponent,
-                     componentType);
-
-      /* ------------------------------------------------------------ */
-      // Constructor
-      /* ------------------------------------------------------------ */
-
-      private TestComponent()
-         : base("") { }
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
    // protected static IOption<DirectoryComponent> Validate(string potentialComponent)
    /* ------------------------------------------------------------ */
 
@@ -46,7 +22,10 @@ public class Validate
    [TestMethod]
    public void GIVEN_a_valid_string_WHEN_Validate_THEN_a_success_is_returned()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
       {
          //Act
          var actual = TestComponent.TestValidate(value,
@@ -75,7 +54,10 @@ public class Validate
    [TestMethod]
    public void GIVEN_a_string_containing_an_invalid_character_WHEN_Validate_THEN_a_failure_is_returned()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
       {
          //Act
          var actual = TestComponent.TestValidate(value,
@@ -92,6 +74,31 @@ public class Validate
 
       Prop.ForAll<string>(Property)
           .QuickCheckThrowOnFailure();
+   }
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   private sealed class TestComponent : DirectoryComponent
+   {
+      /* ------------------------------------------------------------ */
+      // Constructor
+      /* ------------------------------------------------------------ */
+
+      private TestComponent()
+         : base("") { }
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static IOption<Message> TestValidate
+      (
+         string potentialComponent,
+         string componentType
+      )
+         => Validate(potentialComponent,
+                     componentType);
+
+      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */

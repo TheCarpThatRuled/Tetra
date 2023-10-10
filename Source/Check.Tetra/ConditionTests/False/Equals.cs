@@ -24,7 +24,10 @@ public class False_Equals
    public void
       GIVEN_False_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_true_is_returned()
    {
-      static Property Property(object? obj)
+      static Property Property
+      (
+         object? obj
+      )
       {
          //Act
          var actual = Condition
@@ -40,30 +43,6 @@ public class False_Equals
 
       Prop.ForAll<object?>(Property)
           .QuickCheckThrowOnFailure();
-   }
-
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
-   private sealed class ObjIsNullOrANonEquatableType
-   {
-      /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public static Arbitrary<object?> Obj()
-         => Gen
-           .OneOf(Gen.Constant(default(object?)),
-                  Generators.Int32()
-                            .Select(x => (object?) x),
-                  Generators.String()
-                            .Select(x => (object?) x),
-                  Generators.Option(Generators.Bool())
-                            .Select(x => (object?) x))
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */
@@ -282,6 +261,30 @@ public class False_Equals
       Assert.That
             .IsFalse(AssertMessages.ReturnValue,
                      actual);
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   private sealed class ObjIsNullOrANonEquatableType
+   {
+      /* ------------------------------------------------------------ */
+      // Methods
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<object?> Obj()
+         => Gen
+           .OneOf(Gen.Constant(default(object?)),
+                  Generators.Int32()
+                            .Select(x => (object?) x),
+                  Generators.String()
+                            .Select(x => (object?) x),
+                  Generators.Option(Generators.Bool())
+                            .Select(x => (object?) x))
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */

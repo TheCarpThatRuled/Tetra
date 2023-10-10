@@ -16,7 +16,10 @@ public class WHEN_the_client_calls_GetHashCode : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_client_calls_GetHashCode]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       using var given = test.Create();
       var       when  = given.Arrange();
@@ -40,14 +43,7 @@ public class WHEN_the_client_calls_GetHashCode : AAATestDataSource
 
       /* ------------------------------------------------------------ */
 
-      foreach (var content in new[]
-               {
-                  FakeType.Create(""),
-                  FakeType.Create("1"),
-                  FakeType.Create("2"),
-                  FakeType.Create("3"),
-                  FakeType.Create("Content"),
-               })
+      foreach (var content in new[] {FakeType.Create(""), FakeType.Create("1"), FakeType.Create("2"), FakeType.Create("3"), FakeType.Create("Content"),})
       {
          /* ------------------------------------------------------------ */
 

@@ -10,11 +10,17 @@ public static partial class Function
 
    /* ------------------------------------------------------------ */
 
-   public static void NoOp<T>(T _) { }
+   public static void NoOp<T>
+   (
+      T _
+   ) { }
 
    /* ------------------------------------------------------------ */
 
-   public static T PassThrough<T>(T value)
+   public static T PassThrough<T>
+   (
+      T value
+   )
       => value;
 
    /* ------------------------------------------------------------ */

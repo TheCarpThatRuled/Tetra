@@ -23,7 +23,10 @@ public class Create
    [TestMethod]
    public void GIVEN_an_ASCII_letter_WHEN_Create_THEN_a_FileComponent_with_the_string_is_returned()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
       {
          //Act
          var actual = FileComponent.Create(value);
@@ -52,7 +55,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_string_containing_an_invalid_character_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
          => AnArgumentExceptionWasThrown(() => FileComponent.Create(value),
                                          IsNotValidBecauseAComponentMayNotContainTheCharacters(value,
                                                                                                HumanReadableName.FileComponent),

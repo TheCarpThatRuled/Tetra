@@ -46,7 +46,10 @@ public class False
    [TestMethod]
    public void GIVEN_Function_WHEN_False_AND_discard_is_an_int_THEN_false_is_returned()
    {
-      static Property Property(int value)
+      static Property Property
+      (
+         int value
+      )
       {
          //Act
          var actual = Function.False(value);
@@ -72,7 +75,10 @@ public class False
    [TestMethod]
    public void GIVEN_Function_WHEN_False_AND_discard_is_a_TestClass_THEN_false_is_returned()
    {
-      static Property Property(TestClass value)
+      static Property Property
+      (
+         TestClass value
+      )
       {
          //Act
          var actual = Function.False(value);
@@ -100,7 +106,10 @@ public class False
    [TestMethod]
    public void GIVEN_Function_WHEN_False_AND_discard_is_a_TestStruct_THEN_false_is_returned()
    {
-      static Property Property(TestStruct value)
+      static Property Property
+      (
+         TestStruct value
+      )
       {
          //Act
          var actual = Function.False(value);

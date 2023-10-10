@@ -22,7 +22,10 @@ public class Pull
    [TestMethod]
    public void GIVEN_OnOuterPush_WHEN_Pull_THEN_initialValue_is_returned()
    {
-      static Property Property(TestClass value)
+      static Property Property
+      (
+         TestClass value
+      )
       {
          //Arrange
          var binding = Bind.To(value);

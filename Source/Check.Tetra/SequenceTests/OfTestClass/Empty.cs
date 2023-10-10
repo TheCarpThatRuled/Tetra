@@ -28,7 +28,6 @@ public class Empty
       Assert.That
             .TetraSequenceEquals(Array.Empty<TestClass>(),
                                  actual);
-
    }
 
    /* ------------------------------------------------------------ */

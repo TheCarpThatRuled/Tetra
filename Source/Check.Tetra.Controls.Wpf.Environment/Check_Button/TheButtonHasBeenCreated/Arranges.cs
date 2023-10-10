@@ -10,10 +10,33 @@ public sealed partial class TheButtonHasBeenCreated
    public sealed class Arranges : IArranges
    {
       /* ------------------------------------------------------------ */
+      // Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly FakeButton _button;
+      private readonly FakeSystem _system;
+
+      /* ------------------------------------------------------------ */
+      // Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal Arranges
+      (
+         FakeButton button,
+         FakeSystem system
+      )
+      {
+         _button = button;
+         _system = system;
+      }
+      /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public Arranges The_system_updates_IsEnabled(bool isEnabled)
+      public Arranges The_system_updates_IsEnabled
+      (
+         bool isEnabled
+      )
       {
          _system.IsEnabled()
                 .Push(isEnabled);
@@ -23,7 +46,10 @@ public sealed partial class TheButtonHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public Arranges The_system_updates_Visibility(Visibility visibility)
+      public Arranges The_system_updates_Visibility
+      (
+         Visibility visibility
+      )
       {
          _system.Visibility()
                 .Push(visibility);
@@ -33,7 +59,10 @@ public sealed partial class TheButtonHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public Arranges The_user_clicks_the_button(uint numberOfClicks)
+      public Arranges The_user_clicks_the_button
+      (
+         uint numberOfClicks
+      )
       {
          _button.Click(numberOfClicks);
 
@@ -45,24 +74,6 @@ public sealed partial class TheButtonHasBeenCreated
       public Acts WHEN()
          => new(_button,
                 _system);
-
-      /* ------------------------------------------------------------ */
-      // Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal Arranges(FakeButton button,
-                        FakeSystem system)
-      {
-         _button = button;
-         _system = system;
-      }
-
-      /* ------------------------------------------------------------ */
-      // Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly FakeButton _button;
-      private readonly FakeSystem _system;
 
       /* ------------------------------------------------------------ */
    }

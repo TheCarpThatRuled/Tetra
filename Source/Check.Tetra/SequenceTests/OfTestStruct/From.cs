@@ -23,7 +23,10 @@ public class From
    [TestMethod]
    public void GIVEN_Sequence_of_TestStruct_AND_an_Array_of_TestStruct_WHEN_From_THEN_an_ISequence_of_TestStruct_that_is_sequence_equal_to_the_array_is_returned()
    {
-      static Property Property(TestStruct[] array)
+      static Property Property
+      (
+         TestStruct[] array
+      )
       {
          //Arrange
          //Act
@@ -52,7 +55,10 @@ public class From
    [TestMethod]
    public void GIVEN_Sequence_AND_an_Array_of_TestStruct_WHEN_From_THEN_an_ISequence_of_TestStruct_that_is_sequence_equal_to_the_array_is_returned()
    {
-      static Property Property(TestStruct[] array)
+      static Property Property
+      (
+         TestStruct[] array
+      )
       {
          //Arrange
          //Act

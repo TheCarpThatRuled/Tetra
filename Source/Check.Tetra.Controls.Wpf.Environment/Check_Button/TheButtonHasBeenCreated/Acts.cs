@@ -8,34 +8,6 @@ public sealed partial class TheButtonHasBeenCreated
    public sealed class Acts : IActs
    {
       /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public Act<Asserts> The_system_updates_IsEnabled(bool isEnabled)
-         => new(() => Update_IsEnabled(isEnabled));
-
-      /* ------------------------------------------------------------ */
-
-      public Act<Asserts> The_system_updates_Visibility(Visibility visibility)
-         => new(() => Update_Visibility(visibility));
-
-      /* ------------------------------------------------------------ */
-
-      public Act<Asserts> The_user_clicks_the_button(uint numberOfClicks)
-         => new(() => Click_the_button(numberOfClicks));
-
-      /* ------------------------------------------------------------ */
-      // Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal Acts(FakeButton button,
-                    FakeSystem system)
-      {
-         _button = button;
-         _system = system;
-      }
-
-      /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
@@ -43,10 +15,52 @@ public sealed partial class TheButtonHasBeenCreated
       private readonly FakeSystem _system;
 
       /* ------------------------------------------------------------ */
+      // Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal Acts
+      (
+         FakeButton button,
+         FakeSystem system
+      )
+      {
+         _button = button;
+         _system = system;
+      }
+      /* ------------------------------------------------------------ */
+      // Methods
+      /* ------------------------------------------------------------ */
+
+      public Act<Asserts> The_system_updates_IsEnabled
+      (
+         bool isEnabled
+      )
+         => new(() => Update_IsEnabled(isEnabled));
+
+      /* ------------------------------------------------------------ */
+
+      public Act<Asserts> The_system_updates_Visibility
+      (
+         Visibility visibility
+      )
+         => new(() => Update_Visibility(visibility));
+
+      /* ------------------------------------------------------------ */
+
+      public Act<Asserts> The_user_clicks_the_button
+      (
+         uint numberOfClicks
+      )
+         => new(() => Click_the_button(numberOfClicks));
+
+      /* ------------------------------------------------------------ */
       // Private Methods
       /* ------------------------------------------------------------ */
 
-      private Asserts Click_the_button(uint numberOfClicks)
+      private Asserts Click_the_button
+      (
+         uint numberOfClicks
+      )
       {
          _button.Click(numberOfClicks);
 
@@ -56,7 +70,10 @@ public sealed partial class TheButtonHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      private Asserts Update_IsEnabled(bool isEnabled)
+      private Asserts Update_IsEnabled
+      (
+         bool isEnabled
+      )
       {
          _system.IsEnabled()
                 .Push(isEnabled);
@@ -67,7 +84,10 @@ public sealed partial class TheButtonHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      private Asserts Update_Visibility(Visibility visibility)
+      private Asserts Update_Visibility
+      (
+         Visibility visibility
+      )
       {
          _system.Visibility()
                 .Push(visibility);

@@ -23,7 +23,10 @@ public class ToDelimitedString
    [TestMethod]
    public void GIVEN_an_empty_IReadOnlyList_of_string_AND_delimiter_is_a_char_WHEN_ToDelimitedString_THEN_the_empty_string_is_returned()
    {
-      static Property Property(char delimiter)
+      static Property Property
+      (
+         char delimiter
+      )
       {
          //Arrange
          IReadOnlyList<string> readOnlyList = Array.Empty<string>();
@@ -53,8 +56,11 @@ public class ToDelimitedString
    [TestMethod]
    public void GIVEN_a_IReadOnlyList_with_one_string_AND_delimiter_is_a_char_WHEN_ToDelimitedString_THEN_the_item_is_returned()
    {
-      static Property Property(string value,
-                               char   delimiter)
+      static Property Property
+      (
+         string value,
+         char   delimiter
+      )
       {
          //Arrange
          IReadOnlyList<string> readOnlyList = new[] {value,};
@@ -86,8 +92,11 @@ public class ToDelimitedString
    [TestMethod]
    public void GIVEN_a_IReadOnlyList_with_more_than_one_string_AND_delimiter_is_a_char_WHEN_ToDelimitedString_THEN_the_items_concatenated_by_the_delimiter_is_returned()
    {
-      static Property Property(string[] array,
-                               char     delimiter)
+      static Property Property
+      (
+         string[] array,
+         char     delimiter
+      )
       {
          //Arrange
          var expected = new StringBuilder();
@@ -100,7 +109,7 @@ public class ToDelimitedString
          expected.Append(array[^1]);
 
          //Act
-         var actual = ((IReadOnlyList<string>) array).ToDelimitedString(delimiter);
+         var actual = array.ToDelimitedString(delimiter);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
@@ -128,13 +137,16 @@ public class ToDelimitedString
    [TestMethod]
    public void GIVEN_an_empty_IReadOnlyList_of_string_AND_delimiter_is_a_string_WHEN_ToDelimitedString_THEN_the_empty_string_is_returned()
    {
-      static Property Property(string delimiter)
+      static Property Property
+      (
+         string delimiter
+      )
       {
          //Arrange
          var array = Array.Empty<string>();
 
          //Act
-         var actual = ((IReadOnlyList<string>) array).ToDelimitedString(delimiter);
+         var actual = array.ToDelimitedString(delimiter);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
@@ -160,14 +172,17 @@ public class ToDelimitedString
    [TestMethod]
    public void GIVEN_a_IReadOnlyList_with_one_string_AND_delimiter_is_a_string_WHEN_ToDelimitedString_THEN_the_item_is_returned()
    {
-      static Property Property(string value,
-                               string delimiter)
+      static Property Property
+      (
+         string value,
+         string delimiter
+      )
       {
          //Arrange
          var array = new[] {value,};
 
          //Act
-         var actual = ((IReadOnlyList<string>) array).ToDelimitedString(delimiter);
+         var actual = array.ToDelimitedString(delimiter);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,
@@ -193,8 +208,11 @@ public class ToDelimitedString
    [TestMethod]
    public void GIVEN_a_IReadOnlyList_with_more_than_one_string_AND_delimiter_is_a_string_WHEN_ToDelimitedString_THEN_the_items_concatenated_by_the_delimiter_is_returned()
    {
-      static Property Property(string[] array,
-                               string   delimiter)
+      static Property Property
+      (
+         string[] array,
+         string   delimiter
+      )
       {
          //Arrange
          var expected = new StringBuilder();
@@ -207,7 +225,7 @@ public class ToDelimitedString
          expected.Append(array[^1]);
 
          //Act
-         var actual = ((IReadOnlyList<string>) array).ToDelimitedString(delimiter);
+         var actual = array.ToDelimitedString(delimiter);
 
          //Assert
          return AreEqual(AssertMessages.ReturnValue,

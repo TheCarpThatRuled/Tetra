@@ -10,10 +10,33 @@ public sealed partial class TheLabelHasBeenCreated
    public sealed class Arranges : IArranges
    {
       /* ------------------------------------------------------------ */
+      // Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly FakeLabel  _label;
+      private readonly FakeSystem _system;
+
+      /* ------------------------------------------------------------ */
+      // Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal Arranges
+      (
+         FakeLabel  label,
+         FakeSystem system
+      )
+      {
+         _label  = label;
+         _system = system;
+      }
+      /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public Arranges The_system_updates_Content(object content)
+      public Arranges The_system_updates_Content
+      (
+         object content
+      )
       {
          _system.Content()
                 .Push(content);
@@ -23,7 +46,10 @@ public sealed partial class TheLabelHasBeenCreated
 
       /* ------------------------------------------------------------ */
 
-      public Arranges The_system_updates_Visibility(Visibility visibility)
+      public Arranges The_system_updates_Visibility
+      (
+         Visibility visibility
+      )
       {
          _system.Visibility()
                 .Push(visibility);
@@ -36,24 +62,6 @@ public sealed partial class TheLabelHasBeenCreated
       public Acts WHEN()
          => new(_label,
                 _system);
-
-      /* ------------------------------------------------------------ */
-      // Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal Arranges(FakeLabel  label,
-                        FakeSystem system)
-      {
-         _label  = label;
-         _system = system;
-      }
-
-      /* ------------------------------------------------------------ */
-      // Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly FakeLabel  _label;
-      private readonly FakeSystem _system;
 
       /* ------------------------------------------------------------ */
    }

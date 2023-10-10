@@ -22,8 +22,11 @@ public class Pull
    [TestMethod]
    public void GIVEN_a_Binding_of_TestClass_mapped_with_a_Func_of_TestClass_to_int_WHEN_Pull_THEN_mapFrom_was_invoked_once_with_inner_value_AND_outerValue_is_returned()
    {
-      static Property Property(TestClass innerValue,
-                               int       outerValue)
+      static Property Property
+      (
+         TestClass innerValue,
+         int       outerValue
+      )
       {
          //Arrange
          var innerBinding = Bind.To(innerValue);
@@ -61,7 +64,10 @@ public class Pull
    [TestMethod]
    public void GIVEN_a_Binding_of_TestClass_mapped_with_a_Func_of_TestClass_to_TestClass_WHEN_Pull_THEN_mapFrom_was_invoked_once_with_inner_value_AND_outerValue_is_returned()
    {
-      static Property Property((TestClass innerValue, TestClass outerValue) args)
+      static Property Property
+      (
+         (TestClass innerValue, TestClass outerValue) args
+      )
       {
          //Arrange
          var innerBinding = Bind.To(args.innerValue);
@@ -99,8 +105,11 @@ public class Pull
    [TestMethod]
    public void GIVEN_a_Binding_of_TestClass_mapped_with_a_Func_of_TestClass_to_TestStruct_WHEN_Pull_THEN_mapFrom_was_invoked_once_with_inner_value_AND_outerValue_is_returned()
    {
-      static Property Property(TestClass  innerValue,
-                               TestStruct outerValue)
+      static Property Property
+      (
+         TestClass  innerValue,
+         TestStruct outerValue
+      )
       {
          //Arrange
          var innerBinding = Bind.To(innerValue);

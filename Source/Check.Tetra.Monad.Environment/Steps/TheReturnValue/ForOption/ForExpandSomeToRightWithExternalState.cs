@@ -15,13 +15,19 @@ partial class Steps
             /* ------------------------------------------------------------ */
 
             public IAssert<TheOptionHasBeenCreated.AndExpandSomeToRightWasCalledWithExternalStateAsserts,
-               TheOptionHasBeenCreated.AndExpandSomeToRightWasCalledWithExternalStateAsserts> is_a_left_containing(FakeLeft expected)
+                  TheOptionHasBeenCreated.AndExpandSomeToRightWasCalledWithExternalStateAsserts> is_a_left_containing
+               (
+                  FakeLeft expected
+               )
                => the_return_value.is_a_left_containing<FakeLeft, FakeType, TheOptionHasBeenCreated.AndExpandSomeToRightWasCalledWithExternalStateAsserts>(expected);
 
             /* ------------------------------------------------------------ */
 
             public IAssert<TheOptionHasBeenCreated.AndExpandSomeToRightWasCalledWithExternalStateAsserts,
-               TheOptionHasBeenCreated.AndExpandSomeToRightWasCalledWithExternalStateAsserts> is_a_right_containing(FakeType expected)
+                  TheOptionHasBeenCreated.AndExpandSomeToRightWasCalledWithExternalStateAsserts> is_a_right_containing
+               (
+                  FakeType expected
+               )
                => the_return_value.is_a_right_containing<FakeLeft, FakeType, TheOptionHasBeenCreated.AndExpandSomeToRightWasCalledWithExternalStateAsserts>(expected);
 
             /* ------------------------------------------------------------ */

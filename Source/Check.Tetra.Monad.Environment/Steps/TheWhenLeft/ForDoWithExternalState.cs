@@ -12,9 +12,11 @@ partial class Steps
          // Assert
          /* ------------------------------------------------------------ */
 
-         public IAssert<TheEitherHasBeenCreated.AndDoWasCalledWithExternalStateAsserts, TheEitherHasBeenCreated.AndDoWasCalledWithExternalStateAsserts> was_invoked_once_with(
+         public IAssert<TheEitherHasBeenCreated.AndDoWasCalledWithExternalStateAsserts, TheEitherHasBeenCreated.AndDoWasCalledWithExternalStateAsserts> was_invoked_once_with
+         (
             FakeExternalState externalState,
-            FakeLeft          expected)
+            FakeLeft          expected
+         )
             => the_whenLeft.action.was_invoked_once_with<FakeExternalState, FakeLeft, TheEitherHasBeenCreated.AndDoWasCalledWithExternalStateAsserts>(externalState,
                expected);
 

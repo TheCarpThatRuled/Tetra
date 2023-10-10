@@ -1,5 +1,4 @@
-﻿
-namespace Tetra.Testing;
+﻿namespace Tetra.Testing;
 
 public static class GlobalCategories
 {

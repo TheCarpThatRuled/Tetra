@@ -8,15 +8,26 @@ public static partial class TheEitherHasNotBeenCreated
    public sealed class Arrange : IArranges
    {
       /* ------------------------------------------------------------ */
+      //  Private Constructors
+      /* ------------------------------------------------------------ */
+
+      private Arrange() { }
+      /* ------------------------------------------------------------ */
       //  Methods
       /* ------------------------------------------------------------ */
 
-      public TheEitherHasBeenCreated.Arrange CallEitherRight(FakeRight? content)
+      public TheEitherHasBeenCreated.Arrange CallEitherRight
+      (
+         FakeRight? content
+      )
          => new(Either<FakeLeft, FakeRight>.Right(content!));
 
       /* ------------------------------------------------------------ */
 
-      public TheEitherHasBeenCreated.Arrange CallEitherLeft(FakeLeft? content)
+      public TheEitherHasBeenCreated.Arrange CallEitherLeft
+      (
+         FakeLeft? content
+      )
          => new(Either<FakeLeft, FakeRight>.Left(content!));
 
       /* ------------------------------------------------------------ */
@@ -28,14 +39,11 @@ public static partial class TheEitherHasNotBeenCreated
       //  Internal Factory Functions
       /* ------------------------------------------------------------ */
 
-      internal static Arrange Start(AAA_test.Disposables disposable)
+      internal static Arrange Start
+      (
+         AAA_test.Disposables disposable
+      )
          => new();
-
-      /* ------------------------------------------------------------ */
-      //  Private Constructors
-      /* ------------------------------------------------------------ */
-
-      private Arrange() { }
 
       /* ------------------------------------------------------------ */
    }

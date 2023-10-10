@@ -22,7 +22,10 @@ public class ToPath
    [TestMethod]
    public void GIVEN_a_FileComponent_WHEN_ToPath_THEN_a_RelativeFilePath_containing_the_FileComponent_is_returned()
    {
-      static Property Property(FileComponent file)
+      static Property Property
+      (
+         FileComponent file
+      )
       {
          //Arrange
          var expected = TestRelativeFilePath.Create(Sequence<DirectoryComponent>.Empty(),

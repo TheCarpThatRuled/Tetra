@@ -11,23 +11,35 @@ public interface ICondition : IEquatable<ICondition>,
 
    /* ------------------------------------------------------------ */
 
-   public T Reduce<T>(T whenFalse,
-                      T whenTrue);
+   public T Reduce<T>
+   (
+      T whenFalse,
+      T whenTrue
+   );
 
    /* ------------------------------------------------------------ */
 
-   public T Reduce<T>(T       whenFalse,
-                      Func<T> whenTrue);
+   public T Reduce<T>
+   (
+      T       whenFalse,
+      Func<T> whenTrue
+   );
 
    /* ------------------------------------------------------------ */
 
-   public T Reduce<T>(Func<T> whenFalse,
-                      T       whenTrue);
+   public T Reduce<T>
+   (
+      Func<T> whenFalse,
+      T       whenTrue
+   );
 
    /* ------------------------------------------------------------ */
 
-   public T Reduce<T>(Func<T> whenFalse,
-                      Func<T> whenTrue);
+   public T Reduce<T>
+   (
+      Func<T> whenFalse,
+      Func<T> whenTrue
+   );
 
    /* ------------------------------------------------------------ */
 }

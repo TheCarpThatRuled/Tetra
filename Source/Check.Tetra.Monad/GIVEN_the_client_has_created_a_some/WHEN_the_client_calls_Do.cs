@@ -16,7 +16,10 @@ public class WHEN_the_client_calls_Do : AAATestDataSource
 
    [TestMethod]
    [WHEN_the_client_calls_Do]
-   public void Run(AAA_test test)
+   public void Run
+   (
+      AAA_test test
+   )
    {
       using var given = test.Create();
       var       when  = given.Arrange();
@@ -53,7 +56,7 @@ public class WHEN_the_client_calls_Do : AAATestDataSource
                   .WHEN(the_Client.on_the_option.calls_Do_with(externalState))
                   .THEN(the_whenNone.for_Do_with_externalState.was_not_invoked())
                   .And(the_whenSome.for_Do_with_externalState.was_invoked_once_with(externalState,
-                                                                                           content))
+                                                                                    content))
                   .And(the_return_value.for_option.Do_with_externalState.is_this())
                   .Crystallise();
 

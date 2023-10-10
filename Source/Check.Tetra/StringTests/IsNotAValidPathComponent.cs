@@ -22,7 +22,10 @@ public class IsNotAValidPathComponent
    [TestMethod]
    public void GIVEN_a_valid_string_WHEN_IsNotAValidPathComponent_THEN_false_is_returned()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
       {
          //Act
          var actual = value.IsNotAValidPathComponent();
@@ -50,11 +53,14 @@ public class IsNotAValidPathComponent
    [TestMethod]
    public void GIVEN_a_string_containing_an_invalid_character_WHEN_IsNotAValidPathComponent_THEN_true_is_returned()
    {
-      static Property Property(string value)
+      static Property Property
+      (
+         string value
+      )
       {
          //Act
          var actual = value.IsNotAValidPathComponent();
-         
+
          //Assert
          return IsTrue(AssertMessages.ReturnValue,
                        actual);

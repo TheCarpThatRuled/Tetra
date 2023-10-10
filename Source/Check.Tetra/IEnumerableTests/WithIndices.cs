@@ -22,7 +22,10 @@ public class WithIndices
    [TestMethod]
    public void GIVEN_an_IEnumerable_of_int_WHEN_WithIndices_THEN_an_enumerable_containing_the_item_and_its_index_is_returned()
    {
-      static Property Property(int[] sequence)
+      static Property Property
+      (
+         int[] sequence
+      )
       {
          //Arrange
          //Act
@@ -76,7 +79,10 @@ public class WithIndices
    [TestMethod]
    public void GIVEN_an_IEnumerable_of_TestClass_WHEN_WithIndices_THEN_an_enumerable_containing_the_item_and_its_index_is_returned()
    {
-      static Property Property(TestClass[] sequence)
+      static Property Property
+      (
+         TestClass[] sequence
+      )
       {
          //Arrange
          //Act
@@ -132,7 +138,10 @@ public class WithIndices
    [TestMethod]
    public void GIVEN_an_IEnumerable_of_TestStruct_WHEN_WithIndices_THEN_an_enumerable_containing_the_item_and_its_index_is_returned()
    {
-      static Property Property(TestStruct[] sequence)
+      static Property Property
+      (
+         TestStruct[] sequence
+      )
       {
          //Arrange
          //Act

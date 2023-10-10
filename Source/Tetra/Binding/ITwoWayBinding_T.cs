@@ -6,7 +6,10 @@ public interface ITwoWayBinding<T> : IOneWayBinding<T>
    // Methods
    /* ------------------------------------------------------------ */
 
-   public void Push(T value);
+   public void Push
+   (
+      T value
+   );
 
    /* ------------------------------------------------------------ */
 }

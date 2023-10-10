@@ -9,10 +9,9 @@ partial class Generators
    /* ------------------------------------------------------------ */
 
    public static Gen<short> Int16()
-      => Arb
-        .Default
-        .Int16()
-        .Generator;
+      => Arb.Default
+            .Int16()
+            .Generator;
 
    /* ------------------------------------------------------------ */
 }

@@ -6,6 +6,32 @@ namespace Tetra.Testing;
 public sealed partial class Expected_label
 {
    /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly string     _briefCharacterisation;
+   private readonly object     _content;
+   private readonly string     _fullCharacterisation;
+   private readonly Visibility _visibility;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private Expected_label
+   (
+      string     briefCharacterisation,
+      object     content,
+      string     fullCharacterisation,
+      Visibility visibility
+   )
+   {
+      _briefCharacterisation = briefCharacterisation;
+      _content               = content;
+      _fullCharacterisation  = fullCharacterisation;
+      _visibility            = visibility;
+   }
+   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
@@ -46,33 +72,12 @@ public sealed partial class Expected_label
 
    /* ------------------------------------------------------------ */
 
-   public ExceptCarrier<T> Except<T>(Func<Expected_label, T> createParent)
+   public ExceptCarrier<T> Except<T>
+   (
+      Func<Expected_label, T> createParent
+   )
       => new(createParent,
              this);
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly string     _briefCharacterisation;
-   private readonly object     _content;
-   private readonly string     _fullCharacterisation;
-   private readonly Visibility _visibility;
-
-   /* ------------------------------------------------------------ */
-   // Private Constructors
-   /* ------------------------------------------------------------ */
-
-   private Expected_label(string     briefCharacterisation,
-                          object     content,
-                          string     fullCharacterisation,
-                          Visibility visibility)
-   {
-      _briefCharacterisation = briefCharacterisation;
-      _content               = content;
-      _fullCharacterisation  = fullCharacterisation;
-      _visibility            = visibility;
-   }
 
    /* ------------------------------------------------------------ */
 }

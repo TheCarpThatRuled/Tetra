@@ -5,25 +5,30 @@ partial class Button
    public sealed class DefineIsEnabled
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Private Fields
       /* ------------------------------------------------------------ */
 
-      public DefineVisibility IsEnabled(IOneWayBinding<bool> isEnabled)
-         => new(_onClick,
-                isEnabled);
+      private readonly Action _onClick;
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal DefineIsEnabled(Action onClick)
+      internal DefineIsEnabled
+      (
+         Action onClick
+      )
          => _onClick = onClick;
-
       /* ------------------------------------------------------------ */
-      // Private Fields
+      // Methods
       /* ------------------------------------------------------------ */
 
-      private readonly Action _onClick;
+      public DefineVisibility IsEnabled
+      (
+         IOneWayBinding<bool> isEnabled
+      )
+         => new(_onClick,
+                isEnabled);
 
       /* ------------------------------------------------------------ */
    }

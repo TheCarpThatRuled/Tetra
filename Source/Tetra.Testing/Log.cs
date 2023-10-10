@@ -10,7 +10,10 @@ public static class Log
    // ToDebugOutput Functions
    /* ------------------------------------------------------------ */
 
-   public static void ToDebugOutput(string message)
+   public static void ToDebugOutput
+   (
+      string message
+   )
    {
 #if DEBUG
       Debug.WriteLine(message);
@@ -19,9 +22,12 @@ public static class Log
 
    /* ------------------------------------------------------------ */
 
-   public static void ToDebugOutput_AreEqual(string  message,
-                                             object? expected,
-                                             object? actual)
+   public static void ToDebugOutput_AreEqual
+   (
+      string  message,
+      object? expected,
+      object? actual
+   )
    {
       ToDebugOutput(message);
       ToDebugOutput($"Test are equal; Expected: '{expected}', Actual: '{actual}'");
@@ -30,9 +36,12 @@ public static class Log
 
    /* ------------------------------------------------------------ */
 
-   public static void ToDebugOutput_AreReferenceEqual(string  message,
-                                             object? expected,
-                                             object? actual)
+   public static void ToDebugOutput_AreReferenceEqual
+   (
+      string  message,
+      object? expected,
+      object? actual
+   )
    {
       ToDebugOutput(message);
       ToDebugOutput($"Test are reference equal; Expected: '{expected}', Actual: '{actual}'");
@@ -41,17 +50,23 @@ public static class Log
 
    /* ------------------------------------------------------------ */
 
-   public static void ToDebugOutput_AreEqual(string   message,
-                                             DateTime expected,
-                                             DateTime actual)
+   public static void ToDebugOutput_AreEqual
+   (
+      string   message,
+      DateTime expected,
+      DateTime actual
+   )
       => ToDebugOutput_AreEqual(message,
                                 expected.ToString("O"),
                                 actual.ToString("O"));
 
    /* ------------------------------------------------------------ */
 
-   public static void ToDebugOutput_IsFalse(string message,
-                                            bool   actual)
+   public static void ToDebugOutput_IsFalse
+   (
+      string message,
+      bool   actual
+   )
    {
       ToDebugOutput(message);
       ToDebugOutput($"Test is false;'{actual}'");
@@ -60,8 +75,11 @@ public static class Log
 
    /* ------------------------------------------------------------ */
 
-   public static void ToDebugOutput_IsTrue(string message,
-                                           bool   actual)
+   public static void ToDebugOutput_IsTrue
+   (
+      string message,
+      bool   actual
+   )
    {
       ToDebugOutput(message);
       ToDebugOutput($"Test is true;'{actual}'");
@@ -87,7 +105,10 @@ public static class Log
 
    /* ------------------------------------------------------------ */
 
-   public static void TestStep(string message)
+   public static void TestStep
+   (
+      string message
+   )
       => ToStandardOutput(">>> " + message);
 
    /* ------------------------------------------------------------ */
@@ -97,7 +118,10 @@ public static class Log
 
    /* ------------------------------------------------------------ */
 
-   public static void ToStandardOutput(string message)
+   public static void ToStandardOutput
+   (
+      string message
+   )
       => Console
         .WriteLine(message);
 

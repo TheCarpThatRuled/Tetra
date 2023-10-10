@@ -6,10 +6,36 @@ partial class AAA_test
    public sealed class WhenCharacteriser
    {
       /* ------------------------------------------------------------ */
+      // Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly List<string> _briefCharacterisation = new();
+      private readonly List<string> _fullCharacterisation  = new();
+
+      private readonly ISequence<string> _givenBriefCharacterisation;
+      private readonly ISequence<string> _givenFullCharacterisation;
+
+      /* ------------------------------------------------------------ */
+      // Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal WhenCharacteriser
+      (
+         ISequence<string> givenBriefCharacterisation,
+         ISequence<string> givenFullCharacterisation
+      )
+      {
+         _givenBriefCharacterisation = givenBriefCharacterisation;
+         _givenFullCharacterisation  = givenFullCharacterisation;
+      }
+      /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public WhenCharacteriser AddClauseToBriefCharacterisation(string clause)
+      public WhenCharacteriser AddClauseToBriefCharacterisation
+      (
+         string clause
+      )
       {
          _briefCharacterisation.Add(clause);
 
@@ -18,28 +44,23 @@ partial class AAA_test
 
       /* ------------------------------------------------------------ */
 
-      public WhenCharacteriser AddClauseToCharacterisation(string clause)
+      public WhenCharacteriser AddClauseToCharacterisation
+      (
+         string clause
+      )
          => AddClauseToBriefCharacterisation(clause)
            .AddClauseToFullCharacterisation(clause);
 
       /* ------------------------------------------------------------ */
 
-      public WhenCharacteriser AddClauseToFullCharacterisation(string clause)
+      public WhenCharacteriser AddClauseToFullCharacterisation
+      (
+         string clause
+      )
       {
          _fullCharacterisation.Add(clause);
 
          return this;
-      }
-
-      /* ------------------------------------------------------------ */
-      // Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal WhenCharacteriser(ISequence<string> givenBriefCharacterisation,
-                                 ISequence<string> givenFullCharacterisation)
-      {
-         _givenBriefCharacterisation = givenBriefCharacterisation;
-         _givenFullCharacterisation  = givenFullCharacterisation;
       }
 
       /* ------------------------------------------------------------ */
@@ -52,16 +73,6 @@ partial class AAA_test
                 _briefCharacterisation.Materialise(),
                 _givenFullCharacterisation,
                 _fullCharacterisation.Materialise());
-
-      /* ------------------------------------------------------------ */
-      // Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly List<string> _briefCharacterisation = new();
-      private readonly List<string> _fullCharacterisation  = new();
-
-      private readonly ISequence<string> _givenBriefCharacterisation;
-      private readonly ISequence<string> _givenFullCharacterisation;
 
       /* ------------------------------------------------------------ */
    }

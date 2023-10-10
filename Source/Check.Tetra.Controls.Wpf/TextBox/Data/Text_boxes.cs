@@ -1,5 +1,4 @@
-﻿
-using Check.Check_TextBox;
+﻿using Check.Check_TextBox;
 
 // ReSharper disable InconsistentNaming
 
@@ -11,7 +10,10 @@ internal static class Text_boxes
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static The_UI_creates_a_text_box Create_enabled_and_visible(string text)
+   public static The_UI_creates_a_text_box Create_enabled_and_visible
+   (
+      string text
+   )
       => The_UI_creates_a_text_box
         .Factory()
         .Text_is(text)
@@ -20,7 +22,10 @@ internal static class Text_boxes
 
    /* ------------------------------------------------------------ */
 
-   public static Expected_text_box Enabled_and_visible(string text)
+   public static Expected_text_box Enabled_and_visible
+   (
+      string text
+   )
       => Expected_text_box
         .Factory()
         .Text_is(text)
@@ -31,13 +36,19 @@ internal static class Text_boxes
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static The_UI_creates_a_text_box.DefineIsEnabled Text_is_default(this The_UI_creates_a_text_box.DefineText factory)
+   public static The_UI_creates_a_text_box.DefineIsEnabled Text_is_default
+   (
+      this The_UI_creates_a_text_box.DefineText factory
+   )
       => factory
         .Text_is("Some text");
 
    /* ------------------------------------------------------------ */
 
-   public static Expected_text_box.DefineIsEnabled Text_is_default(this Expected_text_box.DefineText factory)
+   public static Expected_text_box.DefineIsEnabled Text_is_default
+   (
+      this Expected_text_box.DefineText factory
+   )
       => factory
         .Text_is("Some text");
 

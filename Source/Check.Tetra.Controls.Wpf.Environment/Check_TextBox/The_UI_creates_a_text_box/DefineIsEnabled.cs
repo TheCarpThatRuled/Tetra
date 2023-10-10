@@ -7,25 +7,30 @@ partial class The_UI_creates_a_text_box
    public sealed class DefineIsEnabled
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Private Fields
       /* ------------------------------------------------------------ */
 
-      public DefineVisibility IsEnabled_is(bool isEnabled)
-         => new(isEnabled,
-                _text);
+      private readonly string _text;
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
-      internal DefineIsEnabled(string text)
+      internal DefineIsEnabled
+      (
+         string text
+      )
          => _text = text;
-
       /* ------------------------------------------------------------ */
-      // Private Fields
+      // Methods
       /* ------------------------------------------------------------ */
 
-      private readonly string _text;
+      public DefineVisibility IsEnabled_is
+      (
+         bool isEnabled
+      )
+         => new(isEnabled,
+                _text);
 
       /* ------------------------------------------------------------ */
    }

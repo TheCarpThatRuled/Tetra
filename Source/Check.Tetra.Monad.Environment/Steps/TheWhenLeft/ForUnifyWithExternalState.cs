@@ -13,8 +13,11 @@ partial class Steps
          /* ------------------------------------------------------------ */
 
          public IAssert<TheEitherHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts, TheEitherHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts>
-            was_invoked_once_with(FakeExternalState expectedExternalState,
-                                  FakeLeft          expectedContent)
+            was_invoked_once_with
+            (
+               FakeExternalState expectedExternalState,
+               FakeLeft          expectedContent
+            )
             => the_whenLeft.function.was_invoked_once_with<FakeExternalState, FakeLeft, FakeNewType, TheEitherHasBeenCreated.AndUnifyWasCalledWithExternalStateAsserts>(
                expectedExternalState,
                expectedContent);

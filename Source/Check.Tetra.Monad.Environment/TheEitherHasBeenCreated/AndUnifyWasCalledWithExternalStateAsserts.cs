@@ -5,10 +5,33 @@ namespace Check;
 public static partial class TheEitherHasBeenCreated
 {
    public sealed class AndUnifyWasCalledWithExternalStateAsserts : IAsserts,
-                                                                    IReturnsAsserts<FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>,
-                                                                    IWhenLeftFuncAsserts<FakeExternalState, FakeLeft, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>,
-                                                                    IWhenRightFuncAsserts<FakeExternalState, FakeRight, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>
+                                                                   IReturnsAsserts<FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>,
+                                                                   IWhenLeftFuncAsserts<FakeExternalState, FakeLeft, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>,
+                                                                   IWhenRightFuncAsserts<FakeExternalState, FakeRight, FakeNewType, AndUnifyWasCalledWithExternalStateAsserts>
    {
+      /* ------------------------------------------------------------ */
+      //  Private Fields
+      /* ------------------------------------------------------------ */
+
+      private readonly FakeNewType                                             _returnValue;
+      private readonly FakeFunction<FakeExternalState, FakeLeft, FakeNewType>  _whenLeft;
+      private readonly FakeFunction<FakeExternalState, FakeRight, FakeNewType> _whenRight;
+
+      /* ------------------------------------------------------------ */
+      //  Internal Constructors
+      /* ------------------------------------------------------------ */
+
+      internal AndUnifyWasCalledWithExternalStateAsserts
+      (
+         FakeFunction<FakeExternalState, FakeLeft, FakeNewType>  whenLeft,
+         FakeFunction<FakeExternalState, FakeRight, FakeNewType> whenRight,
+         FakeNewType                                             returnValue
+      )
+      {
+         _returnValue = returnValue;
+         _whenLeft    = whenLeft;
+         _whenRight   = whenRight;
+      }
       /* ------------------------------------------------------------ */
       //  IReturnsAsserts<FakeNewType, AndReduceWasCalledWithExternalStateAsserts> Methods
       /* ------------------------------------------------------------ */
@@ -38,27 +61,6 @@ public static partial class TheEitherHasBeenCreated
            .Create("whenRight",
                    _whenRight,
                    () => this);
-
-      /* ------------------------------------------------------------ */
-      //  Internal Constructors
-      /* ------------------------------------------------------------ */
-
-      internal AndUnifyWasCalledWithExternalStateAsserts(FakeFunction<FakeExternalState, FakeLeft, FakeNewType>  whenLeft,
-                                                          FakeFunction<FakeExternalState, FakeRight, FakeNewType> whenRight,
-                                                          FakeNewType                                             returnValue)
-      {
-         _returnValue = returnValue;
-         _whenLeft    = whenLeft;
-         _whenRight   = whenRight;
-      }
-
-      /* ------------------------------------------------------------ */
-      //  Private Fields
-      /* ------------------------------------------------------------ */
-
-      private readonly FakeNewType                                             _returnValue;
-      private readonly FakeFunction<FakeExternalState, FakeLeft, FakeNewType>  _whenLeft;
-      private readonly FakeFunction<FakeExternalState, FakeRight, FakeNewType> _whenRight;
 
       /* ------------------------------------------------------------ */
    }

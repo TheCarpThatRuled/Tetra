@@ -23,7 +23,10 @@ public class Create
    [TestMethod]
    public void GIVEN_an_ASCII_letter_WHEN_Create_THEN_a_volume_with_a_value_of_the_letter_colon_is_returned()
    {
-      static Property Property(char value)
+      static Property Property
+      (
+         char value
+      )
       {
          //Act
          var actual = VolumeComponent.Create(value);
@@ -52,7 +55,10 @@ public class Create
    [TestMethod]
    public void GIVEN_a_non_ASCII_letter_WHEN_Create_THEN_an_argument_exception_is_thrown()
    {
-      static Property Property(char value)
+      static Property Property
+      (
+         char value
+      )
          => AnArgumentExceptionWasThrown(() => VolumeComponent.Create(value),
                                          IsNotValidBecauseAVolumeLabelMustBeAnASCIILetter(value,
                                                                                           HumanReadableName.VolumeComponent),

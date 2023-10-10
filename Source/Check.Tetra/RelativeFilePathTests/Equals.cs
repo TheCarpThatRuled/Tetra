@@ -24,8 +24,11 @@ public class Equals
    public void
       GIVEN_RelativeFilePath_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(RelativeFilePath relativeFilePath,
-                               object?          obj)
+      static Property Property
+      (
+         RelativeFilePath relativeFilePath,
+         object?          obj
+      )
       {
          //Act
          var actual = relativeFilePath.Equals(obj);
@@ -44,29 +47,6 @@ public class Equals
 
    /* ------------------------------------------------------------ */
 
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
-   private sealed class ObjIsNullOrANonEquatableType
-   {
-      /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once UnusedMember.Local
-      public static Arbitrary<object?> Obj()
-         => Gen
-           .OneOf(Gen.Constant(default(object?)),
-                  Generators.Int32()
-                            .Select(x => (object?) x),
-                  Generators.String()
-                            .Select(x => (object?) x))
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
-
    //GIVEN
    //RelativeFilePath
    //WHEN
@@ -77,14 +57,15 @@ public class Equals
    [TestMethod]
    public void GIVEN_RelativeFilePath_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
    {
-      static Property Property((RelativeFilePath original, RelativeFilePath copy) args)
-      {
+      static Property Property
+         (
+            (RelativeFilePath original, RelativeFilePath copy) args
+         )
          //Arrange
          //Act
          //Assert
-         return EqualsIsReflexive(args.original,
-                                  args.copy);
-      }
+         => EqualsIsReflexive(args.original,
+                              args.copy);
 
       Arb.Register<Libraries.TwoIdenticalRelativeFilePaths>();
 
@@ -145,7 +126,10 @@ public class Equals
    public void
       GIVEN_RelativeFilePath_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_RelativeFilePath_THEN_false_is_returned()
    {
-      static Property Property(RelativeFilePath value)
+      static Property Property
+      (
+         RelativeFilePath value
+      )
       {
          //act
          var actual = value.Equals(null);
@@ -174,14 +158,15 @@ public class Equals
    public void
       GIVEN_RelativeFilePath_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_nullable_RelativeFilePath_THEN_is_reflexive()
    {
-      static Property Property((RelativeFilePath original, RelativeFilePath copy) args)
-      {
+      static Property Property
+         (
+            (RelativeFilePath original, RelativeFilePath copy) args
+         )
          //Arrange
          //Act
          //Assert
-         return IEquatableIsReflexive(args.original,
-                                      args.copy);
-      }
+         => IEquatableIsReflexive(args.original,
+                                  args.copy);
 
       Arb.Register<Libraries.TwoIdenticalRelativeFilePaths>();
 
@@ -223,6 +208,29 @@ public class Equals
 
       Prop.ForAll<(RelativeFilePath, RelativeFilePath, RelativeFilePath)>(IEquatableIsTransitive<RelativeFilePath>)
           .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   private sealed class ObjIsNullOrANonEquatableType
+   {
+      /* ------------------------------------------------------------ */
+      // Methods
+      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once UnusedMember.Local
+      public static Arbitrary<object?> Obj()
+         => Gen
+           .OneOf(Gen.Constant(default(object?)),
+                  Generators.Int32()
+                            .Select(x => (object?) x),
+                  Generators.String()
+                            .Select(x => (object?) x))
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */

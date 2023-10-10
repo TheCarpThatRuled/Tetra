@@ -24,8 +24,11 @@ public class Equals
    public void
       GIVEN_DirectoryComponent_AND_obj_is_null_or_a_non_equatable_type_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_false_is_returned()
    {
-      static Property Property(DirectoryComponent directoryComponent,
-                               object?            obj)
+      static Property Property
+      (
+         DirectoryComponent directoryComponent,
+         object?            obj
+      )
       {
          //Act
          var actual = directoryComponent.Equals(obj);
@@ -44,29 +47,6 @@ public class Equals
 
    /* ------------------------------------------------------------ */
 
-   // ReSharper disable once ClassNeverInstantiated.Local
-   // ReSharper disable once InconsistentNaming
-   private sealed class ObjIsNullOrANonEquatableType
-   {
-      /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      // ReSharper disable once UnusedMember.Local
-      public static Arbitrary<object?> Obj()
-         => Gen
-           .OneOf(Gen.Constant(default(object?)),
-                  Generators.Int32()
-                            .Select(x => (object?) x),
-                  Generators.String()
-                            .Select(x => (object?) x))
-           .ToArbitrary();
-
-      /* ------------------------------------------------------------ */
-   }
-
-   /* ------------------------------------------------------------ */
-
    //GIVEN
    //DirectoryComponent
    //WHEN
@@ -77,7 +57,10 @@ public class Equals
    [TestMethod]
    public void GIVEN_DirectoryComponent_WHEN_Equals_AND_obj_is_a_nullable_object_THEN_is_reflexive()
    {
-      static Property Property(DirectoryComponent original)
+      static Property Property
+      (
+         DirectoryComponent original
+      )
       {
          //Arrange
          var copy = DirectoryComponent.Create(original.Value());
@@ -147,7 +130,10 @@ public class Equals
    public void
       GIVEN_DirectoryComponent_AND_other_is_null_WHEN_Equals_AND_other_is_a_nullable_DirectoryComponent_THEN_false_is_returned()
    {
-      static Property Property(DirectoryComponent value)
+      static Property Property
+      (
+         DirectoryComponent value
+      )
       {
          //act
          var actual = value.Equals(null);
@@ -176,7 +162,10 @@ public class Equals
    public void
       GIVEN_DirectoryComponent_AND_this_is_a_some_WHEN_Equals_AND_other_is_a_nullable_DirectoryComponent_THEN_is_reflexive()
    {
-      static Property Property(DirectoryComponent original)
+      static Property Property
+      (
+         DirectoryComponent original
+      )
       {
          //Arrange
          var copy = DirectoryComponent.Create(original.Value());
@@ -227,6 +216,29 @@ public class Equals
 
       Prop.ForAll<(DirectoryComponent, DirectoryComponent, DirectoryComponent)>(IEquatableIsTransitive<DirectoryComponent>)
           .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+
+   // ReSharper disable once ClassNeverInstantiated.Local
+   // ReSharper disable once InconsistentNaming
+   private sealed class ObjIsNullOrANonEquatableType
+   {
+      /* ------------------------------------------------------------ */
+      // Methods
+      /* ------------------------------------------------------------ */
+
+      // ReSharper disable once UnusedMember.Local
+      public static Arbitrary<object?> Obj()
+         => Gen
+           .OneOf(Gen.Constant(default(object?)),
+                  Generators.Int32()
+                            .Select(x => (object?) x),
+                  Generators.String()
+                            .Select(x => (object?) x))
+           .ToArbitrary();
+
+      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */

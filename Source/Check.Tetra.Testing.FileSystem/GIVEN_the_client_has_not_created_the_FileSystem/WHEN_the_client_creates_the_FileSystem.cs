@@ -16,7 +16,10 @@ public class WHEN_the_client_creates_the_FileSystem
    [TestMethod]
    public void THEN_the_current_directory_is_the_value_passed_in_on_creation()
    {
-      static Property Property(AbsoluteDirectoryPath path)
+      static Property Property
+      (
+         AbsoluteDirectoryPath path
+      )
       {
          //Arrange
          //Act

@@ -1,25 +1,9 @@
-﻿namespace Tetra.Testing;
+﻿using System.ComponentModel;
+
+namespace Tetra.Testing;
 
 public sealed class FakeOneWayBinding<T>
 {
-   /* ------------------------------------------------------------ */
-   // Factory Functions
-   /* ------------------------------------------------------------ */
-
-   public static FakeOneWayBinding<T> Create(DataContext          context,
-                                             string               propertyName,
-                                             Func<T> get)
-      => new(context,
-             get,
-             propertyName);
-
-   /* ------------------------------------------------------------ */
-   // Properties
-   /* ------------------------------------------------------------ */
-
-   public T Get()
-      => _value;
-
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
@@ -34,9 +18,12 @@ public sealed class FakeOneWayBinding<T>
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private FakeOneWayBinding(DataContext          context,
-                             Func<T> get,
-                             string               propertyName)
+   private FakeOneWayBinding
+   (
+      DataContext context,
+      Func<T>     get,
+      string      propertyName
+   )
    {
       _get          = get;
       _propertyName = propertyName;
@@ -45,13 +32,36 @@ public sealed class FakeOneWayBinding<T>
 
       _value = get();
    }
+   /* ------------------------------------------------------------ */
+   // Factory Functions
+   /* ------------------------------------------------------------ */
+
+   public static FakeOneWayBinding<T> Create
+   (
+      DataContext context,
+      string      propertyName,
+      Func<T>     get
+   )
+      => new(context,
+             get,
+             propertyName);
+
+   /* ------------------------------------------------------------ */
+   // Properties
+   /* ------------------------------------------------------------ */
+
+   public T Get()
+      => _value;
 
    /* ------------------------------------------------------------ */
    // Private Methods
    /* ------------------------------------------------------------ */
 
-   private void ContextOnPropertyChanged(object?                                        sender,
-                                         System.ComponentModel.PropertyChangedEventArgs e)
+   private void ContextOnPropertyChanged
+   (
+      object?                  sender,
+      PropertyChangedEventArgs e
+   )
    {
       if (e.PropertyName == _propertyName)
       {

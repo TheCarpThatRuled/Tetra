@@ -9,9 +9,12 @@ internal static class LocalAsserts
    // Extensions
    /* ------------------------------------------------------------ */
 
-   public static Assert TetraSequenceEquals<T>(this Assert    assert,
-                                               IEnumerable<T> expected,
-                                               ISequence<T>   actual)
+   public static Assert TetraSequenceEquals<T>
+   (
+      this Assert    assert,
+      IEnumerable<T> expected,
+      ISequence<T>   actual
+   )
    {
       var expectedAsArray = expected as T[]
                          ?? expected.ToArray();
@@ -42,8 +45,11 @@ internal static class LocalAsserts
    // Functions
    /* ------------------------------------------------------------ */
 
-   public static Property TetraSequenceEquals<T>(IEnumerable<T> expected,
-                                                 ISequence<T>   actual)
+   public static Property TetraSequenceEquals<T>
+   (
+      IEnumerable<T> expected,
+      ISequence<T>   actual
+   )
    {
       var expectedAsArray = expected as T[]
                          ?? expected.ToArray();
@@ -61,22 +67,27 @@ internal static class LocalAsserts
    // Private Functions
    /* ------------------------------------------------------------ */
 
-   private static Property TetraSequenceAllIndicesMatch<T>(T[]          expectedAsArray,
-                                                          ISequence<T> actual)
+   private static Property TetraSequenceAllIndicesMatch<T>
+   (
+      T[]          expectedAsArray,
+      ISequence<T> actual
+   )
       => expectedAsArray
         .WithIndices()
         .Aggregate(True(),
-                   (total,
-                    next) => total
-                            .And(AreEqual($"Item {next.index} - [int]",
-                                          next.item,
-                                          actual[next.index]))
-                            .And(AreEqual($"Item {next.index} - [uint]",
-                                          next.item,
-                                          actual[(uint) next.index]))
-                            .And(AreEqual($"Item {next.index} - [Index]",
-                                          next.item,
-                                          actual[new Index(next.index)])));
+                   (
+                      total,
+                      next
+                   ) => total
+                       .And(AreEqual($"Item {next.index} - [int]",
+                                     next.item,
+                                     actual[next.index]))
+                       .And(AreEqual($"Item {next.index} - [uint]",
+                                     next.item,
+                                     actual[(uint) next.index]))
+                       .And(AreEqual($"Item {next.index} - [Index]",
+                                     next.item,
+                                     actual[new Index(next.index)])));
 
    /* ------------------------------------------------------------ */
 }

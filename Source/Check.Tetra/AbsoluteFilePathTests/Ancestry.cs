@@ -23,7 +23,10 @@ public class Ancestry
    public void
       GIVEN_an_AbsoluteFilePath_WHEN_Ancestry_THEN_a_sequence_of_AbsoluteDirectoryPaths_representing_each_node_from_the_root_to_the_parent_and_an_AbsoluteFilePath_representing_the_leaf_is_returned()
    {
-      static Property Property(TestAbsoluteFilePath testPath)
+      static Property Property
+      (
+         TestAbsoluteFilePath testPath
+      )
       {
          //Arrange
          var expected = testPath.ToAncestry();

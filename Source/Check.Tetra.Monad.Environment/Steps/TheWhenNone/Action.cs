@@ -23,7 +23,10 @@ partial class Steps
 
          /* ------------------------------------------------------------ */
 
-         public IAssert<TAsserts, TAsserts> was_invoked_once_with<T, TAsserts>(T expected)
+         public IAssert<TAsserts, TAsserts> was_invoked_once_with<T, TAsserts>
+         (
+            T expected
+         )
             where TAsserts : IAsserts, IWhenNoneActionAsserts<T, TAsserts>
             => AtomicAssert<TAsserts, TAsserts>
               .Create($@"{nameof(the_whenNone)}_{nameof(was_invoked_once_with)} ""{expected}""",
