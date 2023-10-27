@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra.Testing;
-using static Check.Steps;
+using static Check.OptionEnvironment.Steps;
 
 namespace Check.GIVEN_the_client_has_created_a_some;
 
@@ -8,7 +8,7 @@ namespace Check.GIVEN_the_client_has_created_a_some;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_Map : AAATestDataSource
+public class WHEN_the_client_calls_Map : AAATestDataSource1
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -18,7 +18,7 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
    [WHEN_the_client_calls_Map]
    public void Run
    (
-      AAA_test test
+      AAA_test1 test
    )
    {
       using var given = test.Create();
@@ -31,7 +31,7 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
    // Test
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test> GetTests()
+   protected override IEnumerable<AAA_test1> GetTests()
    {
       /* ------------------------------------------------------------ */
 
@@ -41,22 +41,22 @@ public class WHEN_the_client_calls_Map : AAATestDataSource
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Map_with(whenSome))
+                  .WHEN(the_Client.calls_Map_with(whenSome))
                   .THEN(the_whenSome.for_Map.was_invoked_once_with(content))
-                  .And(the_return_value.for_option.Map.is_a_some_containing(whenSome))
+                  .And(the_return_value.is_a_some_containing(whenSome))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Map_with(externalState,
-                                                                whenSome))
+                  .WHEN(the_Client.calls_Map_with(externalState,
+                                                  whenSome))
                   .THEN(the_whenSome.for_Map_with_externalState.was_invoked_once_with(externalState,
                                                                                       content))
-                  .And(the_return_value.for_option.Map_with_externalState.is_a_some_containing(whenSome))
+                  .And(the_return_value.is_a_some_containing(whenSome))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */

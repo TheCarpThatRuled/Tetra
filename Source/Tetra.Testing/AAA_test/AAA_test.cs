@@ -38,6 +38,7 @@ public sealed partial class AAA_test : ICharacterisable
 
    public string FullCharacterisation()
       => _fullCharacterisation;
+
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */

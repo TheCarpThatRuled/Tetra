@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
-using static Check.Steps;
+using static Check.OptionEnvironment.Steps;
 
 namespace Check.GIVEN_the_client_has_created_a_some;
 
@@ -9,7 +9,7 @@ namespace Check.GIVEN_the_client_has_created_a_some;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_Equals : AAATestDataSource
+public class WHEN_the_client_calls_Equals : AAATestDataSource1
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -19,7 +19,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource
    [WHEN_the_client_calls_Equals]
    public void Run
    (
-      AAA_test test
+      AAA_test1 test
    )
    {
       using var given = test.Create();
@@ -32,7 +32,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource
    // Test
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test> GetTests()
+   protected override IEnumerable<AAA_test1> GetTests()
    {
       /* ------------------------------------------------------------ */
 
@@ -40,88 +40,88 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Equals_with(null))
+                  .WHEN(the_Client.calls_Equals_with(null))
                   .THEN(the_return_value.is_false())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Equals_with(Option<FakeNewType>.None()))
+                  .WHEN(the_Client.calls_Equals_with(Option<FakeNewType>.None()))
                   .THEN(the_return_value.is_false())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Equals_with(Option.Some(FakeNewType.Create(content.Characterisation))))
+                  .WHEN(the_Client.calls_Equals_with(Option.Some(FakeNewType.Create(content.Characterisation))))
                   .THEN(the_return_value.is_false())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Equals_with(Option<FakeType>.None()))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Equals_with("Some"))
+                  .WHEN(the_Client.calls_Equals_with(Option<FakeType>.None()))
                   .THEN(the_return_value.is_false())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Equals_with(FakeType.Create("Some")))
+                  .WHEN(the_Client.calls_Equals_with("Some"))
                   .THEN(the_return_value.is_false())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Equals_with(Option.Some(FakeType.Create("Some"))))
+                  .WHEN(the_Client.calls_Equals_with(FakeType.Create("Some")))
                   .THEN(the_return_value.is_false())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Equals_with(content.Characterisation))
+                  .WHEN(the_Client.calls_Equals_with(Option.Some(FakeType.Create("Some"))))
                   .THEN(the_return_value.is_false())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Equals_with(content))
+                  .WHEN(the_Client.calls_Equals_with(content.Characterisation))
+                  .THEN(the_return_value.is_false())
+                  .Crystallise();
+
+      /* ------------------------------------------------------------ */
+
+      yield return AAA_test1
+                  .GIVEN(the_Client.has_created_a_some_from(content))
+                  .WHEN(the_Client.calls_Equals_with(content))
                   .THEN(the_return_value.is_true())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Equals_with(Option.Some(content)))
+                  .WHEN(the_Client.calls_Equals_with(Option.Some(content)))
                   .THEN(the_return_value.is_true())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.on_the_option.calls_Equals_with_self())
+                  .WHEN(the_Client.calls_Equals_with_self())
                   .THEN(the_return_value.is_true())
                   .Crystallise();
 

@@ -1,0 +1,9 @@
+﻿namespace Tetra.Testing;
+
+// ReSharper disable once InconsistentNaming
+partial class AAA_test<TActions, TAsserts>
+{
+   public interface IArrangeAct
+      : IArrange,
+        IAct { }
+}

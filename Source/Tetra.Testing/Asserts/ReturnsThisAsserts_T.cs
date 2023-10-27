@@ -3,7 +3,6 @@
 namespace Tetra.Testing;
 
 public sealed class ReturnsThisAsserts<TNext> : IAsserts
-   where TNext : IAsserts
 {
    /* ------------------------------------------------------------ */
    // Private Fields

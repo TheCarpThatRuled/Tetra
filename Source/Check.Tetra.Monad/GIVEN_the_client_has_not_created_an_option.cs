@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra.Testing;
-using static Check.Steps;
+using static Check.OptionEnvironment.Steps;
 
 namespace Check;
 
@@ -8,7 +8,7 @@ namespace Check;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class GIVEN_the_client_has_not_created_an_option : AAATestDataSource
+public class GIVEN_the_client_has_not_created_an_option : AAATestDataSource1
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -18,7 +18,7 @@ public class GIVEN_the_client_has_not_created_an_option : AAATestDataSource
    [GIVEN_the_client_has_not_created_an_option]
    public void Run
    (
-      AAA_test test
+      AAA_test1 test
    )
    {
       using var given = test.Create();
@@ -31,13 +31,13 @@ public class GIVEN_the_client_has_not_created_an_option : AAATestDataSource
    // Test
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test> GetTests()
+   protected override IEnumerable<AAA_test1> GetTests()
    {
       /* ------------------------------------------------------------ */
       // None
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_not_created_an_option())
                   .WHEN(the_Client.calls_Option_T_None())
                   .THEN(the_return_value.is_a_none<FakeType>())
@@ -53,7 +53,7 @@ public class GIVEN_the_client_has_not_created_an_option : AAATestDataSource
       {
          /* ------------------------------------------------------------ */
 
-         yield return AAA_test
+         yield return AAA_test1
                      .GIVEN(the_Client.has_not_created_an_option())
                      .WHEN(act)
                      .THEN(the_return_value.is_a_some_containing(content))

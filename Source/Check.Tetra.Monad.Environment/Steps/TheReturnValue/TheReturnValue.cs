@@ -15,11 +15,6 @@ partial class Steps
       public ForEither for_either { get; } = new();
 
       /* ------------------------------------------------------------ */
-
-      // ReSharper disable once InconsistentNaming
-      public ForOption for_option { get; } = new();
-
-      /* ------------------------------------------------------------ */
       // Assert
       /* ------------------------------------------------------------ */
 

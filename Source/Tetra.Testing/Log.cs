@@ -109,7 +109,11 @@ public static class Log
    (
       string message
    )
-      => ToStandardOutput(">>> " + message);
+   {
+      var s = ">>> " + message;
+      ToStandardOutput(s);
+      ToDebugOutput(s);
+   }
 
    /* ------------------------------------------------------------ */
 

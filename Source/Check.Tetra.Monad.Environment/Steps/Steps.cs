@@ -22,17 +22,7 @@ public static partial class Steps
    /* ------------------------------------------------------------ */
 
    // ReSharper disable once InconsistentNaming
-   public static TheWhenNone the_whenNone { get; } = new();
-
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once InconsistentNaming
    public static TheWhenRight the_whenRight { get; } = new();
-
-   /* ------------------------------------------------------------ */
-
-   // ReSharper disable once InconsistentNaming
-   public static TheWhenSome the_whenSome { get; } = new();
 
    /* ------------------------------------------------------------ */
 }

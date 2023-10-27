@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra.Testing;
-using static Check.Steps;
+using static Check.OptionEnvironment.Steps;
 
 namespace Check.GIVEN_the_client_has_created_a_none;
 
@@ -8,7 +8,7 @@ namespace Check.GIVEN_the_client_has_created_a_none;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_ExpandSomeToLeft : AAATestDataSource
+public class WHEN_the_client_calls_ExpandSomeToLeft : AAATestDataSource1
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -18,7 +18,7 @@ public class WHEN_the_client_calls_ExpandSomeToLeft : AAATestDataSource
    [WHEN_the_client_calls_ExpandSomeToLeft]
    public void Run
    (
-      AAA_test test
+      AAA_test1 test
    )
    {
       using var given = test.Create();
@@ -31,7 +31,7 @@ public class WHEN_the_client_calls_ExpandSomeToLeft : AAATestDataSource
    // Test
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test> GetTests()
+   protected override IEnumerable<AAA_test1> GetTests()
    {
       /* ------------------------------------------------------------ */
 
@@ -40,21 +40,21 @@ public class WHEN_the_client_calls_ExpandSomeToLeft : AAATestDataSource
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.on_the_option.calls_ExpandSomeToLeft_with(whenNone))
+                  .WHEN(the_Client.calls_ExpandSomeToLeft_with(whenNone))
                   .THEN(the_whenNone.for_ExpandSomeToLeft.was_invoked_once())
-                  .And(the_return_value.for_option.ExpandSomeToLeft.is_a_right_containing(whenNone))
+                  .And(the_return_value.is_a_right_containing<FakeType, FakeRight>(whenNone))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.on_the_option.calls_ExpandSomeToLeft_with(externalState,
-                                                                             whenNone))
+                  .WHEN(the_Client.calls_ExpandSomeToLeft_with(externalState,
+                                                               whenNone))
                   .THEN(the_whenNone.for_ExpandSomeToLeft_with_externalState.was_invoked_once_with(externalState))
-                  .And(the_return_value.for_option.ExpandSomeToLeft_with_externalState.is_a_right_containing(whenNone))
+                  .And(the_return_value.is_a_right_containing<FakeType, FakeRight>(whenNone))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */

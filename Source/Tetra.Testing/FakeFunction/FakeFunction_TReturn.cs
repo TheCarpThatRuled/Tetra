@@ -19,6 +19,7 @@ public sealed class FakeFunction<TReturn>
       TReturn returnValue
    )
       => _returnValue = returnValue;
+
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
