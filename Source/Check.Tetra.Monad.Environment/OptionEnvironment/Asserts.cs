@@ -9,10 +9,10 @@ public sealed class Asserts
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly FakeActions                                    _actions;
-   private readonly FakeFunctions                                  _functions;
-   private readonly IReadOnlyDictionary<string, IOption<FakeType>> _options;
-   private readonly object?                                        _returnValue;
+   private readonly FakeActions        _actions;
+   private readonly FakeFunctions      _functions;
+   private readonly object?            _returnValue;
+   private readonly IOption<FakeType>? _this;
 
    /* ------------------------------------------------------------ */
    // Internal Constructors
@@ -20,16 +20,16 @@ public sealed class Asserts
 
    internal Asserts
    (
-      object?                                        returnValue,
-      IReadOnlyDictionary<string, IOption<FakeType>> options,
-      FakeActions                                    actions,
-      FakeFunctions                                  functions
+      IOption<FakeType>? @this,
+      object?            returnValue,
+      FakeActions        actions,
+      FakeFunctions      functions
    )
    {
       _actions     = actions;
       _functions   = functions;
-      _options     = options;
       _returnValue = returnValue;
+      _this        = @this;
    }
 
    /* ------------------------------------------------------------ */
@@ -108,7 +108,7 @@ public sealed class Asserts
    public ObjectAsserts<T, Asserts> Returns<T>()
       => ObjectAsserts<T, Asserts>
         .Create("return value",
-                (T) _returnValue,
+                (T) _returnValue!,
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -116,7 +116,7 @@ public sealed class Asserts
    public BooleanAsserts<Asserts> ReturnsABoolean()
       => BooleanAsserts<Asserts>
         .Create("return value",
-                (bool) _returnValue,
+                _returnValue as bool? ?? throw Failed.Assert("The return value was not a bool"),
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -124,7 +124,8 @@ public sealed class Asserts
    public EitherAsserts<TLeft, TRight, Asserts> ReturnsAnEither<TLeft, TRight>()
       => EitherAsserts<TLeft, TRight, Asserts>
         .Create("return value",
-                (IEither<TLeft, TRight>) _returnValue,
+                _returnValue as IEither<TLeft, TRight>
+             ?? throw Failed.Assert($"The return value was not an {nameof(IEither<TLeft, TRight>)}<{typeof(TLeft).Name}, {typeof(TRight).Name}>"),
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -132,17 +133,14 @@ public sealed class Asserts
    public OptionAsserts<T, Asserts> ReturnsAnOption<T>()
       => OptionAsserts<T, Asserts>
         .Create("return value",
-                (IOption<T>) _returnValue,
+                _returnValue as IOption<T> ?? throw Failed.Assert($"The return value was not an {nameof(IOption<T>)}<{typeof(T).Name}>"),
                 () => this);
 
    /* ------------------------------------------------------------ */
 
-   public ReturnsThisAsserts<Asserts> ReturnsThis
-   (
-      string name
-   )
+   public ReturnsThisAsserts<Asserts> ReturnsThis()
       => ReturnsThisAsserts<Asserts>
-        .Create(_options[name],
+        .Create(_this,
                 _returnValue,
                 () => this);
 

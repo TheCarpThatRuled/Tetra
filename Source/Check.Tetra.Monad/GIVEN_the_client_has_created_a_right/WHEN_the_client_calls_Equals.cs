@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
-using static Check.Steps;
+using static Check.EitherEnvironment.Steps;
 
 namespace Check.GIVEN_the_client_has_created_a_right;
 
@@ -9,7 +9,7 @@ namespace Check.GIVEN_the_client_has_created_a_right;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_Equals : AAATestDataSource
+public class WHEN_the_client_calls_Equals : AAATestDataSource1
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -19,7 +19,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource
    [WHEN_the_client_calls_Equals]
    public void Run
    (
-      AAA_test test
+      AAA_test1 test
    )
    {
       using var given = test.Create();
@@ -32,7 +32,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource
    // Test
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test> GetTests()
+   protected override IEnumerable<AAA_test1> GetTests()
    {
       /* ------------------------------------------------------------ */
 
@@ -40,88 +40,53 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_right_from(content))
-                  .WHEN(the_Client.on_the_either.calls_Equals_with(null))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
+      foreach (var notEquals in new object?[]
+               {
+                  null,
+                  content.Characterisation,
+                  Either<FakeLeft, FakeNewRight>.Right(FakeNewRight.Create(content.Characterisation)),
+                  Either<FakeLeft, FakeRight>.Left(FakeLeft.Create(content.Characterisation)),
+                  "Right",
+                  FakeRight.Create("Right"),
+                  Either<FakeLeft, FakeRight>.Right(FakeRight.Create("Right")),
+                  Either<FakeNewLeft, FakeRight>.Right(content),
+               })
+      {
+         /* ------------------------------------------------------------ */
+
+         yield return AAA_test1
+                     .GIVEN(the_Client.has_created_a_right_from(content))
+                     .WHEN(the_Client.calls_Equals_with(notEquals))
+                     .THEN(the_return_value.is_false())
+                     .Crystallise();
+
+         /* ------------------------------------------------------------ */
+      }
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_right_from(content))
-                  .WHEN(the_Client.on_the_either.calls_Equals_with(Either<FakeLeft, FakeNewRight>.Right(FakeNewRight.Create(content.Characterisation))))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
+      foreach (var equals in new object?[]
+               {
+                  content,
+                  Either<FakeLeft, FakeRight>.Right(content)
+               })
+      {
+         /* ------------------------------------------------------------ */
 
-      /* ------------------------------------------------------------ */
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_right_from(content))
-                  .WHEN(the_Client.on_the_either.calls_Equals_with(Either<FakeLeft, FakeRight>.Left(FakeLeft.Create(content.Characterisation))))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
+         yield return AAA_test1
+                     .GIVEN(the_Client.has_created_a_right_from(content))
+                     .WHEN(the_Client.calls_Equals_with(equals))
+                     .THEN(the_return_value.is_true())
+                     .Crystallise();
 
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_right_from(content))
-                  .WHEN(the_Client.on_the_either.calls_Equals_with("Right"))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
+         /* ------------------------------------------------------------ */
+      }
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_right_from(content))
-                  .WHEN(the_Client.on_the_either.calls_Equals_with(FakeRight.Create("Right")))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_right_from(content))
-                  .WHEN(the_Client.on_the_either.calls_Equals_with(Either<FakeLeft, FakeRight>.Right(FakeRight.Create("Right"))))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_right_from(content))
-                  .WHEN(the_Client.on_the_either.calls_Equals_with(Either<FakeNewLeft, FakeRight>.Right(content)))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_right_from(content))
-                  .WHEN(the_Client.on_the_either.calls_Equals_with(content.Characterisation))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_right_from(content))
-                  .WHEN(the_Client.on_the_either.calls_Equals_with(content))
-                  .THEN(the_return_value.is_true())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_right_from(content))
-                  .WHEN(the_Client.on_the_either.calls_Equals_with(Either<FakeLeft, FakeRight>.Right(content)))
-                  .THEN(the_return_value.is_true())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test
-                  .GIVEN(the_Client.has_created_a_right_from(content))
-                  .WHEN(the_Client.on_the_either.calls_Equals_with_self())
+                  .WHEN(the_Client.calls_Equals_with_self())
                   .THEN(the_return_value.is_true())
                   .Crystallise();
 

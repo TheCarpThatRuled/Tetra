@@ -1,7 +1,9 @@
-﻿using static Check.Names;
-using static Tetra.Testing.AAA_test<Check.OptionEnvironment.Actions, Check.OptionEnvironment.Asserts>;
+﻿using Tetra.Testing;
 
 namespace Check.OptionEnvironment;
+
+using static Names;
+using static AAA_test<Actions, Asserts>;
 
 partial class Steps
 {

@@ -9,13 +9,13 @@ public sealed class Actions : TestEnvironment<Asserts>
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly Dictionary<string, IOption<FakeType>> _options   = new();
-   private readonly FakeActions                           _actions   = FakeActions.Create();
-   private readonly FakeFunctions                         _functions = FakeFunctions.Create();
+   private readonly FakeActions   _actions   = FakeActions.Create();
+   private readonly FakeFunctions _functions = FakeFunctions.Create();
 
    //Mutable
-   private bool    _captureReturnValue = false;
-   private object? _returnValue;
+   private bool               _captureReturnValue = false;
+   private object?            _returnValue;
+   private IOption<FakeType>? _this;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
@@ -38,8 +38,8 @@ public sealed class Actions : TestEnvironment<Asserts>
    /* ------------------------------------------------------------ */
 
    protected override Asserts CreateAsserts()
-      => new(_returnValue,
-             _options,
+      => new(_this!,
+             _returnValue,
              _actions,
              _functions);
 
@@ -52,71 +52,8 @@ public sealed class Actions : TestEnvironment<Asserts>
    // Methods
    /* ------------------------------------------------------------ */
 
-   public Actions CallOptionTNone
-   (
-      string name
-   )
-   {
-      var option = Option<FakeType>.None();
-
-      _options.Add(name,
-                   option);
-
-      if (_captureReturnValue)
-      {
-         _returnValue = option;
-      }
-
-      return this;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public Actions CallOptionSome
-   (
-      string   name,
-      FakeType content
-   )
-   {
-      var option = Option.Some(content);
-
-      _options.Add(name,
-                   option);
-
-      if (_captureReturnValue)
-      {
-         _returnValue = option;
-      }
-
-      return this;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public Actions CallOptionTSome
-   (
-      string   name,
-      FakeType content
-   )
-   {
-      var option = Option<FakeType>.Some(content);
-
-      _options.Add(name,
-                   option);
-
-      if (_captureReturnValue)
-      {
-         _returnValue = option;
-      }
-
-      return this;
-   }
-
-   /* ------------------------------------------------------------ */
-
    public Actions CallDo
    (
-      string optionName,
       string whenNoneName,
       string whenSomeName
    )
@@ -124,9 +61,8 @@ public sealed class Actions : TestEnvironment<Asserts>
       _actions.Create(whenNoneName);
       _actions.Create<FakeType>(whenSomeName);
 
-      var returnValue = _options[optionName]
-        .Do(_actions.Get<FakeType>(whenSomeName)!.Action,
-            _actions.Get(whenNoneName)!.Action);
+      var returnValue = This().Do(_actions.Get<FakeType>(whenSomeName)!.Action,
+                                  _actions.Get(whenNoneName)!.Action);
 
       if (_captureReturnValue)
       {
@@ -140,7 +76,6 @@ public sealed class Actions : TestEnvironment<Asserts>
 
    public Actions CallDo
    (
-      string            optionName,
       string            whenNoneName,
       string            whenSomeName,
       FakeExternalState externalState
@@ -149,10 +84,9 @@ public sealed class Actions : TestEnvironment<Asserts>
       _actions.Create<FakeExternalState>(whenNoneName);
       _actions.Create<FakeExternalState, FakeType>(whenSomeName);
 
-      var returnValue = _options[optionName]
-        .Do(externalState,
-            _actions.Get<FakeExternalState, FakeType>(whenSomeName)!.Action,
-            _actions.Get<FakeExternalState>(whenNoneName)!.Action);
+      var returnValue = This().Do(externalState,
+                                  _actions.Get<FakeExternalState, FakeType>(whenSomeName)!.Action,
+                                  _actions.Get<FakeExternalState>(whenNoneName)!.Action);
 
       if (_captureReturnValue)
       {
@@ -166,12 +100,10 @@ public sealed class Actions : TestEnvironment<Asserts>
 
    public Actions CallEquals
    (
-      string  optionName,
       object? other
    )
    {
-      var returnValue = _options[optionName]
-        .Equals(other);
+      var returnValue = This().Equals(other);
 
       if (_captureReturnValue)
       {
@@ -183,15 +115,10 @@ public sealed class Actions : TestEnvironment<Asserts>
 
    /* ------------------------------------------------------------ */
 
-   public Actions CallEqualsWithSelf
-   (
-      string optionName
-   )
+   public Actions CallEqualsWithSelf()
    {
-      var option = _options[optionName];
-
       // ReSharper disable once EqualExpressionComparison
-      var returnValue = option.Equals(option);
+      var returnValue = This().Equals(_this);
 
       if (_captureReturnValue)
       {
@@ -203,49 +130,9 @@ public sealed class Actions : TestEnvironment<Asserts>
 
    /* ------------------------------------------------------------ */
 
-   public Actions CallGetHashCode
-   (
-      string optionName
-   )
+   public Actions CallGetHashCode()
    {
-      var returnValue = _options[optionName]
-        .GetHashCode();
-
-      if (_captureReturnValue)
-      {
-         _returnValue = returnValue;
-      }
-
-      return this;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public Actions CallIsANone
-   (
-      string optionName
-   )
-   {
-      var returnValue = _options[optionName]
-        .IsANone();
-
-      if (_captureReturnValue)
-      {
-         _returnValue = returnValue;
-      }
-
-      return this;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public Actions CallIsASome
-   (
-      string optionName
-   )
-   {
-      var returnValue = _options[optionName]
-        .IsASome();
+      var returnValue = This().GetHashCode();
 
       if (_captureReturnValue)
       {
@@ -259,7 +146,6 @@ public sealed class Actions : TestEnvironment<Asserts>
 
    public Actions CallExpandSomeToLeft
    (
-      string    optionName,
       string    whenNoneName,
       FakeRight whenNoneValue
    )
@@ -267,8 +153,7 @@ public sealed class Actions : TestEnvironment<Asserts>
       _functions.Create(whenNoneName,
                         whenNoneValue);
 
-      var returnValue = _options[optionName]
-        .ExpandSomeToLeft(_functions.Get<FakeRight>(whenNoneName)!.Func);
+      var returnValue = This().ExpandSomeToLeft(_functions.Get<FakeRight>(whenNoneName)!.Func);
 
       if (_captureReturnValue)
       {
@@ -282,7 +167,6 @@ public sealed class Actions : TestEnvironment<Asserts>
 
    public Actions CallExpandSomeToLeft
    (
-      string            optionName,
       string            whenNoneName,
       FakeRight         whenNoneValue,
       FakeExternalState externalState
@@ -291,9 +175,8 @@ public sealed class Actions : TestEnvironment<Asserts>
       _functions.Create<FakeExternalState, FakeRight>(whenNoneName,
                                                       whenNoneValue);
 
-      var returnValue = _options[optionName]
-        .ExpandSomeToLeft(externalState,
-                          _functions.Get<FakeExternalState, FakeRight>(whenNoneName)!.Func);
+      var returnValue = This().ExpandSomeToLeft(externalState,
+                                                _functions.Get<FakeExternalState, FakeRight>(whenNoneName)!.Func);
 
       if (_captureReturnValue)
       {
@@ -307,7 +190,6 @@ public sealed class Actions : TestEnvironment<Asserts>
 
    public Actions CallExpandSomeToRight
    (
-      string   optionName,
       string   whenNoneName,
       FakeLeft whenNoneValue
    )
@@ -315,8 +197,7 @@ public sealed class Actions : TestEnvironment<Asserts>
       _functions.Create(whenNoneName,
                         whenNoneValue);
 
-      var returnValue = _options[optionName]
-        .ExpandSomeToRight(_functions.Get<FakeLeft>(whenNoneName)!.Func);
+      var returnValue = This().ExpandSomeToRight(_functions.Get<FakeLeft>(whenNoneName)!.Func);
 
       if (_captureReturnValue)
       {
@@ -330,7 +211,6 @@ public sealed class Actions : TestEnvironment<Asserts>
 
    public Actions CallExpandSomeToRight
    (
-      string            optionName,
       string            whenNoneName,
       FakeLeft          whenNoneValue,
       FakeExternalState externalState
@@ -339,9 +219,36 @@ public sealed class Actions : TestEnvironment<Asserts>
       _functions.Create<FakeExternalState, FakeLeft>(whenNoneName,
                                                      whenNoneValue);
 
-      var returnValue = _options[optionName]
-        .ExpandSomeToRight(externalState,
-                           _functions.Get<FakeExternalState, FakeLeft>(whenNoneName)!.Func);
+      var returnValue = This().ExpandSomeToRight(externalState,
+                                                 _functions.Get<FakeExternalState, FakeLeft>(whenNoneName)!.Func);
+
+      if (_captureReturnValue)
+      {
+         _returnValue = returnValue;
+      }
+
+      return this;
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public Actions CallIsANone()
+   {
+      var returnValue = This().IsANone();
+
+      if (_captureReturnValue)
+      {
+         _returnValue = returnValue;
+      }
+
+      return this;
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public Actions CallIsASome()
+   {
+      var returnValue = This().IsASome();
 
       if (_captureReturnValue)
       {
@@ -355,7 +262,6 @@ public sealed class Actions : TestEnvironment<Asserts>
 
    public Actions CallMap
    (
-      string      optionName,
       string      whenSomeName,
       FakeNewType whenSomeValue
    )
@@ -363,8 +269,7 @@ public sealed class Actions : TestEnvironment<Asserts>
       _functions.Create<FakeType, FakeNewType>(whenSomeName,
                                                whenSomeValue);
 
-      var returnValue = _options[optionName]
-        .Map(_functions.Get<FakeType, FakeNewType>(whenSomeName)!.Func);
+      var returnValue = This().Map(_functions.Get<FakeType, FakeNewType>(whenSomeName)!.Func);
 
       if (_captureReturnValue)
       {
@@ -378,7 +283,6 @@ public sealed class Actions : TestEnvironment<Asserts>
 
    public Actions CallMap
    (
-      string            optionName,
       string            whenSomeName,
       FakeNewType       whenSomeValue,
       FakeExternalState externalState
@@ -387,9 +291,8 @@ public sealed class Actions : TestEnvironment<Asserts>
       _functions.Create<FakeExternalState, FakeType, FakeNewType>(whenSomeName,
                                                                   whenSomeValue);
 
-      var returnValue = _options[optionName]
-        .Map(externalState,
-             _functions.Get<FakeExternalState, FakeType, FakeNewType>(whenSomeName)!.Func);
+      var returnValue = This().Map(externalState,
+                                   _functions.Get<FakeExternalState, FakeType, FakeNewType>(whenSomeName)!.Func);
 
       if (_captureReturnValue)
       {
@@ -401,13 +304,57 @@ public sealed class Actions : TestEnvironment<Asserts>
 
    /* ------------------------------------------------------------ */
 
-   public Actions CallToString
+   public Actions CallOptionTNone()
+   {
+      _this = Option<FakeType>.None();
+
+      if (_captureReturnValue)
+      {
+         _returnValue = _this;
+      }
+
+      return this;
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public Actions CallOptionSome
    (
-      string optionName
+      FakeType content
    )
    {
-      var returnValue = _options[optionName]
-        .ToString();
+      _this = Option.Some(content);
+
+      if (_captureReturnValue)
+      {
+         _returnValue = _this;
+      }
+
+      return this;
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public Actions CallOptionTSome
+   (
+      FakeType content
+   )
+   {
+      _this = Option<FakeType>.Some(content);
+
+      if (_captureReturnValue)
+      {
+         _returnValue = _this;
+      }
+
+      return this;
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public Actions CallToString()
+   {
+      var returnValue = This().ToString();
 
       if (_captureReturnValue)
       {
@@ -421,7 +368,6 @@ public sealed class Actions : TestEnvironment<Asserts>
 
    public Actions CallUnify
    (
-      string      optionName,
       string      whenNoneName,
       FakeNewType whenNoneValue,
       string      whenSomeName,
@@ -433,9 +379,8 @@ public sealed class Actions : TestEnvironment<Asserts>
       _functions.Create<FakeType, FakeNewType>(whenSomeName,
                                                whenSomeValue);
 
-      var returnValue = _options[optionName]
-        .Unify(_functions.Get<FakeType, FakeNewType>(whenSomeName)!.Func,
-               _functions.Get<FakeNewType>(whenNoneName)!.Func);
+      var returnValue = This().Unify(_functions.Get<FakeType, FakeNewType>(whenSomeName)!.Func,
+                                     _functions.Get<FakeNewType>(whenNoneName)!.Func);
 
       if (_captureReturnValue)
       {
@@ -449,7 +394,6 @@ public sealed class Actions : TestEnvironment<Asserts>
 
    public Actions CallUnify
    (
-      string            optionName,
       string            whenNoneName,
       FakeNewType       whenNoneValue,
       string            whenSomeName,
@@ -462,10 +406,9 @@ public sealed class Actions : TestEnvironment<Asserts>
       _functions.Create<FakeExternalState, FakeType, FakeNewType>(whenSomeName,
                                                                   whenSomeValue);
 
-      var returnValue = _options[optionName]
-        .Unify(externalState,
-               _functions.Get<FakeExternalState, FakeType, FakeNewType>(whenSomeName)!.Func,
-               _functions.Get<FakeExternalState, FakeNewType>(whenNoneName)!.Func);
+      var returnValue = This().Unify(externalState,
+                                     _functions.Get<FakeExternalState, FakeType, FakeNewType>(whenSomeName)!.Func,
+                                     _functions.Get<FakeExternalState, FakeNewType>(whenNoneName)!.Func);
 
       if (_captureReturnValue)
       {
@@ -474,6 +417,13 @@ public sealed class Actions : TestEnvironment<Asserts>
 
       return this;
    }
+
+   /* ------------------------------------------------------------ */
+   // Private Functions
+   /* ------------------------------------------------------------ */
+
+   public IOption<FakeType> This()
+      => _this ?? throw Failed.InTestSetup("The unit under test has not been created");
 
    /* ------------------------------------------------------------ */
 }

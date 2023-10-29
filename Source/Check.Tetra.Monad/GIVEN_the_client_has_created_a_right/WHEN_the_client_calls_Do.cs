@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra.Testing;
-using static Check.Steps;
+using static Check.EitherEnvironment.Steps;
 
 namespace Check.GIVEN_the_client_has_created_a_right;
 
@@ -8,7 +8,7 @@ namespace Check.GIVEN_the_client_has_created_a_right;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_Do : AAATestDataSource
+public class WHEN_the_client_calls_Do : AAATestDataSource1
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -18,7 +18,7 @@ public class WHEN_the_client_calls_Do : AAATestDataSource
    [WHEN_the_client_calls_Do]
    public void Run
    (
-      AAA_test test
+      AAA_test1 test
    )
    {
       using var given = test.Create();
@@ -31,7 +31,7 @@ public class WHEN_the_client_calls_Do : AAATestDataSource
    // Test
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test> GetTests()
+   protected override IEnumerable<AAA_test1> GetTests()
    {
       /* ------------------------------------------------------------ */
 
@@ -39,25 +39,25 @@ public class WHEN_the_client_calls_Do : AAATestDataSource
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_right_from(content))
-                  .WHEN(the_Client.on_the_either.calls_Do())
+                  .WHEN(the_Client.calls_Do())
                   .THEN(the_whenLeft.for_Do.was_not_invoked())
                   .And(the_whenRight.for_Do.was_invoked_once_with(content))
-                  .And(the_return_value.for_either.Do.is_this())
+                  .And(the_return_value.is_this())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
 
       var externalState = FakeExternalState.Create();
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_right_from(content))
-                  .WHEN(the_Client.on_the_either.calls_Do_with(externalState))
+                  .WHEN(the_Client.calls_Do_with(externalState))
                   .THEN(the_whenLeft.for_Do_with_externalState.was_not_invoked())
                   .And(the_whenRight.for_Do_with_externalState.was_invoked_once_with(externalState,
                                                                                      content))
-                  .And(the_return_value.for_either.Do_with_externalState.is_this())
+                  .And(the_return_value.is_this())
                   .Crystallise();
 
       /* ------------------------------------------------------------ */

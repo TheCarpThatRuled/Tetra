@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra.Testing;
-using static Check.Steps;
+using static Check.EitherEnvironment.Steps;
 
 namespace Check.GIVEN_the_client_has_created_a_right;
 
@@ -8,7 +8,7 @@ namespace Check.GIVEN_the_client_has_created_a_right;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_ReduceLeftToOption : AAATestDataSource
+public class WHEN_the_client_calls_ReduceLeftToOption : AAATestDataSource1
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -18,7 +18,7 @@ public class WHEN_the_client_calls_ReduceLeftToOption : AAATestDataSource
    [WHEN_the_client_calls_ReduceLeftToOption]
    public void Run
    (
-      AAA_test test
+      AAA_test1 test
    )
    {
       using var given = test.Create();
@@ -31,13 +31,13 @@ public class WHEN_the_client_calls_ReduceLeftToOption : AAATestDataSource
    // Test
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test> GetTests()
+   protected override IEnumerable<AAA_test1> GetTests()
    {
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_right_from(FakeRight.Create("Content")))
-                  .WHEN(the_Client.on_the_either.calls_ReduceLeftToOption())
+                  .WHEN(the_Client.calls_ReduceLeftToOption())
                   .THEN(the_return_value.is_a_none<FakeLeft>())
                   .Crystallise();
 

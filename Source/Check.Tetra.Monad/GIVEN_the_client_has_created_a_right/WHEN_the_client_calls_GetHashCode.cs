@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra.Testing;
-using static Check.Steps;
+using static Check.EitherEnvironment.Steps;
 
 namespace Check.GIVEN_the_client_has_created_a_right;
 
@@ -8,7 +8,7 @@ namespace Check.GIVEN_the_client_has_created_a_right;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_GetHashCode : AAATestDataSource
+public class WHEN_the_client_calls_GetHashCode : AAATestDataSource1
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -18,7 +18,7 @@ public class WHEN_the_client_calls_GetHashCode : AAATestDataSource
    [WHEN_the_client_calls_GetHashCode]
    public void Run
    (
-      AAA_test test
+      AAA_test1 test
    )
    {
       using var given = test.Create();
@@ -31,13 +31,13 @@ public class WHEN_the_client_calls_GetHashCode : AAATestDataSource
    // Test
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test> GetTests()
+   protected override IEnumerable<AAA_test1> GetTests()
    {
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test
+      yield return AAA_test1
                   .GIVEN(the_Client.has_created_a_right_from(default!))
-                  .WHEN(the_Client.on_the_either.calls_GetHashCode())
+                  .WHEN(the_Client.calls_GetHashCode())
                   .THEN(the_return_value.is_equal_to(0))
                   .Crystallise();
 
@@ -47,9 +47,9 @@ public class WHEN_the_client_calls_GetHashCode : AAATestDataSource
       {
          /* ------------------------------------------------------------ */
 
-         yield return AAA_test
+         yield return AAA_test1
                      .GIVEN(the_Client.has_created_a_right_from(content))
-                     .WHEN(the_Client.on_the_either.calls_GetHashCode())
+                     .WHEN(the_Client.calls_GetHashCode())
                      .THEN(the_return_value.is_equal_to(content.GetHashCode()))
                      .Crystallise();
 

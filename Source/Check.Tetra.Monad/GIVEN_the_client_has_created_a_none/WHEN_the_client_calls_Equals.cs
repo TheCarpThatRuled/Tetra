@@ -36,35 +36,24 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource1
    {
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test1
-                  .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Equals_with(null))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
+      foreach (var notEquals in new object?[]
+               {
+                  null,
+                  Option<FakeNewType>.None(),
+                  FakeType.Create("Some"),
+                  Option.Some(FakeType.Create("Some")),
+               })
+      {
+         /* ------------------------------------------------------------ */
 
-      /* ------------------------------------------------------------ */
+         yield return AAA_test1
+                     .GIVEN(the_Client.has_created_a_none())
+                     .WHEN(the_Client.calls_Equals_with(notEquals))
+                     .THEN(the_return_value.is_false())
+                     .Crystallise();
 
-      yield return AAA_test1
-                  .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Equals_with(Option<FakeNewType>.None()))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test1
-                  .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Equals_with(FakeType.Create("Some")))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test1
-                  .GIVEN(the_Client.has_created_a_none())
-                  .WHEN(the_Client.calls_Equals_with(Option.Some(FakeType.Create("Some"))))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
+         /* ------------------------------------------------------------ */
+      }
 
       /* ------------------------------------------------------------ */
 

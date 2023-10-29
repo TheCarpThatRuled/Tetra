@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra.Testing;
-using static Check.Steps;
+using static Check.EitherEnvironment.Steps;
 
 namespace Check.GIVEN_the_client_has_created_a_left;
 
@@ -8,7 +8,7 @@ namespace Check.GIVEN_the_client_has_created_a_left;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_ToString : AAATestDataSource
+public class WHEN_the_client_calls_ToString : AAATestDataSource1
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -18,7 +18,7 @@ public class WHEN_the_client_calls_ToString : AAATestDataSource
    [WHEN_the_client_calls_ToString]
    public void Run
    (
-      AAA_test test
+      AAA_test1 test
    )
    {
       using var given = test.Create();
@@ -31,16 +31,16 @@ public class WHEN_the_client_calls_ToString : AAATestDataSource
    // Test
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test> GetTests()
+   protected override IEnumerable<AAA_test1> GetTests()
    {
       /* ------------------------------------------------------------ */
       foreach (var content in new[] {FakeLeft.Create(""), FakeLeft.Create("1"), FakeLeft.Create("2"), FakeLeft.Create("3"), FakeLeft.Create("Content"),})
       {
          /* ------------------------------------------------------------ */
 
-         yield return AAA_test
+         yield return AAA_test1
                      .GIVEN(the_Client.has_created_a_left_from(content))
-                     .WHEN(the_Client.on_the_either.calls_ToString())
+                     .WHEN(the_Client.calls_ToString())
                      .THEN(the_return_value.is_equal_to($"Left ({content})"))
                      .Crystallise();
 

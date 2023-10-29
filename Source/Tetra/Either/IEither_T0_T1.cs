@@ -27,28 +27,6 @@ public interface IEither<out TLeft, out TRight>
    /* ------------------------------------------------------------ */
 
    /// <summary>
-   ///    Identifies if this <c>IEither</c> is a <b>right</b>.
-   /// </summary>
-   /// <returns>
-   ///    <c>true</c> if this <c>IEither</c> is a <b>right</b>;
-   ///    <c>false</c> if it is a <b>left</b>.
-   /// </returns>
-   public bool IsARight();
-
-   /* ------------------------------------------------------------ */
-
-   /// <summary>
-   ///    Identifies if this <c>IEither</c> is a <b>left</b>.
-   /// </summary>
-   /// <returns>
-   ///    <c>true</c> if this <c>IEither</c> is a <b>left</b>;
-   ///    <c>false</c> if it is a <b>right</b>.
-   /// </returns>
-   public bool IsALeft();
-
-   /* ------------------------------------------------------------ */
-
-   /// <summary>
    ///    Invokes an action on the contents of the <c>IEither</c> if it as <b>left</b>, else invokes a different action on the
    ///    <c>IEither</c>  is a <b>right</b>.
    /// </summary>
@@ -88,6 +66,28 @@ public interface IEither<out TLeft, out TRight>
       Action<TExternalState, TLeft>  whenLeft,
       Action<TExternalState, TRight> whenRight
    );
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
+   ///    Identifies if this <c>IEither</c> is a <b>right</b>.
+   /// </summary>
+   /// <returns>
+   ///    <c>true</c> if this <c>IEither</c> is a <b>right</b>;
+   ///    <c>false</c> if it is a <b>left</b>.
+   /// </returns>
+   public bool IsARight();
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
+   ///    Identifies if this <c>IEither</c> is a <b>left</b>.
+   /// </summary>
+   /// <returns>
+   ///    <c>true</c> if this <c>IEither</c> is a <b>left</b>;
+   ///    <c>false</c> if it is a <b>right</b>.
+   /// </returns>
+   public bool IsALeft();
 
    /* ------------------------------------------------------------ */
 
@@ -145,6 +145,30 @@ public interface IEither<out TLeft, out TRight>
    /* ------------------------------------------------------------ */
 
    /// <summary>
+   ///    Reduces this <c>IOption</c> into an <c>IEither</c> where the <b>left</b> branch becomes a <b>some</b> branch
+   ///    and the <b>right</b> branch becomes a <b>none</b> branch.
+   /// </summary>
+   /// <returns>
+   ///    The content of this <c>IEither</c> if it is a <b>left</b>;
+   ///    otherwise a <b>none</b>.
+   /// </returns>
+   public IOption<TLeft> ReduceLeftToOption();
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
+   ///    Reduces this <c>IOption</c> into an <c>IEither</c> where the <b>some</b> branch becomes a <b>left</b> branch
+   ///    and the <b>none</b> branch becomes a <b>right</b> branch.
+   /// </summary>
+   /// <returns>
+   ///    The content of this <c>IEither</c> if it is a <b>right</b>;
+   ///    otherwise a <b>none</b>.
+   /// </returns>
+   public IOption<TRight> ReduceRightToOption();
+
+   /* ------------------------------------------------------------ */
+
+   /// <summary>
    ///    Unifies both branches of the <c>IEither</c> via mapping functions.
    /// </summary>
    /// <typeparam name="TNew">The type this <c>IEither</c> shall be unified as.</typeparam>
@@ -192,30 +216,6 @@ public interface IEither<out TLeft, out TRight>
       Func<TExternalState, TLeft, TNew>  whenLeft,
       Func<TExternalState, TRight, TNew> whenRight
    );
-
-   /* ------------------------------------------------------------ */
-
-   /// <summary>
-   ///    Reduces this <c>IOption</c> into an <c>IEither</c> where the <b>left</b> branch becomes a <b>some</b> branch
-   ///    and the <b>right</b> branch becomes a <b>none</b> branch.
-   /// </summary>
-   /// <returns>
-   ///    The content of this <c>IEither</c> if it is a <b>left</b>;
-   ///    otherwise a <b>none</b>.
-   /// </returns>
-   public IOption<TLeft> ReduceLeftToOption();
-
-   /* ------------------------------------------------------------ */
-
-   /// <summary>
-   ///    Reduces this <c>IOption</c> into an <c>IEither</c> where the <b>some</b> branch becomes a <b>left</b> branch
-   ///    and the <b>none</b> branch becomes a <b>right</b> branch.
-   /// </summary>
-   /// <returns>
-   ///    The content of this <c>IEither</c> if it is a <b>right</b>;
-   ///    otherwise a <b>none</b>.
-   /// </returns>
-   public IOption<TRight> ReduceRightToOption();
 
    /* ------------------------------------------------------------ */
 }

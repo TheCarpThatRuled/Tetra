@@ -40,82 +40,46 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource1
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test1
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.calls_Equals_with(null))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
+      foreach (var notEquals in new object?[]
+               {
+                  null,
+                  content.Characterisation,
+                  Option.Some(FakeNewType.Create(content.Characterisation)),
+                  Option<FakeType>.None(),
+                  "Some",
+                  FakeType.Create("Some"),
+                  Option.Some(FakeType.Create("Some")),
+               })
+      {
+         /* ------------------------------------------------------------ */
+
+         yield return AAA_test1
+                     .GIVEN(the_Client.has_created_a_some_from(content))
+                     .WHEN(the_Client.calls_Equals_with(notEquals))
+                     .THEN(the_return_value.is_false())
+                     .Crystallise();
+
+         /* ------------------------------------------------------------ */
+      }
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test1
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.calls_Equals_with(Option<FakeNewType>.None()))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
+      foreach (var equals in new object?[]
+               {
+                  content,
+                  Option.Some(content),
+               })
+      {
+         /* ------------------------------------------------------------ */
 
-      /* ------------------------------------------------------------ */
+         yield return AAA_test1
+                     .GIVEN(the_Client.has_created_a_some_from(content))
+                     .WHEN(the_Client.calls_Equals_with(equals))
+                     .THEN(the_return_value.is_true())
+                     .Crystallise();
 
-      yield return AAA_test1
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.calls_Equals_with(Option.Some(FakeNewType.Create(content.Characterisation))))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-      yield return AAA_test1
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.calls_Equals_with(Option<FakeType>.None()))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test1
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.calls_Equals_with("Some"))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test1
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.calls_Equals_with(FakeType.Create("Some")))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test1
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.calls_Equals_with(Option.Some(FakeType.Create("Some"))))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test1
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.calls_Equals_with(content.Characterisation))
-                  .THEN(the_return_value.is_false())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test1
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.calls_Equals_with(content))
-                  .THEN(the_return_value.is_true())
-                  .Crystallise();
-
-      /* ------------------------------------------------------------ */
-
-      yield return AAA_test1
-                  .GIVEN(the_Client.has_created_a_some_from(content))
-                  .WHEN(the_Client.calls_Equals_with(Option.Some(content)))
-                  .THEN(the_return_value.is_true())
-                  .Crystallise();
+         /* ------------------------------------------------------------ */
+      }
 
       /* ------------------------------------------------------------ */
 
