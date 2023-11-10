@@ -1,11 +1,11 @@
-﻿using Check.Check_Button;
+﻿using static Check.Check_Button.Steps;
 
 // ReSharper disable InconsistentNaming
 
 namespace Check.Button.GIVEN_the_button_is_enabled_and_visible;
 
 [TestClass]
-public class WHEN_the_user_clicks_the_button : AAATestDataSource
+public class WHEN_the_user_clicks_the_button : AAATestDataSource1
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -15,11 +15,9 @@ public class WHEN_the_user_clicks_the_button : AAATestDataSource
    [WHEN_the_user_clicks_the_button]
    public void Run
    (
-      AAA_test test
+      AAA_test1 test
    )
    {
-      Log.ToStandardOutput(test.FullCharacterisation());
-
       using var given = test.Create();
 
       var when = given.Arrange();
@@ -33,7 +31,7 @@ public class WHEN_the_user_clicks_the_button : AAATestDataSource
    // Overridden AAATestDataSource Methods
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test> GetTests()
+   protected override IEnumerable<AAA_test1> GetTests()
    {
       /* ------------------------------------------------------------ */
 
@@ -42,11 +40,11 @@ public class WHEN_the_user_clicks_the_button : AAATestDataSource
                                              10)
                                       .Select(x => (uint) x))
       {
-         yield return AAA_test
-                     .GIVEN(The_UI.Has_created_the_button(Buttons.Create_enabled_and_visible))
-                     .WHEN(The_user.Clicks_the_button(number_of_clicks))
-                     .THEN(The_button.Matches(Buttons.Enabled_and_visible))
-                     .And(The_Click_callback.Was_invoked(number_of_clicks))
+         yield return AAA_test1
+                     .GIVEN(The_UI.has_created_the_button(Buttons.Create_enabled_and_visible))
+                     .WHEN(The_user.clicks_the_button(number_of_clicks))
+                     .THEN(The_button.matches(Buttons.Enabled_and_visible))
+                     .And(The_Click_callback.was_invoked(number_of_clicks))
                      .Crystallise();
       }
 

@@ -4,31 +4,44 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Tetra.Testing;
 
 public sealed class ButtonAsserts<T> : IAsserts
-   where T : IAsserts
 {
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly FakeButton _button;
+   private readonly FakeButton _actual;
    private readonly string     _descriptionHeader;
+   private readonly Func<T>    _next;
 
-   private readonly T _parent;
    /* ------------------------------------------------------------ */
-   // Constructors
+   // Private Constructors
    /* ------------------------------------------------------------ */
 
-   public ButtonAsserts
+   private ButtonAsserts
    (
+      FakeButton actual,
       string     descriptionHeader,
-      FakeButton button,
-      T          parent
+      Func<T>    next
    )
    {
-      _button            = button;
+      _actual            = actual;
       _descriptionHeader = descriptionHeader;
-      _parent            = parent;
+      _next              = next;
    }
+
+   /* ------------------------------------------------------------ */
+   // Factory Functions
+   /* ------------------------------------------------------------ */
+
+   public static ButtonAsserts<T> Create
+   (
+      string     descriptionHeader,
+      FakeButton actual,
+      Func<T>    next
+   )
+      => new(actual,
+             descriptionHeader,
+             next);
 
    /* ------------------------------------------------------------ */
    // Methods
@@ -42,7 +55,7 @@ public sealed class ButtonAsserts<T> : IAsserts
       Assert.That
             .AreEqual($"{_descriptionHeader}: IsEnabled",
                       expected,
-                      _button.IsEnabled());
+                      _actual.IsEnabled());
 
       return this;
    }
@@ -57,15 +70,15 @@ public sealed class ButtonAsserts<T> : IAsserts
       Assert.That
             .AreEqual($"{_descriptionHeader}: Visibility",
                       expected,
-                      _button.Visibility());
+                      _actual.Visibility());
 
       return this;
    }
 
    /* ------------------------------------------------------------ */
 
-   public T ReturnToParent()
-      => _parent;
+   public T Next()
+      => _next();
 
    /* ------------------------------------------------------------ */
 }

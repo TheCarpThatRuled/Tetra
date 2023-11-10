@@ -1,32 +1,29 @@
-﻿using Tetra.Testing;
-
+﻿// ReSharper disable InconsistentNaming
 namespace Check.Check_Button;
 
-public sealed class Act<T>
-   where T : IAsserts
+public static partial class Steps
 {
    /* ------------------------------------------------------------ */
-   // Private Fields
+   // Properties
    /* ------------------------------------------------------------ */
 
-   private readonly Func<T> _act;
-   /* ------------------------------------------------------------ */
-   // Internal Constructors
-   /* ------------------------------------------------------------ */
-
-   internal Act
-   (
-      Func<T> act
-   )
-      => _act = act;
+   public static TheButton The_button { get; } = new();
 
    /* ------------------------------------------------------------ */
-   // Methods
+
+   public static TheClickCallback The_Click_callback { get; } = new();
+
    /* ------------------------------------------------------------ */
 
-   // ReSharper disable once InconsistentNaming
-   public T THEN()
-      => _act();
+   public static TheSystem The_system { get; } = new();
+
+   /* ------------------------------------------------------------ */
+
+   public static TheUI The_UI { get; } = new();
+
+   /* ------------------------------------------------------------ */
+
+   public static TheUser The_user { get; } = new();
 
    /* ------------------------------------------------------------ */
 }

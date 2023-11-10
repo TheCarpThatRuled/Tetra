@@ -45,6 +45,22 @@ public sealed class ActionAsserts<TNext>
    // Methods
    /* ------------------------------------------------------------ */
 
+   public TNext WasInvoked
+   (
+      uint numberOfClicks
+   )
+   {
+      Assert
+        .That
+        .WasInvoked(_description,
+                    _actual,
+                    (int)numberOfClicks);
+
+      return _next();
+   }
+
+   /* ------------------------------------------------------------ */
+
    public TNext WasInvokedOnce()
    {
       Assert

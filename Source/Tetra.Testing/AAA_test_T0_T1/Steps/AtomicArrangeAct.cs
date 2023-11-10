@@ -59,7 +59,10 @@ partial class AAA_test<TActions, TAsserts>
       (
          TActions environment
       )
-         => _action(environment);
+      {
+         Log.TestStep(_characterisation);
+         return _action(environment);
+      }
 
       /* ------------------------------------------------------------ */
       // ICharacterised Methods
