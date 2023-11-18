@@ -3,25 +3,25 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tetra.Testing;
 
-public sealed class ButtonAsserts<T> : IAsserts
+public sealed class TextBoxAsserts<T> : IAsserts
 {
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly FakeButton _actual;
-   private readonly string     _descriptionHeader;
-   private readonly Func<T>    _next;
+   private readonly FakeTextBox _actual;
+   private readonly string      _descriptionHeader;
+   private readonly Func<T>     _next;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private ButtonAsserts
+   private TextBoxAsserts
    (
-      FakeButton actual,
-      string     descriptionHeader,
-      Func<T>    next
+      FakeTextBox actual,
+      string      descriptionHeader,
+      Func<T>     next
    )
    {
       _actual            = actual;
@@ -33,11 +33,11 @@ public sealed class ButtonAsserts<T> : IAsserts
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static ButtonAsserts<T> Create
+   public static TextBoxAsserts<T> Create
    (
-      string     descriptionHeader,
-      FakeButton actual,
-      Func<T>    next
+      string      descriptionHeader,
+      FakeTextBox actual,
+      Func<T>     next
    )
       => new(actual,
              descriptionHeader,
@@ -47,7 +47,7 @@ public sealed class ButtonAsserts<T> : IAsserts
    // Methods
    /* ------------------------------------------------------------ */
 
-   public ButtonAsserts<T> IsEnabled_is
+   public TextBoxAsserts<T> EnabledEquals
    (
       bool expected
    )
@@ -62,7 +62,22 @@ public sealed class ButtonAsserts<T> : IAsserts
 
    /* ------------------------------------------------------------ */
 
-   public ButtonAsserts<T> Visibility_is
+   public TextBoxAsserts<T> TextEquals
+   (
+      object expected
+   )
+   {
+      Assert.That
+            .AreEqual($"{_descriptionHeader}: Text",
+                      expected,
+                      _actual.Text());
+
+      return this;
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public TextBoxAsserts<T> VisibilityEquals
    (
       Visibility expected
    )

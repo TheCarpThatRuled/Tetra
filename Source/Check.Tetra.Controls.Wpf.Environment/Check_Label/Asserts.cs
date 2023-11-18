@@ -1,17 +1,16 @@
 ﻿using Tetra;
 using Tetra.Testing;
 
-namespace Check.Check_Button;
+namespace Check.Check_Label;
 
 public sealed class Asserts
 {
    /* ------------------------------------------------------------ */
-   // Fields
+   // Field
    /* ------------------------------------------------------------ */
 
-   public readonly ButtonAsserts<Asserts>                    Button;
-   public readonly TwoWayBindingAsserts<bool, Asserts>       IsEnabled;
-   public readonly ActionAsserts<Asserts>                    OnClick;
+   public readonly TwoWayBindingAsserts<object, Asserts>     Content;
+   public readonly LabelAsserts<Asserts>                     Label;
    public readonly TwoWayBindingAsserts<Visibility, Asserts> Visibility;
 
    /* ------------------------------------------------------------ */
@@ -20,21 +19,17 @@ public sealed class Asserts
 
    internal Asserts
    (
-      FakeButton button,
+      FakeLabel  label,
       FakeSystem system
    )
    {
-      Button = ButtonAsserts<Asserts>.Create("Button",
-                                             button,
-                                             () => this);
-
-      IsEnabled = TwoWayBindingAsserts<bool, Asserts>.Create("IsEnabled",
-                                                             system.IsEnabled(),
+      Content = TwoWayBindingAsserts<object, Asserts>.Create("Content",
+                                                             system.Content(),
                                                              () => this);
 
-      OnClick = ActionAsserts<Asserts>.Create("OnClick",
-                                              system.OnClick(),
-                                              () => this);
+      Label = LabelAsserts<Asserts>.Create("Label",
+                                           label,
+                                           () => this);
 
       Visibility = TwoWayBindingAsserts<Visibility, Asserts>.Create("Visibility",
                                                                     system.Visibility(),

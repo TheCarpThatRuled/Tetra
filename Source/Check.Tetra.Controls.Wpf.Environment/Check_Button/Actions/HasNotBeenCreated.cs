@@ -28,12 +28,12 @@ partial class Actions
       /* ------------------------------------------------------------ */
 
       public override TwoWayBindingActions<bool, Actions> IsEnabled
-         => throw Failed.Assert("Cannot perform an action on IsEnabled; it has not been created.");
+         => throw Failed.Assert("Cannot perform an action on IsEnabled; the button has not been created.");
 
       /* ------------------------------------------------------------ */
 
       public override TwoWayBindingActions<Visibility, Actions> Visibility
-         => throw Failed.Assert("Cannot perform an action on Visibility; it has not been created.");
+         => throw Failed.Assert("Cannot perform an action on Visibility; the button has not been created.");
 
       /* ------------------------------------------------------------ */
       // Methods
@@ -53,7 +53,6 @@ partial class Actions
                                                                     .Action)
                                                             .IsEnabled(system.IsEnabled())
                                                             .Visibility(system.Visibility())));
-
 
          return new HasBeenCreated(button,
                                    system);

@@ -2,38 +2,39 @@
 
 namespace Tetra.Testing;
 
-public sealed class FakeButton
+public sealed class FakeLabel
 {
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly FakeCommandBinding            _command;
+   private readonly FakeOneWayBinding<object>     _content;
    private readonly FakeOneWayBinding<Visibility> _visibility;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private FakeButton
+   private FakeLabel
    (
-      ButtonContext context
+      LabelContext context
    )
    {
-      _command = FakeCommandBinding.Create(context,
-                                           nameof(ButtonContext.Command),
-                                           () => context.Command);
+      _content = FakeOneWayBinding<object>.Create(context,
+                                                  nameof(LabelContext.Content),
+                                                  () => context.Content);
       _visibility = FakeOneWayBinding<Visibility>.Create(context,
-                                                         nameof(ButtonContext.Visibility),
+                                                         nameof(LabelContext.Visibility),
                                                          () => context.Visibility);
    }
+
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static FakeButton Create
+   public static FakeLabel Create
    (
-      ButtonContext context
+      LabelContext context
    )
       => new(context);
 
@@ -41,30 +42,15 @@ public sealed class FakeButton
    // Properties
    /* ------------------------------------------------------------ */
 
-   public bool IsEnabled()
-      => _command
-        .CanExecute();
+   public object Content()
+      => _content
+        .Get();
 
    /* ------------------------------------------------------------ */
 
    public Visibility Visibility()
       => _visibility
         .Get();
-
-   /* ------------------------------------------------------------ */
-   // Methods
-   /* ------------------------------------------------------------ */
-
-   public void Click
-   (
-      uint numberOfClicks = 1
-   )
-   {
-      for (var i = 0; i < numberOfClicks; ++i)
-      {
-         _command.Execute();
-      }
-   }
 
    /* ------------------------------------------------------------ */
 }

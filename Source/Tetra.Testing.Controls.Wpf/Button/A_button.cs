@@ -6,7 +6,42 @@ namespace Tetra.Testing;
 public static class A_button
 {
    /* ------------------------------------------------------------ */
+   // ArrangeAct Functions
+   /* ------------------------------------------------------------ */
+
+   public static AAA_test<TActions, TAsserts>.IArrangeAct is_Clicked<TActions, TAsserts>
+   (
+      uint                                    numberOfClicks,
+      string                                  actor,
+      string                                  buttonCharacterisation,
+      Func<TActions, ButtonActions<TActions>> getActions
+   )
+      where TActions : ITestEnvironment<TAsserts>
+      => AAA_test<TActions, TAsserts>
+        .AtomicArrangeAct
+        .Create($"{actor}_clicks_{buttonCharacterisation}{(numberOfClicks != 1 ? $": {numberOfClicks} times" : string.Empty)}",
+                actions => getActions(actions)
+                          .Click(numberOfClicks)
+                          .Next());
+
+   /* ------------------------------------------------------------ */
    // Assert Functions
+   /* ------------------------------------------------------------ */
+
+   public static AAA_test<TActions, TAsserts>.IAssert Matches<TActions, TAsserts>
+   (
+      Expected_button                         expected,
+      string                                  characterisationHeader,
+      Func<TAsserts, ButtonAsserts<TAsserts>> getAsserts
+   )
+      where TActions : ITestEnvironment<TAsserts>
+      => IsEnabled_is<TActions, TAsserts>(characterisationHeader,
+                                          expected.IsEnabled(),
+                                          getAsserts)
+        .And(Visibility_is<TActions, TAsserts>(characterisationHeader,
+                                               expected.Visibility(),
+                                               getAsserts));
+
    /* ------------------------------------------------------------ */
 
    public static AAA_test<TActions, TAsserts>.IAssert IsEnabled_is<TActions, TAsserts>
@@ -20,24 +55,8 @@ public static class A_button
         .AtomicAssert
         .Create($"{characterisationHeader}.{nameof(IsEnabled_is)}: {expected}",
                 asserts => getAsserts(asserts)
-                          .IsEnabled_is(expected)
+                          .IsEnabledEquals(expected)
                           .Next());
-
-   /* ------------------------------------------------------------ */
-
-   public static AAA_test<TActions, TAsserts>.IAssert Matches<TActions, TAsserts>
-   (
-      Expected_button                         expected,
-      string                                  characterisationHeader,
-      Func<TAsserts, ButtonAsserts<TAsserts>> getAsserts
-   )
-      where TActions : ITestEnvironment<TAsserts>
-      => IsEnabled_is<TActions,TAsserts>(characterisationHeader,
-                                         expected.IsEnabled(),
-                                         getAsserts)
-        .And(Visibility_is<TActions, TAsserts>(characterisationHeader,
-                                               expected.Visibility(),
-                                               getAsserts));
 
    /* ------------------------------------------------------------ */
 
@@ -52,7 +71,7 @@ public static class A_button
         .AtomicAssert
         .Create($"{characterisationHeader}.{nameof(Visibility_is)}: {expected}",
                 asserts => getAsserts(asserts)
-                          .Visibility_is(expected)
+                          .VisibilityEquals(expected)
                           .Next());
 
    /* ------------------------------------------------------------ */

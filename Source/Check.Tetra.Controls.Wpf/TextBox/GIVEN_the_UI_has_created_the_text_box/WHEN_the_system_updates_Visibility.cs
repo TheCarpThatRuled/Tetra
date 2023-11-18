@@ -1,12 +1,13 @@
 ﻿using Check.Check_TextBox;
 using static Check.Data;
+using static Check.Check_TextBox.Steps;
 
 // ReSharper disable InconsistentNaming
 
 namespace Check.TextBox.GIVEN_the_UI_has_created_the_text_box;
 
 [TestClass]
-public class WHEN_the_system_updates_Visibility : AAATestDataSource
+public class WHEN_the_system_updates_Visibility : AAATestDataSource1
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -16,11 +17,9 @@ public class WHEN_the_system_updates_Visibility : AAATestDataSource
    [WHEN_the_system_updates_Visibility]
    public void Run
    (
-      AAA_test test
+      AAA_test1 test
    )
    {
-      Log.ToStandardOutput(test.FullCharacterisation());
-
       using var given = test.Create();
 
       var when = given.Arrange();
@@ -34,14 +33,14 @@ public class WHEN_the_system_updates_Visibility : AAATestDataSource
    // Overridden AAATestDataSource Methods
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test> GetTests()
+   protected override IEnumerable<AAA_test1> GetTests()
    {
       /* ------------------------------------------------------------ */
 
       foreach (var (initial_Visibility, _) in Visibilities)
       foreach (var updated_Visibility in Visibilities)
       {
-         yield return AAA_test
+         yield return AAA_test1
                      .GIVEN(The_UI.Has_created_the_text_box(The_UI_creates_a_text_box
                                                            .Factory()
                                                            .Text_is_default()

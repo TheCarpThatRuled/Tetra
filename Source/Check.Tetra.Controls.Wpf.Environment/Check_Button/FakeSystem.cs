@@ -5,12 +5,11 @@ namespace Check.Check_Button;
 
 internal sealed class FakeSystem
 {
-   private readonly ITwoWayBinding<bool> _isEnabled;
-
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
+   private readonly ITwoWayBinding<bool>       _isEnabled;
    private readonly FakeAction                 _onClick = FakeAction.Create();
    private readonly ITwoWayBinding<Visibility> _visibility;
 
@@ -27,6 +26,7 @@ internal sealed class FakeSystem
       _isEnabled  = isEnabled;
       _visibility = visibility;
    }
+
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */

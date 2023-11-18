@@ -24,6 +24,7 @@ internal sealed class FakeSystem
       _content    = content;
       _visibility = visibility;
    }
+
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */

@@ -1,17 +1,17 @@
 ﻿using Tetra;
 using Tetra.Testing;
 
-namespace Check.Check_Button;
+namespace Check.Check_TextBox;
 
 public sealed class Asserts
 {
    /* ------------------------------------------------------------ */
-   // Fields
+   // Field
    /* ------------------------------------------------------------ */
 
-   public readonly ButtonAsserts<Asserts>                    Button;
    public readonly TwoWayBindingAsserts<bool, Asserts>       IsEnabled;
-   public readonly ActionAsserts<Asserts>                    OnClick;
+   public readonly TwoWayBindingAsserts<string, Asserts>     Text;
+   public readonly TextBoxAsserts<Asserts>                   TextBox;
    public readonly TwoWayBindingAsserts<Visibility, Asserts> Visibility;
 
    /* ------------------------------------------------------------ */
@@ -20,21 +20,21 @@ public sealed class Asserts
 
    internal Asserts
    (
-      FakeButton button,
-      FakeSystem system
+      FakeTextBox textBox,
+      FakeSystem  system
    )
    {
-      Button = ButtonAsserts<Asserts>.Create("Button",
-                                             button,
-                                             () => this);
-
       IsEnabled = TwoWayBindingAsserts<bool, Asserts>.Create("IsEnabled",
                                                              system.IsEnabled(),
                                                              () => this);
 
-      OnClick = ActionAsserts<Asserts>.Create("OnClick",
-                                              system.OnClick(),
-                                              () => this);
+      Text = TwoWayBindingAsserts<string, Asserts>.Create("Text",
+                                                          system.Text(),
+                                                          () => this);
+
+      TextBox = TextBoxAsserts<Asserts>.Create("TextBox",
+                                               textBox,
+                                               () => this);
 
       Visibility = TwoWayBindingAsserts<Visibility, Asserts>.Create("Visibility",
                                                                     system.Visibility(),

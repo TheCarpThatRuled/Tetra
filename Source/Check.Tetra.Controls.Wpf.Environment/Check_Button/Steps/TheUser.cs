@@ -17,12 +17,11 @@ partial class Steps
       (
          uint numberOfClicks
       )
-         => AtomicArrangeAct
-           .Create($"{nameof(The_user)}.{nameof(clicks_the_button)}{(numberOfClicks != 1 ? $": {numberOfClicks} times" : string.Empty)}",
-                   environment => environment
-                                 .Button
-                                 .Click(numberOfClicks)
-                                 .Next());
+         => A_button
+           .is_Clicked<Actions, Asserts>(numberOfClicks,
+                                         nameof(The_user),
+                                         "the_button",
+                                         actions => actions.Button);
 
       /* ------------------------------------------------------------ */
    }

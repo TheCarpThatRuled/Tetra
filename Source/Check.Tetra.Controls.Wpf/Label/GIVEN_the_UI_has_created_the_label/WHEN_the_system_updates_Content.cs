@@ -1,4 +1,5 @@
 ﻿using Check.Check_Label;
+using static Check.Check_Label.Steps;
 using static Check.Label.Contents;
 
 // ReSharper disable InconsistentNaming
@@ -6,7 +7,7 @@ using static Check.Label.Contents;
 namespace Check.Label.GIVEN_the_UI_has_created_the_label;
 
 [TestClass]
-public class WHEN_the_system_updates_Content : AAATestDataSource
+public class WHEN_the_system_updates_Content : AAATestDataSource1
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -16,11 +17,9 @@ public class WHEN_the_system_updates_Content : AAATestDataSource
    [WHEN_the_system_updates_Content]
    public void Run
    (
-      AAA_test test
+      AAA_test1 test
    )
    {
-      Log.ToStandardOutput(test.FullCharacterisation());
-
       using var given = test.Create();
 
       var when = given.Arrange();
@@ -34,14 +33,14 @@ public class WHEN_the_system_updates_Content : AAATestDataSource
    // Overridden AAATestDataSource Methods
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test> GetTests()
+   protected override IEnumerable<AAA_test1> GetTests()
    {
       /* ------------------------------------------------------------ */
 
       foreach (var initial_Content in Representative_contents)
       foreach (var updated_Content in Representative_contents)
       {
-         yield return AAA_test
+         yield return AAA_test1
                      .GIVEN(The_UI.Has_created_the_label(The_UI_creates_a_label
                                                         .Factory()
                                                         .Content_is(initial_Content)
