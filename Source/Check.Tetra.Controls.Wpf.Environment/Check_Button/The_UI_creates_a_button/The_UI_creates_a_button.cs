@@ -10,8 +10,6 @@ public sealed partial class The_UI_creates_a_button
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly string     _briefCharacterisation;
-   private readonly string     _fullCharacterisation;
    private readonly bool       _isEnabled;
    private readonly Visibility _visibility;
 
@@ -21,17 +19,14 @@ public sealed partial class The_UI_creates_a_button
 
    private The_UI_creates_a_button
    (
-      string     briefCharacterisation,
-      string     fullCharacterisation,
       bool       isEnabled,
       Visibility visibility
    )
    {
-      _briefCharacterisation = briefCharacterisation;
-      _fullCharacterisation  = fullCharacterisation;
-      _isEnabled             = isEnabled;
-      _visibility            = visibility;
+      _isEnabled  = isEnabled;
+      _visibility = visibility;
    }
+
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
@@ -41,16 +36,6 @@ public sealed partial class The_UI_creates_a_button
 
    /* ------------------------------------------------------------ */
    // Properties
-   /* ------------------------------------------------------------ */
-
-   public string BriefCharacterisation()
-      => _briefCharacterisation;
-
-   /* ------------------------------------------------------------ */
-
-   public string FullCharacterisation()
-      => _fullCharacterisation;
-
    /* ------------------------------------------------------------ */
 
    public bool IsEnabled()

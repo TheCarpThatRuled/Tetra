@@ -3,50 +3,77 @@ using Tetra.Testing;
 
 namespace Check.Check_Button;
 
-public abstract partial class Actions : ITestEnvironment<Asserts>
+public sealed partial class Actions
 {
-    /* ------------------------------------------------------------ */
-    // Internal Factory Functions
-    /* ------------------------------------------------------------ */
+   /* ------------------------------------------------------------ */
+   // Internal Factory Functions
+   /* ------------------------------------------------------------ */
 
-    internal static Actions Start
-    (
-       AAA_test1.Disposables _
-    )
-       => new HasNotBeenCreated();
+   public static Actions Start()
+      => new();
 
-    /* ------------------------------------------------------------ */
-    // ITestEnvironment<Asserts> Methods
-    /* ------------------------------------------------------------ */
+   /* ------------------------------------------------------------ */
+   // Properties
+   /* ------------------------------------------------------------ */
 
-    public abstract Asserts Asserts();
-
-    /* ------------------------------------------------------------ */
-
-    public abstract void FinishArrange();
-
-    /* ------------------------------------------------------------ */
-    // Properties
-    /* ------------------------------------------------------------ */
-
-   public abstract ButtonActions<Actions> Button { get; }
+   public ButtonActions<Actions> Button
+      => _actions
+        .Button;
 
    /* ------------------------------------------------------------ */
 
-   public abstract TwoWayBindingActions<bool, Actions> IsEnabled { get; }
+   public TwoWayBindingActions<bool, Actions> IsEnabled
+      => _actions
+        .IsEnabled;
 
    /* ------------------------------------------------------------ */
 
-   public abstract TwoWayBindingActions<Visibility, Actions> Visibility { get; }
+   public TwoWayBindingActions<Visibility, Actions> Visibility
+      => _actions
+        .Visibility;
 
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
-   public abstract Actions CreateButton
-    (
-       The_UI_creates_a_button args
-    );
+   public Asserts Asserts()
+      => _actions
+        .Asserts();
 
-    /* ------------------------------------------------------------ */
+   /* ------------------------------------------------------------ */
+
+   public Actions CreateButton
+   (
+      The_UI_creates_a_button args
+   )
+   {
+      _actions.CreateButton(args);
+
+      return this;
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public Actions FinishArrange()
+   {
+      _actions.FinishArrange();
+
+      return this;
+   }
+
+   /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private IActions _actions;
+
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
+
+   private Actions()
+      => _actions = HasNotBeenCreated.Create(this,
+                                             actions => _actions = actions);
+
+   /* ------------------------------------------------------------ */
 }

@@ -17,7 +17,7 @@ internal static class Buttons
 
    /* ------------------------------------------------------------ */
 
-   public static readonly Expected_button Enabled_and_visible = Expected_button
+   public static readonly ExpectedButton Enabled_and_visible = ExpectedButton
                                                                .Factory()
                                                                .IsEnabled_is_enabled()
                                                                .Visibility_is_visible();

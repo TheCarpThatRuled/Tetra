@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace Tetra.Testing;
 
-partial class Expected_button
+partial class ExpectedButton
 {
    public sealed class DefineVisibility
    {
@@ -23,17 +23,16 @@ partial class Expected_button
          bool isEnabled
       )
          => _isEnabled = isEnabled;
+
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public Expected_button Visibility_is
+      public ExpectedButton Visibility_is
       (
          Visibility visibility
       )
-         => new($"({_isEnabled}, {visibility})",
-                $"{{{Environment.NewLine}IsEnabled: {_isEnabled}{Environment.NewLine}Visibility: {visibility}{Environment.NewLine}}}",
-                _isEnabled,
+         => new(_isEnabled,
                 visibility);
 
       /* ------------------------------------------------------------ */

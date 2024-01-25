@@ -15,10 +15,10 @@ public sealed class Asserts
    public readonly TwoWayBindingAsserts<Visibility, Asserts> Visibility;
 
    /* ------------------------------------------------------------ */
-   // Internal Constructors
+   // Private Constructors
    /* ------------------------------------------------------------ */
 
-   internal Asserts
+   private Asserts
    (
       FakeButton button,
       FakeSystem system
@@ -39,6 +39,26 @@ public sealed class Asserts
       Visibility = TwoWayBindingAsserts<Visibility, Asserts>.Create("Visibility",
                                                                     system.Visibility(),
                                                                     () => this);
+   }
+
+   /* ------------------------------------------------------------ */
+   // Internal Constructors
+   /* ------------------------------------------------------------ */
+
+   internal static Asserts Create
+   (
+      bool       finalised,
+      FakeButton button,
+      FakeSystem system
+   )
+   {
+      if (!finalised)
+      {
+         throw Failed.InTestSetup("The test environment was not finalised before the asserts were accessed");
+      }
+
+      return new(button,
+                 system);
    }
 
    /* ------------------------------------------------------------ */

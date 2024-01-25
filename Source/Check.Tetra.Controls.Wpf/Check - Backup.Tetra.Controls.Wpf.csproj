@@ -36,8 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Button\GIVEN_the_UI_has_created_the_button\" />
-    <Folder Include="Button\GIVEN_the_button_is_enabled_and_visible\" />
+    <Folder Include="Button\Specflow\GIVEN_the_UI_has_created_the_button\" />
   </ItemGroup>
 
 </Project>

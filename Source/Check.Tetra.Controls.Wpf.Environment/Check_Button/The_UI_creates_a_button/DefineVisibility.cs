@@ -23,6 +23,7 @@ partial class The_UI_creates_a_button
          bool isEnabled
       )
          => _isEnabled = isEnabled;
+
       /* ------------------------------------------------------------ */
       // Factory Functions
       /* ------------------------------------------------------------ */
@@ -31,9 +32,7 @@ partial class The_UI_creates_a_button
       (
          Visibility visibility
       )
-         => new($"({_isEnabled}, {visibility})",
-                $"{{{Environment.NewLine}IsEnabled: {_isEnabled}{Environment.NewLine}Visibility: {visibility}{Environment.NewLine}}}",
-                _isEnabled,
+         => new(_isEnabled,
                 visibility);
 
       /* ------------------------------------------------------------ */
