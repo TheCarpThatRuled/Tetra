@@ -1,51 +1,51 @@
-﻿namespace Tetra.Testing;
+﻿// ReSharper disable InconsistentNaming
 
-// ReSharper disable once InconsistentNaming
+namespace Tetra.Testing;
+
 partial class AAA_property_test<TParameters>
 {
-   public sealed class Disposables
+   public sealed class DefineInitialGiven
    {
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly List<IDisposable> _disposables = new();
+      private readonly Type _library;
 
       /* ------------------------------------------------------------ */
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private Disposables() { }
+      private DefineInitialGiven
+      (
+         Type library
+      )
+         => _library = library;
 
       /* ------------------------------------------------------------ */
       // Internal Factory Functions
       /* ------------------------------------------------------------ */
 
-      internal static Disposables Create()
-         => new();
+      internal static DefineInitialGiven Create
+      (
+         Type library
+      )
+         => new(library);
 
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public void Register
+      public AAA_property_test<TParameters, TActions, TAsserts>.DefineGiven GIVEN<TActions, TAsserts>
       (
-         IDisposable disposable
+         AAA_property_test<TParameters, TActions, TAsserts>.IInitialAction given
       )
-         => _disposables
-           .Add(disposable);
-
-      /* ------------------------------------------------------------ */
-      // Internal Methods
-      /* ------------------------------------------------------------ */
-
-      internal void Dispose()
-      {
-         foreach (var disposable in _disposables)
-         {
-            disposable.Dispose();
-         }
-      }
+         where TActions : TestEnvironment<TActions, TAsserts>
+         where TAsserts : IPropertyAsserts
+         => AAA_property_test<TParameters, TActions, TAsserts>
+           .DefineGiven
+           .Create(_library,
+                   given);
 
       /* ------------------------------------------------------------ */
    }

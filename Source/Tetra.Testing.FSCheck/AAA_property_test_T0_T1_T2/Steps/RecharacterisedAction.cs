@@ -1,51 +1,59 @@
 ﻿namespace Tetra.Testing;
 
 // ReSharper disable once InconsistentNaming
-partial class AAA_property_test<TParameters>
+partial class AAA_property_test<TParameters, TActions, TAsserts>
 {
-   public sealed class Disposables
+   public sealed class RecharacterisedAction : IAction
    {
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly List<IDisposable> _disposables = new();
+      private readonly IAction _action;
+      private readonly string   _characterisation;
 
       /* ------------------------------------------------------------ */
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private Disposables() { }
-
-      /* ------------------------------------------------------------ */
-      // Internal Factory Functions
-      /* ------------------------------------------------------------ */
-
-      internal static Disposables Create()
-         => new();
-
-      /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public void Register
+      private RecharacterisedAction
       (
-         IDisposable disposable
+         IAction action,
+         string   characterisation
       )
-         => _disposables
-           .Add(disposable);
-
-      /* ------------------------------------------------------------ */
-      // Internal Methods
-      /* ------------------------------------------------------------ */
-
-      internal void Dispose()
       {
-         foreach (var disposable in _disposables)
-         {
-            disposable.Dispose();
-         }
+         _action          = action;
+         _characterisation = characterisation;
       }
+
+      /* ------------------------------------------------------------ */
+      // Factory Functions
+      /* ------------------------------------------------------------ */
+
+      public static RecharacterisedAction Create
+      (
+         string   characterisation,
+         IAction action
+      )
+         => new(action,
+                characterisation);
+
+      /* ------------------------------------------------------------ */
+      // IAction Methods
+      /* ------------------------------------------------------------ */
+
+      public TActions Run
+      (
+         TActions environment
+      )
+         => _action.Run(environment);
+
+      /* ------------------------------------------------------------ */
+      // ICharacterised Methods
+      /* ------------------------------------------------------------ */
+
+      public string Characterisation()
+         => _characterisation;
 
       /* ------------------------------------------------------------ */
    }

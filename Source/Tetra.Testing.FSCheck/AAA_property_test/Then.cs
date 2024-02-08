@@ -3,7 +3,7 @@
 namespace Tetra.Testing;
 
 // ReSharper disable once InconsistentNaming
-partial class AAA_property_test<TState>
+partial class AAA_property_test<TParameters>
 {
    public sealed class Then
    {
@@ -22,6 +22,7 @@ partial class AAA_property_test<TState>
          Func<Property> assert
       )
          => _assert = assert;
+
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */

@@ -9,11 +9,11 @@ using static Tetra.Testing.Properties;
 namespace Check.GIVEN_a_directory_exists;
 
 [TestClass]
-public class WHEN_the_client_creates_a_different_directory
+public class WHEN_the_client_creates_a_different_directory : AAAPropertyTestDataSourceAttribute<string>
 {
    /* ------------------------------------------------------------ */
 
-   [TestMethod]
+      [TestMethod]
    public void THEN_a_none_is_returned_AND_the_directory_and_all_its_parents_exist()
    {
       static Property Property
@@ -44,6 +44,42 @@ public class WHEN_the_client_creates_a_different_directory
 
       Prop.ForAll<(AbsoluteDirectoryPath, AbsoluteDirectoryPath, AbsoluteDirectoryPath)>(Property)
           .QuickCheckThrowOnFailure();
+   }
+
+   /* ------------------------------------------------------------ */
+   // Test
+   /* ------------------------------------------------------------ */
+
+   [TestMethod]
+   [WHEN_the_client_creates_a_different_directory]
+   public void Run
+   (
+      AAA_property_test<string> test
+   )
+      => Property_test<string>
+        .Register(test.Library)
+        .Run(parameters =>
+         {
+            using var given = test.Create(parameters);
+
+            var when = given.Arrange();
+
+            var then = when.Act();
+
+            return then.Assert();
+         });
+
+   /* ------------------------------------------------------------ */
+   // Protected Overridden AAAPropertyTestDataSourceAttribute<string> Methods
+   /* ------------------------------------------------------------ */
+
+   protected override IEnumerable<AAA_property_test<string>> GetTests()
+   {
+      /* ------------------------------------------------------------ */
+
+      yield break;
+
+      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */

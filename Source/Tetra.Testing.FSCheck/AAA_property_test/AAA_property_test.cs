@@ -3,15 +3,20 @@
 namespace Tetra.Testing;
 
 // ReSharper disable InconsistentNaming
-public sealed partial class AAA_property_test<TState> : ICharacterisable
+public sealed partial class AAA_property_test<TParameters> : ICharacterised
 {
+   /* ------------------------------------------------------------ */
+   // Fields
+   /* ------------------------------------------------------------ */
+
+   public readonly Type Library;
+
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly string                                          _briefCharacterisation;
-   private readonly string                                          _fullCharacterisation;
-   private readonly Func<Disposables, TState, Func<Func<Property>>> _test;
+   private readonly string                                               _characterisation;
+   private readonly Func<TParameters, Disposables, Func<Func<Property>>> _test;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
@@ -19,58 +24,54 @@ public sealed partial class AAA_property_test<TState> : ICharacterisable
 
    private AAA_property_test
    (
-      string                                          briefCharacterisation,
-      string                                          fullCharacterisation,
-      Func<Disposables, TState, Func<Func<Property>>> test
+      string                                               characterisation,
+      Type                                                 library,
+      Func<TParameters, Disposables, Func<Func<Property>>> test
    )
    {
-      _briefCharacterisation = briefCharacterisation;
-      _fullCharacterisation  = fullCharacterisation;
-      _test                  = test;
+      _characterisation = characterisation;
+      Library           = library;
+      _test             = test;
    }
 
-   /* ------------------------------------------------------------ */
-   // ICharacterisable Methods
-   /* ------------------------------------------------------------ */
-
-   public string BriefCharacterisation()
-      => _briefCharacterisation;
-
-   /* ------------------------------------------------------------ */
-
-   public string FullCharacterisation()
-      => _fullCharacterisation;
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static DefineGiven<TGiven> GIVEN<TGiven>
+   public static DefineInitialGiven LIBRARY<TLibrary>()
+      => DefineInitialGiven.Create(typeof(TLibrary));
+
+   /* ------------------------------------------------------------ */
+   // Internal Factory Functions
+   /* ------------------------------------------------------------ */
+
+   internal static AAA_property_test<TParameters> Create
    (
-      IArrange<TGiven> given
+      string                                               characterisation,
+      Type                                                 library,
+      Func<TParameters, Disposables, Func<Func<Property>>> test
    )
-      where TGiven : IArranges
-      => DefineGiven<TGiven>
-        .Create(given);
+      => new(characterisation,
+             library,
+             test);
+
+   /* ------------------------------------------------------------ */
+   // ICharacterised Methods
+   /* ------------------------------------------------------------ */
+
+   public string Characterisation()
+      => _characterisation;
 
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
-   public Given Create()
-      => new(_test);
-
-   /* ------------------------------------------------------------ */
-   // Private Factory Functions
-   /* ------------------------------------------------------------ */
-
-   private static AAA_property_test<TState> Create
+   public Given Create
    (
-      Func<Disposables, TState, Func<Func<Property>>> test,
-      Characteriser                                   characteriser
+      TParameters parameters
    )
-      => new(characteriser.GenerateBriefCharacterisation(),
-             characteriser.GenerateFullCharacterisation(),
-             test);
+      => new(parameters,
+             _test);
 
    /* ------------------------------------------------------------ */
 }

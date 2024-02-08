@@ -3,8 +3,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tetra.Testing;
 
-public abstract class AAAPropertyTestDataSourceAttribute<TState> : Attribute,
-                                                                   ITestDataSource
+public abstract class AAAPropertyTestDataSourceAttribute<TParameters> : Attribute,
+                                                                        ITestDataSource
 {
    /* ------------------------------------------------------------ */
    // Private Fields
@@ -18,7 +18,10 @@ public abstract class AAAPropertyTestDataSourceAttribute<TState> : Attribute,
 
    protected AAAPropertyTestDataSourceAttribute()
       => _tests = new(() => GetTests()
-                           .Select(test => new[] {test,})
+                           .Select(test => new[]
+                            {
+                               test,
+                            })
                            .Materialise());
 
    /* ------------------------------------------------------------ */
@@ -39,14 +42,14 @@ public abstract class AAAPropertyTestDataSourceAttribute<TState> : Attribute,
       MethodInfo _,
       object?[]? data
    )
-      => (data!.First() as AAA_test)
+      => (data!.First() as AAA_property_test<TParameters>)
        ?.Characterisation();
 
    /* ------------------------------------------------------------ */
    // Protected Methods
    /* ------------------------------------------------------------ */
 
-   protected abstract IEnumerable<AAA_property_test<TState>> GetTests();
+   protected abstract IEnumerable<AAA_property_test<TParameters>> GetTests();
 
    /* ------------------------------------------------------------ */
 }

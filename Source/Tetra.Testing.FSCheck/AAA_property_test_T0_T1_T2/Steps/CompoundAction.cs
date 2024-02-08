@@ -1,51 +1,61 @@
 ﻿namespace Tetra.Testing;
 
 // ReSharper disable once InconsistentNaming
-partial class AAA_property_test<TParameters>
+partial class AAA_property_test<TParameters, TActions, TAsserts>
 {
-   public sealed class Disposables
+   public sealed class CompoundAction : IAction
    {
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly List<IDisposable> _disposables = new();
+      private readonly IAction _first;
+      private readonly IAction _second;
 
       /* ------------------------------------------------------------ */
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private Disposables() { }
-
-      /* ------------------------------------------------------------ */
-      // Internal Factory Functions
-      /* ------------------------------------------------------------ */
-
-      internal static Disposables Create()
-         => new();
-
-      /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public void Register
+      private CompoundAction
       (
-         IDisposable disposable
+         IAction first,
+         IAction second
       )
-         => _disposables
-           .Add(disposable);
-
-      /* ------------------------------------------------------------ */
-      // Internal Methods
-      /* ------------------------------------------------------------ */
-
-      internal void Dispose()
       {
-         foreach (var disposable in _disposables)
-         {
-            disposable.Dispose();
-         }
+         _first  = first;
+         _second = second;
       }
+
+      /* ------------------------------------------------------------ */
+      // Factory Functions
+      /* ------------------------------------------------------------ */
+
+      public static CompoundAction Create
+      (
+         IAction first,
+         IAction second
+      )
+         => new(first,
+                second);
+
+      /* ------------------------------------------------------------ */
+      // IAction Methods
+      /* ------------------------------------------------------------ */
+
+      public TActions Run
+      (
+         TActions environment
+      )
+         => _second
+           .Run(_first.Run(environment));
+
+      /* ------------------------------------------------------------ */
+      // ICharacterised Methods
+      /* ------------------------------------------------------------ */
+
+      public string Characterisation()
+         => And(_first.Characterisation(),
+                _second.Characterisation());
 
       /* ------------------------------------------------------------ */
    }

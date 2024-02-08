@@ -1,51 +1,54 @@
 ﻿namespace Tetra.Testing;
 
 // ReSharper disable once InconsistentNaming
-partial class AAA_property_test<TParameters>
+partial class AAA_property_test<TParameters, TActions, TAsserts>
 {
-   public sealed class Disposables
+   public sealed class SilentInitialAction : IInitialAction
    {
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly List<IDisposable> _disposables = new();
+      private readonly IInitialAction _action;
 
       /* ------------------------------------------------------------ */
       // Private Constructors
       /* ------------------------------------------------------------ */
 
-      private Disposables() { }
-
-      /* ------------------------------------------------------------ */
-      // Internal Factory Functions
-      /* ------------------------------------------------------------ */
-
-      internal static Disposables Create()
-         => new();
-
-      /* ------------------------------------------------------------ */
-      // Methods
-      /* ------------------------------------------------------------ */
-
-      public void Register
+      private SilentInitialAction
       (
-         IDisposable disposable
+         IInitialAction action
       )
-         => _disposables
-           .Add(disposable);
+         => _action = action;
 
       /* ------------------------------------------------------------ */
-      // Internal Methods
+      // Factory Functions
       /* ------------------------------------------------------------ */
 
-      internal void Dispose()
-      {
-         foreach (var disposable in _disposables)
-         {
-            disposable.Dispose();
-         }
-      }
+      public static SilentInitialAction Create
+      (
+         IInitialAction action
+      )
+         => new(action);
+
+      /* ------------------------------------------------------------ */
+      // IInitialAction Methods
+      /* ------------------------------------------------------------ */
+
+      public TActions Run
+      (
+         TParameters                                parameters,
+         AAA_property_test<TParameters>.Disposables disposables
+      )
+         => _action.Run(parameters,
+                        disposables);
+
+      /* ------------------------------------------------------------ */
+      // ICharacterised Methods
+      /* ------------------------------------------------------------ */
+
+      public string Characterisation()
+         => string.Empty;
 
       /* ------------------------------------------------------------ */
    }

@@ -3,11 +3,10 @@
 namespace Tetra.Testing;
 
 // ReSharper disable once InconsistentNaming
-partial class AAA_property_test<TState>
+partial class AAA_property_test<TParameters>
 {
    public sealed class Given : IDisposable
    {
-      private readonly Func<Disposables, TState, Func<Func<Property>>> _arrange;
 
       /* ------------------------------------------------------------ */
       // Private Fields
@@ -15,15 +14,23 @@ partial class AAA_property_test<TState>
 
       private readonly Disposables _disposables = Disposables.Create();
 
+      private readonly Func<TParameters, Disposables, Func<Func<Property>>> _arrange;
+      private readonly TParameters                                          _parameters;
+
       /* ------------------------------------------------------------ */
       // Internal Constructors
       /* ------------------------------------------------------------ */
 
       internal Given
       (
-         Func<Disposables, TState, Func<Func<Property>>> arrange
+         TParameters                                          parameters,
+         Func<TParameters, Disposables, Func<Func<Property>>> arrange
       )
-         => _arrange = arrange;
+      {
+         _arrange    = arrange;
+         _parameters = parameters;
+      }
+
       /* ------------------------------------------------------------ */
       // IDisposable Methods
       /* ------------------------------------------------------------ */
@@ -36,12 +43,9 @@ partial class AAA_property_test<TState>
       // Methods
       /* ------------------------------------------------------------ */
 
-      public When Arrange
-      (
-         TState state
-      )
-         => new(_arrange(_disposables,
-                         state));
+      public When Arrange()
+         => new(_arrange(_parameters,
+                         _disposables));
 
       /* ------------------------------------------------------------ */
    }
