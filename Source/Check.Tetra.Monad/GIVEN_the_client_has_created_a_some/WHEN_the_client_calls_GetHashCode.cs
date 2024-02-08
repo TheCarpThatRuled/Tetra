@@ -8,7 +8,7 @@ namespace Check.GIVEN_the_client_has_created_a_some;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_GetHashCode : AAATestDataSource1
+public class WHEN_the_client_calls_GetHashCode : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -18,7 +18,7 @@ public class WHEN_the_client_calls_GetHashCode : AAATestDataSource1
    [WHEN_the_client_calls_GetHashCode]
    public void Run
    (
-      AAA_test1 test
+      AAA_test test
    )
    {
       using var given = test.Create();
@@ -31,11 +31,11 @@ public class WHEN_the_client_calls_GetHashCode : AAATestDataSource1
    // Test
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test1> GetTests()
+   protected override IEnumerable<AAA_test> GetTests()
    {
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test1
+      yield return AAA_test
                   .GIVEN(the_Client.has_created_a_some_from(default!))
                   .WHEN(the_Client.calls_GetHashCode())
                   .THEN(the_return_value.is_equal_to(0))
@@ -47,7 +47,7 @@ public class WHEN_the_client_calls_GetHashCode : AAATestDataSource1
       {
          /* ------------------------------------------------------------ */
 
-         yield return AAA_test1
+         yield return AAA_test
                      .GIVEN(the_Client.has_created_a_some_from(content))
                      .WHEN(the_Client.calls_GetHashCode())
                      .THEN(the_return_value.is_equal_to(content.GetHashCode()))

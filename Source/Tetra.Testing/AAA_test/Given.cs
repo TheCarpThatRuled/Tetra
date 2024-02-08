@@ -5,13 +5,13 @@ partial class AAA_test
 {
    public sealed class Given : IDisposable
    {
-      private readonly Func<Disposables, Func<Action>> _arrange;
-
       /* ------------------------------------------------------------ */
       // Private Fields
       /* ------------------------------------------------------------ */
 
       private readonly Disposables _disposables = Disposables.Create();
+
+      private readonly Func<Disposables, Func<Action>> _arrange;
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
@@ -22,6 +22,7 @@ partial class AAA_test
          Func<Disposables, Func<Action>> arrange
       )
          => _arrange = arrange;
+
       /* ------------------------------------------------------------ */
       // IDisposable Methods
       /* ------------------------------------------------------------ */
@@ -35,7 +36,10 @@ partial class AAA_test
       /* ------------------------------------------------------------ */
 
       public When Arrange()
-         => new(_arrange(_disposables));
+      {
+         Log.Given();
+         return new(_arrange(_disposables));
+      }
 
       /* ------------------------------------------------------------ */
    }

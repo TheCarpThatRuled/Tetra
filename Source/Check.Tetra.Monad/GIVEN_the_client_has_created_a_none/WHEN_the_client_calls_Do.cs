@@ -8,7 +8,7 @@ namespace Check.GIVEN_the_client_has_created_a_none;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_Do : AAATestDataSource1
+public class WHEN_the_client_calls_Do : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -18,7 +18,7 @@ public class WHEN_the_client_calls_Do : AAATestDataSource1
    [WHEN_the_client_calls_Do]
    public void Run
    (
-      AAA_test1 test
+      AAA_test test
    )
    {
       using var given = test.Create();
@@ -31,11 +31,11 @@ public class WHEN_the_client_calls_Do : AAATestDataSource1
    // Test
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test1> GetTests()
+   protected override IEnumerable<AAA_test> GetTests()
    {
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test1
+      yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
                   .WHEN(the_Client.calls_Do())
                   .THEN(the_whenNone.for_Do.was_invoked_once())
@@ -47,7 +47,7 @@ public class WHEN_the_client_calls_Do : AAATestDataSource1
 
       var externalState = FakeExternalState.Create();
 
-      yield return AAA_test1
+      yield return AAA_test
                   .GIVEN(the_Client.has_created_a_none())
                   .WHEN(the_Client.calls_Do_with(externalState))
                   .THEN(the_whenNone.for_Do_with_externalState.was_invoked_once_with(externalState))

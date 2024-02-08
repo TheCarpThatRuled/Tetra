@@ -9,7 +9,7 @@ internal class SetTheCurrentDirectory : IDisposable
    private readonly string _directory;
 
    /* ------------------------------------------------------------ */
-   // Private Fields
+   // Private Constructors
    /* ------------------------------------------------------------ */
 
    private SetTheCurrentDirectory
@@ -19,13 +19,6 @@ internal class SetTheCurrentDirectory : IDisposable
       => _directory = directory;
 
    /* ------------------------------------------------------------ */
-   // IDisposable Methods
-   /* ------------------------------------------------------------ */
-
-   public void Dispose()
-      => ExternalFileSystem
-        .SetCurrentDirectory(_directory);
-   /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
@@ -34,6 +27,14 @@ internal class SetTheCurrentDirectory : IDisposable
       string directory
    )
       => new(directory);
+
+   /* ------------------------------------------------------------ */
+   // IDisposable Methods
+   /* ------------------------------------------------------------ */
+
+   public void Dispose()
+      => ExternalFileSystem
+        .SetCurrentDirectory(_directory);
 
    /* ------------------------------------------------------------ */
 }

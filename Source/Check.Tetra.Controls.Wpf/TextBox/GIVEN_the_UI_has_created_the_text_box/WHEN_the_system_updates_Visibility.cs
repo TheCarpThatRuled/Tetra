@@ -7,7 +7,7 @@ using static Check.Check_Text_Box.Steps;
 namespace Check.TextBox.GIVEN_the_UI_has_created_the_text_box;
 
 [TestClass]
-public class WHEN_the_system_updates_Visibility : AAATestDataSource1
+public class WHEN_the_system_updates_Visibility : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -17,7 +17,7 @@ public class WHEN_the_system_updates_Visibility : AAATestDataSource1
    [WHEN_the_system_updates_Visibility]
    public void Run
    (
-      AAA_test1 test
+      AAA_test test
    )
    {
       using var given = test.Create();
@@ -33,14 +33,14 @@ public class WHEN_the_system_updates_Visibility : AAATestDataSource1
    // Overridden AAATestDataSource Methods
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test1> GetTests()
+   protected override IEnumerable<AAA_test> GetTests()
    {
       /* ------------------------------------------------------------ */
 
       foreach (var (initial_Visibility, _) in Visibilities)
       foreach (var updated_Visibility in Visibilities)
       {
-         yield return AAA_test1
+         yield return AAA_test
                      .GIVEN(The_UI.Has_created_the_text_box(The_UI_creates_a_text_box
                                                            .Factory()
                                                            .Text_is_default()

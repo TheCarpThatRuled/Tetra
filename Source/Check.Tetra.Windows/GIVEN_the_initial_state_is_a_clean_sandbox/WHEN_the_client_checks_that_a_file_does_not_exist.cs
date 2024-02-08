@@ -2,6 +2,7 @@
 
 using static Check.Constants;
 using static Check.Data;
+using static Check.Steps;
 
 namespace Check.GIVEN_the_initial_state_is_a_clean_sandbox;
 
@@ -19,7 +20,7 @@ public class WHEN_the_client_checks_that_a_file_does_not_exist : AAATestDataSour
       AAA_test test
    )
    {
-      Log.ToStandardOutput(test.FullCharacterisation());
+      Log.ToStandardOutput(test.Characterisation());
 
       using var given = test.Create();
 
@@ -43,9 +44,9 @@ public class WHEN_the_client_checks_that_a_file_does_not_exist : AAATestDataSour
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
-                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
-                  .WHEN(The_client.Checks_that_a_file_does_not_exist(file))
-                  .THEN(The_return_value.Is(true))
+                  .GIVEN(the_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
+                  .WHEN(the_client.Checks_that_a_file_does_not_exist(file))
+                  .THEN(the_return_value.Is(true))
                   .Crystallise();
 
       /* ------------------------------------------------------------ */
@@ -56,28 +57,28 @@ public class WHEN_the_client_checks_that_a_file_does_not_exist : AAATestDataSour
 
 
          yield return AAA_test
-                     .GIVEN(The_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
-                     .And(A_file.Exists(existing_path))
-                     .WHEN(The_client.Checks_that_a_file_does_not_exist(file))
-                     .THEN(The_return_value.Is(false))
+                     .GIVEN(the_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
+                     .And(a_file.Exists(existing_path))
+                     .WHEN(the_client.Checks_that_a_file_does_not_exist(file))
+                     .THEN(the_return_value.Is(false))
                      .Crystallise();
 
          /* ------------------------------------------------------------ */
 
          yield return AAA_test
-                     .GIVEN(The_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
-                     .And(A_file.Exists_and_is_locked(existing_path))
-                     .WHEN(The_client.Checks_that_a_file_does_not_exist(file))
-                     .THEN(The_return_value.Is(false))
+                     .GIVEN(the_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
+                     .And(a_file.Exists_and_is_locked(existing_path))
+                     .WHEN(the_client.Checks_that_a_file_does_not_exist(file))
+                     .THEN(the_return_value.Is(false))
                      .Crystallise();
 
          /* ------------------------------------------------------------ */
 
          yield return AAA_test
-                     .GIVEN(The_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
-                     .And(A_directory.Exists(existing_path))
-                     .WHEN(The_client.Checks_that_a_file_does_not_exist(file))
-                     .THEN(The_return_value.Is(true))
+                     .GIVEN(the_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
+                     .And(a_directory.Exists(existing_path))
+                     .WHEN(the_client.Checks_that_a_file_does_not_exist(file))
+                     .THEN(the_return_value.Is(true))
                      .Crystallise();
 
          /* ------------------------------------------------------------ */

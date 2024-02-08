@@ -44,7 +44,7 @@ partial class AAA_test<TActions, TAsserts>
 
       public TActions Run
       (
-         AAA_test1.Disposables disposables
+         AAA_test.Disposables disposables
       )
          => _second
            .Run(_first.Run(disposables));

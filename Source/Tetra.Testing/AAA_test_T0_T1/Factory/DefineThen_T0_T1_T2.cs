@@ -44,8 +44,8 @@ partial class AAA_test<TActions, TAsserts>
 
       /* ------------------------------------------------------------ */
 
-      public AAA_test1 Crystallise()
-         => AAA_test1
+      public AAA_test Crystallise()
+         => AAA_test
            .Create($"GIVEN {_given.Characterisation()} WHEN {_when.Characterisation()} THEN {_then.Characterisation()}",
                    disposables =>
                    {

@@ -1,6 +1,7 @@
 // ReSharper disable InconsistentNaming
 
 using static Check.Constants;
+using static Check.Steps;
 
 namespace Check.GIVEN_the_initial_state_is_a_clean_sandbox;
 
@@ -18,7 +19,7 @@ public class WHEN_the_client_gets_the_current_directory : AAATestDataSource
       AAA_test test
    )
    {
-      Log.ToStandardOutput(test.FullCharacterisation());
+      Log.ToStandardOutput(test.Characterisation());
 
       using var given = test.Create();
 
@@ -38,9 +39,9 @@ public class WHEN_the_client_gets_the_current_directory : AAATestDataSource
       /* ------------------------------------------------------------ */
 
       yield return AAA_test
-                  .GIVEN(The_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
-                  .WHEN(The_client.Gets_the_current_directory())
-                  .THEN(The_return_value.Is(Path_to_the_test_sandbox))
+                  .GIVEN(the_initial_state.Is_a_clean_sandbox(Path_to_the_test_sandbox.Value()))
+                  .WHEN(the_client.Gets_the_current_directory())
+                  .THEN(the_return_value.Is(Path_to_the_test_sandbox))
                   .Crystallise();
 
 

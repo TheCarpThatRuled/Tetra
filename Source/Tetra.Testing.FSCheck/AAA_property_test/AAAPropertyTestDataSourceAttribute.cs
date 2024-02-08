@@ -20,6 +20,7 @@ public abstract class AAAPropertyTestDataSourceAttribute<TState> : Attribute,
       => _tests = new(() => GetTests()
                            .Select(test => new[] {test,})
                            .Materialise());
+
    /* ------------------------------------------------------------ */
    // ITestDataSource Methods
    /* ------------------------------------------------------------ */
@@ -39,7 +40,7 @@ public abstract class AAAPropertyTestDataSourceAttribute<TState> : Attribute,
       object?[]? data
    )
       => (data!.First() as AAA_test)
-       ?.BriefCharacterisation();
+       ?.Characterisation();
 
    /* ------------------------------------------------------------ */
    // Protected Methods

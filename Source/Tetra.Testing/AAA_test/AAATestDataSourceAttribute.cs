@@ -10,7 +10,7 @@ public abstract class AAATestDataSource : Attribute,
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly Lazy<ISequence<object?[]>> _tests;
+   private readonly Lazy<IReadOnlyList<object?[]>> _tests;
 
    /* ------------------------------------------------------------ */
    // Protected Constructors
@@ -18,8 +18,12 @@ public abstract class AAATestDataSource : Attribute,
 
    protected AAATestDataSource()
       => _tests = new(() => GetTests()
-                           .Select(test => new[] {test,})
-                           .Materialise());
+                           .Select(test => new[]
+                            {
+                               test,
+                            })
+                           .ToList());
+
    /* ------------------------------------------------------------ */
    // ITestDataSource Methods
    /* ------------------------------------------------------------ */
@@ -39,7 +43,7 @@ public abstract class AAATestDataSource : Attribute,
       object?[]? data
    )
       => (data!.First() as AAA_test)
-       ?.BriefCharacterisation();
+       ?.Characterisation();
 
    /* ------------------------------------------------------------ */
    // Protected Methods

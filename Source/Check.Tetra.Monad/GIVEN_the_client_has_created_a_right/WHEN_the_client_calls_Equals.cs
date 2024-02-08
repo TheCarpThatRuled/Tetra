@@ -9,7 +9,7 @@ namespace Check.GIVEN_the_client_has_created_a_right;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_Equals : AAATestDataSource1
+public class WHEN_the_client_calls_Equals : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -19,7 +19,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource1
    [WHEN_the_client_calls_Equals]
    public void Run
    (
-      AAA_test1 test
+      AAA_test test
    )
    {
       using var given = test.Create();
@@ -32,7 +32,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource1
    // Test
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test1> GetTests()
+   protected override IEnumerable<AAA_test> GetTests()
    {
       /* ------------------------------------------------------------ */
 
@@ -54,7 +54,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource1
       {
          /* ------------------------------------------------------------ */
 
-         yield return AAA_test1
+         yield return AAA_test
                      .GIVEN(the_Client.has_created_a_right_from(content))
                      .WHEN(the_Client.calls_Equals_with(notEquals))
                      .THEN(the_return_value.is_false())
@@ -73,7 +73,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource1
       {
          /* ------------------------------------------------------------ */
 
-         yield return AAA_test1
+         yield return AAA_test
                      .GIVEN(the_Client.has_created_a_right_from(content))
                      .WHEN(the_Client.calls_Equals_with(equals))
                      .THEN(the_return_value.is_true())
@@ -84,7 +84,7 @@ public class WHEN_the_client_calls_Equals : AAATestDataSource1
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test1
+      yield return AAA_test
                   .GIVEN(the_Client.has_created_a_right_from(content))
                   .WHEN(the_Client.calls_Equals_with_self())
                   .THEN(the_return_value.is_true())

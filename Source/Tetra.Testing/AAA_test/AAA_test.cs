@@ -1,14 +1,14 @@
-﻿namespace Tetra.Testing;
+﻿// ReSharper disable InconsistentNaming
 
-// ReSharper disable InconsistentNaming
-public sealed partial class AAA_test : ICharacterisable
+namespace Tetra.Testing;
+
+public partial class AAA_test : ICharacterised
 {
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly string                          _briefCharacterisation;
-   private readonly string                          _fullCharacterisation;
+   private readonly string                          _characterisation;
    private readonly Func<Disposables, Func<Action>> _test;
 
    /* ------------------------------------------------------------ */
@@ -17,39 +17,45 @@ public sealed partial class AAA_test : ICharacterisable
 
    private AAA_test
    (
-      string                          briefCharacterisation,
-      string                          fullCharacterisation,
+      string                          characterisation,
       Func<Disposables, Func<Action>> test
    )
    {
-      _briefCharacterisation = briefCharacterisation;
-      _fullCharacterisation  = fullCharacterisation;
-      _test                  = test;
+      _characterisation = characterisation;
+      _test             = test;
    }
-
-   /* ------------------------------------------------------------ */
-   // ICharacterisable Methods
-   /* ------------------------------------------------------------ */
-
-   public string BriefCharacterisation()
-      => _briefCharacterisation;
-
-   /* ------------------------------------------------------------ */
-
-   public string FullCharacterisation()
-      => _fullCharacterisation;
 
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static DefineGiven<TGiven> GIVEN<TGiven>
+   public static AAA_test<TActions, TAsserts>.DefineGiven GIVEN<TActions, TAsserts>
    (
-      IArrange<TGiven> given
+      AAA_test<TActions, TAsserts>.IInitialAction given
    )
-      where TGiven : IArranges
-      => DefineGiven<TGiven>
+      where TActions : TestEnvironment<TActions, TAsserts>
+      => AAA_test<TActions, TAsserts>
+        .DefineGiven
         .Create(given);
+
+   /* ------------------------------------------------------------ */
+   // Internal Factory Functions
+   /* ------------------------------------------------------------ */
+
+   internal static AAA_test Create
+   (
+      string                          characterisation,
+      Func<Disposables, Func<Action>> test
+   )
+      => new(characterisation,
+             test);
+
+   /* ------------------------------------------------------------ */
+   // ICharacterised Methods
+   /* ------------------------------------------------------------ */
+
+   public string Characterisation()
+      => _characterisation;
 
    /* ------------------------------------------------------------ */
    // Methods
@@ -57,19 +63,6 @@ public sealed partial class AAA_test : ICharacterisable
 
    public Given Create()
       => new(_test);
-
-   /* ------------------------------------------------------------ */
-   // Private Factory Functions
-   /* ------------------------------------------------------------ */
-
-   private static AAA_test Create
-   (
-      Func<Disposables, Func<Action>> test,
-      Characteriser                   characteriser
-   )
-      => new(characteriser.GenerateBriefCharacterisation(),
-             characteriser.GenerateFullCharacterisation(),
-             test);
 
    /* ------------------------------------------------------------ */
 }

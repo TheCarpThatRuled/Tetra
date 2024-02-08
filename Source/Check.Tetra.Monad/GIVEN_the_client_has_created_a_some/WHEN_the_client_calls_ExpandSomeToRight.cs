@@ -8,7 +8,7 @@ namespace Check.GIVEN_the_client_has_created_a_some;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_ExpandSomeToRight : AAATestDataSource1
+public class WHEN_the_client_calls_ExpandSomeToRight : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -18,7 +18,7 @@ public class WHEN_the_client_calls_ExpandSomeToRight : AAATestDataSource1
    [WHEN_the_client_calls_ExpandSomeToRight]
    public void Run
    (
-      AAA_test1 test
+      AAA_test test
    )
    {
       using var given = test.Create();
@@ -31,7 +31,7 @@ public class WHEN_the_client_calls_ExpandSomeToRight : AAATestDataSource1
    // Test
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test1> GetTests()
+   protected override IEnumerable<AAA_test> GetTests()
    {
       /* ------------------------------------------------------------ */
 
@@ -40,7 +40,7 @@ public class WHEN_the_client_calls_ExpandSomeToRight : AAATestDataSource1
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test1
+      yield return AAA_test
                   .GIVEN(the_Client.has_created_a_some_from(content))
                   .WHEN(the_Client.calls_ExpandSomeToRight_with(FakeLeft.Create("whenNone Value")))
                   .THEN(the_whenNone.for_ExpandSomeToRight.was_not_invoked())
@@ -49,7 +49,7 @@ public class WHEN_the_client_calls_ExpandSomeToRight : AAATestDataSource1
 
       /* ------------------------------------------------------------ */
 
-      yield return AAA_test1
+      yield return AAA_test
                   .GIVEN(the_Client.has_created_a_some_from(content))
                   .WHEN(the_Client.calls_ExpandSomeToRight_with(externalState,
                                                                 FakeLeft.Create("whenNone Value")))

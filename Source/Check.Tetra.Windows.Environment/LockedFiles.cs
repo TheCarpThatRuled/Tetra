@@ -2,7 +2,7 @@
 
 namespace Check;
 
-internal class LockedFiles : IDisposable
+internal sealed class LockedFiles : IDisposable
 {
    /* ------------------------------------------------------------ */
    // Private Fields
@@ -17,6 +17,13 @@ internal class LockedFiles : IDisposable
    private LockedFiles() { }
 
    /* ------------------------------------------------------------ */
+   // Factory Functions
+   /* ------------------------------------------------------------ */
+
+   public static LockedFiles Create()
+      => new();
+
+   /* ------------------------------------------------------------ */
    // IDisposable Methods
    /* ------------------------------------------------------------ */
 
@@ -27,12 +34,6 @@ internal class LockedFiles : IDisposable
          file.Dispose();
       }
    }
-   /* ------------------------------------------------------------ */
-   // Factory Functions
-   /* ------------------------------------------------------------ */
-
-   public static LockedFiles Create()
-      => new();
 
    /* ------------------------------------------------------------ */
    // Methods
@@ -94,6 +95,7 @@ internal class LockedFiles : IDisposable
          string value
       )
          => _value = value;
+
       /* ------------------------------------------------------------ */
       // Factory Functions
       /* ------------------------------------------------------------ */

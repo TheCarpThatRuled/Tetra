@@ -7,7 +7,7 @@ namespace Check.TextBox.GIVEN_the_UI_has_not_created_the_text_box;
 
 [TestClass]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_UI_creates_the_text_box : AAATestDataSource1
+public class WHEN_the_UI_creates_the_text_box : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -17,7 +17,7 @@ public class WHEN_the_UI_creates_the_text_box : AAATestDataSource1
    [WHEN_the_UI_creates_the_text_box]
    public void Run
    (
-      AAA_test1 test
+      AAA_test test
    )
    {
       using var given = test.Create();
@@ -33,7 +33,7 @@ public class WHEN_the_UI_creates_the_text_box : AAATestDataSource1
    // Overridden AAATestDataSource Methods
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test1> GetTests()
+   protected override IEnumerable<AAA_test> GetTests()
    {
       /* ------------------------------------------------------------ */
 
@@ -41,7 +41,7 @@ public class WHEN_the_UI_creates_the_text_box : AAATestDataSource1
       foreach (var text in Representative_text)
       foreach (var visibility in Visibilities)
       {
-         yield return AAA_test1
+         yield return AAA_test
                      .GIVEN(The_UI.Has_not_created_the_text_box())
                      .WHEN(The_UI.Creates_the_text_box(The_UI_creates_a_text_box
                                                       .Factory()

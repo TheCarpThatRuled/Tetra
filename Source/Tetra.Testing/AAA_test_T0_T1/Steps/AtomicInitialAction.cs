@@ -9,7 +9,7 @@ partial class AAA_test<TActions, TAsserts>
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly Func<AAA_test1.Disposables, TActions> _action;
+      private readonly Func<AAA_test.Disposables, TActions> _action;
       private readonly string                                _characterisation;
 
       /* ------------------------------------------------------------ */
@@ -18,7 +18,7 @@ partial class AAA_test<TActions, TAsserts>
 
       private AtomicInitialAction
       (
-         Func<AAA_test1.Disposables, TActions> action,
+         Func<AAA_test.Disposables, TActions> action,
          string                                characterisation
       )
       {
@@ -32,7 +32,7 @@ partial class AAA_test<TActions, TAsserts>
 
       public TActions Run
       (
-         AAA_test1.Disposables disposables
+         AAA_test.Disposables disposables
       )
       {
          Log.TestStep(_characterisation);
@@ -53,7 +53,7 @@ partial class AAA_test<TActions, TAsserts>
       public static AtomicInitialAction Create
       (
          string                                characterisation,
-         Func<AAA_test1.Disposables, TActions> action
+         Func<AAA_test.Disposables, TActions> action
       )
          => new(action,
                 characterisation);

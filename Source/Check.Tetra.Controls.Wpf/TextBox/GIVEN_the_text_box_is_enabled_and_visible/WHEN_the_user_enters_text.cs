@@ -7,7 +7,7 @@ namespace Check.TextBox.GIVEN_the_text_box_is_enabled_and_visible;
 
 [TestClass]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_user_enters_text : AAATestDataSource1
+public class WHEN_the_user_enters_text : AAATestDataSource
 {
    /* ------------------------------------------------------------ */
    // Test
@@ -17,7 +17,7 @@ public class WHEN_the_user_enters_text : AAATestDataSource1
    [WHEN_the_user_enters_text]
    public void Run
    (
-      AAA_test1 test
+      AAA_test test
    )
    {
       using var given = test.Create();
@@ -33,14 +33,14 @@ public class WHEN_the_user_enters_text : AAATestDataSource1
    // Overridden AAATestDataSource Methods
    /* ------------------------------------------------------------ */
 
-   protected override IEnumerable<AAA_test1> GetTests()
+   protected override IEnumerable<AAA_test> GetTests()
    {
       /* ------------------------------------------------------------ */
 
       foreach (var initial_text in Representative_text)
       foreach (var updated_text in Representative_text)
       {
-         yield return AAA_test1
+         yield return AAA_test
                      .GIVEN(The_UI.Has_created_the_text_box(Text_boxes.Create_enabled_and_visible(initial_text)))
                      .WHEN(The_user.Enters_text(updated_text))
                      .THEN(The_text_box.Matches(Text_boxes.Enabled_and_visible(updated_text)))
