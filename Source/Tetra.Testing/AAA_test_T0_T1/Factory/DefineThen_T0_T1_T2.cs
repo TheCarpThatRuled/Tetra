@@ -10,9 +10,9 @@ partial class AAA_test<TActions, TAsserts>
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly IInitialArrange _given;
-      private readonly IAssert         _then;
-      private readonly IAct            _when;
+      private readonly IInitialAction _given;
+      private readonly IAssert        _then;
+      private readonly IAction        _when;
 
       /* ------------------------------------------------------------ */
       // Private Constructors
@@ -20,9 +20,9 @@ partial class AAA_test<TActions, TAsserts>
 
       private DefineThen
       (
-         IInitialArrange given,
-         IAssert         then,
-         IAct            when
+         IInitialAction given,
+         IAssert        then,
+         IAction        when
       )
       {
          _given = given;
@@ -49,13 +49,12 @@ partial class AAA_test<TActions, TAsserts>
            .Create($"GIVEN {_given.Characterisation()} WHEN {_when.Characterisation()} THEN {_then.Characterisation()}",
                    disposables =>
                    {
-                      var given = _given.Arrange(disposables);
-                      given.FinishArrange();
+                      var given = _given.Run(disposables);
                       return () =>
                       {
-                         var when = _when.Act(given);
+                         var when = _when.Run(given.Finalise());
 
-                         return () => _then.Assert(when.Asserts());
+                         return () => _then.Run(when.Asserts());
                       };
                    });
 
@@ -65,9 +64,9 @@ partial class AAA_test<TActions, TAsserts>
 
       internal static DefineThen Create
       (
-         IInitialArrange given,
-         IAct            when,
-         IAssert         then
+         IInitialAction given,
+         IAction        when,
+         IAssert        then
       )
          => new(given,
                 then,

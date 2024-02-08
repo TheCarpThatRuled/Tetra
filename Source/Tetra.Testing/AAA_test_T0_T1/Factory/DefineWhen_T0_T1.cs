@@ -10,8 +10,8 @@ partial class AAA_test<TActions, TAsserts>
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly IInitialArrange _given;
-      private readonly IAct            _when;
+      private readonly IInitialAction _given;
+      private readonly IAction        _when;
 
       /* ------------------------------------------------------------ */
       // Private Constructors
@@ -19,8 +19,8 @@ partial class AAA_test<TActions, TAsserts>
 
       private DefineWhen
       (
-         IInitialArrange given,
-         IAct            when
+         IInitialAction given,
+         IAction        when
       )
       {
          _given = given;
@@ -46,8 +46,8 @@ partial class AAA_test<TActions, TAsserts>
 
       internal static DefineWhen Create
       (
-         IInitialArrange given,
-         IAct            when
+         IInitialAction given,
+         IAction        when
       )
          => new(given,
                 when);

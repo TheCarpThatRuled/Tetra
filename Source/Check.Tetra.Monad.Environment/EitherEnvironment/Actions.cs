@@ -3,7 +3,7 @@ using Tetra.Testing;
 
 namespace Check.EitherEnvironment;
 
-public sealed class Actions : TestEnvironment<Asserts>
+public sealed class Actions : TestEnvironment<Actions, Asserts>
 {
    /* ------------------------------------------------------------ */
    // Private Fields
@@ -34,7 +34,7 @@ public sealed class Actions : TestEnvironment<Asserts>
       => new();
 
    /* ------------------------------------------------------------ */
-   // Protected Overridden TestEnvironment<Asserts> Methods
+   // Protected Overridden TestEnvironment<Actions, Asserts> Methods
    /* ------------------------------------------------------------ */
 
    protected override Asserts CreateAsserts()
@@ -45,8 +45,12 @@ public sealed class Actions : TestEnvironment<Asserts>
 
    /* ------------------------------------------------------------ */
 
-   protected override void Finalise()
-      => _captureReturnValue = true;
+   protected override Actions PerformFinalise()
+   {
+      _captureReturnValue = true;
+
+      return this;
+   }
 
    /* ------------------------------------------------------------ */
    // Methods

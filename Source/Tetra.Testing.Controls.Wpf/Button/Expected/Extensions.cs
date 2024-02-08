@@ -12,7 +12,7 @@ public static class Expected_button_Extensions
 
    public static T IsEnabled_is_enabled<T>
    (
-      this ExpectedButton.ExceptCarrier<T> except
+      this Expected_button.ExceptCarrier<T> except
    )
       => except
         .IsEnabled_is(true);
@@ -21,7 +21,7 @@ public static class Expected_button_Extensions
 
    public static T IsEnabled_is_disabled<T>
    (
-      this ExpectedButton.ExceptCarrier<T> except
+      this Expected_button.ExceptCarrier<T> except
    )
       => except
         .IsEnabled_is(false);
@@ -30,7 +30,7 @@ public static class Expected_button_Extensions
 
    public static T Visibility_is_collapsed<T>
    (
-      this ExpectedButton.ExceptCarrier<T> except
+      this Expected_button.ExceptCarrier<T> except
    )
       => except
         .Visibility_is(Visibility.Collapsed);
@@ -39,7 +39,7 @@ public static class Expected_button_Extensions
 
    public static T Visibility_is_hidden<T>
    (
-      this ExpectedButton.ExceptCarrier<T> except
+      this Expected_button.ExceptCarrier<T> except
    )
       => except
         .Visibility_is(Visibility.Hidden);
@@ -48,7 +48,7 @@ public static class Expected_button_Extensions
 
    public static T Visibility_is_visible<T>
    (
-      this ExpectedButton.ExceptCarrier<T> except
+      this Expected_button.ExceptCarrier<T> except
    )
       => except
         .Visibility_is(Visibility.Visible);
@@ -57,45 +57,45 @@ public static class Expected_button_Extensions
    // Factory Extensions
    /* ------------------------------------------------------------ */
 
-   public static ExpectedButton.DefineVisibility IsEnabled_is_enabled
+   public static Expected_button.DefineVisibility IsEnabled_is_enabled
    (
-      this ExpectedButton.DefineIsEnabled factory
+      this Expected_button.DefineIsEnabled factory
    )
       => factory
         .IsEnabled_is(true);
 
    /* ------------------------------------------------------------ */
 
-   public static ExpectedButton.DefineVisibility IsEnabled_is_disabled
+   public static Expected_button.DefineVisibility IsEnabled_is_disabled
    (
-      this ExpectedButton.DefineIsEnabled factory
+      this Expected_button.DefineIsEnabled factory
    )
       => factory
         .IsEnabled_is(false);
 
    /* ------------------------------------------------------------ */
 
-   public static ExpectedButton Visibility_is_collapsed
+   public static Expected_button Visibility_is_collapsed
    (
-      this ExpectedButton.DefineVisibility factory
+      this Expected_button.DefineVisibility factory
    )
       => factory
         .Visibility_is(Visibility.Collapsed);
 
    /* ------------------------------------------------------------ */
 
-   public static ExpectedButton Visibility_is_hidden
+   public static Expected_button Visibility_is_hidden
    (
-      this ExpectedButton.DefineVisibility factory
+      this Expected_button.DefineVisibility factory
    )
       => factory
         .Visibility_is(Visibility.Hidden);
 
    /* ------------------------------------------------------------ */
 
-   public static ExpectedButton Visibility_is_visible
+   public static Expected_button Visibility_is_visible
    (
-      this ExpectedButton.DefineVisibility factory
+      this Expected_button.DefineVisibility factory
    )
       => factory
         .Visibility_is(Visibility.Visible);

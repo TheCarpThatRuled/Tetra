@@ -15,7 +15,7 @@ public static class A_label
        string characterisationHeader,
        Func<TAsserts, LabelAsserts<TAsserts>> getAsserts
     )
-       where TActions : ITestEnvironment<TAsserts>
+       where TActions : TestEnvironment<TActions, TAsserts>
        => Content_is<TActions, TAsserts>(expected.Content(),
                                          characterisationHeader,
                                          getAsserts)
@@ -31,7 +31,7 @@ public static class A_label
        string characterisationHeader,
        Func<TAsserts, LabelAsserts<TAsserts>> getAsserts
     )
-       where TActions : ITestEnvironment<TAsserts>
+       where TActions : TestEnvironment<TActions, TAsserts>
        => AAA_test<TActions, TAsserts>
          .AtomicAssert
          .Create($"{characterisationHeader}.{nameof(Content_is)}: {expected}",
@@ -47,7 +47,7 @@ public static class A_label
        string characterisationHeader,
        Func<TAsserts, LabelAsserts<TAsserts>> getAsserts
     )
-       where TActions : ITestEnvironment<TAsserts>
+       where TActions : TestEnvironment<TActions, TAsserts>
        => AAA_test<TActions, TAsserts>
          .AtomicAssert
          .Create($"{characterisationHeader}.{nameof(Visibility_is)}: {expected.ToHumanReadable()}",

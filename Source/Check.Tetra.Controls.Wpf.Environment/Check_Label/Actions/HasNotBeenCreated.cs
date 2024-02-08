@@ -5,36 +5,51 @@ namespace Check.Check_Label;
 
 partial class Actions
 {
-   private sealed class HasNotBeenCreated : Actions
+   private sealed class HasNotBeenCreated : IActions
    {
       /* ------------------------------------------------------------ */
-      // ITestEnvironment<Asserts> Methods
+      // Private Fields
       /* ------------------------------------------------------------ */
 
-      public override Asserts Asserts()
-         => throw Failed.Assert("Cannot progress to the asserts; no actions have been performed.");
+      private readonly Actions          _parent;
+      private readonly Action<IActions> _updateState;
 
       /* ------------------------------------------------------------ */
-
-      public override void FinishArrange() { }
-
-      /* ------------------------------------------------------------ */
-      // Properties
+      // Constructors
       /* ------------------------------------------------------------ */
 
-      public override TwoWayBindingActions<object, Actions> Content
+      public HasNotBeenCreated
+      (
+         Actions          parent,
+         Action<IActions> updateState
+      )
+      {
+         _parent      = parent;
+         _updateState = updateState;
+      }
+
+      /* ------------------------------------------------------------ */
+      // IActions Properties
+      /* ------------------------------------------------------------ */
+
+      public TwoWayBindingActions<object, Actions> Content
          => throw Failed.Assert("Cannot perform an action on Content; the label has not been created.");
 
       /* ------------------------------------------------------------ */
 
-      public override TwoWayBindingActions<Visibility, Actions> Visibility
+      public TwoWayBindingActions<Visibility, Actions> Visibility
          => throw Failed.Assert("Cannot perform an action on Visibility; the label has not been created.");
 
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
-      public override Actions CreateLabel
+      public Asserts Asserts()
+         => throw Failed.InTestSetup("Cannot progress to the asserts; no actions have been performed.");
+
+      /* ------------------------------------------------------------ */
+
+      public void CreateLabel
       (
          The_UI_creates_a_label args
       )
@@ -45,8 +60,9 @@ partial class Actions
                                                          .Content(system.Content())
                                                          .Visibility(system.Visibility())));
 
-         return new HasBeenCreated(label,
-                                   system);
+         _updateState(new HasBeenCreated(_parent,
+                                         label,
+                                         system));
       }
 
       /* ------------------------------------------------------------ */

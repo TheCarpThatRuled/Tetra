@@ -24,8 +24,8 @@ internal sealed class TestEnvironment
 
    /* ------------------------------------------------------------ */
 
-   [Given("the UI has created a button")]
-   public void TheUIHasCreatedAButton()
+   [Given("the UI has created an enabled, visible button")]
+   public void TheUIHasCreatedAnEnabledVisibleButton()
       => _actions
         .CreateButton(The_UI_creates_a_button
                      .Factory()
@@ -56,7 +56,7 @@ internal sealed class TestEnvironment
       string isEnabled
    )
       => _actions
-        .FinishArrange()
+        .Finalise()
         .IsEnabled
         .Push(IsEnabled.From(isEnabled))
         .Next();
@@ -69,7 +69,7 @@ internal sealed class TestEnvironment
       string visibility
    )
       => _actions
-        .FinishArrange()
+        .Finalise()
         .Visibility
         .Push(Visibility.Tetra(visibility))
         .Next();
@@ -83,7 +83,7 @@ internal sealed class TestEnvironment
       string visibility
    )
       => _actions
-        .FinishArrange()
+        .Finalise()
         .CreateButton(The_UI_creates_a_button
                      .Factory()
                      .IsEnabled_is(IsEnabled.From(isEnabled))
@@ -94,7 +94,7 @@ internal sealed class TestEnvironment
    [When("the user clicks the button")]
    public void TheUserClicksTheButton()
       => _actions
-        .FinishArrange()
+        .Finalise()
         .Button
         .Click()
         .Next();
@@ -112,8 +112,10 @@ internal sealed class TestEnvironment
       => _actions
         .Asserts()
         .Button
-        .IsEnabledEquals(IsEnabled.From(expectedIsEnabled))
-        .VisibilityEquals(Visibility.Windows(expectedVisibility));
+        .Matches(Expected_button
+                .Factory()
+                .IsEnabled_is(IsEnabled.From(expectedIsEnabled))
+                .Visibility_is(Visibility.Windows(expectedVisibility)));
 
    /* ------------------------------------------------------------ */
 
@@ -123,6 +125,20 @@ internal sealed class TestEnvironment
         .Asserts()
         .OnClick
         .WasInvokedOnce();
+
+   /* ------------------------------------------------------------ */
+
+   [Then("the system contains {string} and {string}")]
+   public void TheSystemContains
+   (
+      string expectedIsEnabled,
+      string expectedVisibility
+   )
+      => _actions
+        .Asserts()
+        .IsEnabled.Contains(IsEnabled.From(expectedIsEnabled))
+        .Next()
+        .Visibility.Contains(Visibility.Tetra(expectedVisibility));
 
    /* ------------------------------------------------------------ */
 }

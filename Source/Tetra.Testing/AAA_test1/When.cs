@@ -6,14 +6,10 @@ partial class AAA_test1
    public sealed class When
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Private Fields
       /* ------------------------------------------------------------ */
 
-      public Then Act()
-      {
-         Log.When();
-         return new(_act());
-      }
+      private readonly Func<Action> _act;
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
@@ -26,10 +22,14 @@ partial class AAA_test1
          => _act = act;
 
       /* ------------------------------------------------------------ */
-      // Private Fields
+      // Methods
       /* ------------------------------------------------------------ */
 
-      private readonly Func<Action> _act;
+      public Then Act()
+      {
+         Log.When();
+         return new(_act());
+      }
 
       /* ------------------------------------------------------------ */
    }

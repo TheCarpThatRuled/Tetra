@@ -1,4 +1,4 @@
-﻿using static Check.Check_TextBox.Steps;
+﻿using static Check.Check_Text_Box.Steps;
 using static Check.TextBox.Text;
 
 // ReSharper disable InconsistentNaming

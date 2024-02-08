@@ -3,7 +3,7 @@ using Tetra.Testing;
 
 namespace Check.Check_Button;
 
-public sealed partial class Actions
+public sealed partial class Actions : TestEnvironment<Actions, Asserts>
 {
    /* ------------------------------------------------------------ */
    // Internal Factory Functions
@@ -11,6 +11,19 @@ public sealed partial class Actions
 
    public static Actions Start()
       => new();
+
+   /* ------------------------------------------------------------ */
+   // Protected Overridden TestEnvironment<Actions, Asserts> Methods
+   /* ------------------------------------------------------------ */
+
+   protected override Asserts CreateAsserts()
+      =>_actions
+        .Asserts();
+
+   /* ------------------------------------------------------------ */
+
+   protected override Actions PerformFinalise()
+      => this;
 
    /* ------------------------------------------------------------ */
    // Properties
@@ -36,27 +49,12 @@ public sealed partial class Actions
    // Methods
    /* ------------------------------------------------------------ */
 
-   public Asserts Asserts()
-      => _actions
-        .Asserts();
-
-   /* ------------------------------------------------------------ */
-
    public Actions CreateButton
    (
       The_UI_creates_a_button args
    )
    {
       _actions.CreateButton(args);
-
-      return this;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public Actions FinishArrange()
-   {
-      _actions.FinishArrange();
 
       return this;
    }

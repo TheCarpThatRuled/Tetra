@@ -1,8 +1,8 @@
 ﻿namespace Tetra.Testing;
 
-public static class Extensions
+// ReSharper disable once InconsistentNaming
+public static class Button_Extensions
 {
-
    /* ------------------------------------------------------------ */
    // Functions
    /* ------------------------------------------------------------ */
@@ -10,7 +10,7 @@ public static class Extensions
    public static T Matches<T>
    (
       this ButtonAsserts<T> then,
-      ExpectedButton       expected
+      Expected_button       expected
    )
       => then
         .IsEnabledEquals(expected.IsEnabled())

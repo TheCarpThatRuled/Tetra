@@ -35,11 +35,11 @@ partial class AAA_test<TActions, TAsserts>
       // IAssert Methods
       /* ------------------------------------------------------------ */
 
-      public TAsserts Assert
+      public TAsserts Run
       (
          TAsserts environment
       )
-         => _assert.Assert(environment);
+         => _assert.Run(environment);
 
       /* ------------------------------------------------------------ */
       // ICharacterised Methods

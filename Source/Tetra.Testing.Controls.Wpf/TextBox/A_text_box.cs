@@ -9,16 +9,16 @@ public static class A_text_box
    // ArrangeAct Functions
    /* ------------------------------------------------------------ */
 
-   public static AAA_test<TActions, TAsserts>.IArrangeAct receives_text<TActions, TAsserts>
+   public static AAA_test<TActions, TAsserts>.IAction receives_text<TActions, TAsserts>
    (
       string                                   text,
       string                                   actor,
       string                                   textBoxCharacterisation,
       Func<TActions, TextBoxActions<TActions>> getActions
    )
-      where TActions : ITestEnvironment<TAsserts>
+      where TActions : TestEnvironment<TActions, TAsserts>
       => AAA_test<TActions, TAsserts>
-        .AtomicArrangeAct
+        .AtomicAction
         .Create($@"{actor}_enters_text_in_{textBoxCharacterisation}: ""{text}""",
                 actions => getActions(actions)
                           .EnterText(text)
@@ -34,7 +34,7 @@ public static class A_text_box
       string                                   characterisationHeader,
       Func<TAsserts, TextBoxAsserts<TAsserts>> getAsserts
    )
-      where TActions : ITestEnvironment<TAsserts>
+      where TActions : TestEnvironment<TActions, TAsserts>
       => AAA_test<TActions, TAsserts>
         .AtomicAssert
         .Create($"{characterisationHeader}.{nameof(IsEnabled_is)}: {expected}",
@@ -50,7 +50,7 @@ public static class A_text_box
       string                                   characterisationHeader,
       Func<TAsserts, TextBoxAsserts<TAsserts>> getAsserts
    )
-      where TActions : ITestEnvironment<TAsserts>
+      where TActions : TestEnvironment<TActions, TAsserts>
       => Text_is<TActions, TAsserts>(expected.Text(),
                                      characterisationHeader,
                                      getAsserts)
@@ -69,7 +69,7 @@ public static class A_text_box
       string                                   characterisationHeader,
       Func<TAsserts, TextBoxAsserts<TAsserts>> getAsserts
    )
-      where TActions : ITestEnvironment<TAsserts>
+      where TActions : TestEnvironment<TActions, TAsserts>
       => AAA_test<TActions, TAsserts>
         .AtomicAssert
         .Create($"{characterisationHeader}.{nameof(Text_is)}: {expected}",
@@ -85,7 +85,7 @@ public static class A_text_box
       string                                   characterisationHeader,
       Func<TAsserts, TextBoxAsserts<TAsserts>> getAsserts
    )
-      where TActions : ITestEnvironment<TAsserts>
+      where TActions : TestEnvironment<TActions, TAsserts>
       => AAA_test<TActions, TAsserts>
         .AtomicAssert
         .Create($"{characterisationHeader}.{nameof(Visibility_is)}: {expected.ToHumanReadable()}",

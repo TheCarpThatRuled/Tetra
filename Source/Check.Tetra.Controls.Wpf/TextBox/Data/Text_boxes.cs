@@ -1,4 +1,4 @@
-﻿using Check.Check_TextBox;
+﻿using Check.Check_Text_Box;
 
 // ReSharper disable InconsistentNaming
 

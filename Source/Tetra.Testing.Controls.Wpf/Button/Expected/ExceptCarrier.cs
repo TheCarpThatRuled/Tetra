@@ -3,7 +3,7 @@
 namespace Tetra.Testing;
 
 // ReSharper disable once InconsistentNaming
-partial class ExpectedButton
+partial class Expected_button
 {
    public sealed class ExceptCarrier<T>
    {
@@ -11,8 +11,8 @@ partial class ExpectedButton
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly Func<ExpectedButton, T> _createParent;
-      private readonly ExpectedButton          _source;
+      private readonly Func<Expected_button, T> _createParent;
+      private readonly Expected_button          _source;
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
@@ -20,8 +20,8 @@ partial class ExpectedButton
 
       internal ExceptCarrier
       (
-         Func<ExpectedButton, T> createParent,
-         ExpectedButton          source
+         Func<Expected_button, T> createParent,
+         Expected_button          source
       )
       {
          _createParent = createParent;

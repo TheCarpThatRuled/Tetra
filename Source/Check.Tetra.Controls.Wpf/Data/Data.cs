@@ -15,10 +15,10 @@ internal static class Data
 
    /* ------------------------------------------------------------ */
 
-   public static readonly ISequence<(Visibility tetra, System.Windows.Visibility wpf)> Visibilities
-      = Sequence.From((Visibility.Collapsed, System.Windows.Visibility.Collapsed),
-                      (Visibility.Hidden, System.Windows.Visibility.Hidden),
-                      (Visibility.Visible, System.Windows.Visibility.Visible));
+   public static readonly ISequence<(Tetra.Visibility tetra, System.Windows.Visibility wpf)> Visibilities
+      = Sequence.From((Tetra.Visibility.Collapsed, System.Windows.Visibility.Collapsed),
+                      (Tetra.Visibility.Hidden, System.Windows.Visibility.Hidden),
+                      (Tetra.Visibility.Visible, System.Windows.Visibility.Visible));
 
    /* ------------------------------------------------------------ */
 }

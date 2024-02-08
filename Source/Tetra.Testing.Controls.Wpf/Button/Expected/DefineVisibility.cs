@@ -4,7 +4,7 @@ using System.Windows;
 
 namespace Tetra.Testing;
 
-partial class ExpectedButton
+partial class Expected_button
 {
    public sealed class DefineVisibility
    {
@@ -28,7 +28,7 @@ partial class ExpectedButton
       // Methods
       /* ------------------------------------------------------------ */
 
-      public ExpectedButton Visibility_is
+      public Expected_button Visibility_is
       (
          Visibility visibility
       )

@@ -14,9 +14,6 @@ partial class Actions
       private readonly FakeButton _button;
       private readonly FakeSystem _system;
 
-      //Mutable
-      private bool _finalised;
-
       /* ------------------------------------------------------------ */
       // Constructors
       /* ------------------------------------------------------------ */
@@ -24,13 +21,11 @@ partial class Actions
       private HasBeenCreated
       (
          FakeButton button,
-         bool       finalised,
          Actions    parent,
          FakeSystem system
       )
       {
          _button    = button;
-         _finalised = finalised;
          _system    = system;
 
          Button = ButtonActions<Actions>.Create("Button",
@@ -53,12 +48,10 @@ partial class Actions
       public static HasBeenCreated Create
       (
          Actions    parent,
-         bool       finalised,
          FakeButton button,
          FakeSystem system
       )
          => new(button,
-                finalised,
                 parent,
                 system);
 
@@ -83,8 +76,7 @@ partial class Actions
       public Asserts Asserts()
          => Check_Button
            .Asserts
-           .Create(_finalised,
-                   _button,
+           .Create(_button,
                    _system);
 
       /* ------------------------------------------------------------ */
@@ -94,18 +86,6 @@ partial class Actions
          The_UI_creates_a_button args
       )
          => throw Failed.Assert("Cannot create the button; it has already been created.");
-
-      /* ------------------------------------------------------------ */
-
-      public void FinishArrange()
-      {
-         if (_finalised)
-         {
-            throw Failed.InTestSetup("The test environment cannot be finalised; it has already been finalised");
-         }
-
-         _finalised = true;
-      }
 
       /* ------------------------------------------------------------ */
    }

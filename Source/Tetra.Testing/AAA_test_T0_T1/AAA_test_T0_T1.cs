@@ -2,7 +2,7 @@
 
 // ReSharper disable once InconsistentNaming
 public partial class AAA_test<TActions, TAsserts>
-   where TActions : ITestEnvironment<TAsserts>
+   where TActions : TestEnvironment<TActions, TAsserts>
 {
    /* ------------------------------------------------------------ */
    // Private Functions

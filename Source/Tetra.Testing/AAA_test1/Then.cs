@@ -6,14 +6,10 @@ partial class AAA_test1
    public sealed class Then
    {
       /* ------------------------------------------------------------ */
-      // Methods
+      // Private Fields
       /* ------------------------------------------------------------ */
 
-      public void Assert()
-      {
-         Log.Then();
-         _assert();
-      }
+      private readonly Action _assert;
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
@@ -26,10 +22,14 @@ partial class AAA_test1
          => _assert = assert;
 
       /* ------------------------------------------------------------ */
-      // Private Fields
+      // Methods
       /* ------------------------------------------------------------ */
 
-      private readonly Action _assert;
+      public void Assert()
+      {
+         Log.Then();
+         _assert();
+      }
 
       /* ------------------------------------------------------------ */
    }

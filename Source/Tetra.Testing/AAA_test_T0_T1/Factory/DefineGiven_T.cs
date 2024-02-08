@@ -10,7 +10,7 @@ partial class AAA_test<TActions, TAsserts>
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly IInitialArrange _given;
+      private readonly IInitialAction _given;
 
       /* ------------------------------------------------------------ */
       // Private Constructors
@@ -18,7 +18,7 @@ partial class AAA_test<TActions, TAsserts>
 
       private DefineGiven
       (
-         IInitialArrange given
+         IInitialAction given
       )
          => _given = given;
 
@@ -28,7 +28,7 @@ partial class AAA_test<TActions, TAsserts>
 
       internal static DefineGiven Create
       (
-         IInitialArrange given
+         IInitialAction given
       )
          => new(given);
 
@@ -38,7 +38,7 @@ partial class AAA_test<TActions, TAsserts>
 
       public DefineGiven And
       (
-         IArrange given
+         IAction given
       )
          => Create(_given.And(given));
 
@@ -46,7 +46,7 @@ partial class AAA_test<TActions, TAsserts>
 
       public DefineWhen WHEN
       (
-         IAct when
+         IAction when
       )
          => DefineWhen
            .Create(_given,

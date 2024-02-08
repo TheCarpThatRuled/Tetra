@@ -119,6 +119,9 @@ this.ScenarioInitialize(scenarioInfo);
 #line 8
    testRunner.Then(string.Format("the button is \"enabled\" and {0}", newVisibility), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
+#line 9
+   testRunner.And(string.Format("the system contains \"enabled\" and {0}", newVisibility), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
             }
             this.ScenarioCleanup();
         }

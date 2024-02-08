@@ -1,6 +1,6 @@
-﻿using Check.Check_TextBox;
+﻿using Check.Check_Text_Box;
 using static Check.Data;
-using static Check.Check_TextBox.Steps;
+using static Check.Check_Text_Box.Steps;
 using static Check.TextBox.Text;
 
 namespace Check.TextBox.GIVEN_the_UI_has_not_created_the_text_box;

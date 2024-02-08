@@ -31,9 +31,9 @@ public partial class AAA_test1 : ICharacterised
 
    public static AAA_test<TActions, TAsserts>.DefineGiven GIVEN<TActions, TAsserts>
    (
-      AAA_test<TActions, TAsserts>.IInitialArrange given
+      AAA_test<TActions, TAsserts>.IInitialAction given
    )
-      where TActions : ITestEnvironment<TAsserts>
+      where TActions : TestEnvironment<TActions, TAsserts>
       => AAA_test<TActions, TAsserts>
         .DefineGiven
         .Create(given);

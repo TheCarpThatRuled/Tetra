@@ -14,10 +14,10 @@ public sealed class Asserts
    public readonly TwoWayBindingAsserts<Visibility, Asserts> Visibility;
 
    /* ------------------------------------------------------------ */
-   // Internal Constructors
+   // Private Constructors
    /* ------------------------------------------------------------ */
 
-   internal Asserts
+   private Asserts
    (
       FakeLabel  label,
       FakeSystem system
@@ -35,6 +35,18 @@ public sealed class Asserts
                                                                     system.Visibility(),
                                                                     () => this);
    }
+
+   /* ------------------------------------------------------------ */
+   // Internal Factory Functions
+   /* ------------------------------------------------------------ */
+
+   internal static Asserts Create
+   (
+      FakeLabel  label,
+      FakeSystem system
+   )
+      => new(label,
+             system);
 
    /* ------------------------------------------------------------ */
 }

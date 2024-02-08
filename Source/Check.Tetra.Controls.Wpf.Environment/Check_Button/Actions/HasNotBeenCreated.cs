@@ -14,9 +14,6 @@ partial class Actions
       private readonly Actions          _parent;
       private readonly Action<IActions> _updateState;
 
-      //Mutable
-      private bool _finalised = false;
-
       /* ------------------------------------------------------------ */
       // Private Constructors
       /* ------------------------------------------------------------ */
@@ -83,22 +80,10 @@ partial class Actions
                                                                     .Action)
                                                             .IsEnabled(system.IsEnabled())
                                                             .Visibility(system.Visibility())));
+
          _updateState(HasBeenCreated.Create(_parent,
-                                            _finalised,
                                             button,
                                             system));
-      }
-
-      /* ------------------------------------------------------------ */
-
-      public void FinishArrange()
-      {
-         if (_finalised)
-         {
-            throw Failed.InTestSetup("The test environment cannot be finalised; it has already been finalised");
-         }
-
-         _finalised = true;
       }
 
       /* ------------------------------------------------------------ */

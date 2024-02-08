@@ -3,46 +3,69 @@ using Tetra.Testing;
 
 namespace Check.Check_Label;
 
-public abstract partial class Actions : ITestEnvironment<Asserts>
+public sealed partial class Actions : TestEnvironment<Actions, Asserts>
 {
-    /* ------------------------------------------------------------ */
-    // Internal Factory Functions
-    /* ------------------------------------------------------------ */
+   /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
 
-    internal static Actions Start
-    (
-       AAA_test1.Disposables _
-    )
-       => new HasNotBeenCreated();
+   private IActions _actions;
 
-    /* ------------------------------------------------------------ */
-    // ITestEnvironment<Asserts> Methods
-    /* ------------------------------------------------------------ */
+   /* ------------------------------------------------------------ */
+   // Private Constructors
+   /* ------------------------------------------------------------ */
 
-    public abstract Asserts Asserts();
+   private Actions()
+      => _actions = new HasNotBeenCreated(this,
+                                          actions => _actions = actions);
 
-    /* ------------------------------------------------------------ */
+   /* ------------------------------------------------------------ */
+   // Factory Functions
+   /* ------------------------------------------------------------ */
 
-    public abstract void FinishArrange();
+   public static Actions Start()
+      => new();
 
-    /* ------------------------------------------------------------ */
-    // Properties
-    /* ------------------------------------------------------------ */
+   /* ------------------------------------------------------------ */
+   // Protected Overridden TestEnvironment<Actions, Asserts> Methods
+   /* ------------------------------------------------------------ */
 
-   public abstract TwoWayBindingActions<object, Actions> Content { get; }
+   protected override Asserts CreateAsserts()
+      => _actions
+        .Asserts();
 
    /* ------------------------------------------------------------ */
 
-   public abstract TwoWayBindingActions<Visibility, Actions> Visibility { get; }
+   protected override Actions PerformFinalise()
+      => this;
+
+   /* ------------------------------------------------------------ */
+   // Properties
+   /* ------------------------------------------------------------ */
+
+   public TwoWayBindingActions<object, Actions> Content
+      => _actions
+        .Content;
+
+   /* ------------------------------------------------------------ */
+
+   public TwoWayBindingActions<Visibility, Actions> Visibility
+      => _actions
+        .Visibility;
 
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
-   public abstract Actions CreateLabel
-    (
-       The_UI_creates_a_label args
-    );
+   public Actions CreateLabel
+   (
+      The_UI_creates_a_label args
+   )
+   {
+      _actions.CreateLabel(args);
 
-    /* ------------------------------------------------------------ */
+      return this;
+   }
+
+   /* ------------------------------------------------------------ */
 }

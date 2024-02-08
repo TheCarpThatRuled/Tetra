@@ -4,8 +4,26 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Tetra.Testing;
 
 public abstract class AAATestDataSource1 : Attribute,
-                                          ITestDataSource
+                                           ITestDataSource
 {
+   /* ------------------------------------------------------------ */
+   // Private Fields
+   /* ------------------------------------------------------------ */
+
+   private readonly Lazy<IReadOnlyList<object?[]>> _tests;
+
+   /* ------------------------------------------------------------ */
+   // Protected Constructors
+   /* ------------------------------------------------------------ */
+
+   protected AAATestDataSource1()
+      => _tests = new(() => GetTests()
+                           .Select(test => new[]
+                            {
+                               test,
+                            })
+                           .ToList());
+
    /* ------------------------------------------------------------ */
    // ITestDataSource Methods
    /* ------------------------------------------------------------ */
@@ -28,25 +46,10 @@ public abstract class AAATestDataSource1 : Attribute,
        ?.Characterisation();
 
    /* ------------------------------------------------------------ */
-   // Protected Constructors
-   /* ------------------------------------------------------------ */
-
-   protected AAATestDataSource1()
-      => _tests = new(() => GetTests()
-                           .Select(test => new[] { test, })
-                           .ToList());
-
-   /* ------------------------------------------------------------ */
    // Protected Methods
    /* ------------------------------------------------------------ */
 
    protected abstract IEnumerable<AAA_test1> GetTests();
-
-   /* ------------------------------------------------------------ */
-   // Private Fields
-   /* ------------------------------------------------------------ */
-
-   private readonly Lazy<IReadOnlyList<object?[]>> _tests;
 
    /* ------------------------------------------------------------ */
 }

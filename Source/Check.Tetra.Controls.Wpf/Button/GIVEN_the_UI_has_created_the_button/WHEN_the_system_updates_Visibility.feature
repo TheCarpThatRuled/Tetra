@@ -6,6 +6,7 @@ Scenario: THEN_the_button_reflects_the_new_value
    Given the UI has created a button that is "enabled" and <initialVisibility>
    When the system updates Visibility to <newVisibility>
    Then the button is "enabled" and <newVisibility>
+   And the system contains "enabled" and <newVisibility>
 
 Examples:
    | initialVisibility | newVisibility |

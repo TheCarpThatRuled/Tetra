@@ -10,17 +10,17 @@ public static partial class Steps
    public sealed class TheUI
    {
       /* ------------------------------------------------------------ */
-      // Given Functions
+      // Givens
       /* ------------------------------------------------------------ */
 
-      public IInitialArrange Has_not_created_the_label()
-         => AtomicInitialArrange
+      public IInitialAction Has_not_created_the_label()
+         => AtomicInitialAction
            .Create($"{nameof(The_UI)}.{nameof(Has_not_created_the_label)}",
-                   Actions.Start);
+                   _ => Actions.Start());
 
       /* ------------------------------------------------------------ */
 
-      public IInitialArrange Has_created_the_label
+      public IInitialAction Has_created_the_label
       (
          The_UI_creates_a_label args
       )
@@ -29,14 +29,14 @@ public static partial class Steps
            .Recharacterise($"{nameof(The_UI)}.{nameof(Has_created_the_label)}: {args.BriefCharacterisation()}");
 
       /* ------------------------------------------------------------ */
-      // ArrangeAct Functions
+      // Actions
       /* ------------------------------------------------------------ */
 
-      public IArrangeAct Creates_the_label
+      public IAction Creates_the_label
       (
          The_UI_creates_a_label args
       )
-         => AtomicArrangeAct
+         => AtomicAction
            .Create($"{nameof(The_UI)}.{nameof(Creates_the_label)}: {args.BriefCharacterisation()}",
                    environment => environment.CreateLabel(args));
 

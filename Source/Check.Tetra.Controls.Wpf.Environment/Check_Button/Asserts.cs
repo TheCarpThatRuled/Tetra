@@ -42,24 +42,16 @@ public sealed class Asserts
    }
 
    /* ------------------------------------------------------------ */
-   // Internal Constructors
+   // Internal Factory Functions
    /* ------------------------------------------------------------ */
 
    internal static Asserts Create
    (
-      bool       finalised,
       FakeButton button,
       FakeSystem system
    )
-   {
-      if (!finalised)
-      {
-         throw Failed.InTestSetup("The test environment was not finalised before the asserts were accessed");
-      }
-
-      return new(button,
-                 system);
-   }
+      => new(button,
+             system);
 
    /* ------------------------------------------------------------ */
 }

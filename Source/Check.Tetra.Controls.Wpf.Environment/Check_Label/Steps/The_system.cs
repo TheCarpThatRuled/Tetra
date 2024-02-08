@@ -10,14 +10,14 @@ public static partial class Steps
    public sealed class TheSystem
    {
       /* ------------------------------------------------------------ */
-      // ArrangeAct Functions
+      // Actions
       /* ------------------------------------------------------------ */
 
-      public IArrangeAct Updates_Content
+      public IAction Updates_Content
       (
          object content
       )
-         => AtomicArrangeAct
+         => AtomicAction
            .Create($"{nameof(The_system)}.{nameof(Updates_Content)}: {content}",
                    environment => environment
                                  .Content
@@ -26,11 +26,11 @@ public static partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IArrangeAct Updates_Visibility
+      public IAction Updates_Visibility
       (
          Visibility visibility
       )
-         => AtomicArrangeAct
+         => AtomicAction
            .Create($"{nameof(The_system)}.{nameof(Updates_Visibility)}: {visibility}",
                    environment => environment
                                  .Visibility

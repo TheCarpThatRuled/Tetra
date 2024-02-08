@@ -5,7 +5,7 @@ namespace Check.Check_Label;
 
 partial class Actions
 {
-   private sealed class HasBeenCreated : Actions
+   private sealed class HasBeenCreated : IActions
    {
       /* ------------------------------------------------------------ */
       // Private Fields
@@ -20,6 +20,7 @@ partial class Actions
 
       public HasBeenCreated
       (
+         Actions    actions,
          FakeLabel  label,
          FakeSystem system
       )
@@ -29,40 +30,36 @@ partial class Actions
 
          Content = TwoWayBindingActions<object, Actions>.Create("Content",
                                                                 system.Content(),
-                                                                () => this);
+                                                                () => actions);
 
          Visibility = TwoWayBindingActions<Visibility, Actions>.Create("Visibility",
                                                                        system.Visibility(),
-                                                                       () => this);
+                                                                       () => actions);
       }
 
       /* ------------------------------------------------------------ */
-      // ITestEnvironment<Asserts> Methods
+      // IActions Properties
       /* ------------------------------------------------------------ */
 
-      public override Asserts Asserts()
-         => new(_label,
-                _system);
-
-      /* ------------------------------------------------------------ */
-
-      public override void FinishArrange() { }
-
-      /* ------------------------------------------------------------ */
-      // Properties
-      /* ------------------------------------------------------------ */
-
-      public override TwoWayBindingActions<object, Actions> Content { get; }
+      public TwoWayBindingActions<object, Actions> Content { get; }
 
       /* ------------------------------------------------------------ */
 
-      public override TwoWayBindingActions<Visibility, Actions> Visibility { get; }
+      public TwoWayBindingActions<Visibility, Actions> Visibility { get; }
 
       /* ------------------------------------------------------------ */
-      // Methods
+      // IActions Methods
       /* ------------------------------------------------------------ */
 
-      public override Actions CreateLabel
+      public Asserts Asserts()
+         => Check_Label
+           .Asserts
+           .Create(_label,
+                   _system);
+
+      /* ------------------------------------------------------------ */
+
+      public void CreateLabel
       (
          The_UI_creates_a_label args
       )

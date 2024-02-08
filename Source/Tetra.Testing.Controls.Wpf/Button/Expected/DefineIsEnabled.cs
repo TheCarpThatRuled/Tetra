@@ -2,7 +2,7 @@
 
 namespace Tetra.Testing;
 
-partial class ExpectedButton
+partial class Expected_button
 {
    public sealed class DefineIsEnabled
    {

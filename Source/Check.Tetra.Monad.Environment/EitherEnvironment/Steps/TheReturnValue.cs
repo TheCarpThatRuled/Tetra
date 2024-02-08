@@ -10,6 +10,10 @@ partial class Steps
    public sealed class TheReturnValue
    {
 
+      /* ------------------------------------------------------------ */
+      // Asserts
+      /* ------------------------------------------------------------ */
+
       // ReSharper disable once InconsistentNaming
       public IAssert is_equal_to<T>
       (

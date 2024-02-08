@@ -1,6 +1,6 @@
-﻿using Check.Check_TextBox;
+﻿using Check.Check_Text_Box;
 using static Check.TextBox.Text;
-using static Check.Check_TextBox.Steps;
+using static Check.Check_Text_Box.Steps;
 
 // ReSharper disable InconsistentNaming
 

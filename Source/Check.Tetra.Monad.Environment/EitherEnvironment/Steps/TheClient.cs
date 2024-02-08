@@ -10,17 +10,17 @@ partial class Steps
    public sealed class TheClient
    {
       /* ------------------------------------------------------------ */
-      // Given
+      // Givens
       /* ------------------------------------------------------------ */
 
-      public IInitialArrange has_not_created_an_either()
-         => AtomicInitialArrange
+      public IInitialAction has_not_created_an_either()
+         => AtomicInitialAction
            .Create($"{nameof(the_Client)}_{nameof(has_not_created_an_either)}",
                    Actions.Start);
 
       /* ------------------------------------------------------------ */
 
-      public IInitialArrange has_created_a_left_from
+      public IInitialAction has_created_a_left_from
       (
          FakeLeft? content
       )
@@ -30,7 +30,7 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IInitialArrange has_created_a_right_from
+      public IInitialAction has_created_a_right_from
       (
          FakeRight? content
       )
@@ -39,44 +39,42 @@ partial class Steps
            .Recharacterise($@"{nameof(the_Client)}_{nameof(has_created_a_right_from)} ""{content}""");
 
       /* ------------------------------------------------------------ */
-      // Arrange/Act
+      // Actions
       /* ------------------------------------------------------------ */
 
-      public IArrangeAct calls_Either_Left_with
+      public IAction calls_Either_Left_with
       (
          FakeLeft? content
       )
-         => AtomicArrangeAct
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_Either_Left_with)} ""{content}""",
                    arrange => arrange.CallEitherLeft(content!));
 
       /* ------------------------------------------------------------ */
 
-      public IArrangeAct calls_Either_Right_with
+      public IAction calls_Either_Right_with
       (
          FakeRight? content
       )
-         => AtomicArrangeAct
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_Either_Right_with)} ""{content}""",
                    arrange => arrange.CallEitherRight(content!));
 
       /* ------------------------------------------------------------ */
-      // Act
-      /* ------------------------------------------------------------ */
 
-      public IAct calls_Do()
-         => AtomicAct
+      public IAction calls_Do()
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_Do)}",
                    arrange => arrange.CallDo(WhenLeft,
                                              WhenRight));
 
       /* ------------------------------------------------------------ */
 
-      public IAct calls_Do_with
+      public IAction calls_Do_with
       (
          FakeExternalState externalState
       )
-         => AtomicAct
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_Do_with)} ""{externalState}""",
                    arrange => arrange.CallDo(WhenLeft,
                                              WhenRight,
@@ -84,50 +82,50 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IAct calls_Equals_with
+      public IAction calls_Equals_with
       (
          object? other
       )
-         => AtomicAct
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_Equals_with)} ""{other}""",
                    arrange => arrange.CallEquals(other));
 
       /* ------------------------------------------------------------ */
 
-      public IAct calls_Equals_with_self()
-         => AtomicAct
+      public IAction calls_Equals_with_self()
+         => AtomicAction
            .Create($"{nameof(the_Client)}_{nameof(calls_Equals_with_self)}",
                    arrange => arrange.CallEqualsWithSelf());
 
       /* ------------------------------------------------------------ */
 
-      public IAct calls_GetHashCode()
-         => AtomicAct
+      public IAction calls_GetHashCode()
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_GetHashCode)}",
                    arrange => arrange.CallGetHashCode());
 
       /* ------------------------------------------------------------ */
 
-      public IAct calls_IsALeft()
-         => AtomicAct
+      public IAction calls_IsALeft()
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_IsALeft)}",
                    arrange => arrange.CallIsALeft());
 
       /* ------------------------------------------------------------ */
 
-      public IAct calls_IsARight()
-         => AtomicAct
+      public IAction calls_IsARight()
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_IsARight)}",
                    arrange => arrange.CallIsARight());
 
       /* ------------------------------------------------------------ */
 
-      public IAct calls_Map_with
+      public IAction calls_Map_with
       (
          FakeNewLeft  whenLeftValue,
          FakeNewRight whenRightValue
       )
-         => AtomicAct
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{whenLeftValue}"", ""{whenRightValue}""",
                    arrange => arrange.CallMap(WhenLeft,
                                               whenLeftValue,
@@ -136,13 +134,13 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IAct calls_Map_with
+      public IAction calls_Map_with
       (
          FakeExternalState externalState,
          FakeNewLeft       whenLeftValue,
          FakeNewRight      whenRightValue
       )
-         => AtomicAct
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{externalState}"", ""{whenLeftValue}"", ""{whenRightValue}""",
                    arrange => arrange.CallMap(WhenLeft,
                                               whenLeftValue,
@@ -152,12 +150,12 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IAct calls_Unify_with
+      public IAction calls_Unify_with
       (
          FakeNewType whenLeftValue,
          FakeNewType whenRightValue
       )
-         => AtomicAct
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_Unify_with)} ""{whenLeftValue}""",
                    arrange => arrange.CallUnify(WhenLeft,
                                                 whenLeftValue,
@@ -166,13 +164,13 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IAct calls_Unify_with
+      public IAction calls_Unify_with
       (
          FakeExternalState externalState,
          FakeNewType       whenLeftValue,
          FakeNewType       whenRightValue
       )
-         => AtomicAct
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_Unify_with)} ""{externalState}"", ""{whenLeftValue}""",
                    arrange => arrange.CallUnify(WhenLeft,
                                                 whenLeftValue,
@@ -182,22 +180,22 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IAct calls_ReduceLeftToOption()
-         => AtomicAct
+      public IAction calls_ReduceLeftToOption()
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_ReduceLeftToOption)}",
                    arrange => arrange.CallReduceLeftToOption());
 
       /* ------------------------------------------------------------ */
 
-      public IAct calls_ReduceRightToOption()
-         => AtomicAct
+      public IAction calls_ReduceRightToOption()
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_ReduceRightToOption)}",
                    arrange => arrange.CallReduceRightToOption());
 
       /* ------------------------------------------------------------ */
 
-      public IAct calls_ToString()
-         => AtomicAct
+      public IAction calls_ToString()
+         => AtomicAction
            .Create($@"{nameof(the_Client)}_{nameof(calls_ToString)}",
                    arrange => arrange.CallToString());
 

@@ -15,5 +15,23 @@ internal static class Contents
                                                                                     2,
                                                                                     "THIS IS art attack");
 
+   public static readonly object Object = new();
+
+   /* ------------------------------------------------------------ */
+   // Functions
+   /* ------------------------------------------------------------ */
+
+   public static object From
+   (
+      string content
+   )
+      => content switch
+         {
+            "1"      => 1,
+            "2"      => 2,
+            "object" => Object,
+            _        => content,
+         };
+
    /* ------------------------------------------------------------ */
 }

@@ -42,7 +42,7 @@ partial class AAA_test<TActions, TAsserts>
       // IAssert Methods
       /* ------------------------------------------------------------ */
 
-      public TAsserts Assert
+      public TAsserts Run
       (
          TAsserts environment
       )
