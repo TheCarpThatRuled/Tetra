@@ -24,9 +24,9 @@ partial class Steps
          => AtomicAction
            .Create($"{nameof(the_file_system)}.{nameof(Creates_a_sandbox)}: <{directory}>",
                    environment => environment
-                                 .ExternalFileSystem
+                                 .SystemIoApi
                                  .CreateSandbox(directory)
-                                 .ReturnToParent());
+                                 .Next());
 
       /* ------------------------------------------------------------ */
       // Asserts

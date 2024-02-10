@@ -72,7 +72,7 @@ public class WHEN_the_client_sets_the_current_directory
                      .GIVEN(the_client.has_configured_setting_the_current_directory_to_fail(initialCurrentDirectory,
                                                                                             errorMessage))
                      .WHEN(the_client.sets_the_current_directory(newCurrentDirectory))
-                     .THEN(the_return_value.Is_in_error(errorMessage))
+                     .THEN(the_return_value.is_in_error(errorMessage))
                      .And(the_current_directory.@is(initialCurrentDirectory))
                      .Crystallise();
 

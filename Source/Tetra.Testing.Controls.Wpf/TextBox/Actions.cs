@@ -1,13 +1,12 @@
 ﻿namespace Tetra.Testing;
 
-public sealed class TextBoxActions<TNext>
+public sealed class TextBoxActions<T> : Chainable<T>
 {
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
    private readonly string      _descriptionHeader;
-   private readonly Func<TNext> _next;
    private readonly FakeTextBox _textBox;
 
    /* ------------------------------------------------------------ */
@@ -17,24 +16,23 @@ public sealed class TextBoxActions<TNext>
    private TextBoxActions
    (
       string      descriptionHeader,
-      Func<TNext> next,
+      Func<T>     next,
       FakeTextBox textBox
-   )
+   ) : base(next)
    {
       _textBox           = textBox;
       _descriptionHeader = descriptionHeader;
-      _next              = next;
    }
 
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static TextBoxActions<TNext> Create
+   public static TextBoxActions<T> Create
    (
       string      descriptionHeader,
       FakeTextBox textBox,
-      Func<TNext> next
+      Func<T>     next
    )
       => new(descriptionHeader,
              next,
@@ -44,7 +42,7 @@ public sealed class TextBoxActions<TNext>
    // Methods
    /* ------------------------------------------------------------ */
 
-   public TextBoxActions<TNext> EnterText
+   public TextBoxActions<T> EnterText
    (
       string text
    )
@@ -58,11 +56,6 @@ public sealed class TextBoxActions<TNext>
 
       return this;
    }
-
-   /* ------------------------------------------------------------ */
-
-   public TNext Next()
-      => _next();
 
    /* ------------------------------------------------------------ */
 }

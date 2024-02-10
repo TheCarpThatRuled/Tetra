@@ -71,12 +71,12 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IAssert Is_in_error
+      public IAssert is_in_error
       (
          Parameter<Message> expected
       )
          => AtomicAssert
-           .Create($"{nameof(the_return_value)}.{nameof(Is_in_error)}: {expected}",
+           .Create($"{nameof(the_return_value)}.{nameof(is_in_error)}: {expected}",
                    (
                       parameters,
                       environment
@@ -86,18 +86,33 @@ partial class Steps
 
       /* ------------------------------------------------------------ */
 
-      public IAssert Is_in_error
+      public IAssert is_in_error
       (
          Func<Message, bool> predicate
       )
          => AtomicAssert
-           .Create($"{nameof(the_return_value)}.{nameof(Is_in_error)}: {nameof(predicate)}",
+           .Create($"{nameof(the_return_value)}.{nameof(is_in_error)}: {nameof(predicate)}",
                    (
                       _,
                       environment
                    ) => environment
                        .ReturnsAnOption<Message>()
                        .IsASomeAnd(predicate));
+
+      /* ------------------------------------------------------------ */
+
+      public IAssert is_in_error
+      (
+         Func<Parameters, Func<Message, bool>> predicate
+      )
+         => AtomicAssert
+           .Create($"{nameof(the_return_value)}.{nameof(is_in_error)}: {nameof(predicate)}",
+                   (
+                      parameters,
+                      environment
+                   ) => environment
+                       .ReturnsAnOption<Message>()
+                       .IsASomeAnd(predicate(parameters)));
 
       /* ------------------------------------------------------------ */
    }

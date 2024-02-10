@@ -1,52 +1,56 @@
-﻿using Tetra.Testing;
+﻿using Tetra;
+using Tetra.Testing;
 
 namespace Check;
 
-public sealed class ExternalFileSystemActions
+public sealed class SystemIoActions : Chainable<Actions>
 {
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
+   private readonly string               _description;
    private readonly AAA_test.Disposables _disposables;
    private readonly LockedFiles          _lockedFiles;
-   private readonly Actions              _parent;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private ExternalFileSystemActions
+   private SystemIoActions
    (
+      string               description,
       AAA_test.Disposables disposables,
       LockedFiles          lockedFiles,
-      Actions              parent
-   )
+      Func<Actions>        next
+   ) : base(next)
    {
+      _description = description;
       _disposables = disposables;
       _lockedFiles = lockedFiles;
-      _parent      = parent;
    }
 
    /* ------------------------------------------------------------ */
    // Internal Factory Functions
    /* ------------------------------------------------------------ */
 
-   internal static ExternalFileSystemActions Create
+   internal static SystemIoActions Create
    (
+      string               description,
       AAA_test.Disposables disposables,
       LockedFiles          lockedFiles,
-      Actions              parent
+      Func<Actions>        next
    )
-      => new(disposables,
+      => new(description,
+             disposables,
              lockedFiles,
-             parent);
+             next);
 
    /* ------------------------------------------------------------ */
    // Methods
    /* ------------------------------------------------------------ */
 
-   public ExternalFileSystemActions CreateSandbox
+   public SystemIoActions CreateSandbox
    (
       string directory
    )
@@ -61,7 +65,7 @@ public sealed class ExternalFileSystemActions
 
    /* ------------------------------------------------------------ */
 
-   public ExternalFileSystemActions EnsureADirectoryDoesNotExists
+   public SystemIoActions EnsureADirectoryDoesNotExists
    (
       string directory
    )
@@ -73,7 +77,7 @@ public sealed class ExternalFileSystemActions
 
    /* ------------------------------------------------------------ */
 
-   public ExternalFileSystemActions EnsureADirectoryExists
+   public SystemIoActions EnsureADirectoryExists
    (
       string directory
    )
@@ -85,7 +89,7 @@ public sealed class ExternalFileSystemActions
 
    /* ------------------------------------------------------------ */
 
-   public ExternalFileSystemActions EnsureAnEmptyDirectoryExists
+   public SystemIoActions EnsureAnEmptyDirectoryExists
    (
       string directory
    )
@@ -97,7 +101,7 @@ public sealed class ExternalFileSystemActions
 
    /* ------------------------------------------------------------ */
 
-   public ExternalFileSystemActions EnsureADirectoryIsEmpty
+   public SystemIoActions EnsureADirectoryIsEmpty
    (
       string directory
    )
@@ -109,7 +113,7 @@ public sealed class ExternalFileSystemActions
 
    /* ------------------------------------------------------------ */
 
-   public ExternalFileSystemActions EnsureAFileDoesNotExists
+   public SystemIoActions EnsureAFileDoesNotExists
    (
       string file
    )
@@ -121,7 +125,7 @@ public sealed class ExternalFileSystemActions
 
    /* ------------------------------------------------------------ */
 
-   public ExternalFileSystemActions EnsureAFileExists
+   public SystemIoActions EnsureAFileExists
    (
       string file
    )
@@ -133,7 +137,7 @@ public sealed class ExternalFileSystemActions
 
    /* ------------------------------------------------------------ */
 
-   public ExternalFileSystemActions LockFile
+   public SystemIoActions LockFile
    (
       string file
    )
@@ -145,7 +149,7 @@ public sealed class ExternalFileSystemActions
 
    /* ------------------------------------------------------------ */
 
-   public ExternalFileSystemActions UnlockFile
+   public SystemIoActions UnlockFile
    (
       string file
    )
@@ -157,7 +161,7 @@ public sealed class ExternalFileSystemActions
 
    /* ------------------------------------------------------------ */
 
-   public ExternalFileSystemActions SetCurrentDirectory
+   public SystemIoActions SetCurrentDirectory
    (
       string directory
    )
@@ -166,11 +170,6 @@ public sealed class ExternalFileSystemActions
 
       return this;
    }
-
-   /* ------------------------------------------------------------ */
-
-   public Actions ReturnToParent()
-      => _parent;
 
    /* ------------------------------------------------------------ */
 }

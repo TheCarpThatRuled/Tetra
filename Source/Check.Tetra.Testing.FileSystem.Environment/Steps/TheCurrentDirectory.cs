@@ -30,7 +30,7 @@ partial class Steps
                       parameters,
                       environment
                    ) => environment
-                       .TestFileSystem
+                       .FileSystem
                        .TheCurrentDirectoryIs(parameters.Retrieve(expected))
                        .Next());
 

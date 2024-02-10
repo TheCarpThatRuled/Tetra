@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tetra.Testing;
 
-public sealed class LabelAsserts<T> : IAsserts
+public sealed class LabelAsserts<T> : Chainable<T>
 {
    /* ------------------------------------------------------------ */
    // Private Fields
@@ -11,7 +11,6 @@ public sealed class LabelAsserts<T> : IAsserts
 
    private readonly FakeLabel _actual;
    private readonly string    _descriptionHeader;
-   private readonly Func<T>   _next;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
@@ -22,11 +21,10 @@ public sealed class LabelAsserts<T> : IAsserts
       FakeLabel actual,
       string    descriptionHeader,
       Func<T>   next
-   )
+   ) : base(next)
    {
       _actual            = actual;
       _descriptionHeader = descriptionHeader;
-      _next              = next;
    }
 
    /* ------------------------------------------------------------ */
@@ -74,11 +72,6 @@ public sealed class LabelAsserts<T> : IAsserts
 
       return this;
    }
-
-   /* ------------------------------------------------------------ */
-
-   public T Next()
-      => _next();
 
    /* ------------------------------------------------------------ */
 }

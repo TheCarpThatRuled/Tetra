@@ -1,6 +1,6 @@
 ﻿namespace Tetra.Testing;
 
-public sealed class FileSystemAsserts<T>
+public sealed class FileSystemActions<T> : Chainable<T>
 {
    /* ------------------------------------------------------------ */
    // Private Fields
@@ -8,29 +8,27 @@ public sealed class FileSystemAsserts<T>
 
    private readonly string     _characterisation;
    private readonly FileSystem _fileSystem;
-   private readonly Func<T>    _next;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private FileSystemAsserts
+   private FileSystemActions
    (
       string     characterisation,
       FileSystem fileSystem,
       Func<T>    next
-   )
+   ) : base(next)
    {
       _characterisation = characterisation;
       _fileSystem       = fileSystem;
-      _next             = next;
    }
 
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static FileSystemAsserts<T> Create
+   public static FileSystemActions<T> Create
    (
       string     characterisation,
       FileSystem fileSystem,
@@ -44,8 +42,24 @@ public sealed class FileSystemAsserts<T>
    // Methods
    /* ------------------------------------------------------------ */
 
-   public T Next()
-      => _next();
+   public FileSystemActions<T> SettingTheCurrentDirectoryShallFail
+   (
+      Message errorMessage
+   )
+   {
+      _fileSystem.SettingTheCurrentDirectoryShallFail(errorMessage);
+
+      return this;
+   }
+
+   /* ------------------------------------------------------------ */
+
+   public FileSystemActions<T> SettingTheCurrentDirectoryShallSucceed()
+   {
+      _fileSystem.SettingTheCurrentDirectoryShallSucceed();
+
+      return this;
+   }
 
    /* ------------------------------------------------------------ */
 }

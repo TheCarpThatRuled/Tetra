@@ -46,28 +46,22 @@ public sealed partial class Actions : TestEnvironment<Actions, Asserts>
     protected override Actions PerformFinalise()
        => this;
 
-    /* ------------------------------------------------------------ */
-    // Properties
-    /* ------------------------------------------------------------ */
+   /* ------------------------------------------------------------ */
+   // Properties
+   /* ------------------------------------------------------------ */
 
-    public FileSystemActions<Actions> TestFileSystem
+   public FileSystemApiActions<Actions> Api
+      => _actions
+        .Api;
+
+   /* ------------------------------------------------------------ */
+
+   public FileSystemActions<Actions> TestApi
        => _actions
-         .TestFileSystem;
+         .ConfigurationApi;
 
    /* ------------------------------------------------------------ */
    // Methods
-   /* ------------------------------------------------------------ */
-
-   public Actions Create
-   (
-      AbsoluteDirectoryPath path
-   )
-   {
-      _actions.Create(path);
-
-      return this;
-   }
-
    /* ------------------------------------------------------------ */
 
    public Actions CreateFileSystem
@@ -78,30 +72,6 @@ public sealed partial class Actions : TestEnvironment<Actions, Asserts>
        _actions.CreateFileSystem(currentDirectory);
 
        return this;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public Actions Exists
-   (
-      AbsoluteDirectoryPath path
-   )
-   {
-      _actions.Exists(path);
-
-      return this;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public Actions SetCurrentDirectory
-   (
-      AbsoluteDirectoryPath path
-   )
-   {
-      _actions.SetCurrentDirectory(path);
-
-      return this;
    }
 
    /* ------------------------------------------------------------ */

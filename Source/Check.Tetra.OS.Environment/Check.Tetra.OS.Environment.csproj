@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Platforms>x64</Platforms>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -18,7 +18,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tetra\Tetra.csproj" />
-    <ProjectReference Include="..\Tetra.Testing\Tetra.Testing.csproj" />
   </ItemGroup>
 
 </Project>

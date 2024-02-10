@@ -16,11 +16,11 @@ public static partial class Steps
       (
          Expected_text_box expected
       )
-         => A_text_box
-           .Matches<Actions, Asserts>(expected,
-                                      $"{nameof(The_text_box)}",
-                                      asserts => asserts.TextBox)
-           .Recharacterise($"{nameof(The_text_box)}.{nameof(Matches)}: {expected.BriefCharacterisation()}");
+         => AtomicAssert
+           .Create($"{nameof(The_text_box)}.{nameof(Matches)}: {expected.BriefCharacterisation()}",
+                   environment => environment
+                                 .TextBox
+                                 .Matches(expected));
 
       /* ------------------------------------------------------------ */
    }

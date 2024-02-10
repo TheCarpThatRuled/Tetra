@@ -17,6 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Check.Tetra.OS.Environment\Check.Tetra.OS.Environment.csproj" />
     <ProjectReference Include="..\Tetra.Windows\Tetra.Windows.csproj" />
     <ProjectReference Include="..\Tetra\Tetra.csproj" />
     <ProjectReference Include="..\Tetra.Testing\Tetra.Testing.csproj" />

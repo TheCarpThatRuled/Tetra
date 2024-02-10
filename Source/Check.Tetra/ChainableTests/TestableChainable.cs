@@ -1,19 +1,25 @@
-﻿namespace Tetra.Testing;
+﻿namespace Check.ChainableTests;
 
-public sealed class TestTerminus : IAsserts
+internal sealed class TestableChainable<T> : Chainable<T>
 {
    /* ------------------------------------------------------------ */
    // Private Constructors
    /* ------------------------------------------------------------ */
 
-   private TestTerminus() { }
+   private TestableChainable
+   (
+      Func<T> next
+   ) : base(next) { }
 
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static TestTerminus Create()
-      => new();
+   public static TestableChainable<T> Create
+   (
+      Func<T> next
+   )
+      => new(next);
 
    /* ------------------------------------------------------------ */
 }

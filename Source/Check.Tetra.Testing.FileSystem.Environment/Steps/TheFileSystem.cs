@@ -62,7 +62,7 @@ partial class Steps
                                      current,
                                      path
                                   ) => current
-                                      .TestFileSystem
+                                      .FileSystem
                                       .ADirectoryExists(path)
                                       .ExistsAndDoesNotExistsAreInverses(path)
                                       .Next()));

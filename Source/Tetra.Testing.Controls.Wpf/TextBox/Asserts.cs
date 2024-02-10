@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tetra.Testing;
 
-public sealed class TextBoxAsserts<T> : IAsserts
+public sealed class TextBoxAsserts<T> : Chainable<T>
 {
    /* ------------------------------------------------------------ */
    // Private Fields
@@ -11,7 +11,6 @@ public sealed class TextBoxAsserts<T> : IAsserts
 
    private readonly FakeTextBox _actual;
    private readonly string      _descriptionHeader;
-   private readonly Func<T>     _next;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
@@ -22,11 +21,10 @@ public sealed class TextBoxAsserts<T> : IAsserts
       FakeTextBox actual,
       string      descriptionHeader,
       Func<T>     next
-   )
+   ) : base(next)
    {
       _actual            = actual;
       _descriptionHeader = descriptionHeader;
-      _next              = next;
    }
 
    /* ------------------------------------------------------------ */
@@ -47,7 +45,7 @@ public sealed class TextBoxAsserts<T> : IAsserts
    // Methods
    /* ------------------------------------------------------------ */
 
-   public TextBoxAsserts<T> EnabledEquals
+   public TextBoxAsserts<T> IsEnabledEquals
    (
       bool expected
    )
@@ -89,11 +87,6 @@ public sealed class TextBoxAsserts<T> : IAsserts
 
       return this;
    }
-
-   /* ------------------------------------------------------------ */
-
-   public T Next()
-      => _next();
 
    /* ------------------------------------------------------------ */
 }

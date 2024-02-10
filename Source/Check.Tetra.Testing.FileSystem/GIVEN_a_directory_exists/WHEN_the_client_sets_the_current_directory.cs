@@ -6,7 +6,7 @@ using static Check.Steps;
 
 // ReSharper disable InconsistentNaming
 
-namespace Check.GIVEN_the_client_has_configured_setting_the_current_directory_to_fail_then_succeed;
+namespace Check.GIVEN_a_directory_exists;
 
 [TestClass]
 public class WHEN_the_client_sets_the_current_directory
@@ -50,50 +50,11 @@ public class WHEN_the_client_sets_the_current_directory
          /* ------------------------------------------------------------ */
 
          var initialCurrentDirectory = AAA_property_test.Parameter<AbsoluteDirectoryPath>.Create("INITIAL_CURRENT_DIRECTORY");
-         var parentDirectory         = AAA_property_test.Parameter<AbsoluteDirectoryPath>.Create("PARENT_DIRECTORY");
-         var errorMessage            = AAA_property_test.Parameter<Message>.Create("ERROR_MESSAGE");
-
-
-         yield return AAA_property_test
-                     .LIBRARY(Generators
-                             .AbsoluteDirectoryPath()
-                             .Combine(Generators.Message(),
-                                      ValueTuple.Create)
-                             .Select(x => AAA_property_test
-                                         .Parameters
-                                         .Factory()
-                                         .Register(initialCurrentDirectory,
-                                                   x.Item1)
-                                         .Register(parentDirectory,
-                                                   x.Item1
-                                                    .Parent()
-                                                    .Unify(Function.PassThrough,
-                                                           () => throw Failed.InTestSetup($"Could not retrieve the parent of {initialCurrentDirectory}, it doesn't have one?")))
-                                         .Register(errorMessage,
-                                                   x.Item2)
-                                         .Create())
-                             .ToArbitrary())
-                     .GIVEN(the_client.has_configured_setting_the_current_directory_to_fail(initialCurrentDirectory,
-                                                                                            errorMessage))
-                     .And(the_client.configures_setting_the_current_directory_to_succeed())
-                     .WHEN(the_client.sets_the_current_directory(parentDirectory))
-                     .THEN(the_return_value.is_not_in_error<Message>())
-                     .And(the_current_directory.@is(parentDirectory))
-                     .And(the_file_system.contains_a_directory_and_all_its_ancestors(initialCurrentDirectory))
-                     .Crystallise();
-
-         /* ------------------------------------------------------------ */
-
-         var newCurrentDirectory = AAA_property_test.Parameter<AbsoluteDirectoryPath>.Create("NEW_CURRENT_DIRECTORY");
+         var newCurrentDirectory     = AAA_property_test.Parameter<AbsoluteDirectoryPath>.Create("NEW_CURRENT_DIRECTORY");
 
          yield return AAA_property_test
                      .LIBRARY(Generators
                              .TwoUniqueAbsoluteDirectoryPaths()
-                             .Combine(Generators.Message(),
-                                      (
-                                            a,
-                                            b
-                                         ) => (a.Item1, a.Item2, b))
                              .Select(x => AAA_property_test
                                          .Parameters
                                          .Factory()
@@ -101,13 +62,36 @@ public class WHEN_the_client_sets_the_current_directory
                                                    x.Item1)
                                          .Register(newCurrentDirectory,
                                                    x.Item2)
-                                         .Register(errorMessage,
+                                         .Create())
+                             .ToArbitrary())
+                     .GIVEN(the_client.has_created_the_directory(initialCurrentDirectory,
+                                                                 newCurrentDirectory))
+                     .WHEN(the_client.sets_the_current_directory(newCurrentDirectory))
+                     .THEN(the_return_value.is_not_in_error<Message>())
+                     .And(the_current_directory.@is(newCurrentDirectory))
+                     .And(the_file_system.contains_a_directory_and_all_its_ancestors(initialCurrentDirectory))
+                     .Crystallise();
+
+         /* ------------------------------------------------------------ */
+
+         var extantDirectory = AAA_property_test.Parameter<AbsoluteDirectoryPath>.Create("EXTANT_DIRECTORY");
+
+         yield return AAA_property_test
+                     .LIBRARY(Generators
+                             .ThreeUniqueAbsoluteDirectoryPaths()
+                             .Select(x => AAA_property_test
+                                         .Parameters
+                                         .Factory()
+                                         .Register(initialCurrentDirectory,
+                                                   x.Item1)
+                                         .Register(extantDirectory,
+                                                   x.Item2)
+                                         .Register(newCurrentDirectory,
                                                    x.Item3)
                                          .Create())
                              .ToArbitrary())
-                     .GIVEN(the_client.has_configured_setting_the_current_directory_to_fail(initialCurrentDirectory,
-                                                                                            errorMessage))
-                     .And(the_client.configures_setting_the_current_directory_to_succeed())
+                     .GIVEN(the_client.has_created_the_directory(initialCurrentDirectory,
+                                                                 extantDirectory))
                      .WHEN(the_client.sets_the_current_directory(newCurrentDirectory))
                      .THEN(the_return_value.is_in_error(Predicate.Contains_the_text(Error_messages.Partial_DirectoryNotFound_exception(newCurrentDirectory))))
                      .And(the_current_directory.@is(initialCurrentDirectory))

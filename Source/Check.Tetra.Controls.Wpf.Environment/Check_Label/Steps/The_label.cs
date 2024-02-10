@@ -16,11 +16,11 @@ public static partial class Steps
       (
          Expected_label expected
       )
-         => A_label
-           .Matches<Actions, Asserts>(expected,
-                                      $"{nameof(The_label)}",
-                                      asserts => asserts.Label)
-           .Recharacterise($"{nameof(The_label)}.{nameof(Matches)}: {expected.BriefCharacterisation()}");
+         => AtomicAssert
+           .Create($"{nameof(The_label)}.{nameof(Matches)}: {expected.BriefCharacterisation()}",
+                   environment => environment
+                                 .Label
+                                 .Matches(expected));
 
       /* ------------------------------------------------------------ */
    }

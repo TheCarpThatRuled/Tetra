@@ -16,11 +16,12 @@ public static partial class Steps
       (
          string text
       )
-         => A_text_box
-           .receives_text<Actions, Asserts>(text,
-                                            nameof(The_user),
-                                            "the_text_box",
-                                            actions => actions.TextBox);
+         => AtomicAction
+           .Create($@"{nameof(The_user)}_enters_text_in_the_text_box: ""{text}""",
+                   environment => environment
+                                 .TextBox
+                                 .EnterText(text)
+                                 .Next());
 
       /* ------------------------------------------------------------ */
    }

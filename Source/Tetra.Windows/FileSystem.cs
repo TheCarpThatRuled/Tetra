@@ -114,7 +114,7 @@ public sealed class FileSystem : IFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public IEither<ISequence<AbsoluteFilePath>, Message> SubFileOf
+   public IEither<ISequence<AbsoluteFilePath>, Message> SubFilesOf
    (
       AbsoluteDirectoryPath path
    )

@@ -11,7 +11,8 @@ public sealed class Actions : TestEnvironment<Actions, Asserts>
    // Fields
    /* ------------------------------------------------------------ */
 
-   public readonly ExternalFileSystemActions ExternalFileSystem;
+   public readonly SystemIoActions               SystemIoApi;
+   public readonly FileSystemApiActions<Actions> TetraApi;
 
    /* ------------------------------------------------------------ */
    // Private Fields
@@ -20,7 +21,7 @@ public sealed class Actions : TestEnvironment<Actions, Asserts>
    private readonly IFileSystem _fileSystem = FileSystem.Create();
 
    //Mutable
-   private object? _lastReturnedValue = null;
+   private object? _lastReturnedValue;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
@@ -31,9 +32,16 @@ public sealed class Actions : TestEnvironment<Actions, Asserts>
       AAA_test.Disposables disposables,
       LockedFiles          lockedFiles
    )
-      => ExternalFileSystem = ExternalFileSystemActions.Create(disposables,
-                                                               lockedFiles,
-                                                               this);
+   {
+      SystemIoApi = SystemIoActions.Create("System.IO API",
+                                           disposables,
+                                           lockedFiles,
+                                           () => this);
+      TetraApi = FileSystemApiActions<Actions>.Create("Tetra.IFileSystem API",
+                                                      returnValue => _lastReturnedValue = returnValue,
+                                                      _fileSystem,
+                                                      () => this);
+   }
 
    /* ------------------------------------------------------------ */
    // Internal Factory Functions
@@ -46,9 +54,7 @@ public sealed class Actions : TestEnvironment<Actions, Asserts>
    {
       var lockedFiles = LockedFiles.Create();
       disposables.Register(lockedFiles);
-      disposables.Register(SetTheCurrentDirectory.Create(Check
-                                                        .ExternalFileSystem
-                                                        .GetTheCurrentDirectory()));
+      disposables.Register(SetTheCurrentDirectory.Create(ExternalFileSystem.GetTheCurrentDirectory()));
 
       return new(disposables,
                  lockedFiles);
@@ -67,89 +73,6 @@ public sealed class Actions : TestEnvironment<Actions, Asserts>
 
    protected override Actions PerformFinalise()
       => this;
-
-   /* ------------------------------------------------------------ */
-   // Methods
-   /* ------------------------------------------------------------ */
-
-   public Actions DoesNotExist
-   (
-      AbsoluteDirectoryPath path
-   )
-   {
-      _lastReturnedValue = _fileSystem.DoesNotExist(path);
-
-      return this;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public Actions DoesNotExist
-   (
-      AbsoluteFilePath path
-   )
-   {
-      _lastReturnedValue = _fileSystem.DoesNotExist(path);
-
-      return this;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public Actions Exists
-   (
-      AbsoluteFilePath path
-   )
-   {
-      _lastReturnedValue = _fileSystem.Exists(path);
-
-      return this;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public Actions Exists
-   (
-      AbsoluteDirectoryPath path
-   )
-   {
-      _lastReturnedValue = _fileSystem.Exists(path);
-
-      return this;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public Actions Create
-   (
-      AbsoluteDirectoryPath path
-   )
-   {
-      _lastReturnedValue = _fileSystem.Create(path);
-
-      return this;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public Actions GetCurrentDirectory()
-   {
-      _lastReturnedValue = _fileSystem.CurrentDirectory();
-
-      return this;
-   }
-
-   /* ------------------------------------------------------------ */
-
-   public Actions SetCurrentDirectory
-   (
-      AbsoluteDirectoryPath path
-   )
-   {
-     _lastReturnedValue = _fileSystem.SetCurrentDirectory(path);
-
-      return this;
-   }
 
    /* ------------------------------------------------------------ */
 }

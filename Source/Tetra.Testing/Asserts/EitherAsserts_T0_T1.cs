@@ -2,7 +2,7 @@
 
 namespace Tetra.Testing;
 
-public sealed class EitherAsserts<TLeft, TRight, TNext> : IAsserts
+public sealed class EitherAsserts<TLeft, TRight, TNext>
 {
    /* ------------------------------------------------------------ */
    // Private Fields

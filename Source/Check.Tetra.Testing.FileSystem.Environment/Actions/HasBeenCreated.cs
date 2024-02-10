@@ -14,7 +14,7 @@ partial class Actions
       private readonly FileSystem _fileSystem;
 
       //Mutable
-      private object? _returnValue = null;
+      private object? _returnValue;
 
       /* ------------------------------------------------------------ */
       // Private Constructors
@@ -28,10 +28,14 @@ partial class Actions
       {
          _fileSystem = fileSystem;
 
+         Api = FileSystemApiActions<Actions>.Create("IFileSystem API",
+                                                    returnValue => _returnValue = returnValue,
+                                                    _fileSystem,
+                                                    () => parent);
 
-         TestFileSystem = FileSystemActions<Actions>.Create("File system",
-                                                            _fileSystem,
-                                                            () => parent);
+         ConfigurationApi = FileSystemActions<Actions>.Create("Testing.FileSystem API",
+                                                              _fileSystem,
+                                                              () => parent);
       }
 
       /* ------------------------------------------------------------ */
@@ -50,7 +54,11 @@ partial class Actions
       // IActions Properties
       /* ------------------------------------------------------------ */
 
-      public FileSystemActions<Actions> TestFileSystem { get; }
+      public FileSystemApiActions<Actions> Api { get; }
+
+      /* ------------------------------------------------------------ */
+
+      public FileSystemActions<Actions> ConfigurationApi { get; }
 
       /* ------------------------------------------------------------ */
       // IActions Methods
@@ -64,35 +72,11 @@ partial class Actions
 
       /* ------------------------------------------------------------ */
 
-      public void Create
-      (
-         AbsoluteDirectoryPath path
-      )
-         => _returnValue = _fileSystem.Create(path);
-
-      /* ------------------------------------------------------------ */
-
       public void CreateFileSystem
       (
          AbsoluteDirectoryPath currentDirectory
       )
          => throw Failed.Assert("Cannot create the file system; it has already been created.");
-
-      /* ------------------------------------------------------------ */
-
-      public void Exists
-      (
-         AbsoluteDirectoryPath path
-      )
-         => _returnValue = _fileSystem.Exists(path);
-
-      /* ------------------------------------------------------------ */
-
-      public void SetCurrentDirectory
-      (
-         AbsoluteDirectoryPath path
-      )
-         => _returnValue = _fileSystem.SetCurrentDirectory(path);
 
       /* ------------------------------------------------------------ */
    }

@@ -1,6 +1,6 @@
 ﻿namespace Tetra.Testing;
 
-public sealed class TwoWayBindingActions<T, TNext>
+public sealed class TwoWayBindingActions<T, TNext> : Chainable<TNext>
 {
    /* ------------------------------------------------------------ */
    // Private Fields
@@ -8,7 +8,6 @@ public sealed class TwoWayBindingActions<T, TNext>
 
    private readonly ITwoWayBinding<T> _actual;
    private readonly string            _description;
-   private readonly Func<TNext>       _next;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
@@ -19,11 +18,10 @@ public sealed class TwoWayBindingActions<T, TNext>
       ITwoWayBinding<T> actual,
       string            description,
       Func<TNext>       next
-   )
+   ) : base(next)
    {
       _actual      = actual;
       _description = description;
-      _next        = next;
    }
 
    /* ------------------------------------------------------------ */
@@ -53,11 +51,6 @@ public sealed class TwoWayBindingActions<T, TNext>
 
       return this;
    }
-
-   /* ------------------------------------------------------------ */
-
-   public TNext Next()
-      => _next();
 
    /* ------------------------------------------------------------ */
 }

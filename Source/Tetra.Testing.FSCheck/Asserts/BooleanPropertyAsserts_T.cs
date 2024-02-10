@@ -1,6 +1,6 @@
 ﻿namespace Tetra.Testing;
 
-public sealed class BooleanPropertyAsserts<TNext>
+public sealed class BooleanPropertyAsserts<T>
 {
    /* ------------------------------------------------------------ */
    // Private Fields
@@ -8,7 +8,7 @@ public sealed class BooleanPropertyAsserts<TNext>
 
    private readonly bool             _actual;
    private readonly string           _description;
-   private readonly Func<TNext>      _next;
+   private readonly Func<T>          _next;
    private readonly Action<Property> _pushProperty;
 
    /* ------------------------------------------------------------ */
@@ -19,7 +19,7 @@ public sealed class BooleanPropertyAsserts<TNext>
    (
       bool             actual,
       string           description,
-      Func<TNext>      next,
+      Func<T>          next,
       Action<Property> pushProperty
    )
    {
@@ -33,12 +33,12 @@ public sealed class BooleanPropertyAsserts<TNext>
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static BooleanPropertyAsserts<TNext> Create
+   public static BooleanPropertyAsserts<T> Create
    (
       Action<Property> pushProperty,
       string           description,
       bool             actual,
-      Func<TNext>      next
+      Func<T>          next
    )
       => new(actual,
              description,
@@ -49,7 +49,7 @@ public sealed class BooleanPropertyAsserts<TNext>
    // Methods
    /* ------------------------------------------------------------ */
 
-   public TNext IsFalse()
+   public T IsFalse()
    {
       _pushProperty(Properties.IsFalse(_description,
                                        _actual));
@@ -59,7 +59,7 @@ public sealed class BooleanPropertyAsserts<TNext>
 
    /* ------------------------------------------------------------ */
 
-   public TNext IsTrue()
+   public T IsTrue()
    {
       _pushProperty(Properties.IsTrue(_description,
                                       _actual));

@@ -44,8 +44,13 @@ partial class Actions
       // IActions Properties
       /* ------------------------------------------------------------ */
 
-      public FileSystemActions<Actions> TestFileSystem
-         => throw Failed.InTestSetup("Cannot perform the file system; it has not been created.");
+      public FileSystemApiActions<Actions> Api
+         => throw Failed.InTestSetup("Cannot perform any actions on the file system API; it has not been created.");
+
+      /* ------------------------------------------------------------ */
+
+      public FileSystemActions<Actions> ConfigurationApi
+         => throw Failed.InTestSetup("Cannot perform any actions on the file system configuration API; it has not been created.");
 
       /* ------------------------------------------------------------ */
       // IActions Methods
@@ -53,14 +58,6 @@ partial class Actions
 
       public Asserts Asserts()
          => throw Failed.InTestSetup("Cannot progress to the asserts; no actions have been performed.");
-
-      public void Create
-      (
-         AbsoluteDirectoryPath path
-      )
-      {
-         throw new NotImplementedException();
-      }
 
       /* ------------------------------------------------------------ */
 
@@ -70,22 +67,6 @@ partial class Actions
       )
          => _updateState(HasBeenCreated.Create(FileSystem.From(currentDirectory),
                                                _parent));
-
-      /* ------------------------------------------------------------ */
-
-      public void Exists
-      (
-         AbsoluteDirectoryPath path
-      )
-         => throw Failed.InTestSetup("Cannot test if a directory exists; the file system has not been created.");
-
-      /* ------------------------------------------------------------ */
-
-      public void SetCurrentDirectory
-      (
-         AbsoluteDirectoryPath path
-      )
-         => throw Failed.InTestSetup("Cannot set the current directory; the file system has not been created.");
 
       /* ------------------------------------------------------------ */
    }

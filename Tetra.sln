@@ -57,6 +57,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Check.Tetra.Monad", "Source
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Check.Tetra.Testing.FileSystem.Environment", "Source\Check.Tetra.Testing.FileSystem.Environment\Check.Tetra.Testing.FileSystem.Environment.csproj", "{3025035F-2B6D-4409-BDE4-24B1D293F501}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Check.Tetra.OS.Environment", "Source\Check.Tetra.OS.Environment\Check.Tetra.OS.Environment.csproj", "{991F34FD-36B9-4E93-8D98-F30B9CB5F8E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tetra.Testing.FileSystem.FSCheck", "Source\Tetra.Testing.FileSystem.FSCheck\Tetra.Testing.FileSystem.FSCheck.csproj", "{90451FBE-66B2-4A9C-B2AE-BF2761608611}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -159,6 +163,14 @@ Global
 		{3025035F-2B6D-4409-BDE4-24B1D293F501}.Debug|x64.Build.0 = Debug|x64
 		{3025035F-2B6D-4409-BDE4-24B1D293F501}.Release|x64.ActiveCfg = Release|x64
 		{3025035F-2B6D-4409-BDE4-24B1D293F501}.Release|x64.Build.0 = Release|x64
+		{991F34FD-36B9-4E93-8D98-F30B9CB5F8E5}.Debug|x64.ActiveCfg = Debug|x64
+		{991F34FD-36B9-4E93-8D98-F30B9CB5F8E5}.Debug|x64.Build.0 = Debug|x64
+		{991F34FD-36B9-4E93-8D98-F30B9CB5F8E5}.Release|x64.ActiveCfg = Release|x64
+		{991F34FD-36B9-4E93-8D98-F30B9CB5F8E5}.Release|x64.Build.0 = Release|x64
+		{90451FBE-66B2-4A9C-B2AE-BF2761608611}.Debug|x64.ActiveCfg = Debug|x64
+		{90451FBE-66B2-4A9C-B2AE-BF2761608611}.Debug|x64.Build.0 = Debug|x64
+		{90451FBE-66B2-4A9C-B2AE-BF2761608611}.Release|x64.ActiveCfg = Release|x64
+		{90451FBE-66B2-4A9C-B2AE-BF2761608611}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -188,6 +200,8 @@ Global
 		{4A8AB225-DF39-408D-9E76-6FD7296432D5} = {E2EE55F6-6147-4DFD-A576-D6E2C103E76B}
 		{A4A31D3A-50B3-473B-81FB-B61611C0514A} = {E2EE55F6-6147-4DFD-A576-D6E2C103E76B}
 		{3025035F-2B6D-4409-BDE4-24B1D293F501} = {4B86A31C-F3D5-4562-9B12-EFBFA34B9D0A}
+		{991F34FD-36B9-4E93-8D98-F30B9CB5F8E5} = {E2EE55F6-6147-4DFD-A576-D6E2C103E76B}
+		{90451FBE-66B2-4A9C-B2AE-BF2761608611} = {4B86A31C-F3D5-4562-9B12-EFBFA34B9D0A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0C51968D-099A-4C22-A2C4-1B8E4DA238D3}

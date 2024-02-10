@@ -25,9 +25,9 @@ partial class Steps
          => AtomicAction
            .Create($"{nameof(a_directory)}.{nameof(Does_not_exists)}: <{path}>",
                    environment => environment
-                                 .ExternalFileSystem
+                                 .SystemIoApi
                                  .EnsureADirectoryDoesNotExists(path)
-                                 .ReturnToParent());
+                                 .Next());
 
       /* ------------------------------------------------------------ */
 
@@ -38,9 +38,9 @@ partial class Steps
          => AtomicAction
            .Create($"{nameof(a_directory)}.{nameof(Exists)}: <{path}>",
                    environment => environment
-                                 .ExternalFileSystem
+                                 .SystemIoApi
                                  .EnsureADirectoryExists(path)
-                                 .ReturnToParent());
+                                 .Next());
 
       /* ------------------------------------------------------------ */
    }

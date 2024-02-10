@@ -55,7 +55,7 @@ partial class Steps
       public IInitialAction has_configured_setting_the_current_directory_to_fail
       (
          Parameter<AbsoluteDirectoryPath> currentDirectory,
-         Parameter<Message> error
+         Parameter<Message>               error
       )
          => has_created_the_file_system(currentDirectory)
            .And(configures_setting_the_current_directory_to_fail(error))
@@ -86,15 +86,21 @@ partial class Steps
                       environment
                    ) => environment.CreateFileSystem(parameters.Retrieve(currentDirectory)));
 
-      /* ------------------------------------------------------------ * /
+      /* ------------------------------------------------------------ */
 
       public IAction Checks_that_a_directory_does_not_exist
       (
-         AbsoluteDirectoryPath path
+         Parameter<AbsoluteDirectoryPath> path
       )
          => AtomicAction
            .Create($"{nameof(the_client)}.{nameof(Checks_that_a_directory_does_not_exist)}: {path}",
-                   (_, environment) => environment.DoesNotExist(path));
+                   (
+                      parameters,
+                      environment
+                   ) => environment
+                       .Api
+                       .DoesNotExist(parameters.Retrieve(path))
+                       .Next());
 
       /* ------------------------------------------------------------ */
 
@@ -107,27 +113,42 @@ partial class Steps
                    (
                       parameters,
                       environment
-                   ) => environment.Exists(parameters.Retrieve(path)));
+                   ) => environment
+                       .Api
+                       .Exists(parameters.Retrieve(path))
+                       .Next());
 
-      /* ------------------------------------------------------------ * /
+      /* ------------------------------------------------------------ */
 
       public IAction Checks_that_a_file_does_not_exist
       (
-         AbsoluteFilePath path
+         Parameter<AbsoluteFilePath> path
       )
          => AtomicAction
            .Create($"{nameof(the_client)}.{nameof(Checks_that_a_file_does_not_exist)}: {path}",
-                   (_, environment) => environment.DoesNotExist(path));
+                   (
+                      parameters,
+                      environment
+                   ) => environment
+                       .Api
+                       .DoesNotExist(parameters.Retrieve(path))
+                       .Next());
 
-      /* ------------------------------------------------------------ * /
+      /* ------------------------------------------------------------ */
 
       public IAction Checks_that_a_file_exists
       (
-         AbsoluteFilePath path
+         Parameter<AbsoluteFilePath> path
       )
          => AtomicAction
            .Create($"{nameof(the_client)}.{nameof(Checks_that_a_file_exists)}: {path}",
-                   (_, environment) => environment.Exists(path));
+                   (
+                      parameters,
+                      environment
+                   ) => environment
+                       .Api
+                       .Exists(parameters.Retrieve(path))
+                       .Next());
 
       /* ------------------------------------------------------------ */
 
@@ -141,22 +162,20 @@ partial class Steps
                       parameters,
                       environment
                    ) => environment
-                       .TestFileSystem
+                       .TestApi
                        .SettingTheCurrentDirectoryShallFail(parameters.Retrieve(errorMessage))
                        .Next());
 
       /* ------------------------------------------------------------ */
 
-      public IAction configures_setting_the_current_directory_to_succeed
-      (
-      )
+      public IAction configures_setting_the_current_directory_to_succeed()
          => AtomicAction
            .Create($"{nameof(the_client)}.{nameof(configures_setting_the_current_directory_to_succeed)}",
                    (
                       _,
                       environment
                    ) => environment
-                       .TestFileSystem
+                       .TestApi
                        .SettingTheCurrentDirectoryShallSucceed()
                        .Next());
 
@@ -171,14 +190,23 @@ partial class Steps
                    (
                       parameters,
                       environment
-                   ) => environment.Create(parameters.Retrieve(path)));
+                   ) => environment
+                       .Api
+                       .Create(parameters.Retrieve(path))
+                       .Next());
 
-      /* ------------------------------------------------------------ * /
+      /* ------------------------------------------------------------ */
 
-      public IAction Gets_the_current_directory()
+      public IAction gets_the_current_directory()
          => AtomicAction
-           .Create($"{nameof(the_client)}.{nameof(Gets_the_current_directory)}",
-                   (_, environment) => environment.GetCurrentDirectory());
+           .Create($"{nameof(the_client)}.{nameof(gets_the_current_directory)}",
+                   (
+                      _,
+                      environment
+                   ) => environment
+                       .Api
+                       .CurrentDirectory()
+                       .Next());
 
       /* ------------------------------------------------------------ */
 
@@ -191,7 +219,10 @@ partial class Steps
                    (
                       parameters,
                       environment
-                   ) => environment.SetCurrentDirectory(parameters.Retrieve(path)));
+                   ) => environment
+                       .Api
+                       .SetCurrentDirectory(parameters.Retrieve(path))
+                       .Next());
 
       /* ------------------------------------------------------------ */
    }

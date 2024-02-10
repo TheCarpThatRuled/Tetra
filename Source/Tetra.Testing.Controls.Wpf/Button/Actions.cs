@@ -1,14 +1,13 @@
 ﻿namespace Tetra.Testing;
 
-public sealed class ButtonActions<TNext>
+public sealed class ButtonActions<T> : Chainable<T>
 {
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly FakeButton  _button;
-   private readonly string      _descriptionHeader;
-   private readonly Func<TNext> _next;
+   private readonly FakeButton _button;
+   private readonly string     _descriptionHeader;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
@@ -16,25 +15,24 @@ public sealed class ButtonActions<TNext>
 
    private ButtonActions
    (
-      FakeButton  button,
-      string      descriptionHeader,
-      Func<TNext> next
-   )
+      FakeButton button,
+      string     descriptionHeader,
+      Func<T>    next
+   ) : base(next)
    {
       _button            = button;
       _descriptionHeader = descriptionHeader;
-      _next              = next;
    }
 
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static ButtonActions<TNext> Create
+   public static ButtonActions<T> Create
    (
-      string      descriptionHeader,
-      FakeButton  button,
-      Func<TNext> next
+      string     descriptionHeader,
+      FakeButton button,
+      Func<T>    next
    )
       => new(button,
              descriptionHeader,
@@ -44,7 +42,7 @@ public sealed class ButtonActions<TNext>
    // Methods
    /* ------------------------------------------------------------ */
 
-   public ButtonActions<TNext> Click
+   public ButtonActions<T> Click
    (
       uint numberOfClicks = 1
    )
@@ -58,11 +56,6 @@ public sealed class ButtonActions<TNext>
 
       return this;
    }
-
-   /* ------------------------------------------------------------ */
-
-   public TNext Next()
-      => _next();
 
    /* ------------------------------------------------------------ */
 }

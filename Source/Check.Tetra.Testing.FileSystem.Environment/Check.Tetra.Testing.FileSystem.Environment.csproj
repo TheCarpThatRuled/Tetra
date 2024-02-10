@@ -17,6 +17,7 @@
    </PropertyGroup>
 
    <ItemGroup>
+     <ProjectReference Include="..\Check.Tetra.OS.Environment\Check.Tetra.OS.Environment.csproj" />
      <ProjectReference Include="..\Tetra.Testing.FileSystem.FSCheck\Tetra.Testing.FileSystem.FSCheck.csproj" />
      <ProjectReference Include="..\Tetra.Testing.FileSystem\Tetra.Testing.FileSystem.csproj" />
      <ProjectReference Include="..\Tetra.Testing.FSCheck\Tetra.Testing.FSCheck.csproj" />

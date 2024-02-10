@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace Tetra.Testing;
+﻿namespace Tetra.Testing;
 
 public sealed class FileSystem : IFileSystem
 {
@@ -128,7 +126,7 @@ public sealed class FileSystem : IFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public IEither<ISequence<AbsoluteFilePath>, Message> SubFileOf
+   public IEither<ISequence<AbsoluteFilePath>, Message> SubFilesOf
    (
       AbsoluteDirectoryPath path
    )
@@ -158,6 +156,11 @@ public sealed class FileSystem : IFileSystem
       AbsoluteDirectoryPath path
    )
    {
+      if (DoesNotExist(path))
+      {
+         return Option.Some(Messages.DirectoryNotFound(path));
+      }
+
       _currentDirectory = path;
 
       return Option<Message>.None();

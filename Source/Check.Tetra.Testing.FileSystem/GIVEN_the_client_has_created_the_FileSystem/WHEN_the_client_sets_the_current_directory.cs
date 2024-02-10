@@ -48,12 +48,34 @@ public class WHEN_the_client_sets_the_current_directory
       protected override IEnumerable<AAA_property_test> GetTests()
       {
          /* ------------------------------------------------------------ */
-         //This test is wrong and should fail.
-         //This test should expect the call to fail as the directory does not exist.
-         //The positive case should be for a change to a parent directory.
 
          var initialCurrentDirectory = AAA_property_test.Parameter<AbsoluteDirectoryPath>.Create("INITIAL_CURRENT_DIRECTORY");
-         var newCurrentDirectory     = AAA_property_test.Parameter<AbsoluteDirectoryPath>.Create("NEW_CURRENT_DIRECTORY");
+         var parentDirectory         = AAA_property_test.Parameter<AbsoluteDirectoryPath>.Create("PARENT_DIRECTORY");
+
+         yield return AAA_property_test
+                     .LIBRARY(Generators
+                             .AbsoluteDirectoryPath()
+                             .Select(x => AAA_property_test
+                                         .Parameters
+                                         .Factory()
+                                         .Register(initialCurrentDirectory,
+                                                   x)
+                                         .Register(parentDirectory,
+                                                   x.Parent()
+                                                    .Unify(Function.PassThrough,
+                                                           () => throw Failed.InTestSetup($"Could not retrieve the parent of {initialCurrentDirectory}, it doesn't have one?")))
+                                         .Create())
+                             .ToArbitrary())
+                     .GIVEN(the_client.has_created_the_file_system(initialCurrentDirectory))
+                     .WHEN(the_client.sets_the_current_directory(parentDirectory))
+                     .THEN(the_return_value.is_not_in_error<Message>())
+                     .And(the_current_directory.@is(parentDirectory))
+                     .And(the_file_system.contains_a_directory_and_all_its_ancestors(initialCurrentDirectory))
+                     .Crystallise();
+
+         /* ------------------------------------------------------------ */
+
+         var newCurrentDirectory = AAA_property_test.Parameter<AbsoluteDirectoryPath>.Create("NEW_CURRENT_DIRECTORY");
 
          yield return AAA_property_test
                      .LIBRARY(Generators
@@ -69,8 +91,9 @@ public class WHEN_the_client_sets_the_current_directory
                              .ToArbitrary())
                      .GIVEN(the_client.has_created_the_file_system(initialCurrentDirectory))
                      .WHEN(the_client.sets_the_current_directory(newCurrentDirectory))
-                     .THEN(the_file_system.contains_a_directory_and_all_its_ancestors(initialCurrentDirectory))
-                     .And(the_current_directory.@is(newCurrentDirectory))
+                     .THEN(the_return_value.is_in_error(Predicate.Contains_the_text(Error_messages.Partial_DirectoryNotFound_exception(newCurrentDirectory))))
+                     .And(the_current_directory.@is(initialCurrentDirectory))
+                     .And(the_file_system.contains_a_directory_and_all_its_ancestors(initialCurrentDirectory))
                      .Crystallise();
 
          /* ------------------------------------------------------------ */

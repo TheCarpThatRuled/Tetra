@@ -10,7 +10,7 @@ public sealed class Asserts : IPropertyAsserts
    // Fields
    /* ------------------------------------------------------------ */
 
-   public readonly FileSystemPropertyAsserts<Asserts> TestFileSystem;
+   public readonly FileSystemPropertyAsserts<Asserts> FileSystem;
 
    /* ------------------------------------------------------------ */
    // Private Fields
@@ -33,7 +33,7 @@ public sealed class Asserts : IPropertyAsserts
    {
       _returnValue = returnValue;
 
-      TestFileSystem = FileSystemPropertyAsserts<Asserts>.Create(UpdateProperty,
+      FileSystem = FileSystemPropertyAsserts<Asserts>.Create(UpdateProperty,
                                                                  "File system",
                                                                  fileSystem,
                                                                  () => this);

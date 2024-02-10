@@ -8,10 +8,14 @@ partial class Actions
    private interface IActions
    {
       /* ------------------------------------------------------------ */
-      // IActions Properties
+      // Properties
       /* ------------------------------------------------------------ */
 
-      public FileSystemActions<Actions> TestFileSystem { get; }
+      public FileSystemApiActions<Actions> Api { get; }
+
+      /* ------------------------------------------------------------ */
+
+      public FileSystemActions<Actions> ConfigurationApi { get; }
 
       /* ------------------------------------------------------------ */
       // Methods
@@ -21,30 +25,9 @@ partial class Actions
 
       /* ------------------------------------------------------------ */
 
-      public void Create
-      (
-         AbsoluteDirectoryPath path
-      );
-
-      /* ------------------------------------------------------------ */
-
       public void CreateFileSystem
       (
          AbsoluteDirectoryPath currentDirectory
-      );
-
-      /* ------------------------------------------------------------ */
-
-      public void Exists
-      (
-         AbsoluteDirectoryPath path
-      );
-
-      /* ------------------------------------------------------------ */
-
-      void SetCurrentDirectory
-      (
-         AbsoluteDirectoryPath path
       );
 
       /* ------------------------------------------------------------ */

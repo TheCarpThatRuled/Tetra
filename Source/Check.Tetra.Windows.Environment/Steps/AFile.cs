@@ -26,9 +26,9 @@ partial class Steps
          => AtomicAction
            .Create($"{nameof(a_file)}.{nameof(Does_not_exists)}: <{path}>",
                    environment => environment
-                                 .ExternalFileSystem
+                                 .SystemIoApi
                                  .EnsureAFileDoesNotExists(path)
-                                 .ReturnToParent());
+                                 .Next());
 
       /* ------------------------------------------------------------ */
 
@@ -39,9 +39,9 @@ partial class Steps
          => AtomicAction
            .Create($"{nameof(a_file)}.{nameof(Exists)}: <{path}>",
                    environment => environment
-                                 .ExternalFileSystem
+                                 .SystemIoApi
                                  .EnsureAFileExists(path)
-                                 .ReturnToParent());
+                                 .Next());
 
       /* ------------------------------------------------------------ */
 
@@ -52,9 +52,9 @@ partial class Steps
          => AtomicAction
            .Create($"{nameof(a_file)}.{nameof(Is_locked)}: <{path}>",
                    environment => environment
-                                 .ExternalFileSystem
+                                 .SystemIoApi
                                  .LockFile(path)
-                                 .ReturnToParent());
+                                 .Next());
 
       /* ------------------------------------------------------------ */
 
@@ -75,9 +75,9 @@ partial class Steps
          => AtomicAction
            .Create($"{nameof(a_file)}.{nameof(Is_unlocked)}: <{path}>",
                    environment => environment
-                                 .ExternalFileSystem
+                                 .SystemIoApi
                                  .UnlockFile(path)
-                                 .ReturnToParent());
+                                 .Next());
 
       /* ------------------------------------------------------------ */
    }

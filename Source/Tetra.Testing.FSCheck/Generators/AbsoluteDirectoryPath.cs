@@ -13,6 +13,13 @@ partial class Generators
 
    /* ------------------------------------------------------------ */
 
+   public static Gen<AbsoluteDirectoryPath> AbsoluteDirectoryPathWithAParent()
+      => ValidPathWithAVolumeRootAndATrailingDirectorySeparator()
+        .Select(Tetra.AbsoluteDirectoryPath
+                     .Create);
+
+   /* ------------------------------------------------------------ */
+
    public static Gen<(AbsoluteDirectoryPath, AbsoluteDirectoryPath, AbsoluteDirectoryPath)> ThreeUniqueAbsoluteDirectoryPaths()
       => AbsoluteDirectoryPath()
         .ThreeValueTuples()

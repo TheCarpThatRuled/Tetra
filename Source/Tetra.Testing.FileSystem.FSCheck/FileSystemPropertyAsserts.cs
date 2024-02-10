@@ -3,7 +3,7 @@ using static Tetra.Testing.Properties;
 
 namespace Tetra.Testing;
 
-public sealed class FileSystemPropertyAsserts<T>
+public sealed class FileSystemPropertyAsserts<T> : Chainable<T>
 {
    /* ------------------------------------------------------------ */
    // Private Fields
@@ -11,7 +11,6 @@ public sealed class FileSystemPropertyAsserts<T>
 
    private readonly string           _characterisation;
    private readonly FileSystem       _fileSystem;
-   private readonly Func<T>          _next;
    private readonly Action<Property> _pushProperty;
 
    /* ------------------------------------------------------------ */
@@ -24,11 +23,10 @@ public sealed class FileSystemPropertyAsserts<T>
       FileSystem       fileSystem,
       Func<T>          next,
       Action<Property> pushProperty
-   )
+   ) : base(next)
    {
       _characterisation = characterisation;
       _fileSystem       = fileSystem;
-      _next             = next;
       _pushProperty     = pushProperty;
    }
 
@@ -88,9 +86,10 @@ public sealed class FileSystemPropertyAsserts<T>
                                (
                                   _,
                                   actual
-                               ) => AreSetEqual($"{_characterisation}: The directory {expected} should have sub-directories set equal to {{ {expectedSubDirectories.Aggregate("", (total, next) => $"{total}{next}, ")}}}",
-                                                expectedSubDirectories,
-                                                actual),
+                               ) => AreSetEqual(
+                                  $"{_characterisation}: The directory {expected} should have sub-directories set equal to {{ {expectedSubDirectories.Aggregate("", (total, next) => $"{total}{next}, ")}}}",
+                                  expectedSubDirectories,
+                                  actual),
                                _fileSystem.SubDirectoriesOf(expected)));
 
       return this;
@@ -108,10 +107,11 @@ public sealed class FileSystemPropertyAsserts<T>
                                (
                                   _,
                                   actual
-                               ) => AreSetEqual($"{_characterisation}: The directory {expected} should have sub-files set equal to {{ {expectedSubFiles.Aggregate("", (total, next) => $"{total}{next}, ")}}}",
-                                                expectedSubFiles,
-                                                actual),
-                               _fileSystem.SubFileOf(expected)));
+                               ) => AreSetEqual(
+                                  $"{_characterisation}: The directory {expected} should have sub-files set equal to {{ {expectedSubFiles.Aggregate("", (total, next) => $"{total}{next}, ")}}}",
+                                  expectedSubFiles,
+                                  actual),
+                               _fileSystem.SubFilesOf(expected)));
 
       return this;
    }
@@ -181,11 +181,6 @@ public sealed class FileSystemPropertyAsserts<T>
 
       return this;
    }
-
-   /* ------------------------------------------------------------ */
-
-   public T Next()
-      => _next();
 
    /* ------------------------------------------------------------ */
 }
