@@ -31,7 +31,7 @@ partial class The_UI_creates_a_label
       (
          Visibility visibility
       )
-         => new($@"(""{_content}"", {visibility})",
+         => new($"""("{_content}", {visibility})""",
                 _content,
                 $"{{{Environment.NewLine}Content: {_content}{Environment.NewLine}Visibility: {visibility}{Environment.NewLine}}}",
                 visibility);

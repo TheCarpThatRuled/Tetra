@@ -23,11 +23,14 @@ partial class Assert_Extensions
          .Count
        == 0)
       {
-         throw Failed.Assert(TheFakeFunctionWasInvokedMoreThanOnce<T, TReturn>(description)
-                           + "\nExpected:"
-                           + $"\n{expected}"
-                           + "\nActual:"
-                           + $"\n{function.Invocations().Count}");
+         throw Failed
+              .InTheAsserts(TheFakeFunctionWasInvokedMoreThanOnce<T, TReturn>(description),
+                            Failed.Expected(expected),
+                            Failed.Actual(function
+                                         .Invocations()
+                                         .Count))
+              .ToAssertFailedException();
+         ;
       }
 
       if (function
@@ -35,18 +38,21 @@ partial class Assert_Extensions
          .Count
        != 1)
       {
-         throw Failed.Assert(TheFakeFunctionWasNotInvokedWheWeExpectedToBe<T, TReturn>(description)
-                           + "\nExpected:"
-                           + $"\n {expected}");
+         throw Failed
+              .InTheAsserts(TheFakeFunctionWasNotInvokedWheWeExpectedToBe<T, TReturn>(description),
+                            Failed.Expected(expected))
+              .ToAssertFailedException();
       }
 
       if (!function
           .Invocations()[0]!
           .Equals(expected))
       {
-         throw Failed.Assert(TheFakeFunctionWasInvokedWithAnUnexpectedArgument<T, TReturn>(description)
-                           + $"\nExpected: {expected}"
-                           + $"\nActual: {function.Invocations()[0]}");
+         throw Failed
+              .InTheAsserts(TheFakeFunctionWasInvokedWithAnUnexpectedArgument<T, TReturn>(description),
+                            Failed.Expected(expected),
+                            Failed.Actual(function.Invocations()[0]))
+              .ToAssertFailedException();
       }
 
       return assert;
@@ -66,9 +72,12 @@ partial class Assert_Extensions
          .Count
        != 0)
       {
-         throw Failed.Assert(TheFakeFunctionWasInvokedWhenWeExpectedItNotToBe<T, TReturn>(description),
-                             function.Invocations()
-                                     .Count);
+         throw Failed
+              .InTheAsserts(TheFakeFunctionWasInvokedWhenWeExpectedItNotToBe<T, TReturn>(description),
+                            Failed.Actual(function
+                                         .Invocations()
+                                         .Count))
+              .ToAssertFailedException();
       }
 
       return assert;

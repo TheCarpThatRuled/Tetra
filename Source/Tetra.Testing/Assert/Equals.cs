@@ -19,12 +19,16 @@ public static partial class Assert_Extensions
    {
       if (!original.Equals(original))
       {
-         throw Failed.Assert("object.Equals is not reflexive: Comparing against the same instance is not equal");
+         throw Failed
+              .InTheAsserts("object.Equals is not reflexive: Comparing against the same instance is not equal")
+              .ToAssertFailedException();
       }
 
       if (!original.Equals(copy))
       {
-         throw Failed.Assert("object.Equals is not reflexive: Comparing against an identical instance is not equal");
+         throw Failed
+              .InTheAsserts("object.Equals is not reflexive: Comparing against an identical instance is not equal")
+              .ToAssertFailedException();
       }
 
       return assert;
@@ -41,16 +45,20 @@ public static partial class Assert_Extensions
       T           original,
       T           copy
    )
-      where T : notnull, IEquatable<T>
+      where T : IEquatable<T>
    {
       if (!original.Equals(original))
       {
-         throw Failed.Assert("object.Equals is not reflexive: Comparing against the same instance is not equal");
+         throw Failed
+              .InTheAsserts("object.Equals is not reflexive: Comparing against the same instance is not equal")
+              .ToAssertFailedException();
       }
 
       if (!original.Equals(copy))
       {
-         throw Failed.Assert("object.Equals is not reflexive: Comparing against an identical instance is not equal");
+         throw Failed
+              .InTheAsserts("object.Equals is not reflexive: Comparing against an identical instance is not equal")
+              .ToAssertFailedException();
       }
 
       return assert;

@@ -20,7 +20,9 @@ partial class Steps
             FakeExternalState externalState
          )
             => AtomicAssert
-              .Create($@"{nameof(the_whenNone)}_{nameof(was_invoked_once_with)} ""{externalState}""",
+              .Create($"""
+                       {nameof(the_whenNone)}_{nameof(was_invoked_once_with)} "{externalState}"
+                       """,
                       assert => assert
                                .Action<FakeExternalState>(WhenNone)
                                .WasInvokedOnce(externalState));

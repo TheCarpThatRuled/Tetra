@@ -15,9 +15,9 @@ partial class Properties
       int        numberOfInvocations
    )
       => AsProperty(() => action.Invocations() == numberOfInvocations)
-        .Label(Failed.Message(TheFakeActionWasInvokedAnUnexpectedNumberOfTimes(description),
-                              numberOfInvocations,
-                              action.Invocations()));
+        .Label(Failed.InTheAsserts(TheFakeActionWasInvokedAnUnexpectedNumberOfTimes(description),
+                                   Failed.Expected(numberOfInvocations),
+                                   Failed.Actual(action.Invocations())));
 
    /* ------------------------------------------------------------ */
 

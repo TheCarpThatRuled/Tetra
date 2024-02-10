@@ -148,7 +148,7 @@ public static partial class AssertMessages
    (
       this LockedResult<T> locked
    )
-      => $@"Locked(Path: {locked.Content.Path()}, Message: ""{locked.Content.Message()}"")";
+      => $"""Locked(Path: {locked.Content.Path()}, Message: "{locked.Content.Message()}")""";
 
    /* ------------------------------------------------------------ */
 
@@ -156,7 +156,7 @@ public static partial class AssertMessages
    (
       this MissingResult<T> missing
    )
-      => $@"Missing(Path: {missing.Content.Path()}, Message: ""{missing.Content.Message()}"")";
+      => $"""Missing(Path: {missing.Content.Path()}, Message: "{missing.Content.Message()}")""";
 
    /* ------------------------------------------------------------ */
 

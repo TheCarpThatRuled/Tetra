@@ -34,13 +34,11 @@ public class WithIndices
                      .ToArray();
 
          //Assert
-         var expectedActual = Failed.ExpectedActual(sequence.ToArray(),
-                                                    actual.Select(x => $"{x.item}, {x.index}")
-                                                          .ToArray());
-
          if (sequence.Length != actual.Length)
          {
-            return False($"The sequences are unequal in length; {expectedActual}");
+            return False(Failed.InTheAsserts("The sequences are unequal in length.",
+                                             Failed.Expected(sequence),
+                                             Failed.Actual(actual.Select(x => $"{x.item}, {x.index}"))));
          }
 
          for (var i = 0; i < sequence.Length; ++i)
@@ -49,14 +47,18 @@ public class WithIndices
              != actual[i]
                   .item)
             {
-               return False($"The item at position {i} is not the expected item; {expectedActual}");
+               return False(Failed.InTheAsserts($"The item at position {i} is not the expected item.",
+                                                Failed.Expected(sequence),
+                                                Failed.Actual(actual.Select(x => $"{x.item}, {x.index}"))));
             }
 
             if (i
              != actual[i]
                   .index)
             {
-               return False($"The index at position {i} is not '{i}'; {expectedActual}");
+               return False(Failed.InTheAsserts($"The index at position {i} is not '{i}'.",
+                                                Failed.Expected(sequence),
+                                                Failed.Actual(actual.Select(x => $"{x.item}, {x.index}"))));
             }
          }
 
@@ -91,13 +93,11 @@ public class WithIndices
                      .ToArray();
 
          //Assert
-         var expectedActual = Failed.ExpectedActual(sequence.ToArray(),
-                                                    actual.Select(x => $"{x.item}, {x.index}")
-                                                          .ToArray());
-
          if (sequence.Length != actual.Length)
          {
-            return False($"The sequences are unequal in length; {expectedActual}");
+            return False(Failed.InTheAsserts("The sequences are unequal in length.",
+                                             Failed.Expected(sequence),
+                                             Failed.Actual(actual.Select(x => $"{x.item}, {x.index}"))));
          }
 
          for (var i = 0; i < sequence.Length; ++i)
@@ -106,14 +106,18 @@ public class WithIndices
              != actual[i]
                   .item)
             {
-               return False($"The item at position {i} is not the expected item; {expectedActual}");
+               return False(Failed.InTheAsserts($"The item at position {i} is not the expected item.",
+                                                Failed.Expected(sequence),
+                                                Failed.Actual(actual.Select(x => $"{x.item}, {x.index}"))));
             }
 
             if (i
              != actual[i]
                   .index)
             {
-               return False($"The index at position {i} is not '{i}'; {expectedActual}");
+               return False(Failed.InTheAsserts($"The index at position {i} is not '{i}'.",
+                                                Failed.Expected(sequence),
+                                                Failed.Actual(actual.Select(x => $"{x.item}, {x.index}"))));
             }
          }
 
@@ -150,13 +154,11 @@ public class WithIndices
                      .ToArray();
 
          //Assert
-         var expectedActual = Failed.ExpectedActual(sequence.ToArray(),
-                                                    actual.Select(x => $"{x.item}, {x.index}")
-                                                          .ToArray());
-
          if (sequence.Length != actual.Length)
          {
-            return False($"The sequences are unequal in length; {expectedActual}");
+            return False(Failed.InTheAsserts("The sequences are unequal in length.",
+                                             Failed.Expected(sequence),
+                                             Failed.Actual(actual.Select(x => $"{x.item}, {x.index}"))));
          }
 
          for (var i = 0; i < sequence.Length; ++i)
@@ -165,14 +167,18 @@ public class WithIndices
              != actual[i]
                   .item)
             {
-               return False($"The item at position {i} is not the expected item; {expectedActual}");
+               return False(Failed.InTheAsserts($"The item at position {i} is not the expected item.",
+                                                Failed.Expected(sequence),
+                                                Failed.Actual(actual.Select(x => $"{x.item}, {x.index}"))));
             }
 
             if (i
              != actual[i]
                   .index)
             {
-               return False($"The index at position {i} is not '{i}'; {expectedActual}");
+               return False(Failed.InTheAsserts($"The index at position {i} is not '{i}'.",
+                                                Failed.Expected(sequence),
+                                                Failed.Actual(actual.Select(x => $"{x.item}, {x.index}"))));
             }
          }
 

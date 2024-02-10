@@ -60,12 +60,16 @@ partial class Assert_Extensions
       if (expected is null
        && actual is not null)
       {
-         throw Failed.Assert($"{description} - the actual sequence was not null, when we expected it to be null");
+         throw Failed
+              .InTheAsserts($"{description} - the actual sequence was not null, when we expected it to be null")
+              .ToAssertFailedException();
       }
 
       if (actual is null)
       {
-         throw Failed.Assert($"{description} - the actual sequence was null, when we expected it to be non-null");
+         throw Failed
+              .InTheAsserts($"{description} - the actual sequence was null, when we expected it to be non-null")
+              .ToAssertFailedException();
       }
 
       var expectedAsString = expected?
@@ -77,9 +81,11 @@ partial class Assert_Extensions
 
       if (expected?.Length() != actual.Length())
       {
-         throw Failed.Assert($"{description} - The sequences are unequal in length",
-                             expectedAsString,
-                             actualAsString);
+         throw Failed
+              .InTheAsserts($"{description} - The sequences are unequal in length",
+                            expectedAsString,
+                            actualAsString)
+              .ToAssertFailedException();
       }
 
       foreach (var (expectedItem, index) in expected.WithIndices())

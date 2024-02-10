@@ -49,7 +49,10 @@ public sealed class TextBoxActions<T> : Chainable<T>
    {
       if (!_textBox.IsEnabled())
       {
-         throw Failed.Assert($"{_descriptionHeader} could not receive text as it is not enabled");
+         throw Failed
+              .InTheAsserts($"enter text into {_descriptionHeader}",
+                            "it is not enabled")
+              .ToAssertFailedException();
       }
 
       _textBox.EnterText(text);

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tetra.Testing;
@@ -7,164 +8,281 @@ namespace Tetra.Testing;
 public static class Failed
 {
    /* ------------------------------------------------------------ */
-   // Assert Functions
+   // Private Constants
    /* ------------------------------------------------------------ */
 
-   public static AssertFailedException Assert
+   private const string TheTestFailedInTheAsserts = "The test failed in the asserts.";
+   private const string TheTestFailedInTheActions = "The test failed in the actions.";
+
+   /* ------------------------------------------------------------ */
+   // Extension
+   /* ------------------------------------------------------------ */
+
+   public static AssertFailedException ToAssertFailedException
    (
-      string message
+      this string message
    )
       => new(message);
 
    /* ------------------------------------------------------------ */
-
-   public static AssertFailedException Assert
-   (
-      string  message,
-      object? actual
-   )
-      => new(Message(message,
-                     actual));
-
+   // Functions
    /* ------------------------------------------------------------ */
 
-   public static AssertFailedException Assert
-   (
-      string  message,
-      object? expected,
-      object? actual
-   )
-      => new(Message(message,
-                     expected,
-                     actual));
-
-   /* ------------------------------------------------------------ */
-   // InTest Functions
-   /* ------------------------------------------------------------ */
-
-   public static AssertFailedException InTest
+   public static string InTheActions
    (
       string message
    )
-      => Assert($"The test failed after the act: {message}");
+      => Message(TheTestFailedInTheActions,
+                 message);
 
    /* ------------------------------------------------------------ */
 
-   public static AssertFailedException InTest
+   public static string InTheActions
    (
-      string  message,
-      object? actual
+      string          message0,
+      params string[] messages
    )
-      => Assert($"The test failed after the act: {message}",
-                actual);
+      => Message([
+         TheTestFailedInTheActions,
+         message0,
+         .. messages,
+      ]);
 
    /* ------------------------------------------------------------ */
 
-   public static AssertFailedException InTest
+   public static string InTheActions
    (
-      string  message,
-      object? expected,
-      object? actual
+      string              message0,
+      IEnumerable<string> messages
    )
-      => Assert($"The test failed after the act: {message}",
-                expected,
-                actual);
+      => Message([
+         TheTestFailedInTheActions,
+         message0,
+         .. messages,
+      ]);
 
    /* ------------------------------------------------------------ */
-   // InTestSetup Functions
-   /* ------------------------------------------------------------ */
 
-   public static AssertFailedException InTestSetup
+   public static string InTheAsserts
    (
       string message
    )
-      => Assert($"The test failed during test set-up; the act was not performed: {message}");
+      => Message(TheTestFailedInTheAsserts,
+                 message);
 
    /* ------------------------------------------------------------ */
 
-   public static AssertFailedException InTestSetup
+   public static string InTheAsserts
    (
-      string  message,
+      string          message0,
+      params string[] messages
+   )
+      => Message([
+         TheTestFailedInTheAsserts,
+         message0,
+         .. messages,
+      ]);
+
+   /* ------------------------------------------------------------ */
+
+   public static string InTheAsserts
+   (
+      string              message0,
+      IEnumerable<string> messages
+   )
+      => Message([
+         TheTestFailedInTheAsserts,
+         message0,
+         .. messages,
+      ]);
+
+   /* ------------------------------------------------------------ */
+
+   public static string InTheAsserts
+   (
+      string              message0,
+      IEnumerable<string> messages1,
+      IEnumerable<string> messages2
+   )
+      => Message([
+         TheTestFailedInTheAsserts,
+         message0,
+         .. messages1,
+         ..messages2
+      ]);
+
+   /* ------------------------------------------------------------ */
+   // Formatted Message Functions
+   /* ------------------------------------------------------------ */
+
+   public static IEnumerable<string> Actual
+   (
       object? actual
    )
-      => Assert($"The test failed during test set-up; the act was not performed: {message}",
-                actual);
+      =>
+      [
+         "\tActual:",
+         ..Format(actual),
+      ];
 
    /* ------------------------------------------------------------ */
 
-   public static AssertFailedException InTestSetup
+   public static IEnumerable<string> Actual<T>
    (
-      string  message,
-      object? expected,
-      object? actual
+      IEnumerable<T>? expected
    )
-      => Assert($"The test failed during test set-up; the act was not performed: {message}",
-                expected,
-                actual);
+      => Actual((object?) expected);
 
    /* ------------------------------------------------------------ */
-   // Message Functions
-   /* ------------------------------------------------------------ */
 
-   public static string ExpectedActual
+   public static string CannotPerformAnAction
    (
-      object? expected,
-      object? actual
+      string action,
+      string reason
    )
-      => $"Expected: {expected}, Actual: {actual}";
+      => InTheActions($"Cannot {action}; {reason}.");
 
    /* ------------------------------------------------------------ */
 
-   public static string ExpectedActual<T0, T1>
+   public static string CannotPerformAnActionBecauseADependencyHasNotBeenCreated
    (
-      IReadOnlyCollection<T0>? expected,
-      IReadOnlyCollection<T1>? actual
+      string action,
+      string dependency
    )
-      => $"Expected:\n{FormatSequence(expected)}\nActual: {FormatSequence(actual)}";
+      => CannotPerformAnAction(action,
+                               $"{dependency} has not been created");
 
    /* ------------------------------------------------------------ */
 
-   public static string ExpectedActual<T0, T1>
+   public static string CannotPerformAnActionOn
    (
-      IReadOnlyCollection<T0>? expected,
-      IReadOnlyCollection<T1>? actual,
-      string                   description
+      string target,
+      string reason
    )
-      => $"{description}; Expected:\n{FormatSequence(expected)}\nActual: {FormatSequence(actual)}";
+      => CannotPerformAnAction($"perform an action on {target}",
+                               reason);
 
    /* ------------------------------------------------------------ */
 
-   public static string Message
+   public static string CannotPerformAnActionOnBecauseADependencyHasNotBeenCreated
    (
-      string  message,
-      object? actual
+      string target,
+      string dependency
    )
-      => $"{message}; Actual: {actual}";
+      => CannotPerformAnActionBecauseADependencyHasNotBeenCreated($"perform an action on {target}",
+                                                                  dependency);
 
    /* ------------------------------------------------------------ */
 
-   public static string Message
+   public static string CannotPerformAnAssert
    (
-      string  message,
-      object? expected,
-      object? actual
+      string action,
+      string reason
    )
-      => $"{message}; {ExpectedActual(expected, actual)}";
+      => InTheAsserts($"Cannot {action}; {reason}.");
+
+   /* ------------------------------------------------------------ */
+
+   public static string CannotProgressToTheAsserts
+   (
+      string reason
+   )
+      => CannotPerformAnAssert("progress to the asserts",
+                               reason);
+
+   /* ------------------------------------------------------------ */
+
+   public static string CannotProgressToTheAssertsBecauseNoActionsHaveBeenPerformed()
+      => CannotProgressToTheAsserts("no actions have been performed");
+
+   /* ------------------------------------------------------------ */
+
+   public static IEnumerable<string> Expected
+   (
+      object? expected
+   )
+      =>
+      [
+         "\tExpected:",
+         .. Format(expected),
+      ];
+
+   /* ------------------------------------------------------------ */
+
+   public static IEnumerable<string> Expected<T>
+   (
+      IEnumerable<T>? expected
+   )
+      => Expected((object?) expected);
 
    /* ------------------------------------------------------------ */
    // Private Functions
    /* ------------------------------------------------------------ */
 
-   private static string FormatSequence<T>
+   private static IEnumerable<string> Format
    (
-      IEnumerable<T>? expected
+      object? actual
    )
-      => expected?.Aggregate(string.Empty,
-                             (
-                                total,
-                                next
-                             ) => $"{total}{next}\n")
-      ?? "null";
+      => actual switch
+         {
+            IEnumerable<byte> b                             => Format(b),
+            not string and System.Collections.IEnumerable e => Format(e),
+            _ =>
+            [
+               $"\t\t{actual}",
+            ],
+         };
+
+   /* ------------------------------------------------------------ */
+
+   private static IEnumerable<string> Format
+   (
+      System.Collections.IEnumerable source
+   )
+   {
+      var       enumerator = source.GetEnumerator();
+      using var disposable = enumerator as IDisposable;
+
+      while (enumerator.MoveNext())
+      {
+         yield return enumerator
+                     .Current
+                    ?.ToString()
+                   ?? "null";
+      }
+   }
+   /* ------------------------------------------------------------ */
+
+   private static IEnumerable<string> Format
+   (
+      IEnumerable<byte> source
+   )
+      => source
+        .Chunk(10)
+        .Select(chunk => chunk
+                        .Aggregate(new StringBuilder(),
+                                   (
+                                      total,
+                                      next
+                                   ) => total.Append(next.ToString("X")))
+                        .ToString());
+
+   /* ------------------------------------------------------------ */
+
+   private static string Message
+   (
+      params string[] lines
+   )
+      => lines
+        .WithIndices()
+        .Aggregate(new StringBuilder(),
+                   (
+                      total,
+                      next
+                   ) => next.index != lines.Length - 1
+                           ? total.AppendLine(next.item)
+                           : total.Append(next.item))
+        .ToString();
 
    /* ------------------------------------------------------------ */
 }

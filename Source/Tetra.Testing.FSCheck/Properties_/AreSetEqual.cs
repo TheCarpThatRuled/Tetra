@@ -13,8 +13,8 @@ partial class Properties
       IEnumerable<T>? actual
    )
       => AreSetEqual(description,
-                          expected?.Materialise(),
-                          actual?.Materialise());
+                     expected?.Materialise(),
+                     actual?.Materialise());
 
    /* ------------------------------------------------------------ */
 
@@ -68,9 +68,9 @@ partial class Properties
 
       if (expected.Length() != actual.Length())
       {
-         return False(Failed.Message($"{description} - The sequences are unequal in length",
-                                     expectedAsString,
-                                     actualAsString));
+         return False(Failed.InTheAsserts($"{description} - The sequences are unequal in length",
+                                          Failed.Expected(expectedAsString),
+                                          Failed.Actual(actualAsString)));
       }
 
       return actual
@@ -79,8 +79,8 @@ partial class Properties
                        (
                           total,
                           next
-                       ) => total.And(IsTrue(Failed.Message($"{description} - the item at {next.index} was not in the expected sequence",
-                                                            next.index),
+                       ) => total.And(IsTrue(Failed.InTheAsserts($"{description} - the item at {next.index} was not in the expected sequence",
+                                                                 Failed.Actual(next.index)),
                                              expected.Any(e => compareItem(e,
                                                                            next.item)))));
    }

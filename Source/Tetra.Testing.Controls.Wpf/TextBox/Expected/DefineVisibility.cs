@@ -36,8 +36,8 @@ partial class Expected_text_box
       (
          Visibility visibility
       )
-         => new($@"({_isEnabled}, ""{_text}"", {visibility})",
-                $@"{{{Environment.NewLine}IsEnabled: {_isEnabled}{Environment.NewLine}Text: ""{_text}""{Environment.NewLine}Visibility: {visibility}{Environment.NewLine}}}",
+         => new($"""({_isEnabled}, "{_text}", {visibility})""",
+                $$"""{{{Environment.NewLine}}IsEnabled: {{_isEnabled}}{{Environment.NewLine}}Text: "{{_text}}"{{Environment.NewLine}}Visibility: {{visibility}}{{Environment.NewLine}}}""",
                 _isEnabled,
                 _text,
                 visibility);

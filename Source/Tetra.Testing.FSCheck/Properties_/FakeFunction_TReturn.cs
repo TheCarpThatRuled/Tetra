@@ -13,9 +13,9 @@ partial class Properties
       int                   numberOfInvocations
    )
       => AsProperty(() => function.Invocations() == numberOfInvocations)
-        .Label(Failed.Message(AssertMessages.TheFakeFunctionWasInvokedAnUnexpectedNumberOfTimes<TReturn>(description),
-                              numberOfInvocations,
-                              function.Invocations()));
+        .Label(Failed.InTheAsserts(AssertMessages.TheFakeFunctionWasInvokedAnUnexpectedNumberOfTimes<TReturn>(description),
+                                   Failed.Expected(numberOfInvocations),
+                                   Failed.Actual(function.Invocations())));
 
    /* ------------------------------------------------------------ */
 

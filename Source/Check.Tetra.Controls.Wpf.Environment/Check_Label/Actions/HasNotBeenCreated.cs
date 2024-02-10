@@ -33,19 +33,26 @@ partial class Actions
       /* ------------------------------------------------------------ */
 
       public TwoWayBindingActions<object, Actions> Content
-         => throw Failed.Assert("Cannot perform an action on Content; the label has not been created.");
-
+         => throw Failed
+                 .CannotPerformAnActionOnBecauseADependencyHasNotBeenCreated("Content",
+                                                                             "the label")
+                 .ToAssertFailedException();
       /* ------------------------------------------------------------ */
 
       public TwoWayBindingActions<Visibility, Actions> Visibility
-         => throw Failed.Assert("Cannot perform an action on Visibility; the label has not been created.");
+         => throw Failed
+                 .CannotPerformAnActionOnBecauseADependencyHasNotBeenCreated("Visibility",
+                                                                             "the label")
+                 .ToAssertFailedException();
 
       /* ------------------------------------------------------------ */
       // Methods
       /* ------------------------------------------------------------ */
 
       public Asserts Asserts()
-         => throw Failed.InTestSetup("Cannot progress to the asserts; no actions have been performed.");
+         => throw Failed
+                 .CannotProgressToTheAssertsBecauseNoActionsHaveBeenPerformed()
+                 .ToAssertFailedException();
 
       /* ------------------------------------------------------------ */
 

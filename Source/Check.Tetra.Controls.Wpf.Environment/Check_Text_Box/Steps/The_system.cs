@@ -31,7 +31,9 @@ public static partial class Steps
          string text
       )
          => AtomicAction
-           .Create($@"{nameof(The_system)}_{nameof(Updates_Text)}: ""{text}""",
+           .Create($"""
+                    {nameof(The_system)}_{nameof(Updates_Text)}: "{text}"
+                    """,
                    environment => environment
                                  .Text
                                  .Push(text)
@@ -59,7 +61,9 @@ public static partial class Steps
          string expected
       )
          => AtomicAssert
-           .Create($@"{nameof(The_system)}_{nameof(Text_is)}: ""{expected}""",
+           .Create($"""
+                    {nameof(The_system)}_{nameof(Text_is)}: "{expected}"
+                    """,
                    environment => environment
                                  .Text
                                  .Contains(expected)

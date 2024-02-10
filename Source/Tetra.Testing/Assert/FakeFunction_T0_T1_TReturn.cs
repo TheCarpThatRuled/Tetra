@@ -24,12 +24,14 @@ partial class Assert_Extensions
          .Count
        == 0)
       {
-         throw Failed.Assert(TheFakeFunctionWasInvokedMoreThanOnce<T0, T1, TReturn>(description)
-                           + "\nExpected:"
-                           + $"\nArg 0:{expectedArg0}"
-                           + $"\nArg 1:{expectedArg1}"
-                           + "\nActual:"
-                           + $"\n{function.Invocations().Count} invocations");
+         throw Failed
+              .InTheAsserts(TheFakeFunctionWasInvokedMoreThanOnce<T0, T1, TReturn>(description),
+                            Failed.Expected([
+                               $"Arg 0:{expectedArg0}",
+                               $"Arg 1:{expectedArg1}",
+                            ]),
+                            Failed.Actual($"{function.Invocations().Count} invocations"))
+              .ToAssertFailedException();
       }
 
       if (function
@@ -37,10 +39,13 @@ partial class Assert_Extensions
          .Count
        != 1)
       {
-         throw Failed.Assert(TheFakeFunctionWasNotInvokedWheWeExpectedToBe<T0, T1, TReturn>(description)
-                           + "\nExpected:"
-                           + $"\nArg 0:{expectedArg0}"
-                           + $"\nArg 1:{expectedArg1}");
+         throw Failed
+              .InTheAsserts(TheFakeFunctionWasNotInvokedWheWeExpectedToBe<T0, T1, TReturn>(description),
+                            Failed.Expected([
+                               $"Arg 0:{expectedArg0}",
+                               $"Arg 1:{expectedArg1}",
+                            ]))
+              .ToAssertFailedException();
       }
 
       var (actualArg0, actualArg1) = function.Invocations()[0];
@@ -49,13 +54,17 @@ partial class Assert_Extensions
        || !Equals(expectedArg1,
                   actualArg1))
       {
-         throw Failed.Assert(TheFakeFunctionWasInvokedWithAnUnexpectedArgument<T0, T1, TReturn>(description)
-                           + "\nExpected:"
-                           + $"\nArg 0:{expectedArg0}"
-                           + $"\nArg 1:{expectedArg1}"
-                           + "\nActual:"
-                           + $"\nArg 0:{actualArg0}"
-                           + $"\nArg 1:{actualArg1}");
+         throw Failed
+              .InTheAsserts(TheFakeFunctionWasInvokedWithAnUnexpectedArgument<T0, T1, TReturn>(description),
+                            Failed.Expected([
+                               $"Arg 0:{expectedArg0}",
+                               $"Arg 1:{expectedArg1}",
+                            ]),
+                            Failed.Actual([
+                               $"Arg 0:{actualArg0}",
+                               $"Arg 1:{actualArg1}",
+                            ]))
+              .ToAssertFailedException();
       }
 
       return assert;
@@ -75,9 +84,12 @@ partial class Assert_Extensions
          .Count
        != 0)
       {
-         throw Failed.Assert(TheFakeFunctionWasInvokedWhenWeExpectedItNotToBe<T0, T1, TReturn>(description),
-                             function.Invocations()
-                                     .Count);
+         throw Failed
+              .InTheAsserts(TheFakeFunctionWasInvokedWhenWeExpectedItNotToBe<T0, T1, TReturn>(description),
+                            Failed.Actual(function
+                                         .Invocations()
+                                         .Count))
+              .ToAssertFailedException();
       }
 
       return assert;

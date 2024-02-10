@@ -19,15 +19,19 @@ partial class Assert_Extensions
       => actual
         .IsALeft(description,
                  (
-                    leftMessage,
-                    left
+                    _,
+                    _
                  ) => assert,
                  (
                     rightMessage,
                     right
-                 ) => throw Failed.Assert(rightMessage,
-                                          right.ToTestOutput()),
-                 unrecognisedMessage => throw Failed.Assert(unrecognisedMessage));
+                 ) => throw Failed
+                           .InTheAsserts(rightMessage,
+                                         Failed.Actual(right.ToTestOutput()))
+                           .ToAssertFailedException(),
+                 unrecognisedMessage => throw Failed
+                                             .InTheAsserts(unrecognisedMessage)
+                                             .ToAssertFailedException());
 
    /* ------------------------------------------------------------ */
 
@@ -49,9 +53,13 @@ partial class Assert_Extensions
                  (
                     rightMessage,
                     right
-                 ) => throw Failed.Assert(rightMessage,
-                                          right.ToTestOutput()),
-                 unrecognisedMessage => throw Failed.Assert(unrecognisedMessage));
+                 ) => throw Failed
+                           .InTheAsserts(rightMessage,
+                                         Failed.Actual(right.ToTestOutput()))
+                           .ToAssertFailedException(),
+                 unrecognisedMessage => throw Failed
+                                             .InTheAsserts(unrecognisedMessage)
+                                             .ToAssertFailedException());
 
    /* ------------------------------------------------------------ */
 
@@ -68,15 +76,21 @@ partial class Assert_Extensions
                     leftMessage,
                     left
                  ) => !property(left.Content)
-                         ? throw Failed.Assert(leftMessage,
-                                               left.ToTestOutput())
+                         ? throw Failed
+                                .InTheAsserts(leftMessage,
+                                              Failed.Actual(left.ToTestOutput()))
+                                .ToAssertFailedException()
                          : assert,
                  (
                     rightMessage,
                     right
-                 ) => throw Failed.Assert(rightMessage,
-                                          right.ToTestOutput()),
-                 unrecognisedMessage => throw Failed.Assert(unrecognisedMessage));
+                 ) => throw Failed
+                           .InTheAsserts(rightMessage,
+                                         Failed.Actual(right.ToTestOutput()))
+                           .ToAssertFailedException(),
+                 unrecognisedMessage => throw Failed
+                                             .InTheAsserts(unrecognisedMessage)
+                                             .ToAssertFailedException());
 
    /* ------------------------------------------------------------ */
 
@@ -89,14 +103,19 @@ partial class Assert_Extensions
       => actual
         .IsARight(description,
                   (
-                     rightMessage,
-                     right
+                     _,
+                     _
                   ) => assert,
                   (
                      leftMessage,
                      left
-                  ) => throw Failed.Assert(leftMessage),
-                  unrecognisedMessage => throw Failed.Assert(unrecognisedMessage));
+                  ) => throw Failed
+                            .InTheAsserts(leftMessage,
+                                          Failed.Actual(left.ToTestOutput()))
+                            .ToAssertFailedException(),
+                  unrecognisedMessage => throw Failed
+                                              .InTheAsserts(unrecognisedMessage)
+                                              .ToAssertFailedException());
 
    /* ------------------------------------------------------------ */
 
@@ -118,8 +137,13 @@ partial class Assert_Extensions
                   (
                      leftMessage,
                      left
-                  ) => throw Failed.Assert(leftMessage),
-                  unrecognisedMessage => throw Failed.Assert(unrecognisedMessage));
+                  ) => throw Failed
+                            .InTheAsserts(leftMessage,
+                                          Failed.Actual(left.ToTestOutput()))
+                            .ToAssertFailedException(),
+                  unrecognisedMessage => throw Failed
+                                              .InTheAsserts(unrecognisedMessage)
+                                              .ToAssertFailedException());
 
    /* ------------------------------------------------------------ */
 
@@ -136,14 +160,21 @@ partial class Assert_Extensions
                      rightMessage,
                      right
                   ) => !property(right.Content)
-                          ? throw Failed.Assert(rightMessage,
-                                                right.ToTestOutput())
+                          ? throw Failed
+                                 .InTheAsserts(rightMessage,
+                                               Failed.Actual(right.ToTestOutput()))
+                                 .ToAssertFailedException()
                           : assert,
                   (
                      leftMessage,
                      left
-                  ) => throw Failed.Assert(leftMessage),
-                  unrecognisedMessage => throw Failed.Assert(unrecognisedMessage));
+                  ) => throw Failed
+                            .InTheAsserts(leftMessage,
+                                          Failed.Actual(left.ToTestOutput()))
+                            .ToAssertFailedException(),
+                  unrecognisedMessage => throw Failed
+                                              .InTheAsserts(unrecognisedMessage)
+                                              .ToAssertFailedException());
 
    /* ------------------------------------------------------------ */
    // Internal Methods

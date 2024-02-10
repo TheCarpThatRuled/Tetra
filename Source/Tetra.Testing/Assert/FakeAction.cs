@@ -20,9 +20,11 @@ partial class Assert_Extensions
    {
       if (function.Invocations() != numberOfInvocations)
       {
-         throw Failed.Assert(TheFakeActionWasInvokedAnUnexpectedNumberOfTimes(description),
-                             numberOfInvocations,
-                             function.Invocations());
+         throw Failed
+              .InTheAsserts(TheFakeActionWasInvokedAnUnexpectedNumberOfTimes(description),
+                            Failed.Expected(numberOfInvocations),
+                            Failed.Actual(function.Invocations()))
+              .ToAssertFailedException();
       }
 
       return assert;
@@ -54,7 +56,9 @@ partial class Assert_Extensions
             .Invocations()
        != 0)
       {
-         throw Failed.Assert(TheFakeActionWasInvokedWhenWeExpectedItNotToBe(description));
+         throw Failed
+              .InTheAsserts(TheFakeActionWasInvokedWhenWeExpectedItNotToBe(description))
+              .ToAssertFailedException();
       }
 
       return assert;

@@ -76,7 +76,10 @@ partial class Actions
       (
          AbsoluteDirectoryPath currentDirectory
       )
-         => throw Failed.Assert("Cannot create the file system; it has already been created.");
+         => throw Failed
+                 .CannotPerformAnActionOnBecauseADependencyHasNotBeenCreated("create the file system",
+                                                                             "it")
+                 .ToAssertFailedException();
 
       /* ------------------------------------------------------------ */
    }

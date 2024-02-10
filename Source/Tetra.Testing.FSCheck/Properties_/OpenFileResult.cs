@@ -15,10 +15,10 @@ partial class Properties
    )
       => actual switch
          {
-            MissingResult<T> missing => False(Failed.Message(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
-                                                             missing.ToTestOutput())),
-            OpenResult<T> open => False(Failed.Message(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeALocked<T>(description),
-                                                       open.ToTestOutput())),
+            MissingResult<T> missing => False(Failed.InTheAsserts(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
+                                                                  Failed.Actual(missing.ToTestOutput()))),
+            OpenResult<T> open => False(Failed.InTheAsserts(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeALocked<T>(description),
+                                                            Failed.Actual(open.ToTestOutput()))),
             not LockedResult<T> => False(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeALocked<T>(description)),
 
             _ => True(),
@@ -35,10 +35,10 @@ partial class Properties
    )
       => actual switch
          {
-            MissingResult<T> missing => False(Failed.Message(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
-                                                             missing.ToTestOutput())),
-            OpenResult<T> open => False(Failed.Message(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeALocked<T>(description),
-                                                       open.ToTestOutput())),
+            MissingResult<T> missing => False(Failed.InTheAsserts(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
+                                                                  Failed.Actual(missing.ToTestOutput()))),
+            OpenResult<T> open => False(Failed.InTheAsserts(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeALocked<T>(description),
+                                                            Failed.Actual(open.ToTestOutput()))),
             LockedResult<T> locked => AreEqual(TheOpenFileResultIsALockedButDoesNotContainTheExpectedPath<T>(description),
                                                expectedPath,
                                                locked.Content.Path())
@@ -58,10 +58,10 @@ partial class Properties
    )
       => actual switch
          {
-            MissingResult<T> missing => False(Failed.Message(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
-                                                             missing.ToTestOutput())),
-            OpenResult<T> open => False(Failed.Message(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeALocked<T>(description),
-                                                       open.ToTestOutput())),
+            MissingResult<T> missing => False(Failed.InTheAsserts(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
+                                                                  Failed.Actual(missing.ToTestOutput()))),
+            OpenResult<T> open => False(Failed.InTheAsserts(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeALocked<T>(description),
+                                                            Failed.Actual(open.ToTestOutput()))),
             LockedResult<T> locked => property(TheOpenFileResultIsALockedButDoesNotContainTheExpectedContent<T>(description),
                                                locked.Content),
             _ => False(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeALocked<T>(description)),
@@ -76,10 +76,10 @@ partial class Properties
    )
       => actual switch
          {
-            LockedResult<T> locked => False(Failed.Message(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
-                                                           locked.ToTestOutput())),
-            OpenResult<T> open => False(Failed.Message(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeAMissing<T>(description),
-                                                       open.ToTestOutput())),
+            LockedResult<T> locked => False(Failed.InTheAsserts(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
+                                                                Failed.Actual(locked.ToTestOutput()))),
+            OpenResult<T> open => False(Failed.InTheAsserts(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeAMissing<T>(description),
+                                                            Failed.Actual(open.ToTestOutput()))),
             not MissingResult<T> => False(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAMissing<T>(description)),
 
             _ => True(),
@@ -96,10 +96,10 @@ partial class Properties
    )
       => actual switch
          {
-            LockedResult<T> locked => False(Failed.Message(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
-                                                           locked.ToTestOutput())),
-            OpenResult<T> open => False(Failed.Message(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeAMissing<T>(description),
-                                                       open.ToTestOutput())),
+            LockedResult<T> locked => False(Failed.InTheAsserts(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
+                                                                Failed.Actual(locked.ToTestOutput()))),
+            OpenResult<T> open => False(Failed.InTheAsserts(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeAMissing<T>(description),
+                                                            Failed.Actual(open.ToTestOutput()))),
             MissingResult<T> missing => AreEqual(TheOpenFileResultIsAMissingButDoesNotContainTheExpectedPath<T>(description),
                                                  expectedPath,
                                                  missing.Content.Path())
@@ -119,10 +119,10 @@ partial class Properties
    )
       => actual switch
          {
-            LockedResult<T> locked => False(Failed.Message(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
-                                                           locked.ToTestOutput())),
-            OpenResult<T> open => False(Failed.Message(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeAMissing<T>(description),
-                                                       open.ToTestOutput())),
+            LockedResult<T> locked => False(Failed.InTheAsserts(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
+                                                                Failed.Actual(locked.ToTestOutput()))),
+            OpenResult<T> open => False(Failed.InTheAsserts(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeAMissing<T>(description),
+                                                            Failed.Actual(open.ToTestOutput()))),
             MissingResult<T> missing => property(TheOpenFileResultIsAMissingButDoesNotContainTheExpectedContent<T>(description),
                                                  missing.Content),
             _ => False(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAMissing<T>(description)),
@@ -137,10 +137,10 @@ partial class Properties
    )
       => actual switch
          {
-            LockedResult<T> locked => False(Failed.Message(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
-                                                           locked.ToTestOutput())),
-            MissingResult<T> missing => False(Failed.Message(TheOpenFileResultIsAMissingWhenWeExpectedItToBeAnOpen<T>(description),
-                                                             missing.ToTestOutput())),
+            LockedResult<T> locked => False(Failed.InTheAsserts(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
+                                                                Failed.Actual(locked.ToTestOutput()))),
+            MissingResult<T> missing => False(Failed.InTheAsserts(TheOpenFileResultIsAMissingWhenWeExpectedItToBeAnOpen<T>(description),
+                                                                  Failed.Actual(missing.ToTestOutput()))),
             not OpenResult<T> => False(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAnOpen<T>(description)),
 
             _ => True(),
@@ -156,10 +156,10 @@ partial class Properties
    )
       => actual switch
          {
-            LockedResult<T> locked => False(Failed.Message(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
-                                                           locked.ToTestOutput())),
-            MissingResult<T> missing => False(Failed.Message(TheOpenFileResultIsAMissingWhenWeExpectedItToBeAnOpen<T>(description),
-                                                             missing.ToTestOutput())),
+            LockedResult<T> locked => False(Failed.InTheAsserts(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
+                                                                Failed.Actual(locked.ToTestOutput()))),
+            MissingResult<T> missing => False(Failed.InTheAsserts(TheOpenFileResultIsAMissingWhenWeExpectedItToBeAnOpen<T>(description),
+                                                                  Failed.Actual(missing.ToTestOutput()))),
             OpenResult<T> open => AreEqual(TheOpenFileResultIsAnOpenButDoesNotContainTheExpectedContent<T>(description),
                                            expected,
                                            open.Content),
@@ -176,10 +176,10 @@ partial class Properties
    )
       => actual switch
          {
-            LockedResult<T> locked => False(Failed.Message(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
-                                                           locked.ToTestOutput())),
-            MissingResult<T> missing => False(Failed.Message(TheOpenFileResultIsAMissingWhenWeExpectedItToBeAnOpen<T>(description),
-                                                             missing.ToTestOutput())),
+            LockedResult<T> locked => False(Failed.InTheAsserts(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
+                                                                Failed.Actual(locked.ToTestOutput()))),
+            MissingResult<T> missing => False(Failed.InTheAsserts(TheOpenFileResultIsAMissingWhenWeExpectedItToBeAnOpen<T>(description),
+                                                                  Failed.Actual(missing.ToTestOutput()))),
             OpenResult<T> open => property(TheOpenFileResultIsAnOpenButDoesNotContainTheExpectedContent<T>(description),
                                            open.Content),
             _ => False(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAnOpen<T>(description)),

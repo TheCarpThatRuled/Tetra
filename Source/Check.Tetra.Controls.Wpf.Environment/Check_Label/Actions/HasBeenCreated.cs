@@ -63,7 +63,10 @@ partial class Actions
       (
          The_UI_creates_a_label args
       )
-         => throw Failed.Assert("Cannot create the label; it has already been created.");
+         => throw Failed
+                 .CannotPerformAnAssert("create the label",
+                                        "it has already been created.")
+                 .ToAssertFailedException();
 
       /* ------------------------------------------------------------ */
    }

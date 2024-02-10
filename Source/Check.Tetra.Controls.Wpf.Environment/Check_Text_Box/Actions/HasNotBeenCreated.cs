@@ -33,29 +33,43 @@ partial class Actions
       /* ------------------------------------------------------------ */
 
       public TwoWayBindingActions<bool, Actions> IsEnabled
-         => throw Failed.Assert("Cannot perform an action on Content; the text box has not been created.");
+         => throw Failed
+                 .CannotPerformAnActionOnBecauseADependencyHasNotBeenCreated("IsEnabled",
+                                                                             "the text box")
+                 .ToAssertFailedException();
 
       /* ------------------------------------------------------------ */
 
       public TwoWayBindingActions<string, Actions> Text
-         => throw Failed.Assert("Cannot perform an action on Text; the text box has not been created.");
+         => throw Failed
+                 .CannotPerformAnActionOnBecauseADependencyHasNotBeenCreated("Text",
+                                                                             "the text box")
+                 .ToAssertFailedException();
 
       /* ------------------------------------------------------------ */
 
       public TextBoxActions<Actions> TextBox
-         => throw Failed.Assert("Cannot perform an action on the text box; it has not been created.");
+         => throw Failed
+                 .CannotPerformAnActionOnBecauseADependencyHasNotBeenCreated("the text box",
+                                                                             "it")
+                 .ToAssertFailedException();
 
       /* ------------------------------------------------------------ */
 
       public TwoWayBindingActions<Visibility, Actions> Visibility
-         => throw Failed.Assert("Cannot perform an action on Visibility; the text box has not been created.");
+         => throw Failed
+                 .CannotPerformAnActionOnBecauseADependencyHasNotBeenCreated("Visibility",
+                                                                             "the text box")
+                 .ToAssertFailedException();
 
       /* ------------------------------------------------------------ */
       // IActions Methods
       /* ------------------------------------------------------------ */
 
       public Asserts Asserts()
-         => throw Failed.InTestSetup("Cannot progress to the asserts; no actions have been performed.");
+         => throw Failed
+                 .CannotProgressToTheAssertsBecauseNoActionsHaveBeenPerformed()
+                 .ToAssertFailedException();
 
       /* ------------------------------------------------------------ */
 

@@ -56,14 +56,18 @@ partial class AAA_property_test
                   () =>
                   {
                      if (!_parameters.TryGetValue(parameter,
-                                                 out var value))
+                                                  out var value))
                      {
-                        throw Failed.InTestSetup($@"The parameters do not contain an entry for {parameter}");
+                        throw Failed
+                             .InTheActions($@"The parameters do not contain an entry for {parameter}")
+                             .ToAssertFailedException();
                      }
 
                      if (value is not T typedValue)
                      {
-                        throw Failed.InTestSetup($@"The entry for {parameter} is not a {typeof(T).Name}, it is a {value?.GetType().FullName}");
+                        throw Failed
+                             .InTheActions($@"The entry for {parameter} is not a {typeof(T).Name}, it is a {value?.GetType().FullName}")
+                             .ToAssertFailedException();
                      }
 
                      return typedValue;

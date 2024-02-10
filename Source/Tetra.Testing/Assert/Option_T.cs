@@ -25,8 +25,12 @@ partial class Assert_Extensions
                  (
                     noneMessage,
                     none
-                 ) => throw Failed.Assert(noneMessage),
-                 unrecognisedMessage => throw Failed.Assert(unrecognisedMessage));
+                 ) => throw Failed
+                           .InTheAsserts(noneMessage)
+                           .ToAssertFailedException(),
+                 unrecognisedMessage => throw Failed
+                                             .InTheAsserts(unrecognisedMessage)
+                                             .ToAssertFailedException());
 
    /* ------------------------------------------------------------ */
 
@@ -48,8 +52,12 @@ partial class Assert_Extensions
                  (
                     noneMessage,
                     none
-                 ) => throw Failed.Assert(noneMessage),
-                 unrecognisedMessage => throw Failed.Assert(unrecognisedMessage));
+                 ) => throw Failed
+                           .InTheAsserts(noneMessage)
+                           .ToAssertFailedException(),
+                 unrecognisedMessage => throw Failed
+                                             .InTheAsserts(unrecognisedMessage)
+                                             .ToAssertFailedException());
 
    /* ------------------------------------------------------------ */
 
@@ -66,14 +74,20 @@ partial class Assert_Extensions
                     someMessage,
                     some
                  ) => !property(some.Content)
-                         ? throw Failed.Assert(someMessage,
-                                               some.ToTestOutput())
+                         ? throw Failed
+                                .InTheAsserts(someMessage,
+                                              Failed.Actual(some.ToTestOutput()))
+                                .ToAssertFailedException()
                          : assert,
                  (
                     noneMessage,
                     none
-                 ) => throw Failed.Assert(noneMessage),
-                 unrecognisedMessage => throw Failed.Assert(unrecognisedMessage));
+                 ) => throw Failed
+                           .InTheAsserts(noneMessage)
+                           .ToAssertFailedException(),
+                 unrecognisedMessage => throw Failed
+                                             .InTheAsserts(unrecognisedMessage)
+                                             .ToAssertFailedException());
 
    /* ------------------------------------------------------------ */
 
@@ -89,9 +103,13 @@ partial class Assert_Extensions
                  (
                     someMessage,
                     some
-                 ) => throw Failed.Assert(someMessage,
-                                          some.ToTestOutput()),
-                 unrecognisedMessage => throw Failed.Assert(unrecognisedMessage));
+                 ) => throw Failed
+                           .InTheAsserts(someMessage,
+                                         Failed.Actual(some.ToTestOutput()))
+                           .ToAssertFailedException(),
+                 unrecognisedMessage => throw Failed
+                                             .InTheAsserts(unrecognisedMessage)
+                                             .ToAssertFailedException());
 
    /* ------------------------------------------------------------ */
    // Internal Methods

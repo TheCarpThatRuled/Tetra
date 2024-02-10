@@ -47,9 +47,11 @@ public static partial class Assert_Extensions
       if (!ReferenceEquals(expected,
                            actual))
       {
-         throw Failed.Assert($"{description}: the expected and actual are not reference equal",
-                             expected,
-                             actual);
+         throw Failed
+              .InTheAsserts($"{description}: the expected and actual are not reference equal",
+                            Failed.Expected(expected),
+                            Failed.Actual(actual))
+              .ToAssertFailedException();
       }
 
       return assert;
@@ -72,9 +74,11 @@ public static partial class Assert_Extensions
       if (!expected.Equals(actual,
                            StringComparison.OrdinalIgnoreCase))
       {
-         throw Failed.Assert(description,
-                             expected,
-                             actual);
+         throw Failed
+              .InTheAsserts(description,
+                            Failed.Expected(expected),
+                            Failed.Actual(actual))
+              .ToAssertFailedException();
       }
 
       return assert;

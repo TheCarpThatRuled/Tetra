@@ -42,7 +42,12 @@ public sealed class Asserts
    )
       => ActionAsserts<Asserts>
         .Create(name,
-                _actions.Get(name) ?? throw Failed.Assert($@"The test has not created a {nameof(FakeAction)} for ""{name}"""),
+                _actions.Get(name)
+             ?? throw Failed
+                     .InTheAsserts($"""
+                                    The test has not created a {nameof(FakeAction)} for "{name}"
+                                    """)
+                     .ToAssertFailedException(),
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -53,7 +58,12 @@ public sealed class Asserts
    )
       => ActionAsserts<T, Asserts>
         .Create(name,
-                _actions.Get<T>(name) ?? throw Failed.Assert($@"The test has not created a {nameof(FakeAction)}<{typeof(T).Name}> for ""{name}"""),
+                _actions.Get<T>(name)
+             ?? throw Failed
+                     .InTheAsserts($"""
+                                    The test has not created a {nameof(FakeAction)}<{typeof(T).Name}> for "{name}"
+                                    """)
+                     .ToAssertFailedException(),
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -64,7 +74,12 @@ public sealed class Asserts
    )
       => ActionAsserts<T0, T1, Asserts>
         .Create(name,
-                _actions.Get<T0, T1>(name) ?? throw Failed.Assert($@"The test has not created a {nameof(FakeAction)}<{typeof(T0).Name}, {typeof(T1).Name}> for ""{name}"""),
+                _actions.Get<T0, T1>(name)
+             ?? throw Failed
+                     .InTheAsserts($"""
+                                    The test has not created a {nameof(FakeAction)}<{typeof(T0).Name}, {typeof(T1).Name}> for "{name}"
+                                    """)
+                     .ToAssertFailedException(),
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -76,7 +91,11 @@ public sealed class Asserts
       => FuncAsserts<TReturn, Asserts>
         .Create(name,
                 _functions.Get<TReturn>(name)
-             ?? throw Failed.Assert($@"The test has not created a {nameof(FakeFunction<TReturn>)}<{typeof(TReturn).Name}> for ""{name}"""),
+             ?? throw Failed
+                     .InTheAsserts($"""
+                                    The test has not created a {nameof(FakeFunction<TReturn>)}<{typeof(TReturn).Name}> for "{name}"
+                                    """)
+                     .ToAssertFailedException(),
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -88,7 +107,11 @@ public sealed class Asserts
       => FuncAsserts<T, TReturn, Asserts>
         .Create(name,
                 _functions.Get<T, TReturn>(name)
-             ?? throw Failed.Assert($@"The test has not created a {nameof(FakeFunction<TReturn>)}<{typeof(T).Name}, {typeof(TReturn).Name}> for ""{name}"""),
+             ?? throw Failed
+                     .InTheAsserts($"""
+                                    The test has not created a {nameof(FakeFunction<TReturn>)}<{typeof(T).Name}, {typeof(TReturn).Name}> for "{name}"
+                                    """)
+                     .ToAssertFailedException(),
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -100,7 +123,11 @@ public sealed class Asserts
       => FuncAsserts<T0, T1, TReturn, Asserts>
         .Create(name,
                 _functions.Get<T0, T1, TReturn>(name)
-             ?? throw Failed.Assert($@"The test has not created a {nameof(FakeFunction<TReturn>)}<{typeof(T0).Name}, {typeof(T1).Name}, {typeof(TReturn).Name}> for ""{name}"""),
+             ?? throw Failed
+                     .InTheAsserts($"""
+                                    The test has not created a {nameof(FakeFunction<TReturn>)}<{typeof(T0).Name}, {typeof(T1).Name}, {typeof(TReturn).Name}> for "{name}"
+                                    """)
+                     .ToAssertFailedException(),
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -116,7 +143,10 @@ public sealed class Asserts
    public BooleanAsserts<Asserts> ReturnsABoolean()
       => BooleanAsserts<Asserts>
         .Create("return value",
-                _returnValue as bool? ?? throw Failed.Assert("The return value was not a bool"),
+                _returnValue as bool?
+             ?? throw Failed
+                     .InTheAsserts("The return value was not a bool")
+                     .ToAssertFailedException(),
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -125,7 +155,9 @@ public sealed class Asserts
       => EitherAsserts<TLeft, TRight, Asserts>
         .Create("return value",
                 _returnValue as IEither<TLeft, TRight>
-             ?? throw Failed.Assert($"The return value was not an {nameof(IEither<TLeft, TRight>)}<{typeof(TLeft).Name}, {typeof(TRight).Name}>"),
+             ?? throw Failed
+                     .InTheAsserts($"The return value was not an {nameof(IEither<TLeft, TRight>)}<{typeof(TLeft).Name}, {typeof(TRight).Name}>")
+                     .ToAssertFailedException(),
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -133,7 +165,10 @@ public sealed class Asserts
    public OptionAsserts<T, Asserts> ReturnsAnOption<T>()
       => OptionAsserts<T, Asserts>
         .Create("return value",
-                _returnValue as IOption<T> ?? throw Failed.Assert($"The return value was not an {nameof(IOption<T>)}<{typeof(T).Name}>"),
+                _returnValue as IOption<T>
+             ?? throw Failed
+                     .InTheAsserts($"The return value was not an {nameof(IOption<T>)}<{typeof(T).Name}>")
+                     .ToAssertFailedException(),
                 () => this);
 
    /* ------------------------------------------------------------ */

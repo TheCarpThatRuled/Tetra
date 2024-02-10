@@ -45,19 +45,27 @@ partial class Actions
       /* ------------------------------------------------------------ */
 
       public FileSystemApiActions<Actions> Api
-         => throw Failed.InTestSetup("Cannot perform any actions on the file system API; it has not been created.");
+         => throw Failed
+                 .CannotPerformAnActionOnBecauseADependencyHasNotBeenCreated("the file system API",
+                                                                             "it")
+                 .ToAssertFailedException();
 
       /* ------------------------------------------------------------ */
 
       public FileSystemActions<Actions> ConfigurationApi
-         => throw Failed.InTestSetup("Cannot perform any actions on the file system configuration API; it has not been created.");
+         => throw Failed
+                 .CannotPerformAnActionOnBecauseADependencyHasNotBeenCreated("the file system configuration API",
+                                                                             "it")
+                 .ToAssertFailedException();
 
       /* ------------------------------------------------------------ */
       // IActions Methods
       /* ------------------------------------------------------------ */
 
       public Asserts Asserts()
-         => throw Failed.InTestSetup("Cannot progress to the asserts; no actions have been performed.");
+         => throw Failed
+                 .CannotProgressToTheAssertsBecauseNoActionsHaveBeenPerformed()
+                 .ToAssertFailedException();
 
       /* ------------------------------------------------------------ */
 

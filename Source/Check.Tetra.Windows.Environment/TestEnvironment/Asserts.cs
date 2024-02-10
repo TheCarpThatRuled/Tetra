@@ -118,7 +118,10 @@ public sealed class Asserts
    public BooleanAsserts<Asserts> ReturnsABoolean()
       => BooleanAsserts<Asserts>
         .Create("return value",
-                _returnValue as bool? ?? throw Failed.Assert("The return value was not a bool"),
+                _returnValue as bool?
+             ?? throw Failed
+                     .InTheAsserts("The return value was not a bool")
+                     .ToAssertFailedException(),
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -126,7 +129,10 @@ public sealed class Asserts
    public EitherAsserts<TLeft, TRight, Asserts> ReturnsAnEither<TLeft, TRight>()
       => EitherAsserts<TLeft, TRight, Asserts>
         .Create("return value",
-                _returnValue as IEither<TLeft, TRight> ?? throw Failed.Assert($"The return value was not an either of {typeof(TLeft).Name}, {typeof(TRight).Name}"),
+                _returnValue as IEither<TLeft, TRight>
+             ?? throw Failed
+                     .InTheAsserts($"The return value was not an either of {typeof(TLeft).Name}, {typeof(TRight).Name}")
+                     .ToAssertFailedException(),
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -134,7 +140,10 @@ public sealed class Asserts
    public OptionAsserts<T, Asserts> ReturnsAnOption<T>()
       => OptionAsserts<T, Asserts>
         .Create("return value",
-                _returnValue as IOption<T> ?? throw Failed.Assert($"The return value was not an option of {typeof(T).Name}"),
+                _returnValue as IOption<T>
+             ?? throw Failed
+                     .InTheAsserts($"The return value was not an option of {typeof(T).Name}")
+                     .ToAssertFailedException(),
                 () => this);
 
    /* ------------------------------------------------------------ */

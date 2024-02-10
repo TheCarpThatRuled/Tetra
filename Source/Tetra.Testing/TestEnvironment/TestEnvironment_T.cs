@@ -17,7 +17,9 @@ public abstract class TestEnvironment<TActions, TAsserts>
    {
       if (!_finalised)
       {
-         throw Failed.InTestSetup("The Test Environment was not finalised before the asserts were accessed");
+         throw Failed
+              .CannotProgressToTheAsserts("the test environment was not finalised")
+              .ToAssertFailedException();
       }
 
       return CreateAsserts();
@@ -29,7 +31,10 @@ public abstract class TestEnvironment<TActions, TAsserts>
    {
       if (_finalised)
       {
-         throw Failed.InTestSetup("The Test Environment cannot be finalised; it has already been finalised");
+         throw Failed
+              .CannotPerformAnAction("finalise the test environment",
+                                     "it has already been finalised")
+              .ToAssertFailedException();
       }
 
       _finalised = true;

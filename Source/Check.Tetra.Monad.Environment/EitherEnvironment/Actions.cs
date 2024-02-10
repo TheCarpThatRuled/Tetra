@@ -363,7 +363,11 @@ public sealed class Actions : TestEnvironment<Actions, Asserts>
    /* ------------------------------------------------------------ */
 
    public IEither<FakeLeft, FakeRight> This()
-      => _this ?? throw Failed.InTestSetup("The unit under test has not been created");
+      => _this
+      ?? throw Failed
+              .CannotPerformAnActionOnBecauseADependencyHasNotBeenCreated("the unit under test",
+                                                                          "it")
+              .ToAssertFailedException();
 
    /* ------------------------------------------------------------ */
 }

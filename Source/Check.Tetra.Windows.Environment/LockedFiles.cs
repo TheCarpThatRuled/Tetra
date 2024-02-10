@@ -48,7 +48,9 @@ internal sealed class LockedFiles : IDisposable
 
       if (_lockedFiles.ContainsKey(caseInsensitiveFile))
       {
-         throw Failed.InTestSetup($"The file {file} is already locked");
+         throw Failed
+              .InTheActions($"The file {file} is already locked")
+              .ToAssertFailedException();
       }
 
       _lockedFiles.Add(caseInsensitiveFile,
@@ -64,14 +66,15 @@ internal sealed class LockedFiles : IDisposable
    {
       var caseInsensitiveFile = CaseInsensitiveString.Create(file);
 
-      if (!_lockedFiles.ContainsKey(caseInsensitiveFile))
+      if (!_lockedFiles.Remove(caseInsensitiveFile,
+                               out var lockedFile))
       {
-         throw Failed.InTestSetup($"The file {file} is not locked");
+         throw Failed
+              .InTheActions($"The file {file} is not locked")
+              .ToAssertFailedException();
       }
 
-      _lockedFiles[caseInsensitiveFile]
-        .Dispose();
-      _lockedFiles.Remove(caseInsensitiveFile);
+      lockedFile.Dispose();
    }
 
    /* ------------------------------------------------------------ */

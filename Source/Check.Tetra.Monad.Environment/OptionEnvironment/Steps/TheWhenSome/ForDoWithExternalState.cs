@@ -21,7 +21,9 @@ partial class Steps
             FakeType          expectedContent
          )
             => AtomicAssert
-              .Create($@"{nameof(the_whenSome)}_{nameof(was_invoked_once_with)} ""{expectedExternalState}"", ""{expectedContent}""",
+              .Create($"""
+                       {nameof(the_whenSome)}_{nameof(was_invoked_once_with)} "{expectedExternalState}", "{expectedContent}"
+                       """,
                       assert => assert
                                .Action<FakeExternalState, FakeType>(WhenSome)
                                .WasInvokedOnce(expectedExternalState,

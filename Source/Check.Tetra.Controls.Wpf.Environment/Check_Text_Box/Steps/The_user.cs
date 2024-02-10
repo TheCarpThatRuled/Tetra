@@ -17,7 +17,9 @@ public static partial class Steps
          string text
       )
          => AtomicAction
-           .Create($@"{nameof(The_user)}_enters_text_in_the_text_box: ""{text}""",
+           .Create($"""
+                    {nameof(The_user)}_enters_text_in_the_text_box: "{text}"
+                    """,
                    environment => environment
                                  .TextBox
                                  .EnterText(text)

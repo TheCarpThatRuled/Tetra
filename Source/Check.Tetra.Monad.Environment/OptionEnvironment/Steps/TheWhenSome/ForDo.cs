@@ -20,7 +20,9 @@ partial class Steps
             FakeType expected
          )
             => AtomicAssert
-              .Create($@"{nameof(the_whenSome)}_{nameof(was_invoked_once_with)} ""{expected}""",
+              .Create($"""
+                       {nameof(the_whenSome)}_{nameof(was_invoked_once_with)} "{expected}"
+                       """,
                       assert => assert
                                .Action<FakeType>(WhenSome)
                                .WasInvokedOnce(expected));

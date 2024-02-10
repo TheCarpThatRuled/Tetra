@@ -68,7 +68,7 @@ public static partial class AssertMessages
    (
       this Either<TLeft, TRight>.RightEither right
    )
-      => $@"Right(""{right.Content}"")";
+      => $"""Right("{right.Content}")""";
 
    /* ------------------------------------------------------------ */
 
@@ -76,7 +76,7 @@ public static partial class AssertMessages
    (
       this Either<TLeft, TRight>.LeftEither left
    )
-      => $@"Left(""{left.Content}"")";
+      => $"""Left("{left.Content}")""";
 
    /* ------------------------------------------------------------ */
    // Private Functions

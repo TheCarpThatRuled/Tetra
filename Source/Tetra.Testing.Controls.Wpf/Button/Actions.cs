@@ -49,7 +49,10 @@ public sealed class ButtonActions<T> : Chainable<T>
    {
       if (!_button.IsEnabled())
       {
-         throw Failed.Assert($"{_descriptionHeader} could not be clicked as it is not enabled");
+         throw Failed
+              .CannotPerformAnActionOn($"click {_descriptionHeader}",
+                                       "it is not enabled")
+              .ToAssertFailedException();
       }
 
       _button.Click(numberOfClicks);

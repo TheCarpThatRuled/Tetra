@@ -23,11 +23,13 @@ partial class Assert_Extensions
          .Count
        == 0)
       {
-         throw Failed.Assert(TheFakeActionWasInvokedMoreThanOnce<T>(description)
-                           + "\nExpected:"
-                           + $"\n{expected}"
-                           + "\nActual:"
-                           + $"\n{action.Invocations().Count}");
+         throw Failed
+              .InTheAsserts(TheFakeActionWasInvokedMoreThanOnce<T>(description),
+                            Failed.Expected(expected),
+                            Failed.Actual(action
+                                         .Invocations()
+                                         .Count))
+              .ToAssertFailedException();
       }
 
       if (action
@@ -35,18 +37,21 @@ partial class Assert_Extensions
          .Count
        != 1)
       {
-         throw Failed.Assert(TheFakeActionWasNotInvokedWheWeExpectedToBe<T>(description)
-                           + "\nExpected:"
-                           + $"\n {expected}");
+         throw Failed
+              .InTheAsserts(TheFakeActionWasNotInvokedWheWeExpectedToBe<T>(description),
+                            Failed.Expected(expected))
+              .ToAssertFailedException();
       }
 
       if (!action
           .Invocations()[0]!
           .Equals(expected))
       {
-         throw Failed.Assert(TheFakeActionWasInvokedWithAnUnexpectedArgument<T>(description)
-                           + $"\nExpected: {expected}"
-                           + $"\nActual: {action.Invocations()[0]}");
+         throw Failed
+              .InTheAsserts(TheFakeActionWasInvokedWithAnUnexpectedArgument<T>(description),
+                            Failed.Expected(expected),
+                            Failed.Actual(action.Invocations()[0]))
+              .ToAssertFailedException();
       }
 
       return assert;
@@ -66,9 +71,12 @@ partial class Assert_Extensions
          .Count
        != 0)
       {
-         throw Failed.Assert(TheFakeActionWasInvokedWhenWeExpectedItNotToBe<T>(description),
-                             action.Invocations()
-                                   .Count);
+         throw Failed
+              .InTheAsserts(TheFakeActionWasInvokedWhenWeExpectedItNotToBe<T>(description),
+                            Failed.Actual(action
+                                         .Invocations()
+                                         .Count))
+              .ToAssertFailedException();
       }
 
       return assert;

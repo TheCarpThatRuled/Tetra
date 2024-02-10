@@ -23,13 +23,15 @@ partial class Assert_Extensions
                   Assert.IsNull(exception.InnerException,
                                 "The exception contains an inner exception ");
                   Assert.That
-                        .AreEqual($"The exception does contain the expected message.\nExpected: \"{expectedMessage}\"\nActual: \"{exception.Message}\"",
+                        .AreEqual($"The exception does contain the expected message",
                                   expectedMessage,
                                   exception.Message);
 
                   return asserts;
                },
-               () => throw Failed.Assert("No exception was thrown"));
+               () => throw Failed
+                          .InTheAsserts("No exception was thrown")
+                          .ToAssertFailedException());
 
    /* ------------------------------------------------------------ */
 }

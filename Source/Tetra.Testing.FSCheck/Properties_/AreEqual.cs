@@ -14,9 +14,9 @@ partial class Properties
    )
       => AsProperty(() => Equals(expected,
                                  actual))
-        .Label(Failed.Message(description,
-                              expected,
-                              actual));
+        .Label(Failed.InTheAsserts(description,
+                              Failed.Expected(expected),
+                              Failed.Actual(actual)));
 
    /* ------------------------------------------------------------ */
 
@@ -28,9 +28,9 @@ partial class Properties
    )
       => AsProperty(() => Equals(expected,
                                  actual))
-        .Label(Failed.Message($"{description}: are not reference equal",
-                              expected,
-                              actual));
+        .Label(Failed.InTheAsserts($"{description}: are not reference equal",
+                                   Failed.Expected(expected),
+                                   Failed.Actual(actual)));
 
    /* ------------------------------------------------------------ */
 }

@@ -70,17 +70,17 @@ partial class Properties
 
       if (expected.Length() != actual.Length())
       {
-         return False(Failed.Message($"{description} - The sequences are unequal in length",
-                                     expectedAsString,
-                                     actualAsString));
+         return False(Failed.InTheAsserts($"{description} - The sequences are unequal in length",
+                                          Failed.Expected(expectedAsString),
+                                          Failed.Actual(actualAsString)));
       }
 
       return expected
             .Zip(actual)
             .WithIndices()
-            .Aggregate(True(Failed.Message(description,
-                                           expectedAsString,
-                                           actualAsString)),
+            .Aggregate(True(Failed.InTheAsserts(description,
+                                                Failed.Expected(expectedAsString),
+                                                Failed.Actual(actualAsString))),
                        (
                           total,
                           next

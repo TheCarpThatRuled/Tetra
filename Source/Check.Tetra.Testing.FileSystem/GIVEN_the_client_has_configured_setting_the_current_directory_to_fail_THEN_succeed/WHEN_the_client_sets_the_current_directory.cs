@@ -68,7 +68,9 @@ public class WHEN_the_client_sets_the_current_directory
                                                    x.Item1
                                                     .Parent()
                                                     .Unify(Function.PassThrough,
-                                                           () => throw Failed.InTestSetup($"Could not retrieve the parent of {initialCurrentDirectory}, it doesn't have one?")))
+                                                           () => throw Failed
+                                                                      .InTheActions($"Could not retrieve the parent of {initialCurrentDirectory}, it doesn't have one?")
+                                                                      .ToAssertFailedException()))
                                          .Register(errorMessage,
                                                    x.Item2)
                                          .Create())

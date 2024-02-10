@@ -23,9 +23,9 @@ partial class Properties
              .Arguments()
              .Length()
            != 1
-               ? False(Failed.Message(TheFakePropertyChangedEventHandlerWasFiredMoreThanOnce(description),
-                                      fakeEventHandler.Arguments()
-                                                      .Length()))
+               ? False(Failed.InTheAsserts(TheFakePropertyChangedEventHandlerWasFiredMoreThanOnce(description),
+                                           Failed.Actual(fakeEventHandler.Arguments()
+                                                                         .Length())))
                : AreEqual(TheFakePropertyChangedEventHandlerWasFiredWithAnUnexpectedArgument(description),
                           expected,
                           fakeEventHandler.Arguments()[0]

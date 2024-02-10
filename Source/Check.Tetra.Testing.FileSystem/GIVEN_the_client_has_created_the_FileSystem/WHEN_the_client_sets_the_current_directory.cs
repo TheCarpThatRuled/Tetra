@@ -63,7 +63,9 @@ public class WHEN_the_client_sets_the_current_directory
                                          .Register(parentDirectory,
                                                    x.Parent()
                                                     .Unify(Function.PassThrough,
-                                                           () => throw Failed.InTestSetup($"Could not retrieve the parent of {initialCurrentDirectory}, it doesn't have one?")))
+                                                           () => throw Failed
+                                                                      .InTheActions($"Could not retrieve the parent of {initialCurrentDirectory}, it doesn't have one?")
+                                                                      .ToAssertFailedException()))
                                          .Create())
                              .ToArbitrary())
                      .GIVEN(the_client.has_created_the_file_system(initialCurrentDirectory))

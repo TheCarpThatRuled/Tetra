@@ -33,7 +33,9 @@ partial class Steps
       )
          => has_not_created_an_option()
            .And(calls_Option_T_Some_with(content))
-           .Recharacterise($@"{nameof(the_Client)}_{nameof(has_created_a_some_from)} ""{content}""");
+           .Recharacterise($"""
+                            {nameof(the_Client)}_{nameof(has_created_a_some_from)} "{content}"
+                            """);
 
       /* ------------------------------------------------------------ */
       // Actions
@@ -44,7 +46,9 @@ partial class Steps
          FakeType? content
       )
          => AtomicAction
-           .Create($@"{nameof(the_Client)}_{nameof(calls_Option_Some_T_with)} ""{content}""",
+           .Create($"""
+                    {nameof(the_Client)}_{nameof(calls_Option_Some_T_with)} "{content}"
+                    """,
                    arrange => arrange.CallOptionSome(content!));
 
       /* ------------------------------------------------------------ */
@@ -61,7 +65,9 @@ partial class Steps
          FakeType? content
       )
          => AtomicAction
-           .Create($@"{nameof(the_Client)}_{nameof(calls_Option_T_Some_with)} ""{content}""",
+           .Create($"""
+                    {nameof(the_Client)}_{nameof(calls_Option_T_Some_with)} "{content}"
+                    """,
                    arrange => arrange.CallOptionTSome(content!));
 
       /* ------------------------------------------------------------ */
@@ -79,7 +85,9 @@ partial class Steps
          FakeExternalState externalState
       )
          => AtomicAction
-           .Create($@"{nameof(the_Client)}_{nameof(calls_Do_with)} ""{externalState}""",
+           .Create($"""
+                    {nameof(the_Client)}_{nameof(calls_Do_with)} "{externalState}"
+                    """,
                    arrange => arrange.CallDo(WhenNone,
                                              WhenSome,
                                              externalState));
@@ -91,7 +99,9 @@ partial class Steps
          object? other
       )
          => AtomicAction
-           .Create($@"{nameof(the_Client)}_{nameof(calls_Equals_with)} ""{other}""",
+           .Create($"""
+                    {nameof(the_Client)}_{nameof(calls_Equals_with)} "{other}"
+                    """,
                    arrange => arrange.CallEquals(other));
 
       /* ------------------------------------------------------------ */
@@ -130,7 +140,9 @@ partial class Steps
          FakeRight whenNoneValue
       )
          => AtomicAction
-           .Create($@"{nameof(the_Client)}_{nameof(calls_ExpandSomeToLeft_with)} ""{whenNoneValue}""",
+           .Create($"""
+                    {nameof(the_Client)}_{nameof(calls_ExpandSomeToLeft_with)} "{whenNoneValue}"
+                    """,
                    arrange => arrange.CallExpandSomeToLeft(WhenNone,
                                                            whenNoneValue));
 
@@ -142,7 +154,9 @@ partial class Steps
          FakeRight         whenNoneValue
       )
          => AtomicAction
-           .Create($@"{nameof(the_Client)}_{nameof(calls_ExpandSomeToLeft_with)} ""{externalState}"", ""{whenNoneValue}""",
+           .Create($"""
+                    {nameof(the_Client)}_{nameof(calls_ExpandSomeToLeft_with)} "{externalState}", "{whenNoneValue}"
+                    """,
                    arrange => arrange.CallExpandSomeToLeft(WhenNone,
                                                            whenNoneValue,
                                                            externalState));
@@ -154,7 +168,9 @@ partial class Steps
          FakeLeft whenNoneValue
       )
          => AtomicAction
-           .Create($@"{nameof(the_Client)}_{nameof(calls_ExpandSomeToRight_with)} ""{whenNoneValue}""",
+           .Create($"""
+                    {nameof(the_Client)}_{nameof(calls_ExpandSomeToRight_with)} "{whenNoneValue}"
+                    """,
                    arrange => arrange.CallExpandSomeToRight(WhenNone,
                                                             whenNoneValue));
 
@@ -166,7 +182,9 @@ partial class Steps
          FakeLeft          whenNoneValue
       )
          => AtomicAction
-           .Create($@"{nameof(the_Client)}_{nameof(calls_ExpandSomeToRight_with)} ""{externalState}"", ""{whenNoneValue}""",
+           .Create($"""
+                    {nameof(the_Client)}_{nameof(calls_ExpandSomeToRight_with)} "{externalState}", "{whenNoneValue}"
+                    """,
                    arrange => arrange.CallExpandSomeToRight(WhenNone,
                                                             whenNoneValue,
                                                             externalState));
@@ -178,7 +196,9 @@ partial class Steps
          FakeNewType whenSomeValue
       )
          => AtomicAction
-           .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{whenSomeValue}""",
+           .Create($"""
+                    {nameof(the_Client)}_{nameof(calls_Map_with)} "{whenSomeValue}"
+                    """,
                    arrange => arrange.CallMap(WhenSome,
                                               whenSomeValue));
 
@@ -190,7 +210,9 @@ partial class Steps
          FakeNewType       whenSomeValue
       )
          => AtomicAction
-           .Create($@"{nameof(the_Client)}_{nameof(calls_Map_with)} ""{externalState}"", ""{whenSomeValue}""",
+           .Create($"""
+                    {nameof(the_Client)}_{nameof(calls_Map_with)} "{externalState}", "{whenSomeValue}"
+                    """,
                    arrange => arrange.CallMap(WhenSome,
                                               whenSomeValue,
                                               externalState));
@@ -210,7 +232,9 @@ partial class Steps
          FakeNewType whenNoneValue
       )
          => AtomicAction
-           .Create($@"{nameof(the_Client)}_{nameof(calls_Unify_with)} ""{whenSomeValue}""",
+           .Create($"""
+                    {nameof(the_Client)}_{nameof(calls_Unify_with)} "{whenSomeValue}"
+                    """,
                    arrange => arrange.CallUnify(WhenNone,
                                                 whenNoneValue,
                                                 WhenSome,
@@ -225,7 +249,9 @@ partial class Steps
          FakeNewType       whenNoneValue
       )
          => AtomicAction
-           .Create($@"{nameof(the_Client)}_{nameof(calls_Unify_with)} ""{externalState}"", ""{whenSomeValue}""",
+           .Create($"""
+                    {nameof(the_Client)}_{nameof(calls_Unify_with)} "{externalState}", "{whenSomeValue}"
+                    """,
                    arrange => arrange.CallUnify(WhenNone,
                                                 whenNoneValue,
                                                 WhenSome,

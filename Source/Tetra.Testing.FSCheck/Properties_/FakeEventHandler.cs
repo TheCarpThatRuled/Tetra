@@ -16,8 +16,8 @@ partial class Properties
       => fakeEventHandler.NumberOfTimesFired() == 0
             ? False(TheFakeEventHandlerWasNotFiredWhenWeExpectedToHaveBeen(description))
             : fakeEventHandler.NumberOfTimesFired() != 1
-               ? False(Failed.Message(TheFakeEventHandlerWasFiredMoreThanOnce(description),
-                                      fakeEventHandler.NumberOfTimesFired()))
+               ? False(Failed.InTheAsserts(TheFakeEventHandlerWasFiredMoreThanOnce(description),
+                                           Failed.Actual(fakeEventHandler.NumberOfTimesFired())))
                : True();
 
    /* ------------------------------------------------------------ */

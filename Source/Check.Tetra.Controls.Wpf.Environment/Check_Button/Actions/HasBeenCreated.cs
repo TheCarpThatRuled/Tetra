@@ -25,8 +25,8 @@ partial class Actions
          FakeSystem system
       )
       {
-         _button    = button;
-         _system    = system;
+         _button = button;
+         _system = system;
 
          Button = ButtonActions<Actions>.Create("Button",
                                                 button,
@@ -85,7 +85,10 @@ partial class Actions
       (
          The_UI_creates_a_button args
       )
-         => throw Failed.Assert("Cannot create the button; it has already been created.");
+         => throw Failed
+                 .CannotPerformAnAssert("create the button",
+                                        "it has already been created")
+                 .ToAssertFailedException();
 
       /* ------------------------------------------------------------ */
    }

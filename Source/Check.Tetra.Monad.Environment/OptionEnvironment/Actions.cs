@@ -427,7 +427,11 @@ public sealed class Actions : TestEnvironment<Actions, Asserts>
    /* ------------------------------------------------------------ */
 
    public IOption<FakeType> This()
-      => _this ?? throw Failed.InTestSetup("The unit under test has not been created");
+      => _this
+      ?? throw Failed
+              .CannotPerformAnActionOnBecauseADependencyHasNotBeenCreated("the unit under test",
+                                                                          "it")
+              .ToAssertFailedException();
 
    /* ------------------------------------------------------------ */
 }

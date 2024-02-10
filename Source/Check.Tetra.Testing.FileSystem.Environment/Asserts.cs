@@ -34,9 +34,9 @@ public sealed class Asserts : IPropertyAsserts
       _returnValue = returnValue;
 
       FileSystem = FileSystemPropertyAsserts<Asserts>.Create(UpdateProperty,
-                                                                 "File system",
-                                                                 fileSystem,
-                                                                 () => this);
+                                                             "File system",
+                                                             fileSystem,
+                                                             () => this);
    }
 
    /* ------------------------------------------------------------ */
@@ -65,7 +65,7 @@ public sealed class Asserts : IPropertyAsserts
    public ObjectAsserts<T, Asserts> Returns<T>()
       => ObjectAsserts<T, Asserts>
         .Create("return value",
-                (T)_returnValue!,
+                (T) _returnValue!,
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -74,7 +74,10 @@ public sealed class Asserts : IPropertyAsserts
       => BooleanPropertyAsserts<Asserts>
         .Create(UpdateProperty,
                 "return value",
-                _returnValue as bool? ?? throw Failed.Assert("The return value was not a bool"),
+                _returnValue as bool?
+             ?? throw Failed
+                     .InTheAsserts("The return value was not a bool")
+                     .ToAssertFailedException(),
                 () => this);
 
    /* ------------------------------------------------------------ */
@@ -83,7 +86,10 @@ public sealed class Asserts : IPropertyAsserts
       => OptionPropertyAsserts<T, Asserts>
         .Create(UpdateProperty,
                 "return value",
-                _returnValue as IOption<T> ?? throw Failed.Assert($"The return value was not an option of {typeof(T).Name}"),
+                _returnValue as IOption<T>
+             ?? throw Failed
+                     .InTheAsserts($"The return value was not an option of {typeof(T).Name}")
+                     .ToAssertFailedException(),
                 () => this);
 
    /* ------------------------------------------------------------ */

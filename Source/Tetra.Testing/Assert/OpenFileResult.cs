@@ -18,11 +18,17 @@ partial class Assert_Extensions
    )
       => actual switch
          {
-            MissingResult<T> missing => throw Failed.Assert(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
-                                                            missing.ToTestOutput()),
-            OpenResult<T> open => throw Failed.Assert(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeALocked<T>(description),
-                                                      open.ToTestOutput()),
-            not LockedResult<T> => throw Failed.Assert(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeALocked<T>(description)),
+            MissingResult<T> missing => throw Failed
+                                             .InTheAsserts(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
+                                                           Failed.Actual(missing.ToTestOutput()))
+                                             .ToAssertFailedException(),
+            OpenResult<T> open => throw Failed
+                                       .InTheAsserts(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeALocked<T>(description),
+                                                     Failed.Actual(open.ToTestOutput()))
+                                       .ToAssertFailedException(),
+            not LockedResult<T> => throw Failed
+                                        .InTheAsserts(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeALocked<T>(description))
+                                        .ToAssertFailedException(),
 
             _ => assert,
          };
@@ -39,15 +45,21 @@ partial class Assert_Extensions
    )
       => actual switch
          {
-            MissingResult<T> missing => throw Failed.Assert(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
-                                                            missing.ToTestOutput()),
-            OpenResult<T> open => throw Failed.Assert(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeALocked<T>(description),
-                                                      open.ToTestOutput()),
+            MissingResult<T> missing => throw Failed
+                                             .InTheAsserts(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
+                                                           Failed.Actual(missing.ToTestOutput()))
+                                             .ToAssertFailedException(),
+            OpenResult<T> open => throw Failed
+                                       .InTheAsserts(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeALocked<T>(description),
+                                                     Failed.Actual(open.ToTestOutput()))
+                                       .ToAssertFailedException(),
             LockedResult<T> locked => assert.AreEqual(description,
                                                       expectedPath,
                                                       expectedMessage,
                                                       locked),
-            _ => throw Failed.Assert(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeALocked<T>(description)),
+            _ => throw Failed
+                      .InTheAsserts(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeALocked<T>(description))
+                      .ToAssertFailedException(),
          };
 
    /* ------------------------------------------------------------ */
@@ -61,14 +73,22 @@ partial class Assert_Extensions
    )
       => actual switch
          {
-            MissingResult<T> missing => throw Failed.Assert(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
-                                                            missing.ToTestOutput()),
-            OpenResult<T> open => throw Failed.Assert(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeALocked<T>(description),
-                                                      open.ToTestOutput()),
+            MissingResult<T> missing => throw Failed
+                                             .InTheAsserts(TheOpenFileResultIsAMissingWhenWeExpectedItToBeALocked<T>(description),
+                                                           Failed.Actual(missing.ToTestOutput()))
+                                             .ToAssertFailedException(),
+            OpenResult<T> open => throw Failed
+                                       .InTheAsserts(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeALocked<T>(description),
+                                                     Failed.Actual(open.ToTestOutput()))
+                                       .ToAssertFailedException(),
             LockedResult<T> locked => !property(locked.Content)
-                                         ? throw Failed.Assert(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeALocked<T>(description))
+                                         ? throw Failed
+                                                .InTheAsserts(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeALocked<T>(description))
+                                                .ToAssertFailedException()
                                          : assert,
-            _ => throw Failed.Assert(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeALocked<T>(description)),
+            _ => throw Failed
+                      .InTheAsserts(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeALocked<T>(description))
+                      .ToAssertFailedException(),
          };
 
    /* ------------------------------------------------------------ */
@@ -81,11 +101,17 @@ partial class Assert_Extensions
    )
       => actual switch
          {
-            LockedResult<T> locked => throw Failed.Assert(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
-                                                          locked.ToTestOutput()),
-            OpenResult<T> open => throw Failed.Assert(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeAMissing<T>(description),
-                                                      open.ToTestOutput()),
-            not MissingResult<T> => throw Failed.Assert(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAMissing<T>(description)),
+            LockedResult<T> locked => throw Failed
+                                           .InTheAsserts(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
+                                                         Failed.Actual(locked.ToTestOutput()))
+                                           .ToAssertFailedException(),
+            OpenResult<T> open => throw Failed
+                                       .InTheAsserts(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeAMissing<T>(description),
+                                                     Failed.Actual(open.ToTestOutput()))
+                                       .ToAssertFailedException(),
+            not MissingResult<T> => throw Failed
+                                         .InTheAsserts(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAMissing<T>(description))
+                                         .ToAssertFailedException(),
 
             _ => assert,
          };
@@ -102,15 +128,21 @@ partial class Assert_Extensions
    )
       => actual switch
          {
-            LockedResult<T> locked => throw Failed.Assert(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
-                                                          locked.ToTestOutput()),
-            OpenResult<T> open => throw Failed.Assert(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeAMissing<T>(description),
-                                                      open.ToTestOutput()),
+            LockedResult<T> locked => throw Failed
+                                           .InTheAsserts(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
+                                                         Failed.Actual(locked.ToTestOutput()))
+                                           .ToAssertFailedException(),
+            OpenResult<T> open => throw Failed
+                                       .InTheAsserts(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeAMissing<T>(description),
+                                                     Failed.Actual(open.ToTestOutput()))
+                                       .ToAssertFailedException(),
             MissingResult<T> missing => assert.AreEqual(description,
                                                         expectedPath,
                                                         expectedMessage,
                                                         missing),
-            _ => throw Failed.Assert(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAMissing<T>(description)),
+            _ => throw Failed
+                      .InTheAsserts(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAMissing<T>(description))
+                      .ToAssertFailedException(),
          };
 
    /* ------------------------------------------------------------ */
@@ -124,14 +156,22 @@ partial class Assert_Extensions
    )
       => actual switch
          {
-            LockedResult<T> locked => throw Failed.Assert(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
-                                                          locked.ToTestOutput()),
-            OpenResult<T> open => throw Failed.Assert(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeAMissing<T>(description),
-                                                      open.ToTestOutput()),
+            LockedResult<T> locked => throw Failed
+                                           .InTheAsserts(TheOpenFileResultIsALockedWhenWeExpectedItToBeAMissing<T>(description),
+                                                         Failed.Actual(locked.ToTestOutput()))
+                                           .ToAssertFailedException(),
+            OpenResult<T> open => throw Failed
+                                       .InTheAsserts(TheOpenFileResultIsAnOpenWhenWeExpectedItToBeAMissing<T>(description),
+                                                     Failed.Actual(open.ToTestOutput()))
+                                       .ToAssertFailedException(),
             MissingResult<T> missing => !property(missing.Content)
-                                           ? throw Failed.Assert(TheOpenFileResultIsAMissingButDoesNotContainTheExpectedContent<T>(description))
+                                           ? throw Failed
+                                                  .InTheAsserts(TheOpenFileResultIsAMissingButDoesNotContainTheExpectedContent<T>(description))
+                                                  .ToAssertFailedException()
                                            : assert,
-            _ => throw Failed.Assert(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAMissing<T>(description)),
+            _ => throw Failed
+                      .InTheAsserts(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAMissing<T>(description))
+                      .ToAssertFailedException(),
          };
 
    /* ------------------------------------------------------------ */
@@ -144,11 +184,17 @@ partial class Assert_Extensions
    )
       => actual switch
          {
-            LockedResult<T> locked => throw Failed.Assert(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
-                                                          locked.ToTestOutput()),
-            MissingResult<T> missing => throw Failed.Assert(TheOpenFileResultIsAMissingWhenWeExpectedItToBeAnOpen<T>(description),
-                                                            missing.ToTestOutput()),
-            not OpenResult<T> => throw Failed.Assert(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAnOpen<T>(description)),
+            LockedResult<T> locked => throw Failed
+                                           .InTheAsserts(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
+                                                         Failed.Actual(locked.ToTestOutput()))
+                                           .ToAssertFailedException(),
+            MissingResult<T> missing => throw Failed
+                                             .InTheAsserts(TheOpenFileResultIsAMissingWhenWeExpectedItToBeAnOpen<T>(description),
+                                                           Failed.Actual(missing.ToTestOutput()))
+                                             .ToAssertFailedException(),
+            not OpenResult<T> => throw Failed
+                                      .InTheAsserts(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAnOpen<T>(description))
+                                      .ToAssertFailedException(),
 
             _ => assert,
          };
@@ -164,14 +210,20 @@ partial class Assert_Extensions
    )
       => actual switch
          {
-            LockedResult<T> locked => throw Failed.Assert(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
-                                                          locked.ToTestOutput()),
-            MissingResult<T> missing => throw Failed.Assert(TheOpenFileResultIsAMissingWhenWeExpectedItToBeAnOpen<T>(description),
-                                                            missing.ToTestOutput()),
+            LockedResult<T> locked => throw Failed
+                                           .InTheAsserts(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
+                                                         Failed.Actual(locked.ToTestOutput()))
+                                           .ToAssertFailedException(),
+            MissingResult<T> missing => throw Failed
+                                             .InTheAsserts(TheOpenFileResultIsAMissingWhenWeExpectedItToBeAnOpen<T>(description),
+                                                           Failed.Actual(missing.ToTestOutput()))
+                                             .ToAssertFailedException(),
             OpenResult<T> open => assert.AreEqual(description,
                                                   expected,
                                                   open.Content),
-            _ => throw Failed.Assert(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAnOpen<T>(description)),
+            _ => throw Failed
+                      .InTheAsserts(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAnOpen<T>(description))
+                      .ToAssertFailedException(),
          };
 
    /* ------------------------------------------------------------ */
@@ -185,14 +237,22 @@ partial class Assert_Extensions
    )
       => actual switch
          {
-            LockedResult<T> locked => throw Failed.Assert(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
-                                                          locked.ToTestOutput()),
-            MissingResult<T> missing => throw Failed.Assert(TheOpenFileResultIsAMissingWhenWeExpectedItToBeAnOpen<T>(description),
-                                                            missing.ToTestOutput()),
+            LockedResult<T> locked => throw Failed
+                                           .InTheAsserts(TheOpenFileResultIsALockedWhenWeExpectedItToBeAnOpen<T>(description),
+                                                         Failed.Actual(locked.ToTestOutput()))
+                                           .ToAssertFailedException(),
+            MissingResult<T> missing => throw Failed
+                                             .InTheAsserts(TheOpenFileResultIsAMissingWhenWeExpectedItToBeAnOpen<T>(description),
+                                                           Failed.Actual(missing.ToTestOutput()))
+                                             .ToAssertFailedException(),
             OpenResult<T> open => !property(open.Content)
-                                     ? throw Failed.Assert(TheOpenFileResultIsAnOpenButDoesNotContainTheExpectedContent<T>(description))
+                                     ? throw Failed
+                                            .InTheAsserts(TheOpenFileResultIsAnOpenButDoesNotContainTheExpectedContent<T>(description))
+                                            .ToAssertFailedException()
                                      : assert,
-            _ => throw Failed.Assert(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAnOpen<T>(description)),
+            _ => throw Failed
+                      .InTheAsserts(TheOpenFileResultIsUnrecognisedWhenWeExpectedItToBeAnOpen<T>(description))
+                      .ToAssertFailedException(),
          };
 
    /* ------------------------------------------------------------ */
