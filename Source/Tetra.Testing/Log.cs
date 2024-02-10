@@ -112,7 +112,6 @@ public static class Log
    {
       var s = ">>> " + message;
       ToStandardOutput(s);
-      ToDebugOutput(s);
    }
 
    /* ------------------------------------------------------------ */

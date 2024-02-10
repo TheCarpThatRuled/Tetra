@@ -1,5 +1,4 @@
-﻿using FsCheck;
-using static Tetra.Testing.AssertMessages;
+﻿using static Tetra.Testing.AssertMessages;
 
 namespace Tetra.Testing;
 

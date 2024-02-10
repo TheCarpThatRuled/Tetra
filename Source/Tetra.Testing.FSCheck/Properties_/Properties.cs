@@ -1,6 +1,4 @@
-﻿using FsCheck;
-
-namespace Tetra.Testing;
+﻿namespace Tetra.Testing;
 
 public static partial class Properties
 {

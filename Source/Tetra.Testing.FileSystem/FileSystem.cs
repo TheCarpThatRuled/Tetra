@@ -1,4 +1,6 @@
-﻿namespace Tetra.Testing;
+﻿using System.IO;
+
+namespace Tetra.Testing;
 
 public sealed class FileSystem : IFileSystem
 {
@@ -7,9 +9,9 @@ public sealed class FileSystem : IFileSystem
    /* ------------------------------------------------------------ */
 
    private readonly List<AbsoluteDirectoryPath> _directories = new();
-   private          AbsoluteDirectoryPath       _currentDirectory;
 
    //Mutable
+   private AbsoluteDirectoryPath                         _currentDirectory;
    private Func<AbsoluteDirectoryPath, IOption<Message>> _setCurrentDirectory;
 
    /* ------------------------------------------------------------ */
@@ -25,8 +27,18 @@ public sealed class FileSystem : IFileSystem
 
       _currentDirectory = currentDirectory;
 
-      _directories.Add(currentDirectory);
+      _directories.AddRange(currentDirectory.Ancestry());
    }
+
+   /* ------------------------------------------------------------ */
+   // Factory Functions
+   /* ------------------------------------------------------------ */
+
+   public static FileSystem From
+   (
+      AbsoluteDirectoryPath currentDirectory
+   )
+      => new(currentDirectory);
 
    /* ------------------------------------------------------------ */
    // IFileSystem Properties
@@ -108,7 +120,7 @@ public sealed class FileSystem : IFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public IEither<ISequence<AbsoluteFilePath>, Message> SubDirectoriesOf
+   public IEither<ISequence<AbsoluteDirectoryPath>, Message> SubDirectoriesOf
    (
       AbsoluteDirectoryPath path
    )
@@ -121,15 +133,6 @@ public sealed class FileSystem : IFileSystem
       AbsoluteDirectoryPath path
    )
       => throw new NotImplementedException();
-   /* ------------------------------------------------------------ */
-   // Factory Functions
-   /* ------------------------------------------------------------ */
-
-   public static FileSystem From
-   (
-      AbsoluteDirectoryPath currentDirectory
-   )
-      => new(currentDirectory);
 
    /* ------------------------------------------------------------ */
    // Methods

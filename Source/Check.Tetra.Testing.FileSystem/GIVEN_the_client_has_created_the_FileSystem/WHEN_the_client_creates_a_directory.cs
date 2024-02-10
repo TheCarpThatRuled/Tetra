@@ -2,7 +2,7 @@ using FsCheck;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
-using static Tetra.Testing.Properties;
+using static Check.Steps;
 
 // ReSharper disable InconsistentNaming
 
@@ -12,34 +12,73 @@ namespace Check.GIVEN_the_client_has_created_the_FileSystem;
 public class WHEN_the_client_creates_a_directory
 {
    /* ------------------------------------------------------------ */
+   // Test
+   /* ------------------------------------------------------------ */
 
    [TestMethod]
-   public void THEN_a_none_is_returned_AND_the_directory_and_all_its_parents_exist()
+   [Scenarios]
+   public void Run
+   (
+      AAA_property_test test
+   )
+      => Property_test<AAA_property_test.Parameters>
+        .Register(test.Library)
+        .Run(parameters =>
+         {
+            using var given = test.Create(parameters);
+
+            var when = given.Arrange();
+
+            var then = when.Act();
+
+            return then.Assert();
+         });
+
+   /* ------------------------------------------------------------ */
+   // Scenarios
+   /* ------------------------------------------------------------ */
+
+   private sealed class Scenarios : AAAPropertyTestSource
    {
-      static Property Property
-      (
-         (AbsoluteDirectoryPath currentDirectory, AbsoluteDirectoryPath otherDirectory) args
-      )
+
+      /* ------------------------------------------------------------ */
+      // Protected Overridden AAAPropertyTestDataSourceAttribute<string> Methods
+      /* ------------------------------------------------------------ */
+
+      protected override IEnumerable<AAA_property_test> GetTests()
       {
-         //Arrange
-         var fileSystem = FileSystem.From(args.currentDirectory);
+         /* ------------------------------------------------------------ */
 
-         //Act
-         var actual = fileSystem.Create(args.otherDirectory);
+         var currentDirectory = AAA_property_test.Parameter<AbsoluteDirectoryPath>.Create("CURRENT_DIRECTORY");
+         var newDirectory     = AAA_property_test.Parameter<AbsoluteDirectoryPath>.Create("NEW_DIRECTORY");
 
-         //Assert
-         return IsANone(AssertMessages.ReturnValue,
-                        actual)
-           .And(IsTrue("Directories created",
-                       args.otherDirectory
-                           .Ancestry()
-                           .All(fileSystem.Exists)));
+         yield return AAA_property_test
+                     .LIBRARY(Generators
+                             .TwoUniqueAbsoluteDirectoryPaths()
+                             .Select(x => AAA_property_test
+                                         .Parameters
+                                         .Factory()
+                                         .Register(currentDirectory,
+                                                   x.Item1)
+                                         .Register(newDirectory,
+                                                   x.Item2)
+                                         .Create())
+                             .ToArbitrary())
+                     .GIVEN(the_client.has_created_the_file_system(currentDirectory))
+                     .WHEN(the_client.creates_a_directory(newDirectory))
+                     .THEN(the_return_value.is_not_in_error<Message>())
+                     .And(the_file_system.contains_a_directory_and_all_its_ancestors(newDirectory))
+                     .Crystallise();
+
+         /* ------------------------------------------------------------ */
+
+         // ReSharper disable once RedundantJumpStatement
+         yield break;
+
+         /* ------------------------------------------------------------ */
       }
 
-      Arb.Register<Libraries.TwoUniqueAbsoluteDirectoryPaths>();
-
-      Prop.ForAll<(AbsoluteDirectoryPath, AbsoluteDirectoryPath )>(Property)
-          .QuickCheckThrowOnFailure();
+      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */

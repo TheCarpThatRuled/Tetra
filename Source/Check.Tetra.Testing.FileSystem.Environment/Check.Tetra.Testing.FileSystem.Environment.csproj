@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+   <PropertyGroup>
+      <TargetFramework>net8.0</TargetFramework>
+      <Platforms>x64</Platforms>
+      <ImplicitUsings>enable</ImplicitUsings>
+      <Nullable>enable</Nullable>
+      <IsPackable>false</IsPackable>
+      <RootNamespace>Check</RootNamespace>
+      <IntermediateOutputPath>$(SolutionDir)Intermediate\$(Configuration)\$(MSBuildProjectName)</IntermediateOutputPath>
+      <OutputPath>$(SolutionDir)Check\$(Configuration)\$(MSBuildProjectName)</OutputPath>
+      <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+   </PropertyGroup>
+
+   <PropertyGroup>
+      <Authors>Tom McFadden</Authors>
+   </PropertyGroup>
+
+   <ItemGroup>
+     <ProjectReference Include="..\Tetra.Testing.FileSystem.FSCheck\Tetra.Testing.FileSystem.FSCheck.csproj" />
+     <ProjectReference Include="..\Tetra.Testing.FileSystem\Tetra.Testing.FileSystem.csproj" />
+     <ProjectReference Include="..\Tetra.Testing.FSCheck\Tetra.Testing.FSCheck.csproj" />
+   </ItemGroup>
+
+</Project>

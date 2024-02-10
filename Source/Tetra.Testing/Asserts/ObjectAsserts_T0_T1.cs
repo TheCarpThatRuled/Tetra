@@ -27,6 +27,7 @@ public sealed class ObjectAsserts<T, TNext> : IAsserts
       _description = description;
       _next        = next;
    }
+
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */

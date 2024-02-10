@@ -1,22 +1,20 @@
-﻿using FsCheck;
-
-namespace Tetra.Testing;
+﻿namespace Tetra.Testing;
 
 // ReSharper disable InconsistentNaming
-public sealed partial class AAA_property_test<TParameters> : ICharacterised
+public sealed partial class AAA_property_test : ICharacterised
 {
    /* ------------------------------------------------------------ */
    // Fields
    /* ------------------------------------------------------------ */
 
-   public readonly Type Library;
+   public readonly Arbitrary<Parameters> Library;
 
    /* ------------------------------------------------------------ */
    // Private Fields
    /* ------------------------------------------------------------ */
 
-   private readonly string                                               _characterisation;
-   private readonly Func<TParameters, Disposables, Func<Func<Property>>> _test;
+   private readonly string                                              _characterisation;
+   private readonly Func<Parameters, Disposables, Func<Func<Property>>> _test;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
@@ -24,32 +22,34 @@ public sealed partial class AAA_property_test<TParameters> : ICharacterised
 
    private AAA_property_test
    (
-      string                                               characterisation,
-      Type                                                 library,
-      Func<TParameters, Disposables, Func<Func<Property>>> test
+      string                                              characterisation,
+      Arbitrary<Parameters>                               library,
+      Func<Parameters, Disposables, Func<Func<Property>>> test
    )
    {
       _characterisation = characterisation;
-      Library           = library;
       _test             = test;
+
+      Library = library;
    }
 
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */
 
-   public static DefineInitialGiven LIBRARY<TLibrary>()
-      => DefineInitialGiven.Create(typeof(TLibrary));
+   public static DefineInitialGiven LIBRARY(Arbitrary<Parameters> library)
+      => DefineInitialGiven
+        .Create(library);
 
    /* ------------------------------------------------------------ */
    // Internal Factory Functions
    /* ------------------------------------------------------------ */
 
-   internal static AAA_property_test<TParameters> Create
+   internal static AAA_property_test Create
    (
-      string                                               characterisation,
-      Type                                                 library,
-      Func<TParameters, Disposables, Func<Func<Property>>> test
+      string                                              characterisation,
+      Arbitrary<Parameters>                               library,
+      Func<Parameters, Disposables, Func<Func<Property>>> test
    )
       => new(characterisation,
              library,
@@ -68,7 +68,7 @@ public sealed partial class AAA_property_test<TParameters> : ICharacterised
 
    public Given Create
    (
-      TParameters parameters
+      Parameters parameters
    )
       => new(parameters,
              _test);

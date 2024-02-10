@@ -8,7 +8,7 @@ namespace Check;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class GIVEN_the_client_has_not_created_an_option : AAATestDataSource
+public class GIVEN_the_client_has_not_created_an_option : AAATestSource
 {
    /* ------------------------------------------------------------ */
    // Test

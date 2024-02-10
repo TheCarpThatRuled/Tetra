@@ -7,7 +7,7 @@ using static Check.Check_Text_Box.Steps;
 namespace Check.TextBox.GIVEN_the_UI_has_created_the_text_box;
 
 [TestClass]
-public class WHEN_the_system_updates_Visibility : AAATestDataSource
+public class WHEN_the_system_updates_Visibility : AAATestSource
 {
    /* ------------------------------------------------------------ */
    // Test

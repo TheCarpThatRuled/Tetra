@@ -1,7 +1,7 @@
 ﻿namespace Tetra.Testing;
 
 // ReSharper disable once InconsistentNaming
-partial class AAA_property_test<TParameters>
+partial class AAA_property_test
 {
    public sealed class Disposables
    {

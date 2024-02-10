@@ -1,6 +1,4 @@
-﻿using FsCheck;
-
-namespace Tetra.Testing;
+﻿namespace Tetra.Testing;
 // ReSharper disable once InconsistentNaming
 
 public static class Property_test<T>
@@ -11,10 +9,11 @@ public static class Property_test<T>
 
    public static RunTest Register
    (
-      Type library
+      Arbitrary<T> arbitrary
    )
    {
-      Arb.Register(library);
+      Library.Arbitrary = arbitrary;
+      Arb.Register<Library>();
 
       return new();
    }
@@ -42,6 +41,24 @@ public static class Property_test<T>
          => Prop
            .ForAll(test)
            .QuickCheckThrowOnFailure();
+
+      /* ------------------------------------------------------------ */
+   }
+
+   private sealed class Library
+   {
+      /* ------------------------------------------------------------ */
+      // Static Fields
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<T> Arbitrary = null!;
+
+      /* ------------------------------------------------------------ */
+      // Functions
+      /* ------------------------------------------------------------ */
+
+      public static Arbitrary<T> Type()
+         => Arbitrary;
 
       /* ------------------------------------------------------------ */
    }

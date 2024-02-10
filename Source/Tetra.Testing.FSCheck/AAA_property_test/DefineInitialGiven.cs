@@ -2,7 +2,7 @@
 
 namespace Tetra.Testing;
 
-partial class AAA_property_test<TParameters>
+partial class AAA_property_test
 {
    public sealed class DefineInitialGiven
    {
@@ -10,7 +10,7 @@ partial class AAA_property_test<TParameters>
       // Private Fields
       /* ------------------------------------------------------------ */
 
-      private readonly Type _library;
+      private readonly Arbitrary<Parameters> _library;
 
       /* ------------------------------------------------------------ */
       // Private Constructors
@@ -18,7 +18,7 @@ partial class AAA_property_test<TParameters>
 
       private DefineInitialGiven
       (
-         Type library
+         Arbitrary<Parameters> library
       )
          => _library = library;
 
@@ -28,7 +28,7 @@ partial class AAA_property_test<TParameters>
 
       internal static DefineInitialGiven Create
       (
-         Type library
+         Arbitrary<Parameters> library
       )
          => new(library);
 
@@ -36,13 +36,13 @@ partial class AAA_property_test<TParameters>
       // Methods
       /* ------------------------------------------------------------ */
 
-      public AAA_property_test<TParameters, TActions, TAsserts>.DefineGiven GIVEN<TActions, TAsserts>
+      public AAA_property_test<TActions, TAsserts>.DefineGiven GIVEN<TActions, TAsserts>
       (
-         AAA_property_test<TParameters, TActions, TAsserts>.IInitialAction given
+         AAA_property_test<TActions, TAsserts>.IInitialAction given
       )
          where TActions : TestEnvironment<TActions, TAsserts>
          where TAsserts : IPropertyAsserts
-         => AAA_property_test<TParameters, TActions, TAsserts>
+         => AAA_property_test<TActions, TAsserts>
            .DefineGiven
            .Create(_library,
                    given);

@@ -27,6 +27,7 @@ public sealed class OptionAsserts<T, TNext> : IAsserts
       _description = description;
       _next        = next;
    }
+
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */

@@ -7,7 +7,7 @@ using static Check.Label.Contents;
 namespace Check.Label.GIVEN_the_UI_has_created_the_label;
 
 [TestClass]
-public class WHEN_the_system_updates_Content : AAATestDataSource
+public class WHEN_the_system_updates_Content : AAATestSource
 {
    /* ------------------------------------------------------------ */
    // Test

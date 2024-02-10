@@ -46,8 +46,11 @@ partial class AAA_test<TActions, TAsserts>
       (
          TActions environment
       )
-         => _second
-           .Run(_first.Run(environment));
+      {
+         var intermediate = _first.Run(environment);
+         Log.And();
+         return _second.Run(intermediate);
+      }
 
       /* ------------------------------------------------------------ */
       // ICharacterised Methods

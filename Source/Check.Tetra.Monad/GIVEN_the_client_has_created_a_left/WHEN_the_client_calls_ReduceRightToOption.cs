@@ -8,7 +8,7 @@ namespace Check.GIVEN_the_client_has_created_a_left;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_ReduceRightToOption : AAATestDataSource
+public class WHEN_the_client_calls_ReduceRightToOption : AAATestSource
 {
    /* ------------------------------------------------------------ */
    // Test

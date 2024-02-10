@@ -7,7 +7,7 @@ using static Check.Check_Label.Steps;
 namespace Check.Label.GIVEN_the_UI_has_created_the_label;
 
 [TestClass]
-public class WHEN_the_system_updates_Visibility : AAATestDataSource
+public class WHEN_the_system_updates_Visibility : AAATestSource
 {
    /* ------------------------------------------------------------ */
    // Test

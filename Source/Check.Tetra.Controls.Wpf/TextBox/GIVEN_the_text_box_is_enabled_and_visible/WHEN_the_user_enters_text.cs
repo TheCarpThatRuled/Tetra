@@ -7,7 +7,7 @@ namespace Check.TextBox.GIVEN_the_text_box_is_enabled_and_visible;
 
 [TestClass]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_user_enters_text : AAATestDataSource
+public class WHEN_the_user_enters_text : AAATestSource
 {
    /* ------------------------------------------------------------ */
    // Test

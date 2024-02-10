@@ -3,7 +3,7 @@
 // ReSharper disable once InconsistentNaming
 partial class AAA_test<TActions, TAsserts>
 {
-   public sealed class CompoundAssert: IAssert
+   public sealed class CompoundAssert : IAssert
    {
       /* ------------------------------------------------------------ */
       // Private Fields
@@ -32,8 +32,8 @@ partial class AAA_test<TActions, TAsserts>
 
       public static CompoundAssert Create
       (
-         IAssert  first,
-         IAssert     second
+         IAssert first,
+         IAssert second
       )
          => new(first,
                 second);
@@ -46,8 +46,11 @@ partial class AAA_test<TActions, TAsserts>
       (
          TAsserts environment
       )
-         => _second
-           .Run(_first.Run(environment));
+      {
+         var intermediate = _first.Run(environment);
+         Log.And();
+         return _second.Run(intermediate);
+      }
 
       /* ------------------------------------------------------------ */
       // ICharacterised Methods

@@ -27,6 +27,7 @@ public sealed class BooleanAsserts<TNext> : IAsserts
       _description = description;
       _next        = next;
    }
+
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */

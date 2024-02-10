@@ -2,47 +2,95 @@ using FsCheck;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Tetra;
 using Tetra.Testing;
-using static Tetra.Testing.Properties;
+using static Check.Steps;
 
 // ReSharper disable InconsistentNaming
 
-namespace Check.GIVEN_the_client_has_configured_setting_the_current_directory_to_fail_THEN_succeed;
+namespace Check.GIVEN_the_client_has_configured_setting_the_current_directory_to_fail_then_succeed;
 
 [TestClass]
 public class WHEN_the_client_sets_the_current_directory
 {
    /* ------------------------------------------------------------ */
+   // Test
+   /* ------------------------------------------------------------ */
 
    [TestMethod]
-   public void THEN_the_current_directory_is_the_value_passed_to_SetCurrentDirectory_AND_a_none_is_returned()
+   [Scenarios]
+   public void Run
+   (
+      AAA_property_test test
+   )
+      => Property_test<AAA_property_test.Parameters>
+        .Register(test.Library)
+        .Run(parameters =>
+        {
+           using var given = test.Create(parameters);
+
+           var when = given.Arrange();
+
+           var then = when.Act();
+
+           return then.Assert();
+        });
+
+   /* ------------------------------------------------------------ */
+   // Scenarios
+   /* ------------------------------------------------------------ */
+
+   private sealed class Scenarios : AAAPropertyTestSource
    {
-      static Property Property
-      (
-         (AbsoluteDirectoryPath initialPath, AbsoluteDirectoryPath updatedPath) args,
-         Message                                                                message
-      )
+
+      /* ------------------------------------------------------------ */
+      // Protected Overridden AAAPropertyTestDataSourceAttribute<string> Methods
+      /* ------------------------------------------------------------ */
+
+      protected override IEnumerable<AAA_property_test> GetTests()
       {
-         //Arrange
-         var fileSystem = FileSystem.From(args.initialPath);
-         fileSystem.SettingTheCurrentDirectoryShallFail(message);
-         fileSystem.SettingTheCurrentDirectoryShallSucceed();
+         /* ------------------------------------------------------------ */
+         // Again this should fail, as the new directory won't exist
+         // See the SetCurrentDirectory tests for detail
 
-         //Act
-         var actual = fileSystem.SetCurrentDirectory(args.updatedPath);
+         var initialCurrentDirectory = AAA_property_test.Parameter<AbsoluteDirectoryPath>.Create("INITIAL_CURRENT_DIRECTORY");
+         var newCurrentDirectory = AAA_property_test.Parameter<AbsoluteDirectoryPath>.Create("NEW_CURRENT_DIRECTORY");
+         var errorMessage = AAA_property_test.Parameter<Message>.Create("ERROR_MESSAGE");
 
-         //Assert
-         return IsANone(AssertMessages.ReturnValue,
-                        actual)
-           .And(AreEqual("Current directory",
-                         args.updatedPath,
-                         fileSystem.CurrentDirectory()));
+         yield return AAA_property_test
+                     .LIBRARY(Generators
+                             .TwoUniqueAbsoluteDirectoryPaths()
+                             .Combine(Generators.Message(),
+                                      (
+                                            a,
+                                            b
+                                         ) => (a.Item1, a.Item2, b))
+                             .Select(x => AAA_property_test
+                                         .Parameters
+                                         .Factory()
+                                         .Register(initialCurrentDirectory,
+                                                   x.Item1)
+                                         .Register(newCurrentDirectory,
+                                                   x.Item2)
+                                         .Register(errorMessage,
+                                                   x.Item3)
+                                         .Create())
+                             .ToArbitrary())
+                     .GIVEN(the_client.has_configured_setting_the_current_directory_to_fail(initialCurrentDirectory,
+                                                                                            errorMessage))
+                     .And(the_client.configures_setting_the_current_directory_to_succeed())
+                     .WHEN(the_client.sets_the_current_directory(newCurrentDirectory))
+                     .THEN(the_return_value.is_not_in_error<Message>())
+                     .And(the_current_directory.@is(newCurrentDirectory))
+                     .Crystallise();
+
+         /* ------------------------------------------------------------ */
+
+         // ReSharper disable once RedundantJumpStatement
+         yield break;
+
+         /* ------------------------------------------------------------ */
       }
 
-      Arb.Register<Libraries.Message>();
-      Arb.Register<Libraries.TwoUniqueAbsoluteDirectoryPaths>();
-
-      Prop.ForAll<(AbsoluteDirectoryPath, AbsoluteDirectoryPath), Message>(Property)
-          .QuickCheckThrowOnFailure();
+      /* ------------------------------------------------------------ */
    }
 
    /* ------------------------------------------------------------ */

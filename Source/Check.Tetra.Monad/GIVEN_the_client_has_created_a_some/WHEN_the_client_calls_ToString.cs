@@ -8,7 +8,7 @@ namespace Check.GIVEN_the_client_has_created_a_some;
 [TestCategory(GlobalCategories.Unit)]
 [TestCategory(LocalCategories.Option)]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_client_calls_ToString : AAATestDataSource
+public class WHEN_the_client_calls_ToString : AAATestSource
 {
    /* ------------------------------------------------------------ */
    // Test

@@ -55,6 +55,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Check.Tetra.Monad.Environme
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Check.Tetra.Monad", "Source\Check.Tetra.Monad\Check.Tetra.Monad.csproj", "{A4A31D3A-50B3-473B-81FB-B61611C0514A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Check.Tetra.Testing.FileSystem.Environment", "Source\Check.Tetra.Testing.FileSystem.Environment\Check.Tetra.Testing.FileSystem.Environment.csproj", "{3025035F-2B6D-4409-BDE4-24B1D293F501}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -153,6 +155,10 @@ Global
 		{A4A31D3A-50B3-473B-81FB-B61611C0514A}.Debug|x64.Build.0 = Debug|x64
 		{A4A31D3A-50B3-473B-81FB-B61611C0514A}.Release|x64.ActiveCfg = Release|x64
 		{A4A31D3A-50B3-473B-81FB-B61611C0514A}.Release|x64.Build.0 = Release|x64
+		{3025035F-2B6D-4409-BDE4-24B1D293F501}.Debug|x64.ActiveCfg = Debug|x64
+		{3025035F-2B6D-4409-BDE4-24B1D293F501}.Debug|x64.Build.0 = Debug|x64
+		{3025035F-2B6D-4409-BDE4-24B1D293F501}.Release|x64.ActiveCfg = Release|x64
+		{3025035F-2B6D-4409-BDE4-24B1D293F501}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -181,6 +187,7 @@ Global
 		{D76F40F8-6FFD-4577-929B-B81C4E4888CC} = {E2EE55F6-6147-4DFD-A576-D6E2C103E76B}
 		{4A8AB225-DF39-408D-9E76-6FD7296432D5} = {E2EE55F6-6147-4DFD-A576-D6E2C103E76B}
 		{A4A31D3A-50B3-473B-81FB-B61611C0514A} = {E2EE55F6-6147-4DFD-A576-D6E2C103E76B}
+		{3025035F-2B6D-4409-BDE4-24B1D293F501} = {4B86A31C-F3D5-4562-9B12-EFBFA34B9D0A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {0C51968D-099A-4C22-A2C4-1B8E4DA238D3}

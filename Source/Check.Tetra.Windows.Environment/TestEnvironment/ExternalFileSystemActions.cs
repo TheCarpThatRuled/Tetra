@@ -9,8 +9,8 @@ public sealed class ExternalFileSystemActions
    /* ------------------------------------------------------------ */
 
    private readonly AAA_test.Disposables _disposables;
-   private readonly LockedFiles           _lockedFiles;
-   private readonly Actions               _parent;
+   private readonly LockedFiles          _lockedFiles;
+   private readonly Actions              _parent;
 
    /* ------------------------------------------------------------ */
    // Private Constructors
@@ -19,8 +19,8 @@ public sealed class ExternalFileSystemActions
    private ExternalFileSystemActions
    (
       AAA_test.Disposables disposables,
-      LockedFiles           lockedFiles,
-      Actions               parent
+      LockedFiles          lockedFiles,
+      Actions              parent
    )
    {
       _disposables = disposables;
@@ -35,8 +35,8 @@ public sealed class ExternalFileSystemActions
    internal static ExternalFileSystemActions Create
    (
       AAA_test.Disposables disposables,
-      LockedFiles           lockedFiles,
-      Actions               parent
+      LockedFiles          lockedFiles,
+      Actions              parent
    )
       => new(disposables,
              lockedFiles,

@@ -27,6 +27,7 @@ public sealed class EitherAsserts<TLeft, TRight, TNext> : IAsserts
       _description = description;
       _next        = next;
    }
+
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */

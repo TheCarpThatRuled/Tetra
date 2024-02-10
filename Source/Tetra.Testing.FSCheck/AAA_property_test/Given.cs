@@ -1,9 +1,7 @@
-﻿using FsCheck;
-
-namespace Tetra.Testing;
+﻿namespace Tetra.Testing;
 
 // ReSharper disable once InconsistentNaming
-partial class AAA_property_test<TParameters>
+partial class AAA_property_test
 {
    public sealed class Given : IDisposable
    {
@@ -14,8 +12,8 @@ partial class AAA_property_test<TParameters>
 
       private readonly Disposables _disposables = Disposables.Create();
 
-      private readonly Func<TParameters, Disposables, Func<Func<Property>>> _arrange;
-      private readonly TParameters                                          _parameters;
+      private readonly Func<Parameters, Disposables, Func<Func<Property>>> _arrange;
+      private readonly Parameters                                          _parameters;
 
       /* ------------------------------------------------------------ */
       // Internal Constructors
@@ -23,8 +21,8 @@ partial class AAA_property_test<TParameters>
 
       internal Given
       (
-         TParameters                                          parameters,
-         Func<TParameters, Disposables, Func<Func<Property>>> arrange
+         Parameters                                          parameters,
+         Func<Parameters, Disposables, Func<Func<Property>>> arrange
       )
       {
          _arrange    = arrange;

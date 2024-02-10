@@ -1,6 +1,4 @@
-﻿using FsCheck;
-
-namespace Tetra.Testing;
+﻿namespace Tetra.Testing;
 
 // ReSharper disable once InconsistentNaming
 partial class Properties

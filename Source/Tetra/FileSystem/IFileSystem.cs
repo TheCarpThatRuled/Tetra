@@ -68,7 +68,7 @@ public interface IFileSystem
 
    /* ------------------------------------------------------------ */
 
-   public IEither<ISequence<AbsoluteFilePath>, Message> SubDirectoriesOf
+   public IEither<ISequence<AbsoluteDirectoryPath>, Message> SubDirectoriesOf
    (
       AbsoluteDirectoryPath path
    );

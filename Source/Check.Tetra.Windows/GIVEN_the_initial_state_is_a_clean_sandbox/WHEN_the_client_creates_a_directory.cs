@@ -8,7 +8,7 @@ using static Check.Steps;
 namespace Check.GIVEN_the_initial_state_is_a_clean_sandbox;
 
 [TestClass]
-public class WHEN_the_client_creates_a_directory : AAATestDataSource
+public class WHEN_the_client_creates_a_directory : AAATestSource
 {
    /* ------------------------------------------------------------ */
    // Test

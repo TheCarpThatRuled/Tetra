@@ -27,6 +27,7 @@ public sealed class ReturnsThisAsserts<TNext> : IAsserts
       _expected = expected;
       _next     = next;
    }
+
    /* ------------------------------------------------------------ */
    // Factory Functions
    /* ------------------------------------------------------------ */

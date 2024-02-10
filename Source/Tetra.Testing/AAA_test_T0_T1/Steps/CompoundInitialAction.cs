@@ -1,4 +1,6 @@
-﻿namespace Tetra.Testing;
+﻿using System;
+
+namespace Tetra.Testing;
 
 // ReSharper disable once InconsistentNaming
 partial class AAA_test<TActions, TAsserts>
@@ -46,8 +48,11 @@ partial class AAA_test<TActions, TAsserts>
       (
          AAA_test.Disposables disposables
       )
-         => _second
-           .Run(_first.Run(disposables));
+      {
+         var intermediate = _first.Run(disposables);
+         Log.And();
+         return _second.Run(intermediate);
+      }
 
       /* ------------------------------------------------------------ */
       // ICharacterised Methods

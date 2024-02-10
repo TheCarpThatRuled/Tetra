@@ -7,7 +7,7 @@ namespace Check.TextBox.GIVEN_the_UI_has_not_created_the_text_box;
 
 [TestClass]
 // ReSharper disable once InconsistentNaming
-public class WHEN_the_UI_creates_the_text_box : AAATestDataSource
+public class WHEN_the_UI_creates_the_text_box : AAATestSource
 {
    /* ------------------------------------------------------------ */
    // Test

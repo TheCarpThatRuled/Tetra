@@ -9,7 +9,7 @@ using static Check.Label.Contents;
 namespace Check.Label.GIVEN_the_UI_has_not_created_the_label;
 
 [TestClass]
-public class WHEN_the_UI_creates_the_label : AAATestDataSource
+public class WHEN_the_UI_creates_the_label : AAATestSource
 {
    /* ------------------------------------------------------------ */
    // Test

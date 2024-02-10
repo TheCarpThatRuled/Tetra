@@ -7,7 +7,7 @@ using static Check.Steps;
 namespace Check.GIVEN_the_initial_state_is_a_clean_sandbox;
 
 [TestClass]
-public class WHEN_the_client_checks_that_a_directory_does_not_exist : AAATestDataSource
+public class WHEN_the_client_checks_that_a_directory_does_not_exist : AAATestSource
 {
    /* ------------------------------------------------------------ */
    // Test
