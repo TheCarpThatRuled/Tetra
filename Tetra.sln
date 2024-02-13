@@ -61,6 +61,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Check.Tetra.OS.Environment"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tetra.Testing.FileSystem.FSCheck", "Source\Tetra.Testing.FileSystem.FSCheck\Tetra.Testing.FileSystem.FSCheck.csproj", "{90451FBE-66B2-4A9C-B2AE-BF2761608611}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{ECAEF740-24F3-4B73-9E22-20CEE61FA46F}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Tetra.KnownIssues.md = Documentation\Tetra.KnownIssues.md
+		Documentation\Tetra.Stories.md = Documentation\Tetra.Stories.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
